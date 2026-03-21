@@ -1,0 +1,8 @@
+__pycache__
+*.pyc
+.env
+storage/*.db
+storage/*.json
+storage/*.pdf
+storage/*.png
+.git
