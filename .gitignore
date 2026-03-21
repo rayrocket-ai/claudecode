@@ -1,0 +1,31 @@
+# Environment
+.env
+.venv/
+venv/
+
+# Storage (sessions, generated PDFs)
+storage/*.json
+storage/*.pdf
+storage/*.png
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temp
+/tmp/
+*.tmp
