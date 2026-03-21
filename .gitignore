@@ -1,31 +1,25 @@
-# Environment
+# Dependencies
+node_modules/
+
+# Environment variables / secrets
 .env
-.venv/
-venv/
+.env.*
+!.env.example
 
-# Storage (sessions, generated PDFs)
-storage/*.json
-storage/*.pdf
-storage/*.png
+# macOS
+.DS_Store
+**/.DS_Store
 
-# Python
-__pycache__/
-*.pyc
-*.pyo
-*.egg-info/
-dist/
-build/
+# macOS / iCloud duplicate files
+* 2.*
+* 2/
 
-# IDE
-.idea/
-.vscode/
+# Remotion video project
+video/
+
+# Editor
 *.swp
 *.swo
-
-# OS
-.DS_Store
-Thumbs.db
-
-# Temp
-/tmp/
-*.tmp
+*~
+.idea/
+.vscode/
