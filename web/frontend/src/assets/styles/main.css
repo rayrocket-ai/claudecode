@@ -1,0 +1,74 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Map overrides */
+.mapboxgl-popup-content {
+  @apply rounded-lg shadow-lg p-0 overflow-hidden;
+  min-width: 280px;
+}
+
+.mapboxgl-popup-close-button {
+  @apply text-gray-400 hover:text-gray-600 text-xl pr-2 pt-1;
+}
+
+/* Cluster markers */
+.cluster-marker {
+  @apply bg-primary-600 text-white rounded-full flex items-center justify-center font-semibold shadow-lg border-2 border-white cursor-pointer;
+  transition: transform 0.15s ease;
+}
+
+.cluster-marker:hover {
+  transform: scale(1.15);
+}
+
+/* Price pin */
+.price-pin {
+  @apply bg-white text-gray-900 rounded-lg px-2 py-1 text-xs font-semibold shadow-md border border-gray-200 cursor-pointer whitespace-nowrap;
+  transform: translate(-50%, -100%);
+  transition: all 0.15s ease;
+}
+
+.price-pin:hover {
+  @apply bg-primary-600 text-white border-primary-600;
+  transform: translate(-50%, -100%) scale(1.1);
+}
+
+.price-pin.sold {
+  @apply bg-red-50 text-red-700 border-red-200;
+}
+
+.price-pin.sold:hover {
+  @apply bg-red-600 text-white border-red-600;
+}
+
+/* Filter panel */
+.filter-chip {
+  @apply inline-flex items-center px-3 py-1.5 rounded-full text-sm border cursor-pointer transition-colors;
+}
+
+.filter-chip.active {
+  @apply bg-primary-600 text-white border-primary-600;
+}
+
+.filter-chip:not(.active) {
+  @apply bg-white text-gray-700 border-gray-300 hover:border-primary-400;
+}
+
+/* Scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  @apply bg-gray-100;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  @apply bg-gray-300 rounded-full;
+}
+
+/* Loading skeleton */
+.skeleton {
+  @apply bg-gray-200 rounded animate-pulse;
+}

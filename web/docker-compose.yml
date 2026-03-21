@@ -1,0 +1,82 @@
+version: '3.8'
+
+services:
+  # Laravel API
+  api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/var/www/html
+      - ./storage/boundaries:/var/www/html/storage/app/boundaries
+    environment:
+      - APP_ENV=local
+      - APP_DEBUG=true
+      - DB_HOST=mysql
+      - REDIS_HOST=redis
+      - ELASTICSEARCH_HOST=elasticsearch
+    depends_on:
+      - mysql
+      - redis
+      - elasticsearch
+    env_file:
+      - ./backend/.env
+
+  # Vue Frontend (dev server)
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend/src:/app/src
+    environment:
+      - VITE_MAPBOX_TOKEN=${MAPBOX_ACCESS_TOKEN}
+      - VITE_API_BASE_URL=http://localhost:8000/api
+
+  # MySQL Database
+  mysql:
+    image: mysql:8.0
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: realty_platform
+      MYSQL_USER: realty
+      MYSQL_PASSWORD: secret
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  # Redis Cache
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+
+  # Elasticsearch
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.13.0
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ports:
+      - "9200:9200"
+    volumes:
+      - es_data:/usr/share/elasticsearch/data
+
+  # Self-hosted Map Tile Server (OpenMapTiles)
+  tileserver:
+    image: maptiler/tileserver-gl:latest
+    ports:
+      - "8080:80"
+    volumes:
+      - ./storage/tiles:/data
+    command: --verbose
+
+volumes:
+  mysql_data:
+  es_data:
