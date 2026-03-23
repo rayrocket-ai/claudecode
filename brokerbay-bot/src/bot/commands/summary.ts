@@ -1,4 +1,4 @@
-import { Context } from 'grammy';
+import { ChatInputCommandInteraction } from 'discord.js';
 import pino from 'pino';
 import { config } from '../../config';
 import { enqueue } from '../queue';
@@ -17,7 +17,6 @@ function parseDate(input: string): string {
     });
   }
 
-  // Try parsing the user's date input
   const parsed = new Date(trimmed);
   if (!isNaN(parsed.getTime())) {
     return parsed.toLocaleDateString('en-US', {
@@ -27,21 +26,16 @@ function parseDate(input: string): string {
     });
   }
 
-  // Return as-is if we can't parse it
   return trimmed;
 }
 
-export async function handleSummaryCommand(ctx: Context): Promise<void> {
-  const text = ctx.message?.text || '';
-  const dateInput = text.replace(/^\/summary\s*/i, '').trim();
+export async function handleSummaryCommand(interaction: ChatInputCommandInteraction): Promise<void> {
+  const dateInput = interaction.options.getString('date') || '';
   const dateStr = parseDate(dateInput);
 
-  await ctx.reply(`🔄 Fetching showings for ${dateStr}...`);
+  await interaction.deferReply();
 
   try {
-    // Note: BrokerBay may need filtering by date — getPendingRequests gets all,
-    // then we filter client-side. A more sophisticated implementation would
-    // navigate to the correct date view in BrokerBay.
     const allRequests = await enqueue('get-summary', () => getPendingRequests());
 
     const targetDate = new Date(dateStr);
@@ -55,9 +49,9 @@ export async function handleSummaryCommand(ctx: Context): Promise<void> {
     });
 
     const summary = formatDaySummary(dateStr, filtered);
-    await ctx.reply(summary, { parse_mode: 'MarkdownV2' });
+    await interaction.editReply(summary);
   } catch (err) {
     logger.error({ err }, 'Failed to fetch summary');
-    await ctx.reply('❌ Failed to fetch showing summary.');
+    await interaction.editReply('❌ Failed to fetch showing summary.');
   }
 }

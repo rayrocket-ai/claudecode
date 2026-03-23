@@ -1,6 +1,6 @@
 import pino from 'pino';
 import { config } from './config';
-import { createBot } from './bot';
+import { createClient } from './bot';
 import { initBrowser, closeBrowser, ensureAuthenticated } from './browser/session';
 
 const logger = pino({
@@ -25,13 +25,13 @@ async function main(): Promise<void> {
     process.exit(1);
   }
 
-  // Create and start the Telegram bot
-  const bot = createBot();
+  // Create and start the Discord client
+  const client = createClient();
 
   // Graceful shutdown
   const shutdown = async (signal: string) => {
     logger.info({ signal }, 'Shutting down...');
-    bot.stop();
+    client.destroy();
     await closeBrowser();
     process.exit(0);
   };
@@ -39,13 +39,9 @@ async function main(): Promise<void> {
   process.on('SIGINT', () => shutdown('SIGINT'));
   process.on('SIGTERM', () => shutdown('SIGTERM'));
 
-  // Start polling
-  logger.info('Bot is starting...');
-  await bot.start({
-    onStart: () => {
-      logger.info('Bot is running! Waiting for messages...');
-    },
-  });
+  // Login to Discord
+  logger.info('Connecting to Discord...');
+  await client.login(config.discordBotToken);
 }
 
 main().catch((err) => {

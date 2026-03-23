@@ -1,10 +1,5 @@
 import type { TourSchedule, TourStop } from '../types';
 
-// Telegram MarkdownV2 requires escaping these characters
-function escapeMarkdownV2(text: string): string {
-  return text.replace(/([_*\[\]()~`>#+\-=|{}.!\\])/g, '\\$1');
-}
-
 function formatTime(date: Date): string {
   return date.toLocaleTimeString('en-US', {
     hour: 'numeric',
@@ -43,24 +38,24 @@ function formatStop(stop: TourStop, isFirst: boolean): string {
   const driveTime = stop.driveTimeFromPrevious || 0;
 
   const lines = [
-    `${emoji}  *${escapeMarkdownV2(stop.address)}*`,
-    `🕙 ${escapeMarkdownV2(arrival)} – ${escapeMarkdownV2(departure)}`,
-    `💰 ${escapeMarkdownV2(price)} \\| 📐 ${escapeMarkdownV2(String(stop.sqft))} sqft \\| 🗓 Built ${stop.yearBuilt}`,
+    `${emoji}  **${stop.address}**`,
+    `🕙 ${arrival} – ${departure}`,
+    `💰 ${price} | 📐 ${stop.sqft} sqft | 🗓 Built ${stop.yearBuilt}`,
   ];
 
   if (stop.showingInstructions) {
-    lines.push(`🔑 Access: ${escapeMarkdownV2(stop.showingInstructions)}`);
+    lines.push(`🔑 Access: ${stop.showingInstructions}`);
   }
 
   if (stop.agentName) {
-    let agentLine = `👤 Agent: ${escapeMarkdownV2(stop.agentName)}`;
+    let agentLine = `👤 Agent: ${stop.agentName}`;
     if (stop.agentPhone) {
-      agentLine += ` \\| 📞 ${escapeMarkdownV2(stop.agentPhone)}`;
+      agentLine += ` | 📞 ${stop.agentPhone}`;
     }
     lines.push(agentLine);
   }
 
-  lines.push(`🚗 ${escapeMarkdownV2(driveLabel)}: ${driveTime} min`);
+  lines.push(`🚗 ${driveLabel}: ${driveTime} min`);
 
   return lines.join('\n');
 }
@@ -68,9 +63,9 @@ function formatStop(stop: TourStop, isFirst: boolean): string {
 export function formatTourSummary(schedule: TourSchedule): string {
   const lines: string[] = [];
 
-  lines.push(`🏠 *SHOWING TOUR* — ${escapeMarkdownV2(schedule.clientName)}`);
-  lines.push(`📅 ${escapeMarkdownV2(formatDate(schedule.date))}`);
-  lines.push(`🚀 Start: ${escapeMarkdownV2(schedule.startingPoint)}`);
+  lines.push(`🏠 **SHOWING TOUR** — ${schedule.clientName}`);
+  lines.push(`📅 ${formatDate(schedule.date)}`);
+  lines.push(`🚀 Start: ${schedule.startingPoint}`);
   lines.push(SEPARATOR);
 
   for (let i = 0; i < schedule.stops.length; i++) {
@@ -81,13 +76,13 @@ export function formatTourSummary(schedule: TourSchedule): string {
   const totalHours = Math.floor(schedule.totalDurationMinutes / 60);
   const totalMins = schedule.totalDurationMinutes % 60;
   const totalStr = totalHours > 0 ? `${totalHours}h ${totalMins}min` : `${totalMins}min`;
-  lines.push(`⏱ Total tour: ~${escapeMarkdownV2(totalStr)}`);
+  lines.push(`⏱ Total tour: ~${totalStr}`);
 
   if (schedule.failedAddresses.length > 0) {
     lines.push('');
-    lines.push('⚠️ *Could not book:*');
+    lines.push('⚠️ **Could not book:**');
     for (const failed of schedule.failedAddresses) {
-      lines.push(`  • ${escapeMarkdownV2(failed.address)}: ${escapeMarkdownV2(failed.reason)}`);
+      lines.push(`  • ${failed.address}: ${failed.reason}`);
     }
   } else {
     lines.push('✅ All showings confirmed');
@@ -99,16 +94,14 @@ export function formatTourSummary(schedule: TourSchedule): string {
 export function formatProposedSchedule(schedule: TourSchedule): string {
   const lines: string[] = [];
 
-  lines.push(`📋 *Proposed Tour Schedule* — ${escapeMarkdownV2(schedule.clientName)}`);
-  lines.push(`📅 ${escapeMarkdownV2(formatDate(schedule.date))}`);
+  lines.push(`📋 **Proposed Tour Schedule** — ${schedule.clientName}`);
+  lines.push(`📅 ${formatDate(schedule.date)}`);
   lines.push('');
 
   for (const stop of schedule.stops) {
     const time = formatTime(stop.arrivalTime);
     const drive = stop.driveTimeFromPrevious || 0;
-    lines.push(
-      `${stop.stopNumber}\\. ${escapeMarkdownV2(stop.address)} — ${escapeMarkdownV2(time)} \\(${drive} min drive\\)`,
-    );
+    lines.push(`${stop.stopNumber}. ${stop.address} — ${time} (${drive} min drive)`);
   }
 
   lines.push('');

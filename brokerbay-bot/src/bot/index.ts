@@ -1,122 +1,113 @@
-import { Bot } from 'grammy';
+import { Client, GatewayIntentBits, Events } from 'discord.js';
 import pino from 'pino';
 import { config } from '../config';
 import { isSessionValid } from '../browser/session';
-import { handleTourCommand, handleConversationMessage } from './commands/book';
+import { handleTourCommand } from './commands/book';
 import {
   handleListingsCommand,
   handlePendingCommand,
   handleApproveCommand,
   handleDeclineCommand,
-  handleListingCallback,
-  handleApproveCallback,
-  handleDeclineCallback,
+  handleListingButton,
+  handleApproveButton,
+  handleDeclineButton,
 } from './commands/listings';
 import { handleSummaryCommand } from './commands/summary';
-import { TelegramMessenger } from './messenger';
 
 const logger = pino({ level: config.logLevel });
 
-export function createBot(): Bot {
-  const bot = new Bot(config.telegramBotToken);
+export function createClient(): Client {
+  const client = new Client({
+    intents: [
+      GatewayIntentBits.Guilds,
+      GatewayIntentBits.GuildMessages,
+      GatewayIntentBits.MessageContent,
+    ],
+  });
 
-  // ── Auth Middleware: whitelist check ──
-  bot.use(async (ctx, next) => {
-    const userId = ctx.from?.id;
-    if (!userId || !config.telegramAllowedUserIds.includes(userId)) {
-      logger.warn({ userId }, 'Unauthorized access attempt');
-      await ctx.reply('Unauthorized.');
+  // ── Slash Commands ──
+  client.on(Events.InteractionCreate, async (interaction) => {
+    // Auth check: whitelist
+    if (!config.discordAllowedUserIds.includes(interaction.user.id)) {
+      logger.warn({ userId: interaction.user.id }, 'Unauthorized access attempt');
+      if (interaction.isRepliable()) {
+        await interaction.reply({ content: 'Unauthorized.', ephemeral: true });
+      }
       return;
     }
-    await next();
-  });
 
-  // ── Commands ──
-  bot.command('start', async (ctx) => {
-    await ctx.reply(
-      '👋 Welcome to the BrokerBay Showing Bot!\n\n' +
-        'Commands:\n' +
-        '/tour or /book — Book a showing tour\n' +
-        '/listings — View your active listings\n' +
-        '/pending — View pending showing requests\n' +
-        '/approve <id> — Approve a showing request\n' +
-        '/decline <id> [reason] — Decline a showing request\n' +
-        '/summary [date] — View showings for a date\n' +
-        '/status — Check bot & session status',
-    );
-  });
+    // Handle slash commands
+    if (interaction.isChatInputCommand()) {
+      try {
+        switch (interaction.commandName) {
+          case 'tour':
+          case 'book':
+            await handleTourCommand(interaction);
+            break;
+          case 'listings':
+            await handleListingsCommand(interaction);
+            break;
+          case 'pending':
+            await handlePendingCommand(interaction);
+            break;
+          case 'approve':
+            await handleApproveCommand(interaction);
+            break;
+          case 'decline':
+            await handleDeclineCommand(interaction);
+            break;
+          case 'summary':
+            await handleSummaryCommand(interaction);
+            break;
+          case 'status': {
+            await interaction.deferReply();
+            const sessionValid = await isSessionValid().catch(() => false);
+            const statusEmoji = sessionValid ? '✅' : '❌';
+            await interaction.editReply(
+              `🤖 **Bot Status:** Running\n` +
+                `🔑 **BrokerBay Session:** ${statusEmoji} ${sessionValid ? 'Active' : 'Expired'}\n` +
+                `⏰ **Server Time:** ${new Date().toLocaleString()}`,
+            );
+            break;
+          }
+          default:
+            break;
+        }
+      } catch (err) {
+        logger.error({ err, command: interaction.commandName }, 'Command error');
+        const reply = { content: '❌ An error occurred processing this command.', ephemeral: true };
+        if (interaction.deferred || interaction.replied) {
+          await interaction.followUp(reply).catch(() => {});
+        } else {
+          await interaction.reply(reply).catch(() => {});
+        }
+      }
+    }
 
-  bot.command('help', async (ctx) => {
-    await ctx.reply(
-      '📖 *BrokerBay Bot Commands*\n\n' +
-        '🏠 *Showing Tours*\n' +
-        '/tour — Start booking a showing tour\n' +
-        '/book — Same as /tour\n\n' +
-        '📋 *Listing Management*\n' +
-        '/listings — View your active listings\n' +
-        '/pending — View pending showing requests\n' +
-        '/approve <id> — Approve a request\n' +
-        '/decline <id> \\[reason\\] — Decline a request\n\n' +
-        '📅 *Summary*\n' +
-        '/summary \\[date\\] — Showings for a date \\(default: today\\)\n\n' +
-        '⚙️ *System*\n' +
-        '/status — Check bot and session status',
-      { parse_mode: 'MarkdownV2' },
-    );
-  });
+    // Handle button interactions
+    if (interaction.isButton()) {
+      try {
+        const customId = interaction.customId;
 
-  bot.command(['tour', 'book'], handleTourCommand);
-  bot.command('listings', handleListingsCommand);
-  bot.command('pending', handlePendingCommand);
-  bot.command('approve', handleApproveCommand);
-  bot.command('decline', handleDeclineCommand);
-  bot.command('summary', handleSummaryCommand);
-
-  bot.command('status', async (ctx) => {
-    const sessionValid = await isSessionValid().catch(() => false);
-    const statusEmoji = sessionValid ? '✅' : '❌';
-    await ctx.reply(
-      `🤖 Bot Status: Running\n` +
-        `🔑 BrokerBay Session: ${statusEmoji} ${sessionValid ? 'Active' : 'Expired'}\n` +
-        `⏰ Server Time: ${new Date().toLocaleString()}`,
-    );
-  });
-
-  // ── Callback Queries (inline button presses) ──
-  bot.on('callback_query:data', async (ctx) => {
-    const data = ctx.callbackQuery.data;
-
-    if (data.startsWith('listing:')) {
-      await handleListingCallback(ctx, data.replace('listing:', ''));
-    } else if (data.startsWith('approve:')) {
-      await handleApproveCallback(ctx, data.replace('approve:', ''));
-    } else if (data.startsWith('decline:')) {
-      await handleDeclineCallback(ctx, data.replace('decline:', ''));
-    } else if (data.startsWith('listing_showings:') || data.startsWith('listing_pending:')) {
-      // These would navigate to sub-views — placeholder for now
-      await ctx.answerCallbackQuery('Coming soon!');
-    } else {
-      await ctx.answerCallbackQuery();
+        if (customId.startsWith('listing:')) {
+          await handleListingButton(interaction, customId.replace('listing:', ''));
+        } else if (customId.startsWith('approve:')) {
+          await handleApproveButton(interaction, customId.replace('approve:', ''));
+        } else if (customId.startsWith('decline:')) {
+          await handleDeclineButton(interaction, customId.replace('decline:', ''));
+        } else if (customId.startsWith('listing_showings:') || customId.startsWith('listing_pending:')) {
+          await interaction.reply({ content: 'Coming soon!', ephemeral: true });
+        }
+        // tour_confirm/tour_cancel are handled inline by the book command's awaitMessageComponent
+      } catch (err) {
+        logger.error({ err, customId: interaction.customId }, 'Button interaction error');
+      }
     }
   });
 
-  // ── Text Messages (conversation flow) ──
-  bot.on('message:text', async (ctx) => {
-    const handled = await handleConversationMessage(ctx);
-    if (!handled) {
-      await ctx.reply('Use /tour to book a showing tour or /help for all commands.');
-    }
+  client.on(Events.ClientReady, (c) => {
+    logger.info({ user: c.user.tag }, 'Bot is online!');
   });
 
-  // ── Error Handler ──
-  bot.catch((err) => {
-    logger.error({ err: err.error, ctx: err.ctx?.update?.update_id }, 'Bot error');
-  });
-
-  return bot;
-}
-
-// Export the messenger factory
-export function createMessenger(bot: Bot): TelegramMessenger {
-  return new TelegramMessenger(bot);
+  return client;
 }

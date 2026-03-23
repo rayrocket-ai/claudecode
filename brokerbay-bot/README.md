@@ -1,67 +1,85 @@
 # BrokerBay Showing Management Bot
 
-A Telegram bot that automates BrokerBay showing management tasks for real estate agents using Playwright browser automation.
+A Discord bot that automates BrokerBay showing management tasks for real estate agents using Playwright browser automation.
 
 ## Features
 
 - **Showing Tours** — Book optimized multi-property showing tours with route optimization
-- **Listing Management** — View listings, approve/decline showing requests
+- **Listing Management** — View listings, approve/decline showing requests via buttons
 - **Day Summary** — View all confirmed showings for any date
 - **Session Management** — Persistent BrokerBay login sessions
 
 ## Setup
 
-### 1. Create a Telegram Bot
+### 1. Create a Discord Bot
 
-1. Message [@BotFather](https://t.me/BotFather) on Telegram
-2. Send `/newbot` and follow the prompts
-3. Copy the bot token
+1. Go to [Discord Developer Portal](https://discord.com/developers/applications)
+2. Click **New Application**, give it a name
+3. Go to **Bot** tab, click **Add Bot**
+4. Copy the **Token** — this is your `DISCORD_BOT_TOKEN`
+5. Copy the **Application ID** from the General Information tab — this is your `DISCORD_CLIENT_ID`
+6. Under **Privileged Gateway Intents**, enable **Message Content Intent**
+7. Go to **OAuth2 > URL Generator**, select scopes: `bot`, `applications.commands`
+8. Select permissions: Send Messages, Use Slash Commands, Read Message History, Embed Links, Attach Files
+9. Copy the generated URL and open it to invite the bot to your server
 
-### 2. Get Your Telegram User ID
+### 2. Get Your Discord User ID
 
-1. Message [@userinfobot](https://t.me/userinfobot) on Telegram
-2. It will reply with your user ID
+1. Open Discord Settings > Advanced > Enable **Developer Mode**
+2. Right-click your name in any chat > **Copy User ID**
 
-### 3. Get a Google Maps API Key
+### 3. Get Your Server (Guild) ID (optional, for dev)
+
+Right-click your server name > **Copy Server ID**. Setting `DISCORD_GUILD_ID` makes slash commands appear instantly instead of taking up to 1 hour.
+
+### 4. Get a Google Maps API Key
 
 1. Go to [Google Cloud Console](https://console.cloud.google.com/)
 2. Enable the **Geocoding API** and **Distance Matrix API**
 3. Create an API key
 
-### 4. Configure Environment
+### 5. Configure Environment
 
 ```bash
 cp .env.example .env
 ```
 
-Edit `.env` with your credentials:
+Edit `.env`:
 
 ```
-BROKERBAY_EMAIL=your@email.com
-BROKERBAY_PASSWORD=your_password
-TELEGRAM_BOT_TOKEN=123456:ABC-DEF...
-TELEGRAM_ALLOWED_USER_IDS=123456789
+BROKERBAY_EMAIL=your-brokerbay-email@example.com
+BROKERBAY_PASSWORD=your-password
+DISCORD_BOT_TOKEN=your-bot-token
+DISCORD_CLIENT_ID=your-application-id
+DISCORD_ALLOWED_USER_IDS=your-discord-user-id
+DISCORD_GUILD_ID=your-server-id
 GOOGLE_MAPS_API_KEY=AIza...
 ```
 
-### 5. Install Dependencies
+### 6. Install Dependencies
 
 ```bash
 npm install
 npx playwright install chromium
 ```
 
-### 6. First Login (Generate Session)
+### 7. Deploy Slash Commands
 
-Run the manual login script to authenticate with BrokerBay and save the session:
+```bash
+npm run deploy-commands
+```
+
+This registers the slash commands with Discord. If you set `DISCORD_GUILD_ID`, they appear instantly. Otherwise, global commands can take up to 1 hour.
+
+### 8. First Login (Generate BrokerBay Session)
 
 ```bash
 npm run login
 ```
 
-A browser window will open. Log in to BrokerBay through the Honeywell SSO. Once you reach the dashboard, the session is saved automatically.
+A browser window will open. Log in through the Honeywell SSO. Once you reach the BrokerBay dashboard, the session is saved automatically.
 
-### 7. Start the Bot
+### 9. Start the Bot
 
 ```bash
 # Development (with hot reload)
@@ -79,14 +97,13 @@ docker-compose up -d
 
 | Command | Description |
 |---------|-------------|
-| `/start` | Welcome message and command list |
-| `/help` | Detailed help |
-| `/tour` or `/book` | Start booking a showing tour |
-| `/listings` | View your active listings |
-| `/pending` | View pending showing requests |
-| `/approve <id>` | Approve a showing request |
-| `/decline <id> [reason]` | Decline a showing request |
-| `/summary [date]` | View showings for a date (default: today) |
+| `/tour` | Start booking a showing tour |
+| `/book` | Alias for `/tour` |
+| `/listings` | View your active listings (with buttons) |
+| `/pending` | View pending showing requests (approve/decline buttons) |
+| `/approve id:<id>` | Approve a showing request |
+| `/decline id:<id> [reason:<reason>]` | Decline a showing request |
+| `/summary [date:<date>]` | View showings for a date (default: today) |
 | `/status` | Check bot and BrokerBay session status |
 
 ## Tour Booking Flow
@@ -97,18 +114,18 @@ docker-compose up -d
 4. Enter client name
 5. Enter starting point (office address or "first property")
 6. Choose duration (20/25/30 minutes)
-7. Review optimized route and confirm
-8. Bot books all showings in BrokerBay and sends a summary
+7. Review optimized route, click **Book All** or **Cancel**
+8. Bot books all showings in BrokerBay and posts a summary
 
 ## Architecture
 
 ```
 /brokerbay-bot
   /src
-    /bot          — Grammy bot, commands, messenger interface
+    /bot          — Discord.js client, slash commands, button handlers, messenger interface
     /browser      — Playwright session & BrokerBay page objects
     /scheduler    — Route optimization & Google Maps integration
-    /formatters   — Telegram message formatters (MarkdownV2)
+    /formatters   — Discord message formatters (markdown)
     /types        — Shared TypeScript interfaces
     config.ts     — Zod-validated environment config
     index.ts      — Entry point
@@ -116,10 +133,11 @@ docker-compose up -d
 
 ### Key Design Decisions
 
-- **IMessenger interface** — Telegram is abstracted behind an interface for future WhatsApp/Discord support
+- **IMessenger interface** — Discord is abstracted behind an interface for future WhatsApp/other platform support
 - **p-queue (concurrency: 1)** — All browser tasks run sequentially to prevent conflicts
 - **Session persistence** — BrokerBay session (cookies + localStorage) saved to disk, reused across restarts
-- **User whitelist** — Only authorized Telegram user IDs can interact with the bot
+- **User whitelist** — Only authorized Discord user IDs can interact with the bot
+- **Discord slash commands** — Native Discord UX with autocomplete, options, and buttons
 
 ## Development
 
@@ -130,7 +148,7 @@ HEADLESS=false npm run dev
 
 ## Security
 
-- Only whitelisted Telegram user IDs can use the bot
+- Only whitelisted Discord user IDs can use the bot
 - Session files are gitignored
 - Credentials are never logged
-- Unauthorized users get a generic "Unauthorized" response
+- Unauthorized users get an ephemeral "Unauthorized" response

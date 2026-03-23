@@ -95,16 +95,15 @@ export interface FailedBooking {
   reason: string;
 }
 
-// ── Messenger Interface (abstraction for future WhatsApp/Discord) ──
+// ── Messenger Interface (abstraction for future WhatsApp/other platforms) ──
 
 export interface IMessenger {
-  sendMessage(chatId: string | number, text: string, parseMode?: string): Promise<void>;
-  sendPhoto(chatId: string | number, photo: string | Buffer, caption?: string): Promise<void>;
+  sendMessage(channelId: string, text: string): Promise<void>;
+  sendPhoto(channelId: string, photo: string | Buffer, caption?: string): Promise<void>;
   sendButtons(
-    chatId: string | number,
+    channelId: string,
     text: string,
     buttons: InlineButton[][],
-    parseMode?: string,
   ): Promise<void>;
 }
 
@@ -127,6 +126,7 @@ export type ConversationStep =
 
 export interface ConversationState {
   step: ConversationStep;
+  channelId?: string;
   addresses?: string[];
   date?: string;
   startTime?: string;

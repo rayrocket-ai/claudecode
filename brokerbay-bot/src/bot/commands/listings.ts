@@ -1,4 +1,11 @@
-import { Context, InlineKeyboard } from 'grammy';
+import {
+  ChatInputCommandInteraction,
+  ButtonInteraction,
+  ActionRowBuilder,
+  ButtonBuilder,
+  ButtonStyle,
+  TextChannel,
+} from 'discord.js';
 import pino from 'pino';
 import { config } from '../../config';
 import { enqueue } from '../queue';
@@ -8,167 +15,180 @@ import {
   approveShowingRequest,
   declineShowingRequest,
   getListingDetails,
-  updateShowingInstructions,
 } from '../../browser/brokerbay';
-import { formatMyListings, formatPendingRequests, formatApprovalResult, formatListingDetails } from '../../formatters/listing';
+import {
+  formatMyListings,
+  formatPendingRequests,
+  formatApprovalResult,
+  formatListingDetails,
+} from '../../formatters/listing';
 
 const logger = pino({ level: config.logLevel });
 
-export async function handleListingsCommand(ctx: Context): Promise<void> {
-  await ctx.reply('🔄 Fetching your listings...');
+export async function handleListingsCommand(interaction: ChatInputCommandInteraction): Promise<void> {
+  await interaction.deferReply();
 
   try {
     const listings = await enqueue('get-listings', () => getMyListings());
     const text = formatMyListings(listings);
 
     if (listings.length === 0) {
-      await ctx.reply(text, { parse_mode: 'MarkdownV2' });
+      await interaction.editReply(text);
       return;
     }
 
-    // Build inline buttons for each listing
-    const keyboard = new InlineKeyboard();
-    for (const listing of listings) {
-      keyboard.text(`🏠 ${listing.address}`, `listing:${listing.id}`).row();
+    // Build button rows (max 5 buttons per row, max 5 rows)
+    const rows: ActionRowBuilder<ButtonBuilder>[] = [];
+    for (let i = 0; i < Math.min(listings.length, 25); i++) {
+      const rowIndex = Math.floor(i / 5);
+      if (!rows[rowIndex]) {
+        rows[rowIndex] = new ActionRowBuilder<ButtonBuilder>();
+      }
+      rows[rowIndex].addComponents(
+        new ButtonBuilder()
+          .setCustomId(`listing:${listings[i].id}`)
+          .setLabel(listings[i].address.substring(0, 80))
+          .setEmoji('🏠')
+          .setStyle(ButtonStyle.Secondary),
+      );
     }
 
-    await ctx.reply(text, {
-      parse_mode: 'MarkdownV2',
-      reply_markup: keyboard,
-    });
+    await interaction.editReply({ content: text, components: rows.slice(0, 5) });
   } catch (err) {
     logger.error({ err }, 'Failed to fetch listings');
-    await ctx.reply('❌ Failed to fetch listings. Please try again.');
+    await interaction.editReply('❌ Failed to fetch listings. Please try again.');
   }
 }
 
-export async function handleListingCallback(ctx: Context, listingId: string): Promise<void> {
-  await ctx.answerCallbackQuery();
+export async function handleListingButton(interaction: ButtonInteraction, listingId: string): Promise<void> {
+  await interaction.deferUpdate();
 
-  const keyboard = new InlineKeyboard()
-    .text('📅 View Showings', `listing_showings:${listingId}`)
-    .text('⏳ Pending Requests', `listing_pending:${listingId}`)
-    .row()
-    .text('🔑 Update Instructions', `listing_instructions:${listingId}`)
-    .text('⏰ Set Availability', `listing_availability:${listingId}`)
-    .row()
-    .text('📢 Message Co-op Agents', `listing_message:${listingId}`)
-    .text('💰 Offer Instructions', `listing_offers:${listingId}`);
+  const rows = [
+    new ActionRowBuilder<ButtonBuilder>().addComponents(
+      new ButtonBuilder()
+        .setCustomId(`listing_showings:${listingId}`)
+        .setLabel('View Showings')
+        .setEmoji('📅')
+        .setStyle(ButtonStyle.Primary),
+      new ButtonBuilder()
+        .setCustomId(`listing_pending:${listingId}`)
+        .setLabel('Pending Requests')
+        .setEmoji('⏳')
+        .setStyle(ButtonStyle.Primary),
+    ),
+    new ActionRowBuilder<ButtonBuilder>().addComponents(
+      new ButtonBuilder()
+        .setCustomId(`listing_instructions:${listingId}`)
+        .setLabel('Update Instructions')
+        .setEmoji('🔑')
+        .setStyle(ButtonStyle.Secondary),
+      new ButtonBuilder()
+        .setCustomId(`listing_availability:${listingId}`)
+        .setLabel('Set Availability')
+        .setEmoji('⏰')
+        .setStyle(ButtonStyle.Secondary),
+    ),
+  ];
 
   try {
     const details = await enqueue('get-listing-details', () => getListingDetails(listingId));
     const text = formatListingDetails(details);
-
-    await ctx.editMessageText(text, {
-      parse_mode: 'MarkdownV2',
-      reply_markup: keyboard,
-    });
+    await interaction.editReply({ content: text, components: rows });
   } catch (err) {
     logger.error({ err, listingId }, 'Failed to get listing details');
-    await ctx.editMessageText('❌ Failed to load listing details.', {
-      reply_markup: keyboard,
-    });
+    await interaction.editReply({ content: '❌ Failed to load listing details.', components: rows });
   }
 }
 
-export async function handlePendingCommand(ctx: Context): Promise<void> {
-  await ctx.reply('🔄 Fetching pending requests...');
+export async function handlePendingCommand(interaction: ChatInputCommandInteraction): Promise<void> {
+  await interaction.deferReply();
 
   try {
     const requests = await enqueue('get-pending', () => getPendingRequests());
     const text = formatPendingRequests(requests);
 
     if (requests.length === 0) {
-      await ctx.reply(text, { parse_mode: 'MarkdownV2' });
+      await interaction.editReply(text);
       return;
     }
 
-    // Add approve/decline buttons for each request
-    const keyboard = new InlineKeyboard();
-    for (const req of requests) {
-      keyboard
-        .text('✅ Approve', `approve:${req.requestId}`)
-        .text('❌ Decline', `decline:${req.requestId}`)
-        .row();
+    // Build approve/decline buttons (max 5 rows)
+    const rows: ActionRowBuilder<ButtonBuilder>[] = [];
+    for (let i = 0; i < Math.min(requests.length, 5); i++) {
+      rows.push(
+        new ActionRowBuilder<ButtonBuilder>().addComponents(
+          new ButtonBuilder()
+            .setCustomId(`approve:${requests[i].requestId}`)
+            .setLabel(`Approve ${requests[i].listingAddress.substring(0, 40)}`)
+            .setEmoji('✅')
+            .setStyle(ButtonStyle.Success),
+          new ButtonBuilder()
+            .setCustomId(`decline:${requests[i].requestId}`)
+            .setLabel('Decline')
+            .setEmoji('❌')
+            .setStyle(ButtonStyle.Danger),
+        ),
+      );
     }
 
-    await ctx.reply(text, {
-      parse_mode: 'MarkdownV2',
-      reply_markup: keyboard,
-    });
+    await interaction.editReply({ content: text, components: rows });
   } catch (err) {
     logger.error({ err }, 'Failed to fetch pending requests');
-    await ctx.reply('❌ Failed to fetch pending requests.');
+    await interaction.editReply('❌ Failed to fetch pending requests.');
   }
 }
 
-export async function handleApproveCommand(ctx: Context): Promise<void> {
-  const text = ctx.message?.text || '';
-  const parts = text.split(/\s+/);
-  const requestId = parts[1];
-
-  if (!requestId) {
-    await ctx.reply('Usage: /approve <request_id>');
-    return;
-  }
-
-  await ctx.reply(`🔄 Approving request ${requestId}...`);
+export async function handleApproveCommand(interaction: ChatInputCommandInteraction): Promise<void> {
+  const requestId = interaction.options.getString('id', true);
+  await interaction.deferReply();
 
   try {
     const success = await enqueue('approve-request', () => approveShowingRequest(requestId));
     const msg = formatApprovalResult(requestId, success);
-    await ctx.reply(msg, { parse_mode: 'MarkdownV2' });
+    await interaction.editReply(msg);
   } catch (err) {
     logger.error({ err, requestId }, 'Failed to approve request');
-    await ctx.reply('❌ Failed to approve request.');
+    await interaction.editReply('❌ Failed to approve request.');
   }
 }
 
-export async function handleDeclineCommand(ctx: Context): Promise<void> {
-  const text = ctx.message?.text || '';
-  const parts = text.split(/\s+/);
-  const requestId = parts[1];
-  const reason = parts.slice(2).join(' ') || undefined;
-
-  if (!requestId) {
-    await ctx.reply('Usage: /decline <request_id> [reason]');
-    return;
-  }
-
-  await ctx.reply(`🔄 Declining request ${requestId}...`);
+export async function handleDeclineCommand(interaction: ChatInputCommandInteraction): Promise<void> {
+  const requestId = interaction.options.getString('id', true);
+  const reason = interaction.options.getString('reason') || undefined;
+  await interaction.deferReply();
 
   try {
     const success = await enqueue('decline-request', () => declineShowingRequest(requestId, reason));
     const msg = formatApprovalResult(requestId, false);
-    await ctx.reply(msg, { parse_mode: 'MarkdownV2' });
+    await interaction.editReply(msg);
   } catch (err) {
     logger.error({ err, requestId }, 'Failed to decline request');
-    await ctx.reply('❌ Failed to decline request.');
+    await interaction.editReply('❌ Failed to decline request.');
   }
 }
 
-export async function handleApproveCallback(ctx: Context, requestId: string): Promise<void> {
-  await ctx.answerCallbackQuery('Approving...');
+export async function handleApproveButton(interaction: ButtonInteraction, requestId: string): Promise<void> {
+  await interaction.deferUpdate();
 
   try {
     const success = await enqueue('approve-request', () => approveShowingRequest(requestId));
     const msg = formatApprovalResult(requestId, success);
-    await ctx.editMessageText(msg, { parse_mode: 'MarkdownV2' });
+    await interaction.editReply({ content: msg, components: [] });
   } catch (err) {
     logger.error({ err, requestId }, 'Failed to approve request');
-    await ctx.answerCallbackQuery('Failed to approve');
+    await interaction.followUp({ content: '❌ Failed to approve request.', ephemeral: true });
   }
 }
 
-export async function handleDeclineCallback(ctx: Context, requestId: string): Promise<void> {
-  await ctx.answerCallbackQuery('Declining...');
+export async function handleDeclineButton(interaction: ButtonInteraction, requestId: string): Promise<void> {
+  await interaction.deferUpdate();
 
   try {
     const success = await enqueue('decline-request', () => declineShowingRequest(requestId));
     const msg = formatApprovalResult(requestId, false);
-    await ctx.editMessageText(msg, { parse_mode: 'MarkdownV2' });
+    await interaction.editReply({ content: msg, components: [] });
   } catch (err) {
     logger.error({ err, requestId }, 'Failed to decline request');
-    await ctx.answerCallbackQuery('Failed to decline');
+    await interaction.followUp({ content: '❌ Failed to decline request.', ephemeral: true });
   }
 }

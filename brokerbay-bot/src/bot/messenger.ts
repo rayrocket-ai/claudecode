@@ -1,43 +1,58 @@
-import { Bot, InlineKeyboard } from 'grammy';
+import {
+  Client,
+  TextChannel,
+  ActionRowBuilder,
+  ButtonBuilder,
+  ButtonStyle,
+  AttachmentBuilder,
+} from 'discord.js';
 import type { IMessenger, InlineButton } from '../types';
 
-export class TelegramMessenger implements IMessenger {
-  constructor(private bot: Bot) {}
+export class DiscordMessenger implements IMessenger {
+  constructor(private client: Client) {}
 
-  async sendMessage(chatId: string | number, text: string, parseMode?: string): Promise<void> {
-    await this.bot.api.sendMessage(chatId, text, {
-      parse_mode: (parseMode as 'MarkdownV2' | 'HTML') || 'MarkdownV2',
-    });
+  private async getChannel(channelId: string): Promise<TextChannel> {
+    const channel = await this.client.channels.fetch(channelId);
+    if (!channel || !channel.isTextBased()) {
+      throw new Error(`Channel ${channelId} not found or not a text channel`);
+    }
+    return channel as TextChannel;
   }
 
-  async sendPhoto(chatId: string | number, photo: string | Buffer, caption?: string): Promise<void> {
+  async sendMessage(channelId: string, text: string): Promise<void> {
+    const channel = await this.getChannel(channelId);
+    await channel.send(text);
+  }
+
+  async sendPhoto(channelId: string, photo: string | Buffer, caption?: string): Promise<void> {
+    const channel = await this.getChannel(channelId);
     if (typeof photo === 'string') {
-      await this.bot.api.sendPhoto(chatId, photo, { caption });
+      await channel.send({ content: caption || '', files: [photo] });
     } else {
-      await this.bot.api.sendPhoto(chatId, new InputFile(photo), { caption });
+      const attachment = new AttachmentBuilder(photo, { name: 'image.png' });
+      await channel.send({ content: caption || '', files: [attachment] });
     }
   }
 
   async sendButtons(
-    chatId: string | number,
+    channelId: string,
     text: string,
     buttons: InlineButton[][],
-    parseMode?: string,
   ): Promise<void> {
-    const keyboard = new InlineKeyboard();
-    for (const row of buttons) {
-      for (const btn of row) {
-        keyboard.text(btn.text, btn.callbackData);
+    const channel = await this.getChannel(channelId);
+    const rows = buttons.map((rowButtons) => {
+      const row = new ActionRowBuilder<ButtonBuilder>();
+      for (const btn of rowButtons) {
+        row.addComponents(
+          new ButtonBuilder()
+            .setCustomId(btn.callbackData)
+            .setLabel(btn.text)
+            .setStyle(ButtonStyle.Primary),
+        );
       }
-      keyboard.row();
-    }
-
-    await this.bot.api.sendMessage(chatId, text, {
-      parse_mode: (parseMode as 'MarkdownV2' | 'HTML') || 'MarkdownV2',
-      reply_markup: keyboard,
+      return row;
     });
+
+    await channel.send({ content: text, components: rows });
   }
 }
-
-// Re-export InputFile for photo support
-import { InputFile } from 'grammy';
