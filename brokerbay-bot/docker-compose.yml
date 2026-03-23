@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  brokerbay-bot:
+    build: .
+    container_name: brokerbay-bot
+    restart: unless-stopped
+    env_file:
+      - .env
+    volumes:
+      - ./session:/app/session
+    environment:
+      - NODE_ENV=production
+      - HEADLESS=true
