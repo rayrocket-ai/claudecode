@@ -62,6 +62,16 @@ class Settings(BaseSettings):
     skyslope_api_key: str = ""
     skyslope_api_url: str = "https://api.skyslope.com"
 
+    # BrokerBay
+    brokerbay_email: str = ""
+    brokerbay_password: str = ""
+    brokerbay_base_url: str = "https://www.brokerbay.com"
+    session_path: str = "./session/brokerbay.json"
+    showing_poll_interval: int = 120  # seconds between showing checks
+
+    # Google Maps
+    google_maps_api_key: str = ""
+
     # Derived
     @property
     def authorized_user_id_list(self) -> list[int]:
@@ -80,6 +90,10 @@ class Settings(BaseSettings):
     @property
     def is_smtp_configured(self) -> bool:
         return bool(self.smtp_host and self.smtp_user)
+
+    @property
+    def is_brokerbay_configured(self) -> bool:
+        return bool(self.brokerbay_email and self.brokerbay_password)
 
 
 # Paths

@@ -160,6 +160,9 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
         "*Available Commands:*\n\n"
         "/start — Main menu\n"
         "/new — Create a new document\n"
+        "/showings — Pending & upcoming showings\n"
+        "/today — Today's showing schedule\n"
+        "/listings — View active listings\n"
         "/realmtest — Test REALM/TransactionDesk connection\n"
         "/cancel — Cancel current operation\n"
         "/help — This message\n\n"
@@ -269,6 +272,16 @@ async def menu_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> i
         await query.edit_message_text("🔄 Testing TransactionDesk connection...")
         # Reuse the realm_test logic
         return await realm_test_command(update, context)
+
+    elif data == "menu_showings":
+        from bot.handlers.showings import showings_command
+        await showings_command(update, context)
+        return IDLE
+
+    elif data == "menu_today":
+        from bot.handlers.showings import today_command
+        await today_command(update, context)
+        return IDLE
 
     elif data == "menu_help":
         return await help_command(update, context)

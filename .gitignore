@@ -8,6 +8,9 @@ storage/*.json
 storage/*.pdf
 storage/*.png
 
+# Session files
+session/
+
 # Python
 __pycache__/
 *.pyc

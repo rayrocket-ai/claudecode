@@ -11,6 +11,7 @@ from telegram import BotCommand
 from telegram.ext import Application
 
 from bot.handlers.conversation import build_conversation_handler
+from bot.handlers.showings import register_showing_handlers
 from config import get_settings
 from db.operations import init_db
 
@@ -36,14 +37,23 @@ async def post_init(application: Application) -> None:
     """Run after bot initialization — set commands and init DB."""
     await init_db()
 
+    settings = get_settings()
+
     commands = [
         BotCommand("start", "Main menu"),
         BotCommand("new", "Create a new document"),
+        BotCommand("showings", "View pending & upcoming showings"),
+        BotCommand("today", "Today's showing schedule"),
+        BotCommand("listings", "View active listings"),
         BotCommand("realmtest", "Test REALM / TransactionDesk connection"),
         BotCommand("help", "Show help"),
         BotCommand("cancel", "Cancel current operation"),
     ]
     await application.bot.set_my_commands(commands)
+
+    if settings.is_brokerbay_configured:
+        log = structlog.get_logger()
+        log.info("brokerbay.configured", email=settings.brokerbay_email)
 
 
 def main() -> None:
@@ -70,6 +80,9 @@ def main() -> None:
     # Add conversation handler
     conv_handler = build_conversation_handler()
     app.add_handler(conv_handler)
+
+    # Add showing management handlers (commands + callback queries + polling)
+    register_showing_handlers(app)
 
     # Start polling
     log.info("bot.polling", mode="polling")
