@@ -7,8 +7,8 @@ import logging
 import sys
 
 import structlog
-from telegram import BotCommand
-from telegram.ext import Application
+from telegram import BotCommand, Update
+from telegram.ext import Application, CommandHandler, ContextTypes
 
 from bot.handlers.conversation import build_conversation_handler
 from bot.handlers.showings import register_showing_handlers
@@ -45,6 +45,7 @@ async def post_init(application: Application) -> None:
         BotCommand("showings", "View pending & upcoming showings"),
         BotCommand("today", "Today's showing schedule"),
         BotCommand("listings", "View active listings"),
+        BotCommand("whoami", "Show your Telegram user ID"),
         BotCommand("realmtest", "Test REALM / TransactionDesk connection"),
         BotCommand("help", "Show help"),
         BotCommand("cancel", "Cancel current operation"),
@@ -76,6 +77,20 @@ def main() -> None:
         .post_init(post_init)
         .build()
     )
+
+    # /whoami — always works, no auth required, so user can discover their ID
+    async def whoami_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+        user = update.effective_user
+        await update.message.reply_text(
+            f"Your Telegram user ID is: `{user.id}`\n\n"
+            f"Name: {user.full_name}\n"
+            f"Username: @{user.username or 'N/A'}\n\n"
+            f"Set this in your `.env` file as:\n"
+            f"`AUTHORIZED_USER_IDS={user.id}`",
+            parse_mode="Markdown",
+        )
+
+    app.add_handler(CommandHandler("whoami", whoami_command))
 
     # Add conversation handler
     conv_handler = build_conversation_handler()
