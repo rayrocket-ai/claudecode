@@ -2,6 +2,7 @@
 .env
 .venv/
 venv/
+credentials.json
 
 # Storage (sessions, generated PDFs)
 storage/*.json
