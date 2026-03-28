@@ -58,6 +58,12 @@ class Settings(BaseSettings):
     smtp_password: str = ""
     smtp_from: str = ""
 
+    # Higgsfield (tour video generation)
+    higgsfield_api_key: str = ""
+    higgsfield_model: str = "standard"  # standard or soul_cinema
+    tour_max_photos: int = 10
+    tour_clip_duration: int = 5  # seconds per clip (3-5)
+
     # SkySlope
     skyslope_api_key: str = ""
     skyslope_api_url: str = "https://api.skyslope.com"
@@ -80,6 +86,10 @@ class Settings(BaseSettings):
     @property
     def is_smtp_configured(self) -> bool:
         return bool(self.smtp_host and self.smtp_user)
+
+    @property
+    def is_higgsfield_configured(self) -> bool:
+        return bool(self.higgsfield_api_key)
 
 
 # Paths

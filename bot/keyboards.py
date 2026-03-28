@@ -9,6 +9,7 @@ def main_menu_keyboard() -> InlineKeyboardMarkup:
     """Main menu after /start."""
     return InlineKeyboardMarkup([
         [InlineKeyboardButton("📝 Create New Document", callback_data="menu_new_doc")],
+        [InlineKeyboardButton("🎬 Create Tour Video", callback_data="menu_tour_video")],
         [InlineKeyboardButton("📋 My Transactions", callback_data="menu_transactions")],
         [InlineKeyboardButton("🔗 Test REALM Connection", callback_data="menu_realm_test")],
         [InlineKeyboardButton("ℹ️ Help", callback_data="menu_help")],

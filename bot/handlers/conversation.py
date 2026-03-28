@@ -8,6 +8,8 @@ FSM States:
   GENERATING (4)      → Document is being generated
   POST_GENERATE (5)   → Document ready, user picks next action
   SIGNING (6)         → User provides signer emails
+  TOUR_INPUT (7)      → User provides MLS# or listing URL for tour video
+  TOUR_GENERATING (8) → Tour video is being generated
 """
 
 from __future__ import annotations
@@ -49,7 +51,8 @@ from forms.generator import generate_document, get_last_td_result
 logger = logging.getLogger(__name__)
 
 # Conversation states
-IDLE, SELECTING_DOC, COLLECTING, CONFIRMING, GENERATING, POST_GENERATE, SIGNING = range(7)
+(IDLE, SELECTING_DOC, COLLECTING, CONFIRMING, GENERATING,
+ POST_GENERATE, SIGNING, TOUR_INPUT, TOUR_GENERATING) = range(9)
 
 # Module-level dict for 2FA futures (avoids setting attributes on PTB ExtBot)
 _pending_2fa: dict[int, asyncio.Future] = {}
@@ -160,6 +163,7 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
         "*Available Commands:*\n\n"
         "/start — Main menu\n"
         "/new — Create a new document\n"
+        "/tour — Generate a house tour video\n"
         "/realmtest — Test REALM/TransactionDesk connection\n"
         "/cancel — Cancel current operation\n"
         "/help — This message\n\n"
@@ -170,6 +174,9 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
         "• Notice (Form 124)\n"
         "• Commercial APS (Form 500)\n"
         "• Agreement to Lease\n\n"
+        "*House Tour Videos:*\n"
+        "Generate cinematic walkthrough videos from listing photos "
+        "using Higgsfield AI. Provide an MLS# or listing URL.\n\n"
         "*How it works:*\n"
         "1. Choose a document type\n"
         "2. Answer questions about the deal\n"
@@ -269,6 +276,27 @@ async def menu_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> i
         await query.edit_message_text("🔄 Testing TransactionDesk connection...")
         # Reuse the realm_test logic
         return await realm_test_command(update, context)
+
+    elif data == "menu_tour_video":
+        settings = get_settings()
+        if not settings.is_higgsfield_configured:
+            await query.edit_message_text(
+                "⚠️ Tour video generation is not configured.\n"
+                "Set HIGGSFIELD_API_KEY in .env to enable this feature.",
+                reply_markup=main_menu_keyboard(),
+            )
+            return IDLE
+
+        await query.edit_message_text(
+            "🎬 *Create House Tour Video*\n\n"
+            "I'll generate a cinematic walkthrough video from listing photos "
+            "using Higgsfield AI.\n\n"
+            "Please provide either:\n"
+            "• An *MLS number* (e.g. `C1234567`)\n"
+            "• A *REALTOR.ca listing URL*",
+            parse_mode="Markdown",
+        )
+        return TOUR_INPUT
 
     elif data == "menu_help":
         return await help_command(update, context)
@@ -723,6 +751,143 @@ async def signing_message(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
     return POST_GENERATE
 
 
+# ── Tour Video Handlers ──────────────────────────────────────────
+
+
+async def tour_input_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    """Handle MLS number or listing URL input for tour video generation."""
+    text = update.message.text.strip()
+    chat_id = update.effective_user.id
+
+    # Determine if input is MLS number or URL
+    mls_number = None
+    listing_url = None
+
+    if text.startswith("http") and "realtor.ca" in text:
+        listing_url = text
+    elif re.match(r"^[A-Z]?\d{5,10}$", text.upper()):
+        mls_number = text.upper()
+    else:
+        await update.message.reply_text(
+            "⚠️ I didn't recognize that as an MLS number or listing URL.\n\n"
+            "Please provide:\n"
+            "• An MLS number like `C1234567`\n"
+            "• A REALTOR.ca URL\n\n"
+            "Or type /cancel to go back.",
+            parse_mode="Markdown",
+        )
+        return TOUR_INPUT
+
+    context.user_data["tour_mls"] = mls_number
+    context.user_data["tour_url"] = listing_url
+
+    identifier = mls_number or listing_url
+    await update.message.reply_text(
+        f"🎬 Starting tour video generation for:\n`{identifier}`\n\n"
+        "This may take several minutes. I'll update you on progress...",
+        parse_mode="Markdown",
+    )
+
+    # Start generation in background
+    asyncio.create_task(_run_tour_generation(chat_id, context, mls_number, listing_url))
+    return TOUR_GENERATING
+
+
+async def _run_tour_generation(
+    chat_id: int,
+    context: ContextTypes.DEFAULT_TYPE,
+    mls_number: str | None,
+    listing_url: str | None,
+) -> None:
+    """Run tour video generation and send updates via Telegram."""
+    settings = get_settings()
+    last_stage = ""
+
+    async def progress_callback(stage: str, current: int, total: int) -> None:
+        nonlocal last_stage
+        if stage == last_stage and current > 0 and current < total:
+            return  # Skip intermediate updates for the same stage
+        last_stage = stage
+
+        messages = {
+            "fetching_photos": "📷 Fetching listing photos...",
+            "generating_clips": f"🎬 Generating video clips... ({current}/{total})",
+            "concatenating": "🔗 Assembling final tour video...",
+        }
+        msg = messages.get(stage, f"⏳ {stage}...")
+        try:
+            await context.bot.send_message(chat_id=chat_id, text=msg)
+        except Exception:
+            pass
+
+    try:
+        from integrations.tour_video import generate_tour_video
+
+        result = await generate_tour_video(
+            mls_number=mls_number,
+            listing_url=listing_url,
+            max_photos=settings.tour_max_photos,
+            clip_duration=settings.tour_clip_duration,
+            model=settings.higgsfield_model,
+            progress_callback=progress_callback,
+        )
+
+        video_path = result["video_path"]
+        address = result["address"]
+        duration = result["duration_seconds"]
+        clip_count = result["clip_count"]
+
+        # Send the video
+        with open(video_path, "rb") as f:
+            await context.bot.send_video(
+                chat_id=chat_id,
+                video=InputFile(f, filename=f"tour_{result.get('mls_number', 'video')}.mp4"),
+                caption=(
+                    f"🏠 *House Tour Video*\n\n"
+                    f"📍 {address}\n"
+                    f"🎬 {clip_count} scenes | {duration}s duration\n"
+                    f"🤖 Generated with Higgsfield AI"
+                ),
+                parse_mode="Markdown",
+                supports_streaming=True,
+            )
+
+        await context.bot.send_message(
+            chat_id=chat_id,
+            text="✅ Tour video complete! What would you like to do next?",
+            reply_markup=main_menu_keyboard(),
+        )
+
+    except ValueError as e:
+        await context.bot.send_message(
+            chat_id=chat_id,
+            text=f"⚠️ {e}\n\nPlease try again with a valid MLS number or URL.",
+            reply_markup=main_menu_keyboard(),
+        )
+    except Exception as e:
+        logger.exception("Tour video generation failed: %s", e)
+        await context.bot.send_message(
+            chat_id=chat_id,
+            text=f"❌ Tour video generation failed: {e}\n\nType /start to try again.",
+            reply_markup=main_menu_keyboard(),
+        )
+
+
+async def tour_generating_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    """Handle messages while tour video is being generated."""
+    text = update.message.text.strip()
+
+    if text.lower() in ("cancel", "/cancel"):
+        await update.message.reply_text("❌ Cancelled. Note: any in-progress generation may still complete.")
+        return ConversationHandler.END
+
+    await update.message.reply_text(
+        "⏳ Tour video is still being generated. Please wait...\n"
+        "Type /cancel to cancel."
+    )
+    return TOUR_GENERATING
+
+
 # ── Idle Message Handler ──────────────────────────────────────────
 
 
@@ -768,6 +933,25 @@ async def idle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
             )
             return COLLECTING
 
+    # Check for tour video intent
+    tour_keywords = ["tour", "video", "walkthrough", "virtual tour", "house tour"]
+    if any(kw in text for kw in tour_keywords):
+        settings = get_settings()
+        if settings.is_higgsfield_configured:
+            await update.message.reply_text(
+                "🎬 *Create House Tour Video*\n\n"
+                "Please provide an *MLS number* or *REALTOR.ca listing URL*:",
+                parse_mode="Markdown",
+            )
+            return TOUR_INPUT
+        else:
+            await update.message.reply_text(
+                "⚠️ Tour video generation requires a Higgsfield API key. "
+                "Set HIGGSFIELD_API_KEY in .env to enable this feature.",
+                reply_markup=main_menu_keyboard(),
+            )
+            return IDLE
+
     # Default: show menu
     await update.message.reply_text(
         "I can help you create real estate documents. "
@@ -786,6 +970,7 @@ def build_conversation_handler() -> ConversationHandler:
         entry_points=[
             CommandHandler("start", start_command),
             CommandHandler("new", lambda u, c: menu_callback.__wrapped__(u, c) if False else _new_doc_entry(u, c)),
+            CommandHandler("tour", _tour_entry),
             CommandHandler("realmtest", realm_test_command),
             CommandHandler("help", help_command),
             MessageHandler(filters.TEXT & ~filters.COMMAND, idle_message),
@@ -813,6 +998,14 @@ def build_conversation_handler() -> ConversationHandler:
             SIGNING: [
                 MessageHandler(filters.TEXT & ~filters.COMMAND, signing_message),
             ],
+            TOUR_INPUT: [
+                MessageHandler(filters.TEXT & ~filters.COMMAND, tour_input_message),
+                CallbackQueryHandler(cancel_command, pattern="^cancel"),
+            ],
+            TOUR_GENERATING: [
+                MessageHandler(filters.TEXT & ~filters.COMMAND, tour_generating_message),
+                CallbackQueryHandler(menu_callback, pattern="^menu_"),
+            ],
         },
         fallbacks=[
             CommandHandler("cancel", cancel_command),
@@ -831,3 +1024,31 @@ async def _new_doc_entry(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
         reply_markup=doc_type_keyboard(),
     )
     return SELECTING_DOC
+
+
+async def _tour_entry(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    """Entry point for /tour command."""
+    user = update.effective_user
+    if not _is_authorized(user.id):
+        await update.message.reply_text("⛔ You are not authorized to use this bot.")
+        return ConversationHandler.END
+
+    settings = get_settings()
+    if not settings.is_higgsfield_configured:
+        await update.message.reply_text(
+            "⚠️ Tour video generation requires a Higgsfield API key.\n"
+            "Set HIGGSFIELD_API_KEY in .env to enable this feature.",
+            reply_markup=main_menu_keyboard(),
+        )
+        return IDLE
+
+    await update.message.reply_text(
+        "🎬 *Create House Tour Video*\n\n"
+        "I'll generate a cinematic walkthrough video from listing photos "
+        "using Higgsfield AI.\n\n"
+        "Please provide either:\n"
+        "• An *MLS number* (e.g. `C1234567`)\n"
+        "• A *REALTOR.ca listing URL*",
+        parse_mode="Markdown",
+    )
+    return TOUR_INPUT

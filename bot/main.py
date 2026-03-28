@@ -39,6 +39,7 @@ async def post_init(application: Application) -> None:
     commands = [
         BotCommand("start", "Main menu"),
         BotCommand("new", "Create a new document"),
+        BotCommand("tour", "Generate a house tour video"),
         BotCommand("realmtest", "Test REALM / TransactionDesk connection"),
         BotCommand("help", "Show help"),
         BotCommand("cancel", "Cancel current operation"),
