@@ -62,6 +62,10 @@ class Settings(BaseSettings):
     skyslope_api_key: str = ""
     skyslope_api_url: str = "https://api.skyslope.com"
 
+    # Redbricks (Pre-construction)
+    redbricks_api_key: str = ""
+    redbricks_api_url: str = "https://api.redbricks.dev"
+
     # Derived
     @property
     def authorized_user_id_list(self) -> list[int]:
@@ -80,6 +84,10 @@ class Settings(BaseSettings):
     @property
     def is_smtp_configured(self) -> bool:
         return bool(self.smtp_host and self.smtp_user)
+
+    @property
+    def is_redbricks_configured(self) -> bool:
+        return bool(self.redbricks_api_key)
 
 
 # Paths
