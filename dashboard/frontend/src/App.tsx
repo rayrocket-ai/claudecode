@@ -8,6 +8,7 @@ import DashboardPage from './pages/DashboardPage';
 import PostsPage from './pages/PostsPage';
 import AnalyticsPage from './pages/AnalyticsPage';
 import SettingsPage from './pages/SettingsPage';
+import OAuthCallbackPage from './pages/OAuthCallbackPage';
 
 function App() {
   const auth = useAuthProvider();
@@ -18,6 +19,7 @@ function App() {
         <Routes>
           <Route path="/login" element={auth.isAuthenticated ? <Navigate to="/" replace /> : <LoginPage />} />
           <Route path="/register" element={auth.isAuthenticated ? <Navigate to="/" replace /> : <RegisterPage />} />
+          <Route path="/auth/callback/:platform" element={<OAuthCallbackPage />} />
           <Route
             element={
               <ProtectedRoute>

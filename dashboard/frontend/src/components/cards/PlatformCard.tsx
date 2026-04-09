@@ -1,4 +1,4 @@
-import { Check, Plus, ExternalLink } from 'lucide-react';
+import { Check, LogIn, Plus } from 'lucide-react';
 import { getPlatformColor, getPlatformName, getPlatformLight } from '../../utils/platformColors';
 
 interface PlatformCardProps {
@@ -11,7 +11,7 @@ interface PlatformCardProps {
   onDisconnect: () => void;
 }
 
-export default function PlatformCard({ platform, connected, username, loading, onConnect, onDisconnect }: PlatformCardProps) {
+export default function PlatformCard({ platform, connected, configured, username, loading, onConnect, onDisconnect }: PlatformCardProps) {
   const color = getPlatformColor(platform);
   const name = getPlatformName(platform);
   const light = getPlatformLight(platform);
@@ -67,6 +67,11 @@ export default function PlatformCard({ platform, connected, username, loading, o
           >
             {loading ? (
               <span className="animate-spin rounded-full h-3.5 w-3.5 border-b-2 border-white" />
+            ) : configured ? (
+              <>
+                <LogIn size={14} />
+                Sign in
+              </>
             ) : (
               <>
                 <Plus size={14} />
