@@ -44,6 +44,10 @@ class Settings(BaseSettings):
     browser_headless: bool = True
     browser_slowmo: int = 100
 
+    # Livabl scraping
+    livabl_base_url: str = "https://www.livabl.com"
+    livabl_request_delay: float = 2.0
+
     # DocuSign
     docusign_account_id: str = ""
     docusign_integration_key: str = ""
