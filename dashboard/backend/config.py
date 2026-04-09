@@ -7,6 +7,7 @@ class DashboardSettings(BaseSettings):
     # Dashboard
     dashboard_secret_key: str = "change-me-in-production-use-a-random-string"
     dashboard_db_path: str = "storage/dashboard.db"
+    dashboard_url: str = "http://localhost:5173"  # Frontend URL for OAuth redirects
     demo_mode: bool = True
 
     # JWT

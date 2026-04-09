@@ -37,11 +37,6 @@ async def register(req: RegisterRequest, db: AsyncSession = Depends(get_db)):
     await db.commit()
     await db.refresh(user)
 
-    # Seed demo data if demo mode is on
-    if settings.demo_mode:
-        from dashboard.backend.demo.seed import seed_demo_data
-        await seed_demo_data(db, user.id)
-
     token = create_access_token(user.id)
     return TokenResponse(access_token=token)
 
