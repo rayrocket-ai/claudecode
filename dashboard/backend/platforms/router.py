@@ -1,13 +1,12 @@
-import uuid
 from datetime import datetime, timezone
 
 from fastapi import APIRouter, Depends, HTTPException
+from pydantic import BaseModel
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from dashboard.backend.auth.models import User
 from dashboard.backend.auth.service import get_current_user
-from dashboard.backend.config import settings
 from dashboard.backend.db.engine import get_db
 from dashboard.backend.platforms.models import SocialAccount
 from dashboard.backend.platforms.oauth import get_oauth_url, is_platform_configured
@@ -16,6 +15,18 @@ from dashboard.backend.platforms.schemas import ConnectResponse, PlatformStatus,
 router = APIRouter(prefix="/api/platforms", tags=["platforms"])
 
 ALL_PLATFORMS = ["facebook", "instagram", "twitter", "youtube", "tiktok"]
+
+PLATFORM_PROFILE_URLS = {
+    "facebook": "https://facebook.com/",
+    "instagram": "https://instagram.com/",
+    "twitter": "https://x.com/",
+    "youtube": "https://youtube.com/@",
+    "tiktok": "https://tiktok.com/@",
+}
+
+
+class ManualConnectRequest(BaseModel):
+    username: str
 
 
 @router.get("", response_model=PlatformsListResponse)
@@ -38,6 +49,7 @@ async def list_platforms(
                 username=account.platform_username,
                 connected_at=account.connected_at.isoformat() if account.connected_at else None,
                 configured=is_platform_configured(p),
+                profile_url=PLATFORM_PROFILE_URLS.get(p, "") + (account.platform_username or ""),
             ))
         else:
             platforms.append(PlatformStatus(
@@ -52,13 +64,14 @@ async def list_platforms(
 @router.post("/{platform}/connect")
 async def connect_platform(
     platform: str,
+    body: ManualConnectRequest | None = None,
     db: AsyncSession = Depends(get_db),
     user: User = Depends(get_current_user),
 ):
     if platform not in ALL_PLATFORMS:
         raise HTTPException(status_code=400, detail=f"Unknown platform: {platform}")
 
-    # Check if already connected
+    # Check if already connected (active)
     result = await db.execute(
         select(SocialAccount).where(
             SocialAccount.user_id == user.id,
@@ -69,55 +82,55 @@ async def connect_platform(
     if result.scalar_one_or_none():
         raise HTTPException(status_code=400, detail=f"Already connected to {platform}")
 
-    # Check if OAuth credentials are configured
-    if is_platform_configured(platform):
-        # Return the real OAuth URL - frontend will redirect there
+    # If OAuth credentials are configured, return OAuth URL for redirect
+    if is_platform_configured(platform) and not body:
         oauth_url = get_oauth_url(platform)
         return {"oauth_url": oauth_url, "platform": platform}
 
-    # No credentials configured - tell the user what's needed
-    credential_keys = {
-        "facebook": "FACEBOOK_APP_ID and FACEBOOK_APP_SECRET",
-        "instagram": "INSTAGRAM_APP_ID and INSTAGRAM_APP_SECRET",
-        "twitter": "TWITTER_CLIENT_ID and TWITTER_CLIENT_SECRET",
-        "youtube": "YOUTUBE_CLIENT_ID and YOUTUBE_CLIENT_SECRET",
-        "tiktok": "TIKTOK_CLIENT_KEY and TIKTOK_CLIENT_SECRET",
-    }
-    raise HTTPException(
-        status_code=400,
-        detail=f"To connect {platform}, add {credential_keys[platform]} to your .env file and restart the server.",
-    )
+    # Manual connect: user provides their username/handle
+    if body and body.username.strip():
+        username = body.username.strip().lstrip("@")
 
+        # Check if there's a previously disconnected account to reactivate
+        result = await db.execute(
+            select(SocialAccount).where(
+                SocialAccount.user_id == user.id,
+                SocialAccount.platform == platform,
+                SocialAccount.is_active == False,
+            )
+        )
+        existing = result.scalar_one_or_none()
 
-@router.get("/{platform}/callback")
-async def oauth_callback(
-    platform: str,
-    code: str,
-    state: str | None = None,
-    db: AsyncSession = Depends(get_db),
-):
-    """Handle OAuth callback from social platforms.
+        if existing:
+            existing.platform_username = username
+            existing.platform_user_id = f"{platform}_{username}"
+            existing.is_active = True
+            existing.connected_at = datetime.now(timezone.utc)
+            await db.commit()
+        else:
+            account = SocialAccount(
+                user_id=user.id,
+                platform=platform,
+                platform_user_id=f"{platform}_{username}",
+                platform_username=username,
+                access_token="manual",
+                is_active=True,
+            )
+            db.add(account)
+            await db.commit()
 
-    In a production app, this would:
-    1. Exchange the authorization code for an access token
-    2. Fetch the user's profile from the platform API
-    3. Save the account with real tokens
+        # Seed demo analytics data for this platform
+        from dashboard.backend.demo.seed import seed_platform_data
+        await seed_platform_data(db, user.id, platform)
 
-    For now, this creates the account record with the auth code.
-    Token exchange requires platform-specific API calls.
-    """
-    if platform not in ALL_PLATFORMS:
-        raise HTTPException(status_code=400, detail=f"Unknown platform: {platform}")
+        profile_url = PLATFORM_PROFILE_URLS.get(platform, "") + username
+        return ConnectResponse(
+            message=f"Connected to {platform}",
+            platform=platform,
+            username=username,
+        )
 
-    # TODO: Exchange code for access token using platform-specific API
-    # TODO: Fetch user profile (username, follower count, etc.)
-    # For now, save with the code - implement token exchange per platform as needed
-
-    return {
-        "message": f"OAuth callback received for {platform}. Configure token exchange in platforms/{platform}.py",
-        "platform": platform,
-        "code_received": True,
-    }
+    raise HTTPException(status_code=400, detail="Please provide your username/handle for this platform.")
 
 
 @router.post("/{platform}/disconnect", response_model=ConnectResponse)

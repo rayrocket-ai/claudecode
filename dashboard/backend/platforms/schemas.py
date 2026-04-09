@@ -6,7 +6,8 @@ class PlatformStatus(BaseModel):
     connected: bool
     username: str | None = None
     connected_at: str | None = None
-    configured: bool = False  # Whether OAuth credentials are set in .env
+    configured: bool = False
+    profile_url: str | None = None
 
 
 class PlatformsListResponse(BaseModel):

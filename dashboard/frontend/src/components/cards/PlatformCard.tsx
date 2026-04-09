@@ -1,4 +1,4 @@
-import { Check, Plus, ExternalLink, AlertCircle } from 'lucide-react';
+import { Check, Plus, ExternalLink } from 'lucide-react';
 import { getPlatformColor, getPlatformName, getPlatformLight } from '../../utils/platformColors';
 
 interface PlatformCardProps {
@@ -11,7 +11,7 @@ interface PlatformCardProps {
   onDisconnect: () => void;
 }
 
-export default function PlatformCard({ platform, connected, configured, username, loading, onConnect, onDisconnect }: PlatformCardProps) {
+export default function PlatformCard({ platform, connected, username, loading, onConnect, onDisconnect }: PlatformCardProps) {
   const color = getPlatformColor(platform);
   const name = getPlatformName(platform);
   const light = getPlatformLight(platform);
@@ -25,15 +25,10 @@ export default function PlatformCard({ platform, connected, configured, username
         <div>
           <h3 className="font-semibold text-gray-900">{name}</h3>
           {connected && username ? (
-            <p className="text-sm text-gray-500">{username}</p>
-          ) : !connected && !configured ? (
-            <p className="text-xs text-amber-600 flex items-center gap-1">
-              <AlertCircle size={11} />
-              API keys required
-            </p>
-          ) : !connected ? (
-            <p className="text-sm text-gray-400">Ready to connect</p>
-          ) : null}
+            <p className="text-sm text-gray-500">@{username}</p>
+          ) : (
+            <p className="text-sm text-gray-400">Not connected</p>
+          )}
         </div>
       </div>
 
@@ -68,19 +63,14 @@ export default function PlatformCard({ platform, connected, configured, username
             onClick={onConnect}
             disabled={loading}
             className="px-4 py-2 rounded-lg text-sm font-medium text-white hover:opacity-90 transition-colors disabled:opacity-50 flex items-center gap-1.5"
-            style={{ backgroundColor: configured ? color : '#9CA3AF' }}
+            style={{ backgroundColor: color }}
           >
             {loading ? (
               <span className="animate-spin rounded-full h-3.5 w-3.5 border-b-2 border-white" />
-            ) : configured ? (
-              <>
-                <ExternalLink size={14} />
-                Connect
-              </>
             ) : (
               <>
                 <Plus size={14} />
-                Setup
+                Connect
               </>
             )}
           </button>

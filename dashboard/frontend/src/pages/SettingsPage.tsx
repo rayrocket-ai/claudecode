@@ -3,34 +3,34 @@ import TopBar from '../components/layout/TopBar';
 import PlatformCard from '../components/cards/PlatformCard';
 import { getPlatforms, connectPlatform, disconnectPlatform } from '../api/platforms';
 import type { PlatformStatus } from '../types';
-import { Info, Key, ExternalLink } from 'lucide-react';
-import { getPlatformName } from '../utils/platformColors';
+import { getPlatformColor, getPlatformName } from '../utils/platformColors';
+import { ExternalLink, X } from 'lucide-react';
 
-const SETUP_LINKS: Record<string, { name: string; url: string; envKeys: string[] }> = {
+const PLATFORM_HINTS: Record<string, { placeholder: string; help: string; example: string }> = {
   facebook: {
-    name: 'Meta for Developers',
-    url: 'https://developers.facebook.com/apps/',
-    envKeys: ['FACEBOOK_APP_ID', 'FACEBOOK_APP_SECRET'],
+    placeholder: 'Your page name or username',
+    help: 'Enter your Facebook Page name or username',
+    example: 'e.g. MyBrandOfficial',
   },
   instagram: {
-    name: 'Meta for Developers',
-    url: 'https://developers.facebook.com/apps/',
-    envKeys: ['INSTAGRAM_APP_ID', 'INSTAGRAM_APP_SECRET'],
+    placeholder: 'Your Instagram handle',
+    help: 'Enter your Instagram username (without the @)',
+    example: 'e.g. mybrand',
   },
   twitter: {
-    name: 'Twitter Developer Portal',
-    url: 'https://developer.x.com/en/portal/dashboard',
-    envKeys: ['TWITTER_CLIENT_ID', 'TWITTER_CLIENT_SECRET'],
+    placeholder: 'Your X (Twitter) handle',
+    help: 'Enter your X handle (without the @)',
+    example: 'e.g. MyBrand',
   },
   youtube: {
-    name: 'Google Cloud Console',
-    url: 'https://console.cloud.google.com/apis/credentials',
-    envKeys: ['YOUTUBE_CLIENT_ID', 'YOUTUBE_CLIENT_SECRET'],
+    placeholder: 'Your YouTube channel name',
+    help: 'Enter your YouTube channel name or handle',
+    example: 'e.g. MyBrandTV',
   },
   tiktok: {
-    name: 'TikTok for Developers',
-    url: 'https://developers.tiktok.com/',
-    envKeys: ['TIKTOK_CLIENT_KEY', 'TIKTOK_CLIENT_SECRET'],
+    placeholder: 'Your TikTok username',
+    help: 'Enter your TikTok username (without the @)',
+    example: 'e.g. mybrand',
   },
 };
 
@@ -38,7 +38,9 @@ export default function SettingsPage() {
   const [platforms, setPlatforms] = useState<PlatformStatus[]>([]);
   const [loading, setLoading] = useState(true);
   const [actionLoading, setActionLoading] = useState<string | null>(null);
-  const [setupInfo, setSetupInfo] = useState<string | null>(null);
+  const [connectModal, setConnectModal] = useState<string | null>(null);
+  const [usernameInput, setUsernameInput] = useState('');
+  const [connectError, setConnectError] = useState('');
 
   const loadPlatforms = () => {
     getPlatforms()
@@ -48,31 +50,31 @@ export default function SettingsPage() {
 
   useEffect(() => { loadPlatforms(); }, []);
 
-  const handleConnect = async (platform: string) => {
-    // If not configured, show setup instructions
-    const plat = platforms.find((p) => p.platform === platform);
-    if (plat && !plat.configured) {
-      setSetupInfo(platform);
+  const openConnectModal = (platform: string) => {
+    setConnectModal(platform);
+    setUsernameInput('');
+    setConnectError('');
+  };
+
+  const handleConnect = async () => {
+    if (!connectModal) return;
+    if (!usernameInput.trim()) {
+      setConnectError('Please enter your username');
       return;
     }
 
-    setActionLoading(platform);
+    setActionLoading(connectModal);
+    setConnectError('');
     try {
-      const result = await connectPlatform(platform);
+      const result = await connectPlatform(connectModal, usernameInput.trim());
       if (result.oauth_url) {
-        // Redirect to the platform's OAuth page
         window.location.href = result.oauth_url;
         return;
       }
+      setConnectModal(null);
       loadPlatforms();
     } catch (err: any) {
-      const detail = err.response?.data?.detail ?? 'Failed to connect';
-      // If the error mentions .env setup, show setup info instead
-      if (detail.includes('.env')) {
-        setSetupInfo(platform);
-      } else {
-        alert(detail);
-      }
+      setConnectError(err.response?.data?.detail ?? 'Failed to connect');
     } finally {
       setActionLoading(null);
     }
@@ -90,77 +92,82 @@ export default function SettingsPage() {
     }
   };
 
-  const anyConfigured = platforms.some((p) => p.configured);
-
   return (
     <div>
       <TopBar title="Settings" subtitle="Manage your connected social media accounts" />
 
-      {/* Info Banner */}
-      <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 mb-6 flex items-start gap-3">
-        <Info size={20} className="text-blue-500 mt-0.5 shrink-0" />
-        <div>
-          <p className="text-sm font-medium text-blue-800">Connect Your Real Accounts</p>
-          <p className="text-sm text-blue-600 mt-0.5">
-            Click <strong>Connect</strong> on any platform to sign in with your real social media account.
-            {!anyConfigured && (
-              <> You'll need to set up API credentials first - click <strong>Setup</strong> on any platform for instructions.</>
-            )}
-          </p>
-        </div>
-      </div>
+      {/* Connect Modal */}
+      {connectModal && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4" onClick={() => setConnectModal(null)}>
+          <div className="bg-white rounded-2xl p-0 max-w-md w-full shadow-2xl overflow-hidden" onClick={(e) => e.stopPropagation()}>
+            {/* Modal Header */}
+            <div className="p-6 pb-0">
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center gap-3">
+                  <div
+                    className="w-10 h-10 rounded-xl flex items-center justify-center text-white font-bold"
+                    style={{ backgroundColor: getPlatformColor(connectModal) }}
+                  >
+                    {getPlatformName(connectModal).charAt(0)}
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold text-gray-900">
+                      Connect {getPlatformName(connectModal)}
+                    </h3>
+                    <p className="text-xs text-gray-500">{PLATFORM_HINTS[connectModal]?.help}</p>
+                  </div>
+                </div>
+                <button onClick={() => setConnectModal(null)} className="p-1 hover:bg-gray-100 rounded-lg">
+                  <X size={18} className="text-gray-400" />
+                </button>
+              </div>
+            </div>
 
-      {/* Setup Instructions Modal */}
-      {setupInfo && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4" onClick={() => setSetupInfo(null)}>
-          <div className="bg-white rounded-2xl p-6 max-w-lg w-full shadow-2xl" onClick={(e) => e.stopPropagation()}>
-            <h3 className="text-lg font-bold text-gray-900 mb-2">
-              Connect {getPlatformName(setupInfo)}
-            </h3>
-            <p className="text-sm text-gray-600 mb-4">
-              To connect your {getPlatformName(setupInfo)} account, you need to create a developer app and add the API credentials to your <code className="bg-gray-100 px-1.5 py-0.5 rounded text-xs">.env</code> file.
-            </p>
+            {/* Modal Body */}
+            <div className="px-6 pb-6">
+              <div className="mb-4">
+                <label className="block text-sm font-medium text-gray-700 mb-1.5">
+                  Your {getPlatformName(connectModal)} Username
+                </label>
+                <div className="flex">
+                  <span className="inline-flex items-center px-3 rounded-l-xl border border-r-0 border-gray-200 bg-gray-50 text-gray-500 text-sm">
+                    @
+                  </span>
+                  <input
+                    type="text"
+                    value={usernameInput}
+                    onChange={(e) => { setUsernameInput(e.target.value); setConnectError(''); }}
+                    onKeyDown={(e) => e.key === 'Enter' && handleConnect()}
+                    placeholder={PLATFORM_HINTS[connectModal]?.placeholder}
+                    className="flex-1 px-4 py-3 border border-gray-200 rounded-r-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+                    autoFocus
+                  />
+                </div>
+                <p className="text-xs text-gray-400 mt-1.5">{PLATFORM_HINTS[connectModal]?.example}</p>
+              </div>
 
-            <div className="bg-gray-50 rounded-xl p-4 mb-4">
-              <p className="text-sm font-medium text-gray-700 mb-2 flex items-center gap-2">
-                <Key size={14} />
-                Step 1: Create a Developer App
-              </p>
-              <a
-                href={SETUP_LINKS[setupInfo]?.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-sm text-blue-600 hover:underline"
+              {connectError && (
+                <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-red-600 text-sm">
+                  {connectError}
+                </div>
+              )}
+
+              <button
+                onClick={handleConnect}
+                disabled={actionLoading === connectModal}
+                className="w-full py-3 rounded-xl text-sm font-semibold text-white transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
+                style={{ backgroundColor: getPlatformColor(connectModal) }}
               >
-                Go to {SETUP_LINKS[setupInfo]?.name}
-                <ExternalLink size={13} />
-              </a>
+                {actionLoading === connectModal ? (
+                  <span className="animate-spin rounded-full h-4 w-4 border-b-2 border-white" />
+                ) : (
+                  <>
+                    <ExternalLink size={15} />
+                    Connect {getPlatformName(connectModal)}
+                  </>
+                )}
+              </button>
             </div>
-
-            <div className="bg-gray-50 rounded-xl p-4 mb-4">
-              <p className="text-sm font-medium text-gray-700 mb-2">
-                Step 2: Add credentials to your .env file
-              </p>
-              <pre className="bg-gray-900 text-green-400 text-xs rounded-lg p-3 overflow-x-auto">
-                {SETUP_LINKS[setupInfo]?.envKeys.map((k) => `${k}=your_value_here`).join('\n')}
-              </pre>
-            </div>
-
-            <div className="bg-gray-50 rounded-xl p-4 mb-6">
-              <p className="text-sm font-medium text-gray-700 mb-1">
-                Step 3: Restart the server
-              </p>
-              <p className="text-xs text-gray-500">
-                After adding credentials, restart the backend server and come back here to connect.
-              </p>
-            </div>
-
-            <button
-              onClick={() => setSetupInfo(null)}
-              className="w-full bg-gray-900 text-white py-2.5 rounded-xl text-sm font-medium hover:bg-gray-800 transition-colors"
-            >
-              Got it
-            </button>
           </div>
         </div>
       )}
@@ -177,10 +184,10 @@ export default function SettingsPage() {
               key={p.platform}
               platform={p.platform}
               connected={p.connected}
-              configured={p.configured}
+              configured={true}
               username={p.username}
               loading={actionLoading === p.platform}
-              onConnect={() => handleConnect(p.platform)}
+              onConnect={() => openConnectModal(p.platform)}
               onDisconnect={() => handleDisconnect(p.platform)}
             />
           ))}

@@ -79,6 +79,7 @@ export interface PlatformStatus {
   username: string | null;
   connected_at: string | null;
   configured: boolean;
+  profile_url: string | null;
 }
 
 export interface PlatformsListData {
