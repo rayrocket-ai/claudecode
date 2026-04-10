@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+{% block title %}Scripts — {{ selected_date.isoformat() }}{% endblock %}
+
+{% block content %}
+<div class="p-6 lg:p-8 max-w-7xl mx-auto">
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
+        <div>
+            <h1 class="text-2xl font-bold text-gray-900">
+                {% if is_history %}Scripts for {{ selected_date.strftime('%B %d, %Y') }}{% else %}Today's Scripts{% endif %}
+            </h1>
+            <p class="text-gray-500 mt-1">{{ selected_date.strftime('%A, %B %d, %Y') }}</p>
+        </div>
+        <div class="flex gap-3">
+            {% if batch and batch.status == 'complete' %}
+                <a href="/api/export/{{ batch.id }}" class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                    Export All
+                </a>
+            {% endif %}
+            {% if not is_history %}
+                <button onclick="generateScripts()" id="generate-btn"
+                    class="inline-flex items-center px-5 py-2 bg-gray-900 text-white rounded-lg text-sm font-medium hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                    {% if batch and batch.status == 'complete' %}Regenerate All{% else %}Generate Scripts{% endif %}
+                </button>
+            {% endif %}
+        </div>
+    </div>
+
+    {% if not profile.name %}
+    <!-- Setup Prompt -->
+    <div class="bg-yellow-50 border border-yellow-200 rounded-xl p-6 mb-8">
+        <div class="flex items-start gap-3">
+            <svg class="w-6 h-6 text-yellow-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z"/></svg>
+            <div>
+                <h3 class="font-semibold text-yellow-800">Set Up Your Profile First</h3>
+                <p class="text-yellow-700 text-sm mt-1">Add your name, bio, and personal stories so the AI can create personalized, branded scripts.</p>
+                <a href="/profile" class="inline-flex items-center mt-3 text-sm font-medium text-yellow-800 hover:text-yellow-900">
+                    Go to Profile Settings &rarr;
+                </a>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    {% if batch and batch.status == 'generating' %}
+    <!-- Loading State -->
+    <div class="text-center py-20">
+        <div class="inline-flex items-center gap-3 text-gray-500">
+            <svg class="animate-spin h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            <span class="text-lg">Generating scripts...</span>
+        </div>
+    </div>
+
+    {% elif batch and batch.status == 'error' %}
+    <!-- Error State -->
+    <div class="bg-red-50 border border-red-200 rounded-xl p-6 mb-8">
+        <h3 class="font-semibold text-red-800">Generation Failed</h3>
+        <p class="text-red-700 text-sm mt-1">{{ batch.error_message or 'An unknown error occurred.' }}</p>
+        <button onclick="generateScripts()" class="mt-3 text-sm font-medium text-red-800 hover:text-red-900">Try Again &rarr;</button>
+    </div>
+
+    {% elif scripts %}
+    <!-- Scripts Grid -->
+    <div id="scripts-container" class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {% for script in scripts %}
+        {% include "script_card.html" %}
+        {% endfor %}
+    </div>
+
+    {% else %}
+    <!-- Empty State -->
+    <div class="text-center py-20">
+        <svg class="mx-auto h-16 w-16 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+        </svg>
+        <h3 class="mt-4 text-lg font-medium text-gray-900">No scripts yet</h3>
+        <p class="mt-2 text-gray-500">Click "Generate Scripts" to create today's batch of 7 video scripts.</p>
+        {% if not is_history %}
+        <button onclick="generateScripts()" class="mt-6 inline-flex items-center px-6 py-3 bg-gray-900 text-white rounded-lg font-medium hover:bg-gray-800">
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+            Generate Today's Scripts
+        </button>
+        {% endif %}
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+async function generateScripts() {
+    const btn = document.getElementById('generate-btn');
+    if (btn) {
+        btn.disabled = true;
+        btn.innerHTML = '<svg class="animate-spin h-4 w-4 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path></svg> Generating...';
+    }
+    try {
+        const resp = await fetch('/api/generate', { method: 'POST' });
+        const data = await resp.json();
+        if (data.status === 'success' || data.status === 'already_exists') {
+            window.location.reload();
+        } else {
+            showToast('Error: ' + (data.message || 'Generation failed'));
+            if (btn) { btn.disabled = false; btn.innerHTML = 'Generate Scripts'; }
+        }
+    } catch (e) {
+        showToast('Network error. Please try again.');
+        if (btn) { btn.disabled = false; btn.innerHTML = 'Generate Scripts'; }
+    }
+}
+</script>
+{% endblock %}

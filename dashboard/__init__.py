@@ -1,0 +1,1 @@
+"""Video Script Generation Dashboard."""

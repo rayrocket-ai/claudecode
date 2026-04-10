@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+{% block title %}Profile Settings{% endblock %}
+
+{% block content %}
+<div class="p-6 lg:p-8 max-w-3xl mx-auto">
+    <div class="mb-8">
+        <h1 class="text-2xl font-bold text-gray-900">Creator Profile</h1>
+        <p class="text-gray-500 mt-1">Set up your personal brand so the AI can create authentic, personalized scripts.</p>
+    </div>
+
+    <form id="profile-form" class="space-y-8">
+        <!-- Basic Info -->
+        <div class="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
+            <h2 class="text-lg font-semibold text-gray-900">Basic Info</h2>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Your Name</label>
+                    <input type="text" name="name" value="{{ profile.name }}" placeholder="e.g., Mike" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-gray-900 focus:border-transparent">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Location</label>
+                    <input type="text" name="location" value="{{ profile.location }}" placeholder="e.g., Toronto, Ontario" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-gray-900 focus:border-transparent">
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Profession</label>
+                <input type="text" name="profession" value="{{ profile.profession }}" placeholder="e.g., Real Estate & Mortgage Professional" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-gray-900 focus:border-transparent">
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Bio</label>
+                <textarea name="bio" rows="3" placeholder="A short bio about you. What drives you? What do you help people with? This gets woven into your scripts." class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-gray-900 focus:border-transparent">{{ profile.bio }}</textarea>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Brand Values (comma-separated)</label>
+                <input type="text" name="brand_values" value="{{ (profile.brand_values or []) | join(', ') }}" placeholder="e.g., authenticity, education, family, hard work, community" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-gray-900 focus:border-transparent">
+            </div>
+        </div>
+
+        <!-- Story Elements -->
+        <div class="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
+            <h2 class="text-lg font-semibold text-gray-900">Your Story</h2>
+            <p class="text-sm text-gray-500">These stories get woven naturally into your scripts to make you relatable and memorable.</p>
+
+            {% set stories = profile.story_elements or {} %}
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Family</label>
+                <textarea name="story_family" rows="2" placeholder="Why does your family drive you? Kids, spouse, parents? What do they mean to your hustle?" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-gray-900 focus:border-transparent">{{ stories.get('family', '') }}</textarea>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Challenges & Struggles</label>
+                <textarea name="story_challenges" rows="2" placeholder="What obstacles have you overcome? Early career struggles, rejections, financial hardships?" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-gray-900 focus:border-transparent">{{ stories.get('challenges', '') }}</textarea>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Victories & Wins</label>
+                <textarea name="story_victories" rows="2" placeholder="Biggest career wins, milestones, deals you're proud of, client success stories." class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-gray-900 focus:border-transparent">{{ stories.get('victories', '') }}</textarea>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Travels & Experiences</label>
+                <textarea name="story_travels" rows="2" placeholder="Places you've been, experiences that shaped you, trips with family." class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-gray-900 focus:border-transparent">{{ stories.get('travels', '') }}</textarea>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Background</label>
+                <textarea name="story_background" rows="2" placeholder="Where you came from, how you got into real estate/mortgage, your origin story." class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-gray-900 focus:border-transparent">{{ stories.get('background', '') }}</textarea>
+            </div>
+        </div>
+
+        <!-- Tone & Platforms -->
+        <div class="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
+            <h2 class="text-lg font-semibold text-gray-900">Content Style</h2>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Tone</label>
+                <select name="tone" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-gray-900 focus:border-transparent">
+                    <option value="motivational_educational" {% if profile.tone == 'motivational_educational' %}selected{% endif %}>Motivational & Educational</option>
+                    <option value="raw_authentic" {% if profile.tone == 'raw_authentic' %}selected{% endif %}>Raw & Authentic</option>
+                    <option value="professional_authority" {% if profile.tone == 'professional_authority' %}selected{% endif %}>Professional Authority</option>
+                    <option value="mixed" {% if profile.tone == 'mixed' %}selected{% endif %}>Mix of All Styles</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="flex justify-end">
+            <button type="submit" class="px-6 py-3 bg-gray-900 text-white rounded-lg font-medium hover:bg-gray-800">
+                Save Profile
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.getElementById('profile-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const form = e.target;
+
+    const brandValues = form.brand_values.value
+        .split(',')
+        .map(v => v.trim())
+        .filter(v => v.length > 0);
+
+    const data = {
+        name: form.name.value,
+        location: form.location.value,
+        profession: form.profession.value,
+        bio: form.bio.value,
+        brand_values: brandValues,
+        tone: form.tone.value,
+        story_elements: {
+            family: form.story_family.value,
+            challenges: form.story_challenges.value,
+            victories: form.story_victories.value,
+            travels: form.story_travels.value,
+            background: form.story_background.value,
+        },
+    };
+
+    try {
+        const resp = await fetch('/api/profile', {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data),
+        });
+        if (resp.ok) {
+            showToast('Profile saved!');
+        } else {
+            showToast('Failed to save profile');
+        }
+    } catch (e) {
+        showToast('Network error');
+    }
+});
+</script>
+{% endblock %}

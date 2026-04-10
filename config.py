@@ -62,6 +62,12 @@ class Settings(BaseSettings):
     skyslope_api_key: str = ""
     skyslope_api_url: str = "https://api.skyslope.com"
 
+    # Dashboard
+    dashboard_port: int = 8050
+    dashboard_host: str = "0.0.0.0"
+    script_model: str = "claude-sonnet-4-6"
+    scripts_per_day: int = 7
+
     # Derived
     @property
     def authorized_user_id_list(self) -> list[int]:

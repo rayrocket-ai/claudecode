@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block title %}Script History{% endblock %}
+
+{% block content %}
+<div class="p-6 lg:p-8 max-w-5xl mx-auto">
+    <div class="mb-8">
+        <h1 class="text-2xl font-bold text-gray-900">Script History</h1>
+        <p class="text-gray-500 mt-1">Browse your past video script batches.</p>
+    </div>
+
+    {% if batches %}
+    <div class="space-y-3">
+        {% for batch in batches %}
+        <a href="/history/{{ batch.date.isoformat() }}" class="block bg-white rounded-xl border border-gray-200 p-5 hover:shadow-md transition-shadow group">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center">
+                        <span class="text-lg font-bold text-gray-600">{{ batch.date.day }}</span>
+                    </div>
+                    <div>
+                        <h3 class="font-medium text-gray-900 group-hover:text-gray-700">
+                            {{ batch.date.strftime('%A, %B %d, %Y') }}
+                        </h3>
+                        <div class="flex items-center gap-3 mt-1">
+                            {% if batch.status == 'complete' %}
+                            <span class="inline-flex items-center text-xs text-green-600">
+                                <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                                {{ batch.scripts|length }} scripts
+                            </span>
+                            {% elif batch.status == 'error' %}
+                            <span class="inline-flex items-center text-xs text-red-600">
+                                <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/></svg>
+                                Error
+                            </span>
+                            {% else %}
+                            <span class="inline-flex items-center text-xs text-yellow-600">
+                                <svg class="w-3 h-3 mr-1 animate-spin" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg>
+                                {{ batch.status }}
+                            </span>
+                            {% endif %}
+
+                            {% if batch.scripts %}
+                            <div class="flex gap-1">
+                                {% set cats_seen = [] %}
+                                {% for script in batch.scripts %}
+                                    {% if script.category not in cats_seen %}
+                                        {% set _ = cats_seen.append(script.category) %}
+                                        {% set colors = category_colors.get(script.category, {"bg": "bg-gray-100", "text": "text-gray-600"}) %}
+                                        <span class="inline-block w-2 h-2 rounded-full {{ colors.bg }}" title="{{ colors.label }}"></span>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <svg class="w-5 h-5 text-gray-400 group-hover:text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+
+    {% else %}
+    <div class="text-center py-20">
+        <svg class="mx-auto h-16 w-16 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+        <h3 class="mt-4 text-lg font-medium text-gray-900">No history yet</h3>
+        <p class="mt-2 text-gray-500">Generate your first batch of scripts to start building history.</p>
+        <a href="/" class="mt-4 inline-block text-sm font-medium text-gray-900 hover:text-gray-700">Go to Dashboard &rarr;</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
