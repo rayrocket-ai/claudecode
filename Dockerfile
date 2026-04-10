@@ -9,6 +9,7 @@ COPY . .
 
 RUN mkdir -p /app/storage
 
+ENV PORT=8050
 EXPOSE 8050
 
-CMD uvicorn dashboard.app:app --host 0.0.0.0 --port ${PORT:-8050}
+CMD uvicorn dashboard.app:app --host 0.0.0.0 --port ${PORT}
