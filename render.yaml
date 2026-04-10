@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: script-studio
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn dashboard.app:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: SCRIPT_MODEL
+        value: claude-sonnet-4-6
+      - key: PYTHON_VERSION
+        value: "3.11"
