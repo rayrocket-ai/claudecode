@@ -3,10 +3,11 @@
 .venv/
 venv/
 
-# Storage (sessions, generated PDFs)
+# Storage (sessions, generated PDFs, databases)
 storage/*.json
 storage/*.pdf
 storage/*.png
+storage/*.db
 
 # Python
 __pycache__/
