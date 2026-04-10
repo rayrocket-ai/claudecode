@@ -53,18 +53,20 @@ CATEGORY_COLORS = {
 HOOK_STYLE_LABELS = {
     "question": "Question Hook",
     "stat": "Shocking Stat",
+    "shocking_stat": "Shocking Stat",
     "controversy": "Hot Take",
     "story": "Story Opener",
     "pattern_interrupt": "Pattern Interrupt",
     "challenge": "Direct Challenge",
+    "identity_callout": "Identity Call-Out",
     "confession": "Confession",
+    "future_pacing": "Future Pacing",
 }
 
 
-def _template_context(request: Request, **kwargs) -> dict:
+def _template_context(**kwargs) -> dict:
     """Build standard template context."""
     ctx = {
-        "request": request,
         "category_colors": CATEGORY_COLORS,
         "hook_style_labels": HOOK_STYLE_LABELS,
         "today": date.today(),
@@ -82,23 +84,18 @@ async def dashboard_page(request: Request):
     batch = await ops.get_batch_for_date(today)
     profile = await ops.get_or_create_profile()
 
-    return templates.TemplateResponse("dashboard.html", _template_context(
-        request,
-        batch=batch,
-        scripts=batch.scripts if batch else [],
-        profile=profile,
-        selected_date=today,
-    ))
+    ctx = _template_context(batch=batch,
+                            scripts=batch.scripts if batch else [],
+                            profile=profile, selected_date=today)
+    return templates.TemplateResponse(request, name="dashboard.html", context=ctx)
 
 
 @app.get("/history", response_class=HTMLResponse)
 async def history_page(request: Request):
     """Past scripts archive."""
     batches = await ops.list_batches(limit=30)
-    return templates.TemplateResponse("history.html", _template_context(
-        request,
-        batches=batches,
-    ))
+    ctx = _template_context(batches=batches)
+    return templates.TemplateResponse(request, name="history.html", context=ctx)
 
 
 @app.get("/history/{date_str}", response_class=HTMLResponse)
@@ -112,24 +109,18 @@ async def history_date_page(request: Request, date_str: str):
     batch = await ops.get_batch_for_date(target_date)
     profile = await ops.get_or_create_profile()
 
-    return templates.TemplateResponse("dashboard.html", _template_context(
-        request,
-        batch=batch,
-        scripts=batch.scripts if batch else [],
-        profile=profile,
-        selected_date=target_date,
-        is_history=True,
-    ))
+    ctx = _template_context(batch=batch,
+                            scripts=batch.scripts if batch else [],
+                            profile=profile, selected_date=target_date, is_history=True)
+    return templates.TemplateResponse(request, name="dashboard.html", context=ctx)
 
 
 @app.get("/profile", response_class=HTMLResponse)
 async def profile_page(request: Request):
     """Creator profile settings."""
     profile = await ops.get_or_create_profile()
-    return templates.TemplateResponse("profile.html", _template_context(
-        request,
-        profile=profile,
-    ))
+    ctx = _template_context(profile=profile)
+    return templates.TemplateResponse(request, name="profile.html", context=ctx)
 
 
 @app.get("/trends", response_class=HTMLResponse)
@@ -146,12 +137,9 @@ async def trends_page(request: Request):
     for item in trending_items:
         by_category.setdefault(item.category, []).append(item)
 
-    return templates.TemplateResponse("trends.html", _template_context(
-        request,
-        trending_items=trending_items,
-        by_category=by_category,
-        has_data=len(trending_items) > 0,
-    ))
+    ctx = _template_context(trending_items=trending_items,
+                            by_category=by_category, has_data=len(trending_items) > 0)
+    return templates.TemplateResponse(request, name="trends.html", context=ctx)
 
 
 # ── API Routes ────────────────────────────────────────────────────────

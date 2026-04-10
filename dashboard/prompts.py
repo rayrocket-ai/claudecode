@@ -247,21 +247,30 @@ def build_generation_prompt(
     general_trends = format_trends("general", limit=8)
 
     brand_values_str = ", ".join(brand_values) if brand_values else "authenticity, education, family, hard work, community"
+    display_name = (name or "THE CREATOR").upper()
+    bio_text = bio or "A passionate real estate and mortgage professional building a personal brand. Works tirelessly to help families achieve homeownership."
+    default_story = (
+        "  FAMILY: Driven by love for family. Every deal closed, every client helped — it's all for them.\n"
+        "  CHALLENGES: Has faced rejection, doubt, and setbacks but keeps showing up.\n"
+        "  VALUES: Believes everyone deserves a shot at owning a home."
+    )
+    story_text = story_section or default_story
+    creator_ref = name or "the creator"
 
     prompt = f"""═══ DAILY SCRIPT GENERATION — {num_scripts} SCRIPTS ═══
 
-WHO IS {(name or 'THE CREATOR').upper()}?
+WHO IS {display_name}?
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Name: {name}
 Based in: {location}
 Profession: {profession}
-Bio: {bio or "A passionate real estate and mortgage professional building a personal brand. Works tirelessly to help families achieve homeownership."}
+Bio: {bio_text}
 Brand DNA: {brand_values_str}
 Tone: Motivational & Educational — "let me show you" energy. Inspiring but grounded. The friend who happens to be an expert.
 
-{(name or 'THE CREATOR').upper()}'S PERSONAL STORY (weave these naturally — a different element in each script):
+{display_name}'S PERSONAL STORY (weave these naturally — a different element in each script):
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-{story_section or "  FAMILY: Driven by love for family. Every deal closed, every client helped — it's all for them.\n  CHALLENGES: Has faced rejection, doubt, and setbacks but keeps showing up.\n  VALUES: Believes everyone deserves a shot at owning a home."}
+{story_text}
 
 TODAY'S LIVE TRENDING DATA:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -287,7 +296,7 @@ GENERAL / VIRAL TOPICS:
 SCRIPT 1 — REAL ESTATE (Trending + Expertise)
 → Framework: PAS or Curiosity Gap
 → Use a trending RE topic from above
-→ Position {name or 'the creator'} as the insider who knows the REAL story
+→ Position {creator_ref} as the insider who knows the REAL story
 → Hook style: shocking_stat or controversy
 
 SCRIPT 2 — REAL ESTATE (Story-driven)
@@ -317,7 +326,7 @@ SCRIPT 5 — POLITICS & ECONOMY (Connect Policy to People)
 SCRIPT 6 — SPORTS (Life Lesson from the Game)
 → Framework: Analogy + Personal Brand Bridge
 → Take a trending sports moment and extract a powerful life or business lesson
-→ Show personality! This is where {name or 'the creator'} gets to be a real person, not just an expert
+→ Show personality! This is where {creator_ref} gets to be a real person, not just an expert
 → Connect the sports lesson to real estate/mortgage/hustle
 → Hook style: story or pattern_interrupt
 
@@ -333,7 +342,7 @@ SCRIPT 7 — PERSONAL / LIFESTYLE (Pure Brand Building)
 
 1. Every script uses a DIFFERENT hook style — no repeats across the 7 scripts
 2. Every script uses a DIFFERENT copywriting framework — vary PAS, AIDA, BAB, Open Loop
-3. Write in FIRST PERSON as {name or 'the creator'} — spoken language, not written
+3. Write in FIRST PERSON as {creator_ref} — spoken language, not written
 4. 30-60 seconds when spoken aloud (150-250 words per script body)
 5. Include [PAUSE], [LEAN IN TO CAMERA], [LOOK AWAY THEN BACK] direction cues for emphasis
 6. Reference SPECIFIC trending topics from the data — not generic advice
@@ -356,6 +365,7 @@ def build_regenerate_prompt(
     """Build a prompt to regenerate a single script."""
 
     name = creator_profile.get("name", "the creator")
+    creator_ref = name or "the creator"
     bio = creator_profile.get("bio", "")
     story_elements = creator_profile.get("story_elements", {})
 
@@ -395,19 +405,24 @@ Previous title: {existing_script.get('title', '')}
 Generate something COMPLETELY DIFFERENT — different hook style, different angle, different story, \
 different framework. Surprise me. Take a risk with this one."""
 
-    prompt = f"""Generate exactly 1 {cat_label} video script for {name or 'the creator'}.
+    bio_text = bio or "Real estate & mortgage professional in Ontario, Canada."
+    family_text = story_elements.get("family", "Family-driven motivation — everything is for them.")
+    challenges_text = story_elements.get("challenges", "Has overcome setbacks and rejection.")
+    background_text = story_elements.get("background", "")
 
-CREATOR: {name}, {bio or 'Real estate & mortgage professional in Ontario, Canada.'}
+    prompt = f"""Generate exactly 1 {cat_label} video script for {creator_ref}.
+
+CREATOR: {name}, {bio_text}
 
 STORYTELLING GUIDANCE: {guidance}
 
 Story elements to weave in:
-- Family: {story_elements.get('family', 'Family-driven motivation — everything is for them.')}
-- Challenges: {story_elements.get('challenges', 'Has overcome setbacks and rejection.')}
-- Background: {story_elements.get('background', '')}
+- Family: {family_text}
+- Challenges: {challenges_text}
+- Background: {background_text}
 
 Trending data for this category:
-{trends_text or '(No live data — use powerful evergreen content. Make it timeless.)'}
+{trends_text or "(No live data — use powerful evergreen content. Make it timeless.)"}
 {avoid_text}
 
 Use one of these frameworks: PAS, AIDA, BAB, Open Loop, Curiosity Gap, or Hero's Journey micro-arc.
