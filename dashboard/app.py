@@ -595,3 +595,53 @@ def send_digest(db: Session = Depends(get_db)):
         return {"ok": True, "sent_to": email}
     except Exception as e:
         return {"ok": False, "error": str(e)}
+
+@app.post("/api/update-story")
+def update_story_timeline(db: Session = Depends(get_db)):
+    """Update Ray's story timeline elements."""
+    story_elements = [
+        {"period": "Afghanistan, mid-1990s", "event": "Born during Taliban occupation. Hid in cellars while bombs fell. Witnessed violence and civilian casualties."},
+        {"period": "Peshawar, Pakistan", "event": "18 months. No school. No documents. Father left alone for Russia to earn money and sponsor the family later."},
+        {"period": "Moscow, Aug 23, 2000", "event": "Illegal bus journey through wilderness. Fake passports. Warned to stay silent — soldiers would hurt Afghans. Father had lost weight from overwork."},
+        {"period": "Russia → Wealth → Racism", "event": "Father rebuilt from roadside table → store → factory in China. Became wealthy. But police bribes, racism, classmates saying 'get out of our country.' Money without dignity."},
+        {"period": "Toronto, Oct 13, 2009", "event": "Waited 3 years for Canada. Arrived Pearson Airport with tears and smiles. No English. Started from zero."},
+        {"period": "Seneca College", "event": "Learned English from scratch. Studied hard. Built his foundation in Canada."},
+        {"period": "Real Estate — The Climb", "event": "Solo agent at RE/MAX. Grinded from nothing. No connections, no shortcuts. Built to first million by 2016."},
+        {"period": "2017-18 — Lost Everything", "event": "Real estate downturn + crypto crash wiped him out completely. Zero again. Second time starting over in his life."},
+        {"period": "2019-20 — The Rebuild", "event": "Slow grind back up. No shortcuts. Pure hustle. Third time building from nothing."},
+        {"period": "COVID 2020 — Lost Again", "event": "Market chaos. Deals collapsed. Lost it all again. But this time he knew he'd survived worse."},
+        {"period": "2022-25 — Built Different", "event": "Named Top 30 Under 30 in Canada. Built eXp organization with 200+ agents. Broker-owner. Investor in Canada and USA. Sold 1,000+ homes."},
+        {"period": "Today", "event": "Father of 3. Travelled 25+ countries. Fluent in Dari, Russian, English. Sponsors Afghan refugees, settles families. Board of charity. Community leader. Client first — always. 'I would rather not make money than have my client lose.'"},
+    ]
+
+    victories = [
+        "First million in Canadian real estate by 2016",
+        "Top 30 Under 30 in Canada — real estate",
+        "Built 200+ agent organization at eXp Realty",
+        "Sold 1,000+ homes across GTA",
+        "Broker-owner and mortgage professional",
+        "Investor in Canada and USA",
+        "Travelled to 25+ countries",
+        "Fluent in 3 languages: Dari, Russian, English",
+        "Speaker, team leader, mastermind group member",
+    ]
+
+    challenges = [
+        "Fled Afghanistan as a child — bombs, Taliban, refugee camps",
+        "18 months in Peshawar with no school and no documents",
+        "2-week illegal journey to Moscow — fake passports, armed soldiers",
+        "9 years of racism in Russia — bribes, threats, 'get out of our country'",
+        "Arrived Canada with no English",
+        "Lost everything in 2017-18 real estate + crypto crash",
+        "Lost again in COVID — rebuilt from zero a third time",
+    ]
+
+    profile = get_profile(db)
+    if profile:
+        from .models import json_dump
+        profile.story_elements = json_dump(story_elements)
+        profile.victories = json_dump(victories)
+        profile.challenges = json_dump(challenges)
+        db.commit()
+        return {"ok": True, "message": "Story updated"}
+    return {"ok": False, "error": "No profile found"}
