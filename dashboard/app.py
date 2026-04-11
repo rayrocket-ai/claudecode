@@ -498,3 +498,55 @@ def reset_batch(db: Session = Depends(get_db)):
     db.query(DailyBatch).filter(DailyBatch.date == today).delete()
     db.commit()
     return {"status": "reset", "date": today}
+
+@app.get("/scripts/{script_id}/shot-list")
+def get_shot_list(script_id: int, db: Session = Depends(get_db)):
+    """Generate a shot list for a script using AI."""
+    from .script_engine import _call_claude
+    script = get_script(db, script_id)
+    if not script:
+        raise HTTPException(status_code=404, detail="Script not found")
+    prompt = f"""You are a social media video director. Generate a practical shot list for this script that Ray can film solo on his iPhone.
+
+SCRIPT:
+HOOK: {script.hook}
+BODY: {script.body}
+CTA: {script.cta}
+
+Output a JSON array of shots. Each shot has:
+- section: HOOK, BODY, or CTA
+- framing: "tight selfie" / "medium selfie" / "wide selfie" / "walking shot"
+- action: exactly what Ray should do physically
+- text: the words to say in this shot
+- duration: estimated seconds
+
+Return ONLY valid JSON array, no markdown."""
+
+    try:
+        result = _call_claude(prompt)
+        import json, re
+        # Extract JSON array
+        match = re.search(r'\[.*\]', result, re.DOTALL)
+        shots = json.loads(match.group(0)) if match else []
+        return {"shots": shots}
+    except Exception as e:
+        return {"shots": [], "error": str(e)}
+
+
+@app.post("/api/send-digest")
+def send_digest(db: Session = Depends(get_db)):
+    """Send today's scripts to Ray's email."""
+    import os
+    from .digest_email import send_daily_digest
+    email = os.getenv("DIGEST_EMAIL", "")
+    if not email:
+        return {"ok": False, "error": "DIGEST_EMAIL not set in environment variables"}
+    profile = get_profile(db)
+    scripts = get_today_scripts(db)
+    if not scripts:
+        return {"ok": False, "error": "No scripts generated today"}
+    try:
+        send_daily_digest(email, profile, scripts)
+        return {"ok": True, "sent_to": email}
+    except Exception as e:
+        return {"ok": False, "error": str(e)}

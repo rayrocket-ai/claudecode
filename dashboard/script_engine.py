@@ -287,6 +287,52 @@ Platform: {idea.platform_fit}"""
 
 # ── Single Script Regeneration ────────────────────────────────────────────────
 
+def generate_shot_list(script: VideoScript) -> List[Dict]:
+    """Generate a specific shot-by-shot filming guide for a script."""
+    prompt = f"""You are a social media video director. Create a practical shot list for this script.
+
+TITLE: {script.title}
+HOOK: {script.hook}
+BODY: {script.body}
+CTA: {script.cta}
+PLATFORM: {getattr(script, 'platform', 'Instagram/TikTok')}
+DURATION: ~{getattr(script, 'estimated_duration_seconds', 60)} seconds
+
+Return a JSON array of shot objects. Each shot:
+{{
+  "shot": "HOOK",
+  "framing": "tight selfie / medium / wide / close-up detail",
+  "camera": "front / back / tripod / handheld",
+  "action": "specific action and delivery instruction",
+  "movement": "static / walk toward camera / step back / pan / none",
+  "duration": "3 seconds",
+  "notes": "optional tip for delivery or setup"
+}}
+
+Create 5-9 shots covering: hook delivery, setup/context, key points, payoff moment, CTA.
+Be very specific — this is a real filming guide Ray will read on set.
+Return ONLY the JSON array, no markdown."""
+
+    response = _call_claude(prompt)
+    parsed = _parse_json(response)
+    if isinstance(parsed, list):
+        return parsed
+    # Fallback: wrap in list if single object returned
+    if isinstance(parsed, dict):
+        return [parsed]
+    return [
+        {"shot": "HOOK", "framing": "tight selfie", "camera": "front",
+         "action": "Look directly at camera, deliver hook with energy",
+         "movement": "static", "duration": "3-4 seconds", "notes": ""},
+        {"shot": "BODY", "framing": "medium", "camera": "front/tripod",
+         "action": "Walk through main points naturally",
+         "movement": "slight walk toward camera", "duration": "30-40 seconds", "notes": ""},
+        {"shot": "CTA", "framing": "medium", "camera": "front",
+         "action": "Deliver CTA with direct eye contact",
+         "movement": "static", "duration": "5 seconds", "notes": ""},
+    ]
+
+
 def regenerate_script(script: VideoScript, profile: Optional[CreatorProfile],
                       client_stories: List[ClientStory]) -> Dict:
     """Regenerate a single script based on its type."""

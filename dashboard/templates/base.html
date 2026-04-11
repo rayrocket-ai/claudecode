@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" id="htmlRoot">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,6 +24,7 @@
       <a href="/profile" class="nav-link {% if active_page == 'profile' %}active{% endif %}">Profile</a>
       <a href="/trends" class="nav-link {% if active_page == 'trends' %}active{% endif %}">Trends</a>
     </div>
+    <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle theme" title="Toggle light/dark mode">🌙</button>
     <button class="nav-toggle" onclick="toggleNav()" aria-label="Menu">☰</button>
   </nav>
 
@@ -49,6 +50,35 @@
   {% endblock %}
 
   <script>
+    // ── Theme toggle ──────────────────────────────────────────────────────────
+    const htmlRoot = document.getElementById('htmlRoot');
+    const themeToggle = document.getElementById('themeToggle');
+
+    function applyTheme(theme) {
+      if (theme === 'light') {
+        htmlRoot.setAttribute('data-theme', 'light');
+        themeToggle.textContent = '☀️';
+      } else {
+        htmlRoot.removeAttribute('data-theme');
+        themeToggle.textContent = '🌙';
+      }
+    }
+
+    function toggleTheme() {
+      const current = htmlRoot.getAttribute('data-theme');
+      const next = current === 'light' ? 'dark' : 'light';
+      applyTheme(next);
+      try { localStorage.setItem('ce-theme', next); } catch(e) {}
+    }
+
+    // Apply saved theme immediately (before paint to avoid flash)
+    (function() {
+      try {
+        const saved = localStorage.getItem('ce-theme');
+        if (saved) applyTheme(saved);
+      } catch(e) {}
+    })();
+
     function toggleNav() {
       const menu = document.getElementById('mobileMenu');
       menu.classList.toggle('open');
