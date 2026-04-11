@@ -449,3 +449,17 @@ def trends_page(request: Request):
 @app.get("/health")
 def health():
     return {"status": "ok", "service": "content-engine"}
+
+@app.get("/api/status")
+def api_status(db: Session = Depends(get_db)):
+    """Debug endpoint — check generation status."""
+    from .script_engine import AI_PROVIDER, DEEPSEEK_API_KEY, ANTHROPIC_API_KEY
+    batch = get_today_batch(db)
+    scripts = get_today_scripts(db)
+    return {
+        "provider": AI_PROVIDER,
+        "has_deepseek_key": bool(DEEPSEEK_API_KEY),
+        "has_anthropic_key": bool(ANTHROPIC_API_KEY),
+        "batch": {"id": batch.id, "status": batch.status} if batch else None,
+        "script_count": len(scripts),
+    }
