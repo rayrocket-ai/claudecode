@@ -17,9 +17,7 @@ import json
 import logging
 from typing import Any
 
-import anthropic
-
-from config import get_settings
+from dashboard.claude_client import get_claude_client
 from dashboard.prompts import RAY_SIGNATURE_THEMES
 
 logger = logging.getLogger(__name__)
@@ -89,9 +87,7 @@ class Stage2HookForge:
     """Regenerates + scores hook variations for a content idea."""
 
     def __init__(self):
-        settings = get_settings()
-        self.client = anthropic.Anthropic(api_key=settings.anthropic_api_key)
-        self.model = settings.script_model
+        self.claude = get_claude_client()
 
     def _parse_json(self, text: str) -> dict[str, Any]:
         text = text.strip()
@@ -137,8 +133,7 @@ CORE STORY:
 Produce 3 hook variations (curiosity / contrarian / number). Score each ruthlessly.
 Return strict JSON in the format specified in the system prompt."""
 
-        response = self.client.messages.create(
-            model=self.model,
+        response = self.claude.messages_create(
             max_tokens=2000,
             system=STAGE2_SYSTEM_PROMPT,
             messages=[{"role": "user", "content": user_prompt}],

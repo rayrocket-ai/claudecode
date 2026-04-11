@@ -16,10 +16,24 @@ from db.operations import init_db
 from dashboard import operations as ops
 from dashboard.scraper import collect_all_trends
 from dashboard.script_engine import get_engine
+from dashboard.claude_client import BillingError, get_claude_client
 from dashboard.pipeline.stage1_idea_bank import get_stage1_generator
 from dashboard.pipeline.stage2_hook_forge import get_hook_forge
 from dashboard.pipeline.stage3_script_writer import get_script_writer
 from dashboard.pipeline.stage4_cta_caption import get_cta_caption_builder
+
+
+def _billing_error_response(err: BillingError) -> JSONResponse:
+    """Return a structured 402-ish payload that the frontend can detect."""
+    return JSONResponse(
+        {
+            "status": "billing_error",
+            "message": err.message,
+            "billing_url": err.billing_url,
+            "action": "add_credits",
+        },
+        status_code=402,
+    )
 
 logger = logging.getLogger(__name__)
 
@@ -263,6 +277,9 @@ async def api_generate_scripts(request: Request):
 
         return JSONResponse({"status": "success", "batch_id": batch.id, "script_count": len(scripts_data)})
 
+    except BillingError as e:
+        await ops.update_batch_status(batch.id, "error", e.message)
+        return _billing_error_response(e)
     except Exception as e:
         logger.error(f"Script generation failed: {e}")
         await ops.update_batch_status(batch.id, "error", str(e))
@@ -309,6 +326,8 @@ async def api_regenerate_script(script_id: str):
 
         return JSONResponse({"status": "success", "script_id": script_id})
 
+    except BillingError as e:
+        return _billing_error_response(e)
     except Exception as e:
         logger.error(f"Script regeneration failed: {e}")
         return JSONResponse({"status": "error", "message": str(e)}, status_code=500)
@@ -386,6 +405,21 @@ async def api_refresh_trends():
         return JSONResponse({"status": "error", "message": str(e)}, status_code=500)
 
 
+# ── System / Model Info ───────────────────────────────────────────────
+
+@app.get("/api/system/model")
+async def api_model_info():
+    """Return which Claude model is currently active + cost tier."""
+    try:
+        claude = get_claude_client()
+        return JSONResponse({
+            "model": claude.model,
+            "info": claude.model_info,
+        })
+    except Exception as e:
+        return JSONResponse({"error": str(e)}, status_code=500)
+
+
 # ── Client Story API ──────────────────────────────────────────────────
 
 @app.post("/api/stories")
@@ -451,6 +485,8 @@ async def api_refine_hooks(idea_id: str):
                 for h in saved
             ],
         })
+    except BillingError as e:
+        return _billing_error_response(e)
     except Exception as e:
         logger.exception("Hook forge failed")
         return JSONResponse({"status": "error", "message": str(e)}, status_code=500)
@@ -514,6 +550,8 @@ async def api_write_script_from_idea(idea_id: str, request: Request):
             "word_count_original": saved.word_count_original,
             "word_count_compressed": saved.word_count_compressed,
         })
+    except BillingError as e:
+        return _billing_error_response(e)
     except Exception as e:
         logger.exception("Stage 3 script writer failed")
         return JSONResponse({"status": "error", "message": str(e)}, status_code=500)
@@ -553,6 +591,8 @@ async def api_generate_platform_captions(script_id: str):
         )
         await ops.update_script_platform_captions(script_id, captions)
         return JSONResponse({"status": "success", "platform_captions": captions})
+    except BillingError as e:
+        return _billing_error_response(e)
     except Exception as e:
         logger.exception("Stage 4 caption builder failed")
         return JSONResponse({"status": "error", "message": str(e)}, status_code=500)
@@ -593,6 +633,9 @@ async def api_generate_idea_bank(request: Request):
             "batch_id": batch.id,
             "idea_count": len(ideas),
         })
+    except BillingError as e:
+        await ops.update_idea_batch_status(batch.id, "error", e.message)
+        return _billing_error_response(e)
     except Exception as e:
         logger.exception("Idea bank generation failed")
         await ops.update_idea_batch_status(batch.id, "error", str(e))

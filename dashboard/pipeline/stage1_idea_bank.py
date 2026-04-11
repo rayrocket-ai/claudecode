@@ -22,9 +22,7 @@ import json
 import logging
 from typing import Any
 
-import anthropic
-
-from config import get_settings
+from dashboard.claude_client import get_claude_client
 from dashboard.prompts import RAY_SIGNATURE_THEMES, _format_client_stories, _format_story_elements
 
 logger = logging.getLogger(__name__)
@@ -172,9 +170,7 @@ class Stage1IdeaBankGenerator:
     """Generates 30-day content idea banks via Claude."""
 
     def __init__(self):
-        settings = get_settings()
-        self.client = anthropic.Anthropic(api_key=settings.anthropic_api_key)
-        self.model = settings.script_model
+        self.claude = get_claude_client()
 
     def _parse_ideas_json(self, text: str) -> list[dict[str, Any]]:
         text = text.strip()
@@ -261,8 +257,7 @@ class Stage1IdeaBankGenerator:
         user_prompt = _build_stage1_user_prompt(creator_profile, client_stories, num_ideas)
         logger.info(f"Generating Stage 1 idea bank with {num_ideas} ideas")
 
-        response = self.client.messages.create(
-            model=self.model,
+        response = self.claude.messages_create(
             max_tokens=16000,
             system=STAGE1_SYSTEM_PROMPT,
             messages=[{"role": "user", "content": user_prompt}],

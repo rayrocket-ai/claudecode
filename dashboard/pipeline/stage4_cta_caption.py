@@ -19,9 +19,7 @@ import json
 import logging
 from typing import Any
 
-import anthropic
-
-from config import get_settings
+from dashboard.claude_client import get_claude_client
 
 logger = logging.getLogger(__name__)
 
@@ -86,9 +84,7 @@ class Stage4CTACaptionBuilder:
     """Generates platform-specific captions for a finished script."""
 
     def __init__(self):
-        settings = get_settings()
-        self.client = anthropic.Anthropic(api_key=settings.anthropic_api_key)
-        self.model = settings.script_model
+        self.claude = get_claude_client()
 
     def _parse_json(self, text: str) -> dict[str, Any]:
         text = text.strip()
@@ -134,8 +130,7 @@ ORIGINAL CTA (keep the intent, adapt the phrasing per platform):
 Return strict JSON with all 4 platform captions and their hashtag arrays. Match the
 CTA to the viral angle ({viral_angle}). Reference {target_location} where relevant."""
 
-        response = self.client.messages.create(
-            model=self.model,
+        response = self.claude.messages_create(
             max_tokens=3000,
             system=STAGE4_SYSTEM_PROMPT,
             messages=[{"role": "user", "content": user_prompt}],

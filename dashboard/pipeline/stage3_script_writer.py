@@ -16,9 +16,7 @@ import json
 import logging
 from typing import Any
 
-import anthropic
-
-from config import get_settings
+from dashboard.claude_client import get_claude_client
 from dashboard.prompts import (
     RAY_SIGNATURE_THEMES,
     _format_client_stories,
@@ -120,9 +118,7 @@ class Stage3ScriptWriter:
     """Converts an idea + chosen hook into a full script with Hormozi density pass."""
 
     def __init__(self):
-        settings = get_settings()
-        self.client = anthropic.Anthropic(api_key=settings.anthropic_api_key)
-        self.model = settings.script_model
+        self.claude = get_claude_client()
 
     def _parse_json(self, text: str) -> dict[str, Any]:
         text = text.strip()
@@ -187,8 +183,7 @@ REAL CLIENT STORIES (reference one if natural):
 Write the full script now. Return ONLY the JSON object specified in the system
 prompt. Hook is locked. Target 180-260 word body. Hormozi density throughout."""
 
-        response = self.client.messages.create(
-            model=self.model,
+        response = self.claude.messages_create(
             max_tokens=4000,
             system=STAGE3_SYSTEM_PROMPT,
             messages=[{"role": "user", "content": user_prompt}],
@@ -235,8 +230,7 @@ prompt. Hook is locked. Target 180-260 word body. Hormozi density throughout."""
 
 Run the Hormozi density pass. Return strict JSON only."""
         try:
-            response = self.client.messages.create(
-                model=self.model,
+            response = self.claude.messages_create(
                 max_tokens=2000,
                 system=HORMOZI_DENSITY_PROMPT,
                 messages=[{"role": "user", "content": prompt}],

@@ -188,23 +188,22 @@ async function generateIdeaBank(numIdeas) {
     btn.disabled = true;
     btn.innerHTML = '<svg class="animate-spin h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path></svg>Generating...';
 
-    try {
-        const resp = await fetch('/api/idea-bank/generate', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({num_ideas: numIdeas}),
-        });
-        const data = await resp.json();
-        if (data.status === 'success') {
-            showToast(`Generated ${data.idea_count} ideas!`);
-            setTimeout(() => window.location.reload(), 800);
-        } else {
-            showToast('Error: ' + (data.message || 'Unknown'));
-            btn.disabled = false;
-            btn.textContent = 'Generate 30-Day Bank';
-        }
-    } catch (e) {
-        showToast('Error: ' + e.message);
+    const result = await apiFetch('/api/idea-bank/generate', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({num_ideas: numIdeas}),
+    });
+    if (result.billingError) {
+        btn.disabled = false;
+        btn.textContent = 'Generate 30-Day Bank';
+        return;
+    }
+    const data = result.data || {};
+    if (data.status === 'success') {
+        showToast(`Generated ${data.idea_count} ideas!`);
+        setTimeout(() => window.location.reload(), 800);
+    } else {
+        showToast('Error: ' + (data.message || 'Unknown'));
         btn.disabled = false;
         btn.textContent = 'Generate 30-Day Bank';
     }
@@ -212,38 +211,32 @@ async function generateIdeaBank(numIdeas) {
 
 async function refineHooks(ideaId) {
     showToast('Forging new hooks...');
-    try {
-        const resp = await fetch(`/api/ideas/${ideaId}/refine-hooks`, {method: 'POST'});
-        const data = await resp.json();
-        if (data.status === 'success') {
-            showToast(`Got ${data.hook_count} fresh hooks!`);
-            setTimeout(() => window.location.reload(), 600);
-        } else {
-            showToast('Error: ' + (data.message || 'Unknown'));
-        }
-    } catch (e) {
-        showToast('Error: ' + e.message);
+    const result = await apiFetch(`/api/ideas/${ideaId}/refine-hooks`, {method: 'POST'});
+    if (result.billingError) return;
+    const data = result.data || {};
+    if (data.status === 'success') {
+        showToast(`Got ${data.hook_count} fresh hooks!`);
+        setTimeout(() => window.location.reload(), 600);
+    } else {
+        showToast('Error: ' + (data.message || 'Unknown'));
     }
 }
 
 async function writeScript(ideaId) {
     showToast('Writing script + running Hormozi pass...');
-    try {
-        const resp = await fetch(`/api/ideas/${ideaId}/write-script`, {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({}),
-        });
-        const data = await resp.json();
-        if (data.status === 'success') {
-            const density = Math.round((data.hormozi_density_score || 0) * 100);
-            showToast(`Script written! Cut ${density}% of filler.`);
-            setTimeout(() => window.location.href = '/pipeline', 900);
-        } else {
-            showToast('Error: ' + (data.message || 'Unknown'));
-        }
-    } catch (e) {
-        showToast('Error: ' + e.message);
+    const result = await apiFetch(`/api/ideas/${ideaId}/write-script`, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({}),
+    });
+    if (result.billingError) return;
+    const data = result.data || {};
+    if (data.status === 'success') {
+        const density = Math.round((data.hormozi_density_score || 0) * 100);
+        showToast(`Script written! Cut ${density}% of filler.`);
+        setTimeout(() => window.location.href = '/pipeline', 900);
+    } else {
+        showToast('Error: ' + (data.message || 'Unknown'));
     }
 }
 </script>

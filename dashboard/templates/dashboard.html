@@ -99,17 +99,16 @@ async function generateScripts() {
         btn.disabled = true;
         btn.innerHTML = '<svg class="animate-spin h-4 w-4 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path></svg> Generating...';
     }
-    try {
-        const resp = await fetch('/api/generate', { method: 'POST' });
-        const data = await resp.json();
-        if (data.status === 'success' || data.status === 'already_exists') {
-            window.location.reload();
-        } else {
-            showToast('Error: ' + (data.message || 'Generation failed'));
-            if (btn) { btn.disabled = false; btn.innerHTML = 'Generate Scripts'; }
-        }
-    } catch (e) {
-        showToast('Network error. Please try again.');
+    const result = await apiFetch('/api/generate', { method: 'POST' });
+    if (result.billingError) {
+        if (btn) { btn.disabled = false; btn.innerHTML = 'Generate Scripts'; }
+        return;
+    }
+    const data = result.data || {};
+    if (data.status === 'success' || data.status === 'already_exists') {
+        window.location.reload();
+    } else {
+        showToast('Error: ' + (data.message || 'Generation failed'));
         if (btn) { btn.disabled = false; btn.innerHTML = 'Generate Scripts'; }
     }
 }

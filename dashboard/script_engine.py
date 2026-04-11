@@ -7,9 +7,7 @@ import logging
 from datetime import date
 from typing import Any
 
-import anthropic
-
-from config import get_settings
+from dashboard.claude_client import get_claude_client
 from dashboard.prompts import (
     SCRIPT_SYSTEM_PROMPT,
     build_generation_prompt,
@@ -24,9 +22,7 @@ class ScriptEngine:
     """Generates video scripts using Claude AI and trending data."""
 
     def __init__(self):
-        settings = get_settings()
-        self.client = anthropic.Anthropic(api_key=settings.anthropic_api_key)
-        self.model = settings.script_model
+        self.claude = get_claude_client()
 
     def _parse_scripts_json(self, text: str) -> list[dict[str, Any]]:
         """Parse the JSON array of scripts from Claude's response."""
@@ -80,8 +76,7 @@ class ScriptEngine:
 
         logger.info(f"Generating {num_scripts} scripts for {target_date}")
 
-        response = self.client.messages.create(
-            model=self.model,
+        response = self.claude.messages_create(
             max_tokens=8192,
             system=SCRIPT_SYSTEM_PROMPT,
             messages=[{"role": "user", "content": prompt}],
@@ -113,8 +108,7 @@ class ScriptEngine:
 
         prompt = build_regenerate_prompt(creator_profile, trending_data, category, existing_script)
 
-        response = self.client.messages.create(
-            model=self.model,
+        response = self.claude.messages_create(
             max_tokens=2048,
             system=SCRIPT_SYSTEM_PROMPT,
             messages=[{"role": "user", "content": prompt}],

@@ -113,40 +113,32 @@
 <script>
 async function writeScriptFromPipeline(ideaId) {
     showToast('Writing script...');
-    try {
-        const resp = await fetch(`/api/ideas/${ideaId}/write-script`, {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({}),
-        });
-        const data = await resp.json();
-        if (data.status === 'success') {
-            const density = Math.round((data.hormozi_density_score || 0) * 100);
-            showToast(`Script written! Cut ${density}% filler.`);
-            setTimeout(() => window.location.reload(), 800);
-        } else {
-            showToast('Error: ' + (data.message || 'Unknown'));
-        }
-    } catch (e) {
-        showToast('Error: ' + e.message);
+    const result = await apiFetch(`/api/ideas/${ideaId}/write-script`, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({}),
+    });
+    if (result.billingError) return;
+    const data = result.data || {};
+    if (data.status === 'success') {
+        const density = Math.round((data.hormozi_density_score || 0) * 100);
+        showToast(`Script written! Cut ${density}% filler.`);
+        setTimeout(() => window.location.reload(), 800);
+    } else {
+        showToast('Error: ' + (data.message || 'Unknown'));
     }
 }
 
 async function buildCaptions(scriptId) {
     showToast('Building platform captions...');
-    try {
-        const resp = await fetch(`/api/scripts/${scriptId}/platform-captions`, {
-            method: 'POST',
-        });
-        const data = await resp.json();
-        if (data.status === 'success') {
-            showToast('Captions ready for all 4 platforms!');
-            setTimeout(() => window.location.reload(), 600);
-        } else {
-            showToast('Error: ' + (data.message || 'Unknown'));
-        }
-    } catch (e) {
-        showToast('Error: ' + e.message);
+    const result = await apiFetch(`/api/scripts/${scriptId}/platform-captions`, {method: 'POST'});
+    if (result.billingError) return;
+    const data = result.data || {};
+    if (data.status === 'success') {
+        showToast('Captions ready for all 4 platforms!');
+        setTimeout(() => window.location.reload(), 600);
+    } else {
+        showToast('Error: ' + (data.message || 'Unknown'));
     }
 }
 </script>
