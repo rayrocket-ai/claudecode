@@ -476,3 +476,13 @@ def test_deepseek():
         return {"status": resp.status_code, "response": resp.json()}
     except Exception as e:
         return {"error": str(e), "type": type(e).__name__}
+
+@app.get("/api/reset-batch")
+def reset_batch(db: Session = Depends(get_db)):
+    """Reset stuck batch so generation can retry."""
+    from .models import DailyBatch
+    from datetime import date
+    today = date.today().isoformat()
+    db.query(DailyBatch).filter(DailyBatch.date == today).delete()
+    db.commit()
+    return {"status": "reset", "date": today}
