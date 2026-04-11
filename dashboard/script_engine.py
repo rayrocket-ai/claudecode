@@ -123,6 +123,29 @@ def _apply_hormozi_pass(hook: str, body: str, cta: str) -> Dict[str, str]:
 
 # ── Daily Batch ───────────────────────────────────────────────────────────────
 
+SCRIPT_TYPES = [
+    ("market", "Write a GTA real estate market script (Brampton/Vaughan/Mississauga data-driven)"),
+    ("market", "Write a GTA real estate script from a different angle (investment, pre-con, or rental)"),
+    ("mortgage", "Write a mortgage education script (rates, pre-approval, or refinancing tips)"),
+    ("personal", "Write a personal story script drawing from Ray's Afghanistan/Russia/Canada arc"),
+    ("client_win", "Write a client win script using one of the available client stories"),
+    ("trending", "Write a trending topic script hooked off current news or viral content"),
+    ("wildcard", "Write a wildcard script with maximum virality potential — unexpected angle"),
+]
+
+SINGLE_SCRIPT_PROMPT = """Generate ONE complete video script for Ray Ahmadi.
+
+TASK: {task}
+
+TRENDING CONTEXT: {trending_context}
+CLIENT STORIES: {client_story_context}
+
+Return a single JSON object with:
+- title, script_type, hook, body, cta, caption, hashtags, platform, estimated_duration_seconds
+
+RETURN ONLY THE JSON OBJECT."""
+
+
 def generate_daily_batch(
     profile: Optional[CreatorProfile],
     trending_items: List[Dict],
@@ -130,21 +153,31 @@ def generate_daily_batch(
     n: int = 7,
     batch_id: int = None,
 ) -> List[Dict]:
-    """Generate n scripts for today's batch. Returns list of script data dicts."""
+    """Generate n scripts one at a time for reliability."""
 
     from .scraper import format_trending_for_prompt
     trending_context = format_trending_for_prompt(trending_items)
     story_context = _stories_context(client_stories)
 
-    prompt = DAILY_BATCH_PROMPT.format(
-        n=n,
-        trending_context=trending_context,
-        client_story_context=story_context,
-    )
-
-    logger.info(f"Generating daily batch of {n} scripts...")
-    response = _call_claude(prompt, system=SYSTEM_PROMPT)
-    raw_scripts = _parse_json(response)
+    raw_scripts = []
+    for i, (script_type, task) in enumerate(SCRIPT_TYPES[:n]):
+        prompt = SINGLE_SCRIPT_PROMPT.format(
+            task=task,
+            trending_context=trending_context,
+            client_story_context=story_context,
+        )
+        logger.info(f"Generating script {i+1}/{n}: {script_type}")
+        try:
+            response = _call_claude(prompt, system=SYSTEM_PROMPT)
+            parsed = _parse_json(response)
+            if isinstance(parsed, list) and parsed:
+                parsed = parsed[0]
+            if isinstance(parsed, dict):
+                parsed["script_type"] = script_type
+                raw_scripts.append(parsed)
+        except Exception as e:
+            logger.error(f"Script {i+1} failed: {e}")
+            continue
 
     scripts = []
     for raw in raw_scripts:
