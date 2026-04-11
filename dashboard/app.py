@@ -463,3 +463,16 @@ def api_status(db: Session = Depends(get_db)):
         "batch": {"id": batch.id, "status": batch.status} if batch else None,
         "script_count": len(scripts),
     }
+
+@app.get("/api/test-deepseek")
+def test_deepseek():
+    """Test DeepSeek connection directly."""
+    try:
+        import httpx
+        from .script_engine import DEEPSEEK_API_KEY
+        headers = {"Authorization": f"Bearer {DEEPSEEK_API_KEY}", "Content-Type": "application/json"}
+        payload = {"model": "deepseek-chat", "messages": [{"role": "user", "content": "Say OK"}], "max_tokens": 5}
+        resp = httpx.post("https://api.deepseek.com/chat/completions", json=payload, headers=headers, timeout=30)
+        return {"status": resp.status_code, "response": resp.json()}
+    except Exception as e:
+        return {"error": str(e), "type": type(e).__name__}
