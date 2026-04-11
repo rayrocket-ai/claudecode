@@ -49,8 +49,14 @@ templates = Jinja2Templates(directory=os.path.join(BASE_DIR, "templates"))
 
 @app.on_event("startup")
 def on_startup():
-    init_db()
-    _seed_data()
+    try:
+        init_db()
+    except Exception as e:
+        logger.error(f"DB init failed: {e}")
+    try:
+        _seed_data()
+    except Exception as e:
+        logger.error(f"Seed data failed: {e}")
 
 
 def _seed_data():
