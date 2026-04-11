@@ -74,3 +74,4 @@ content-engine/
 Ray Ahmadi was born in Afghanistan in the mid-1990s during Taliban occupation. His family fled through wilderness, spent 18 months in Pakistan, made an illegal bus journey to Moscow, rebuilt from a roadside table to a factory in China — then left it all behind again for Canada. He arrived at Pearson Airport on October 13, 2009, and built his real estate career from zero.
 
 Every script Claude generates draws from this real story. No placeholders. No generic advice.
+# force redeploy Sat Apr 11 04:04:57 AM UTC 2026
