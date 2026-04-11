@@ -169,6 +169,7 @@ class VideoScript(Base):
     hashtags = Column(Text, nullable=True)
     script_type = Column(String(50), nullable=True)  # market/mortgage/personal/client_win/trending/wildcard
     status = Column(String(50), default="draft")  # draft/approved/posted
+    rating = Column(Integer, nullable=True)  # 1=good, -1=bad, None=unrated
     word_count = Column(Integer, default=0)
     estimated_duration_seconds = Column(Integer, default=0)
     created_at = Column(DateTime, default=datetime.utcnow)
@@ -204,3 +205,16 @@ def get_db():
 
 def init_db():
     Base.metadata.create_all(bind=engine)
+    # Migrate: add columns added after initial schema
+    _migrate_db()
+
+
+def _migrate_db():
+    """Add new columns to existing tables if they don't exist (SQLite-safe)."""
+    from sqlalchemy import text
+    with engine.connect() as conn:
+        try:
+            conn.execute(text("ALTER TABLE video_scripts ADD COLUMN rating INTEGER"))
+            conn.commit()
+        except Exception:
+            pass  # Column already exists

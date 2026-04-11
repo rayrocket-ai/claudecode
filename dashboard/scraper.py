@@ -3,6 +3,7 @@
 import feedparser
 import httpx
 import asyncio
+from concurrent.futures import ThreadPoolExecutor, TimeoutError as FuturesTimeout
 from typing import List, Dict
 from datetime import datetime
 import logging
@@ -96,13 +97,22 @@ FALLBACK_ITEMS = [
 ]
 
 
+def _fetch_feed(url: str):
+    """Blocking feedparser call — run inside a thread with timeout."""
+    return feedparser.parse(url)
+
+
 def parse_feed(feed_info: Dict) -> List[Dict]:
-    """Parse a single RSS feed and return items."""
+    """Parse a single RSS feed and return items. 5-second hard timeout via thread."""
     try:
-        feedparser.api._FeedParserMixin  # noqa
-        import socket
-        socket.setdefaulttimeout(5)
-        parsed = feedparser.parse(feed_info["url"])
+        with ThreadPoolExecutor(max_workers=1) as ex:
+            future = ex.submit(_fetch_feed, feed_info["url"])
+            try:
+                parsed = future.result(timeout=5)
+            except FuturesTimeout:
+                logger.warning(f"Feed timed out: {feed_info['name']}")
+                return []
+
         items = []
         for entry in parsed.entries[:3]:  # Top 3 per feed
             item = {

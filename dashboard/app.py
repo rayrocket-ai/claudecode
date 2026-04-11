@@ -26,6 +26,7 @@ from .operations import (
     get_stories, get_story, create_story, delete_story,
     get_today_batch, get_batch, create_batch, complete_batch, fail_batch,
     get_scripts, get_today_scripts, get_script, create_script, update_script_status,
+    rate_script,
     get_ideas, get_idea, create_idea, update_idea_status,
     get_hooks_for_idea, create_hook, choose_hook,
 )
@@ -249,6 +250,17 @@ def teleprompter(script_id: int, request: Request, db: Session = Depends(get_db)
     return tmpl("teleprompter.html", request, {
         "script": script,
     })
+
+
+@app.post("/scripts/{script_id}/rate")
+def script_rate(script_id: int, rating: int = Form(...), db: Session = Depends(get_db)):
+    """Rate a script: rating=1 (👍) or rating=-1 (👎). Sends JSON response."""
+    from fastapi.responses import JSONResponse
+    script = get_script(db, script_id)
+    if not script:
+        raise HTTPException(status_code=404, detail="Script not found")
+    updated = rate_script(db, script_id, rating)
+    return JSONResponse({"ok": True, "rating": updated.rating})
 
 
 @app.post("/scripts/{script_id}/regenerate")

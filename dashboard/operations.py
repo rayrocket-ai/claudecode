@@ -292,3 +292,17 @@ def update_script_status(db: Session, script_id: int, status: str) -> Optional[V
         db.commit()
         db.refresh(script)
     return script
+
+
+def rate_script(db: Session, script_id: int, rating: int) -> Optional[VideoScript]:
+    """Rate a script: 1=thumbs up, -1=thumbs down, 0=clear rating."""
+    script = get_script(db, script_id)
+    if script:
+        # Toggle off if same rating clicked again
+        if script.rating == rating:
+            script.rating = None
+        else:
+            script.rating = rating if rating in (1, -1) else None
+        db.commit()
+        db.refresh(script)
+    return script

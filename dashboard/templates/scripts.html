@@ -25,7 +25,7 @@
 
 <div class="scripts-list">
   {% for script in scripts %}
-  <div class="script-row">
+  <div class="script-row {% if script.rating == 1 %}script-row--liked{% elif script.rating == -1 %}script-row--disliked{% endif %}" id="sr-{{ script.id }}">
     <div class="script-row-meta">
       <span class="type-badge type-{{ script.script_type }}">{{ script.script_type.replace('_', ' ').title() }}</span>
       <span class="platform-badge">{{ script.platform }}</span>
@@ -70,6 +70,28 @@
       <form method="post" action="/scripts/{{ script.id }}/regenerate" style="display:inline;">
         <button type="submit" class="btn btn-ghost btn-xs">🔄 Regen</button>
       </form>
+
+      <!-- Rating buttons -->
+      <button
+        class="btn btn-xs rating-btn {% if script.rating == 1 %}rating-active-up{% endif %}"
+        id="up-{{ script.id }}"
+        onclick="rateScript({{ script.id }}, 1)"
+        title="Good script">👍</button>
+      <button
+        class="btn btn-xs rating-btn {% if script.rating == -1 %}rating-active-down{% endif %}"
+        id="down-{{ script.id }}"
+        onclick="rateScript({{ script.id }}, -1)"
+        title="Bad script">👎</button>
+
+      <!-- Copy buttons -->
+      <button class="btn btn-ghost btn-xs copy-btn" id="copycap-{{ script.id }}"
+        onclick="copyCaption({{ script.id }}, {{ (script.caption ~ '\n\n' ~ script.hashtags) | tojson }})">
+        📋 Copy Caption
+      </button>
+      <button class="btn btn-ghost btn-xs copy-btn" id="copyscript-{{ script.id }}"
+        onclick="copyScript({{ script.id }}, {{ script.full_script() | tojson }})">
+        📋 Copy Script
+      </button>
     </div>
   </div>
   {% endfor %}
@@ -79,6 +101,33 @@
 {% endblock %}
 
 {% block scripts %}
+<style>
+  /* Rating states */
+  .rating-btn {
+    background: #1a1a1a; border: 1px solid #333; border-radius: 6px;
+    padding: 4px 10px; font-size: 14px; cursor: pointer; transition: all .15s;
+    opacity: 0.5;
+  }
+  .rating-btn:hover { opacity: 1; background: #252525; }
+  .rating-active-up {
+    opacity: 1 !important; background: rgba(34,197,94,.15) !important;
+    border-color: #22c55e !important;
+  }
+  .rating-active-down {
+    opacity: 1 !important; background: rgba(239,68,68,.12) !important;
+    border-color: #ef4444 !important;
+  }
+
+  /* Script row rating states */
+  .script-row--liked { border-left: 3px solid #22c55e !important; }
+  .script-row--disliked { opacity: 0.5; }
+
+  /* Copy button feedback */
+  .copy-btn.copied {
+    color: #22c55e !important; border-color: #22c55e !important;
+    background: rgba(34,197,94,.1) !important;
+  }
+</style>
 <script>
 function toggleBody(id) {
   const body = document.getElementById('body-' + id);
@@ -90,6 +139,75 @@ function toggleBody(id) {
     body.style.display = 'none';
     btn.textContent = '👁 Expand';
   }
+}
+
+// ── Rating ────────────────────────────────────────────────────────────────────
+function rateScript(id, rating) {
+  const formData = new FormData();
+  formData.append('rating', rating);
+
+  fetch('/scripts/' + id + '/rate', { method: 'POST', body: formData })
+    .then(r => r.json())
+    .then(data => {
+      const row = document.getElementById('sr-' + id);
+      const upBtn  = document.getElementById('up-' + id);
+      const downBtn = document.getElementById('down-' + id);
+
+      // Reset classes
+      upBtn.classList.remove('rating-active-up');
+      downBtn.classList.remove('rating-active-down');
+      row.classList.remove('script-row--liked', 'script-row--disliked');
+
+      if (data.rating === 1) {
+        upBtn.classList.add('rating-active-up');
+        row.classList.add('script-row--liked');
+      } else if (data.rating === -1) {
+        downBtn.classList.add('rating-active-down');
+        row.classList.add('script-row--disliked');
+      }
+    })
+    .catch(err => console.error('Rating failed:', err));
+}
+
+// ── Copy helpers ──────────────────────────────────────────────────────────────
+function flashCopied(btnId) {
+  const btn = document.getElementById(btnId);
+  const orig = btn.textContent;
+  btn.textContent = '✅ Copied!';
+  btn.classList.add('copied');
+  setTimeout(() => {
+    btn.textContent = orig;
+    btn.classList.remove('copied');
+  }, 2000);
+}
+
+function copyCaption(id, text) {
+  navigator.clipboard.writeText(text.trim())
+    .then(() => flashCopied('copycap-' + id))
+    .catch(() => {
+      // Fallback for older mobile browsers
+      const el = document.createElement('textarea');
+      el.value = text.trim();
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand('copy');
+      document.body.removeChild(el);
+      flashCopied('copycap-' + id);
+    });
+}
+
+function copyScript(id, text) {
+  navigator.clipboard.writeText(text.trim())
+    .then(() => flashCopied('copyscript-' + id))
+    .catch(() => {
+      const el = document.createElement('textarea');
+      el.value = text.trim();
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand('copy');
+      document.body.removeChild(el);
+      flashCopied('copyscript-' + id);
+    });
 }
 </script>
 {% endblock %}

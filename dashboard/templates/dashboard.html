@@ -55,7 +55,7 @@
 
 <div class="scripts-grid">
   {% for script in scripts %}
-  <div class="script-card" data-id="{{ script.id }}">
+  <div class="script-card {% if script.rating == 1 %}script-card--liked{% elif script.rating == -1 %}script-card--disliked{% endif %}" data-id="{{ script.id }}">
     <div class="script-card-header">
       <span class="type-badge type-{{ script.script_type }}">{{ script.script_type.replace('_', ' ').title() }}</span>
       <span class="platform-badge">{{ script.platform }}</span>
@@ -125,6 +125,14 @@ function togglePreview(id) {
     toggle.textContent = '👁 Expand';
   }
 }
+
+// Script card rating styles (injected here so they apply within the block)
+const ratingStyle = document.createElement('style');
+ratingStyle.textContent = `
+  .script-card--liked  { border: 2px solid #22c55e !important; }
+  .script-card--disliked { opacity: 0.45; }
+`;
+document.head.appendChild(ratingStyle);
 
 // Show loading state on generate
 document.querySelectorAll('#generateBtn, #generateBtn2').forEach(btn => {
