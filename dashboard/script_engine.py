@@ -24,7 +24,7 @@ OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "")
 
 claude_client = Anthropic(api_key=ANTHROPIC_API_KEY) if ANTHROPIC_API_KEY else None
 
-MODEL = os.getenv("AI_MODEL", "claude-sonnet-4-6")
+MODEL = os.getenv("AI_MODEL", "claude-haiku-4-5")
 FAST_MODEL = os.getenv("AI_FAST_MODEL", "claude-haiku-4-5")
 
 
