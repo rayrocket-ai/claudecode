@@ -99,7 +99,10 @@ FALLBACK_ITEMS = [
 def parse_feed(feed_info: Dict) -> List[Dict]:
     """Parse a single RSS feed and return items."""
     try:
-        parsed = feedparser.parse(feed_info["url"], request_headers={"User-Agent": "Mozilla/5.0"}, timeout=5)
+        feedparser.api._FeedParserMixin  # noqa
+        import socket
+        socket.setdefaulttimeout(5)
+        parsed = feedparser.parse(feed_info["url"])
         items = []
         for entry in parsed.entries[:3]:  # Top 3 per feed
             item = {

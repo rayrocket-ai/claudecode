@@ -9,3 +9,4 @@ jinja2
 python-multipart
 apscheduler
 pydantic-settings
+psycopg2-binary
