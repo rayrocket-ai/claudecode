@@ -17,7 +17,7 @@ from .models import (
 logger = logging.getLogger(__name__)
 
 # Model configuration
-AI_PROVIDER = os.getenv("AI_PROVIDER", "claude")  # claude, deepseek, openai
+AI_PROVIDER = "claude"  # hardcoded for reliability  # claude, deepseek, openai
 ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY", "")
 DEEPSEEK_API_KEY = os.getenv("DEEPSEEK_API_KEY", "")
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "")
