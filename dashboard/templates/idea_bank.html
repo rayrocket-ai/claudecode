@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+{% block title %}Idea Bank · Ray's Content Engine{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div class="page-header-left">
+    <h1 class="page-title">Idea Bank</h1>
+    <p class="page-subtitle">{{ ideas|length }} ideas ready to use</p>
+  </div>
+  <div class="page-header-right">
+    <form method="post" action="/idea-bank/generate">
+      <button type="submit" class="btn btn-primary" id="genIdeasBtn">
+        💡 Generate 30 Ideas
+      </button>
+    </form>
+  </div>
+</div>
+
+{% if not ideas %}
+<div class="empty-state">
+  <div class="empty-icon">💡</div>
+  <h2 class="empty-title">No ideas yet</h2>
+  <p class="empty-text">Generate a 30-day idea bank. Claude will create 30 tailored content ideas with hook seeds, viral angles, and platform recommendations.</p>
+  <form method="post" action="/idea-bank/generate">
+    <button type="submit" class="btn btn-primary btn-xl">💡 Generate 30-Day Idea Bank</button>
+  </form>
+</div>
+{% else %}
+
+<div class="pillar-filter">
+  <button class="filter-btn active" data-pillar="all" onclick="filterPillar('all', this)">All</button>
+  {% for pillar in pillars %}
+  <button class="filter-btn" data-pillar="{{ pillar.id }}" onclick="filterPillar('{{ pillar.id }}', this)">
+    {{ pillar.emoji or '●' }} {{ pillar.name }}
+  </button>
+  {% endfor %}
+</div>
+
+<div class="ideas-grid" id="ideasGrid">
+  {% for idea in ideas %}
+  <div class="idea-card" data-pillar="{{ idea.pillar_id }}" data-id="{{ idea.id }}">
+    <div class="idea-card-header">
+      <span class="pillar-badge pillar-{{ idea.pillar_id }}">
+        {% for p in pillars %}{% if p.id == idea.pillar_id %}{{ p.emoji or '●' }} {{ p.name }}{% endif %}{% endfor %}
+      </span>
+      <span class="idea-status status-{{ idea.status }}">{{ idea.status.replace('_', ' ').title() }}</span>
+    </div>
+
+    <p class="idea-core-story">{{ idea.core_story[:180] }}{% if idea.core_story|length > 180 %}...{% endif %}</p>
+
+    {% if idea.viral_angle %}
+    <div class="viral-angle-tag">
+      <span class="viral-label">🔥 VIRAL ANGLE</span>
+      <span class="viral-text">{{ idea.viral_angle[:120] }}</span>
+    </div>
+    {% endif %}
+
+    {% if idea.platform_fit %}
+    <div class="platform-tags">
+      {% for platform in idea.platform_fit.split(',') %}
+      <span class="platform-tag">{{ platform.strip() }}</span>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    {% if idea.hook_seeds_list() %}
+    <div class="hook-seeds" id="seeds-{{ idea.id }}" style="display:none;">
+      <div class="seeds-label">Hook Seeds:</div>
+      {% for seed in idea.hook_seeds_list() %}
+      <div class="seed-item">• {{ seed }}</div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="idea-card-actions">
+      {% if idea.hook_seeds_list() %}
+      <button class="btn btn-ghost btn-xs" onclick="toggleSeeds({{ idea.id }})">
+        <span id="seedtoggle-{{ idea.id }}">🌱 Seeds</span>
+      </button>
+      {% endif %}
+
+      {% if idea.status == 'idea' %}
+      <a href="/idea-bank/{{ idea.id }}/hooks" class="btn btn-orange btn-xs">⚡ Forge Hooks</a>
+      {% elif idea.status == 'hook_chosen' %}
+      <a href="/idea-bank/{{ idea.id }}/hooks" class="btn btn-orange btn-xs">✏️ Write Script</a>
+      {% elif idea.status == 'scripted' %}
+      <a href="/scripts" class="btn btn-secondary btn-xs">📝 View Script</a>
+      {% else %}
+      <a href="/idea-bank/{{ idea.id }}/hooks" class="btn btn-ghost btn-xs">⚡ Forge Hooks</a>
+      {% endif %}
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endif %}
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+function filterPillar(pillar, btn) {
+  // Update active button
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+
+  // Filter cards
+  document.querySelectorAll('.idea-card').forEach(card => {
+    if (pillar === 'all' || card.dataset.pillar === pillar) {
+      card.style.display = '';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+}
+
+function toggleSeeds(id) {
+  const el = document.getElementById('seeds-' + id);
+  const btn = document.getElementById('seedtoggle-' + id);
+  if (el.style.display === 'none') {
+    el.style.display = 'block';
+    btn.textContent = '🌱 Hide Seeds';
+  } else {
+    el.style.display = 'none';
+    btn.textContent = '🌱 Seeds';
+  }
+}
+
+document.getElementById('genIdeasBtn')?.closest('form').addEventListener('submit', function() {
+  const btn = document.getElementById('genIdeasBtn');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner-sm"></span> Generating 30 ideas...';
+});
+</script>
+{% endblock %}

@@ -1,0 +1,228 @@
+{% extends "base.html" %}
+{% block title %}Teleprompter · {{ script.title }}{% endblock %}
+
+{% block full_page %}
+<div class="teleprompter-wrap">
+  <!-- Controls bar -->
+  <div class="tp-controls" id="tpControls">
+    <a href="/scripts" class="tp-back">← Back</a>
+    <div class="tp-title">{{ script.title }}</div>
+    <div class="tp-speed-group">
+      <span class="tp-label">SPEED</span>
+      <button class="tp-speed-btn" onclick="setSpeed('slow')">Slow</button>
+      <button class="tp-speed-btn tp-speed-active" id="speedMed" onclick="setSpeed('medium')">Med</button>
+      <button class="tp-speed-btn" onclick="setSpeed('fast')">Fast</button>
+    </div>
+    <div class="tp-timer" id="tpTimer">0:00</div>
+    <button class="tp-play-btn" id="tpPlayBtn" onclick="toggleScroll()">▶ Start</button>
+    <button class="tp-reset-btn" onclick="resetScroll()">↩ Reset</button>
+  </div>
+
+  <!-- Script content -->
+  <div class="tp-content" id="tpContent">
+    <!-- HOOK section -->
+    <div class="tp-section">
+      <div class="tp-section-label tp-hook-label">HOOK</div>
+      <div class="tp-text tp-hook-text" id="hookText">
+        {{ script.hook | replace('...', '<span class="tp-pause">...</span>') | safe }}
+      </div>
+    </div>
+
+    <div class="tp-divider"></div>
+
+    <!-- BODY section -->
+    <div class="tp-section">
+      <div class="tp-section-label tp-body-label">BODY</div>
+      <div class="tp-text tp-body-text" id="bodyText">
+        {{ script.body | replace('...', '<span class="tp-pause">...</span>') | safe }}
+      </div>
+    </div>
+
+    <div class="tp-divider"></div>
+
+    <!-- CTA section -->
+    <div class="tp-section">
+      <div class="tp-section-label tp-cta-label">CTA</div>
+      <div class="tp-text tp-cta-text" id="ctaText">
+        {{ script.cta | replace('...', '<span class="tp-pause">...</span>') | safe }}
+      </div>
+    </div>
+
+    <div class="tp-end-spacer"></div>
+  </div>
+
+  <!-- Progress bar -->
+  <div class="tp-progress-bar">
+    <div class="tp-progress-fill" id="tpProgress"></div>
+  </div>
+</div>
+
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #0a0a0a; color: #fff; font-family: 'Inter', sans-serif; overflow: hidden; height: 100vh; }
+
+  .teleprompter-wrap { display: flex; flex-direction: column; height: 100vh; background: #0a0a0a; }
+
+  /* Controls */
+  .tp-controls {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 20px; background: #141414; border-bottom: 1px solid #222;
+    flex-shrink: 0; flex-wrap: wrap;
+  }
+  .tp-back { color: #f97316; text-decoration: none; font-size: 14px; font-weight: 600; white-space: nowrap; }
+  .tp-back:hover { color: #fb923c; }
+  .tp-title { flex: 1; color: #888; font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+  .tp-speed-group { display: flex; align-items: center; gap: 6px; }
+  .tp-label { color: #555; font-size: 11px; font-weight: 600; text-transform: uppercase; }
+  .tp-speed-btn {
+    background: #222; color: #aaa; border: 1px solid #333;
+    border-radius: 6px; padding: 5px 12px; font-size: 13px; cursor: pointer;
+    transition: all .15s;
+  }
+  .tp-speed-btn:hover { background: #333; color: #fff; }
+  .tp-speed-active { background: #f97316 !important; color: #fff !important; border-color: #f97316 !important; }
+  .tp-timer { color: #f97316; font-size: 18px; font-weight: 700; font-variant-numeric: tabular-nums; min-width: 50px; text-align: center; }
+  .tp-play-btn {
+    background: #f97316; color: #fff; border: none; border-radius: 8px;
+    padding: 8px 20px; font-size: 14px; font-weight: 700; cursor: pointer;
+    transition: all .15s; white-space: nowrap;
+  }
+  .tp-play-btn:hover { background: #fb923c; }
+  .tp-reset-btn {
+    background: #222; color: #888; border: 1px solid #333;
+    border-radius: 8px; padding: 8px 14px; font-size: 13px; cursor: pointer;
+  }
+  .tp-reset-btn:hover { background: #333; color: #fff; }
+
+  /* Script content */
+  .tp-content {
+    flex: 1; overflow-y: auto; padding: 60px 40px 40px;
+    scroll-behavior: smooth;
+  }
+  @media (max-width: 600px) {
+    .tp-content { padding: 40px 20px 20px; }
+  }
+
+  .tp-section { margin-bottom: 50px; }
+  .tp-section-label {
+    font-size: 13px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 2px; margin-bottom: 20px; padding: 4px 12px;
+    display: inline-block; border-radius: 4px;
+  }
+  .tp-hook-label { background: rgba(234,179,8,.15); color: #eab308; }
+  .tp-body-label { background: rgba(255,255,255,.08); color: #ccc; }
+  .tp-cta-label { background: rgba(34,197,94,.15); color: #22c55e; }
+
+  .tp-text { font-size: 56px; line-height: 1.4; font-weight: 600; }
+  @media (max-width: 900px) { .tp-text { font-size: 40px; } }
+  @media (max-width: 600px) { .tp-text { font-size: 30px; } }
+
+  .tp-hook-text { color: #eab308; }
+  .tp-body-text { color: #ffffff; }
+  .tp-cta-text { color: #22c55e; }
+
+  .tp-pause { color: #f97316; font-weight: 800; }
+
+  .tp-divider { height: 1px; background: #1a1a1a; margin: 30px 0; }
+  .tp-end-spacer { height: 60vh; }
+
+  /* Progress bar */
+  .tp-progress-bar { height: 3px; background: #1a1a1a; flex-shrink: 0; }
+  .tp-progress-fill { height: 100%; background: #f97316; width: 0%; transition: width .5s; }
+</style>
+{% endblock %}
+
+{% block scripts %}
+<script>
+const content = document.getElementById('tpContent');
+const playBtn = document.getElementById('tpPlayBtn');
+const timerEl = document.getElementById('tpTimer');
+const progressEl = document.getElementById('tpProgress');
+
+let scrolling = false;
+let scrollInterval = null;
+let timerInterval = null;
+let elapsed = 0;
+let speed = 'medium'; // slow=1, medium=2, fast=3.5
+
+const speeds = { slow: 1, medium: 2, fast: 3.5 };
+
+function setSpeed(s) {
+  speed = s;
+  document.querySelectorAll('.tp-speed-btn').forEach(b => b.classList.remove('tp-speed-active'));
+  const map = { slow: 0, medium: 1, fast: 2 };
+  document.querySelectorAll('.tp-speed-btn')[map[s]]?.classList.add('tp-speed-active');
+  if (scrolling) {
+    clearInterval(scrollInterval);
+    startScrollInterval();
+  }
+}
+
+function startScrollInterval() {
+  const px = speeds[speed];
+  scrollInterval = setInterval(() => {
+    content.scrollTop += px;
+    updateProgress();
+    // Stop at bottom
+    if (content.scrollTop + content.clientHeight >= content.scrollHeight - 10) {
+      stopScroll();
+      playBtn.textContent = '✓ Done';
+    }
+  }, 16); // ~60fps
+}
+
+function startTimer() {
+  timerInterval = setInterval(() => {
+    elapsed++;
+    const m = Math.floor(elapsed / 60);
+    const s = elapsed % 60;
+    timerEl.textContent = m + ':' + String(s).padStart(2, '0');
+  }, 1000);
+}
+
+function toggleScroll() {
+  if (scrolling) {
+    stopScroll();
+  } else {
+    startScroll();
+  }
+}
+
+function startScroll() {
+  scrolling = true;
+  playBtn.textContent = '⏸ Pause';
+  startScrollInterval();
+  if (!timerInterval) startTimer();
+}
+
+function stopScroll() {
+  scrolling = false;
+  playBtn.textContent = '▶ Resume';
+  clearInterval(scrollInterval);
+  scrollInterval = null;
+}
+
+function resetScroll() {
+  stopScroll();
+  clearInterval(timerInterval);
+  timerInterval = null;
+  elapsed = 0;
+  timerEl.textContent = '0:00';
+  content.scrollTop = 0;
+  progressEl.style.width = '0%';
+  playBtn.textContent = '▶ Start';
+}
+
+function updateProgress() {
+  const max = content.scrollHeight - content.clientHeight;
+  const pct = max > 0 ? (content.scrollTop / max * 100) : 0;
+  progressEl.style.width = pct + '%';
+}
+
+// Tap to play/pause on mobile
+content.addEventListener('click', toggleScroll);
+
+// Keep controls visible on scroll but fade slightly
+content.addEventListener('scroll', updateProgress);
+</script>
+{% endblock %}

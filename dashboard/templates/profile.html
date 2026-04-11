@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+{% block title %}Creator Profile · Ray's Content Engine{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div class="page-header-left">
+    <h1 class="page-title">Creator Profile</h1>
+    <p class="page-subtitle">Ray's brand identity and story</p>
+  </div>
+</div>
+
+<div class="profile-layout">
+  <form method="post" action="/profile" class="profile-form">
+    <div class="form-card">
+      <h3 class="form-card-title">Identity</h3>
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Name *</label>
+          <input type="text" name="name" class="form-input" value="{{ profile.name if profile else 'Ray Ahmadi' }}" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Instagram</label>
+          <input type="text" name="instagram" class="form-input" placeholder="@handle"
+            value="{{ profile.instagram or '' }}">
+        </div>
+        <div class="form-group">
+          <label class="form-label">TikTok</label>
+          <input type="text" name="tiktok" class="form-input" placeholder="@handle"
+            value="{{ profile.tiktok or '' }}">
+        </div>
+        <div class="form-group">
+          <label class="form-label">YouTube</label>
+          <input type="text" name="youtube" class="form-input" placeholder="@handle"
+            value="{{ profile.youtube or '' }}">
+        </div>
+        <div class="form-group">
+          <label class="form-label">LinkedIn</label>
+          <input type="text" name="linkedin" class="form-input" placeholder="URL or handle"
+            value="{{ profile.linkedin or '' }}">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Bio / Tagline</label>
+        <textarea name="bio" class="form-textarea" rows="3"
+          placeholder="Licensed real estate broker + mortgage professional in the GTA...">{{ profile.bio if profile and profile.bio else '' }}</textarea>
+      </div>
+    </div>
+
+    <div class="form-card">
+      <h3 class="form-card-title">GTA Markets</h3>
+      <p class="form-hint">Comma-separated cities you work in. These get referenced in every script.</p>
+      <div class="form-group">
+        <input type="text" name="gta_markets" class="form-input"
+          value="{{ (profile.markets_list()|join(', ')) if profile else 'Brampton, Vaughan, Mississauga, Markham, Oakville, Richmond Hill, Scarborough, North York, Toronto' }}"
+          placeholder="Brampton, Vaughan, Mississauga...">
+      </div>
+    </div>
+
+    <div class="form-card">
+      <h3 class="form-card-title">Story Elements</h3>
+      <p class="form-hint">Key life events (one per line). These are baked into every prompt so Claude references real events.</p>
+      <div class="form-group">
+        <textarea name="story_elements" class="form-textarea" rows="10"
+          placeholder="Born Afghanistan mid-1990s during Taliban occupation&#10;Family fled through wilderness in back of truck&#10;18 months in Peshawar — no school, no documents...">{% if profile and profile.story_elements_list() %}{% for s in profile.story_elements_list() %}{{ s }}
+{% endfor %}{% else %}Born Afghanistan mid-1990s during Taliban occupation
+Family fled through wilderness in back of truck across Afghan-Pakistan border
+18 months in Peshawar — no school, no documents
+Father left alone for Russia
+Two-week illegal bus journey to Moscow — fake passports, warned to stay silent
+Arrived Moscow August 23, 2000
+Father rebuilt from roadside table → store → factory in China → importing business
+Became wealthy in Russia — but brutal racism, police bribes, "get out of our country"
+Canada decision 2006, waited 3 years for permission
+Arrived Pearson International Airport, Toronto, October 13, 2009
+Built real estate and mortgage career from zero in Canada{% endif %}</textarea>
+      </div>
+    </div>
+
+    <div class="form-card">
+      <h3 class="form-card-title">7 Signature Themes</h3>
+      <p class="form-hint">Each theme on a new line as: THEME NAME: description</p>
+      <div class="form-group">
+        <textarea name="themes" class="form-textarea" rows="10">{% if profile and profile.themes_list() %}{% for t in profile.themes_list() %}{{ t }}
+{% endfor %}{% else %}SAFETY AS PRIVILEGE: Grew up hiding from bombs. A home means safety in a way most people will never understand.
+STARTING OVER IS SURVIVABLE: Father rebuilt from zero twice. Market crashes mean nothing.
+MONEY ≠ HAPPINESS: Russia gave wealth but stripped dignity. A home is more than a number.
+HUSTLE FROM NOTHING: A roadside table became a factory in China. Every client journey starts small.
+OUTSIDER ADVANTAGE: Knows what it's like to be told "you don't belong." Fights for buyers others overlook.
+PATIENCE UNDER PRESSURE: Waited 3 years for Canada. Can wait out any volatile market.
+FAMILY IS THE WHY: Father risked death for family's safety. Every deal carries that weight.{% endif %}</textarea>
+      </div>
+    </div>
+
+    <div class="form-actions form-actions-bottom">
+      <button type="submit" class="btn btn-primary btn-lg">Save Profile</button>
+    </div>
+  </form>
+
+  <!-- Story preview panel -->
+  <div class="profile-sidebar">
+    <div class="sidebar-card">
+      <h3 class="sidebar-card-title">Ray's Story</h3>
+      <div class="story-arc">
+        <div class="arc-step">
+          <div class="arc-dot"></div>
+          <div class="arc-content">
+            <div class="arc-label">Afghanistan, mid-1990s</div>
+            <p class="arc-text">Born during Taliban occupation. Hid in cellars while bombs fell.</p>
+          </div>
+        </div>
+        <div class="arc-step">
+          <div class="arc-dot"></div>
+          <div class="arc-content">
+            <div class="arc-label">Peshawar, Pakistan</div>
+            <p class="arc-text">18 months. No school. No documents. Father left alone for Russia.</p>
+          </div>
+        </div>
+        <div class="arc-step">
+          <div class="arc-dot"></div>
+          <div class="arc-content">
+            <div class="arc-label">Moscow, Aug 23, 2000</div>
+            <p class="arc-text">Illegal bus journey through wilderness. Fake passports. Warned to stay silent. Father had lost weight.</p>
+          </div>
+        </div>
+        <div class="arc-step">
+          <div class="arc-dot"></div>
+          <div class="arc-content">
+            <div class="arc-label">Russia → Wealth → Racism</div>
+            <p class="arc-text">Roadside table → factory in China. Became wealthy. "Get out of our country." Money without dignity.</p>
+          </div>
+        </div>
+        <div class="arc-step">
+          <div class="arc-dot arc-dot-final"></div>
+          <div class="arc-content">
+            <div class="arc-label">Toronto, Oct 13, 2009</div>
+            <p class="arc-text">Waited 3 years. Arrived Pearson Airport. Tears and smiles. Built real estate career from zero.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

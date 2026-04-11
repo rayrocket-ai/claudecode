@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% block title %}Scripts · Ray's Content Engine{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div class="page-header-left">
+    <h1 class="page-title">Scripts</h1>
+    <p class="page-subtitle">{{ scripts|length }} script{{ 's' if scripts|length != 1 else '' }}</p>
+  </div>
+  <div class="page-header-right">
+    <form method="post" action="/generate">
+      <button type="submit" class="btn btn-primary">⚡ Generate New Batch</button>
+    </form>
+  </div>
+</div>
+
+{% if not scripts %}
+<div class="empty-state">
+  <div class="empty-icon">📝</div>
+  <h2 class="empty-title">No scripts yet</h2>
+  <p class="empty-text">Generate your first batch from the dashboard.</p>
+  <a href="/" class="btn btn-primary">Go to Dashboard</a>
+</div>
+{% else %}
+
+<div class="scripts-list">
+  {% for script in scripts %}
+  <div class="script-row">
+    <div class="script-row-meta">
+      <span class="type-badge type-{{ script.script_type }}">{{ script.script_type.replace('_', ' ').title() }}</span>
+      <span class="platform-badge">{{ script.platform }}</span>
+      <span class="duration-badge">~{{ script.estimated_duration_seconds }}s</span>
+      <span class="date-label">{{ script.created_at.strftime('%b %d') }}</span>
+    </div>
+
+    <h3 class="script-row-title">{{ script.title }}</h3>
+
+    <div class="script-hook-row">
+      <span class="hook-label">HOOK</span>
+      <p class="hook-text-sm">{{ script.hook }}</p>
+    </div>
+
+    <div class="script-body-preview" id="body-{{ script.id }}" style="display:none;">
+      <div class="preview-col">
+        <div class="preview-section">
+          <span class="section-label body-label">BODY</span>
+          <p class="preview-text">{{ script.body }}</p>
+        </div>
+        <div class="preview-section">
+          <span class="section-label cta-label">CTA</span>
+          <p class="preview-text">{{ script.cta }}</p>
+        </div>
+        {% if script.caption %}
+        <div class="preview-section">
+          <span class="section-label">CAPTION</span>
+          <p class="preview-text caption-text">{{ script.caption }}</p>
+        </div>
+        {% endif %}
+        {% if script.hashtags %}
+        <p class="hashtags">{{ script.hashtags }}</p>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="script-row-actions">
+      <button class="btn btn-ghost btn-xs" onclick="toggleBody({{ script.id }})">
+        <span id="bodytoggle-{{ script.id }}">👁 Expand</span>
+      </button>
+      <a href="/scripts/{{ script.id }}/teleprompter" class="btn btn-orange btn-xs">🎤 Teleprompter</a>
+      <form method="post" action="/scripts/{{ script.id }}/regenerate" style="display:inline;">
+        <button type="submit" class="btn btn-ghost btn-xs">🔄 Regen</button>
+      </form>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+{% endif %}
+{% endblock %}
+
+{% block scripts %}
+<script>
+function toggleBody(id) {
+  const body = document.getElementById('body-' + id);
+  const btn = document.getElementById('bodytoggle-' + id);
+  if (body.style.display === 'none') {
+    body.style.display = 'block';
+    btn.textContent = '▲ Collapse';
+  } else {
+    body.style.display = 'none';
+    btn.textContent = '👁 Expand';
+  }
+}
+</script>
+{% endblock %}

@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+{% block title %}Dashboard · Ray's Content Engine{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div class="page-header-left">
+    <h1 class="page-title">Today's Content</h1>
+    <p class="page-subtitle">{{ today_date }}</p>
+  </div>
+  <div class="page-header-right">
+    {% if not has_today_batch %}
+    <form method="post" action="/generate">
+      <button type="submit" class="btn btn-primary btn-lg" id="generateBtn">
+        <span class="btn-icon">⚡</span>
+        Generate Today's Scripts
+      </button>
+    </form>
+    {% else %}
+    <div class="batch-status">
+      <span class="status-dot status-{{ batch.status }}"></span>
+      <span>{{ scripts|length }} scripts ready</span>
+    </div>
+    {% endif %}
+  </div>
+</div>
+
+{% if not has_today_batch %}
+<div class="empty-state">
+  <div class="empty-icon">🎬</div>
+  <h2 class="empty-title">No content yet today</h2>
+  <p class="empty-text">Generate 7 scripts with a mix of GTA market, mortgage, personal story, client wins, and trending topics — all tailored to Ray's brand.</p>
+  <form method="post" action="/generate">
+    <button type="submit" class="btn btn-primary btn-xl" id="generateBtn2">
+      <span class="btn-icon">⚡</span>
+      Generate Today's Scripts
+    </button>
+  </form>
+  <p class="empty-note">Takes ~30-60 seconds. Claude writes, edits, and density-checks all 7 scripts.</p>
+</div>
+
+{% else %}
+
+{% if batch.status == 'generating' %}
+<div class="generating-banner">
+  <div class="spinner"></div>
+  <span>Generating scripts... refresh in a moment.</span>
+</div>
+{% endif %}
+
+{% if batch.status == 'failed' %}
+<div class="error-banner">
+  ❌ Generation failed. <a href="/generate" class="link-orange">Try again</a>
+</div>
+{% endif %}
+
+<div class="scripts-grid">
+  {% for script in scripts %}
+  <div class="script-card" data-id="{{ script.id }}">
+    <div class="script-card-header">
+      <span class="type-badge type-{{ script.script_type }}">{{ script.script_type.replace('_', ' ').title() }}</span>
+      <span class="platform-badge">{{ script.platform }}</span>
+      <span class="duration-badge">~{{ script.estimated_duration_seconds }}s</span>
+    </div>
+
+    <h3 class="script-card-title">{{ script.title }}</h3>
+
+    <div class="script-hook">
+      <span class="hook-label">HOOK</span>
+      <p class="hook-text">{{ script.hook }}</p>
+    </div>
+
+    <div class="script-preview" id="preview-{{ script.id }}" style="display:none;">
+      <div class="preview-section">
+        <span class="section-label body-label">BODY</span>
+        <p class="preview-text">{{ script.body }}</p>
+      </div>
+      <div class="preview-section">
+        <span class="section-label cta-label">CTA</span>
+        <p class="preview-text">{{ script.cta }}</p>
+      </div>
+      {% if script.caption %}
+      <div class="preview-section">
+        <span class="section-label">CAPTION</span>
+        <p class="preview-text caption-text">{{ script.caption }}</p>
+      </div>
+      {% endif %}
+      {% if script.hashtags %}
+      <p class="hashtags">{{ script.hashtags }}</p>
+      {% endif %}
+    </div>
+
+    <div class="script-card-actions">
+      <button class="btn btn-ghost btn-sm" onclick="togglePreview({{ script.id }})">
+        <span id="toggle-{{ script.id }}">👁 Expand</span>
+      </button>
+      <a href="/scripts/{{ script.id }}/teleprompter" class="btn btn-orange btn-sm">
+        🎤 Teleprompter
+      </a>
+      <form method="post" action="/scripts/{{ script.id }}/regenerate" style="display:inline;">
+        <button type="submit" class="btn btn-ghost btn-sm">🔄 Regen</button>
+      </form>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+<div class="dash-footer-actions">
+  <a href="/scripts" class="btn btn-secondary">View All Scripts →</a>
+  <a href="/idea-bank" class="btn btn-ghost">💡 Idea Bank</a>
+</div>
+{% endif %}
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+function togglePreview(id) {
+  const preview = document.getElementById('preview-' + id);
+  const toggle = document.getElementById('toggle-' + id);
+  if (preview.style.display === 'none') {
+    preview.style.display = 'block';
+    toggle.textContent = '▲ Collapse';
+  } else {
+    preview.style.display = 'none';
+    toggle.textContent = '👁 Expand';
+  }
+}
+
+// Show loading state on generate
+document.querySelectorAll('#generateBtn, #generateBtn2').forEach(btn => {
+  btn.closest('form').addEventListener('submit', () => {
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner-sm"></span> Generating...';
+  });
+});
+</script>
+{% endblock %}

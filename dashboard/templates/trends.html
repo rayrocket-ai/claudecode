@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Trending · Ray's Content Engine{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div class="page-header-left">
+    <h1 class="page-title">Trending Now</h1>
+    <p class="page-subtitle">GTA real estate & mortgage news</p>
+  </div>
+  <div class="page-header-right">
+    <a href="/trends?refresh=1" class="btn btn-secondary">🔄 Refresh</a>
+  </div>
+</div>
+
+{% if not items %}
+<div class="empty-state">
+  <div class="empty-icon">📈</div>
+  <h2 class="empty-title">No trending items</h2>
+  <p class="empty-text">RSS feeds couldn't be reached. Using fallback items for generation.</p>
+</div>
+{% else %}
+
+<div class="trends-list">
+  {% for item in items %}
+  <div class="trend-card trend-{{ item.category }}">
+    <div class="trend-meta">
+      <span class="trend-category">{{ item.category.replace('_', ' ').upper() }}</span>
+      <span class="trend-source">{{ item.source }}</span>
+    </div>
+    <h3 class="trend-title">
+      {% if item.link and item.link != '#' %}
+      <a href="{{ item.link }}" target="_blank" rel="noopener" class="trend-link">{{ item.title }}</a>
+      {% else %}
+      {{ item.title }}
+      {% endif %}
+    </h3>
+    {% if item.summary %}
+    <p class="trend-summary">{{ item.summary[:300] }}{% if item.summary|length > 300 %}...{% endif %}</p>
+    {% endif %}
+  </div>
+  {% endfor %}
+</div>
+
+{% endif %}
+
+{% endblock %}

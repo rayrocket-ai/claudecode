@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+{% block title %}Forge Hooks · Ray's Content Engine{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div class="page-header-left">
+    <a href="/idea-bank" class="back-link">← Idea Bank</a>
+    <h1 class="page-title">Forge Hooks</h1>
+    <p class="page-subtitle">{{ idea.core_story[:100] }}...</p>
+  </div>
+  <div class="page-header-right">
+    <form method="post" action="/idea-bank/{{ idea.id }}/hooks">
+      <input type="hidden" name="action" value="forge">
+      <button type="submit" class="btn btn-secondary" id="reforgeBtn">🔄 Re-forge</button>
+    </form>
+  </div>
+</div>
+
+{% if not hooks %}
+<div class="empty-state">
+  <div class="empty-icon">⚡</div>
+  <h2 class="empty-title">No hooks yet</h2>
+  <p class="empty-text">Generate 3 hook variations for this idea. Each is scored on scroll-stop power, curiosity, specificity, and authenticity.</p>
+  <form method="post" action="/idea-bank/{{ idea.id }}/hooks">
+    <input type="hidden" name="action" value="forge">
+    <button type="submit" class="btn btn-primary btn-xl">⚡ Forge 3 Hooks</button>
+  </form>
+</div>
+{% else %}
+
+<div class="hooks-grid">
+  {% for hook in hooks %}
+  <div class="hook-card {% if hook.chosen %}hook-chosen{% endif %}">
+    <div class="hook-card-header">
+      <span class="hook-type-badge hook-{{ hook.hook_type }}">{{ hook.hook_type.title() }}</span>
+      <span class="composite-score">⭐ {{ hook.composite_score() }}/10</span>
+      {% if hook.chosen %}
+      <span class="chosen-badge">✓ Chosen</span>
+      {% endif %}
+    </div>
+
+    <p class="hook-card-text">{{ hook.hook_text }}</p>
+
+    <div class="hook-scores">
+      <div class="score-row">
+        <span class="score-label">Scroll Stop</span>
+        <div class="score-bar"><div class="score-fill" style="width: {{ hook.scroll_stop_score * 10 }}%"></div></div>
+        <span class="score-val">{{ hook.scroll_stop_score }}/10</span>
+      </div>
+      <div class="score-row">
+        <span class="score-label">Curiosity</span>
+        <div class="score-bar"><div class="score-fill score-fill-blue" style="width: {{ hook.curiosity_score * 10 }}%"></div></div>
+        <span class="score-val">{{ hook.curiosity_score }}/10</span>
+      </div>
+      <div class="score-row">
+        <span class="score-label">Specificity</span>
+        <div class="score-bar"><div class="score-fill score-fill-green" style="width: {{ hook.specificity_score * 10 }}%"></div></div>
+        <span class="score-val">{{ hook.specificity_score }}/10</span>
+      </div>
+      <div class="score-row">
+        <span class="score-label">Authentic</span>
+        <div class="score-bar"><div class="score-fill score-fill-purple" style="width: {{ hook.authenticity_score * 10 }}%"></div></div>
+        <span class="score-val">{{ hook.authenticity_score }}/10</span>
+      </div>
+    </div>
+
+    <div class="hook-card-actions">
+      {% if not hook.chosen %}
+      <form method="post" action="/idea-bank/{{ idea.id }}/hooks">
+        <input type="hidden" name="action" value="write_script">
+        <input type="hidden" name="hook_id" value="{{ hook.id }}">
+        <button type="submit" class="btn btn-primary btn-sm" id="writeBtn-{{ hook.id }}">
+          📝 Choose & Write Script
+        </button>
+      </form>
+      {% else %}
+      <a href="/scripts" class="btn btn-secondary btn-sm">📝 View Scripts</a>
+      {% endif %}
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+<div class="idea-detail-card">
+  <h3 class="detail-title">Idea Detail</h3>
+  <div class="detail-grid">
+    <div>
+      <div class="detail-label">Core Story</div>
+      <p class="detail-text">{{ idea.core_story }}</p>
+    </div>
+    {% if idea.viral_angle %}
+    <div>
+      <div class="detail-label">Viral Angle</div>
+      <p class="detail-text">{{ idea.viral_angle }}</p>
+    </div>
+    {% endif %}
+    {% if idea.hook_seeds_list() %}
+    <div>
+      <div class="detail-label">Hook Seeds</div>
+      {% for seed in idea.hook_seeds_list() %}
+      <p class="detail-text seed-text">• {{ seed }}</p>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+</div>
+{% endif %}
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.querySelectorAll('[id^="writeBtn-"]').forEach(btn => {
+  btn.closest('form').addEventListener('submit', function() {
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner-sm"></span> Writing script...';
+  });
+});
+</script>
+{% endblock %}

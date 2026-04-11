@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Ray's Content Engine{% endblock %}</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  {% block full_page %}
+  <nav class="navbar">
+    <a href="/" class="nav-brand">
+      <span class="nav-logo">🎬</span>
+      <span class="nav-title">Content Engine</span>
+    </a>
+    <div class="nav-links">
+      <a href="/" class="nav-link {% if active_page == 'dashboard' %}active{% endif %}">Dashboard</a>
+      <a href="/scripts" class="nav-link {% if active_page == 'scripts' %}active{% endif %}">Scripts</a>
+      <a href="/idea-bank" class="nav-link {% if active_page == 'ideas' %}active{% endif %}">Idea Bank</a>
+      <a href="/stories" class="nav-link {% if active_page == 'stories' %}active{% endif %}">Stories</a>
+      <a href="/profile" class="nav-link {% if active_page == 'profile' %}active{% endif %}">Profile</a>
+      <a href="/trends" class="nav-link {% if active_page == 'trends' %}active{% endif %}">Trends</a>
+    </div>
+    <button class="nav-toggle" onclick="toggleNav()" aria-label="Menu">☰</button>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="/" class="mobile-link">🏠 Dashboard</a>
+    <a href="/scripts" class="mobile-link">📝 Scripts</a>
+    <a href="/idea-bank" class="mobile-link">💡 Idea Bank</a>
+    <a href="/stories" class="mobile-link">📖 Stories</a>
+    <a href="/profile" class="mobile-link">👤 Profile</a>
+    <a href="/trends" class="mobile-link">📈 Trends</a>
+  </div>
+
+  <main class="main-content">
+    {% if flash_message %}
+    <div class="flash flash-{{ flash_type or 'info' }}">{{ flash_message }}</div>
+    {% endif %}
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="footer">
+    <p>Ray Ahmadi · GTA Real Estate & Mortgage · Content Engine</p>
+  </footer>
+  {% endblock %}
+
+  <script>
+    function toggleNav() {
+      const menu = document.getElementById('mobileMenu');
+      menu.classList.toggle('open');
+    }
+
+    // Auto-dismiss flash messages
+    const flash = document.querySelector('.flash');
+    if (flash) {
+      setTimeout(() => flash.style.opacity = '0', 4000);
+      setTimeout(() => flash.remove(), 4500);
+    }
+  </script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

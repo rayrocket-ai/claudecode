@@ -1,0 +1,150 @@
+{% extends "base.html" %}
+{% block title %}Client Stories · Ray's Content Engine{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div class="page-header-left">
+    <h1 class="page-title">Client Stories</h1>
+    <p class="page-subtitle">{{ stories|length }} stor{{ 'ies' if stories|length != 1 else 'y' }}</p>
+  </div>
+  <div class="page-header-right">
+    <button class="btn btn-primary" onclick="toggleForm()">+ Add Story</button>
+  </div>
+</div>
+
+<!-- Add Story Form -->
+<div class="add-story-form" id="addStoryForm" style="display:none;">
+  <h3 class="form-title">Add Client Story</h3>
+  <form method="post" action="/stories" class="story-form">
+    <div class="form-grid">
+      <div class="form-group">
+        <label class="form-label">Title *</label>
+        <input type="text" name="title" class="form-input" placeholder="e.g. Sara — single mom, dream home in Brampton" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Category *</label>
+        <select name="category" class="form-input" required>
+          <option value="">Select category...</option>
+          <option value="win">Win</option>
+          <option value="loss">Loss / Lesson</option>
+          <option value="turnaround">Turnaround</option>
+          <option value="first_time_buyer">First-Time Buyer</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Narrative *</label>
+      <textarea name="narrative" class="form-textarea" rows="4" placeholder="Tell the full story. Who were they? What challenge? What happened? Be specific — Brampton, 3 rejected offers, etc." required></textarea>
+    </div>
+    <div class="form-grid">
+      <div class="form-group">
+        <label class="form-label">Key Lesson</label>
+        <input type="text" name="lesson" class="form-input" placeholder="What's the takeaway?">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Emotional Peak</label>
+        <input type="text" name="emotional_peak" class="form-input" placeholder="The moment that hit hardest">
+      </div>
+    </div>
+    <div class="form-group-inline">
+      <label class="form-check">
+        <input type="checkbox" name="is_scriptable" value="1" checked>
+        <span>Use in scripts</span>
+      </label>
+    </div>
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary">Save Story</button>
+      <button type="button" class="btn btn-ghost" onclick="toggleForm()">Cancel</button>
+    </div>
+  </form>
+</div>
+
+{% if not stories %}
+<div class="empty-state">
+  <div class="empty-icon">📖</div>
+  <h2 class="empty-title">No client stories yet</h2>
+  <p class="empty-text">Add your client stories — wins, lessons, turnarounds. These get woven into scripts to make Ray's content authentic and shareable.</p>
+  <button class="btn btn-primary" onclick="toggleForm()">+ Add First Story</button>
+</div>
+{% else %}
+
+<div class="stories-table-wrap">
+  <table class="stories-table">
+    <thead>
+      <tr>
+        <th>Story</th>
+        <th>Category</th>
+        <th>Used</th>
+        <th>Scriptable</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for story in stories %}
+      <tr class="story-row" onclick="toggleStoryDetail('detail-{{ story.id }}')">
+        <td>
+          <div class="story-title">{{ story.title }}</div>
+          {% if story.lesson %}
+          <div class="story-lesson">{{ story.lesson[:80] }}{% if story.lesson|length > 80 %}...{% endif %}</div>
+          {% endif %}
+        </td>
+        <td>
+          <span class="category-badge cat-{{ story.category }}">
+            {{ story.category.replace('_', ' ').title() }}
+          </span>
+        </td>
+        <td class="times-used">{{ story.times_used }}x</td>
+        <td>
+          {% if story.is_scriptable %}
+          <span class="scriptable-yes">✓</span>
+          {% else %}
+          <span class="scriptable-no">–</span>
+          {% endif %}
+        </td>
+        <td class="story-actions" onclick="event.stopPropagation()">
+          <form method="post" action="/stories/{{ story.id }}/delete" style="display:inline;">
+            <button type="submit" class="btn btn-danger btn-xs"
+              onclick="return confirm('Delete this story?')">Delete</button>
+          </form>
+        </td>
+      </tr>
+      <tr class="story-detail-row" id="detail-{{ story.id }}" style="display:none;">
+        <td colspan="5">
+          <div class="story-detail-content">
+            <div class="detail-section">
+              <div class="detail-label">Narrative</div>
+              <p class="detail-text">{{ story.narrative }}</p>
+            </div>
+            {% if story.emotional_peak %}
+            <div class="detail-section">
+              <div class="detail-label">Emotional Peak</div>
+              <p class="detail-text">{{ story.emotional_peak }}</p>
+            </div>
+            {% endif %}
+          </div>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endif %}
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+function toggleForm() {
+  const form = document.getElementById('addStoryForm');
+  form.style.display = form.style.display === 'none' ? 'block' : 'none';
+  if (form.style.display === 'block') {
+    form.scrollIntoView({ behavior: 'smooth' });
+  }
+}
+
+function toggleStoryDetail(id) {
+  const row = document.getElementById(id);
+  row.style.display = row.style.display === 'none' ? 'table-row' : 'none';
+}
+</script>
+{% endblock %}
