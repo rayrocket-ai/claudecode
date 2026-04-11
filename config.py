@@ -23,7 +23,7 @@ class Settings(BaseSettings):
 
     # AI
     anthropic_api_key: str = ""
-    claude_model: str = "claude-sonnet-4-6"
+    claude_model: str = "claude-haiku-4-5-20251001"
 
     # REALM / TRREB
     realm_username: str = ""
@@ -65,7 +65,7 @@ class Settings(BaseSettings):
     # Dashboard
     dashboard_port: int = 8050
     dashboard_host: str = "0.0.0.0"
-    script_model: str = "claude-sonnet-4-6"
+    script_model: str = "claude-haiku-4-5-20251001"
     scripts_per_day: int = 7
 
     # Derived

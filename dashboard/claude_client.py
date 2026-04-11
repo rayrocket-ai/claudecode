@@ -45,7 +45,7 @@ class ClaudeClient:
     def __init__(self):
         settings = get_settings()
         self._client = anthropic.Anthropic(api_key=settings.anthropic_api_key)
-        self.model = settings.script_model or "claude-sonnet-4-6"
+        self.model = settings.script_model or "claude-haiku-4-5-20251001"
 
     @property
     def model_info(self) -> dict:
