@@ -1,0 +1,180 @@
+{% extends "base.html" %}
+{% block title %}30-Day Idea Bank{% endblock %}
+
+{% block content %}
+<div class="p-6 lg:p-8 max-w-7xl mx-auto">
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
+        <div>
+            <h1 class="text-2xl font-bold text-gray-900">30-Day Idea Bank</h1>
+            <p class="text-gray-500 mt-1">
+                Stage 1 — every idea pinned to a brand pillar, 3 hook variations, platform fit, and viral angle.
+            </p>
+        </div>
+        <div class="flex gap-3">
+            <button onclick="generateIdeaBank(30)" id="generate-btn"
+                class="inline-flex items-center px-5 py-2 bg-gray-900 text-white rounded-lg text-sm font-medium hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                Generate 30-Day Bank
+            </button>
+        </div>
+    </div>
+
+    <!-- Pillar Legend -->
+    <div class="bg-white border border-gray-200 rounded-xl p-5 mb-8">
+        <h3 class="text-sm font-semibold text-gray-900 mb-3">The 6 Brand Pillars</h3>
+        <div class="grid grid-cols-2 lg:grid-cols-3 gap-3">
+            {% for p in pillars %}
+            <div class="flex items-start gap-2 text-xs">
+                <div class="w-2 h-2 rounded-full mt-1.5 flex-shrink-0
+                    {% if p.id == 'authority_expertise' %}bg-blue-500
+                    {% elif p.id == 'behind_scenes' %}bg-purple-500
+                    {% elif p.id == 'client_wins' %}bg-green-500
+                    {% elif p.id == 'market_intel' %}bg-orange-500
+                    {% elif p.id == 'mindset_lifestyle' %}bg-pink-500
+                    {% elif p.id == 'community_culture' %}bg-teal-500
+                    {% else %}bg-gray-500{% endif %}"></div>
+                <div>
+                    <div class="font-medium text-gray-900">{{ p.name }}</div>
+                    <div class="text-gray-500 mt-0.5">{{ p.description }}</div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    {% if batch and batch.status == 'generating' %}
+    <div class="text-center py-20">
+        <div class="inline-flex items-center gap-3 text-gray-500">
+            <svg class="animate-spin h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"/>
+            </svg>
+            <span class="text-lg">Generating 30 ideas...</span>
+        </div>
+    </div>
+
+    {% elif batch and batch.status == 'error' %}
+    <div class="bg-red-50 border border-red-200 rounded-xl p-6 mb-8">
+        <h3 class="font-semibold text-red-800">Generation Failed</h3>
+        <p class="text-red-700 text-sm mt-1">{{ batch.error_message or 'Unknown error.' }}</p>
+        <button onclick="generateIdeaBank(30)" class="mt-3 text-sm font-medium text-red-800 hover:text-red-900">Try Again &rarr;</button>
+    </div>
+
+    {% elif ideas %}
+    <div class="mb-4 text-sm text-gray-500">
+        <strong>{{ batch.label }}</strong> — {{ ideas | length }} ideas generated
+    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+        {% for idea in ideas %}
+        <div class="bg-white border border-gray-200 rounded-xl p-5 hover:shadow-md transition">
+            <!-- Top row: pillar chip + platform + viral angle -->
+            <div class="flex flex-wrap items-center gap-2 mb-3">
+                <span class="inline-flex items-center px-2 py-0.5 rounded-md text-xs font-medium
+                    {% if idea.pillar_id == 'authority_expertise' %}bg-blue-100 text-blue-800
+                    {% elif idea.pillar_id == 'behind_scenes' %}bg-purple-100 text-purple-800
+                    {% elif idea.pillar_id == 'client_wins' %}bg-green-100 text-green-800
+                    {% elif idea.pillar_id == 'market_intel' %}bg-orange-100 text-orange-800
+                    {% elif idea.pillar_id == 'mindset_lifestyle' %}bg-pink-100 text-pink-800
+                    {% elif idea.pillar_id == 'community_culture' %}bg-teal-100 text-teal-800
+                    {% else %}bg-gray-100 text-gray-800{% endif %}">
+                    {{ idea.pillar.name if idea.pillar else idea.pillar_id }}
+                </span>
+                <span class="inline-flex items-center px-2 py-0.5 rounded-md text-xs font-medium bg-gray-100 text-gray-700">
+                    {{ idea.platform_fit | upper }}
+                </span>
+                <span class="inline-flex items-center px-2 py-0.5 rounded-md text-xs font-medium bg-yellow-50 text-yellow-800">
+                    {{ idea.viral_angle | title }}
+                </span>
+                {% if idea.is_personal_brand %}
+                <span class="inline-flex items-center px-2 py-0.5 rounded-md text-xs font-medium bg-indigo-50 text-indigo-700">
+                    Personal Brand
+                </span>
+                {% endif %}
+                {% if idea.target_location %}
+                <span class="text-xs text-gray-500">📍 {{ idea.target_location }}</span>
+                {% endif %}
+            </div>
+
+            <!-- Title -->
+            <h3 class="font-semibold text-gray-900 text-base mb-2">
+                #{{ idea.sort_order }} — {{ idea.title }}
+            </h3>
+
+            <!-- Core Story -->
+            <p class="text-sm text-gray-700 mb-3 leading-relaxed">{{ idea.core_story }}</p>
+
+            <!-- Market Condition Ref -->
+            {% if idea.market_condition_ref %}
+            <div class="bg-orange-50 border-l-2 border-orange-300 px-3 py-2 mb-3 text-xs text-orange-900">
+                📊 {{ idea.market_condition_ref }}
+            </div>
+            {% endif %}
+
+            <!-- Hook Variations -->
+            {% if idea.hook_variations %}
+            <div class="border-t border-gray-100 pt-3 mt-3">
+                <div class="text-xs font-semibold text-gray-500 mb-2">3 HOOKS (first 3 words must stop the scroll):</div>
+                <div class="space-y-2">
+                    {% for hook in idea.hook_variations %}
+                    <div class="flex items-start gap-2">
+                        <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-semibold uppercase
+                            {% if hook.hook_type == 'curiosity' %}bg-blue-100 text-blue-700
+                            {% elif hook.hook_type == 'contrarian' %}bg-red-100 text-red-700
+                            {% else %}bg-green-100 text-green-700{% endif %}">
+                            {{ hook.hook_type }}
+                        </span>
+                        <span class="text-sm text-gray-800 flex-1">{{ hook.hook_text }}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+
+    {% else %}
+    <!-- Empty State -->
+    <div class="text-center py-20 bg-white border border-dashed border-gray-300 rounded-xl">
+        <svg class="mx-auto h-16 w-16 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+        </svg>
+        <h3 class="mt-4 text-lg font-semibold text-gray-900">No idea bank yet</h3>
+        <p class="mt-1 text-sm text-gray-500 max-w-md mx-auto">
+            Click "Generate 30-Day Bank" to create your first idea bank. Each idea will be tagged
+            with a brand pillar, 3 hook variations, platform fit, and viral angle.
+        </p>
+    </div>
+    {% endif %}
+</div>
+
+<script>
+async function generateIdeaBank(numIdeas) {
+    const btn = document.getElementById('generate-btn');
+    btn.disabled = true;
+    btn.innerHTML = '<svg class="animate-spin h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path></svg>Generating...';
+
+    try {
+        const resp = await fetch('/api/idea-bank/generate', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({num_ideas: numIdeas}),
+        });
+        const data = await resp.json();
+        if (data.status === 'success') {
+            showToast(`Generated ${data.idea_count} ideas!`);
+            setTimeout(() => window.location.reload(), 800);
+        } else {
+            showToast('Error: ' + (data.message || 'Unknown'));
+            btn.disabled = false;
+            btn.textContent = 'Generate 30-Day Bank';
+        }
+    } catch (e) {
+        showToast('Error: ' + e.message);
+        btn.disabled = false;
+        btn.textContent = 'Generate 30-Day Bank';
+    }
+}
+</script>
+{% endblock %}

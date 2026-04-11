@@ -3,15 +3,64 @@
 Uses professional copywriting frameworks (PAS, AIDA, Before-After-Bridge),
 storytelling structures (Hero's Journey micro-arcs, Open Loops, Curiosity Gaps),
 and viral content patterns proven on short-form video platforms.
+
+Calibrated specifically for Ray — a licensed GTA real estate broker with a real
+refugee-to-broker arc (Afghanistan → Pakistan → Russia → Canada, Oct 13 2009).
+Every script is engineered at the story level first: a real moment, specific
+detail, vivid scene — not a tip, not a talking head.
 """
 
-SCRIPT_SYSTEM_PROMPT = """You are an elite short-form video scriptwriter — the kind that builds \
-personal brands that go from 0 to 1M followers. You don't write "content." You write MOMENTS. \
-Moments that make someone stop mid-scroll, lean in, feel something, and hit follow.
+# Ray's 7 signature narrative themes extracted from his real story.
+# Every script must lean into at least one of these as its emotional backbone.
+RAY_SIGNATURE_THEMES = """RAY'S 7 SIGNATURE THEMES (every script leans into one):
+1. SAFETY IS A PRIVILEGE, NOT A GIVEN — Ray grew up hiding in a cellar from
+   Taliban rockets. When he helps a family buy a home, he knows what "feeling
+   safe" actually costs.
+2. STARTING OVER IS SURVIVABLE — His father rebuilt twice (Afghanistan → Russia,
+   Russia → Canada). Market crashes, lost deals, rejection — none of it
+   compares. Use this to comfort buyers paralyzed by fear.
+3. MONEY ≠ HAPPINESS — Russia gave them wealth but stripped their dignity.
+   A home is more than a number on a balance sheet.
+4. HUSTLE AT THE SMALLEST SCALE WORKS — His dad turned a roadside table in
+   Moscow into a factory in China. Every client journey starts small.
+5. OUTSIDER PERSPECTIVE = INSIDER ADVANTAGE — Ray knows what it's like to be
+   told "you don't belong." That's why he fights for buyers the system
+   overlooks: newcomers, single parents, first-gen immigrants.
+6. PATIENCE UNDER PRESSURE — He waited 3 years for Canada's approval.
+   He can wait out a volatile GTA market with you.
+7. FAMILY IS THE WHY — His father risked death to get them to safety. Every
+   deal Ray closes carries that same weight. Make the buyer feel it."""
 
-You are writing for a real estate & mortgage professional who wants to become the most trusted, \
-relatable voice in their space. Every script must feel like a real conversation — raw, honest, \
-human. Never corporate. Never salesy. Always real.
+
+SCRIPT_SYSTEM_PROMPT = """You are a viral content strategist who has studied Ryan Serhant, Alex \
+Hormozi, Gary Vee, and every major personal brand that scaled from 0 to millions of followers \
+on short-form video. You don't write "content." You write MOMENTS — real moments, specific \
+details, vivid scenes that make someone stop mid-scroll, lean in, feel something, and hit follow.
+
+You are writing for RAY, a licensed real estate broker in the Greater Toronto Area with 12+ \
+years of experience in residential, investment, pre-construction, and commercial real estate. \
+Ray's origin story is not a marketing hook — it is real. He was born in Afghanistan during the \
+Taliban occupation, escaped through Pakistan, lived 9 years as an unwanted outsider in Moscow, \
+and arrived at Pearson Airport on October 13, 2009 with nothing. Every script must feel like \
+a real conversation Ray is having with a friend — raw, honest, human. Never corporate. Never \
+salesy. Never generic real estate advice. Always hyper-specific to the GTA: Brampton, Vaughan, \
+Mississauga, Markham, Oakville, Richmond Hill, Scarborough, North York.
+
+═══════════════════════════════════════════════
+THE NON-NEGOTIABLE RULES (Hormozi density)
+═══════════════════════════════════════════════
+- EVERY hook must stop the scroll in the first 3 WORDS. Not 3 sentences. 3 WORDS.
+- NO generic real estate advice. Every script names a specific GTA neighbourhood,
+  a specific dollar amount, a specific month, or a specific client type.
+- At least one in three scripts must draw from Ray's personal story (Afghanistan/
+  Pakistan/Russia/Canada arc, family sacrifices, immigrant resilience).
+- Every sentence must earn its place. If you can delete a sentence and the story
+  still works, delete it. Hormozi density.
+- Never use the phrases: "In today's market" / "Let me tell you" / "Did you know" /
+  "As a realtor" / "I'm often asked" / "Without further ado" / "The bottom line".
+  These are scroll-triggers.
+- Every CTA starts a conversation, not a transaction. Comment, DM, save — not
+  "call me today!"
 
 ═══════════════════════════════════════════════
 COPYWRITING FRAMEWORKS YOU MUST USE
@@ -194,36 +243,71 @@ Return a valid JSON array. Each script object must have ALL these fields:
 CRITICAL: Return ONLY the JSON array. No markdown fences, no explanation. Pure JSON."""
 
 
+def _format_client_stories(client_stories: list[dict] | None) -> str:
+    """Format real client stories for injection into prompts."""
+    if not client_stories:
+        return "  (No client stories logged yet — lean harder on Ray's personal story instead.)"
+    lines: list[str] = []
+    for i, story in enumerate(client_stories[:5], start=1):
+        title = story.get("title") or f"Client story #{i}"
+        category = story.get("category", "win")
+        narrative = (story.get("narrative") or "").strip()
+        lesson = (story.get("lesson") or "").strip()
+        peak = (story.get("emotional_peak") or "").strip()
+        lines.append(f"  [{category.upper()}] {title}")
+        if narrative:
+            lines.append(f"    STORY: {narrative[:400]}")
+        if peak:
+            lines.append(f"    PEAK MOMENT: {peak}")
+        if lesson:
+            lines.append(f"    LESSON: {lesson}")
+    return "\n".join(lines)
+
+
+def _format_story_elements(story_elements: dict) -> str:
+    """Format Ray's personal story elements from the profile."""
+    if not story_elements:
+        return ""
+    key_order = [
+        ("origin", "ORIGIN (Afghanistan)"),
+        ("first_escape", "FIRST ESCAPE (Afghan→Pakistan)"),
+        ("pakistan_years", "PAKISTAN (Peshawar, 18 months)"),
+        ("journey_to_russia", "JOURNEY TO RUSSIA"),
+        ("arrival_moscow", "ARRIVAL MOSCOW (Aug 23, 2000)"),
+        ("russia_years", "RUSSIA (9 years, wealth)"),
+        ("russia_racism", "RUSSIA (the racism, the breaking point)"),
+        ("canada_decision", "CANADA DECISION (2006)"),
+        ("canada_arrival", "ARRIVAL TORONTO (Oct 13, 2009)"),
+        ("real_estate_path", "REAL ESTATE PATH"),
+        ("family", "FAMILY"),
+        ("challenges", "CHALLENGES"),
+        ("victories", "VICTORIES"),
+        ("background", "BACKGROUND"),
+    ]
+    parts: list[str] = []
+    for key, label in key_order:
+        val = (story_elements.get(key) or "").strip()
+        if val:
+            parts.append(f"  {label}: {val}")
+    return "\n".join(parts)
+
+
 def build_generation_prompt(
     creator_profile: dict,
     trending_data: dict,
     num_scripts: int = 7,
+    client_stories: list[dict] | None = None,
 ) -> str:
     """Build the user prompt for generating a daily batch of scripts."""
 
     name = creator_profile.get("name", "the creator")
-    location = creator_profile.get("location", "Ontario, Canada")
+    location = creator_profile.get("location", "Greater Toronto Area, Ontario, Canada")
     profession = creator_profile.get("profession", "Real Estate & Mortgage Professional")
     bio = creator_profile.get("bio", "")
     story_elements = creator_profile.get("story_elements", {})
     brand_values = creator_profile.get("brand_values", [])
-
-    # Format story elements
-    story_section = ""
-    if story_elements:
-        parts = []
-        if story_elements.get("family"):
-            parts.append(f"  FAMILY: {story_elements['family']}")
-        if story_elements.get("challenges"):
-            parts.append(f"  CHALLENGES: {story_elements['challenges']}")
-        if story_elements.get("victories"):
-            parts.append(f"  VICTORIES: {story_elements['victories']}")
-        if story_elements.get("travels"):
-            parts.append(f"  TRAVELS: {story_elements['travels']}")
-        if story_elements.get("background"):
-            parts.append(f"  ORIGIN STORY: {story_elements['background']}")
-        if parts:
-            story_section = "\n".join(parts)
+    story_section = _format_story_elements(story_elements)
+    client_stories_section = _format_client_stories(client_stories)
 
     # Format trending data by category
     def format_trends(category: str, limit: int = 5) -> str:
@@ -246,16 +330,16 @@ def build_generation_prompt(
     sports_trends = format_trends("sports")
     general_trends = format_trends("general", limit=8)
 
-    brand_values_str = ", ".join(brand_values) if brand_values else "authenticity, education, family, hard work, community"
-    display_name = (name or "THE CREATOR").upper()
-    bio_text = bio or "A passionate real estate and mortgage professional building a personal brand. Works tirelessly to help families achieve homeownership."
+    brand_values_str = ", ".join(brand_values) if brand_values else "safety, resilience, patience, family, hustle"
+    display_name = (name or "RAY").upper()
+    bio_text = bio or "Licensed real estate broker in the Greater Toronto Area. Afghanistan → Canada 2009."
     default_story = (
-        "  FAMILY: Driven by love for family. Every deal closed, every client helped — it's all for them.\n"
-        "  CHALLENGES: Has faced rejection, doubt, and setbacks but keeps showing up.\n"
-        "  VALUES: Believes everyone deserves a shot at owning a home."
+        "  FAMILY: Driven by love for family. Every deal closed carries his parents' sacrifices.\n"
+        "  CHALLENGES: Survived Taliban war, refugee life in Pakistan, racism in Russia, arriving in Canada at 15 with nothing.\n"
+        "  ORIGIN: Born Afghanistan 1990s, fled to Pakistan, 9 years in Moscow, arrived Toronto Oct 13 2009."
     )
     story_text = story_section or default_story
-    creator_ref = name or "the creator"
+    creator_ref = name or "Ray"
 
     prompt = f"""═══ DAILY SCRIPT GENERATION — {num_scripts} SCRIPTS ═══
 
@@ -266,11 +350,17 @@ Based in: {location}
 Profession: {profession}
 Bio: {bio_text}
 Brand DNA: {brand_values_str}
-Tone: Motivational & Educational — "let me show you" energy. Inspiring but grounded. The friend who happens to be an expert.
+Tone: Grounded, authoritative, personal. The friend who happens to know the GTA market cold. Never a talking head. Never corporate.
 
-{display_name}'S PERSONAL STORY (weave these naturally — a different element in each script):
+{RAY_SIGNATURE_THEMES}
+
+{display_name}'S PERSONAL STORY (rotate these across the {num_scripts} scripts — never repeat the same beat twice in one batch):
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 {story_text}
+
+REAL CLIENT STORIES (pull at least 2 of these into today's batch as proof — be specific, use real details):
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+{client_stories_section}
 
 TODAY'S LIVE TRENDING DATA:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

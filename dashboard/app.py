@@ -16,6 +16,7 @@ from db.operations import init_db
 from dashboard import operations as ops
 from dashboard.scraper import collect_all_trends
 from dashboard.script_engine import get_engine
+from dashboard.pipeline.stage1_idea_bank import get_stage1_generator
 
 logger = logging.getLogger(__name__)
 
@@ -34,10 +35,24 @@ async def startup():
     await init_db()
     # Ensure dashboard models are created
     from db.operations import _engine as db_engine
-    from dashboard.models import CreatorProfile, DailyBatch, VideoScript, TrendingItem
+    from dashboard.models import (
+        CreatorProfile,
+        DailyBatch,
+        VideoScript,
+        TrendingItem,
+        BrandPillar,
+        ClientStory,
+        IdeaBatch,
+        ContentIdea,
+        HookVariation,
+    )
     from db.models import Base
     async with db_engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
+
+    # Seed the 6 brand pillars + ensure Ray's profile exists with real story
+    await ops.seed_brand_pillars()
+    await ops.get_or_create_profile()
 
 
 # ── Template Helpers ──────────────────────────────────────────────────
@@ -123,6 +138,27 @@ async def profile_page(request: Request):
     return templates.TemplateResponse(request, name="profile.html", context=ctx)
 
 
+@app.get("/stories", response_class=HTMLResponse)
+async def stories_page(request: Request):
+    """Client story database — add/edit/tag real wins & turnarounds."""
+    stories = await ops.list_client_stories(scriptable_only=False)
+    ctx = _template_context(stories=stories)
+    return templates.TemplateResponse(request, name="stories.html", context=ctx)
+
+
+@app.get("/idea-bank", response_class=HTMLResponse)
+async def idea_bank_page(request: Request):
+    """Stage 1 — 30-day idea bank review + generation."""
+    latest_batch = await ops.get_latest_idea_batch()
+    pillars = await ops.list_brand_pillars()
+    ctx = _template_context(
+        batch=latest_batch,
+        ideas=latest_batch.ideas if latest_batch else [],
+        pillars=pillars,
+    )
+    return templates.TemplateResponse(request, name="idea_bank.html", context=ctx)
+
+
 @app.get("/trends", response_class=HTMLResponse)
 async def trends_page(request: Request):
     """Today's trending data feed."""
@@ -178,6 +214,10 @@ async def api_generate_scripts(request: Request):
         all_trend_items.extend(category_items)
     await ops.save_trending_items(batch.id, all_trend_items)
 
+    # Pull scriptable client stories (prefer unused first), dict-format for prompt
+    client_stories = await ops.list_client_stories(scriptable_only=True)
+    client_stories_dicts = [ops.client_story_to_dict(s) for s in client_stories[:8]]
+
     # Generate scripts via Claude
     try:
         engine = get_engine()
@@ -185,9 +225,14 @@ async def api_generate_scripts(request: Request):
             target_date=today,
             trending_data=trending_data,
             creator_profile=profile_dict,
+            client_stories=client_stories_dicts,
         )
         await ops.save_scripts(batch.id, scripts_data)
         await ops.update_batch_status(batch.id, "complete")
+
+        # Bump times_used counter on the stories we pulled
+        if client_stories_dicts:
+            await ops.increment_story_usage([s["id"] for s in client_stories_dicts])
 
         return JSONResponse({"status": "success", "batch_id": batch.id, "script_count": len(scripts_data)})
 
@@ -311,6 +356,76 @@ async def api_refresh_trends():
         await ops.save_trending_items(batch.id, all_items)
         return JSONResponse({"status": "success", "item_count": len(all_items)})
     except Exception as e:
+        return JSONResponse({"status": "error", "message": str(e)}, status_code=500)
+
+
+# ── Client Story API ──────────────────────────────────────────────────
+
+@app.post("/api/stories")
+async def api_create_story(request: Request):
+    """Create a new client story."""
+    data = await request.json()
+    story = await ops.create_client_story(data)
+    return JSONResponse({"status": "success", "id": story.id})
+
+
+@app.put("/api/stories/{story_id}")
+async def api_update_story(story_id: str, request: Request):
+    """Update an existing client story."""
+    data = await request.json()
+    story = await ops.update_client_story(story_id, data)
+    if story is None:
+        raise HTTPException(404, "Story not found")
+    return JSONResponse({"status": "success"})
+
+
+@app.delete("/api/stories/{story_id}")
+async def api_delete_story(story_id: str):
+    """Delete a client story."""
+    ok = await ops.delete_client_story(story_id)
+    if not ok:
+        raise HTTPException(404, "Story not found")
+    return JSONResponse({"status": "success"})
+
+
+# ── Stage 1: Idea Bank API ────────────────────────────────────────────
+
+@app.post("/api/idea-bank/generate")
+async def api_generate_idea_bank(request: Request):
+    """Generate a 30-day content idea bank via Stage 1."""
+    body: dict = {}
+    try:
+        body = await request.json()
+    except Exception:
+        body = {}
+    num_ideas = int(body.get("num_ideas") or 30)
+    label = body.get("label") or f"Idea Bank {datetime.utcnow().strftime('%b %d, %Y')}"
+
+    profile = await ops.get_or_create_profile()
+    profile_dict = ops.profile_to_dict(profile)
+
+    stories = await ops.list_client_stories(scriptable_only=True)
+    story_dicts = [ops.client_story_to_dict(s) for s in stories[:10]]
+
+    batch = await ops.create_idea_batch(label=label, num_ideas=num_ideas)
+
+    try:
+        generator = get_stage1_generator()
+        ideas = await generator.generate(
+            creator_profile=profile_dict,
+            client_stories=story_dicts,
+            num_ideas=num_ideas,
+        )
+        await ops.save_content_ideas(batch.id, ideas)
+        await ops.update_idea_batch_status(batch.id, "complete")
+        return JSONResponse({
+            "status": "success",
+            "batch_id": batch.id,
+            "idea_count": len(ideas),
+        })
+    except Exception as e:
+        logger.exception("Idea bank generation failed")
+        await ops.update_idea_batch_status(batch.id, "error", str(e))
         return JSONResponse({"status": "error", "message": str(e)}, status_code=500)
 
 

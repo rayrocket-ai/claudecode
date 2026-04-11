@@ -67,10 +67,16 @@ class ScriptEngine:
         trending_data: dict[str, list[dict]],
         creator_profile: dict,
         num_scripts: int = 7,
+        client_stories: list[dict] | None = None,
     ) -> list[dict[str, Any]]:
         """Generate a full daily batch of scripts."""
 
-        prompt = build_generation_prompt(creator_profile, trending_data, num_scripts)
+        prompt = build_generation_prompt(
+            creator_profile,
+            trending_data,
+            num_scripts,
+            client_stories=client_stories,
+        )
 
         logger.info(f"Generating {num_scripts} scripts for {target_date}")
 

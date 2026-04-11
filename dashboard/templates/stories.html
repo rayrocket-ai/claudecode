@@ -1,0 +1,230 @@
+{% extends "base.html" %}
+{% block title %}Client Stories{% endblock %}
+
+{% block content %}
+<div class="p-6 lg:p-8 max-w-5xl mx-auto">
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
+        <div>
+            <h1 class="text-2xl font-bold text-gray-900">Client Stories</h1>
+            <p class="text-gray-500 mt-1">
+                Real wins, turnarounds, and moments of truth. The AI pulls from these every time it writes a script.
+            </p>
+        </div>
+        <button onclick="openCreateModal()"
+            class="inline-flex items-center px-5 py-2 bg-gray-900 text-white rounded-lg text-sm font-medium hover:bg-gray-800">
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+            Add Client Story
+        </button>
+    </div>
+
+    {% if stories %}
+    <div class="space-y-4">
+        {% for story in stories %}
+        <div class="bg-white border border-gray-200 rounded-xl p-5 hover:shadow-sm transition" id="story-{{ story.id }}">
+            <div class="flex items-start justify-between gap-4">
+                <div class="flex-1">
+                    <div class="flex flex-wrap items-center gap-2 mb-2">
+                        <span class="inline-flex items-center px-2 py-0.5 rounded-md text-xs font-medium
+                            {% if story.category == 'win' %}bg-green-100 text-green-800
+                            {% elif story.category == 'loss' %}bg-red-100 text-red-800
+                            {% elif story.category == 'turnaround' %}bg-purple-100 text-purple-800
+                            {% elif story.category == 'first_time_buyer' %}bg-blue-100 text-blue-800
+                            {% elif story.category == 'mortgage_save' %}bg-yellow-100 text-yellow-800
+                            {% else %}bg-gray-100 text-gray-800{% endif %}">
+                            {{ story.category | replace('_', ' ') | title }}
+                        </span>
+                        {% if story.is_scriptable %}
+                        <span class="inline-flex items-center px-2 py-0.5 rounded-md text-xs font-medium bg-indigo-50 text-indigo-700">
+                            In rotation
+                        </span>
+                        {% endif %}
+                        {% if story.times_used %}
+                        <span class="text-xs text-gray-500">Used {{ story.times_used }}×</span>
+                        {% endif %}
+                    </div>
+                    <h3 class="font-semibold text-gray-900 text-base mb-2">{{ story.title or 'Untitled' }}</h3>
+                    <p class="text-sm text-gray-700 leading-relaxed mb-3">{{ story.narrative }}</p>
+                    {% if story.emotional_peak %}
+                    <div class="bg-yellow-50 border-l-2 border-yellow-400 px-3 py-2 mb-2 text-sm text-yellow-900">
+                        <span class="font-semibold">⭐ Peak moment:</span> {{ story.emotional_peak }}
+                    </div>
+                    {% endif %}
+                    {% if story.lesson %}
+                    <div class="text-sm text-gray-600 italic">→ {{ story.lesson }}</div>
+                    {% endif %}
+                </div>
+                <div class="flex flex-col gap-2">
+                    <button onclick="editStory('{{ story.id }}')"
+                        class="text-xs text-gray-600 hover:text-gray-900 px-2 py-1 rounded hover:bg-gray-100">Edit</button>
+                    <button onclick="deleteStory('{{ story.id }}')"
+                        class="text-xs text-red-600 hover:text-red-800 px-2 py-1 rounded hover:bg-red-50">Delete</button>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="text-center py-20 bg-white border border-dashed border-gray-300 rounded-xl">
+        <svg class="mx-auto h-16 w-16 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
+        </svg>
+        <h3 class="mt-4 text-lg font-semibold text-gray-900">No client stories yet</h3>
+        <p class="mt-1 text-sm text-gray-500 max-w-md mx-auto">
+            Add your first client win, turnaround, or moment of truth. The AI will weave these into every script so your content sounds like you, not ChatGPT.
+        </p>
+    </div>
+    {% endif %}
+</div>
+
+<!-- Create / Edit Modal -->
+<div id="story-modal" class="hidden fixed inset-0 z-50 overflow-y-auto bg-black/50">
+    <div class="flex min-h-full items-start justify-center p-4 sm:p-8">
+        <div class="bg-white rounded-xl shadow-xl w-full max-w-2xl">
+            <div class="p-6 border-b border-gray-200 flex items-center justify-between">
+                <h2 id="modal-title" class="text-lg font-semibold text-gray-900">Add Client Story</h2>
+                <button onclick="closeModal()" class="text-gray-400 hover:text-gray-600">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+            </div>
+            <form id="story-form" onsubmit="saveStory(event)" class="p-6 space-y-4">
+                <input type="hidden" id="story-id" value="">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Title</label>
+                    <input type="text" id="story-title" required
+                        placeholder="e.g. Sara — single mom, 3 rejected offers, found her dream home in Brampton"
+                        class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-gray-900 focus:border-transparent">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Category</label>
+                    <select id="story-category"
+                        class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-gray-900">
+                        <option value="win">Win</option>
+                        <option value="loss">Loss</option>
+                        <option value="turnaround">Turnaround</option>
+                        <option value="first_time_buyer">First-Time Buyer</option>
+                        <option value="mortgage_save">Mortgage Save</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">The Narrative</label>
+                    <textarea id="story-narrative" rows="5" required
+                        placeholder="Tell the full story — real details, real numbers, real neighbourhoods. Who was the client? What did they want? What got in the way? What actually happened?"
+                        class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-gray-900"></textarea>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Peak Moment</label>
+                    <input type="text" id="story-peak"
+                        placeholder="The moment of truth in 1-2 sentences — the line that makes a viewer stop scrolling"
+                        class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-gray-900">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Lesson / Takeaway</label>
+                    <input type="text" id="story-lesson"
+                        placeholder="One-line universal truth that makes this story matter to strangers"
+                        class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-gray-900">
+                </div>
+                <div class="flex items-center gap-2">
+                    <input type="checkbox" id="story-scriptable" checked
+                        class="w-4 h-4 text-gray-900 border-gray-300 rounded focus:ring-gray-900">
+                    <label for="story-scriptable" class="text-sm text-gray-700">Include in script generation rotation</label>
+                </div>
+                <div class="flex justify-end gap-2 pt-4 border-t border-gray-200">
+                    <button type="button" onclick="closeModal()"
+                        class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50">
+                        Cancel
+                    </button>
+                    <button type="submit"
+                        class="px-4 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg hover:bg-gray-800">
+                        Save Story
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+const existingStories = {{ stories | length }};
+const storyData = {
+    {% for s in stories %}
+    "{{ s.id }}": {
+        title: {{ s.title | tojson }},
+        category: {{ s.category | tojson }},
+        narrative: {{ s.narrative | tojson }},
+        emotional_peak: {{ s.emotional_peak | tojson }},
+        lesson: {{ s.lesson | tojson }},
+        is_scriptable: {{ 'true' if s.is_scriptable else 'false' }},
+    },
+    {% endfor %}
+};
+
+function openCreateModal() {
+    document.getElementById('modal-title').textContent = 'Add Client Story';
+    document.getElementById('story-id').value = '';
+    document.getElementById('story-form').reset();
+    document.getElementById('story-scriptable').checked = true;
+    document.getElementById('story-modal').classList.remove('hidden');
+}
+
+function editStory(id) {
+    const s = storyData[id];
+    if (!s) return;
+    document.getElementById('modal-title').textContent = 'Edit Client Story';
+    document.getElementById('story-id').value = id;
+    document.getElementById('story-title').value = s.title || '';
+    document.getElementById('story-category').value = s.category || 'win';
+    document.getElementById('story-narrative').value = s.narrative || '';
+    document.getElementById('story-peak').value = s.emotional_peak || '';
+    document.getElementById('story-lesson').value = s.lesson || '';
+    document.getElementById('story-scriptable').checked = s.is_scriptable;
+    document.getElementById('story-modal').classList.remove('hidden');
+}
+
+function closeModal() {
+    document.getElementById('story-modal').classList.add('hidden');
+}
+
+async function saveStory(event) {
+    event.preventDefault();
+    const id = document.getElementById('story-id').value;
+    const payload = {
+        title: document.getElementById('story-title').value,
+        category: document.getElementById('story-category').value,
+        narrative: document.getElementById('story-narrative').value,
+        emotional_peak: document.getElementById('story-peak').value,
+        lesson: document.getElementById('story-lesson').value,
+        is_scriptable: document.getElementById('story-scriptable').checked,
+    };
+    const url = id ? `/api/stories/${id}` : '/api/stories';
+    const method = id ? 'PUT' : 'POST';
+    try {
+        const resp = await fetch(url, {
+            method,
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(payload),
+        });
+        if (resp.ok) {
+            showToast(id ? 'Story updated!' : 'Story saved!');
+            setTimeout(() => window.location.reload(), 400);
+        } else {
+            showToast('Error saving story');
+        }
+    } catch (e) {
+        showToast('Error: ' + e.message);
+    }
+}
+
+async function deleteStory(id) {
+    if (!confirm('Delete this client story? This cannot be undone.')) return;
+    try {
+        const resp = await fetch(`/api/stories/${id}`, {method: 'DELETE'});
+        if (resp.ok) {
+            document.getElementById(`story-${id}`).remove();
+            showToast('Story deleted');
+        }
+    } catch (e) {
+        showToast('Error: ' + e.message);
+    }
+}
+</script>
+{% endblock %}
