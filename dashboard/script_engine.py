@@ -148,12 +148,8 @@ def generate_daily_batch(
 
     scripts = []
     for raw in raw_scripts:
-        # Apply Hormozi density pass
-        dense = _apply_hormozi_pass(
-            raw.get("hook", ""),
-            raw.get("body", ""),
-            raw.get("cta", ""),
-        )
+        # Skip Hormozi pass for speed — DeepSeek already writes dense
+        dense = {"hook": raw.get("hook", ""), "body": raw.get("body", ""), "cta": raw.get("cta", "")}
 
         full_text = f"{dense['hook']} {dense['body']} {dense['cta']}"
         word_count = len(full_text.split())
