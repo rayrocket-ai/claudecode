@@ -121,7 +121,12 @@ RAY_DEFAULT_PROFILE = {
 
 
 async def get_or_create_profile() -> CreatorProfile:
-    """Get the single creator profile, creating one seeded with Ray's real story if missing."""
+    """Get the single creator profile, creating one seeded with Ray's real story if missing.
+
+    If an empty default profile already exists (from earlier dashboard versions),
+    backfill the name, bio, and story_elements with Ray's real story. Never
+    overwrite non-empty user edits.
+    """
     async with get_session() as session:
         result = await session.execute(select(CreatorProfile))
         profile = result.scalar_one_or_none()
@@ -137,6 +142,34 @@ async def get_or_create_profile() -> CreatorProfile:
                 platforms=RAY_DEFAULT_PROFILE["platforms"],
             )
             session.add(profile)
+            await session.commit()
+            await session.refresh(profile)
+            return profile
+
+        # Backfill empty fields without overwriting real edits
+        changed = False
+        if not (profile.name or "").strip():
+            profile.name = RAY_DEFAULT_PROFILE["name"]
+            changed = True
+        if not (profile.bio or "").strip():
+            profile.bio = RAY_DEFAULT_PROFILE["bio"]
+            changed = True
+        if not profile.brand_values:
+            profile.brand_values = RAY_DEFAULT_PROFILE["brand_values"]
+            flag_modified(profile, "brand_values")
+            changed = True
+        # Backfill story_elements if missing the new "origin" key
+        current_story = profile.story_elements or {}
+        if "origin" not in current_story or not (current_story.get("origin") or "").strip():
+            merged = dict(RAY_DEFAULT_PROFILE["story_elements"])
+            # Preserve any existing non-empty values from the old schema
+            for k, v in current_story.items():
+                if v and isinstance(v, str) and v.strip():
+                    merged[k] = v
+            profile.story_elements = merged
+            flag_modified(profile, "story_elements")
+            changed = True
+        if changed:
             await session.commit()
             await session.refresh(profile)
         return profile
@@ -353,6 +386,41 @@ async def seed_brand_pillars() -> None:
         await session.commit()
 
 
+# ── Lightweight SQLite migrations (ADD COLUMN idempotent) ─────────────
+
+VIDEO_SCRIPT_MIGRATIONS = [
+    ("idea_id", "VARCHAR"),
+    ("chosen_hook_id", "VARCHAR"),
+    ("pillar_id", "VARCHAR"),
+    ("viral_angle", "VARCHAR DEFAULT ''"),
+    ("platform_captions", "JSON DEFAULT '{}'"),
+    ("hormozi_density_score", "FLOAT DEFAULT 0.0"),
+    ("word_count_original", "INTEGER DEFAULT 0"),
+    ("word_count_compressed", "INTEGER DEFAULT 0"),
+    ("pipeline_stage", "VARCHAR DEFAULT 'scripted'"),
+]
+
+
+async def run_light_migrations() -> None:
+    """Add new columns to existing tables without losing data.
+
+    SQLAlchemy's create_all never ALTERs existing tables. This runs idempotent
+    ADD COLUMN statements so the new pipeline columns appear on live deployments.
+    """
+    from sqlalchemy import text
+    from db.operations import _engine as db_engine
+    async with db_engine.begin() as conn:
+        # Check which columns already exist on video_scripts
+        result = await conn.execute(text("PRAGMA table_info(video_scripts)"))
+        existing_cols = {row[1] for row in result.fetchall()}
+        for col_name, col_type in VIDEO_SCRIPT_MIGRATIONS:
+            if col_name not in existing_cols:
+                try:
+                    await conn.execute(text(f"ALTER TABLE video_scripts ADD COLUMN {col_name} {col_type}"))
+                except Exception:
+                    pass  # column may already exist or table missing
+
+
 async def list_brand_pillars() -> list[BrandPillar]:
     """Get all brand pillars ordered by sort_order."""
     async with get_session() as session:
@@ -544,3 +612,210 @@ async def save_content_ideas(batch_id: str, ideas_data: list[dict[str, Any]]) ->
             ideas.append(idea)
         await session.commit()
         return ideas
+
+
+async def get_content_idea(idea_id: str) -> ContentIdea | None:
+    async with get_session() as session:
+        result = await session.execute(
+            select(ContentIdea)
+            .options(
+                selectinload(ContentIdea.hook_variations),
+                selectinload(ContentIdea.pillar),
+            )
+            .where(ContentIdea.id == idea_id)
+        )
+        return result.scalar_one_or_none()
+
+
+def content_idea_to_dict(idea: ContentIdea) -> dict[str, Any]:
+    return {
+        "id": idea.id,
+        "title": idea.title,
+        "pillar_id": idea.pillar_id,
+        "core_story": idea.core_story,
+        "viral_angle": idea.viral_angle,
+        "platform_fit": idea.platform_fit,
+        "target_location": idea.target_location,
+        "market_condition_ref": idea.market_condition_ref,
+        "is_personal_brand": idea.is_personal_brand,
+        "status": idea.status,
+    }
+
+
+async def update_idea_status(idea_id: str, status: str) -> None:
+    async with get_session() as session:
+        result = await session.execute(select(ContentIdea).where(ContentIdea.id == idea_id))
+        idea = result.scalar_one_or_none()
+        if idea:
+            idea.status = status
+            await session.commit()
+
+
+async def replace_hook_variations(idea_id: str, hooks: list[dict[str, Any]]) -> list[HookVariation]:
+    """Delete existing hook variations for an idea and insert fresh ones."""
+    async with get_session() as session:
+        # Delete existing
+        result = await session.execute(
+            select(HookVariation).where(HookVariation.idea_id == idea_id)
+        )
+        for h in result.scalars():
+            await session.delete(h)
+        await session.flush()
+
+        # Insert new
+        new_hooks = []
+        for h in hooks[:3]:
+            hv = HookVariation(
+                idea_id=idea_id,
+                hook_text=h.get("hook_text", ""),
+                hook_type=h.get("hook_type", "curiosity"),
+                scroll_stop_score=int(h.get("scroll_stop_score") or 0),
+                curiosity_score=int(h.get("curiosity_score") or 0),
+                specificity_score=int(h.get("specificity_score") or 0),
+                authenticity_score=int(h.get("authenticity_score") or 0),
+            )
+            session.add(hv)
+            new_hooks.append(hv)
+        await session.commit()
+        for h in new_hooks:
+            await session.refresh(h)
+        return new_hooks
+
+
+async def get_hook_variation(hook_id: str) -> HookVariation | None:
+    async with get_session() as session:
+        result = await session.execute(select(HookVariation).where(HookVariation.id == hook_id))
+        return result.scalar_one_or_none()
+
+
+async def get_best_hook_for_idea(idea_id: str) -> HookVariation | None:
+    """Return the hook with the highest total score for an idea."""
+    async with get_session() as session:
+        result = await session.execute(
+            select(HookVariation).where(HookVariation.idea_id == idea_id)
+        )
+        hooks = list(result.scalars().all())
+        if not hooks:
+            return None
+        def total(h: HookVariation) -> int:
+            return (h.scroll_stop_score or 0) + (h.curiosity_score or 0) + (h.specificity_score or 0) + (h.authenticity_score or 0)
+        return max(hooks, key=total)
+
+
+async def create_script_from_idea(
+    idea_id: str,
+    hook_id: str | None,
+    script_data: dict[str, Any],
+) -> VideoScript:
+    """Persist a Stage 3 script tied back to an idea + chosen hook."""
+    async with get_session() as session:
+        script = VideoScript(
+            batch_id=None,
+            idea_id=idea_id,
+            chosen_hook_id=hook_id,
+            category=script_data.get("category") or "personal",
+            pillar_id=script_data.get("pillar_id"),
+            viral_angle=script_data.get("viral_angle", ""),
+            title=script_data.get("title", ""),
+            hook=script_data.get("hook", ""),
+            body=script_data.get("body", ""),
+            cta=script_data.get("cta", ""),
+            personal_tie_in=script_data.get("personal_tie_in", ""),
+            hashtags=script_data.get("hashtags", {}),
+            visual_suggestions=script_data.get("visual_suggestions", ""),
+            platform_notes=script_data.get("platform_notes", {}),
+            platform_captions=script_data.get("platform_captions", {}),
+            hook_style=script_data.get("hook_style", ""),
+            estimated_duration=script_data.get("estimated_duration", 45),
+            hormozi_density_score=script_data.get("hormozi_density_score", 0.0),
+            word_count_original=script_data.get("word_count_original", 0),
+            word_count_compressed=script_data.get("word_count_compressed", 0),
+            pipeline_stage=script_data.get("pipeline_stage", "scripted"),
+        )
+        session.add(script)
+
+        # Mark the chosen hook + update idea status
+        if hook_id:
+            hook_res = await session.execute(select(HookVariation).where(HookVariation.id == hook_id))
+            hook = hook_res.scalar_one_or_none()
+            if hook:
+                # Unselect other hooks for this idea
+                others_res = await session.execute(
+                    select(HookVariation).where(HookVariation.idea_id == idea_id)
+                )
+                for h in others_res.scalars():
+                    h.chosen = (h.id == hook_id)
+
+        idea_res = await session.execute(select(ContentIdea).where(ContentIdea.id == idea_id))
+        idea = idea_res.scalar_one_or_none()
+        if idea:
+            idea.status = "scripted"
+
+        await session.commit()
+        await session.refresh(script)
+        return script
+
+
+async def list_scripts_for_idea(idea_id: str) -> list[VideoScript]:
+    async with get_session() as session:
+        result = await session.execute(
+            select(VideoScript).where(VideoScript.idea_id == idea_id)
+            .order_by(VideoScript.created_at.desc())
+        )
+        return list(result.scalars().all())
+
+
+async def update_script_platform_captions(script_id: str, platform_captions: dict) -> VideoScript | None:
+    async with get_session() as session:
+        result = await session.execute(select(VideoScript).where(VideoScript.id == script_id))
+        script = result.scalar_one_or_none()
+        if script is None:
+            return None
+        script.platform_captions = platform_captions
+        script.pipeline_stage = "captioned"
+        flag_modified(script, "platform_captions")
+        await session.commit()
+        await session.refresh(script)
+        return script
+
+
+async def list_ideas_with_pipeline_status() -> dict[str, list]:
+    """Return all ideas from the latest batch grouped by pipeline stage for the Kanban."""
+    async with get_session() as session:
+        result = await session.execute(
+            select(IdeaBatch).order_by(IdeaBatch.created_at.desc()).limit(1)
+        )
+        latest = result.scalar_one_or_none()
+        if latest is None:
+            return {"idea": [], "scripted": [], "captioned": [], "scheduled": [], "posted": []}
+
+        ideas_res = await session.execute(
+            select(ContentIdea)
+            .options(selectinload(ContentIdea.pillar), selectinload(ContentIdea.hook_variations))
+            .where(ContentIdea.batch_id == latest.id)
+            .order_by(ContentIdea.sort_order)
+        )
+        ideas = list(ideas_res.scalars().all())
+
+        # Collect script counts per idea
+        idea_ids = [i.id for i in ideas]
+        scripts_by_idea: dict[str, list[VideoScript]] = {i.id: [] for i in ideas}
+        if idea_ids:
+            scripts_res = await session.execute(
+                select(VideoScript).where(VideoScript.idea_id.in_(idea_ids))
+            )
+            for s in scripts_res.scalars():
+                scripts_by_idea.setdefault(s.idea_id, []).append(s)
+
+        buckets = {"idea": [], "scripted": [], "captioned": [], "scheduled": [], "posted": []}
+        for idea in ideas:
+            scripts = scripts_by_idea.get(idea.id, [])
+            status = idea.status or "idea"
+            # Upgrade status based on latest script's pipeline_stage
+            if scripts:
+                latest_script = max(scripts, key=lambda s: s.created_at)
+                status = latest_script.pipeline_stage or "scripted"
+            bucket = buckets.setdefault(status, [])
+            bucket.append({"idea": idea, "scripts": scripts})
+
+        return buckets

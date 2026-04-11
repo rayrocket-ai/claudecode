@@ -17,6 +17,9 @@ from dashboard import operations as ops
 from dashboard.scraper import collect_all_trends
 from dashboard.script_engine import get_engine
 from dashboard.pipeline.stage1_idea_bank import get_stage1_generator
+from dashboard.pipeline.stage2_hook_forge import get_hook_forge
+from dashboard.pipeline.stage3_script_writer import get_script_writer
+from dashboard.pipeline.stage4_cta_caption import get_cta_caption_builder
 
 logger = logging.getLogger(__name__)
 
@@ -53,6 +56,8 @@ async def startup():
     # Seed the 6 brand pillars + ensure Ray's profile exists with real story
     await ops.seed_brand_pillars()
     await ops.get_or_create_profile()
+    # Idempotent SQLite column additions for pipeline upgrades
+    await ops.run_light_migrations()
 
 
 # ── Template Helpers ──────────────────────────────────────────────────
@@ -151,12 +156,34 @@ async def idea_bank_page(request: Request):
     """Stage 1 — 30-day idea bank review + generation."""
     latest_batch = await ops.get_latest_idea_batch()
     pillars = await ops.list_brand_pillars()
+
+    # Build a set of idea IDs that already have scripts
+    scripted_idea_ids: set[str] = set()
+    if latest_batch and latest_batch.ideas:
+        idea_ids = [i.id for i in latest_batch.ideas]
+        async with ops.get_session() as session:
+            from sqlalchemy import select as _select
+            result = await session.execute(
+                _select(ops.VideoScript.idea_id).where(ops.VideoScript.idea_id.in_(idea_ids))
+            )
+            scripted_idea_ids = {row[0] for row in result.fetchall() if row[0]}
+
     ctx = _template_context(
         batch=latest_batch,
         ideas=latest_batch.ideas if latest_batch else [],
         pillars=pillars,
+        scripted_idea_ids=scripted_idea_ids,
     )
     return templates.TemplateResponse(request, name="idea_bank.html", context=ctx)
+
+
+@app.get("/pipeline", response_class=HTMLResponse)
+async def pipeline_page(request: Request):
+    """Kanban view — ideas flowing through the 6-stage pipeline."""
+    buckets = await ops.list_ideas_with_pipeline_status()
+    pillars = await ops.list_brand_pillars()
+    ctx = _template_context(buckets=buckets, pillars=pillars)
+    return templates.TemplateResponse(request, name="pipeline.html", context=ctx)
 
 
 @app.get("/trends", response_class=HTMLResponse)
@@ -386,6 +413,149 @@ async def api_delete_story(story_id: str):
     if not ok:
         raise HTTPException(404, "Story not found")
     return JSONResponse({"status": "success"})
+
+
+# ── Stage 2: Hook Forge API ───────────────────────────────────────────
+
+@app.post("/api/ideas/{idea_id}/refine-hooks")
+async def api_refine_hooks(idea_id: str):
+    """Stage 2 — regenerate 3 scored hook variations for an idea."""
+    idea = await ops.get_content_idea(idea_id)
+    if not idea:
+        raise HTTPException(404, "Idea not found")
+
+    profile = await ops.get_or_create_profile()
+    profile_dict = ops.profile_to_dict(profile)
+
+    try:
+        forge = get_hook_forge()
+        new_hooks = await forge.forge(
+            idea=ops.content_idea_to_dict(idea),
+            creator_profile=profile_dict,
+        )
+        saved = await ops.replace_hook_variations(idea_id, new_hooks)
+        return JSONResponse({
+            "status": "success",
+            "idea_id": idea_id,
+            "hook_count": len(saved),
+            "hooks": [
+                {
+                    "id": h.id,
+                    "hook_type": h.hook_type,
+                    "hook_text": h.hook_text,
+                    "scroll_stop_score": h.scroll_stop_score,
+                    "curiosity_score": h.curiosity_score,
+                    "specificity_score": h.specificity_score,
+                    "authenticity_score": h.authenticity_score,
+                }
+                for h in saved
+            ],
+        })
+    except Exception as e:
+        logger.exception("Hook forge failed")
+        return JSONResponse({"status": "error", "message": str(e)}, status_code=500)
+
+
+# ── Stage 3: Script Writer API ────────────────────────────────────────
+
+@app.post("/api/ideas/{idea_id}/write-script")
+async def api_write_script_from_idea(idea_id: str, request: Request):
+    """Stage 3 — take an idea (+ optional chosen hook_id) and write a full script."""
+    body: dict = {}
+    try:
+        body = await request.json()
+    except Exception:
+        body = {}
+    hook_id = body.get("hook_id")
+
+    idea = await ops.get_content_idea(idea_id)
+    if not idea:
+        raise HTTPException(404, "Idea not found")
+
+    # Pick a hook: explicit → highest-scoring → first → error
+    chosen_hook = None
+    if hook_id:
+        chosen_hook = await ops.get_hook_variation(hook_id)
+    if chosen_hook is None:
+        chosen_hook = await ops.get_best_hook_for_idea(idea_id)
+    if chosen_hook is None:
+        return JSONResponse(
+            {"status": "error", "message": "No hooks available — run Refine Hooks first."},
+            status_code=400,
+        )
+
+    profile = await ops.get_or_create_profile()
+    profile_dict = ops.profile_to_dict(profile)
+
+    stories = await ops.list_client_stories(scriptable_only=True)
+    story_dicts = [ops.client_story_to_dict(s) for s in stories[:6]]
+
+    try:
+        writer = get_script_writer()
+        script_data = await writer.write(
+            idea=ops.content_idea_to_dict(idea),
+            chosen_hook={
+                "hook_type": chosen_hook.hook_type,
+                "hook_text": chosen_hook.hook_text,
+            },
+            creator_profile=profile_dict,
+            client_stories=story_dicts,
+        )
+        saved = await ops.create_script_from_idea(
+            idea_id=idea_id,
+            hook_id=chosen_hook.id,
+            script_data=script_data,
+        )
+        return JSONResponse({
+            "status": "success",
+            "script_id": saved.id,
+            "title": saved.title,
+            "hormozi_density_score": saved.hormozi_density_score,
+            "word_count_original": saved.word_count_original,
+            "word_count_compressed": saved.word_count_compressed,
+        })
+    except Exception as e:
+        logger.exception("Stage 3 script writer failed")
+        return JSONResponse({"status": "error", "message": str(e)}, status_code=500)
+
+
+# ── Stage 4: CTA + Caption API ────────────────────────────────────────
+
+@app.post("/api/scripts/{script_id}/platform-captions")
+async def api_generate_platform_captions(script_id: str):
+    """Stage 4 — build Reels/TikTok/Shorts/LinkedIn captions for a script."""
+    script = await ops.get_script(script_id)
+    if not script:
+        raise HTTPException(404, "Script not found")
+
+    # Look up the viral angle from the source idea if available
+    viral_angle = "education"
+    target_location = "GTA"
+    if script.idea_id:
+        idea = await ops.get_content_idea(script.idea_id)
+        if idea:
+            viral_angle = idea.viral_angle or "education"
+            target_location = idea.target_location or "GTA"
+
+    script_dict = {
+        "title": script.title,
+        "hook": script.hook,
+        "body": script.body,
+        "cta": script.cta,
+    }
+
+    try:
+        builder = get_cta_caption_builder()
+        captions = await builder.build(
+            script=script_dict,
+            viral_angle=viral_angle,
+            target_location=target_location,
+        )
+        await ops.update_script_platform_captions(script_id, captions)
+        return JSONResponse({"status": "success", "platform_captions": captions})
+    except Exception as e:
+        logger.exception("Stage 4 caption builder failed")
+        return JSONResponse({"status": "error", "message": str(e)}, status_code=500)
 
 
 # ── Stage 1: Idea Bank API ────────────────────────────────────────────

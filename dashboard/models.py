@@ -53,8 +53,12 @@ class VideoScript(Base):
     __tablename__ = "video_scripts"
 
     id = Column(String, primary_key=True, default=_new_id)
-    batch_id = Column(String, ForeignKey("daily_batches.id"), nullable=False)
+    batch_id = Column(String, ForeignKey("daily_batches.id"), nullable=True)
+    idea_id = Column(String, ForeignKey("content_ideas.id"), nullable=True)  # link back to Stage 1 idea
+    chosen_hook_id = Column(String, ForeignKey("hook_variations.id"), nullable=True)
     category = Column(String, nullable=False)  # real_estate, mortgage, politics_economy, sports, personal
+    pillar_id = Column(String, ForeignKey("brand_pillars.id"), nullable=True)
+    viral_angle = Column(String, default="")  # identity, shock, education, aspiration
     title = Column(String, default="")
     hook = Column(Text, default="")
     body = Column(Text, default="")
@@ -63,8 +67,13 @@ class VideoScript(Base):
     hashtags = Column(JSON, default=dict)
     visual_suggestions = Column(Text, default="")
     platform_notes = Column(JSON, default=dict)
+    platform_captions = Column(JSON, default=dict)  # {reels: "...", tiktok: "...", shorts: "...", linkedin: "..."}
     hook_style = Column(String, default="")  # question, stat, controversy, story, pattern_interrupt, challenge, confession
     estimated_duration = Column(Integer, default=45)
+    hormozi_density_score = Column(Float, default=0.0)  # post-compression density: words cut / original words
+    word_count_original = Column(Integer, default=0)
+    word_count_compressed = Column(Integer, default=0)
+    pipeline_stage = Column(String, default="scripted")  # scripted, captioned, platform_adapted, scheduled, posted
     is_edited = Column(Boolean, default=False)
     sort_order = Column(Integer, default=0)
     created_at = Column(DateTime, default=_utcnow)

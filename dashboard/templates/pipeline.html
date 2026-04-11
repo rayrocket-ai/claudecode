@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+{% block title %}Pipeline — 6-Stage Flow{% endblock %}
+
+{% block content %}
+<div class="p-6 lg:p-8 max-w-[1600px] mx-auto">
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+        <div>
+            <h1 class="text-2xl font-bold text-gray-900">Content Pipeline</h1>
+            <p class="text-gray-500 mt-1">
+                Ideas flow left → right through the 6 stages. Click Write Script on any idea to move it forward.
+            </p>
+        </div>
+        <a href="/idea-bank"
+            class="inline-flex items-center px-4 py-2 bg-gray-900 text-white rounded-lg text-sm font-medium hover:bg-gray-800">
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+            Back to Idea Bank
+        </a>
+    </div>
+
+    {% set stage_labels = {
+        'idea':            ('1. Idea',          'bg-gray-100',  'text-gray-700'),
+        'scripted':        ('2. Scripted',       'bg-blue-100',  'text-blue-800'),
+        'captioned':       ('3. Captioned',      'bg-purple-100','text-purple-800'),
+        'platform_adapted':('4. Adapted',        'bg-indigo-100','text-indigo-800'),
+        'scheduled':       ('5. Scheduled',      'bg-amber-100', 'text-amber-800'),
+        'posted':          ('6. Posted',         'bg-emerald-100','text-emerald-800'),
+    } %}
+
+    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 items-start">
+        {% for stage_key in ['idea', 'scripted', 'captioned', 'scheduled', 'posted'] %}
+        {% set label, bg, text_color = stage_labels[stage_key] %}
+        {% set bucket = buckets.get(stage_key, []) %}
+        <div class="bg-gray-50 rounded-xl p-3 min-h-[400px]">
+            <div class="flex items-center justify-between mb-3 px-1">
+                <div class="flex items-center gap-2">
+                    <span class="inline-flex items-center px-2 py-0.5 rounded-md text-[11px] font-semibold uppercase {{ bg }} {{ text_color }}">
+                        {{ label }}
+                    </span>
+                </div>
+                <span class="text-xs text-gray-500">{{ bucket | length }}</span>
+            </div>
+
+            {% if bucket %}
+            <div class="space-y-2">
+                {% for entry in bucket %}
+                {% set idea = entry.idea %}
+                {% set scripts = entry.scripts %}
+                <div class="bg-white border border-gray-200 rounded-lg p-3 hover:shadow-sm transition">
+                    <!-- Pillar chip -->
+                    <div class="flex flex-wrap items-center gap-1 mb-2">
+                        <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-medium
+                            {% if idea.pillar_id == 'authority_expertise' %}bg-blue-100 text-blue-800
+                            {% elif idea.pillar_id == 'behind_scenes' %}bg-purple-100 text-purple-800
+                            {% elif idea.pillar_id == 'client_wins' %}bg-green-100 text-green-800
+                            {% elif idea.pillar_id == 'market_intel' %}bg-orange-100 text-orange-800
+                            {% elif idea.pillar_id == 'mindset_lifestyle' %}bg-pink-100 text-pink-800
+                            {% elif idea.pillar_id == 'community_culture' %}bg-teal-100 text-teal-800
+                            {% else %}bg-gray-100 text-gray-800{% endif %}">
+                            {{ idea.pillar.name if idea.pillar else idea.pillar_id[:8] }}
+                        </span>
+                        <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[9px] font-medium bg-gray-100 text-gray-600 uppercase">
+                            {{ idea.platform_fit }}
+                        </span>
+                    </div>
+
+                    <!-- Title -->
+                    <div class="text-xs font-semibold text-gray-900 line-clamp-2 mb-1.5">
+                        #{{ idea.sort_order }} {{ idea.title }}
+                    </div>
+
+                    <!-- Core story snippet -->
+                    <div class="text-[11px] text-gray-600 line-clamp-3 mb-2">{{ idea.core_story[:180] }}{% if idea.core_story|length > 180 %}…{% endif %}</div>
+
+                    <!-- Scripts attached -->
+                    {% if scripts %}
+                    {% for script in scripts %}
+                    <div class="bg-blue-50 border border-blue-200 rounded p-2 mb-1 text-[11px]">
+                        <div class="font-medium text-blue-900 truncate">📝 {{ script.title or 'Untitled' }}</div>
+                        {% if script.hormozi_density_score %}
+                        <div class="text-[10px] text-blue-700 mt-0.5">Cut {{ (script.hormozi_density_score * 100) | round | int }}% filler • {{ script.word_count_compressed }} words</div>
+                        {% endif %}
+                        <div class="flex gap-1 mt-1.5">
+                            {% if not script.platform_captions or script.platform_captions == {} %}
+                            <button onclick="buildCaptions('{{ script.id }}')"
+                                class="text-[10px] px-2 py-0.5 bg-white border border-blue-300 text-blue-700 rounded hover:bg-blue-50">
+                                + Captions
+                            </button>
+                            {% else %}
+                            <span class="text-[10px] px-2 py-0.5 bg-purple-100 text-purple-800 rounded">
+                                ✓ Captioned
+                            </span>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    <button onclick="writeScriptFromPipeline('{{ idea.id }}')"
+                        class="w-full text-[11px] px-2 py-1 bg-gray-900 text-white rounded hover:bg-gray-800">
+                        Write Script
+                    </button>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="text-center py-8 text-gray-400 text-xs">Empty</div>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script>
+async function writeScriptFromPipeline(ideaId) {
+    showToast('Writing script...');
+    try {
+        const resp = await fetch(`/api/ideas/${ideaId}/write-script`, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({}),
+        });
+        const data = await resp.json();
+        if (data.status === 'success') {
+            const density = Math.round((data.hormozi_density_score || 0) * 100);
+            showToast(`Script written! Cut ${density}% filler.`);
+            setTimeout(() => window.location.reload(), 800);
+        } else {
+            showToast('Error: ' + (data.message || 'Unknown'));
+        }
+    } catch (e) {
+        showToast('Error: ' + e.message);
+    }
+}
+
+async function buildCaptions(scriptId) {
+    showToast('Building platform captions...');
+    try {
+        const resp = await fetch(`/api/scripts/${scriptId}/platform-captions`, {
+            method: 'POST',
+        });
+        const data = await resp.json();
+        if (data.status === 'success') {
+            showToast('Captions ready for all 4 platforms!');
+            setTimeout(() => window.location.reload(), 600);
+        } else {
+            showToast('Error: ' + (data.message || 'Unknown'));
+        }
+    } catch (e) {
+        showToast('Error: ' + e.message);
+    }
+}
+</script>
+
+<style>
+.line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.line-clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+</style>
+{% endblock %}
