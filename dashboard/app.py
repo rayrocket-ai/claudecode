@@ -213,8 +213,8 @@ def _run_generation(batch_id: str):
 
 
 @app.post("/generate")
-def generate_batch(request: Request, background_tasks: BackgroundTasks, db: Session = Depends(get_db)):
-    """Kick off background generation and redirect immediately."""
+def generate_batch(request: Request, db: Session = Depends(get_db)):
+    """Generate scripts synchronously and redirect."""
     existing = get_today_batch(db)
     if existing and existing.status == "complete":
         return RedirectResponse("/scripts", status_code=303)
@@ -223,8 +223,28 @@ def generate_batch(request: Request, background_tasks: BackgroundTasks, db: Sess
         "market": 2, "mortgage": 1, "personal": 1,
         "client_win": 1, "trending": 1, "wildcard": 1
     })
-    background_tasks.add_task(_run_generation, batch.id)
-    return RedirectResponse("/?generating=1", status_code=303)
+
+    try:
+        profile = get_profile(db)
+        stories = get_stories(db, scriptable_only=True)
+        trending = get_trending_items(8)
+        script_dicts = generate_daily_batch(
+            profile=profile,
+            trending_items=trending,
+            client_stories=stories,
+            n=7,
+            batch_id=batch.id,
+        )
+        for sd in script_dicts:
+            sd["batch_id"] = batch.id
+            create_script(db, sd)
+        complete_batch(db, batch.id, len(script_dicts))
+        logger.info(f"Batch {batch.id} complete with {len(script_dicts)} scripts")
+    except Exception as e:
+        logger.error(f"Generation failed: {e}")
+        fail_batch(db, batch.id)
+
+    return RedirectResponse("/scripts", status_code=303)
 
 
 @app.get("/scripts", response_class=HTMLResponse)
