@@ -31,7 +31,7 @@ from .operations import (
     get_hooks_for_idea, create_hook, choose_hook,
 )
 from .scraper import get_trending_items
-from .script_engine import generate_daily_batch, generate_idea_bank, forge_hooks, write_script, regenerate_script
+from .script_engine import generate_daily_batch, generate_idea_bank, forge_hooks, write_script, regenerate_script, generate_shot_list
 from .pipeline.stage1_idea_bank import run_stage1
 from .pipeline.stage2_hook_forge import run_stage2
 from .pipeline.stage3_script_writer import run_stage3
@@ -457,6 +457,45 @@ def trends_page(request: Request):
 
 
 # ── Health check ──────────────────────────────────────────────────────────────
+
+# ── Email digest ──────────────────────────────────────────────────────────
+
+@app.post("/api/send-digest")
+def send_digest_endpoint(db: Session = Depends(get_db)):
+    """Send today's scripts as a digest email to DIGEST_EMAIL."""
+    from fastapi.responses import JSONResponse
+    from .digest_email import send_daily_digest
+
+    to_email = os.getenv("DIGEST_EMAIL", "")
+    if not to_email:
+        return JSONResponse({"ok": False, "error": "DIGEST_EMAIL env var not set"}, status_code=400)
+
+    profile = get_profile(db)
+    scripts = get_today_scripts(db)
+    if not scripts:
+        scripts = get_scripts(db, limit=7)
+
+    result = send_daily_digest(to_email, profile, scripts)
+    status = 200 if result["ok"] else 500
+    return JSONResponse(result, status_code=status)
+
+
+# ── Shot list ────────────────────────────────────────────────────────────
+
+@app.get("/scripts/{script_id}/shot-list")
+def shot_list_endpoint(script_id: int, db: Session = Depends(get_db)):
+    """Generate and return a shot list for a script."""
+    from fastapi.responses import JSONResponse
+    script = get_script(db, script_id)
+    if not script:
+        raise HTTPException(status_code=404, detail="Script not found")
+    try:
+        shots = generate_shot_list(script)
+        return JSONResponse({"ok": True, "shots": shots})
+    except Exception as e:
+        logger.error(f"Shot list generation failed: {e}")
+        return JSONResponse({"ok": False, "error": str(e)}, status_code=500)
+
 
 @app.get("/health")
 def health():

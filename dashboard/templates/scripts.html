@@ -8,6 +8,7 @@
     <p class="page-subtitle">{{ scripts|length }} script{{ 's' if scripts|length != 1 else '' }}</p>
   </div>
   <div class="page-header-right">
+    <button class="btn btn-ghost" id="digestBtn" onclick="sendDigest()" title="Email today's scripts">📧 Email Scripts</button>
     <form method="post" action="/generate">
       <button type="submit" class="btn btn-primary">⚡ Generate New Batch</button>
     </form>
@@ -67,6 +68,7 @@
         <span id="bodytoggle-{{ script.id }}">👁 Expand</span>
       </button>
       <a href="/scripts/{{ script.id }}/teleprompter" class="btn btn-orange btn-xs">🎤 Teleprompter</a>
+      <button class="btn btn-ghost btn-xs" onclick="openShotList({{ script.id }}, {{ script.title | tojson }})">🎥 Shot List</button>
       <form method="post" action="/scripts/{{ script.id }}/regenerate" style="display:inline;">
         <button type="submit" class="btn btn-ghost btn-xs">🔄 Regen</button>
       </form>
@@ -101,6 +103,26 @@
 {% endblock %}
 
 {% block scripts %}
+<!-- Shot List Modal -->
+<div id="shotModal" style="display:none; position:fixed; inset:0; z-index:200; align-items:center; justify-content:center;">
+  <div id="shotModalBackdrop" onclick="closeShotModal()"
+       style="position:absolute; inset:0; background:rgba(0,0,0,0.75); backdrop-filter:blur(4px);"></div>
+  <div id="shotModalBox"
+       style="position:relative; z-index:1; background:var(--bg2); border:1px solid var(--border2);
+              border-radius:16px; padding:28px; max-width:640px; width:90%; max-height:85vh;
+              overflow-y:auto; box-shadow:var(--shadow);">
+    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:20px;">
+      <div>
+        <h2 style="font-size:18px; margin:0 0 4px;">🎥 Shot List</h2>
+        <p id="shotModalTitle" style="font-size:13px; color:var(--text3); margin:0;"></p>
+      </div>
+      <button onclick="closeShotModal()"
+              style="background:none; border:none; color:var(--text3); font-size:22px; cursor:pointer; padding:4px;">&times;</button>
+    </div>
+    <div id="shotModalBody"><!-- shots injected here --></div>
+  </div>
+</div>
+
 <style>
   /* Rating states */
   .rating-btn {
@@ -208,6 +230,96 @@ function copyScript(id, text) {
       document.body.removeChild(el);
       flashCopied('copyscript-' + id);
     });
+}
+
+// ── Email digest ──────────────────────────────────────────────────────
+function sendDigest() {
+  const btn = document.getElementById('digestBtn');
+  btn.disabled = true;
+  btn.textContent = '⏳ Sending...';
+  fetch('/api/send-digest', { method: 'POST' })
+    .then(r => r.json())
+    .then(data => {
+      if (data.ok) {
+        btn.textContent = '✅ Sent!';
+        setTimeout(() => { btn.textContent = '📧 Email Scripts'; btn.disabled = false; }, 3000);
+      } else {
+        btn.textContent = '❌ Failed';
+        alert('Email failed: ' + (data.error || 'Unknown error'));
+        setTimeout(() => { btn.textContent = '📧 Email Scripts'; btn.disabled = false; }, 3000);
+      }
+    })
+    .catch(() => {
+      btn.textContent = '❌ Error';
+      setTimeout(() => { btn.textContent = '📧 Email Scripts'; btn.disabled = false; }, 3000);
+    });
+}
+
+// ── Shot list modal ──────────────────────────────────────────────────
+const shotModal = document.getElementById('shotModal');
+const shotModalBody = document.getElementById('shotModalBody');
+const shotModalTitle = document.getElementById('shotModalTitle');
+
+function openShotList(scriptId, title) {
+  shotModalTitle.textContent = title;
+  shotModalBody.innerHTML = '<div style="text-align:center; padding:40px; color:var(--text3);">' +
+    '<div class="spinner" style="margin:0 auto 16px;"></div>Generating shot list...</div>';
+  shotModal.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+
+  fetch('/scripts/' + scriptId + '/shot-list')
+    .then(r => r.json())
+    .then(data => {
+      if (data.ok && data.shots) {
+        renderShots(data.shots);
+      } else {
+        shotModalBody.innerHTML = '<p style="color:#f87171; text-align:center;">❌ ' +
+          (data.error || 'Failed to generate shot list') + '</p>';
+      }
+    })
+    .catch(err => {
+      shotModalBody.innerHTML = '<p style="color:#f87171; text-align:center;">❌ Network error: ' + err.message + '</p>';
+    });
+}
+
+function closeShotModal() {
+  shotModal.style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+// Close on Escape
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeShotModal(); });
+
+function renderShots(shots) {
+  const framingColors = {
+    'tight selfie': '#f97316', 'tight': '#f97316',
+    'medium': '#3b82f6', 'wide': '#22c55e',
+    'close-up': '#a855f7', 'close-up detail': '#a855f7',
+  };
+  const cameraIcons = { 'front': '🤳', 'back': '📷', 'tripod': '🎥', 'handheld': '✊' };
+
+  let html = '<div style="display:flex; flex-direction:column; gap:14px;">';
+  shots.forEach((shot, i) => {
+    const color = framingColors[shot.framing?.toLowerCase()] || '#6b7280';
+    const camIcon = cameraIcons[shot.camera?.toLowerCase()] || '📹';
+    html += `
+      <div style="background:var(--bg3); border:1px solid var(--border); border-radius:10px;
+                  border-left:3px solid ${color}; padding:14px 16px;">
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px; flex-wrap:wrap;">
+          <span style="background:${color}22; color:${color}; font-size:11px; font-weight:700;
+                       padding:3px 10px; border-radius:4px; letter-spacing:1px;">${shot.shot || 'SHOT ' + (i+1)}</span>
+          <span style="font-size:12px; color:var(--text3);">${camIcon} ${shot.camera || ''}</span>
+          <span style="font-size:12px; color:var(--text2);">&#128250; ${shot.framing || ''}</span>
+          <span style="font-size:12px; color:var(--text3); margin-left:auto;">⏱ ${shot.duration || ''}</span>
+        </div>
+        <p style="font-size:14px; font-weight:600; color:var(--text); margin:0 0 6px;">${shot.action || ''}</p>
+        ${shot.movement && shot.movement !== 'none' && shot.movement !== 'static'
+          ? `<p style="font-size:12px; color:var(--orange); margin:0 0 6px;">➡️ Movement: ${shot.movement}</p>` : ''}
+        ${shot.notes ? `<p style="font-size:12px; color:var(--text3); margin:0; font-style:italic;">💡 ${shot.notes}</p>` : ''}
+      </div>`;
+  });
+  html += '</div>';
+  shotModalBody.innerHTML = html;
 }
 </script>
 {% endblock %}
