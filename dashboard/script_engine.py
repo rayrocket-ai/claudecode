@@ -1,4 +1,4 @@
-"""Claude-powered script generation engine for Ray's Content Engine."""
+"""Multi-model script generation engine for Ray's Content Engine."""
 
 import json
 import logging
@@ -16,21 +16,64 @@ from .models import (
 
 logger = logging.getLogger(__name__)
 
-client = Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY", ""))
+# Model configuration
+AI_PROVIDER = os.getenv("AI_PROVIDER", "claude")  # claude, deepseek, openai
+ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY", "")
+DEEPSEEK_API_KEY = os.getenv("DEEPSEEK_API_KEY", "")
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "")
 
-MODEL = "claude-opus-4-5"
-FAST_MODEL = "claude-haiku-4-5"
+claude_client = Anthropic(api_key=ANTHROPIC_API_KEY) if ANTHROPIC_API_KEY else None
+
+MODEL = os.getenv("AI_MODEL", "claude-sonnet-4-6")
+FAST_MODEL = os.getenv("AI_FAST_MODEL", "claude-haiku-4-5")
+
+
+def _call_deepseek(prompt: str, system: str = None) -> str:
+    """Call DeepSeek API (OpenAI-compatible)."""
+    import httpx
+    headers = {"Authorization": f"Bearer {DEEPSEEK_API_KEY}", "Content-Type": "application/json"}
+    messages = []
+    if system:
+        messages.append({"role": "system", "content": system})
+    messages.append({"role": "user", "content": prompt})
+    payload = {"model": "deepseek-chat", "messages": messages, "max_tokens": 8096}
+    resp = httpx.post("https://api.deepseek.com/chat/completions", json=payload, headers=headers, timeout=120)
+    resp.raise_for_status()
+    return resp.json()["choices"][0]["message"]["content"]
+
+
+def _call_openai(prompt: str, system: str = None) -> str:
+    """Call OpenAI API."""
+    import httpx
+    headers = {"Authorization": f"Bearer {OPENAI_API_KEY}", "Content-Type": "application/json"}
+    messages = []
+    if system:
+        messages.append({"role": "system", "content": system})
+    messages.append({"role": "user", "content": prompt})
+    model = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
+    payload = {"model": model, "messages": messages, "max_tokens": 8096}
+    resp = httpx.post("https://api.openai.com/v1/chat/completions", json=payload, headers=headers, timeout=120)
+    resp.raise_for_status()
+    return resp.json()["choices"][0]["message"]["content"]
 
 
 def _call_claude(prompt: str, system: str = None, fast: bool = False) -> str:
-    """Make a Claude API call and return the text response."""
-    model = FAST_MODEL if fast else MODEL
-    messages = [{"role": "user", "content": prompt}]
-    kwargs = {"model": model, "max_tokens": 8096, "messages": messages}
-    if system:
-        kwargs["system"] = system
-    response = client.messages.create(**kwargs)
-    return response.content[0].text
+    """Route to the configured AI provider."""
+    provider = AI_PROVIDER.lower()
+
+    if provider == "deepseek" and DEEPSEEK_API_KEY:
+        return _call_deepseek(prompt, system)
+    elif provider == "openai" and OPENAI_API_KEY:
+        return _call_openai(prompt, system)
+    else:
+        # Default: Claude
+        model = FAST_MODEL if fast else MODEL
+        messages = [{"role": "user", "content": prompt}]
+        kwargs = {"model": model, "max_tokens": 8096, "messages": messages}
+        if system:
+            kwargs["system"] = system
+        response = claude_client.messages.create(**kwargs)
+        return response.content[0].text
 
 
 def _parse_json(text: str) -> any:
