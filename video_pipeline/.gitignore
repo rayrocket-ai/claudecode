@@ -1,0 +1,17 @@
+input/*
+!input/.gitkeep
+output/*
+!output/.gitkeep
+work/*
+!work/.gitkeep
+*.mp4
+*.mov
+*.mkv
+*.webm
+*.wav
+*.m4a
+*.mp3
+*.srt
+*.words.json
+*.segments.json
+__pycache__/
