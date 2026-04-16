@@ -9,5 +9,7 @@ services:
         sync: false
       - key: SCRIPT_MODEL
         value: claude-haiku-4-5-20251001
+      - key: APIFY_TOKEN
+        sync: false
       - key: PYTHON_VERSION
         value: "3.11"

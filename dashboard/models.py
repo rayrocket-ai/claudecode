@@ -86,12 +86,17 @@ class TrendingItem(Base):
 
     id = Column(String, primary_key=True, default=_new_id)
     batch_id = Column(String, ForeignKey("daily_batches.id"), nullable=False)
-    source = Column(String, nullable=False)  # google_trends, rss_news, reddit, bank_of_canada
-    category = Column(String, nullable=False)  # real_estate, mortgage, politics, sports, general
+    source = Column(String, nullable=False)  # google_trends, rss_news, reddit, bank_of_canada, apify_instagram, apify_reddit
+    category = Column(String, nullable=False)  # real_estate, mortgage, politics, sports, general, business, lifestyle, viral
     title = Column(String, nullable=False)
     summary = Column(Text, default="")
     url = Column(String, default="")
     relevance_score = Column(Float, default=0.5)
+    velocity_score = Column(Float, default=0.0)  # 0-10: how fast it's growing
+    platform = Column(String, default="rss")  # instagram, reddit, google_trends, news, rss
+    engagement = Column(JSON, default=dict)  # {likes, comments, shares, views, subscribers}
+    author = Column(String, default="")  # creator handle for social posts
+    posted_at = Column(DateTime, nullable=True)  # original post timestamp
     raw_data = Column(JSON, default=dict)
     fetched_at = Column(DateTime, default=_utcnow)
 

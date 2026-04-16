@@ -329,6 +329,9 @@ def build_generation_prompt(
     politics_trends = format_trends("politics")
     sports_trends = format_trends("sports")
     general_trends = format_trends("general", limit=8)
+    business_trends = format_trends("business", limit=5)
+    lifestyle_trends = format_trends("lifestyle", limit=5)
+    viral_trends = format_trends("viral", limit=5)
 
     brand_values_str = ", ".join(brand_values) if brand_values else "safety, resilience, patience, family, hustle"
     display_name = (name or "RAY").upper()
@@ -379,6 +382,15 @@ SPORTS:
 
 GENERAL / VIRAL TOPICS:
 {general_trends}
+
+BUSINESS & TECH:
+{business_trends}
+
+LIFESTYLE:
+{lifestyle_trends}
+
+VIRAL / TRENDING FAST:
+{viral_trends}
 
 ═══ CONTENT PLAN — {num_scripts} SCRIPTS ═══
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

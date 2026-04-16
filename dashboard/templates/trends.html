@@ -6,7 +6,7 @@
     <div class="flex items-center justify-between mb-8">
         <div>
             <h1 class="text-2xl font-bold text-gray-900">Trending Data</h1>
-            <p class="text-gray-500 mt-1">Today's trending topics that inform your scripts.</p>
+            <p class="text-gray-500 mt-1">Multi-platform trending topics that inform your scripts.</p>
         </div>
         <button onclick="refreshTrends()" id="refresh-btn" class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
@@ -24,43 +24,84 @@
     </div>
 
     {% else %}
-    <div class="space-y-8">
-        {% set category_meta = {
-            'real_estate': {'label': 'Real Estate', 'icon': 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6', 'color': 'blue'},
-            'mortgage': {'label': 'Mortgage & Finance', 'icon': 'M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z', 'color': 'green'},
-            'politics': {'label': 'Politics & Economy', 'icon': 'M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4', 'color': 'red'},
-            'sports': {'label': 'Sports', 'icon': 'M13 10V3L4 14h7v7l9-11h-7z', 'color': 'orange'},
-            'general': {'label': 'General Trending', 'icon': 'M13 7h8m0 0v8m0-8l-8 8-4-4-6 6', 'color': 'gray'}
-        } %}
 
+    {% set platform_colors = {
+        'instagram': {'bg': 'bg-pink-100', 'text': 'text-pink-700', 'label': 'Instagram'},
+        'reddit': {'bg': 'bg-orange-100', 'text': 'text-orange-700', 'label': 'Reddit'},
+        'google_trends': {'bg': 'bg-blue-100', 'text': 'text-blue-700', 'label': 'Google Trends'},
+        'news': {'bg': 'bg-gray-100', 'text': 'text-gray-700', 'label': 'News'},
+        'rss': {'bg': 'bg-gray-50', 'text': 'text-gray-600', 'label': 'RSS'},
+    } %}
+
+    {% set category_meta = {
+        'real_estate': {'label': 'Real Estate', 'icon': 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6', 'color': 'blue'},
+        'mortgage': {'label': 'Mortgage & Finance', 'icon': 'M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z', 'color': 'green'},
+        'politics': {'label': 'Politics & Economy', 'icon': 'M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4', 'color': 'red'},
+        'sports': {'label': 'Sports', 'icon': 'M13 10V3L4 14h7v7l9-11h-7z', 'color': 'orange'},
+        'business': {'label': 'Business & Tech', 'icon': 'M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z', 'color': 'indigo'},
+        'lifestyle': {'label': 'Lifestyle', 'icon': 'M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z', 'color': 'pink'},
+        'viral': {'label': 'Viral / Trending Fast', 'icon': 'M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z', 'color': 'red'},
+        'general': {'label': 'General Trending', 'icon': 'M13 7h8m0 0v8m0-8l-8 8-4-4-6 6', 'color': 'gray'},
+    } %}
+
+    <div class="space-y-8">
         {% for category, items in by_category.items() %}
+        {% if items %}
         {% set meta = category_meta.get(category, {'label': category, 'icon': 'M13 7h8m0 0v8m0-8l-8 8-4-4-6 6', 'color': 'gray'}) %}
         <div>
             <h2 class="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
                 <svg class="w-5 h-5 text-{{ meta.color }}-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="{{ meta.icon }}"/></svg>
                 {{ meta.label }}
-                <span class="text-sm font-normal text-gray-400">({{ items|length }} items)</span>
+                <span class="text-sm font-normal text-gray-400">({{ items|length }})</span>
             </h2>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
                 {% for item in items[:9] %}
                 <div class="bg-white rounded-lg border border-gray-200 p-4 hover:shadow-sm transition-shadow">
-                    <div class="flex items-start justify-between gap-2">
-                        <h3 class="text-sm font-medium text-gray-900 line-clamp-2">{{ item.title }}</h3>
-                        <span class="inline-flex items-center px-1.5 py-0.5 rounded text-xs bg-gray-100 text-gray-500 flex-shrink-0">
-                            {{ item.source.replace('_', ' ') }}
+                    <div class="flex items-start justify-between gap-2 mb-2">
+                        <h3 class="text-sm font-medium text-gray-900 line-clamp-2 flex-1">{{ item.title }}</h3>
+                        {% set plat = item.platform if item.platform is defined else 'rss' %}
+                        {% set pc = platform_colors.get(plat, platform_colors['rss']) %}
+                        <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-medium {{ pc.bg }} {{ pc.text }} flex-shrink-0">
+                            {{ pc.label }}
                         </span>
                     </div>
+
+                    {% if item.author is defined and item.author %}
+                    <div class="text-[11px] text-gray-500 mb-1">{{ item.author }}</div>
+                    {% endif %}
+
                     {% if item.summary %}
-                    <p class="text-xs text-gray-500 mt-2 line-clamp-3">{{ item.summary[:150] }}</p>
+                    <p class="text-xs text-gray-500 mt-1 line-clamp-3">{{ item.summary[:200] }}</p>
                     {% endif %}
-                    {% if item.url %}
-                    <a href="{{ item.url }}" target="_blank" rel="noopener" class="text-xs text-blue-500 hover:text-blue-600 mt-2 inline-block">Source &rarr;</a>
-                    {% endif %}
+
+                    <div class="flex items-center gap-3 mt-2">
+                        {% set eng = item.engagement if item.engagement is defined and item.engagement is mapping else {} %}
+                        {% if eng.get('likes') %}
+                        <span class="text-[10px] text-gray-500">❤️ {{ eng.likes }}</span>
+                        {% endif %}
+                        {% if eng.get('comments') %}
+                        <span class="text-[10px] text-gray-500">💬 {{ eng.comments }}</span>
+                        {% endif %}
+                        {% if eng.get('shares') %}
+                        <span class="text-[10px] text-gray-500">🔁 {{ eng.shares }}</span>
+                        {% endif %}
+                        {% if eng.get('views') %}
+                        <span class="text-[10px] text-gray-500">👁 {{ eng.views }}</span>
+                        {% endif %}
+                        {% set vel = item.velocity_score if item.velocity_score is defined else 0 %}
+                        {% if vel and vel > 5 %}
+                        <span class="text-[10px] text-red-600 font-semibold">🔥 Rising fast</span>
+                        {% endif %}
+                        {% if item.url %}
+                        <a href="{{ item.url }}" target="_blank" rel="noopener" class="text-[10px] text-blue-500 hover:text-blue-600 ml-auto">Source &rarr;</a>
+                        {% endif %}
+                    </div>
                 </div>
                 {% endfor %}
             </div>
         </div>
+        {% endif %}
         {% endfor %}
     </div>
     {% endif %}
@@ -74,17 +115,17 @@ async function refreshTrends() {
     btn.disabled = true;
     btn.innerHTML = '<svg class="animate-spin h-4 w-4 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path></svg> Refreshing...';
 
-    try {
-        const resp = await fetch('/api/trends/refresh', { method: 'POST' });
-        const data = await resp.json();
-        if (resp.ok) {
-            showToast('Trends refreshed!');
-            window.location.reload();
-        } else {
-            showToast(data.message || 'Failed to refresh');
-        }
-    } catch (e) {
-        showToast('Network error');
+    const result = await apiFetch('/api/trends/refresh', { method: 'POST' });
+    if (result.billingError) {
+        btn.disabled = false;
+        return;
+    }
+    const data = result.data || {};
+    if (result.ok) {
+        showToast('Trends refreshed!');
+        window.location.reload();
+    } else {
+        showToast(data.message || 'Failed to refresh');
     }
 
     btn.disabled = false;

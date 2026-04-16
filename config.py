@@ -68,6 +68,11 @@ class Settings(BaseSettings):
     script_model: str = "claude-haiku-4-5-20251001"
     scripts_per_day: int = 7
 
+    # Apify (trending data scraper)
+    apify_token: str = ""
+    apify_cache_ttl_hours: int = 4
+    apify_enabled_actors: str = "instagram,reddit,google_trends,news"
+
     # Derived
     @property
     def authorized_user_id_list(self) -> list[int]:

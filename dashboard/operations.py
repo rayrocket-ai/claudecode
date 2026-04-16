@@ -338,6 +338,10 @@ async def save_trending_items(batch_id: str, items: list[dict[str, Any]]) -> Non
                 title=item.get("title", ""),
                 summary=item.get("summary", ""),
                 url=item.get("url", ""),
+                platform=item.get("platform", "rss"),
+                velocity_score=float(item.get("velocity_score") or 0),
+                engagement=item.get("engagement", {}),
+                author=item.get("author", ""),
                 raw_data=item.get("raw_data", {}),
             )
             session.add(ti)
@@ -388,6 +392,14 @@ async def seed_brand_pillars() -> None:
 
 # ── Lightweight SQLite migrations (ADD COLUMN idempotent) ─────────────
 
+TRENDING_ITEM_MIGRATIONS = [
+    ("velocity_score", "FLOAT DEFAULT 0.0"),
+    ("platform", "VARCHAR DEFAULT 'rss'"),
+    ("engagement", "JSON DEFAULT '{}'"),
+    ("author", "VARCHAR DEFAULT ''"),
+    ("posted_at", "DATETIME"),
+]
+
 VIDEO_SCRIPT_MIGRATIONS = [
     ("idea_id", "VARCHAR"),
     ("chosen_hook_id", "VARCHAR"),
@@ -418,7 +430,17 @@ async def run_light_migrations() -> None:
                 try:
                     await conn.execute(text(f"ALTER TABLE video_scripts ADD COLUMN {col_name} {col_type}"))
                 except Exception:
-                    pass  # column may already exist or table missing
+                    pass
+
+        # TrendingItem columns
+        result2 = await conn.execute(text("PRAGMA table_info(trending_items)"))
+        existing_ti_cols = {row[1] for row in result2.fetchall()}
+        for col_name, col_type in TRENDING_ITEM_MIGRATIONS:
+            if col_name not in existing_ti_cols:
+                try:
+                    await conn.execute(text(f"ALTER TABLE trending_items ADD COLUMN {col_name} {col_type}"))
+                except Exception:
+                    pass
 
 
 async def list_brand_pillars() -> list[BrandPillar]:

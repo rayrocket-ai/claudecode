@@ -220,14 +220,10 @@ async def fetch_reddit_posts() -> list[dict[str, Any]]:
 
 # ── Main Collector ────────────────────────────────────────────────────
 
-async def collect_all_trends() -> dict[str, list[dict[str, Any]]]:
-    """Collect trending data from all free sources.
-
-    Returns a dict keyed by category with lists of trending items.
-    """
+async def _collect_rss_trends() -> dict[str, list[dict[str, Any]]]:
+    """Original RSS-only collection. Used as fallback if Apify is not configured."""
     all_items: list[dict[str, Any]] = []
 
-    # Fetch from all sources
     google = await fetch_google_trends()
     rss = await fetch_rss_feeds()
     boc = await fetch_boc_rates()
@@ -238,29 +234,68 @@ async def collect_all_trends() -> dict[str, list[dict[str, Any]]]:
     all_items.extend(boc)
     all_items.extend(reddit)
 
-    # Group by category
     by_category: dict[str, list[dict[str, Any]]] = {
-        "real_estate": [],
-        "mortgage": [],
-        "politics": [],
-        "sports": [],
-        "general": [],
+        "real_estate": [], "mortgage": [], "politics": [],
+        "sports": [], "general": [], "business": [],
+        "lifestyle": [], "viral": [],
     }
 
     for item in all_items:
         cat = item.get("category", "general")
-        if cat in by_category:
-            by_category[cat].append(item)
-        else:
-            by_category["general"].append(item)
+        by_category.setdefault(cat, []).append(item)
 
-    # Sort each category by relevance (Reddit score, recency, etc.)
     for cat in by_category:
         by_category[cat] = sorted(
             by_category[cat],
             key=lambda x: x.get("raw_data", {}).get("score", 0),
             reverse=True,
         )
+
+    return by_category
+
+
+async def collect_all_trends() -> dict[str, list[dict[str, Any]]]:
+    """Collect trending data from Apify (if configured) or RSS fallback.
+
+    Tries Apify first — richer data from Instagram, Reddit, Google Trends,
+    and news. Falls back to RSS if APIFY_TOKEN is missing or Apify fails.
+    Always supplements with BoC rates (free, no API key needed).
+    """
+    from config import get_settings
+    settings = get_settings()
+
+    by_category: dict[str, list[dict[str, Any]]] = {}
+
+    # Try Apify first
+    if settings.apify_token:
+        try:
+            from dashboard.apify_scraper import ApifyTrendingEngine
+            engine = ApifyTrendingEngine(
+                token=settings.apify_token,
+                enabled_actors=settings.apify_enabled_actors,
+            )
+            by_category = await engine.fetch_all_trending()
+            logger.info(
+                f"Apify collected: "
+                + ", ".join(f"{k}={len(v)}" for k, v in by_category.items())
+            )
+        except Exception as e:
+            logger.warning(f"Apify scrape failed, falling back to RSS: {e}")
+            by_category = {}
+
+    # Fallback to RSS if Apify returned nothing
+    if not any(by_category.values()):
+        logger.info("Using RSS fallback for trending data")
+        by_category = await _collect_rss_trends()
+
+    # Always supplement with BoC rates (free, instant)
+    boc = await fetch_boc_rates()
+    if boc:
+        by_category.setdefault("mortgage", []).extend(boc)
+
+    # Ensure all expected categories exist (even if empty)
+    for cat in ("real_estate", "mortgage", "politics", "sports", "general", "business", "lifestyle", "viral"):
+        by_category.setdefault(cat, [])
 
     logger.info(
         f"Collected trends: "
