@@ -10,8 +10,11 @@ aiosqlite>=0.19.0
 # PDF generation (fallback)
 reportlab>=4.0.0
 
-# Browser automation (TransactionDesk / REALM)
+# Browser automation (TransactionDesk / REALM / Higgsfield browser backend)
 playwright>=1.44.0
+
+# Higgsfield Cloud API (tour video generation)
+higgsfield-client>=0.1.0
 
 # Logging
 structlog>=23.2.0

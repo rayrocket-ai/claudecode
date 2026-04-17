@@ -40,6 +40,7 @@ async def post_init(application: Application) -> None:
         BotCommand("start", "Main menu"),
         BotCommand("new", "Create a new document"),
         BotCommand("tour", "Generate a house tour video"),
+        BotCommand("higgsfieldtest", "Test Higgsfield API credentials"),
         BotCommand("higgsfieldlogin", "Log in to Higgsfield (browser backend)"),
         BotCommand("realmtest", "Test REALM / TransactionDesk connection"),
         BotCommand("help", "Show help"),

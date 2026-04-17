@@ -59,10 +59,13 @@ class Settings(BaseSettings):
     smtp_from: str = ""
 
     # Higgsfield (tour video generation)
-    higgsfield_api_key: str = ""
+    higgsfield_api_key: str = ""       # ID portion from cloud.higgsfield.ai/api-keys
+    higgsfield_api_secret: str = ""    # Secret portion (paired with API key)
     higgsfield_model: str = "standard"  # standard or soul_cinema
-    # Backend: "api" uses cloud.higgsfield.ai API, "browser" uses Playwright on higgsfield.ai
-    higgsfield_backend: str = "browser"
+    # Backend: "api" uses cloud.higgsfield.ai SDK, "browser" uses Playwright on higgsfield.ai
+    higgsfield_backend: str = "api"
+    # Optional override for the image-to-video endpoint ID
+    higgsfield_i2v_endpoint: str = ""
     tour_max_photos: int = 10
     tour_clip_duration: int = 5  # seconds per clip (3-5)
 
@@ -94,7 +97,12 @@ class Settings(BaseSettings):
         # "browser" backend only needs a logged-in Playwright profile (no API key)
         if self.higgsfield_backend == "browser":
             return True
-        return bool(self.higgsfield_api_key)
+        # "api" backend needs both key + secret (or a combined key with colon)
+        if self.higgsfield_api_key and self.higgsfield_api_secret:
+            return True
+        if self.higgsfield_api_key and ":" in self.higgsfield_api_key:
+            return True
+        return False
 
 
 # Paths

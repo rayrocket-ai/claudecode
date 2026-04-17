@@ -188,6 +188,27 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
     return IDLE
 
 
+async def higgsfield_test_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    """Test the Higgsfield Cloud API credentials."""
+    user = update.effective_user
+    if not _is_authorized(user.id):
+        return IDLE
+
+    await _send(update, "🔄 Testing Higgsfield API connection...")
+
+    try:
+        from integrations.higgsfield import test_connection
+        result = await test_connection()
+        if result.get("ok"):
+            note = result.get("note", "")
+            await _send(update, f"✅ Higgsfield credentials accepted.\n{note}")
+        else:
+            await _send(update, f"❌ Higgsfield test failed: {result.get('error')}")
+    except Exception as e:
+        await _send(update, f"❌ Error: {e}")
+    return IDLE
+
+
 async def higgsfield_login_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     """Open a visible browser so the user can log in to Higgsfield once.
 
@@ -1011,6 +1032,7 @@ def build_conversation_handler() -> ConversationHandler:
             CommandHandler("start", start_command),
             CommandHandler("new", lambda u, c: menu_callback.__wrapped__(u, c) if False else _new_doc_entry(u, c)),
             CommandHandler("tour", _tour_entry),
+            CommandHandler("higgsfieldtest", higgsfield_test_command),
             CommandHandler("higgsfieldlogin", higgsfield_login_command),
             CommandHandler("realmtest", realm_test_command),
             CommandHandler("help", help_command),
