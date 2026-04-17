@@ -61,6 +61,8 @@ class Settings(BaseSettings):
     # Higgsfield (tour video generation)
     higgsfield_api_key: str = ""
     higgsfield_model: str = "standard"  # standard or soul_cinema
+    # Backend: "api" uses cloud.higgsfield.ai API, "browser" uses Playwright on higgsfield.ai
+    higgsfield_backend: str = "browser"
     tour_max_photos: int = 10
     tour_clip_duration: int = 5  # seconds per clip (3-5)
 
@@ -89,6 +91,9 @@ class Settings(BaseSettings):
 
     @property
     def is_higgsfield_configured(self) -> bool:
+        # "browser" backend only needs a logged-in Playwright profile (no API key)
+        if self.higgsfield_backend == "browser":
+            return True
         return bool(self.higgsfield_api_key)
 
 

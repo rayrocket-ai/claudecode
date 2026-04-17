@@ -188,6 +188,46 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
     return IDLE
 
 
+async def higgsfield_login_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    """Open a visible browser so the user can log in to Higgsfield once.
+
+    Session is saved in storage/higgsfield_profile and reused thereafter.
+    Only works when the bot host has a display (or X forwarding).
+    """
+    user = update.effective_user
+    if not _is_authorized(user.id):
+        return IDLE
+
+    settings = get_settings()
+    if settings.higgsfield_backend.lower() != "browser":
+        await _send(
+            update,
+            "ℹ️ Higgsfield backend is set to API mode. "
+            "Set `HIGGSFIELD_BACKEND=browser` in .env to use the Playwright login.",
+            parse_mode="Markdown",
+        )
+        return IDLE
+
+    await _send(
+        update,
+        "🌐 Opening a browser window on the bot host for Higgsfield login...\n\n"
+        "Complete SSO login (Google/Microsoft/Apple). "
+        "Session will be saved for future tour video generations.",
+    )
+
+    try:
+        from integrations.higgsfield_browser import interactive_login_flow
+        success = await interactive_login_flow()
+        if success:
+            await _send(update, "✅ Higgsfield login saved. You can now use /tour.")
+        else:
+            await _send(update, "⚠️ Login not detected before timeout. Please try again.")
+    except Exception as e:
+        await _send(update, f"❌ Login failed: {e}")
+
+    return IDLE
+
+
 async def realm_test_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     """Handle /realmtest — test TransactionDesk connection."""
     user = update.effective_user
@@ -971,6 +1011,7 @@ def build_conversation_handler() -> ConversationHandler:
             CommandHandler("start", start_command),
             CommandHandler("new", lambda u, c: menu_callback.__wrapped__(u, c) if False else _new_doc_entry(u, c)),
             CommandHandler("tour", _tour_entry),
+            CommandHandler("higgsfieldlogin", higgsfield_login_command),
             CommandHandler("realmtest", realm_test_command),
             CommandHandler("help", help_command),
             MessageHandler(filters.TEXT & ~filters.COMMAND, idle_message),

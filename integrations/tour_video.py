@@ -15,7 +15,7 @@ import subprocess
 from pathlib import Path
 from typing import Any
 
-from config import STORAGE_DIR
+from config import STORAGE_DIR, get_settings
 from integrations.higgsfield import (
     HiggsFieldClient,
     ROOM_PROMPTS,
@@ -90,51 +90,95 @@ async def generate_tour_video(
         await progress_callback("fetching_photos", 1, 1)
 
     # Step 2: Generate video clips from each photo
-    client = HiggsFieldClient()
+    settings = get_settings()
+    backend = settings.higgsfield_backend.lower()
+
     tour_dir = TOURS_DIR / listing.get("mls_number", "tour")
     tour_dir.mkdir(exist_ok=True)
 
     clip_paths: list[Path] = []
     total_photos = len(photos)
-    semaphore = asyncio.Semaphore(concurrency)
 
-    async def generate_clip(index: int, photo_path: Path) -> Path | None:
-        """Generate a single video clip from a photo."""
-        async with semaphore:
-            try:
-                # Determine room type and motion
-                room_type = classify_room_from_index(index, total_photos)
-                prompt = ROOM_PROMPTS.get(room_type, ROOM_PROMPTS["default"])
-                motion = WALKTHROUGH_MOTIONS[index % len(WALKTHROUGH_MOTIONS)]
+    if backend == "browser":
+        # Playwright backend — serialize generation in one browser session
+        from integrations.higgsfield_browser import HiggsFieldBrowser
 
-                clip_path = tour_dir / f"clip_{index:02d}.mp4"
-
-                if progress_callback:
-                    await progress_callback("generating_clips", index, total_photos)
-
-                logger.info(
-                    "Generating clip %d/%d: %s (%s)",
-                    index + 1, total_photos, room_type, motion["type"],
+        clip_paths = []
+        async with HiggsFieldBrowser() as hf:
+            if not await hf.is_logged_in():
+                raise RuntimeError(
+                    "Higgsfield not logged in. Run the /higgsfieldlogin command "
+                    "first (or call interactive_login_flow() once) to save a session."
                 )
 
-                await client.generate_and_download(
-                    photo_path,
-                    clip_path,
-                    prompt=prompt,
-                    motion_type=motion["type"],
-                    duration=clip_duration,
-                    model=model,
-                )
+            for index, photo_path in enumerate(photos):
+                try:
+                    room_type = classify_room_from_index(index, total_photos)
+                    prompt = ROOM_PROMPTS.get(room_type, ROOM_PROMPTS["default"])
+                    motion = WALKTHROUGH_MOTIONS[index % len(WALKTHROUGH_MOTIONS)]
 
-                return clip_path
+                    if progress_callback:
+                        await progress_callback("generating_clips", index, total_photos)
 
-            except Exception as e:
-                logger.error("Failed to generate clip %d: %s", index, e)
-                return None
+                    logger.info(
+                        "Generating clip %d/%d via browser: %s (%s)",
+                        index + 1, total_photos, room_type, motion["type"],
+                    )
 
-    # Run clip generation with controlled concurrency
-    tasks = [generate_clip(i, photo) for i, photo in enumerate(photos)]
-    results = await asyncio.gather(*tasks)
+                    video_path = await hf.generate_video_from_image(
+                        photo_path,
+                        prompt=prompt,
+                        duration=clip_duration,
+                        model=model,
+                        motion=motion["type"],
+                    )
+
+                    # Copy into tour_dir for consistent naming
+                    final_clip = tour_dir / f"clip_{index:02d}.mp4"
+                    import shutil
+                    shutil.copy2(video_path, final_clip)
+                    clip_paths.append(final_clip)
+
+                except Exception as e:
+                    logger.error("Failed to generate clip %d (browser): %s", index, e)
+        results = clip_paths
+    else:
+        # API backend — parallel generation via httpx
+        client = HiggsFieldClient()
+        semaphore = asyncio.Semaphore(concurrency)
+
+        async def generate_clip(index: int, photo_path: Path) -> Path | None:
+            async with semaphore:
+                try:
+                    room_type = classify_room_from_index(index, total_photos)
+                    prompt = ROOM_PROMPTS.get(room_type, ROOM_PROMPTS["default"])
+                    motion = WALKTHROUGH_MOTIONS[index % len(WALKTHROUGH_MOTIONS)]
+
+                    clip_path = tour_dir / f"clip_{index:02d}.mp4"
+
+                    if progress_callback:
+                        await progress_callback("generating_clips", index, total_photos)
+
+                    logger.info(
+                        "Generating clip %d/%d via API: %s (%s)",
+                        index + 1, total_photos, room_type, motion["type"],
+                    )
+
+                    await client.generate_and_download(
+                        photo_path,
+                        clip_path,
+                        prompt=prompt,
+                        motion_type=motion["type"],
+                        duration=clip_duration,
+                        model=model,
+                    )
+                    return clip_path
+                except Exception as e:
+                    logger.error("Failed to generate clip %d (API): %s", index, e)
+                    return None
+
+        tasks = [generate_clip(i, photo) for i, photo in enumerate(photos)]
+        results = await asyncio.gather(*tasks)
 
     clip_paths = [p for p in results if p is not None]
 
