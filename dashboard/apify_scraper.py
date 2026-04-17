@@ -82,8 +82,8 @@ class ApifyTrendingEngine:
     """Fetches trending data from multiple platforms via Apify actors."""
 
     def __init__(self, token: str, enabled_actors: str = "instagram,reddit,google_trends,news"):
-        from apify_client import ApifyClient
-        self.client = ApifyClient(token)
+        from apify_client import ApifyClientAsync
+        self.client = ApifyClientAsync(token)
         self.enabled = set(a.strip() for a in enabled_actors.split(",") if a.strip())
 
     async def fetch_all_trending(self) -> dict[str, list[dict[str, Any]]]:
@@ -137,12 +137,12 @@ class ApifyTrendingEngine:
                 "resultsLimit": 30,
                 "resultsType": "posts",
             }
-            run = self.client.actor("apify/instagram-hashtag-scraper").call(
+            run = await self.client.actor("apify/instagram-hashtag-scraper").call(
                 run_input=run_input,
                 timeout_secs=120,
             )
             dataset = self.client.dataset(run["defaultDatasetId"])
-            for post in dataset.iterate_items():
+            async for post in dataset.iterate_items():
                 caption = (post.get("caption") or "")[:500]
                 likes = post.get("likesCount") or post.get("likes") or 0
                 comments = post.get("commentsCount") or post.get("comments") or 0
@@ -186,12 +186,12 @@ class ApifyTrendingEngine:
                 "maxItems": 50,
                 "sort": "hot",
             }
-            run = self.client.actor("trudax/reddit-scraper").call(
+            run = await self.client.actor("trudax/reddit-scraper").call(
                 run_input=run_input,
                 timeout_secs=120,
             )
             dataset = self.client.dataset(run["defaultDatasetId"])
-            for post in dataset.iterate_items():
+            async for post in dataset.iterate_items():
                 title = (post.get("title") or "")[:200]
                 body = (post.get("body") or post.get("selftext") or "")[:500]
                 ups = post.get("numberOfUpvotes") or post.get("ups") or post.get("score") or 0
@@ -232,12 +232,12 @@ class ApifyTrendingEngine:
                 "timeRange": "now 7-d",
                 "maxItems": 30,
             }
-            run = self.client.actor("emastra/google-trends-scraper").call(
+            run = await self.client.actor("emastra/google-trends-scraper").call(
                 run_input=run_input,
                 timeout_secs=90,
             )
             dataset = self.client.dataset(run["defaultDatasetId"])
-            for trend in dataset.iterate_items():
+            async for trend in dataset.iterate_items():
                 query = trend.get("term") or trend.get("query") or trend.get("title") or ""
                 value = trend.get("value") or trend.get("interest") or 0
 
@@ -266,12 +266,12 @@ class ApifyTrendingEngine:
                 "maxPagesPerCrawl": 20,
                 "onlyNewArticles": True,
             }
-            run = self.client.actor("lukaskrivka/article-extractor-smart").call(
+            run = await self.client.actor("lukaskrivka/article-extractor-smart").call(
                 run_input=run_input,
                 timeout_secs=120,
             )
             dataset = self.client.dataset(run["defaultDatasetId"])
-            for article in dataset.iterate_items():
+            async for article in dataset.iterate_items():
                 title = (article.get("title") or "")[:200]
                 text = (article.get("text") or article.get("description") or "")[:500]
                 url = article.get("url") or ""

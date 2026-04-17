@@ -5,7 +5,7 @@
 <div class="p-6 lg:p-8 max-w-3xl mx-auto">
     <div class="mb-8">
         <h1 class="text-2xl font-bold text-gray-900">Creator Profile</h1>
-        <p class="text-gray-500 mt-1">Set up your personal brand so the AI can create authentic, personalized scripts.</p>
+        <p class="text-gray-500 mt-1">Every chapter of your story becomes raw material the AI pulls into scripts. Keep it specific, sensory, and real.</p>
     </div>
 
     <form id="profile-form" class="space-y-8">
@@ -16,70 +16,71 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Your Name</label>
-                    <input type="text" name="name" value="{{ profile.name }}" placeholder="e.g., Mike" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-gray-900 focus:border-transparent">
+                    <input type="text" name="name" value="{{ profile.name }}" placeholder="e.g., Ray" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-gray-900 focus:border-transparent">
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Location</label>
-                    <input type="text" name="location" value="{{ profile.location }}" placeholder="e.g., Toronto, Ontario" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-gray-900 focus:border-transparent">
+                    <input type="text" name="location" value="{{ profile.location }}" placeholder="e.g., Greater Toronto Area" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-gray-900 focus:border-transparent">
                 </div>
             </div>
 
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">Profession</label>
-                <input type="text" name="profession" value="{{ profile.profession }}" placeholder="e.g., Real Estate & Mortgage Professional" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-gray-900 focus:border-transparent">
+                <input type="text" name="profession" value="{{ profile.profession }}" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-gray-900 focus:border-transparent">
             </div>
 
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">Bio</label>
-                <textarea name="bio" rows="3" placeholder="A short bio about you. What drives you? What do you help people with? This gets woven into your scripts." class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-gray-900 focus:border-transparent">{{ profile.bio }}</textarea>
+                <textarea name="bio" rows="5" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-gray-900 focus:border-transparent">{{ profile.bio }}</textarea>
             </div>
 
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">Brand Values (comma-separated)</label>
-                <input type="text" name="brand_values" value="{{ (profile.brand_values or []) | join(', ') }}" placeholder="e.g., authenticity, education, family, hard work, community" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-gray-900 focus:border-transparent">
+                <input type="text" name="brand_values" value="{{ (profile.brand_values or []) | join(', ') }}" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-gray-900 focus:border-transparent">
+                <p class="text-xs text-gray-500 mt-1">These phrases get used as refrains across scripts. Keep them sharp.</p>
             </div>
         </div>
 
-        <!-- Story Elements -->
+        <!-- Your Story: all 14 chapters -->
         <div class="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
-            <h2 class="text-lg font-semibold text-gray-900">Your Story</h2>
-            <p class="text-sm text-gray-500">These stories get woven naturally into your scripts to make you relatable and memorable.</p>
+            <h2 class="text-lg font-semibold text-gray-900">Your Story — Every Chapter</h2>
+            <p class="text-sm text-gray-500">Pre-filled with Ray's real arc. Edit any chapter to add texture, dialogue, specific dates, specific moments. The AI rotates through these so no two scripts feel the same.</p>
 
             {% set stories = profile.story_elements or {} %}
+            {% set chapters = [
+                ('origin', 'Origin — Afghanistan', 'Where you were born, what the world looked like, earliest memories. Specific images, sounds, smells.'),
+                ('first_escape', 'First Escape — Afghan→Pakistan', 'The night you left. How you got out. The details only someone who lived it would know.'),
+                ('pakistan_years', 'Pakistan Years', 'Peshawar. Schools you couldn\'t attend. Work your parents couldn\'t find. Daily life.'),
+                ('journey_to_russia', 'Journey to Russia', 'The bus through wilderness. Fake passports. Moments where things could have gone wrong.'),
+                ('arrival_moscow', 'Arrival in Moscow', 'August 23, 2000. The moment you reunited with your father. What you felt, what he looked like.'),
+                ('russia_years', 'Russia Years — The Business', 'Nine years. Roadside table to factory. Wealth, houses, apartments. What the money bought and what it didn\'t.'),
+                ('russia_racism', 'Russia Years — The Racism', 'Police bribes. Bullies. Classmates telling you to get out. The moment you learned money isn\'t enough.'),
+                ('canada_decision', 'Canada Decision (2006)', 'Why Canada. Who decided. The three-year wait.'),
+                ('canada_arrival', 'Arrival in Toronto', 'October 13, 2009. Pearson. Your sponsor. The tears. Your father starting over again.'),
+                ('real_estate_path', 'Path into Real Estate', 'How you got licensed. First deals. Why THIS work and not another job.'),
+                ('family', 'Family', 'Your parents\' sacrifices, your why, your motivation that comes from them.'),
+                ('challenges', 'Challenges Overcome', 'Specific setbacks, rejections, hard periods — and how you moved through them.'),
+                ('victories', 'Victories', 'Real wins: licenses earned, clients helped, milestones hit. With dates and specifics.'),
+                ('background', 'Short Background Summary', 'One-paragraph version of the whole arc — used as a quick reference in prompts.'),
+            ] %}
 
+            {% for key, label, hint in chapters %}
             <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Family</label>
-                <textarea name="story_family" rows="2" placeholder="Why does your family drive you? Kids, spouse, parents? What do they mean to your hustle?" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-gray-900 focus:border-transparent">{{ stories.get('family', '') }}</textarea>
+                <label class="block text-sm font-medium text-gray-700 mb-1">{{ label }}</label>
+                <textarea name="story_{{ key }}" rows="3" placeholder="{{ hint }}" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-gray-900 focus:border-transparent">{{ stories.get(key, '') }}</textarea>
+                <p class="text-xs text-gray-400 mt-1">{{ hint }}</p>
             </div>
-
-            <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Challenges & Struggles</label>
-                <textarea name="story_challenges" rows="2" placeholder="What obstacles have you overcome? Early career struggles, rejections, financial hardships?" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-gray-900 focus:border-transparent">{{ stories.get('challenges', '') }}</textarea>
-            </div>
-
-            <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Victories & Wins</label>
-                <textarea name="story_victories" rows="2" placeholder="Biggest career wins, milestones, deals you're proud of, client success stories." class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-gray-900 focus:border-transparent">{{ stories.get('victories', '') }}</textarea>
-            </div>
-
-            <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Travels & Experiences</label>
-                <textarea name="story_travels" rows="2" placeholder="Places you've been, experiences that shaped you, trips with family." class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-gray-900 focus:border-transparent">{{ stories.get('travels', '') }}</textarea>
-            </div>
-
-            <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Background</label>
-                <textarea name="story_background" rows="2" placeholder="Where you came from, how you got into real estate/mortgage, your origin story." class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-gray-900 focus:border-transparent">{{ stories.get('background', '') }}</textarea>
-            </div>
+            {% endfor %}
         </div>
 
-        <!-- Tone & Platforms -->
+        <!-- Tone -->
         <div class="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
             <h2 class="text-lg font-semibold text-gray-900">Content Style</h2>
 
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">Tone</label>
                 <select name="tone" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-gray-900 focus:border-transparent">
+                    <option value="grounded_authoritative_personal" {% if profile.tone == 'grounded_authoritative_personal' %}selected{% endif %}>Grounded, Authoritative, Personal (Ray default)</option>
                     <option value="motivational_educational" {% if profile.tone == 'motivational_educational' %}selected{% endif %}>Motivational & Educational</option>
                     <option value="raw_authentic" {% if profile.tone == 'raw_authentic' %}selected{% endif %}>Raw & Authentic</option>
                     <option value="professional_authority" {% if profile.tone == 'professional_authority' %}selected{% endif %}>Professional Authority</option>
@@ -88,8 +89,8 @@
             </div>
         </div>
 
-        <div class="flex justify-end">
-            <button type="submit" class="px-6 py-3 bg-gray-900 text-white rounded-lg font-medium hover:bg-gray-800">
+        <div class="flex justify-end sticky bottom-4">
+            <button type="submit" class="px-6 py-3 bg-gray-900 text-white rounded-lg font-medium hover:bg-gray-800 shadow-lg">
                 Save Profile
             </button>
         </div>
@@ -99,6 +100,14 @@
 
 {% block scripts %}
 <script>
+// List of story chapter keys — must match the server-side schema
+const STORY_KEYS = [
+    'origin', 'first_escape', 'pakistan_years', 'journey_to_russia',
+    'arrival_moscow', 'russia_years', 'russia_racism', 'canada_decision',
+    'canada_arrival', 'real_estate_path', 'family', 'challenges',
+    'victories', 'background'
+];
+
 document.getElementById('profile-form').addEventListener('submit', async function(e) {
     e.preventDefault();
     const form = e.target;
@@ -108,6 +117,13 @@ document.getElementById('profile-form').addEventListener('submit', async functio
         .map(v => v.trim())
         .filter(v => v.length > 0);
 
+    // Collect ALL story chapters so we never wipe data
+    const story_elements = {};
+    for (const key of STORY_KEYS) {
+        const el = form.elements['story_' + key];
+        if (el) story_elements[key] = el.value || '';
+    }
+
     const data = {
         name: form.name.value,
         location: form.location.value,
@@ -115,13 +131,7 @@ document.getElementById('profile-form').addEventListener('submit', async functio
         bio: form.bio.value,
         brand_values: brandValues,
         tone: form.tone.value,
-        story_elements: {
-            family: form.story_family.value,
-            challenges: form.story_challenges.value,
-            victories: form.story_victories.value,
-            travels: form.story_travels.value,
-            background: form.story_background.value,
-        },
+        story_elements: story_elements,
     };
 
     try {

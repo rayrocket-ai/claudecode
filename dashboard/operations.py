@@ -176,7 +176,12 @@ async def get_or_create_profile() -> CreatorProfile:
 
 
 async def update_profile(data: dict[str, Any]) -> CreatorProfile:
-    """Update the creator profile with new data."""
+    """Update the creator profile with new data.
+
+    story_elements is MERGED with the existing dict (partial updates safe —
+    sending {origin: "new"} will not wipe pakistan_years). All other fields
+    are replaced wholesale.
+    """
     async with get_session() as session:
         result = await session.execute(select(CreatorProfile))
         profile = result.scalar_one_or_none()
@@ -185,7 +190,17 @@ async def update_profile(data: dict[str, Any]) -> CreatorProfile:
             session.add(profile)
 
         for key, value in data.items():
-            if hasattr(profile, key) and key not in ("id", "created_at"):
+            if not hasattr(profile, key) or key in ("id", "created_at"):
+                continue
+
+            # Merge story_elements dicts instead of replacing — partial
+            # saves must not wipe unspecified chapters
+            if key == "story_elements" and isinstance(value, dict):
+                existing = dict(profile.story_elements or {})
+                existing.update(value)
+                profile.story_elements = existing
+                flag_modified(profile, "story_elements")
+            else:
                 setattr(profile, key, value)
                 if isinstance(value, (dict, list)):
                     flag_modified(profile, key)
