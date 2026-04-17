@@ -12,6 +12,8 @@ from telegram.ext import Application, CommandHandler, ContextTypes
 
 from bot.handlers.conversation import build_conversation_handler
 from bot.handlers.showings import register_showing_handlers
+from bot.handlers.status import register_status_handlers
+from bot.handlers.tour import build_tour_handler
 from config import get_settings
 from db.operations import init_db
 
@@ -41,11 +43,18 @@ async def post_init(application: Application) -> None:
 
     commands = [
         BotCommand("start", "Main menu"),
-        BotCommand("new", "Create a new document"),
+        BotCommand("tour", "Book a showing tour (route-optimized)"),
+        BotCommand("book", "Alias for /tour"),
         BotCommand("showings", "View pending & upcoming showings"),
         BotCommand("today", "Today's showing schedule"),
+        BotCommand("summary", "Showings summary for a date"),
+        BotCommand("pending", "Pending requests on your listings"),
+        BotCommand("approve", "Approve a showing: /approve <id>"),
+        BotCommand("decline", "Decline a showing: /decline <id> [reason]"),
         BotCommand("listings", "View active listings"),
+        BotCommand("status", "Bot + session health check"),
         BotCommand("whoami", "Show your Telegram user ID"),
+        BotCommand("new", "Create a document (OREA forms)"),
         BotCommand("realmtest", "Test REALM / TransactionDesk connection"),
         BotCommand("help", "Show help"),
         BotCommand("cancel", "Cancel current operation"),
@@ -92,12 +101,20 @@ def main() -> None:
 
     app.add_handler(CommandHandler("whoami", whoami_command))
 
-    # Add conversation handler
-    conv_handler = build_conversation_handler()
-    app.add_handler(conv_handler)
+    # Tour booking conversation (must be added before the generic conv handler
+    # so its /tour and /book entry points win)
+    app.add_handler(build_tour_handler())
 
     # Add showing management handlers (commands + callback queries + polling)
     register_showing_handlers(app)
+
+    # Add status / summary / pending / approve / decline commands
+    register_status_handlers(app)
+
+    # Add conversation handler (OREA document generation) — register last so
+    # its message fallback doesn't swallow other command states
+    conv_handler = build_conversation_handler()
+    app.add_handler(conv_handler)
 
     # Start polling
     log.info("bot.polling", mode="polling")
