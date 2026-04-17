@@ -1,24 +1,46 @@
-# Core
-python-telegram-bot>=21.0
-anthropic>=0.39.0
-pydantic-settings>=2.1.0
+# Off-Market Property Dashboard — dependencies
+
+# Web framework
+fastapi>=0.115.0
+uvicorn[standard]>=0.32.0
+jinja2>=3.1.4
+python-multipart>=0.0.9
+itsdangerous>=2.2.0
+
+# Auth
+fastapi-users[sqlalchemy]>=13.0.0
+passlib[bcrypt]>=1.7.4
+python-jose[cryptography]>=3.3.0
 
 # Database
-sqlalchemy>=2.0.0
-aiosqlite>=0.19.0
+sqlalchemy>=2.0.30
+aiosqlite>=0.20.0
+asyncpg>=0.29.0
+psycopg2-binary>=2.9.9
+alembic>=1.13.2
+greenlet>=3.0.3
 
-# PDF generation (fallback)
-reportlab>=4.0.0
+# Settings / config
+pydantic>=2.7.0
+pydantic-settings>=2.4.0
 
-# Browser automation (TransactionDesk / REALM)
-playwright>=1.44.0
+# Scheduler / ingestion
+apscheduler>=3.10.4
 
-# Logging
-structlog>=23.2.0
+# Browser automation (REALM/TRREB scrape)
+playwright>=1.47.0
 
 # HTTP
-httpx>=0.25.0
+httpx>=0.27.0
+
+# AI (Claude — optional fuzzy address fallback, listing remark summaries)
+anthropic>=0.39.0
+
+# Address parsing (libpostal bindings; install `libpostal` system library)
+postal>=1.1.10
+
+# Logging
+structlog>=24.4.0
 
 # Utilities
-python-dateutil>=2.8.0
-# num2words removed (docopt build issue) — using inline implementation
+python-dateutil>=2.9.0

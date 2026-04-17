@@ -2,28 +2,33 @@
 
 from __future__ import annotations
 
-import os
 from pathlib import Path
+
 from pydantic_settings import BaseSettings
+
+
+BASE_DIR = Path(__file__).resolve().parent
+STORAGE_DIR = BASE_DIR / "storage"
+STORAGE_DIR.mkdir(exist_ok=True)
 
 
 class Settings(BaseSettings):
     """All application settings. Loaded from .env, then env vars."""
 
     model_config = {
-        "env_file": str(Path(__file__).resolve().parent / ".env"),
+        "env_file": str(BASE_DIR / ".env"),
         "env_file_encoding": "utf-8",
         "extra": "ignore",
-        "env_ignore_empty": True,  # empty env vars don't override .env
+        "env_ignore_empty": True,
     }
 
-    # Telegram
-    telegram_bot_token: str = ""
-    authorized_user_ids: str = ""
+    # Database
+    database_url: str = f"sqlite+aiosqlite:///{STORAGE_DIR / 'dashboard.db'}"
 
-    # AI
-    anthropic_api_key: str = ""
-    claude_model: str = "claude-sonnet-4-6"
+    # Web / auth
+    jwt_secret: str = "dev-insecure-change-me"
+    session_secret: str = "dev-insecure-change-me"
+    web_base_url: str = "http://localhost:8000"
 
     # REALM / TRREB
     realm_username: str = ""
@@ -33,60 +38,35 @@ class Settings(BaseSettings):
         "https://sso.ampre.ca/realms/trreb/protocol/openid-connect/auth"
     )
 
-    # Brokerage
-    brokerage_name: str = ""
-    brokerage_phone: str = ""
-    brokerage_fax: str = ""
-    brokerage_email: str = ""
-    brokerage_address: str = ""
+    # GHL (SMS relay for REALM 2FA)
+    ghl_api_key: str = ""
+    ghl_location_id: str = ""
+    ghl_phone_number: str = ""
+    ghl_api_base: str = "https://services.leadconnectorhq.com"
+    ghl_mfa_poll_seconds: int = 90
+
+    # Google Maps
+    google_maps_api_key: str = ""
+
+    # AI (optional)
+    anthropic_api_key: str = ""
+    claude_model: str = "claude-sonnet-4-6"
 
     # Browser
     browser_headless: bool = True
-    browser_slowmo: int = 100
+    browser_slowmo: int = 50
 
-    # DocuSign
-    docusign_account_id: str = ""
-    docusign_integration_key: str = ""
-    docusign_user_id: str = ""
-    docusign_private_key_path: str = ""
-    docusign_base_url: str = "https://demo.docusign.net/restapi"
-
-    # Email
-    smtp_host: str = ""
-    smtp_port: int = 587
-    smtp_user: str = ""
-    smtp_password: str = ""
-    smtp_from: str = ""
-
-    # SkySlope
-    skyslope_api_key: str = ""
-    skyslope_api_url: str = "https://api.skyslope.com"
-
-    # Derived
-    @property
-    def authorized_user_id_list(self) -> list[int]:
-        if not self.authorized_user_ids.strip():
-            return []
-        return [int(x.strip()) for x in self.authorized_user_ids.split(",") if x.strip()]
+    # Ingestion
+    backfill_days: int = 180
+    scraper_timezone: str = "America/Toronto"
 
     @property
     def is_realm_configured(self) -> bool:
         return bool(self.realm_username and self.realm_password)
 
     @property
-    def is_docusign_configured(self) -> bool:
-        return bool(self.docusign_account_id and self.docusign_integration_key)
-
-    @property
-    def is_smtp_configured(self) -> bool:
-        return bool(self.smtp_host and self.smtp_user)
-
-
-# Paths
-BASE_DIR = Path(__file__).resolve().parent
-STORAGE_DIR = BASE_DIR / "storage"
-DB_PATH = STORAGE_DIR / "realtor.db"
-STORAGE_DIR.mkdir(exist_ok=True)
+    def is_ghl_configured(self) -> bool:
+        return bool(self.ghl_api_key and self.ghl_phone_number)
 
 
 def get_settings() -> Settings:

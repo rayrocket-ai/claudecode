@@ -3,7 +3,9 @@
 .venv/
 venv/
 
-# Storage (sessions, generated PDFs)
+# Storage (local DB, scraper session cookies, etc.)
+storage/*.db
+storage/*.db-journal
 storage/*.json
 storage/*.pdf
 storage/*.png
