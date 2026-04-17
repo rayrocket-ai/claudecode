@@ -123,7 +123,7 @@ class Listing(Base):
     source = Column(String, nullable=False, default="TRREB")   # TRREB, CREB, ...
     mls_number = Column(String, nullable=False, index=True)
 
-    status = Column(String, nullable=False, index=True)
+    status = Column(String, nullable=False)
     # Active | Sold | Expired | Terminated | Suspended | Conditional
 
     list_price = Column(Float, nullable=True)
