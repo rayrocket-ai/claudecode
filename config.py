@@ -73,6 +73,26 @@ class Settings(BaseSettings):
     skyslope_api_key: str = ""
     skyslope_api_url: str = "https://api.skyslope.com"
 
+    # Google Sheets (Higgsfield tracking sheet)
+    google_sheets_credentials_path: str = ""
+    google_sheets_csv_url: str = ""
+    higgsfield_sheet_id: str = ""
+    higgsfield_worksheet_name: str = "Sheet1"
+    higgsfield_address_column: str = "address"
+    higgsfield_video_url_column: str = "video_url"
+    higgsfield_status_column: str = "status"
+    higgsfield_output_column: str = "final_video_url"
+
+    # Voiceover (ElevenLabs TTS)
+    elevenlabs_api_key: str = ""
+    elevenlabs_voice_id: str = "21m00Tcm4TlvDq8ikWAM"
+    elevenlabs_model_id: str = "eleven_turbo_v2_5"
+
+    # Voiceover tuning
+    voiceover_scene_threshold: float = 0.35
+    voiceover_min_scene_seconds: float = 1.5
+    voiceover_words_per_second: float = 2.4
+
     # Derived
     @property
     def authorized_user_id_list(self) -> list[int]:
@@ -103,6 +123,16 @@ class Settings(BaseSettings):
         if self.higgsfield_api_key and ":" in self.higgsfield_api_key:
             return True
         return False
+
+    @property
+    def is_google_sheets_configured(self) -> bool:
+        if self.google_sheets_csv_url:
+            return True
+        return bool(self.google_sheets_credentials_path and self.higgsfield_sheet_id)
+
+    @property
+    def is_voiceover_configured(self) -> bool:
+        return bool(self.elevenlabs_api_key and self.anthropic_api_key)
 
 
 # Paths
