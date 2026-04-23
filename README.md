@@ -68,6 +68,45 @@ content-engine/
 |---|---|---|
 | `ANTHROPIC_API_KEY` | Yes | Claude API key |
 | `DATABASE_URL` | No | Defaults to `sqlite:///./content.db` |
+| `FB_PAGE_ID` | FB agent | Numeric ID of Ray's Facebook Page |
+| `FB_PAGE_ACCESS_TOKEN` | FB agent | Long-lived Page Access Token |
+| `FB_APP_SECRET` | FB agent | App Secret (used to verify webhook signatures) |
+| `FB_VERIFY_TOKEN` | FB agent | Any random string — you pick it, then paste the same string into the Meta webhook UI |
+| `FB_GRAPH_VERSION` | No | Defaults to `v21.0` |
+
+## Facebook Comment Agent
+
+Claude drafts a public reply + private DM for every Facebook comment that looks like a real estate inquiry. Compliments and spam are auto-skipped. Drafts land in a review queue at **`/facebook`** — nothing is sent until you click Send.
+
+### One-time setup (Meta side)
+
+1. **Create a Meta App** at https://developers.facebook.com/apps → "Business" type.
+2. **Add products:** "Facebook Login for Business", "Webhooks", "Messenger".
+3. **Link Ray's Page** to the app (App Dashboard → Messenger → Settings → Add Page).
+4. **Generate a Page Access Token** and exchange it for a long-lived token:
+   ```bash
+   curl "https://graph.facebook.com/v21.0/oauth/access_token?grant_type=fb_exchange_token&client_id=APP_ID&client_secret=APP_SECRET&fb_exchange_token=SHORT_TOKEN"
+   ```
+   Put the result in `FB_PAGE_ACCESS_TOKEN`.
+5. **Required permissions/scopes on the token:** `pages_show_list`, `pages_read_engagement`, `pages_manage_engagement`, `pages_messaging`. Submit for App Review if you're going live beyond testers.
+6. **Configure the webhook** (App Dashboard → Webhooks → Page):
+   - Callback URL: `https://your-app.up.railway.app/webhook/facebook`
+   - Verify token: same random string you put in `FB_VERIFY_TOKEN`
+   - Subscribe to field: **`feed`** (this is the one that delivers comment events)
+7. **Subscribe the Page to the app's webhook** (one-time API call):
+   ```bash
+   curl -X POST "https://graph.facebook.com/v21.0/PAGE_ID/subscribed_apps?subscribed_fields=feed&access_token=PAGE_ACCESS_TOKEN"
+   ```
+
+### Local testing without a public URL
+
+Use the manual ingest endpoint to pull a single comment by ID and watch Claude draft a response:
+
+```bash
+curl -X POST http://localhost:8000/api/facebook/ingest -d "comment_id=123_456"
+```
+
+Then visit `/facebook` to review and send.
 
 ## Ray's Story
 

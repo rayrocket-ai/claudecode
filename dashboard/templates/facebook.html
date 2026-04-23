@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+{% block title %}Facebook Agent · Ray's Content Engine{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div class="page-header-left">
+    <h1 class="page-title">Facebook Agent</h1>
+    <p class="page-subtitle">
+      Claude drafts a reply + DM for every real estate inquiry. You approve before anything is sent.
+    </p>
+  </div>
+</div>
+
+{% if not fb_configured %}
+<div class="flash flash-info" style="opacity:1;">
+  <strong>Not configured yet.</strong> Set <code>FB_PAGE_ACCESS_TOKEN</code>,
+  <code>FB_PAGE_ID</code>, <code>FB_APP_SECRET</code>, and <code>FB_VERIFY_TOKEN</code>
+  in your environment, then point a Meta App webhook at
+  <code>/webhook/facebook</code> (feed field). See README for the setup walkthrough.
+</div>
+{% endif %}
+
+<div class="fb-filters" style="display:flex; gap:8px; margin:16px 0;">
+  <a href="/facebook?status_filter=drafted" class="btn {% if status_filter == 'drafted' %}btn-primary{% else %}btn-ghost{% endif %}">
+    Pending review ({{ counts.drafted }})
+  </a>
+  <a href="/facebook?status_filter=sent" class="btn {% if status_filter == 'sent' %}btn-primary{% else %}btn-ghost{% endif %}">
+    Sent ({{ counts.sent }})
+  </a>
+  <a href="/facebook?status_filter=skipped" class="btn {% if status_filter == 'skipped' %}btn-primary{% else %}btn-ghost{% endif %}">
+    Skipped ({{ counts.skipped }})
+  </a>
+  <a href="/facebook?status_filter=failed" class="btn {% if status_filter == 'failed' %}btn-primary{% else %}btn-ghost{% endif %}">
+    Failed ({{ counts.failed }})
+  </a>
+  <a href="/facebook?status_filter=all" class="btn {% if status_filter == 'all' %}btn-primary{% else %}btn-ghost{% endif %}">
+    All
+  </a>
+</div>
+
+{% if not comments %}
+<div class="empty-state">
+  <div class="empty-icon">💬</div>
+  <h2 class="empty-title">Nothing here yet</h2>
+  <p class="empty-text">New Facebook comments will appear here once your webhook is connected.</p>
+  <form method="post" action="/api/facebook/ingest" style="margin-top:12px;">
+    <input type="text" name="comment_id" placeholder="paste a FB comment_id to test"
+           style="padding:8px; width:320px;">
+    <button type="submit" class="btn btn-ghost">Ingest manually</button>
+  </form>
+</div>
+{% else %}
+
+<div class="fb-queue">
+  {% for c in comments %}
+  <div class="fb-row" style="border:1px solid var(--border, #333); padding:16px; margin-bottom:14px; border-radius:8px;">
+
+    <div class="fb-row-meta" style="display:flex; justify-content:space-between; font-size:12px; opacity:0.8;">
+      <div>
+        <strong>{{ c.author_name or "Facebook user" }}</strong>
+        · {{ c.received_at.strftime("%b %d, %H:%M") if c.received_at else "" }}
+        {% if c.permalink %} · <a href="{{ c.permalink }}" target="_blank" rel="noopener">view on FB ↗</a>{% endif %}
+      </div>
+      <div>
+        <span class="tag">{{ c.category or "—" }}</span>
+        <span class="tag">{{ c.status }}</span>
+      </div>
+    </div>
+
+    <div class="fb-comment" style="margin:10px 0; padding:10px; background:rgba(255,255,255,0.03); border-radius:6px;">
+      <div style="font-size:12px; opacity:0.7;">Their comment:</div>
+      <div>{{ c.message }}</div>
+      {% if c.intent %}
+      <div style="font-size:12px; opacity:0.7; margin-top:6px;">
+        <em>Claude read this as:</em> {{ c.intent }}
+      </div>
+      {% endif %}
+    </div>
+
+    {% if c.status in ["drafted", "failed"] and c.should_engage %}
+    <form method="post" action="/facebook/{{ c.id }}/send">
+      <label style="display:block; font-size:12px; opacity:0.7; margin-top:8px;">Public reply:</label>
+      <textarea name="draft_reply" rows="2" style="width:100%; padding:8px;">{{ c.draft_reply or "" }}</textarea>
+
+      <label style="display:block; font-size:12px; opacity:0.7; margin-top:8px;">Private DM:</label>
+      <textarea name="draft_dm" rows="4" style="width:100%; padding:8px;">{{ c.draft_dm or "" }}</textarea>
+
+      <div style="display:flex; gap:6px; margin-top:10px; flex-wrap:wrap;">
+        <button type="submit" name="action" value="both" class="btn btn-primary">Send reply + DM</button>
+        <button type="submit" name="action" value="reply" class="btn btn-ghost">Send reply only</button>
+        <button type="submit" name="action" value="dm" class="btn btn-ghost">Send DM only</button>
+        <button type="submit" name="action" value="skip" class="btn btn-ghost"
+                formaction="/facebook/{{ c.id }}/send"
+                onclick="return confirm('Skip this comment without sending anything?');">
+          Skip
+        </button>
+        <button type="submit" class="btn btn-ghost"
+                formaction="/facebook/{{ c.id }}/redraft"
+                formmethod="post">
+          Redraft with Claude
+        </button>
+      </div>
+    </form>
+    {% elif c.status == "skipped" %}
+    <div style="font-size:12px; opacity:0.7; margin-top:8px;">
+      Skipped — classified as <em>{{ c.category }}</em>.
+      <form method="post" action="/facebook/{{ c.id }}/redraft" style="display:inline;">
+        <button class="btn btn-ghost">Force redraft</button>
+      </form>
+    </div>
+    {% else %}
+    {% if c.draft_reply %}
+    <div style="margin-top:8px;"><strong>Reply sent:</strong> {{ c.draft_reply }}</div>
+    {% endif %}
+    {% if c.draft_dm %}
+    <div style="margin-top:8px;"><strong>DM sent:</strong> {{ c.draft_dm }}</div>
+    {% endif %}
+    {% if c.error %}
+    <div style="color:#c33; margin-top:8px;"><strong>Error:</strong> {{ c.error }}</div>
+    {% endif %}
+    {% endif %}
+
+  </div>
+  {% endfor %}
+</div>
+{% endif %}
+
+{% endblock %}

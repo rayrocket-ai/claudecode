@@ -17,7 +17,7 @@ load_dotenv()
 
 from .models import (
     init_db, get_db, CreatorProfile, BrandPillar, ClientStory,
-    DailyBatch, ContentIdea, HookVariation, VideoScript,
+    DailyBatch, ContentIdea, HookVariation, VideoScript, FBComment,
     json_dump, json_load
 )
 from .operations import (
@@ -35,6 +35,7 @@ from .script_engine import generate_daily_batch, generate_idea_bank, forge_hooks
 from .pipeline.stage1_idea_bank import run_stage1
 from .pipeline.stage2_hook_forge import run_stage2
 from .pipeline.stage3_script_writer import run_stage3
+from . import facebook as fb
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -615,6 +616,135 @@ def send_digest(db: Session = Depends(get_db)):
         return {"ok": True, "sent_to": email}
     except Exception as e:
         return {"ok": False, "error": str(e)}
+
+# ── Facebook comment agent ───────────────────────────────────────────────
+
+@app.get("/webhook/facebook")
+def facebook_webhook_verify(request: Request):
+    return fb.webhook_verify(request)
+
+
+@app.post("/webhook/facebook")
+async def facebook_webhook_receive(request: Request):
+    return await fb.webhook_receive(request)
+
+
+@app.get("/facebook", response_class=HTMLResponse)
+def facebook_queue(request: Request, status_filter: str = "drafted", db: Session = Depends(get_db)):
+    """Review queue for Facebook comments."""
+    q = db.query(FBComment)
+    if status_filter == "pending":
+        q = q.filter(FBComment.status.in_(["drafted"]))
+    elif status_filter == "sent":
+        q = q.filter(FBComment.status.in_(["reply_sent", "dm_sent", "both_sent"]))
+    elif status_filter == "skipped":
+        q = q.filter(FBComment.status == "skipped")
+    elif status_filter == "failed":
+        q = q.filter(FBComment.status == "failed")
+    # "all" → no filter
+    comments = q.order_by(FBComment.received_at.desc()).limit(100).all()
+
+    counts = {
+        "drafted": db.query(FBComment).filter(FBComment.status == "drafted").count(),
+        "sent": db.query(FBComment).filter(FBComment.status.in_(["reply_sent", "dm_sent", "both_sent"])).count(),
+        "skipped": db.query(FBComment).filter(FBComment.status == "skipped").count(),
+        "failed": db.query(FBComment).filter(FBComment.status == "failed").count(),
+    }
+    return tmpl("facebook.html", request, {
+        "active_page": "facebook",
+        "comments": comments,
+        "status_filter": status_filter,
+        "counts": counts,
+        "fb_configured": bool(os.getenv("FB_PAGE_ACCESS_TOKEN")),
+    })
+
+
+@app.post("/facebook/{row_id}/edit")
+def facebook_edit_draft(
+    row_id: int,
+    draft_reply: str = Form(""),
+    draft_dm: str = Form(""),
+    db: Session = Depends(get_db),
+):
+    row = db.query(FBComment).filter(FBComment.id == row_id).first()
+    if not row:
+        raise HTTPException(404, "comment not found")
+    row.draft_reply = draft_reply.strip()
+    row.draft_dm = draft_dm.strip()
+    db.commit()
+    return RedirectResponse("/facebook", status_code=303)
+
+
+@app.post("/facebook/{row_id}/send")
+def facebook_send(
+    row_id: int,
+    action: str = Form(...),  # "reply" | "dm" | "both" | "skip"
+    draft_reply: str = Form(""),
+    draft_dm: str = Form(""),
+    db: Session = Depends(get_db),
+):
+    row = db.query(FBComment).filter(FBComment.id == row_id).first()
+    if not row:
+        raise HTTPException(404, "comment not found")
+
+    # Apply any inline edits before sending
+    if draft_reply.strip():
+        row.draft_reply = draft_reply.strip()
+    if draft_dm.strip():
+        row.draft_dm = draft_dm.strip()
+    db.commit()
+
+    if action == "skip":
+        row.status = "skipped"
+        db.commit()
+    elif action == "reply" and row.draft_reply:
+        fb.send_drafted_reply(db, row)
+    elif action == "dm" and row.draft_dm:
+        fb.send_drafted_dm(db, row)
+    elif action == "both":
+        if row.draft_reply:
+            fb.send_drafted_reply(db, row)
+        if row.draft_dm:
+            fb.send_drafted_dm(db, row)
+
+    return RedirectResponse("/facebook", status_code=303)
+
+
+@app.post("/facebook/{row_id}/redraft")
+def facebook_redraft(row_id: int, db: Session = Depends(get_db)):
+    """Re-run Claude to regenerate the reply + DM drafts for this comment."""
+    from .fb_agent import classify_and_draft
+    row = db.query(FBComment).filter(FBComment.id == row_id).first()
+    if not row:
+        raise HTTPException(404, "comment not found")
+    profile = get_profile(db)
+    draft = classify_and_draft(
+        message=row.message,
+        author=row.author_name or "Facebook user",
+        profile=profile,
+    )
+    row.category = draft["category"]
+    row.intent = draft["intent"]
+    row.should_engage = draft["should_engage"]
+    row.draft_reply = draft["draft_reply"]
+    row.draft_dm = draft["draft_dm"]
+    if draft["should_engage"]:
+        row.status = "drafted"
+    else:
+        row.status = "skipped"
+    db.commit()
+    return RedirectResponse("/facebook", status_code=303)
+
+
+@app.post("/api/facebook/ingest")
+def facebook_ingest_manual(comment_id: str = Form(...), db: Session = Depends(get_db)):
+    """Manually ingest a comment by ID (useful for testing without webhooks)."""
+    from fastapi.responses import JSONResponse
+    row = fb._ingest_comment(db, comment_id.strip())
+    if not row:
+        return JSONResponse({"ok": False, "error": "could not ingest"}, status_code=400)
+    return JSONResponse({"ok": True, "id": row.id, "status": row.status, "category": row.category})
+
 
 @app.post("/api/update-story")
 def update_story_timeline(db: Session = Depends(get_db)):

@@ -187,6 +187,37 @@ class VideoScript(Base):
         return [h.strip() for h in self.hashtags.split() if h.startswith("#")]
 
 
+class FBComment(Base):
+    __tablename__ = "fb_comments"
+
+    id = Column(Integer, primary_key=True, index=True)
+    comment_id = Column(String(100), unique=True, index=True, nullable=False)  # FB's comment id
+    post_id = Column(String(100), index=True, nullable=True)
+    parent_id = Column(String(100), nullable=True)  # parent comment if this is a reply
+    author_id = Column(String(100), nullable=True)  # FB user id (PSID-like)
+    author_name = Column(String(200), nullable=True)
+    message = Column(Text, nullable=False)
+    permalink = Column(String(500), nullable=True)
+
+    # Classification + drafts
+    category = Column(String(50), nullable=True)  # real_estate_inquiry / compliment / spam / other
+    intent = Column(String(200), nullable=True)    # short phrase about what they're asking
+    should_engage = Column(Boolean, default=False)
+    draft_reply = Column(Text, nullable=True)
+    draft_dm = Column(Text, nullable=True)
+
+    # Workflow status
+    status = Column(String(50), default="pending")
+    # pending / drafted / reply_sent / dm_sent / both_sent / skipped / failed
+    reply_sent_at = Column(DateTime, nullable=True)
+    dm_sent_at = Column(DateTime, nullable=True)
+    sent_reply_id = Column(String(100), nullable=True)  # FB id of our reply
+    error = Column(Text, nullable=True)
+
+    received_at = Column(DateTime, default=datetime.utcnow)
+    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+
+
 DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./content.db")
 engine = create_engine(
     DATABASE_URL,
