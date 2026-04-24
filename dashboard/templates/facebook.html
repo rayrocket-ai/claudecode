@@ -63,6 +63,7 @@
       </div>
       <div>
         <span class="tag">{{ c.category or "—" }}</span>
+        {% if c.language and c.language != 'en' %}<span class="tag">{{ c.language }}</span>{% endif %}
         <span class="tag">{{ c.status }}</span>
       </div>
     </div>
@@ -73,6 +74,18 @@
       {% if c.intent %}
       <div style="font-size:12px; opacity:0.7; margin-top:6px;">
         <em>Claude read this as:</em> {{ c.intent }}
+      </div>
+      {% endif %}
+      {% if c.matched_listing_id %}
+      {% set l = listings_by_id.get(c.matched_listing_id) %}
+      {% if l %}
+      <div style="font-size:12px; margin-top:6px; padding:6px; background:rgba(100,200,100,0.06); border-radius:4px;">
+        <strong>Matched listing:</strong> {{ l.short_summary() }}
+      </div>
+      {% endif %}
+      {% elif c.category == 'price_inquiry' %}
+      <div style="font-size:12px; margin-top:6px; padding:6px; background:rgba(200,150,0,0.08); border-radius:4px;">
+        ⚠️ No listing matched — the DM will ask which property instead of sending a price.
       </div>
       {% endif %}
     </div>

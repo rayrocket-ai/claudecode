@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block title %}Listings · Ray's Content Engine{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div class="page-header-left">
+    <h1 class="page-title">Listings</h1>
+    <p class="page-subtitle">
+      Master spreadsheet synced from Google Sheets. The Facebook agent looks these up to answer price questions.
+    </p>
+  </div>
+  <div class="page-header-right">
+    <form method="post" action="/listings/sync">
+      <button type="submit" class="btn btn-primary">↻ Sync from Google Sheet</button>
+    </form>
+  </div>
+</div>
+
+{% if sync_result %}
+<div class="flash flash-{{ 'success' if sync_result.ok else 'info' }}" style="opacity:1;">
+  {% if sync_result.ok %}
+    Synced — {{ sync_result.inserted }} new, {{ sync_result.updated }} updated, {{ sync_result.skipped }} skipped.
+    {% if sync_result.headers %}<br><small>Detected headers: {{ sync_result.headers|join(', ') }}</small>{% endif %}
+  {% else %}
+    Sync failed: {{ sync_result.error }}
+  {% endif %}
+</div>
+{% endif %}
+
+{% if not sheets_configured %}
+<div class="flash flash-info" style="opacity:1;">
+  <strong>Not configured yet.</strong> Set <code>GOOGLE_SERVICE_ACCOUNT_JSON</code>
+  and <code>LISTINGS_SHEET_ID</code> in your environment, then share the sheet with
+  the service account's email. See README → "Google Sheets Integration".
+</div>
+{% endif %}
+
+{% if not listings %}
+<div class="empty-state">
+  <div class="empty-icon">🏠</div>
+  <h2 class="empty-title">No listings synced yet</h2>
+  <p class="empty-text">Once the service account has access to your master sheet, click Sync.</p>
+</div>
+{% else %}
+<div class="scripts-list">
+  {% for l in listings %}
+  <div class="script-row">
+    <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:16px;">
+      <div style="flex:1;">
+        <div style="font-weight:600;">{{ l.address or "—" }}{% if l.city %}, {{ l.city }}{% endif %}</div>
+        <div style="font-size:14px; opacity:0.85;">
+          {% if l.price_label %}{{ l.price_label }}{% elif l.price %}${{ "{:,}".format(l.price) }}{% endif %}
+          {% if l.bedrooms %} · {{ l.bedrooms|int if l.bedrooms == l.bedrooms|int else l.bedrooms }} bed{% endif %}
+          {% if l.bathrooms %} · {{ l.bathrooms|int if l.bathrooms == l.bathrooms|int else l.bathrooms }} bath{% endif %}
+          {% if l.sqft %} · {{ "{:,}".format(l.sqft) }} sqft{% endif %}
+          {% if l.property_type %} · {{ l.property_type }}{% endif %}
+        </div>
+        <div style="font-size:12px; opacity:0.7; margin-top:4px;">
+          {% if l.mls %}MLS {{ l.mls }}{% endif %}
+          {% if l.status %} · <span class="tag">{{ l.status }}</span>{% endif %}
+          {% if l.fb_post_id %} · FB post linked{% endif %}
+        </div>
+      </div>
+      <div style="text-align:right; font-size:12px; opacity:0.7;">
+        {% if l.listing_url %}<a href="{{ l.listing_url }}" target="_blank" rel="noopener">listing ↗</a>{% endif %}
+        {% if l.fb_post_url %}<br><a href="{{ l.fb_post_url }}" target="_blank" rel="noopener">FB post ↗</a>{% endif %}
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endif %}
+
+{% endblock %}

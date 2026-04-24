@@ -17,7 +17,7 @@ load_dotenv()
 
 from .models import (
     init_db, get_db, CreatorProfile, BrandPillar, ClientStory,
-    DailyBatch, ContentIdea, HookVariation, VideoScript, FBComment,
+    DailyBatch, ContentIdea, HookVariation, VideoScript, FBComment, Listing,
     json_dump, json_load
 )
 from .operations import (
@@ -617,6 +617,38 @@ def send_digest(db: Session = Depends(get_db)):
     except Exception as e:
         return {"ok": False, "error": str(e)}
 
+# ── Listings (Google Sheets sync) ────────────────────────────────────────
+
+@app.get("/listings", response_class=HTMLResponse)
+def listings_page(request: Request, db: Session = Depends(get_db)):
+    listings = db.query(Listing).order_by(Listing.synced_at.desc()).limit(200).all()
+    return tmpl("listings.html", request, {
+        "active_page": "listings",
+        "listings": listings,
+        "sheets_configured": bool(os.getenv("GOOGLE_SERVICE_ACCOUNT_JSON") and os.getenv("LISTINGS_SHEET_ID")),
+        "sync_result": None,
+    })
+
+
+@app.post("/listings/sync", response_class=HTMLResponse)
+def listings_sync(request: Request, db: Session = Depends(get_db)):
+    from .sheets import sync_listings
+    try:
+        result = sync_listings(db)
+        result["ok"] = True
+    except Exception as e:
+        logger.error(f"Sheet sync failed: {e}")
+        result = {"ok": False, "error": str(e)}
+
+    listings = db.query(Listing).order_by(Listing.synced_at.desc()).limit(200).all()
+    return tmpl("listings.html", request, {
+        "active_page": "listings",
+        "listings": listings,
+        "sheets_configured": bool(os.getenv("GOOGLE_SERVICE_ACCOUNT_JSON") and os.getenv("LISTINGS_SHEET_ID")),
+        "sync_result": result,
+    })
+
+
 # ── Facebook comment agent ───────────────────────────────────────────────
 
 @app.get("/webhook/facebook")
@@ -650,11 +682,16 @@ def facebook_queue(request: Request, status_filter: str = "drafted", db: Session
         "skipped": db.query(FBComment).filter(FBComment.status == "skipped").count(),
         "failed": db.query(FBComment).filter(FBComment.status == "failed").count(),
     }
+    listing_ids = {c.matched_listing_id for c in comments if c.matched_listing_id}
+    listings_by_id = {
+        l.id: l for l in db.query(Listing).filter(Listing.id.in_(listing_ids)).all()
+    } if listing_ids else {}
     return tmpl("facebook.html", request, {
         "active_page": "facebook",
         "comments": comments,
         "status_filter": status_filter,
         "counts": counts,
+        "listings_by_id": listings_by_id,
         "fb_configured": bool(os.getenv("FB_PAGE_ACCESS_TOKEN")),
     })
 
@@ -713,25 +750,31 @@ def facebook_send(
 @app.post("/facebook/{row_id}/redraft")
 def facebook_redraft(row_id: int, db: Session = Depends(get_db)):
     """Re-run Claude to regenerate the reply + DM drafts for this comment."""
-    from .fb_agent import classify_and_draft
+    from .fb_agent import classify_and_draft, match_listing
     row = db.query(FBComment).filter(FBComment.id == row_id).first()
     if not row:
         raise HTTPException(404, "comment not found")
     profile = get_profile(db)
+    # Try to rematch the listing using the latest listings data
+    listing = None
+    if row.matched_listing_id:
+        listing = db.query(Listing).filter(Listing.id == row.matched_listing_id).first()
+    if not listing:
+        listing = match_listing(db, row.post_id, "")
     draft = classify_and_draft(
         message=row.message,
         author=row.author_name or "Facebook user",
         profile=profile,
+        listing=listing,
     )
     row.category = draft["category"]
+    row.language = draft.get("language", "en")
     row.intent = draft["intent"]
     row.should_engage = draft["should_engage"]
     row.draft_reply = draft["draft_reply"]
     row.draft_dm = draft["draft_dm"]
-    if draft["should_engage"]:
-        row.status = "drafted"
-    else:
-        row.status = "skipped"
+    row.matched_listing_id = listing.id if listing else None
+    row.status = "drafted" if draft["should_engage"] else "skipped"
     db.commit()
     return RedirectResponse("/facebook", status_code=303)
 

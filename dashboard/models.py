@@ -200,11 +200,13 @@ class FBComment(Base):
     permalink = Column(String(500), nullable=True)
 
     # Classification + drafts
-    category = Column(String(50), nullable=True)  # real_estate_inquiry / compliment / spam / other
+    category = Column(String(50), nullable=True)  # price_inquiry / real_estate_inquiry / compliment / spam / other
+    language = Column(String(10), nullable=True)  # "en" / "dari"
     intent = Column(String(200), nullable=True)    # short phrase about what they're asking
     should_engage = Column(Boolean, default=False)
     draft_reply = Column(Text, nullable=True)
     draft_dm = Column(Text, nullable=True)
+    matched_listing_id = Column(Integer, ForeignKey("listings.id"), nullable=True)
 
     # Workflow status
     status = Column(String(50), default="pending")
@@ -216,6 +218,57 @@ class FBComment(Base):
 
     received_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+
+
+class Listing(Base):
+    __tablename__ = "listings"
+
+    id = Column(Integer, primary_key=True, index=True)
+    external_id = Column(String(100), unique=True, index=True, nullable=True)
+    # ^ stable id from the spreadsheet (MLS number or row key); used for upsert
+
+    address = Column(String(300), nullable=True)
+    city = Column(String(100), nullable=True)
+    province = Column(String(20), nullable=True, default="ON")
+    postal_code = Column(String(20), nullable=True)
+
+    price = Column(Integer, nullable=True)   # in CAD dollars, whole number
+    price_label = Column(String(50), nullable=True)  # "$1,299,000" or "For Sale"
+    bedrooms = Column(Float, nullable=True)
+    bathrooms = Column(Float, nullable=True)
+    sqft = Column(Integer, nullable=True)
+    property_type = Column(String(100), nullable=True)  # detached/semi/condo/townhouse
+    listing_type = Column(String(50), nullable=True)  # sale/rent/sold
+    status = Column(String(50), default="active")  # active/sold/leased/inactive
+    mls = Column(String(100), nullable=True)
+
+    fb_post_id = Column(String(100), nullable=True, index=True)
+    fb_post_url = Column(String(500), nullable=True)
+    listing_url = Column(String(500), nullable=True)  # MLS or realtor.ca link
+    notes = Column(Text, nullable=True)
+    raw_row = Column(Text, nullable=True)  # full source row as JSON, for debugging
+
+    synced_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    created_at = Column(DateTime, default=datetime.utcnow)
+
+    def short_summary(self) -> str:
+        parts = []
+        if self.address:
+            parts.append(self.address)
+        if self.city:
+            parts.append(self.city)
+        bits = ", ".join(parts)
+        specs = []
+        if self.bedrooms:
+            specs.append(f"{int(self.bedrooms) if float(self.bedrooms).is_integer() else self.bedrooms} bed")
+        if self.bathrooms:
+            specs.append(f"{int(self.bathrooms) if float(self.bathrooms).is_integer() else self.bathrooms} bath")
+        if self.sqft:
+            specs.append(f"{self.sqft} sqft")
+        spec_str = " · ".join(specs)
+        price = self.price_label or (f"${self.price:,}" if self.price else "Call for price")
+        line = " — ".join(x for x in [bits, spec_str, price] if x)
+        return line
 
 
 DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./content.db")
@@ -243,9 +296,15 @@ def init_db():
 def _migrate_db():
     """Add new columns to existing tables if they don't exist (SQLite-safe)."""
     from sqlalchemy import text
+    migrations = [
+        "ALTER TABLE video_scripts ADD COLUMN rating INTEGER",
+        "ALTER TABLE fb_comments ADD COLUMN language VARCHAR(10)",
+        "ALTER TABLE fb_comments ADD COLUMN matched_listing_id INTEGER",
+    ]
     with engine.connect() as conn:
-        try:
-            conn.execute(text("ALTER TABLE video_scripts ADD COLUMN rating INTEGER"))
-            conn.commit()
-        except Exception:
-            pass  # Column already exists
+        for stmt in migrations:
+            try:
+                conn.execute(text(stmt))
+                conn.commit()
+            except Exception:
+                pass  # Column already exists or table doesn't exist yet

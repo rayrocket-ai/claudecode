@@ -10,3 +10,5 @@ python-multipart
 apscheduler
 pydantic-settings
 psycopg2-binary
+gspread
+google-auth

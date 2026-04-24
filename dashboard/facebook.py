@@ -22,8 +22,8 @@ from fastapi import HTTPException, Request
 from fastapi.responses import PlainTextResponse, JSONResponse
 from sqlalchemy.orm import Session
 
-from .models import FBComment, SessionLocal
-from .fb_agent import classify_and_draft
+from .models import FBComment, Listing, SessionLocal
+from .fb_agent import classify_and_draft, match_listing
 from .operations import get_profile
 
 logger = logging.getLogger(__name__)
@@ -137,6 +137,10 @@ def _ingest_comment(db: Session, comment_id: str, post_id: Optional[str] = None)
 
     post_obj = data.get("post") or {}
     post_context = (post_obj.get("message") or "")[:500]
+    resolved_post_id = post_id or post_obj.get("id")
+
+    # Find which listing this post is about (if any)
+    listing = match_listing(db, resolved_post_id, post_context)
 
     profile = get_profile(db)
     draft = classify_and_draft(
@@ -144,23 +148,26 @@ def _ingest_comment(db: Session, comment_id: str, post_id: Optional[str] = None)
         author=from_obj.get("name") or "Facebook user",
         post_context=post_context,
         profile=profile,
+        listing=listing,
     )
 
     parent = data.get("parent") or {}
 
     row = FBComment(
         comment_id=data.get("id", comment_id),
-        post_id=post_id or post_obj.get("id"),
+        post_id=resolved_post_id,
         parent_id=parent.get("id"),
         author_id=author_id,
         author_name=from_obj.get("name"),
         message=message,
         permalink=data.get("permalink_url"),
         category=draft["category"],
+        language=draft.get("language", "en"),
         intent=draft["intent"],
         should_engage=draft["should_engage"],
         draft_reply=draft["draft_reply"],
         draft_dm=draft["draft_dm"],
+        matched_listing_id=listing.id if listing else None,
         status="drafted" if draft["should_engage"] else "skipped",
     )
     db.add(row)

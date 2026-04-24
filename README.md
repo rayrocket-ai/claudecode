@@ -73,6 +73,9 @@ content-engine/
 | `FB_APP_SECRET` | FB agent | App Secret (used to verify webhook signatures) |
 | `FB_VERIFY_TOKEN` | FB agent | Any random string — you pick it, then paste the same string into the Meta webhook UI |
 | `FB_GRAPH_VERSION` | No | Defaults to `v21.0` |
+| `GOOGLE_SERVICE_ACCOUNT_JSON` | Listings | Full service-account JSON (single-line) |
+| `LISTINGS_SHEET_ID` | Listings | The sheet ID (from the URL between `/d/` and `/edit`) |
+| `LISTINGS_SHEET_TAB` | No | Worksheet/tab name. Defaults to the first tab |
 
 ## Facebook Comment Agent
 
@@ -107,6 +110,47 @@ curl -X POST http://localhost:8000/api/facebook/ingest -d "comment_id=123_456"
 ```
 
 Then visit `/facebook` to review and send.
+
+## Google Sheets Integration (master listings)
+
+The agent looks up price questions against a master Google Sheet of Ray's active listings. Once synced, `/listings` shows every row the app knows about, and the Facebook agent matches each video post to the correct listing so it can DM the real price.
+
+### One-time setup
+
+1. **Create a Google Cloud project** at https://console.cloud.google.com.
+2. **Enable APIs:** "Google Sheets API" and "Google Drive API" (APIs & Services → Library).
+3. **Create a service account:** IAM & Admin → Service Accounts → Create. Give it any name (e.g. `ray-listings-bot`). No roles needed.
+4. **Create a JSON key** for that service account (Keys → Add key → JSON). Download it.
+5. **Copy the service account's email** (looks like `ray-listings-bot@yourproject.iam.gserviceaccount.com`) and **share your master sheet with that email as Viewer**.
+6. **Grab the sheet ID** from the URL: `https://docs.google.com/spreadsheets/d/SHEET_ID/edit`.
+7. Set env vars on Railway:
+   - `GOOGLE_SERVICE_ACCOUNT_JSON` = the entire JSON file content (single line). Railway handles multi-line env vars fine if you paste it as-is.
+   - `LISTINGS_SHEET_ID` = the sheet ID from step 6.
+   - `LISTINGS_SHEET_TAB` = worksheet name, optional. Defaults to the first tab.
+8. Visit `/listings` and click **Sync from Google Sheet**.
+
+### Supported column headers
+
+The importer is header-tolerant — any of these work (case- and spacing-insensitive):
+
+| Canonical | Accepted aliases |
+|---|---|
+| `address` | address, street, street_address, property_address, property |
+| `city` | city, municipality, town |
+| `price` | price, list_price, listing_price, asking_price, sale_price |
+| `bedrooms` | bedrooms, beds, bed, br |
+| `bathrooms` | bathrooms, baths, bath, ba |
+| `sqft` | sqft, square_feet, sq_ft, size, floor_area |
+| `property_type` | property_type, type, home_type, style |
+| `listing_type` | listing_type, transaction_type, sale_type |
+| `status` | status, state, listing_status |
+| `mls` | mls, mls_number, mls_id |
+| `fb_post_id` | fb_post_id, facebook_post_id, post_id |
+| `fb_post_url` | fb_post_url, facebook_url, facebook_post_url, fb_link, video_url, reel_url |
+| `listing_url` | listing_url, mls_url, link, url, realtor_url |
+| `notes` | notes, description, comments, remarks |
+
+Setting `fb_post_id` or `fb_post_url` on a row is optional — it makes matching instant and exact. If you leave them blank, Claude matches comments to listings by reading the FB post caption against the address + city of each active listing.
 
 ## Ray's Story
 
