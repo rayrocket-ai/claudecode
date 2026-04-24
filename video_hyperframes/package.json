@@ -1,0 +1,18 @@
+{
+  "name": "video-hyperframes",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Standalone HTML/GSAP motion-graphics compositions, rendered with Hyperframes.",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "preview": "hyperframes preview",
+    "render": "hyperframes render",
+    "lint": "hyperframes lint",
+    "add": "hyperframes add"
+  },
+  "dependencies": {
+    "hyperframes": "latest"
+  }
+}

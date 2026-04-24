@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "sources": {
+    "A": "output/my_video/cleaned.mp4"
+  },
+  "ranges": [
+    {
+      "source": "A",
+      "start": 0.0,
+      "end": 6.5,
+      "beat": "HOOK",
+      "quote": "Replace with the opening line...",
+      "reason": "Strongest delivery, looks into camera."
+    },
+    {
+      "source": "A",
+      "start": 12.3,
+      "end": 28.9,
+      "beat": "PROBLEM",
+      "quote": "...",
+      "reason": "Explains the stakes in one breath."
+    },
+    {
+      "source": "A",
+      "start": 45.0,
+      "end": 62.0,
+      "beat": "SOLUTION",
+      "quote": "...",
+      "reason": "Cleanest take of the core pitch."
+    }
+  ],
+  "grade": "warm_cinematic",
+  "audio_fade": 0.03,
+  "overlays": [
+    {
+      "file": "overlays/stat_90_percent.mov",
+      "start_in_output": 16.0,
+      "duration": 4.0,
+      "x": "(W-w)/2",
+      "y": "H*0.15"
+    }
+  ],
+  "subtitles": "output/my_video/cleaned.srt",
+  "subtitle_style": "bold-overlay",
+  "total_duration_s": 39.8
+}
