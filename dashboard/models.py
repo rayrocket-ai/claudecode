@@ -187,6 +187,41 @@ class VideoScript(Base):
         return [h.strip() for h in self.hashtags.split() if h.startswith("#")]
 
 
+class CallRecord(Base):
+    __tablename__ = "call_records"
+
+    id = Column(Integer, primary_key=True, index=True)
+    call_sid = Column(String(100), unique=True, index=True, nullable=False)
+    from_number = Column(String(50), nullable=True)
+    to_number = Column(String(50), nullable=True)
+    status = Column(String(30), default="in_progress")  # in_progress / completed / failed
+    collected = Column(Text, nullable=True)   # JSON: {name, callback, reason, ...}
+    summary = Column(Text, nullable=True)
+    recap_sent = Column(Boolean, default=False)
+    started_at = Column(DateTime, default=datetime.utcnow)
+    ended_at = Column(DateTime, nullable=True)
+
+    turns = relationship("CallTurn", back_populates="call", cascade="all, delete-orphan", order_by="CallTurn.turn_index")
+
+    def collected_dict(self):
+        return json_load(self.collected) or {}
+
+
+class CallTurn(Base):
+    __tablename__ = "call_turns"
+
+    id = Column(Integer, primary_key=True, index=True)
+    call_id = Column(Integer, ForeignKey("call_records.id"), nullable=False)
+    turn_index = Column(Integer, nullable=False)
+    role = Column(String(20), nullable=False)  # ai / caller
+    text = Column(Text, nullable=False)
+    audio_path = Column(String(300), nullable=True)  # for AI turns: path to MP3
+    confidence = Column(Float, nullable=True)        # for caller turns: speech confidence
+    created_at = Column(DateTime, default=datetime.utcnow)
+
+    call = relationship("CallRecord", back_populates="turns")
+
+
 DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./content.db")
 engine = create_engine(
     DATABASE_URL,

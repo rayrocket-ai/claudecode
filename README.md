@@ -68,6 +68,27 @@ content-engine/
 |---|---|---|
 | `ANTHROPIC_API_KEY` | Yes | Claude API key |
 | `DATABASE_URL` | No | Defaults to `sqlite:///./content.db` |
+| `ELEVENLABS_API_KEY` | Receptionist | ElevenLabs key |
+| `ELEVENLABS_VOICE_ID` | Receptionist | Voice ID for the AI receptionist |
+| `ELEVENLABS_MODEL_ID` | No | Defaults to `eleven_turbo_v2_5` |
+| `PUBLIC_BASE_URL` | Receptionist | Public https URL of this app — used in TwiML `<Play>` |
+| `RECEPTIONIST_EMAIL` | Receptionist | Where call recap emails are sent |
+| `SMTP_HOST/PORT/USER/PASS` | Receptionist | SMTP creds for sending the recap |
+
+## AI Receptionist (Twilio + ElevenLabs)
+
+When Ray can't pick up, an AI answers the call, gets the caller's name and reason, gathers any other details, answers simple questions about Ray (using the profile + client stories above), and emails Ray a recap when the call ends.
+
+### Setup
+
+1. **Pick an ElevenLabs voice.** In the ElevenLabs dashboard, copy the Voice ID (and your API key). Set `ELEVENLABS_API_KEY` and `ELEVENLABS_VOICE_ID`.
+2. **Set `PUBLIC_BASE_URL`** to your deployed URL (e.g. `https://your-app.up.railway.app`) — TwiML needs absolute URLs to play the MP3s back to the caller.
+3. **Set `RECEPTIONIST_EMAIL`** to where you want the recap delivered, plus the four `SMTP_*` vars.
+4. **Configure Twilio.** In the Twilio Console → Phone Numbers → your number → Voice Configuration:
+   - **A call comes in** → Webhook → `POST https://your-app.up.railway.app/voice/incoming`
+   - **Call status changes** → Webhook → `POST https://your-app.up.railway.app/voice/status`
+
+That's it. Call the number to test. Inspect recent calls at `GET /voice/calls`.
 
 ## Ray's Story
 

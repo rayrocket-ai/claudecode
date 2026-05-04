@@ -35,6 +35,7 @@ from .script_engine import generate_daily_batch, generate_idea_bank, forge_hooks
 from .pipeline.stage1_idea_bank import run_stage1
 from .pipeline.stage2_hook_forge import run_stage2
 from .pipeline.stage3_script_writer import run_stage3
+from .receptionist import router as receptionist_router
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -43,8 +44,10 @@ logger = logging.getLogger(__name__)
 app = FastAPI(title="Ray's Content Engine", version="1.0.0")
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+os.makedirs(os.path.join(BASE_DIR, "static", "voice"), exist_ok=True)
 app.mount("/static", StaticFiles(directory=os.path.join(BASE_DIR, "static")), name="static")
 templates = Jinja2Templates(directory=os.path.join(BASE_DIR, "templates"))
+app.include_router(receptionist_router)
 
 
 @app.on_event("startup")
