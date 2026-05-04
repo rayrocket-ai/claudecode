@@ -19,6 +19,9 @@ Required env vars:
 
 from __future__ import annotations
 
+import base64
+import hashlib
+import hmac
 import json
 import logging
 import os
@@ -50,6 +53,7 @@ logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/voice", tags=["receptionist"])
 
 # ── Config ────────────────────────────────────────────────────────────────────
+TWILIO_AUTH_TOKEN = os.getenv("TWILIO_AUTH_TOKEN", "")
 ELEVENLABS_API_KEY = os.getenv("ELEVENLABS_API_KEY", "")
 ELEVENLABS_VOICE_ID = os.getenv("ELEVENLABS_VOICE_ID", "")
 ELEVENLABS_MODEL_ID = os.getenv("ELEVENLABS_MODEL_ID", "eleven_turbo_v2_5")
@@ -61,6 +65,27 @@ MAX_TURNS = 12  # safety stop on runaway calls
 BASE_DIR = Path(__file__).resolve().parent
 VOICE_DIR = BASE_DIR / "static" / "voice"
 VOICE_DIR.mkdir(parents=True, exist_ok=True)
+
+
+# ── Twilio request signature validation ──────────────────────────────────────
+
+def _validate_twilio(request: Request, form: dict) -> bool:
+    """Verify X-Twilio-Signature so only Twilio can hit our webhooks."""
+    if not TWILIO_AUTH_TOKEN:
+        logger.warning("TWILIO_AUTH_TOKEN not set — webhook validation disabled")
+        return True
+    sig = request.headers.get("X-Twilio-Signature", "")
+    if not sig:
+        return False
+    proto = request.headers.get("X-Forwarded-Proto", request.url.scheme)
+    host = request.headers.get("X-Forwarded-Host") or request.headers.get("Host") or request.url.netloc
+    query = f"?{request.url.query}" if request.url.query else ""
+    url = f"{proto}://{host}{request.url.path}{query}"
+    data = url + "".join(f"{k}{form[k]}" for k in sorted(form.keys()))
+    expected = base64.b64encode(
+        hmac.new(TWILIO_AUTH_TOKEN.encode("utf-8"), data.encode("utf-8"), hashlib.sha1).digest()
+    ).decode()
+    return hmac.compare_digest(expected, sig)
 
 
 # ── ElevenLabs TTS ────────────────────────────────────────────────────────────
@@ -296,7 +321,9 @@ def _update_collected(db: Session, call: CallRecord, new_collected: dict) -> Non
 @router.post("/incoming")
 async def incoming_call(request: Request, db: Session = Depends(get_db)):
     """Twilio hits this URL when a call comes in."""
-    form = await request.form()
+    form = dict(await request.form())
+    if not _validate_twilio(request, form):
+        return PlainTextResponse("Forbidden", status_code=403)
     call_sid = form.get("CallSid", "")
     from_number = form.get("From", "")
     to_number = form.get("To", "")
@@ -326,7 +353,9 @@ async def incoming_call(request: Request, db: Session = Depends(get_db)):
 @router.post("/turn")
 async def caller_turn(request: Request, db: Session = Depends(get_db)):
     """Twilio posts here after each <Gather> captures speech."""
-    form = await request.form()
+    form = dict(await request.form())
+    if not _validate_twilio(request, form):
+        return PlainTextResponse("Forbidden", status_code=403)
     call_sid = form.get("CallSid", "")
     speech = (form.get("SpeechResult") or "").strip()
     confidence = form.get("Confidence")
@@ -394,7 +423,9 @@ async def caller_turn(request: Request, db: Session = Depends(get_db)):
 @router.post("/status")
 async def call_status(request: Request):
     """Twilio posts call lifecycle events here. We only act on completion."""
-    form = await request.form()
+    form = dict(await request.form())
+    if not _validate_twilio(request, form):
+        return PlainTextResponse("Forbidden", status_code=403)
     call_sid = form.get("CallSid", "")
     call_status = form.get("CallStatus", "")
     logger.info(f"Call status {call_sid}: {call_status}")
