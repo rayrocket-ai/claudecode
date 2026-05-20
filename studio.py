@@ -2,28 +2,38 @@
 """Studio — one entry point for the video editing pipeline.
 
 Subcommands:
-    studio.py prep   <input.mp4> [--engine scribe|whisper] [--model base]
-    studio.py render <edl.json>  -o out.mp4 [--preview]
-    studio.py pack   <edit-dir>
+    studio.py prep     <input.mp4> [--engine scribe|whisper] [--model base]
+    studio.py render   <edl.json>  -o out.mp4 [--preview]
+    studio.py pack     <edit-dir>
+    studio.py releases [--limit 10]
+    studio.py pull     [TAG | --latest] [--prep]
 
 Example full pipeline, from raw camera file to a production MP4:
 
-    python studio.py prep raw/interview.mp4 --engine scribe
+    python studio.py pull --latest --prep              # grab newest upload, prep it
     # edit edl.json by hand or via an agent using .claude/skills/video-editing/SKILL.md
     python studio.py render edl.json -o output/final.mp4
 
 `prep` runs: silence cut -> transcribe -> filler cut -> re-transcribe -> pack.
+`pull` reads from GitHub releases tagged `raw-*` (uploaded by
+scripts/watch_and_upload.sh running on your laptop).
 """
 from __future__ import annotations
 
 import argparse
+import json
+import os
 import subprocess
 import sys
+import urllib.error
+import urllib.request
 from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parent
 PIPELINE = ROOT / "video_pipeline"
+DEFAULT_REPO = os.environ.get("GITHUB_REPO", "rayrocket-ai/claudecode")
+GITHUB_API = "https://api.github.com"
 
 
 def run(cmd: list[str]) -> None:
@@ -105,6 +115,145 @@ def cmd_pack(args: argparse.Namespace) -> None:
     )
 
 
+# ---------- GitHub release helpers ----------
+
+def _load_env() -> None:
+    """Load GITHUB_TOKEN from .env if present."""
+    env_path = ROOT / ".env"
+    if not env_path.exists():
+        return
+    for line in env_path.read_text().splitlines():
+        line = line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        k, v = line.split("=", 1)
+        os.environ.setdefault(k.strip(), v.strip())
+
+
+def _gh_request(path: str, *, accept: str = "application/vnd.github+json",
+                binary: bool = False) -> bytes | dict:
+    """GET against api.github.com. Authenticated if GITHUB_TOKEN is set."""
+    _load_env()
+    url = f"{GITHUB_API}{path}" if path.startswith("/") else path
+    req = urllib.request.Request(url)
+    req.add_header("Accept", accept)
+    req.add_header("User-Agent", "claudecode-studio/1.0")
+    token = os.environ.get("GITHUB_TOKEN", "").strip()
+    if token:
+        req.add_header("Authorization", f"Bearer {token}")
+    try:
+        with urllib.request.urlopen(req, timeout=120) as r:
+            data = r.read()
+    except urllib.error.HTTPError as e:
+        body = e.read().decode("utf-8", errors="replace")[:400]
+        sys.exit(f"GitHub API {e.code}: {body}")
+    return data if binary else json.loads(data)
+
+
+def _list_raw_releases(repo: str, limit: int) -> list[dict]:
+    """Return releases tagged `raw-*`, newest first."""
+    releases = _gh_request(f"/repos/{repo}/releases?per_page={min(100, limit * 2)}")
+    raw = [r for r in releases if r.get("tag_name", "").startswith("raw-")]
+    return raw[:limit]
+
+
+def _download_asset(asset: dict, dest_dir: Path) -> Path:
+    """Stream a release asset to dest_dir. Returns the path."""
+    name = asset["name"]
+    out = dest_dir / name
+    _load_env()
+    # api.github.com URL with Accept: octet-stream for authenticated download.
+    url = asset["url"]
+    req = urllib.request.Request(url)
+    req.add_header("Accept", "application/octet-stream")
+    req.add_header("User-Agent", "claudecode-studio/1.0")
+    token = os.environ.get("GITHUB_TOKEN", "").strip()
+    if token:
+        req.add_header("Authorization", f"Bearer {token}")
+    try:
+        with urllib.request.urlopen(req, timeout=600) as r, out.open("wb") as f:
+            total = int(r.headers.get("Content-Length", 0))
+            done = 0
+            chunk_size = 1 << 20  # 1 MiB
+            while True:
+                chunk = r.read(chunk_size)
+                if not chunk:
+                    break
+                f.write(chunk)
+                done += len(chunk)
+                if total:
+                    pct = done * 100 / total
+                    sys.stdout.write(f"\r  {name}: {done / (1<<20):.1f} / "
+                                     f"{total / (1<<20):.1f} MiB ({pct:.0f}%)")
+                    sys.stdout.flush()
+    except urllib.error.HTTPError as e:
+        body = e.read().decode("utf-8", errors="replace")[:400]
+        sys.exit(f"\nasset download {e.code}: {body}")
+    sys.stdout.write("\n")
+    return out
+
+
+def cmd_releases(args: argparse.Namespace) -> None:
+    releases = _list_raw_releases(args.repo, args.limit)
+    if not releases:
+        print(f"No raw-* releases in {args.repo}.")
+        return
+    print(f"{'TAG':<40} {'TITLE':<40} {'ASSETS':<6}")
+    for r in releases:
+        n_assets = len(r.get("assets", []))
+        title = (r.get("name") or "")[:38]
+        print(f"{r['tag_name']:<40} {title:<40} {n_assets:<6}")
+
+
+def cmd_pull(args: argparse.Namespace) -> None:
+    input_dir = PIPELINE / "input"
+    input_dir.mkdir(parents=True, exist_ok=True)
+
+    if args.tag and args.latest:
+        sys.exit("Pass either a TAG or --latest, not both.")
+
+    if args.latest or not args.tag:
+        releases = _list_raw_releases(args.repo, 1)
+        if not releases:
+            sys.exit(f"No raw-* releases in {args.repo}.")
+        release = releases[0]
+    else:
+        release = _gh_request(f"/repos/{args.repo}/releases/tags/{args.tag}")
+
+    assets = release.get("assets", [])
+    if not assets:
+        sys.exit(f"Release {release['tag_name']} has no assets.")
+
+    print(f"pulling {release['tag_name']}  ({len(assets)} asset{'s' if len(assets) > 1 else ''})")
+    downloaded: list[Path] = []
+    for a in assets:
+        # Skip non-video files (e.g. checksums) — keep it tidy.
+        if "/" not in a.get("content_type", "") and not a["name"].lower().endswith(
+            (".mp4", ".mov", ".m4v", ".webm", ".mkv")
+        ):
+            print(f"  skip non-video: {a['name']}")
+            continue
+        path = _download_asset(a, input_dir)
+        downloaded.append(path)
+        print(f"  wrote {path}")
+
+    if not downloaded:
+        sys.exit("nothing downloaded.")
+
+    if args.prep:
+        # Run prep on each downloaded file.
+        for path in downloaded:
+            print(f"\n=== prepping {path.name} ===")
+            prep_cmd = ["python3", str(ROOT / "studio.py"), "prep", str(path)]
+            if args.engine:
+                prep_cmd += ["--engine", args.engine]
+            if args.model:
+                prep_cmd += ["--model", args.model]
+            if args.cut_discourse:
+                prep_cmd.append("--cut-discourse")
+            run(prep_cmd)
+
+
 def main() -> None:
     ap = argparse.ArgumentParser(description="Video editing studio entry point")
     subs = ap.add_subparsers(dest="command", required=True)
@@ -128,6 +277,29 @@ def main() -> None:
     p = subs.add_parser("pack", help="pack transcripts into takes_packed.md")
     p.add_argument("edit_dir")
     p.set_defaults(func=cmd_pack)
+
+    p = subs.add_parser("releases", help="list recent raw-* releases")
+    p.add_argument("--repo", default=DEFAULT_REPO)
+    p.add_argument("--limit", type=int, default=10)
+    p.set_defaults(func=cmd_releases)
+
+    p = subs.add_parser("pull",
+        help="download a raw-* release asset into video_pipeline/input/")
+    p.add_argument("tag", nargs="?", default=None,
+                   help="Release tag (e.g. raw-20260520-104133-clip). "
+                        "Omit and pass --latest to grab newest.")
+    p.add_argument("--latest", action="store_true",
+                   help="Pick the newest raw-* release")
+    p.add_argument("--repo", default=DEFAULT_REPO)
+    p.add_argument("--prep", action="store_true",
+                   help="After downloading, run `studio.py prep` on the file")
+    p.add_argument("--engine", choices=["whisper", "scribe"], default=None,
+                   help="Passed through to prep")
+    p.add_argument("--model", default=None,
+                   help="Passed through to prep")
+    p.add_argument("--cut-discourse", action="store_true",
+                   help="Passed through to prep")
+    p.set_defaults(func=cmd_pull)
 
     args = ap.parse_args()
     args.func(args)
