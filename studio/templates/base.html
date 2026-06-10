@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}RayRocket Studio — AI-Powered Services for GTA Realtors{% endblock %}</title>
+<meta name="description" content="{% block description %}Cinematic listing tours from just an address, a 24/7 AI receptionist, executive assistant support, and a second brain for your business. Built for GTA realtors.{% endblock %}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/studio.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/" class="logo">Ray<span>Rocket</span> Studio</a>
+    <div class="nav-links">
+      <a href="/tours" class="{{ 'active' if request.url.path == '/tours' }}">House Tours</a>
+      <a href="/receptionist" class="{{ 'active' if request.url.path == '/receptionist' }}">AI Receptionist</a>
+      <a href="/assistant" class="{{ 'active' if request.url.path == '/assistant' }}">Exec Assistant</a>
+      <a href="/second-brain" class="{{ 'active' if request.url.path == '/second-brain' }}">Second Brain</a>
+    </div>
+    <a href="/tours#order-panel" class="btn btn-sm btn-gold">Order a Tour</a>
+  </div>
+</nav>
+
+{% block content %}{% endblock %}
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <div>
+      <a href="/" class="logo">Ray<span>Rocket</span> Studio</a>
+      <p class="muted">AI-powered services for GTA realtors.<br>Built in Toronto. 🇨🇦</p>
+    </div>
+    <div class="footer-links">
+      <a href="/tours">Cinematic House Tours</a>
+      <a href="/receptionist">AI Receptionist</a>
+      <a href="/assistant">Executive Assistant</a>
+      <a href="/second-brain">Second Brain</a>
+    </div>
+    <div class="footer-links">
+      <a href="mailto:r4166252070@gmail.com">Contact us</a>
+      <a href="/#faq">FAQ</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Waitlist modal (available on every page) -->
+<div class="modal-backdrop" id="waitlist-modal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeWaitlist()">✕</button>
+    <h3 id="waitlist-title">Join early access</h3>
+    <form action="/waitlist" method="post" class="form-grid">
+      <input type="hidden" name="service" id="waitlist-service" value="exec_assistant">
+      <label>Your name *<input type="text" name="name" required></label>
+      <label>Email *<input type="email" name="email" required></label>
+      <label class="full">Notes<textarea name="notes" rows="2" id="waitlist-notes"></textarea></label>
+      <button type="submit" class="btn btn-gold full">Sign me up →</button>
+    </form>
+  </div>
+</div>
+
+<script src="/static/studio.js"></script>
+</body>
+</html>

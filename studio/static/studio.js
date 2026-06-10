@@ -11,7 +11,7 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.12 });
 document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
 
-// ── Pricing toggle (one-time vs subscription) ─────────────────────────────
+// ── Pricing toggle (one-time vs subscription) — tours pages only ──────────
 document.querySelectorAll(".toggle-opt").forEach((btn) => {
   btn.addEventListener("click", () => {
     document.querySelectorAll(".toggle-opt").forEach((b) => b.classList.remove("active"));
@@ -68,6 +68,7 @@ const PLANS = {
 };
 
 function estimate() {
+  if (!document.getElementById("recep-form")) return; // not on this page
   const tasks = [...document.querySelectorAll('input[name="tasks"]:checked')].map((i) => i.value);
   const volume = document.querySelector('input[name="call_volume"]:checked').value;
   const coverage = document.querySelector('input[name="coverage"]:checked').value;

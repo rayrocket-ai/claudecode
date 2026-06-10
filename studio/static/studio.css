@@ -52,6 +52,7 @@ a { color: inherit; text-decoration: none; }
 .nav-links { display: flex; gap: 22px; margin-left: auto; }
 .nav-links a { color: var(--muted); font-size: 0.92rem; font-weight: 500; transition: color 0.2s; }
 .nav-links a:hover { color: var(--text); }
+.nav-links a.active { color: var(--gold-2); }
 
 /* ── Buttons ── */
 .btn {
@@ -97,6 +98,10 @@ a { color: inherit; text-decoration: none; }
 .hero-stats {
   margin-top: 56px; display: flex; justify-content: center; gap: 56px; flex-wrap: wrap;
 }
+.hero.page-hero { padding: 150px 24px 70px; }
+.hero.page-hero h1 { font-size: clamp(1.9rem, 4.5vw, 3rem); }
+.text-link { color: var(--gold-2); font-weight: 600; }
+.text-link:hover { text-decoration: underline; }
 .hero-stats div { display: flex; flex-direction: column; }
 .hero-stats strong { font-family: "Sora", sans-serif; font-size: 1.5rem; color: var(--gold-2); }
 .hero-stats span { font-size: 0.82rem; color: var(--muted); }

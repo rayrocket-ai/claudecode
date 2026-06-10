@@ -64,6 +64,28 @@ def index(request: Request):
     })
 
 
+@app.get("/tours", response_class=HTMLResponse)
+def tours(request: Request):
+    return templates.TemplateResponse(request, "tours.html", {})
+
+
+@app.get("/receptionist", response_class=HTMLResponse)
+def receptionist(request: Request):
+    return templates.TemplateResponse(request, "receptionist.html", {
+        "receptionist_tasks": RECEPTIONIST_TASKS,
+    })
+
+
+@app.get("/assistant", response_class=HTMLResponse)
+def assistant(request: Request):
+    return templates.TemplateResponse(request, "assistant.html", {})
+
+
+@app.get("/second-brain", response_class=HTMLResponse)
+def second_brain(request: Request):
+    return templates.TemplateResponse(request, "secondbrain.html", {})
+
+
 @app.get("/thanks", response_class=HTMLResponse)
 def thanks(request: Request, type: str = "order"):
     return templates.TemplateResponse(request, "thanks.html", {"type": type})

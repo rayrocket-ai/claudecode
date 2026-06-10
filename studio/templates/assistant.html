@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Executive Assistant for Realtors — RayRocket Studio{% endblock %}
+{% block description %}Hybrid AI + human executive assistant for realtors: inbox triage, paperwork chasing, scheduling, and client follow-up. Early access open.{% endblock %}
+
+{% block content %}
+<header class="hero page-hero">
+  <div class="hero-glow"></div>
+  <div class="hero-inner reveal">
+    <p class="eyebrow">Service 03 — Early access</p>
+    <h1>An executive assistant<br>behind your name</h1>
+    <p class="hero-sub">Hybrid AI + human operations support: inbox triage, deal paperwork chasing, showing coordination, client touch-points. <strong>You sell. It runs.</strong></p>
+    <div class="hero-ctas">
+      <a href="#assistant-pricing" class="btn btn-gold">See packages ↓</a>
+    </div>
+  </div>
+</header>
+
+<section class="section section-alt" id="assistant-pricing">
+  <div class="container">
+    <p class="eyebrow reveal">What it takes off your plate</p>
+    <h2 class="reveal">Two packages, one calmer business</h2>
+    <div class="steps reveal">
+      <div class="step"><span>✉️</span><h4>Inbox triage</h4><p>Every email read, sorted, and drafted — you just approve and send.</p></div>
+      <div class="step"><span>📋</span><h4>Paperwork chasing</h4><p>Signatures, conditions, deposits — chased until done, never dropped.</p></div>
+      <div class="step"><span>📅</span><h4>Scheduling</h4><p>Showings, inspections, photographers — booked around your day.</p></div>
+      <div class="step"><span>💛</span><h4>Client touch-points</h4><p>Birthdays, anniversaries, check-ins — your clients feel remembered.</p></div>
+    </div>
+    {% include "_assistant_section.html" %}
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,100 @@
+<div class="steps reveal">
+  <div class="step"><span>1</span><h4>Paste the address</h4><p>That's genuinely all we need to start.</p></div>
+  <div class="step"><span>2</span><h4>Pick your style</h4><p>Cinematic, luxury, or fast-cut social.</p></div>
+  <div class="step"><span>3</span><h4>We produce it</h4><p>AI-powered production, human-checked quality.</p></div>
+  <div class="step"><span>4</span><h4>You post & impress</h4><p>Vertical + horizontal cuts, ready to publish.</p></div>
+</div>
+
+<!-- Pricing -->
+<div class="pricing-toggle reveal">
+  <button class="toggle-opt active" data-mode="once">One-time</button>
+  <button class="toggle-opt" data-mode="sub">Subscription</button>
+</div>
+
+<div class="pricing reveal" id="pricing-once">
+  <div class="price-card featured">
+    <h3>Single Tour</h3>
+    <div class="price">$249<span> / video</span></div>
+    <ul>
+      <li>1 cinematic listing tour</li>
+      <li>Vertical (Reels/TikTok) + horizontal cuts</li>
+      <li>Licensed music & captions</li>
+      <li>48h standard delivery</li>
+      <li>1 revision included</li>
+    </ul>
+    <button class="btn btn-gold" onclick="openOrder('single')">Order this tour</button>
+  </div>
+  <div class="price-card">
+    <h3>Rush Tour</h3>
+    <div class="price">$349<span> / video</span></div>
+    <ul>
+      <li>Everything in Single Tour</li>
+      <li><strong>24h delivery</strong></li>
+      <li>Priority production queue</li>
+      <li>Same-day revision turnaround</li>
+    </ul>
+    <button class="btn btn-ghost" onclick="openOrder('single', true)">Order rush</button>
+  </div>
+</div>
+
+<div class="pricing hidden reveal" id="pricing-sub">
+  <div class="price-card">
+    <h3>Starter</h3>
+    <div class="price">$399<span> / mo</span></div>
+    <ul>
+      <li><strong>2 tours</strong> per month</li>
+      <li>All formats & music included</li>
+      <li>48h delivery</li>
+      <li>Cancel anytime</li>
+    </ul>
+    <button class="btn btn-ghost" onclick="openOrder('starter')">Start Starter</button>
+  </div>
+  <div class="price-card featured">
+    <div class="badge">Most popular</div>
+    <h3>Pro</h3>
+    <div class="price">$899<span> / mo</span></div>
+    <ul>
+      <li><strong>5 tours</strong> per month</li>
+      <li>Priority queue</li>
+      <li>2 revisions per video</li>
+      <li>Branded intro/outro with your logo</li>
+    </ul>
+    <button class="btn btn-gold" onclick="openOrder('pro')">Go Pro</button>
+  </div>
+  <div class="price-card">
+    <h3>Brokerage</h3>
+    <div class="price">$1,999<span> / mo</span></div>
+    <ul>
+      <li><strong>12 tours</strong> per month</li>
+      <li>Multi-agent team account</li>
+      <li>Dedicated production manager</li>
+      <li>Custom brand kit across all videos</li>
+    </ul>
+    <button class="btn btn-ghost" onclick="openOrder('brokerage')">Equip the team</button>
+  </div>
+</div>
+
+<!-- Order form -->
+<div class="order-panel reveal" id="order-panel">
+  <h3>🎬 Order your tour</h3>
+  <p class="muted">Fill this in and we'll confirm your order by email with a secure payment link.</p>
+  <form action="/order/tour" method="post" class="form-grid">
+    <input type="hidden" name="package" id="order-package" value="single">
+    <label>Property address *<input type="text" name="address" required placeholder="123 Lakeshore Blvd W, Toronto, ON"></label>
+    <label>Listing URL (optional)<input type="url" name="listing_url" placeholder="https://www.realtor.ca/..."></label>
+    <label>Your name *<input type="text" name="name" required placeholder="Jane Agent"></label>
+    <label>Email *<input type="email" name="email" required placeholder="you@brokerage.com"></label>
+    <label>Phone<input type="tel" name="phone" placeholder="(416) 555-0123"></label>
+    <label>Brokerage<input type="text" name="brokerage" placeholder="RE/MAX, Royal LePage..."></label>
+    <label>Style
+      <select name="style">
+        <option value="cinematic">Cinematic — sweeping & dramatic</option>
+        <option value="luxury">Luxury — slow, elegant, high-end</option>
+        <option value="social">Social — fast cuts for Reels/TikTok</option>
+      </select>
+    </label>
+    <label class="checkbox-label"><input type="checkbox" name="rush" value="true" id="rush-box"> Rush 24h delivery (+$100)</label>
+    <label class="full">Anything we should know?<textarea name="notes" rows="3" placeholder="Feature the backyard, listing goes live Friday..."></textarea></label>
+    <button type="submit" class="btn btn-gold full">Place order →</button>
+  </form>
+</div>

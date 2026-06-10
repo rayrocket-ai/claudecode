@@ -86,7 +86,11 @@ class WaitlistEntry(Base):
     created_at = Column(DateTime, default=datetime.utcnow)
 
 
-DATABASE_URL = os.getenv("STUDIO_DATABASE_URL", "sqlite:///./studio.db")
+# Vercel's filesystem is read-only outside /tmp, so default the SQLite file
+# there when running on Vercel (data is ephemeral — use a hosted DB via
+# STUDIO_DATABASE_URL for production).
+_default_sqlite = "sqlite:////tmp/studio.db" if os.getenv("VERCEL") else "sqlite:///./studio.db"
+DATABASE_URL = os.getenv("STUDIO_DATABASE_URL", _default_sqlite)
 connect_args = {"check_same_thread": False} if DATABASE_URL.startswith("sqlite") else {}
 engine = create_engine(DATABASE_URL, connect_args=connect_args)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)

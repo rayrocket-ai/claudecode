@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Cinematic House Tours — RayRocket Studio{% endblock %}
+{% block description %}Order a cinematic listing tour from just an address. Vertical and horizontal cuts, licensed music, 48h delivery. One-time or subscription pricing for GTA realtors.{% endblock %}
+
+{% block content %}
+<header class="hero page-hero">
+  <div class="hero-glow"></div>
+  <div class="hero-inner reveal">
+    <p class="eyebrow">Service 01 — Live now</p>
+    <h1>Cinematic House Tours,<br>from just an address</h1>
+    <p class="hero-sub">You type the address. We generate a cinematic, music-driven listing tour ready for Instagram, TikTok, YouTube and MLS — delivered to your inbox, typically within <strong>48 hours</strong>. No filming. No editing. No crew on site.</p>
+    <div class="hero-ctas">
+      <a href="#order-panel" class="btn btn-gold">Order now — from $249</a>
+      <a href="#pricing-once" class="btn btn-ghost">See pricing ↓</a>
+    </div>
+  </div>
+</header>
+
+<section class="section section-alt">
+  <div class="container">
+    <p class="eyebrow reveal">How it works</p>
+    <h2 class="reveal">Four steps. Zero hassle.</h2>
+    {% include "_tours_section.html" %}
+  </div>
+</section>
+
+<section class="section">
+  <div class="container narrow">
+    <h2 class="reveal">Tour questions, answered</h2>
+    <details class="faq reveal"><summary>How can you make a house tour from just an address?</summary><p>Our production pipeline pulls listing media and property data, then uses AI-driven cinematography — camera moves, pacing, music, colour grading — to build a tour. A human reviews every video before delivery. If we need anything extra, we'll email you.</p></details>
+    <details class="faq reveal"><summary>What formats do I receive?</summary><p>A vertical cut for Reels/TikTok/Shorts and a horizontal cut for YouTube and MLS, with licensed music and captions baked in.</p></details>
+    <details class="faq reveal"><summary>What if I don't like the video?</summary><p>Every order includes a revision — tell us what to change and we'll re-cut it. Pro subscribers get two revisions per video.</p></details>
+    <details class="faq reveal"><summary>Do unused subscription tours roll over?</summary><p>Yes — unused tours roll over one month. Subscriptions are month-to-month and you can cancel anytime.</p></details>
+    <details class="faq reveal"><summary>How does payment work?</summary><p>Submit your order and we'll email you a secure payment link to confirm. Production starts as soon as payment clears.</p></details>
+  </div>
+</section>
+{% endblock %}

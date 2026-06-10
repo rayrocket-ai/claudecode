@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}AI Receptionist for Realtors — RayRocket Studio{% endblock %}
+{% block description %}A 24/7 AI receptionist that answers every call, qualifies leads, books showings, and logs everything to your CRM. Build your scope and get an instant plan estimate.{% endblock %}
+
+{% block content %}
+<header class="hero page-hero">
+  <div class="hero-glow"></div>
+  <div class="hero-inner reveal">
+    <p class="eyebrow">Service 02 — Early access</p>
+    <h1>An AI receptionist that<br>works your phones 24/7</h1>
+    <p class="hero-sub">Every missed call is a missed commission. Our AI receptionist answers instantly, sounds human, qualifies the lead, books the showing, and writes it all into your CRM — <strong>while you're at the open house</strong>.</p>
+    <div class="hero-ctas">
+      <a href="#recep-form" class="btn btn-gold">Build yours — from $299/mo</a>
+    </div>
+  </div>
+</header>
+
+<section class="section section-alt">
+  <div class="container">
+    <p class="eyebrow reveal">Scope it yourself</p>
+    <h2 class="reveal">Tell us what it should handle — see your plan instantly</h2>
+    <p class="section-sub reveal">Pick the tasks, your call volume, and coverage hours. The estimate updates live with the recommended plan, monthly price, and how long setup will take.</p>
+    {% include "_receptionist_section.html" %}
+  </div>
+</section>
+
+<section class="section">
+  <div class="container narrow">
+    <h2 class="reveal">Receptionist questions, answered</h2>
+    <details class="faq reveal"><summary>Is it available right now?</summary><p>It's in early access. Submit the scope form and we'll book a 15-minute call, confirm your quote, and onboard you in waves. Early-access members lock their pricing for 12 months.</p></details>
+    <details class="faq reveal"><summary>Will callers know it's AI?</summary><p>It sounds natural and conversational. We disclose what's required by law, and any call it can't handle gets transferred to you or takes a detailed message.</p></details>
+    <details class="faq reveal"><summary>What does setup involve?</summary><p>We script your greeting, load your service areas and listings, set transfer rules, and — depending on plan — connect your calendar and CRM and design your follow-up sequences. The estimate card shows the expected effort for your scope.</p></details>
+    <details class="faq reveal"><summary>Which CRMs do you support?</summary><p>Follow Up Boss, KvCORE, and most CRMs with an API or email-to-lead intake. Tell us yours in the form and we'll confirm on the scoping call.</p></details>
+    <details class="faq reveal"><summary>Can I keep my existing phone number?</summary><p>Yes — we forward your existing line (or unanswered calls only) to the receptionist. You stay in control of when it picks up.</p></details>
+  </div>
+</section>
+{% endblock %}

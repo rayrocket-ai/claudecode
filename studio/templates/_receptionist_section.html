@@ -1,0 +1,56 @@
+<div class="recep-grid">
+  <!-- Scope builder -->
+  <div class="recep-builder reveal">
+    <h3>Build your receptionist</h3>
+    <form action="/lead/receptionist" method="post" id="recep-form">
+      <p class="field-label">What should it handle? <span class="muted">(pick all that apply)</span></p>
+      <div class="chips">
+        {% for key, label in receptionist_tasks.items() %}
+        <label class="chip"><input type="checkbox" name="tasks" value="{{ key }}" onchange="estimate()"><span>{{ label }}</span></label>
+        {% endfor %}
+      </div>
+
+      <p class="field-label">Roughly how many calls per week?</p>
+      <div class="seg" data-name="call_volume">
+        <label><input type="radio" name="call_volume" value="low" onchange="estimate()"><span>Under 20</span></label>
+        <label><input type="radio" name="call_volume" value="medium" checked onchange="estimate()"><span>20–75</span></label>
+        <label><input type="radio" name="call_volume" value="high" onchange="estimate()"><span>75+</span></label>
+      </div>
+
+      <p class="field-label">Coverage hours</p>
+      <div class="seg" data-name="coverage">
+        <label><input type="radio" name="coverage" value="business" checked onchange="estimate()"><span>Business hours</span></label>
+        <label><input type="radio" name="coverage" value="extended" onchange="estimate()"><span>8am–10pm</span></label>
+        <label><input type="radio" name="coverage" value="always" onchange="estimate()"><span>24/7</span></label>
+      </div>
+
+      <div class="form-grid tight">
+        <label>Your name *<input type="text" name="name" required placeholder="Jane Agent"></label>
+        <label>Email *<input type="email" name="email" required placeholder="you@brokerage.com"></label>
+        <label>Phone<input type="tel" name="phone"></label>
+        <label>CRM you use<input type="text" name="crm" placeholder="Follow Up Boss, KvCORE, none..."></label>
+        <label class="full">Notes<textarea name="notes" rows="2" placeholder="I keep missing calls during showings..."></textarea></label>
+      </div>
+      <input type="hidden" name="recommended_plan" id="recommended-plan-input" value="core">
+      <button type="submit" class="btn btn-gold full">Request early access →</button>
+    </form>
+  </div>
+
+  <!-- Live estimate -->
+  <div class="recep-estimate reveal">
+    <div class="estimate-card" id="estimate-card">
+      <p class="eyebrow">Your estimate</p>
+      <h3 id="est-plan">Core — $299/mo</h3>
+      <p id="est-desc">24/7 answering with message-taking and instant text-back to callers.</p>
+      <div class="est-row"><span>Setup effort</span><strong id="est-setup">~3 business days</strong></div>
+      <div class="est-row"><span>What setup involves</span><strong id="est-work">Greeting script, your service areas, transfer rules</strong></div>
+      <div class="est-row"><span>Estimated monthly</span><strong id="est-price">$299/mo + $99 one-time setup</strong></div>
+      <p class="muted small">Estimates update as you pick options. Final quote confirmed on a 15-minute scoping call. Early-access members lock this pricing for 12 months.</p>
+    </div>
+    <div class="plan-ladder">
+      <div class="rung" data-plan="core"><strong>Core · $299/mo</strong><span>Answering, messages, text-back</span></div>
+      <div class="rung" data-plan="plus"><strong>Plus · $499/mo</strong><span>+ Lead qualification & showing bookings</span></div>
+      <div class="rung" data-plan="concierge"><strong>Concierge · $899/mo</strong><span>+ CRM logging, follow-up sequences, 24/7</span></div>
+    </div>
+  </div>
+</div>
