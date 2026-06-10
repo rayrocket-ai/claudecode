@@ -1,5 +1,8 @@
 /* RayRocket Studio — landing page interactions */
 
+// Mark JS as available so CSS only hides .reveal content when we can show it again
+document.documentElement.classList.add("js");
+
 // ── Reveal on scroll ──────────────────────────────────────────────────────
 const observer = new IntersectionObserver((entries) => {
   entries.forEach((e) => {
