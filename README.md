@@ -1,4 +1,49 @@
-# Ray Ahmadi — Content Engine 🎬
+# Ray Ahmadi — Content Engine 🎬 + RayRocket Studio 🚀
+
+This repo now ships two FastAPI apps:
+
+1. **Content Engine** (`dashboard/`) — Ray's private content creation dashboard (below)
+2. **RayRocket Studio** (`studio/`) — the public landing page selling services to GTA realtors
+
+## RayRocket Studio — services storefront
+
+A dark, cinematic landing page where GTA realtors can browse and buy:
+
+- **Cinematic House Tours** — order with just an address; one-time ($249, $349 rush) or subscriptions (Starter $399/mo, Pro $899/mo, Brokerage $1,999/mo). Orders are captured to the database and shown in `/admin`; set the `STRIPE_LINK_TOUR_*` env vars to send buyers straight to Stripe checkout instead.
+- **AI Receptionist** (early access) — interactive scope builder: realtors pick the tasks they need handled (answering, lead qualification, showing bookings, CRM logging, follow-ups), call volume and coverage hours, and see a live plan recommendation (Core $299 / Plus $499 / Concierge $899) with a setup-effort estimate before submitting.
+- **Executive Assistant** (early access) — Essentials $450/mo and Operator $950/mo packages, waitlist signup.
+- **Second Brain** (waitlist) — email capture.
+
+All pricing lives in `studio/templates/index.html` (display) and `studio/static/studio.js` (receptionist estimator) — edit there to change numbers.
+
+### Run the storefront locally
+
+```bash
+uvicorn studio.app:app --reload --port 8001
+```
+
+### Storefront environment variables
+
+| Variable | Required | Description |
+|---|---|---|
+| `STUDIO_DATABASE_URL` | No | Defaults to `sqlite:///./studio.db` |
+| `STUDIO_ADMIN_KEY` | Yes for `/admin` | Visit `/admin?key=<value>` to see orders, leads & waitlist |
+| `STRIPE_LINK_TOUR_SINGLE/STARTER/PRO/BROKERAGE` | No | Stripe payment links; when set, order submissions redirect to checkout |
+
+### Deploy the storefront on Railway
+
+The Dockerfile starts whichever app `APP_MODULE` points at. Create a **second Railway service** from this same repo and set:
+
+```
+APP_MODULE=studio.app:app
+STUDIO_ADMIN_KEY=<your secret>
+```
+
+The existing service keeps running the content engine (no `APP_MODULE` needed — it defaults to `dashboard.app:app`).
+
+---
+
+# Content Engine
 
 A FastAPI-powered content creation dashboard built for Ray Ahmadi, GTA real estate broker and mortgage professional.
 

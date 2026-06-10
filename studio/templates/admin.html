@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — RayRocket Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/studio.css">
+</head>
+<body>
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/" class="logo">Ray<span>Rocket</span> Studio — Admin</a>
+  </div>
+</nav>
+
+<div class="admin-wrap">
+  <h2>🎬 Tour Orders ({{ orders|length }})</h2>
+  <table class="table">
+    <tr><th>When</th><th>Agent</th><th>Address</th><th>Package</th><th>Style</th><th>Rush</th><th>Notes</th><th>Status</th></tr>
+    {% for o in orders %}
+    <tr>
+      <td>{{ o.created_at.strftime("%b %d %H:%M") }}</td>
+      <td>{{ o.name }}<br><a href="mailto:{{ o.email }}" class="muted">{{ o.email }}</a>{% if o.phone %}<br><span class="muted">{{ o.phone }}</span>{% endif %}{% if o.brokerage %}<br><span class="muted">{{ o.brokerage }}</span>{% endif %}</td>
+      <td>{{ o.address }}{% if o.listing_url %}<br><a href="{{ o.listing_url }}" target="_blank" class="muted">listing ↗</a>{% endif %}</td>
+      <td>{{ o.package }}</td>
+      <td>{{ o.style }}</td>
+      <td>{{ "⚡ 24h" if o.rush else "—" }}</td>
+      <td>{{ o.notes or "—" }}</td>
+      <td>
+        <form action="/admin/order/{{ o.id }}/status" method="post">
+          <input type="hidden" name="key" value="{{ key }}">
+          <select name="status" onchange="this.form.submit()">
+            {% for s in ["new", "contacted", "paid", "in_production", "delivered"] %}
+            <option value="{{ s }}" {{ "selected" if o.status == s }}>{{ s }}</option>
+            {% endfor %}
+          </select>
+        </form>
+      </td>
+    </tr>
+    {% else %}
+    <tr><td colspan="8" class="muted">No orders yet.</td></tr>
+    {% endfor %}
+  </table>
+
+  <h2>📞 Receptionist Leads ({{ leads|length }})</h2>
+  <table class="table">
+    <tr><th>When</th><th>Agent</th><th>Tasks</th><th>Volume</th><th>Coverage</th><th>CRM</th><th>Plan</th><th>Notes</th></tr>
+    {% for l in leads %}
+    <tr>
+      <td>{{ l.created_at.strftime("%b %d %H:%M") }}</td>
+      <td>{{ l.name }}<br><a href="mailto:{{ l.email }}" class="muted">{{ l.email }}</a>{% if l.phone %}<br><span class="muted">{{ l.phone }}</span>{% endif %}</td>
+      <td>{% for t in l.tasks_list() %}{{ task_labels.get(t, t) }}{{ ", " if not loop.last }}{% endfor %}</td>
+      <td>{{ l.call_volume }}</td>
+      <td>{{ l.coverage }}</td>
+      <td>{{ l.crm or "—" }}</td>
+      <td><span class="status-pill">{{ l.recommended_plan or "—" }}</span></td>
+      <td>{{ l.notes or "—" }}</td>
+    </tr>
+    {% else %}
+    <tr><td colspan="8" class="muted">No leads yet.</td></tr>
+    {% endfor %}
+  </table>
+
+  <h2>🧠 Waitlist ({{ waitlist|length }})</h2>
+  <table class="table">
+    <tr><th>When</th><th>Service</th><th>Name</th><th>Email</th><th>Notes</th></tr>
+    {% for w in waitlist %}
+    <tr>
+      <td>{{ w.created_at.strftime("%b %d %H:%M") }}</td>
+      <td><span class="status-pill">{{ w.service }}</span></td>
+      <td>{{ w.name }}</td>
+      <td><a href="mailto:{{ w.email }}">{{ w.email }}</a></td>
+      <td>{{ w.notes or "—" }}</td>
+    </tr>
+    {% else %}
+    <tr><td colspan="5" class="muted">No signups yet.</td></tr>
+    {% endfor %}
+  </table>
+</div>
+</body>
+</html>

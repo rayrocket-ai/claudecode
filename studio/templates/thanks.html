@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>You're in — RayRocket Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/studio.css">
+</head>
+<body>
+<div class="center-page">
+  <div class="center-card">
+    {% if type == "tour" %}
+      <div class="big">🎬</div>
+      <h1>Your tour order is in!</h1>
+      <p>We've got the address. You'll receive an email shortly to confirm details and complete payment — then we go straight into production. Typical delivery is 48 hours (24h for rush orders).</p>
+    {% elif type == "receptionist" %}
+      <div class="big">📞</div>
+      <h1>Welcome to early access</h1>
+      <p>We've received your receptionist scope. We'll email you within one business day to book a quick 15-minute call, confirm your quote, and get your setup started.</p>
+    {% else %}
+      <div class="big">🧠</div>
+      <h1>You're on the list</h1>
+      <p>We'll email you the moment this service opens up. Early-access members get locked-in launch pricing.</p>
+    {% endif %}
+    <a href="/" class="btn btn-gold">← Back to RayRocket Studio</a>
+  </div>
+</div>
+</body>
+</html>

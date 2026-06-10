@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RayRocket Studio — AI-Powered Services for GTA Realtors</title>
+<meta name="description" content="Cinematic listing tours from just an address, a 24/7 AI receptionist, executive assistant support, and a second brain for your business. Built for GTA realtors.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/studio.css">
+</head>
+<body>
+
+<!-- ── Nav ─────────────────────────────────────────────────────────────── -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#top" class="logo">Ray<span>Rocket</span> Studio</a>
+    <div class="nav-links">
+      <a href="#tours">House Tours</a>
+      <a href="#receptionist">AI Receptionist</a>
+      <a href="#assistant">Exec Assistant</a>
+      <a href="#secondbrain">Second Brain</a>
+    </div>
+    <a href="#tours" class="btn btn-sm btn-gold">Order a Tour</a>
+  </div>
+</nav>
+
+<!-- ── Hero ────────────────────────────────────────────────────────────── -->
+<header class="hero" id="top">
+  <div class="hero-glow"></div>
+  <div class="hero-inner reveal">
+    <p class="eyebrow">Built by a GTA realtor, for GTA realtors</p>
+    <h1>Your listings deserve Hollywood.<br>Your time deserves backup.</h1>
+    <p class="hero-sub">Cinematic listing tours generated from <strong>just the address</strong>. A receptionist that never sleeps. An assistant that never forgets. One studio, every tool you need to look bigger than you are.</p>
+    <div class="hero-ctas">
+      <a href="#tours" class="btn btn-gold">🎬 Order a Cinematic Tour</a>
+      <a href="#services" class="btn btn-ghost">Explore all services ↓</a>
+    </div>
+    <div class="hero-stats">
+      <div><strong>48h</strong><span>typical tour delivery</span></div>
+      <div><strong>24/7</strong><span>AI call coverage</span></div>
+      <div><strong>GTA</strong><span>Toronto · Peel · York · Durham · Halton</span></div>
+    </div>
+  </div>
+</header>
+
+<!-- ── Services overview ───────────────────────────────────────────────── -->
+<section class="section" id="services">
+  <div class="container">
+    <p class="eyebrow reveal">The Suite</p>
+    <h2 class="reveal">Everything a one-person brokerage empire needs</h2>
+    <div class="cards">
+      <a href="#tours" class="card reveal">
+        <div class="card-icon">🎬</div>
+        <h3>Cinematic House Tours</h3>
+        <p>Drop an address, get back a scroll-stopping cinematic video for your listing. No filming. No editing. No crew.</p>
+        <span class="card-tag live">Available now</span>
+      </a>
+      <a href="#receptionist" class="card reveal">
+        <div class="card-icon">📞</div>
+        <h3>AI Receptionist</h3>
+        <p>Answers every call, qualifies every lead, books showings, and logs it all to your CRM — while you're at the open house.</p>
+        <span class="card-tag soon">Early access</span>
+      </a>
+      <a href="#assistant" class="card reveal">
+        <div class="card-icon">🗂️</div>
+        <h3>Executive Assistant</h3>
+        <p>Inbox triage, deal paperwork chasing, scheduling, listing coordination — a real operations layer behind your name.</p>
+        <span class="card-tag soon">Early access</span>
+      </a>
+      <a href="#secondbrain" class="card reveal">
+        <div class="card-icon">🧠</div>
+        <h3>Second Brain</h3>
+        <p>Every client, conversation, and commitment — remembered, searchable, and surfaced exactly when you need it.</p>
+        <span class="card-tag wait">Waitlist</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── Cinematic tours ─────────────────────────────────────────────────── -->
+<section class="section section-alt" id="tours">
+  <div class="container">
+    <p class="eyebrow reveal">Service 01 — Live now</p>
+    <h2 class="reveal">Cinematic House Tours, from just an address</h2>
+    <p class="section-sub reveal">You type the address. We generate a cinematic, music-driven listing tour ready for Instagram, TikTok, YouTube and MLS. Delivered to your inbox, typically within 48 hours.</p>
+
+    <div class="steps reveal">
+      <div class="step"><span>1</span><h4>Paste the address</h4><p>That's genuinely all we need to start.</p></div>
+      <div class="step"><span>2</span><h4>Pick your style</h4><p>Cinematic, luxury, or fast-cut social.</p></div>
+      <div class="step"><span>3</span><h4>We produce it</h4><p>AI-powered production, human-checked quality.</p></div>
+      <div class="step"><span>4</span><h4>You post & impress</h4><p>Vertical + horizontal cuts, ready to publish.</p></div>
+    </div>
+
+    <!-- Pricing -->
+    <div class="pricing-toggle reveal">
+      <button class="toggle-opt active" data-mode="once">One-time</button>
+      <button class="toggle-opt" data-mode="sub">Subscription</button>
+    </div>
+
+    <div class="pricing reveal" id="pricing-once">
+      <div class="price-card featured">
+        <h3>Single Tour</h3>
+        <div class="price">$249<span> / video</span></div>
+        <ul>
+          <li>1 cinematic listing tour</li>
+          <li>Vertical (Reels/TikTok) + horizontal cuts</li>
+          <li>Licensed music & captions</li>
+          <li>48h standard delivery</li>
+          <li>1 revision included</li>
+        </ul>
+        <button class="btn btn-gold" data-package="single" onclick="openOrder('single')">Order this tour</button>
+      </div>
+      <div class="price-card">
+        <h3>Rush Tour</h3>
+        <div class="price">$349<span> / video</span></div>
+        <ul>
+          <li>Everything in Single Tour</li>
+          <li><strong>24h delivery</strong></li>
+          <li>Priority production queue</li>
+          <li>Same-day revision turnaround</li>
+        </ul>
+        <button class="btn btn-ghost" data-package="single" onclick="openOrder('single', true)">Order rush</button>
+      </div>
+    </div>
+
+    <div class="pricing hidden reveal" id="pricing-sub">
+      <div class="price-card">
+        <h3>Starter</h3>
+        <div class="price">$399<span> / mo</span></div>
+        <ul>
+          <li><strong>2 tours</strong> per month</li>
+          <li>All formats & music included</li>
+          <li>48h delivery</li>
+          <li>Cancel anytime</li>
+        </ul>
+        <button class="btn btn-ghost" onclick="openOrder('starter')">Start Starter</button>
+      </div>
+      <div class="price-card featured">
+        <div class="badge">Most popular</div>
+        <h3>Pro</h3>
+        <div class="price">$899<span> / mo</span></div>
+        <ul>
+          <li><strong>5 tours</strong> per month</li>
+          <li>Priority queue</li>
+          <li>2 revisions per video</li>
+          <li>Branded intro/outro with your logo</li>
+        </ul>
+        <button class="btn btn-gold" onclick="openOrder('pro')">Go Pro</button>
+      </div>
+      <div class="price-card">
+        <h3>Brokerage</h3>
+        <div class="price">$1,999<span> / mo</span></div>
+        <ul>
+          <li><strong>12 tours</strong> per month</li>
+          <li>Multi-agent team account</li>
+          <li>Dedicated production manager</li>
+          <li>Custom brand kit across all videos</li>
+        </ul>
+        <button class="btn btn-ghost" onclick="openOrder('brokerage')">Equip the team</button>
+      </div>
+    </div>
+
+    <!-- Order form -->
+    <div class="order-panel reveal" id="order-panel">
+      <h3>🎬 Order your tour</h3>
+      <p class="muted">Fill this in and we'll confirm your order by email with a secure payment link.</p>
+      <form action="/order/tour" method="post" class="form-grid">
+        <input type="hidden" name="package" id="order-package" value="single">
+        <label>Property address *<input type="text" name="address" required placeholder="123 Lakeshore Blvd W, Toronto, ON"></label>
+        <label>Listing URL (optional)<input type="url" name="listing_url" placeholder="https://www.realtor.ca/..."></label>
+        <label>Your name *<input type="text" name="name" required placeholder="Jane Agent"></label>
+        <label>Email *<input type="email" name="email" required placeholder="you@brokerage.com"></label>
+        <label>Phone<input type="tel" name="phone" placeholder="(416) 555-0123"></label>
+        <label>Brokerage<input type="text" name="brokerage" placeholder="RE/MAX, Royal LePage..."></label>
+        <label>Style
+          <select name="style">
+            <option value="cinematic">Cinematic — sweeping & dramatic</option>
+            <option value="luxury">Luxury — slow, elegant, high-end</option>
+            <option value="social">Social — fast cuts for Reels/TikTok</option>
+          </select>
+        </label>
+        <label class="checkbox-label"><input type="checkbox" name="rush" value="true" id="rush-box"> Rush 24h delivery (+$100)</label>
+        <label class="full">Anything we should know?<textarea name="notes" rows="3" placeholder="Feature the backyard, listing goes live Friday..."></textarea></label>
+        <button type="submit" class="btn btn-gold full">Place order →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ── AI Receptionist ─────────────────────────────────────────────────── -->
+<section class="section" id="receptionist">
+  <div class="container">
+    <p class="eyebrow reveal">Service 02 — Early access</p>
+    <h2 class="reveal">An AI receptionist that works your phones 24/7</h2>
+    <p class="section-sub reveal">Every missed call is a missed commission. Our AI receptionist answers instantly, sounds human, qualifies the lead, books the showing, and writes it all into your CRM. Tell us what you need below — we'll size the setup and recommend a plan on the spot.</p>
+
+    <div class="recep-grid">
+      <!-- Scope builder -->
+      <div class="recep-builder reveal">
+        <h3>Build your receptionist</h3>
+        <form action="/lead/receptionist" method="post" id="recep-form">
+          <p class="field-label">What should it handle? <span class="muted">(pick all that apply)</span></p>
+          <div class="chips">
+            {% for key, label in receptionist_tasks.items() %}
+            <label class="chip"><input type="checkbox" name="tasks" value="{{ key }}" onchange="estimate()"><span>{{ label }}</span></label>
+            {% endfor %}
+          </div>
+
+          <p class="field-label">Roughly how many calls per week?</p>
+          <div class="seg" data-name="call_volume">
+            <label><input type="radio" name="call_volume" value="low" onchange="estimate()"><span>Under 20</span></label>
+            <label><input type="radio" name="call_volume" value="medium" checked onchange="estimate()"><span>20–75</span></label>
+            <label><input type="radio" name="call_volume" value="high" onchange="estimate()"><span>75+</span></label>
+          </div>
+
+          <p class="field-label">Coverage hours</p>
+          <div class="seg" data-name="coverage">
+            <label><input type="radio" name="coverage" value="business" checked onchange="estimate()"><span>Business hours</span></label>
+            <label><input type="radio" name="coverage" value="extended" onchange="estimate()"><span>8am–10pm</span></label>
+            <label><input type="radio" name="coverage" value="always" onchange="estimate()"><span>24/7</span></label>
+          </div>
+
+          <div class="form-grid tight">
+            <label>Your name *<input type="text" name="name" required placeholder="Jane Agent"></label>
+            <label>Email *<input type="email" name="email" required placeholder="you@brokerage.com"></label>
+            <label>Phone<input type="tel" name="phone"></label>
+            <label>CRM you use<input type="text" name="crm" placeholder="Follow Up Boss, KvCORE, none..."></label>
+            <label class="full">Notes<textarea name="notes" rows="2" placeholder="I keep missing calls during showings..."></textarea></label>
+          </div>
+          <input type="hidden" name="recommended_plan" id="recommended-plan-input" value="core">
+          <button type="submit" class="btn btn-gold full">Request early access →</button>
+        </form>
+      </div>
+
+      <!-- Live estimate -->
+      <div class="recep-estimate reveal">
+        <div class="estimate-card" id="estimate-card">
+          <p class="eyebrow">Your estimate</p>
+          <h3 id="est-plan">Core — $299/mo</h3>
+          <p id="est-desc">24/7 answering with message-taking and instant text-back to callers.</p>
+          <div class="est-row"><span>Setup effort</span><strong id="est-setup">~3 business days</strong></div>
+          <div class="est-row"><span>What setup involves</span><strong id="est-work">Greeting script, your service areas, transfer rules</strong></div>
+          <div class="est-row"><span>Estimated monthly</span><strong id="est-price">$299/mo + $99 one-time setup</strong></div>
+          <p class="muted small">Estimates update as you pick options. Final quote confirmed on a 15-minute scoping call. Early-access members lock this pricing for 12 months.</p>
+        </div>
+        <div class="plan-ladder">
+          <div class="rung" data-plan="core"><strong>Core · $299/mo</strong><span>Answering, messages, text-back</span></div>
+          <div class="rung" data-plan="plus"><strong>Plus · $499/mo</strong><span>+ Lead qualification & showing bookings</span></div>
+          <div class="rung" data-plan="concierge"><strong>Concierge · $899/mo</strong><span>+ CRM logging, follow-up sequences, 24/7</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Exec assistant ──────────────────────────────────────────────────── -->
+<section class="section section-alt" id="assistant">
+  <div class="container">
+    <p class="eyebrow reveal">Service 03 — Early access</p>
+    <h2 class="reveal">An executive assistant behind your name</h2>
+    <p class="section-sub reveal">Hybrid AI + human operations support: inbox triage, deal paperwork chasing, showing coordination, client touch-points. You sell. It runs.</p>
+    <div class="pricing reveal">
+      <div class="price-card">
+        <h3>Essentials</h3>
+        <div class="price">$450<span> / mo</span></div>
+        <ul><li>Inbox triage & drafted replies</li><li>Calendar & showing scheduling</li><li>Weekly priorities digest</li></ul>
+        <button class="btn btn-ghost" onclick="openWaitlist('exec_assistant', 'Essentials')">Join early access</button>
+      </div>
+      <div class="price-card featured">
+        <h3>Operator</h3>
+        <div class="price">$950<span> / mo</span></div>
+        <ul><li>Everything in Essentials</li><li>Transaction paperwork chasing</li><li>Client follow-up & touch campaigns</li><li>Listing launch coordination</li></ul>
+        <button class="btn btn-gold" onclick="openWaitlist('exec_assistant', 'Operator')">Join early access</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Second brain ────────────────────────────────────────────────────── -->
+<section class="section" id="secondbrain">
+  <div class="container narrow">
+    <p class="eyebrow reveal">Service 04 — Coming soon</p>
+    <h2 class="reveal">A second brain for your entire business</h2>
+    <p class="section-sub reveal">Every client preference, every conversation, every promise you made at an open house six months ago — captured automatically and surfaced exactly when you need it. "Who was the couple looking for a bungalow near Square One under $900k?" Ask it. It knows.</p>
+    <form action="/waitlist" method="post" class="inline-form reveal">
+      <input type="hidden" name="service" value="second_brain">
+      <input type="text" name="name" required placeholder="Your name">
+      <input type="email" name="email" required placeholder="you@brokerage.com">
+      <button type="submit" class="btn btn-gold">Join the waitlist</button>
+    </form>
+  </div>
+</section>
+
+<!-- ── FAQ ─────────────────────────────────────────────────────────────── -->
+<section class="section section-alt" id="faq">
+  <div class="container narrow">
+    <h2 class="reveal">Questions, answered</h2>
+    <details class="faq reveal"><summary>How can you make a house tour from just an address?</summary><p>Our production pipeline pulls listing media and property data, then uses AI-driven cinematography — camera moves, pacing, music, colour grading — to build a tour. A human reviews every video before delivery. If we need anything extra, we'll email you.</p></details>
+    <details class="faq reveal"><summary>What do I get with each tour?</summary><p>A vertical cut for Reels/TikTok/Shorts and a horizontal cut for YouTube and MLS, with licensed music and captions. One revision is included on every video.</p></details>
+    <details class="faq reveal"><summary>Is the AI receptionist available now?</summary><p>It's in early access. Submit the scope form and we'll book a 15-minute call, confirm your quote, and onboard you in waves. Early-access members lock their pricing for 12 months.</p></details>
+    <details class="faq reveal"><summary>Do unused subscription tours roll over?</summary><p>Yes — unused tours roll over one month. Subscriptions are month-to-month and you can cancel anytime.</p></details>
+    <details class="faq reveal"><summary>Do you serve outside the GTA?</summary><p>House tours: anywhere in Ontario. Receptionist and assistant services: anywhere in Canada.</p></details>
+  </div>
+</section>
+
+<!-- ── Footer ──────────────────────────────────────────────────────────── -->
+<footer class="footer">
+  <div class="container footer-inner">
+    <div>
+      <a href="#top" class="logo">Ray<span>Rocket</span> Studio</a>
+      <p class="muted">AI-powered services for GTA realtors.<br>Built in Toronto. 🇨🇦</p>
+    </div>
+    <div class="footer-links">
+      <a href="#tours">House Tours</a>
+      <a href="#receptionist">AI Receptionist</a>
+      <a href="#assistant">Exec Assistant</a>
+      <a href="#secondbrain">Second Brain</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ── Waitlist modal ──────────────────────────────────────────────────── -->
+<div class="modal-backdrop" id="waitlist-modal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeWaitlist()">✕</button>
+    <h3 id="waitlist-title">Join early access</h3>
+    <form action="/waitlist" method="post" class="form-grid">
+      <input type="hidden" name="service" id="waitlist-service" value="exec_assistant">
+      <label>Your name *<input type="text" name="name" required></label>
+      <label>Email *<input type="email" name="email" required></label>
+      <label class="full">Notes<textarea name="notes" rows="2" id="waitlist-notes"></textarea></label>
+      <button type="submit" class="btn btn-gold full">Sign me up →</button>
+    </form>
+  </div>
+</div>
+
+<script src="/static/studio.js"></script>
+</body>
+</html>
