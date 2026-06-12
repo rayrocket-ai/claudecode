@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Production Brief — Order #{{ order.id }} — RayRocket Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/studio.css">
+<style>
+  .brief-block { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 28px; margin-top: 18px; box-shadow: var(--shadow-soft); }
+  .brief-block textarea { width: 100%; min-height: 320px; font-family: ui-monospace, monospace; font-size: 0.85rem; line-height: 1.55; }
+  .brief-block pre { white-space: pre-wrap; font-family: ui-monospace, monospace; font-size: 0.82rem; line-height: 1.6; color: var(--text); }
+  .brief-meta { display: flex; gap: 24px; flex-wrap: wrap; margin-top: 10px; color: var(--muted); font-size: 0.9rem; }
+  .brief-meta strong { color: var(--navy); }
+</style>
+</head>
+<body>
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/admin?key={{ key }}" class="logo">← Ray<span>Rocket</span> Admin</a>
+  </div>
+</nav>
+
+<div class="admin-wrap">
+  <p class="eyebrow">Order #{{ order.id }} — {{ order.package }}{{ " · RUSH 24h" if order.rush }}</p>
+  <h2 style="margin-top:6px">🎬 {{ order.address }}</h2>
+  <div class="brief-meta">
+    <span>Agent: <strong>{{ order.name }}</strong> &lt;{{ order.email }}&gt;</span>
+    <span>Style: <strong>{{ order.style }}</strong></span>
+    <span>Status: <strong>{{ order.status }}</strong></span>
+    <span>Ordered: <strong>{{ order.created_at.strftime("%b %d, %H:%M") }}</strong></span>
+  </div>
+
+  <div class="brief-block">
+    <h3>Kickoff prompt</h3>
+    <p class="muted small" style="margin: 6px 0 14px">Paste this into a Claude session with the Higgsfield connector + ffmpeg available. It runs the whole pipeline for this order.</p>
+    <textarea readonly id="prompt-box">{{ prompt }}</textarea>
+    <button class="btn btn-gold btn-sm" style="margin-top:12px" onclick="navigator.clipboard.writeText(document.getElementById('prompt-box').value).then(() => this.textContent='Copied ✓')">Copy prompt</button>
+  </div>
+
+  <div class="brief-block">
+    <h3>Full production playbook</h3>
+    <p class="muted small" style="margin: 6px 0 14px">Reference: the complete address → tour workflow, including pitfalls and fixes.</p>
+    <pre>{{ playbook }}</pre>
+  </div>
+</div>
+</body>
+</html>

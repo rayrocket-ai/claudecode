@@ -54,6 +54,59 @@ RECEPTIONIST_TASKS = {
     "faq": "Answer listing & neighbourhood FAQs",
 }
 
+# ── Tour production ───────────────────────────────────────────────────────────
+# Each paid order gets a ready-to-run kickoff prompt for the Claude + Higgsfield
+# pipeline documented in studio/playbooks/house_tour_production.md.
+
+PLAYBOOK_PATH = os.path.join(BASE_DIR, "playbooks", "house_tour_production.md")
+
+STYLE_BRIEFS = {
+    "cinematic": (
+        "Cinematic & dramatic: sweeping drone moves, confident pacing, "
+        "speed-ramp the room-to-room transits, slow down on the hero room."
+    ),
+    "luxury": (
+        "Luxury & elegant: slow, gliding camera throughout, longer holds on "
+        "premium finishes, gentler speed ramp, twilight hero finale."
+    ),
+    "social": (
+        "Fast-cut social: aggressive FPV energy, whip-fast transits, punchy "
+        "~22-25s runtime, optimized for Reels/TikTok hook-and-hold."
+    ),
+}
+
+
+def build_production_prompt(order: "TourOrder") -> str:
+    """The exact prompt to paste into a Claude session (with the Higgsfield
+    connector + ffmpeg available) to produce this order's tour."""
+    lines = [
+        f"Create a cinematic house tour for **{order.address}**.",
+        "Find the listing photos online. Make it one continuous drone shot — "
+        "enter from above, descend, roam room to room. No visible cuts. "
+        "~30 seconds. Deliver 16:9 and 9:16 versions.",
+        "",
+        f"Style brief: {STYLE_BRIEFS.get(order.style, STYLE_BRIEFS['cinematic'])}",
+    ]
+    if order.listing_url:
+        lines.append(f"Listing URL (start photo search here): {order.listing_url}")
+    if order.rush:
+        lines.append("RUSH ORDER — 24h delivery promised. Start immediately.")
+    if order.notes:
+        lines.append(f"Client notes: {order.notes}")
+    lines += [
+        "",
+        "Follow the production playbook at studio/playbooks/house_tour_production.md:",
+        "photo sourcing → flight path → frame-chained segments (start frame = exact "
+        "final frame of previous segment; 'already moving, never decelerating' in "
+        "every prompt) → ffmpeg stitch with 0.25s micro-crossfades → one continuous "
+        "speed ramp (whip the transits, slow the hero room) → Higgsfield reframe for "
+        "9:16 → deliver both masters, silent.",
+        "",
+        f"Deliver to: {order.name} <{order.email}>"
+        + (f" ({order.brokerage})" if order.brokerage else ""),
+    ]
+    return "\n".join(lines)
+
 
 # ── Public pages ──────────────────────────────────────────────────────────────
 
@@ -180,6 +233,27 @@ def admin(request: Request, key: str = "", db: Session = Depends(get_db)):
     return templates.TemplateResponse(request, "admin.html", {
         "orders": orders, "leads": leads,
         "waitlist": waitlist, "key": key, "task_labels": RECEPTIONIST_TASKS,
+    })
+
+
+@app.get("/admin/order/{order_id}/production", response_class=HTMLResponse)
+def order_production_brief(order_id: int, request: Request, key: str = "", db: Session = Depends(get_db)):
+    """Per-order production brief: the kickoff prompt plus the full playbook."""
+    if not ADMIN_KEY or key != ADMIN_KEY:
+        raise HTTPException(status_code=403, detail="Set STUDIO_ADMIN_KEY and pass ?key=...")
+    order = db.query(TourOrder).filter(TourOrder.id == order_id).first()
+    if not order:
+        raise HTTPException(status_code=404)
+    try:
+        with open(PLAYBOOK_PATH, encoding="utf-8") as f:
+            playbook = f.read()
+    except OSError:
+        playbook = "(playbook file missing: studio/playbooks/house_tour_production.md)"
+    return templates.TemplateResponse(request, "production.html", {
+        "order": order,
+        "prompt": build_production_prompt(order),
+        "playbook": playbook,
+        "key": key,
     })
 
 

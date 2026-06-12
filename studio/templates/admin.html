@@ -22,7 +22,7 @@
     <tr>
       <td>{{ o.created_at.strftime("%b %d %H:%M") }}</td>
       <td>{{ o.name }}<br><a href="mailto:{{ o.email }}" class="muted">{{ o.email }}</a>{% if o.phone %}<br><span class="muted">{{ o.phone }}</span>{% endif %}{% if o.brokerage %}<br><span class="muted">{{ o.brokerage }}</span>{% endif %}</td>
-      <td>{{ o.address }}{% if o.listing_url %}<br><a href="{{ o.listing_url }}" target="_blank" class="muted">listing ↗</a>{% endif %}</td>
+      <td>{{ o.address }}{% if o.listing_url %}<br><a href="{{ o.listing_url }}" target="_blank" class="muted">listing ↗</a>{% endif %}<br><a href="/admin/order/{{ o.id }}/production?key={{ key }}"><strong>🎬 production brief →</strong></a></td>
       <td>{{ o.package }}</td>
       <td>{{ o.style }}</td>
       <td>{{ "⚡ 24h" if o.rush else "—" }}</td>
