@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/static/studio.css">
-{% set theme = request.query_params.get('theme') %}
+{% set theme = request.query_params.get('theme') or 'stripe' %}
 {% if theme in ('stripe', 'airbnb', 'apple', 'notion') %}<link rel="stylesheet" href="/static/themes/{{ theme }}.css">{% endif %}
 </head>
 <body>
