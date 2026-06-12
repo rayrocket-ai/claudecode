@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What Fable 5 Can Do For You</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --card: #181b24;
+    --card-hover: #1e2230;
+    --accent: #d97e4a;
+    --accent2: #6ea8fe;
+    --green: #4ade80;
+    --text: #e8eaf0;
+    --muted: #9aa2b5;
+    --border: #2a2f3e;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding: 40px 20px;
+  }
+  .container { max-width: 960px; margin: 0 auto; }
+  header { text-align: center; margin-bottom: 48px; }
+  .badge {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--accent), #c0563a);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    padding: 6px 16px;
+    border-radius: 999px;
+    margin-bottom: 16px;
+  }
+  h1 { font-size: 36px; font-weight: 800; margin-bottom: 12px; }
+  h1 .grad {
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .subtitle { color: var(--muted); font-size: 17px; max-width: 680px; margin: 0 auto; }
+  .section-title {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 44px 0 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-title::after { content: ""; flex: 1; height: 1px; background: var(--border); }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 22px;
+    transition: transform .15s, border-color .15s;
+  }
+  .card:hover { transform: translateY(-2px); border-color: var(--accent); }
+  .card .icon { font-size: 26px; margin-bottom: 10px; }
+  .card h3 { font-size: 16px; margin-bottom: 8px; }
+  .card p { font-size: 14px; color: var(--muted); }
+  .card .tools { margin-top: 12px; }
+  .tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    background: rgba(110,168,254,.12);
+    color: var(--accent2);
+    border: 1px solid rgba(110,168,254,.25);
+    padding: 2px 10px;
+    border-radius: 999px;
+    margin: 2px 3px 0 0;
+  }
+  .tag.green { background: rgba(74,222,128,.1); color: var(--green); border-color: rgba(74,222,128,.25); }
+  .context-box {
+    background: linear-gradient(135deg, rgba(217,126,74,.08), rgba(110,168,254,.06));
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px 26px;
+    margin-bottom: 8px;
+  }
+  .context-box h2 { font-size: 18px; margin-bottom: 10px; }
+  .context-box p { font-size: 14.5px; color: var(--muted); }
+  .context-box strong { color: var(--text); }
+  ul.next { list-style: none; }
+  ul.next li {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--green);
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin-bottom: 10px;
+    font-size: 14.5px;
+  }
+  ul.next li strong { color: var(--green); }
+  ul.next li span { color: var(--muted); }
+  footer { text-align: center; margin-top: 48px; color: var(--muted); font-size: 13px; }
+  footer .note {
+    background: var(--card);
+    border: 1px dashed var(--border);
+    border-radius: 10px;
+    padding: 14px 20px;
+    display: inline-block;
+    max-width: 640px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <div class="badge">CLAUDE FABLE 5</div>
+    <h1>What I Can Do <span class="grad">For You</span></h1>
+    <p class="subtitle">A personalized capability map — built from your codebase, your project, and the 16 integrations you've connected to this workspace.</p>
+  </header>
+
+  <div class="section-title">What I Know About You</div>
+  <div class="context-box">
+    <h2>🏡 You're building an AI Real Estate Operations System</h2>
+    <p>Your repo is an <strong>AI-powered Ontario real estate document generator</strong>: a Telegram bot that uses Claude to extract deal details from natural language, fills <strong>OREA forms as PDFs</strong>, logs into <strong>REALM / TRREB (torontomls.net)</strong> via browser automation, and integrates with <strong>TransactionDesk, DocuSign, SkySlope, and SMTP delivery</strong>. It runs on Python (python-telegram-bot, SQLAlchemy, Playwright, reportlab) and deploys to a <strong>Hetzner server via Docker</strong>. You're clearly a realtor — or building for one — in the GTA, automating the paperwork side of closing deals.</p>
+  </div>
+
+  <div class="section-title">Your Project — How I Can Level It Up</div>
+  <div class="grid">
+    <div class="card">
+      <div class="icon">📄</div>
+      <h3>Harden the Document Engine</h3>
+      <p>Add more OREA forms (Form 100, 101, 120, 320…), clause libraries, amendment chains, and validation so a bad date or missing deposit never reaches a client. Write tests around the field maps so form updates don't silently break.</p>
+      <div class="tools"><span class="tag green">your repo</span><span class="tag green">pytest</span></div>
+    </div>
+    <div class="card">
+      <div class="icon">🤖</div>
+      <h3>Make the Bot Conversational</h3>
+      <p>Upgrade extraction to ask smart follow-ups ("Is the deposit herewith or upon acceptance?"), handle voice notes, photos of MLS sheets, and multi-deal sessions. Boosend can also manage your Telegram/WhatsApp automations alongside the bot.</p>
+      <div class="tools"><span class="tag">Boosend</span><span class="tag green">Claude API</span></div>
+    </div>
+    <div class="card">
+      <div class="icon">🚀</div>
+      <h3>Deploy &amp; Monitor</h3>
+      <p>I can review your Hetzner deploy script, add health checks, log rotation, automatic restarts, and backups for your SQLite DB — or build a web dashboard for deals and deploy it on Vercel.</p>
+      <div class="tools"><span class="tag">Vercel</span><span class="tag green">Docker</span></div>
+    </div>
+    <div class="card">
+      <div class="icon">🔒</div>
+      <h3>Security Review</h3>
+      <p>Your bot holds REALM credentials, client PII, and signing keys. I can run a full security review: secrets handling, the Telegram auth allowlist, Playwright session storage, and DB encryption at rest.</p>
+      <div class="tools"><span class="tag green">/security-review</span></div>
+    </div>
+  </div>
+
+  <div class="section-title">Your Business — Beyond the Code</div>
+  <div class="grid">
+    <div class="card">
+      <div class="icon">📧</div>
+      <h3>Email &amp; Calendar Ops</h3>
+      <p>Search your Gmail for deal threads, draft offer cover emails, label and organize transactions, schedule showings and closing dates in Google Calendar, and file signed PDFs into Drive.</p>
+      <div class="tools"><span class="tag">Gmail</span><span class="tag">Google Calendar</span><span class="tag">Google Drive</span></div>
+    </div>
+    <div class="card">
+      <div class="icon">🎨</div>
+      <h3>Marketing &amp; Listings</h3>
+      <p>Generate listing feature sheets, just-listed/just-sold social posts in Canva, full listing presentations in Gamma, and AI photos/videos for property marketing via Higgsfield. Ad Advisor can help tune your ad spend.</p>
+      <div class="tools"><span class="tag">Canva</span><span class="tag">Gamma</span><span class="tag">Higgsfield</span><span class="tag">Ad Advisor</span></div>
+    </div>
+    <div class="card">
+      <div class="icon">📊</div>
+      <h3>Deal Pipeline / CRM</h3>
+      <p>Stand up an Airtable base as your deal CRM — leads, conditions, key dates, commission tracking — and wire your bot to push every generated document into it automatically.</p>
+      <div class="tools"><span class="tag">Airtable</span></div>
+    </div>
+    <div class="card">
+      <div class="icon">💳</div>
+      <h3>Payments &amp; Domains</h3>
+      <p>If you productize this bot for other realtors: Stripe for subscriptions, GoDaddy for the domain, Clerk for authentication, Vercel for the landing page. I can build the whole funnel.</p>
+      <div class="tools"><span class="tag">Stripe</span><span class="tag">GoDaddy</span><span class="tag">Clerk</span><span class="tag">Vercel</span></div>
+    </div>
+    <div class="card">
+      <div class="icon">🎥</div>
+      <h3>Meetings &amp; Design</h3>
+      <p>Pull Zoom recordings and summarize client calls into action items; design the bot's dashboard UI in Figma before I build it.</p>
+      <div class="tools"><span class="tag">Zoom</span><span class="tag">Figma</span></div>
+    </div>
+    <div class="card">
+      <div class="icon">🔍</div>
+      <h3>Research &amp; Reports</h3>
+      <p>Deep, cited research on anything — TRREB rule changes, OREA form updates, competitor tools, Ontario regulatory requirements for electronic signatures — synthesized into a verified report.</p>
+      <div class="tools"><span class="tag green">/deep-research</span><span class="tag green">web search</span></div>
+    </div>
+  </div>
+
+  <div class="section-title">How I Work (Fable 5)</div>
+  <div class="grid">
+    <div class="card">
+      <div class="icon">🧠</div>
+      <h3>Most Capable Claude Yet</h3>
+      <p>Fable 5 is the first of Anthropic's Claude 5 family — a Mythos-class tier above Opus. Stronger reasoning across large codebases, long autonomous sessions, and multi-step plans.</p>
+    </div>
+    <div class="card">
+      <div class="icon">⚡</div>
+      <h3>Autonomous Execution</h3>
+      <p>I work in a cloud sandbox: I write code, run tests, fix failures, commit, and push to a branch — end to end, without you babysitting each step.</p>
+    </div>
+    <div class="card">
+      <div class="icon">👀</div>
+      <h3>PR Babysitting</h3>
+      <p>I can watch your pull requests, respond to review comments, and auto-fix CI failures until everything is green and mergeable.</p>
+    </div>
+    <div class="card">
+      <div class="icon">🧩</div>
+      <h3>Parallel Agents</h3>
+      <p>For big jobs I spawn sub-agents — one explores the codebase, one plans architecture, one implements — and run them concurrently.</p>
+    </div>
+  </div>
+
+  <div class="section-title">Suggested Next Moves</div>
+  <ul class="next">
+    <li><strong>1. Security pass</strong> — <span>run a full security review on the bot before real client data flows through it (credentials, PII, session storage).</span></li>
+    <li><strong>2. Airtable deal CRM</strong> — <span>connect the bot's generated documents to an Airtable pipeline so every deal, condition, and key date is tracked automatically.</span></li>
+    <li><strong>3. Condition-date reminders</strong> — <span>have the bot push financing/inspection deadlines into Google Calendar and message you on Telegram 48h before they expire.</span></li>
+    <li><strong>4. Test coverage</strong> — <span>the repo has one test file; I can build a suite around extraction, field mapping, and PDF output so changes are safe.</span></li>
+    <li><strong>5. Productize it</strong> — <span>landing page + Stripe billing + Clerk auth if you want other Ontario realtors paying for this.</span></li>
+  </ul>
+
+  <footer>
+    <div class="note">⚠️ Honest caveat: I can't read your past chat sessions — each starts fresh. This page was built from your repository contents and connected integrations. The more context you keep in the repo (a CLAUDE.md works great), the smarter every future session starts.</div>
+    <p style="margin-top:16px;">Generated by Claude Fable 5 · June 12, 2026</p>
+  </footer>
+
+</div>
+</body>
+</html>
