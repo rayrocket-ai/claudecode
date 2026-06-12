@@ -1,0 +1,67 @@
+/* Theme: Notion-inspired — warm paper neutrals, purple pill CTAs, a deep navy
+   hero band, and pastel-tinted service cards echoing database properties. */
+
+:root {
+  --bg: #ffffff;
+  --bg-alt: #f6f5f4;
+  --line: #e5e3df;
+  --text: #37352f;
+  --muted: #787671;
+  --navy: #1a1a1a;
+  --navy-2: #5645d4;
+  --gold: #5645d4;
+  --gold-2: #7b3ff2;
+  --gold-soft: #e6e0f5;
+  --radius: 10px;
+  --shadow: 0 12px 32px rgba(26, 21, 48, 0.10);
+  --shadow-soft: 0 1px 4px rgba(26, 21, 48, 0.05);
+}
+
+h1, h2, h3, h4 { font-weight: 600; letter-spacing: -0.015em; }
+
+.btn { border-radius: 10px; }
+.btn-gold { background: #5645d4; box-shadow: 0 4px 12px rgba(86, 69, 212, 0.28); }
+.btn-gold:hover { background: #4534b3; }
+.btn-ghost { color: #37352f; border-color: #c8c4be; }
+.btn-ghost:hover { border-color: #5645d4; color: #5645d4; }
+
+/* Deep navy hero band with sticky-note accents */
+.hero { background: linear-gradient(180deg, #0a1530 0%, #1a2a52 130%); }
+.hero h1, .hero.page-hero h1 { color: #ffffff; }
+.hero-sub { color: #b9c2d8; }
+.hero-sub strong { color: #f5d75e; }
+.hero .eyebrow { color: #ff64c8; }
+.hero-stats strong { color: #ffffff; }
+.hero-stats span { color: #8e9ab8; }
+.hero-glow {
+  background:
+    radial-gradient(18% 22% at 12% 25%, rgba(255, 100, 200, 0.25), transparent 70%),
+    radial-gradient(16% 20% at 88% 15%, rgba(245, 215, 94, 0.20), transparent 70%),
+    radial-gradient(20% 24% at 70% 80%, rgba(123, 63, 242, 0.30), transparent 70%);
+  animation: none;
+}
+.hero .btn-ghost { color: #ffffff; border-color: rgba(255, 255, 255, 0.35); background: transparent; }
+.hero .btn-ghost:hover { border-color: #ffffff; }
+
+/* Pastel-tinted service cards */
+.cards .card:nth-child(1) { background: #ffe8d4; border-color: transparent; }
+.cards .card:nth-child(2) { background: #fde0ec; border-color: transparent; }
+.cards .card:nth-child(3) { background: #d9f3e1; border-color: transparent; }
+.cards .card:nth-child(4) { background: #e6e0f5; border-color: transparent; }
+.cards .card p { color: #5d5b54; }
+.cards .card .card-tag { background: rgba(255, 255, 255, 0.65); }
+
+.eyebrow { color: #5645d4; }
+.toggle-opt.active { background: #5645d4; }
+.price-card.featured { border-color: #5645d4; }
+.badge { background: #5645d4; }
+.step span { background: #e6e0f5; color: #4534b3; }
+.price-card li::before { color: #5645d4; }
+.chip input:checked + span { background: #e6e0f5; border-color: #5645d4; color: #3a2a99; }
+.chip:hover span { border-color: #5645d4; color: #3a2a99; }
+.seg input:checked + span { background: #e6e0f5; border-color: #5645d4; color: #3a2a99; }
+.rung.active { border-color: #5645d4; background: #f1eefb; }
+input:focus, select:focus, textarea:focus { border-color: #5645d4; box-shadow: 0 0 0 3px rgba(86, 69, 212, 0.14); }
+.card-tag.soon { background: #e6e0f5; color: #4534b3; }
+.faq summary::after { color: #5645d4; }
+.text-link { color: #5645d4; }

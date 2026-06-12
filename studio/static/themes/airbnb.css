@@ -1,0 +1,54 @@
+/* Theme: Airbnb-inspired — warm white canvas, Rausch coral CTAs, friendly
+   full-pill buttons, soft rounded cards, humanist type. */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --bg: #ffffff;
+  --bg-alt: #f7f7f7;
+  --line: #ebebeb;
+  --text: #222222;
+  --muted: #6a6a6a;
+  --navy: #222222;
+  --navy-2: #222222;
+  --gold: #ff385c;
+  --gold-2: #ff385c;
+  --gold-soft: #fff0f3;
+  --radius: 16px;
+  --shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+  --shadow-soft: 0 1px 6px rgba(0, 0, 0, 0.06);
+}
+
+body, h1, h2, h3, h4, .btn, .logo, .toggle-opt, .eyebrow, .price, .badge, .faq summary, .hero-stats strong, .step span {
+  font-family: "Plus Jakarta Sans", "Inter", system-ui, sans-serif;
+}
+h1, h2, h3, h4 { font-weight: 700; letter-spacing: -0.01em; }
+
+.btn { border-radius: 999px; font-weight: 600; }
+.btn-gold { background: linear-gradient(135deg, #ff385c, #e00b41); box-shadow: 0 6px 16px rgba(255, 56, 92, 0.30); }
+.btn-gold:hover { background: #e00b41; box-shadow: 0 10px 24px rgba(255, 56, 92, 0.38); }
+.btn-ghost { color: #222222; border-color: #c1c1c1; }
+.btn-ghost:hover { border-color: #222222; }
+
+.hero { background: #ffffff; }
+.hero-glow {
+  background: radial-gradient(50% 55% at 50% 0%, rgba(255, 56, 92, 0.09), transparent 65%);
+  animation: none;
+}
+.hero-stats strong { color: #ff385c; }
+
+.eyebrow { color: #ff385c; }
+.toggle-opt.active { background: #222222; }
+.price-card.featured { border-color: #222222; }
+.badge { background: #ff385c; }
+.step span { background: #fff0f3; color: #e00b41; }
+.price-card li::before { color: #ff385c; }
+.chip span, .seg span { border-radius: 999px; }
+.chip input:checked + span { background: #fff0f3; border-color: #ff385c; color: #c81e45; }
+.chip:hover span { border-color: #ff385c; color: #c81e45; }
+.seg input:checked + span { background: #fff0f3; border-color: #ff385c; color: #c81e45; }
+.rung.active { border-color: #ff385c; background: #fff7f8; }
+input:focus, select:focus, textarea:focus { border-color: #222222; box-shadow: 0 0 0 2px rgba(34, 34, 34, 0.18); }
+input[type="text"], input[type="email"], input[type="tel"], input[type="url"], select, textarea { border-radius: 12px; }
+.card-tag.soon { background: #fff0f3; color: #c81e45; }
+.faq summary::after { color: #ff385c; }

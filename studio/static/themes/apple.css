@@ -1,0 +1,51 @@
+/* Theme: Apple-inspired — gallery-minimal white + parchment, a single Action
+   Blue, no decorative chrome, tight SF-style headlines, quiet gray eyebrows. */
+
+:root {
+  --bg: #ffffff;
+  --bg-alt: #f5f5f7;
+  --line: #e0e0e0;
+  --text: #1d1d1f;
+  --muted: #6e6e73;
+  --navy: #1d1d1f;
+  --navy-2: #0071e3;
+  --gold: #0066cc;
+  --gold-2: #0071e3;
+  --gold-soft: #eaf3ff;
+  --radius: 18px;
+  --shadow: 0 11px 34px rgba(0, 0, 0, 0.08);
+  --shadow-soft: none;
+}
+
+body, h1, h2, h3, h4 { font-family: -apple-system, "SF Pro Display", "Inter", system-ui, sans-serif; }
+h1, h2, h3, h4 { font-weight: 600; letter-spacing: -0.015em; }
+.hero h1 { letter-spacing: -0.022em; }
+
+.btn { border-radius: 999px; font-weight: 400; font-family: inherit; }
+.btn-gold { background: #0071e3; box-shadow: none; }
+.btn-gold:hover { background: #0077ed; box-shadow: none; transform: none; }
+.btn-ghost { color: #0071e3; border-color: #0071e3; background: transparent; }
+.btn-ghost:hover { background: #eaf3ff; box-shadow: none; transform: none; }
+
+.hero { background: #ffffff; }
+.hero-glow { display: none; }
+.hero-stats strong { color: #1d1d1f; }
+
+.card, .step, .price-card, .faq, .order-panel, .recep-builder, .recep-estimate .estimate-card { box-shadow: none; }
+.card:hover, .price-card:hover { box-shadow: 0 11px 34px rgba(0, 0, 0, 0.08); }
+
+.eyebrow { color: #6e6e73; letter-spacing: 0.1em; }
+.hero .eyebrow { color: #b64400; }
+.toggle-opt.active { background: #1d1d1f; }
+.price-card.featured { border-color: #0071e3; }
+.badge { background: #0071e3; }
+.step span { background: #eaf3ff; color: #0066cc; }
+.price-card li::before { color: #0071e3; }
+.chip input:checked + span { background: #eaf3ff; border-color: #0071e3; color: #0066cc; }
+.chip:hover span { border-color: #0071e3; color: #0066cc; }
+.seg input:checked + span { background: #eaf3ff; border-color: #0071e3; color: #0066cc; }
+.rung.active { border-color: #0071e3; background: #f3f9ff; }
+input:focus, select:focus, textarea:focus { border-color: #0071e3; box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.15); }
+.card-tag.soon { background: #eaf3ff; color: #0066cc; }
+.faq summary::after { color: #0071e3; }
+.text-link { color: #0071e3; }

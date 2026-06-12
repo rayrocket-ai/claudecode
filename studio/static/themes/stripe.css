@@ -1,0 +1,52 @@
+/* Theme: Stripe-inspired — electric indigo, gradient mesh hero, pill buttons,
+   light editorial headlines. Loaded after studio.css; overrides win. */
+
+:root {
+  --bg: #ffffff;
+  --bg-alt: #f6f9fc;
+  --line: #e3e8ee;
+  --text: #0d253d;
+  --muted: #64748d;
+  --navy: #0d253d;
+  --navy-2: #533afd;
+  --gold: #533afd;
+  --gold-2: #665efd;
+  --gold-soft: #efeefe;
+  --radius: 12px;
+  --shadow: 0 16px 40px rgba(0, 55, 112, 0.12);
+  --shadow-soft: 0 2px 10px rgba(0, 55, 112, 0.06);
+}
+
+h1, h2, h3, h4 { font-family: "Inter", system-ui, sans-serif; font-weight: 500; letter-spacing: -0.02em; }
+.hero h1 { font-weight: 400; letter-spacing: -0.035em; }
+
+.btn { border-radius: 999px; }
+.btn-gold { background: #533afd; box-shadow: 0 4px 14px rgba(83, 58, 253, 0.30); }
+.btn-gold:hover { background: #4434d4; box-shadow: 0 8px 22px rgba(83, 58, 253, 0.38); }
+.btn-ghost { color: #533afd; border-color: #d3cffe; }
+.btn-ghost:hover { border-color: #533afd; }
+
+.hero { background: #ffffff; }
+.hero-glow {
+  background:
+    radial-gradient(42% 48% at 16% 6%, rgba(249, 107, 238, 0.30), transparent 62%),
+    radial-gradient(48% 52% at 68% 0%, rgba(83, 58, 253, 0.26), transparent 65%),
+    radial-gradient(36% 42% at 96% 16%, rgba(255, 196, 87, 0.30), transparent 60%);
+  filter: blur(34px);
+  animation: none;
+}
+.hero-stats strong { color: #533afd; }
+
+.eyebrow { color: #533afd; }
+.toggle-opt.active { background: #533afd; }
+.price-card.featured { border-color: #533afd; }
+.badge { background: #533afd; }
+.step span { background: #efeefe; color: #533afd; }
+.price-card li::before { color: #533afd; }
+.chip input:checked + span { background: #efeefe; border-color: #533afd; color: #3a2fc0; }
+.chip:hover span { border-color: #533afd; color: #3a2fc0; }
+.seg input:checked + span { background: #efeefe; border-color: #533afd; color: #3a2fc0; }
+.rung.active { border-color: #533afd; background: #f5f4ff; }
+input:focus, select:focus, textarea:focus { border-color: #533afd; box-shadow: 0 0 0 3px rgba(83, 58, 253, 0.14); }
+.card-tag.soon { background: #efeefe; color: #4434d4; }
+.faq summary::after { color: #533afd; }
