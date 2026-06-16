@@ -100,13 +100,9 @@ class DataExtractor:
 
     @staticmethod
     def normalize_price(value: Any) -> float:
-        """Convert price string/int to float."""
-        if isinstance(value, (int, float)):
-            return float(value)
-        if isinstance(value, str):
-            cleaned = re.sub(r"[,$\s]", "", value)
-            return float(cleaned)
-        return 0.0
+        """Convert price string/int to float (see forms.formatting)."""
+        from forms.formatting import normalize_number
+        return normalize_number(value)
 
 
 _agent: RealEstateAgent | None = None

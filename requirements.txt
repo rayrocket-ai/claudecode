@@ -22,3 +22,6 @@ httpx>=0.25.0
 # Utilities
 python-dateutil>=2.8.0
 # num2words removed (docopt build issue) — using inline implementation
+
+# Testing (dev)
+pytest>=8.0.0

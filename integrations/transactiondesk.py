@@ -25,6 +25,11 @@ from playwright.async_api import async_playwright, Page, Browser, BrowserContext
 
 from config import get_settings, STORAGE_DIR
 from forms.field_maps import FORM_100_FIELDS, FIELD_MAPS, FORM_NAME_MAP, TRANSACTION_TYPE_MAP
+from forms.formatting import (
+    normalize_number as _normalize_number,
+    dollars_to_words as _num_to_words,
+    date_parts as _parse_date,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -592,14 +597,14 @@ def _flatten_deal_data(deal_data: dict) -> dict[str, str]:
     if price:
         price_num = _normalize_number(price)
         flat["purchase_price_formatted"] = f"{price_num:,.2f}"
-        flat["purchase_price_words"] = _num_to_words(int(price_num))
+        flat["purchase_price_words"] = _num_to_words(price_num)
 
     # Deposit
     deposit = deal_data.get("deposit")
     if deposit:
         dep_num = _normalize_number(deposit)
         flat["deposit_formatted"] = f"{dep_num:,.2f}"
-        flat["deposit_words"] = _num_to_words(int(dep_num))
+        flat["deposit_words"] = _num_to_words(dep_num)
 
     # Offer date
     offer_date = deal_data.get("offer_date")
@@ -630,75 +635,3 @@ def _flatten_deal_data(deal_data: dict) -> dict[str, str]:
         flat["closing_date_yy"] = y
 
     return flat
-
-
-def _normalize_number(value) -> float:
-    """Convert a price/number to float."""
-    if isinstance(value, (int, float)):
-        return float(value)
-    if isinstance(value, str):
-        cleaned = re.sub(r"[,$\s]", "", value)
-        try:
-            return float(cleaned)
-        except ValueError:
-            return 0.0
-    return 0.0
-
-
-def _num_to_words(n: int) -> str:
-    """Convert integer to English words."""
-    if n == 0:
-        return "Zero"
-
-    ones = ["", "One", "Two", "Three", "Four", "Five", "Six", "Seven",
-            "Eight", "Nine", "Ten", "Eleven", "Twelve", "Thirteen",
-            "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"]
-    tens = ["", "", "Twenty", "Thirty", "Forty", "Fifty",
-            "Sixty", "Seventy", "Eighty", "Ninety"]
-
-    def _chunk(num: int) -> str:
-        if num == 0:
-            return ""
-        elif num < 20:
-            return ones[num]
-        elif num < 100:
-            return tens[num // 10] + (" " + ones[num % 10] if num % 10 else "")
-        else:
-            return ones[num // 100] + " Hundred" + (" " + _chunk(num % 100) if num % 100 else "")
-
-    parts = []
-    scales = [(1_000_000_000, "Billion"), (1_000_000, "Million"), (1_000, "Thousand")]
-
-    for scale, name in scales:
-        if n >= scale:
-            parts.append(_chunk(n // scale) + " " + name)
-            n %= scale
-
-    if n > 0:
-        parts.append(_chunk(n))
-
-    return " ".join(parts)
-
-
-def _parse_date(date_str: str) -> tuple[str, str, str]:
-    """Parse a date string into (day, month_name, year) tuple."""
-    if not date_str:
-        return ("", "", "")
-
-    # Try common formats
-    for fmt in ("%Y-%m-%d", "%m/%d/%Y", "%d/%m/%Y", "%B %d, %Y", "%b %d, %Y"):
-        try:
-            dt = datetime.strptime(date_str.strip(), fmt)
-            return (str(dt.day), dt.strftime("%B"), str(dt.year))
-        except ValueError:
-            continue
-
-    # Try dateutil as last resort
-    try:
-        from dateutil.parser import parse
-        dt = parse(date_str)
-        return (str(dt.day), dt.strftime("%B"), str(dt.year))
-    except Exception:
-        pass
-
-    return (date_str, "", "")

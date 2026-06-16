@@ -45,6 +45,7 @@ from db.operations import (
     update_session_data,
 )
 from forms.generator import generate_document, get_last_td_result
+from forms.validation import validate_deal
 
 logger = logging.getLogger(__name__)
 
@@ -519,6 +520,22 @@ async def _start_generation(update: Update, context: ContextTypes.DEFAULT_TYPE) 
     chat_id = update.effective_user.id
     doc_type = context.user_data.get("doc_type", "aps")
     deal_data = context.user_data.get("deal_data", {})
+
+    # Validate before generating — never let a bad date or missing/over-large
+    # deposit reach a client document.
+    validation = validate_deal(deal_data, doc_type)
+    if not validation.ok:
+        await query.edit_message_text(
+            "⚠️ *I can't generate this yet — please fix the following:*\n\n"
+            f"{validation.summary()}\n\n"
+            "Tap *Edit* to correct the details, then confirm again.",
+            parse_mode="Markdown",
+            reply_markup=confirm_keyboard(),
+        )
+        return CONFIRMING
+    if validation.warnings:
+        # Non-blocking: log them so they're visible, but proceed.
+        logger.info("Proceeding with warnings for %s: %s", doc_type, validation.warnings)
 
     await query.edit_message_text("⏳ Generating document... This may take a moment.")
     await set_session_state(chat_id, "generating")
