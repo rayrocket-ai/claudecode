@@ -37,6 +37,7 @@ from telegram.ext import (
 )
 
 from bot.formatters.tour import format_proposed_schedule, format_tour_message
+from bot.handlers.conversation import _is_authorized, make_two_factor_callback
 from config import get_settings
 from integrations.brokerbay_browser import BrokerBayBrowser, BrokerBayBrowserError
 from scheduler.geocoder import Geocoder, GeocoderError, GeoPoint
@@ -57,14 +58,6 @@ logger = logging.getLogger(__name__)
 
 
 # ── Helpers ──────────────────────────────────────────────────────
-
-
-def _is_authorized(user_id: int) -> bool:
-    settings = get_settings()
-    allowed = settings.authorized_user_id_list
-    if not allowed:
-        return True
-    return user_id in allowed
 
 
 def _parse_addresses(text: str) -> list[str]:
@@ -368,8 +361,9 @@ async def _book_all_stops(
     confirmations: dict[str, dict[str, Any]] = {}
     failed: list[str] = []
 
+    two_fa = make_two_factor_callback(chat_id, context.bot)
     try:
-        async with BrokerBayBrowser() as bb:
+        async with BrokerBayBrowser(two_factor_callback=two_fa) as bb:
             for stop in tour.stops:
                 address = stop.address
                 booked = False

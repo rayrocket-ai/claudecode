@@ -290,6 +290,16 @@ class BrokerBayClient:
             await self._client.aclose()
 
 
+def _md(value: Any) -> str:
+    """Escape external text for Telegram legacy Markdown.
+
+    BrokerBay addresses, agent names, and notes are untrusted input —
+    an unescaped _ or * makes Telegram reject the whole message.
+    """
+    import re
+    return re.sub(r"([_*`\[])", r"\\\1", str(value))
+
+
 def format_showing(showing: dict[str, Any]) -> str:
     """Format a showing dict into a human-readable Telegram message.
 
@@ -344,25 +354,25 @@ def format_showing(showing: dict[str, Any]) -> str:
     }.get(status, "⚪")
 
     lines = [
-        f"{status_emoji} *Showing #{sid}* — {status}",
-        f"🏠 {address}",
+        f"{status_emoji} *Showing #{_md(sid)}* — {_md(status)}",
+        f"🏠 {_md(address)}",
     ]
 
     if mls:
-        lines.append(f"📋 MLS: {mls}")
+        lines.append(f"📋 MLS: {_md(mls)}")
     if date_str:
-        lines.append(f"📅 {date_str}")
+        lines.append(f"📅 {_md(date_str)}")
     if time_range:
-        lines.append(f"🕐 {time_range}")
+        lines.append(f"🕐 {_md(time_range)}")
     if agent_name:
-        agent_line = f"👤 {agent_name}"
+        agent_line = f"👤 {_md(agent_name)}"
         if agent_brokerage:
-            agent_line += f" ({agent_brokerage})"
+            agent_line += f" ({_md(agent_brokerage)})"
         lines.append(agent_line)
     if agent_phone:
-        lines.append(f"📞 {agent_phone}")
+        lines.append(f"📞 {_md(agent_phone)}")
     if notes:
-        lines.append(f"📝 _{notes}_")
+        lines.append(f"📝 _{_md(notes)}_")
 
     return "\n".join(lines)
 

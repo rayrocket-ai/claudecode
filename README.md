@@ -1,12 +1,29 @@
-# AI Realtor Document Generator
+# AI Realtor Assistant
 
-A Telegram bot for Ontario real estate agents. It collects deal information
-through a natural conversation powered by Claude, then fills the matching
-OREA/TRREB form in **TransactionDesk WebForms** via browser automation —
-falling back to a locally generated summary PDF when TransactionDesk is
-unavailable.
+A Telegram bot for Ontario real estate agents with two capabilities:
 
-## How it works
+1. **Document generation** — collects deal information through a natural
+   conversation powered by Claude, then fills the matching OREA/TRREB form in
+   **TransactionDesk WebForms** via browser automation — falling back to a
+   locally generated summary PDF when TransactionDesk is unavailable.
+2. **Showing management** — connects to **BrokerBay** to list, approve,
+   decline, and counter showing requests, notify you of new requests, and
+   book route-optimized showing tours (`/tour`) using Google Maps.
+
+## Showing commands
+
+| Command | What it does |
+|---|---|
+| `/showings` | Pending + upcoming showings with confirm/decline buttons |
+| `/today`, `/summary [date]` | Schedule for today or a given date |
+| `/pending`, `/approve <id>`, `/decline <id> [reason]` | Manage requests on your listings |
+| `/tour` (or `/book`) | Paste addresses → geocode + optimize route → book each stop in BrokerBay |
+| `/listings`, `/status`, `/whoami` | Listings, health check, your Telegram ID |
+
+A background job polls BrokerBay every `SHOWING_POLL_INTERVAL` seconds and
+pushes new showing requests to every authorized user.
+
+## How document generation works
 
 1. Agent messages the bot and picks a document type (APS, Amendment, Waiver,
    Notice, Commercial APS, or Lease).
@@ -31,7 +48,9 @@ bot/            Telegram UI — conversation state machine, keyboards
 ai/             Claude agent — collection prompts + submit_deal_data tool
 forms/          Generation orchestrator, TD field maps, ReportLab fallback
 integrations/   TransactionDesk & REALM browser automation (Playwright),
-                email (SMTP), SkySlope upload, MLS lookup
+                BrokerBay (HTTP API + browser client), email (SMTP),
+                SkySlope upload, MLS lookup
+scheduler/      Tour geocoding (Google Maps) + route optimization
 db/             SQLAlchemy models + async SQLite (transactions, sessions)
 storage/        Runtime data: DB, session cookies, PDFs, screenshots (gitignored)
 ```
@@ -55,8 +74,11 @@ Required `.env` values:
 | `REALM_USERNAME` / `REALM_PASSWORD` | TRREB REALM login (for TransactionDesk) |
 | `BROKERAGE_*` | Your brokerage details, stamped on documents |
 
-Optional: SMTP (email delivery), DocuSign, SkySlope. Without REALM
-credentials the bot still works, generating summary PDFs locally.
+Optional: `BROKERBAY_EMAIL`/`BROKERBAY_PASSWORD` (showing management),
+`GOOGLE_MAPS_API_KEY` (tour route optimization), SMTP (email delivery),
+DocuSign, SkySlope. Without REALM credentials the bot still works,
+generating summary PDFs locally; without BrokerBay credentials the showing
+features simply stay hidden.
 
 ## Deployment
 

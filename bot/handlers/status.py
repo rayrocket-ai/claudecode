@@ -10,18 +10,11 @@ from dateutil import parser as date_parser
 from telegram import Update
 from telegram.ext import CommandHandler, ContextTypes
 
+from bot.handlers.conversation import _is_authorized
 from config import get_settings, STORAGE_DIR
 from integrations.brokerbay import BrokerBayClient, BrokerBayError, format_showing
 
 logger = logging.getLogger(__name__)
-
-
-def _is_authorized(user_id: int) -> bool:
-    settings = get_settings()
-    allowed = settings.authorized_user_id_list
-    if not allowed:
-        return True
-    return user_id in allowed
 
 
 # ── /status ──────────────────────────────────────────────────────

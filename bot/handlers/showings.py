@@ -21,10 +21,12 @@ from telegram.ext import (
     filters,
 )
 
+from bot.handlers.conversation import _is_authorized
 from config import get_settings
 from integrations.brokerbay import (
     BrokerBayClient,
     BrokerBayError,
+    _md,
     format_showing,
     get_showing_address,
     get_showing_id,
@@ -39,14 +41,6 @@ _notified_showings: dict[int, set[str]] = {}
 
 
 # ── Helpers ──────────────────────────────────────────────────────
-
-
-def _is_authorized(user_id: int) -> bool:
-    settings = get_settings()
-    allowed = settings.authorized_user_id_list
-    if not allowed:
-        return True
-    return user_id in allowed
 
 
 def _showing_action_keyboard(showing_id: str) -> InlineKeyboardMarkup:
@@ -249,13 +243,13 @@ async def listings_command(
             price = lst.get("price") or lst.get("listPrice") or ""
             status = lst.get("status") or ""
 
-            line = f"• {address}"
+            line = f"• {_md(address)}"
             if mls:
-                line += f" (MLS: {mls})"
+                line += f" (MLS: {_md(mls)})"
             if price:
-                line += f" — ${price:,}" if isinstance(price, (int, float)) else f" — {price}"
+                line += f" — ${price:,}" if isinstance(price, (int, float)) else f" — {_md(price)}"
             if status:
-                line += f" [{status}]"
+                line += f" — {_md(status)}"
             lines.append(line)
 
         await update.message.reply_text(
@@ -277,6 +271,9 @@ async def showing_callback(
 ) -> None:
     """Handle inline button presses for showing actions."""
     query = update.callback_query
+    if not _is_authorized(update.effective_user.id):
+        await query.answer("⛔ Not authorized.")
+        return
     await query.answer()
     data = query.data  # e.g. "showing_confirm_12345"
 
@@ -306,10 +303,9 @@ async def _handle_confirm(query, context, showing_id: str) -> None:
         finally:
             await client.close()
 
-        await query.edit_message_text(
-            query.message.text + "\n\n✅ *CONFIRMED*",
-            parse_mode="Markdown",
-        )
+        # query.message.text is the already-rendered plain text — do not
+        # re-parse it as Markdown (addresses may contain formatting chars)
+        await query.edit_message_text(query.message.text + "\n\n✅ CONFIRMED")
     except BrokerBayError as e:
         await query.message.reply_text(f"❌ Failed to confirm: {e}")
     except Exception as e:
@@ -326,10 +322,7 @@ async def _handle_decline(query, context, showing_id: str) -> None:
         finally:
             await client.close()
 
-        await query.edit_message_text(
-            query.message.text + "\n\n🔴 *DECLINED*",
-            parse_mode="Markdown",
-        )
+        await query.edit_message_text(query.message.text + "\n\n🔴 DECLINED")
     except BrokerBayError as e:
         await query.message.reply_text(f"❌ Failed to decline: {e}")
     except Exception as e:
@@ -384,8 +377,8 @@ async def _handle_counter_prompt(query, context, showing_id: str) -> None:
     await query.message.reply_text(
         "🔄 *Counter-propose a new time*\n\n"
         "Reply with the new date and time, e.g.:\n"
-        "`2025-03-25 14:00`\n\n"
-        "Or type /cancel to cancel.",
+        "`2026-07-15 14:00`\n\n"
+        "Or reply `cancel` to cancel.",
         parse_mode="Markdown",
     )
 
@@ -393,25 +386,37 @@ async def _handle_counter_prompt(query, context, showing_id: str) -> None:
 async def counter_message(
     update: Update, context: ContextTypes.DEFAULT_TYPE
 ) -> None:
-    """Handle a counter-proposal time input."""
+    """Handle a counter-proposal time input.
+
+    Registered in a priority group before the conversation handler; when
+    not in counter mode it returns without consuming the update.
+    """
+    from telegram.ext import ApplicationHandlerStop
+
     showing_id = context.user_data.get("counter_showing_id")
     if not showing_id:
-        return  # Not in counter mode
+        return  # Not in counter mode — let other handlers process this
+    if not update.message or not update.message.text:
+        return
+    if not _is_authorized(update.effective_user.id):
+        return
 
     text = update.message.text.strip()
-    if text.lower() == "/cancel":
+
+    if text.lower() in ("cancel", "/cancel"):
         context.user_data.pop("counter_showing_id", None)
         await update.message.reply_text("❌ Counter cancelled.")
-        return
+        raise ApplicationHandlerStop
 
     # Parse date and time
     parts = text.split(None, 1)
     if len(parts) < 2:
         await update.message.reply_text(
-            "⚠️ Please provide both date and time, e.g.: `2025-03-25 14:00`",
+            "⚠️ Please provide both date and time, e.g.: `2026-07-15 14:00`\n"
+            "Or reply `cancel` to cancel.",
             parse_mode="Markdown",
         )
-        return
+        raise ApplicationHandlerStop
 
     new_date, new_time = parts[0], parts[1]
 
@@ -422,7 +427,6 @@ async def counter_message(
         finally:
             await client.close()
 
-        context.user_data.pop("counter_showing_id", None)
         await update.message.reply_text(
             f"🔄 Counter-proposal sent: {new_date} at {new_time}"
         )
@@ -431,6 +435,10 @@ async def counter_message(
     except Exception as e:
         logger.exception("counter error: %s", e)
         await update.message.reply_text(f"❌ Error: {e}")
+    finally:
+        context.user_data.pop("counter_showing_id", None)
+
+    raise ApplicationHandlerStop
 
 
 # ── Background Polling Job ───────────────────────────────────────
@@ -522,6 +530,14 @@ def register_showing_handlers(app) -> None:
     # Callback queries for showing actions
     app.add_handler(
         CallbackQueryHandler(showing_callback, pattern=r"^showing_")
+    )
+
+    # Counter-proposal reply catcher — own priority group so it runs
+    # before the document conversation handler; it only consumes the
+    # message when a counter is actually pending (ApplicationHandlerStop)
+    app.add_handler(
+        MessageHandler(filters.TEXT & ~filters.COMMAND, counter_message),
+        group=-2,
     )
 
     # Start the background polling job
