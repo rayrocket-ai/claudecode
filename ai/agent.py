@@ -17,7 +17,7 @@ class RealEstateAgent:
 
     def __init__(self):
         settings = get_settings()
-        self.client = anthropic.Anthropic(api_key=settings.anthropic_api_key)
+        self.client = anthropic.AsyncAnthropic(api_key=settings.anthropic_api_key)
         self.model = settings.claude_model
 
     async def continue_collection(
@@ -39,14 +39,16 @@ class RealEstateAgent:
             messages.append({"role": msg["role"], "content": msg["content"]})
         messages.append({"role": "user", "content": user_message})
 
-        response = self.client.messages.create(
+        response = await self.client.messages.create(
             model=self.model,
             max_tokens=2048,
             system=system,
             messages=messages,
         )
 
-        ai_text = response.content[0].text
+        ai_text = "".join(
+            block.text for block in response.content if block.type == "text"
+        )
 
         # Update history
         new_history = list(history)
