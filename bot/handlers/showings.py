@@ -543,6 +543,14 @@ def register_showing_handlers(app) -> None:
     # Start the background polling job
     settings = get_settings()
     if settings.is_brokerbay_configured:
+        if app.job_queue is None:
+            # JobQueue needs python-telegram-bot[job-queue]; without it the
+            # bot still works, just without new-showing push notifications
+            logger.error(
+                "JobQueue unavailable — install python-telegram-bot[job-queue] "
+                "to enable new-showing notifications. Polling disabled."
+            )
+            return
         interval = settings.showing_poll_interval
         app.job_queue.run_repeating(
             poll_new_showings,
