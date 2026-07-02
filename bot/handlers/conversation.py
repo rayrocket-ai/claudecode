@@ -187,9 +187,22 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
     await _send(
         update,
         "*Available Commands:*\n\n"
-        "/start — Main menu\n"
+        "*Showings & Tours*\n"
+        "/tour — Book a route-optimized showing tour\n"
+        "/book — Alias for /tour\n"
+        "/showings — Pending & upcoming showings\n"
+        "/today — Today's showing schedule\n"
+        "/summary [date] — Showings for a date\n"
+        "/pending — Pending requests on your listings\n"
+        "/approve <id> — Approve a showing\n"
+        "/decline <id> [reason] — Decline a showing\n"
+        "/listings — View active listings\n"
+        "/status — Bot + session health\n\n"
+        "*Documents (OREA forms)*\n"
         "/new — Create a new document\n"
-        "/realmtest — Test REALM/TransactionDesk connection\n"
+        "/realmtest — Test REALM/TransactionDesk\n\n"
+        "*Utilities*\n"
+        "/whoami — Show your Telegram user ID\n"
         "/cancel — Cancel current operation\n"
         "/help — This message\n\n"
         "*Supported Documents:*\n"
@@ -298,6 +311,16 @@ async def menu_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> i
         await query.edit_message_text("🔄 Testing TransactionDesk connection...")
         # Reuse the realm_test logic
         return await realm_test_command(update, context)
+
+    elif data == "menu_showings":
+        from bot.handlers.showings import showings_command
+        await showings_command(update, context)
+        return IDLE
+
+    elif data == "menu_today":
+        from bot.handlers.showings import today_command
+        await today_command(update, context)
+        return IDLE
 
     elif data == "menu_help":
         return await help_command(update, context)

@@ -7,12 +7,26 @@ from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 
 def main_menu_keyboard() -> InlineKeyboardMarkup:
     """Main menu after /start."""
-    return InlineKeyboardMarkup([
+    from config import get_settings
+    settings = get_settings()
+
+    buttons = [
         [InlineKeyboardButton("📝 Create New Document", callback_data="menu_new_doc")],
         [InlineKeyboardButton("📋 My Transactions", callback_data="menu_transactions")],
+    ]
+
+    if settings.is_brokerbay_configured:
+        buttons.append([
+            InlineKeyboardButton("🏠 Showings", callback_data="menu_showings"),
+            InlineKeyboardButton("📅 Today", callback_data="menu_today"),
+        ])
+
+    buttons.extend([
         [InlineKeyboardButton("🔗 Test REALM Connection", callback_data="menu_realm_test")],
         [InlineKeyboardButton("ℹ️ Help", callback_data="menu_help")],
     ])
+
+    return InlineKeyboardMarkup(buttons)
 
 
 def doc_type_keyboard() -> InlineKeyboardMarkup:

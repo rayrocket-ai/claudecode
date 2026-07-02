@@ -9,6 +9,9 @@ storage/*.pdf
 storage/*.png
 storage/*.db
 
+# Session files
+session/
+
 # Python
 __pycache__/
 *.pyc
