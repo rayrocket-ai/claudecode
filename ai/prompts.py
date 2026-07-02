@@ -102,6 +102,20 @@ Collect:
 Output JSON with "collection_complete": true when done.
 """
 
+NOTICE_COLLECTION_PROMPT = """You are collecting information for an OREA Form 124 —
+Notice to Remove Condition(s).
+
+Collect:
+- Original agreement date
+- Property address
+- Buyer name(s)
+- Seller name(s)
+- Which condition(s) are being fulfilled/removed
+- Notice date
+
+Output JSON with "collection_complete": true when done.
+"""
+
 LEASE_COLLECTION_PROMPT = """You are collecting information for an Agreement to Lease
 (Residential).
 
@@ -134,6 +148,7 @@ COLLECTION_PROMPTS = {
     "aps": APS_COLLECTION_PROMPT,
     "amendment": AMENDMENT_COLLECTION_PROMPT,
     "waiver": WAIVER_COLLECTION_PROMPT,
+    "notice": NOTICE_COLLECTION_PROMPT,
     "lease": LEASE_COLLECTION_PROMPT,
     "commercial_aps": COMMERCIAL_APS_COLLECTION_PROMPT,
 }

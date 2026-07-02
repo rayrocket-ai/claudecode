@@ -30,7 +30,7 @@ from telegram.ext import (
     filters,
 )
 
-from ai.agent import get_agent
+from ai.agent import DataExtractor, get_agent
 from bot.keyboards import (
     main_menu_keyboard,
     doc_type_keyboard,
@@ -389,13 +389,15 @@ async def collecting_message(update: Update, context: ContextTypes.DEFAULT_TYPE)
     """Handle messages during AI data collection."""
     text = update.message.text
     chat_id = update.effective_user.id
-    doc_type = context.user_data.get("doc_type", "aps")
 
     # Show typing indicator
     await context.bot.send_chat_action(chat_id=chat_id, action="typing")
 
-    # Get conversation history
+    # Get conversation history; fall back to the DB session for doc_type
+    # so an in-flight interview survives a bot restart
     conv = await get_or_create_conversation(chat_id)
+    doc_type = context.user_data.get("doc_type") or conv.doc_type or "aps"
+    context.user_data["doc_type"] = doc_type
     history = list(conv.conversation_history or [])
 
     try:
@@ -418,6 +420,18 @@ async def collecting_message(update: Update, context: ContextTypes.DEFAULT_TYPE)
     if extracted and extracted.get("collection_complete"):
         # Remove the flag
         extracted.pop("collection_complete", None)
+
+        # Block confirmation if required fields are missing
+        if doc_type == "aps":
+            missing = DataExtractor.validate_aps(extracted)
+            if missing:
+                pretty = ", ".join(m.replace("_", " ") for m in missing)
+                await update.message.reply_text(
+                    f"⚠️ A few required fields are still missing: {pretty}.\n"
+                    f"Please provide them so we can continue."
+                )
+                return COLLECTING
+
         context.user_data["deal_data"] = extracted
         await update_session_data(chat_id, extracted)
 
@@ -548,8 +562,20 @@ async def _start_generation(update: Update, context: ContextTypes.DEFAULT_TYPE) 
     """Start document generation."""
     query = update.callback_query
     chat_id = update.effective_user.id
-    doc_type = context.user_data.get("doc_type", "aps")
-    deal_data = context.user_data.get("deal_data", {})
+    doc_type = context.user_data.get("doc_type")
+    deal_data = context.user_data.get("deal_data")
+
+    # Bot may have restarted since collection — recover from the DB session
+    if not deal_data or not doc_type:
+        conv = await get_or_create_conversation(chat_id)
+        deal_data = deal_data or dict(conv.collected_data or {})
+        doc_type = doc_type or conv.doc_type or "aps"
+
+    if not deal_data:
+        await query.edit_message_text(
+            "⚠️ I lost the collected deal data. Please start over with /start."
+        )
+        return ConversationHandler.END
 
     await query.edit_message_text("⏳ Generating document... This may take a moment.")
     await set_session_state(chat_id, "generating")
@@ -808,7 +834,7 @@ def build_conversation_handler() -> ConversationHandler:
     return ConversationHandler(
         entry_points=[
             CommandHandler("start", start_command),
-            CommandHandler("new", lambda u, c: menu_callback.__wrapped__(u, c) if False else _new_doc_entry(u, c)),
+            CommandHandler("new", _new_doc_entry),
             CommandHandler("realmtest", realm_test_command),
             CommandHandler("help", help_command),
             MessageHandler(filters.TEXT & ~filters.COMMAND, idle_message),
