@@ -10,7 +10,9 @@ import structlog
 from telegram import BotCommand
 from telegram.ext import Application
 
-from bot.handlers.conversation import build_conversation_handler
+from telegram.ext import MessageHandler, filters
+
+from bot.handlers.conversation import build_conversation_handler, two_fa_catcher
 from config import get_settings
 from db.operations import init_db
 
@@ -59,12 +61,20 @@ def main() -> None:
     if not settings.anthropic_api_key:
         log.warning("ANTHROPIC_API_KEY not set — AI features will not work")
 
-    # Build application
+    # Build application. concurrent_updates is required so a 2FA code
+    # message can be processed while another handler is awaiting the
+    # browser login workflow — sequential processing would deadlock.
     app = (
         Application.builder()
         .token(settings.telegram_bot_token)
+        .concurrent_updates(True)
         .post_init(post_init)
         .build()
+    )
+
+    # 2FA catcher runs before the conversation handler in any state
+    app.add_handler(
+        MessageHandler(filters.TEXT & ~filters.COMMAND, two_fa_catcher), group=-1
     )
 
     # Add conversation handler

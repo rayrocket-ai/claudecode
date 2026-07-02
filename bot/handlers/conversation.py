@@ -21,6 +21,7 @@ from typing import Any
 from telegram import Update, InputFile, BotCommand
 from telegram.ext import (
     Application,
+    ApplicationHandlerStop,
     CallbackQueryHandler,
     CommandHandler,
     ContextTypes,
@@ -107,6 +108,24 @@ def make_two_factor_callback(chat_id: int, bot):
             _pending_2fa.pop(chat_id, None)
 
     return callback
+
+
+async def two_fa_catcher(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    """Resolve a pending 2FA future from any conversation state.
+
+    Registered in a higher-priority handler group so the code is caught
+    even while another handler is awaiting the browser workflow.
+    """
+    if not update.message or not update.message.text:
+        return
+    chat_id = update.effective_user.id
+    text = update.message.text.strip()
+    if chat_id in _pending_2fa and re.match(r"^\d{4,8}$", text):
+        future = _pending_2fa.get(chat_id)
+        if future and not future.done():
+            future.set_result(text)
+            await update.message.reply_text("✅ Code received, submitting...")
+            raise ApplicationHandlerStop
 
 
 async def _send(update: Update, text: str, **kwargs) -> None:
@@ -361,14 +380,6 @@ async def collecting_message(update: Update, context: ContextTypes.DEFAULT_TYPE)
     text = update.message.text
     chat_id = update.effective_user.id
     doc_type = context.user_data.get("doc_type", "aps")
-
-    # Check if this is a 2FA code response
-    if chat_id in _pending_2fa and re.match(r"^\d{4,8}$", text.strip()):
-        future = _pending_2fa.get(chat_id)
-        if future and not future.done():
-            future.set_result(text.strip())
-            await update.message.reply_text("✅ Code received, submitting...")
-            return COLLECTING
 
     # Show typing indicator
     await context.bot.send_chat_action(chat_id=chat_id, action="typing")
@@ -641,14 +652,6 @@ async def signing_message(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
     """Handle signer email input."""
     text = update.message.text.strip()
     chat_id = update.effective_user.id
-
-    # Check for 2FA code
-    if chat_id in _pending_2fa and re.match(r"^\d{4,8}$", text):
-        future = _pending_2fa.get(chat_id)
-        if future and not future.done():
-            future.set_result(text)
-            await update.message.reply_text("✅ Code received.")
-            return SIGNING
 
     pending = context.user_data.get("pending_action")
 
