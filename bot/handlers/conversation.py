@@ -598,6 +598,16 @@ async def _start_generation(update: Update, context: ContextTypes.DEFAULT_TYPE) 
                 form_url = td_result.get("form_url", "")
                 caption += f"\n\n🔗 [Open in TransactionDesk]({form_url})"
 
+                expected = td_result.get("expected_fields")
+                filled = td_result.get("filled_fields", 0)
+                if expected:
+                    caption += f"\n📋 Filled {filled} of {expected} fields"
+                    if filled < expected:
+                        caption += (
+                            "\n⚠️ *Some fields could not be filled — "
+                            "review the form in TransactionDesk before sending.*"
+                        )
+
             await context.bot.send_document(
                 chat_id=chat_id,
                 document=InputFile(f, filename=f"{doc_type}_document.pdf"),

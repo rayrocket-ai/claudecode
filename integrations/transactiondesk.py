@@ -360,8 +360,14 @@ class TransactionDeskClient:
         logger.warning("Could not extract form UUID")
         return None
 
-    async def fill_form(self, form_uuid: str, deal_data: dict, doc_type: str = "aps") -> bool:
-        """Fill a form's fields with deal data."""
+    async def fill_form(
+        self, form_uuid: str, deal_data: dict, doc_type: str = "aps"
+    ) -> dict[str, Any]:
+        """Fill a form's fields with deal data, verifying each value.
+
+        Returns {"filled": n, "expected": n, "failed": [field names]} so
+        callers can report partial fills instead of claiming success.
+        """
         page = self._page
         assert page is not None
 
@@ -371,7 +377,11 @@ class TransactionDeskClient:
             wait_until="domcontentloaded",
         )
         # Wait for form to render (TransactionDesk loads forms dynamically)
-        await asyncio.sleep(5)
+        try:
+            await page.wait_for_load_state("networkidle", timeout=15000)
+        except Exception:
+            pass
+        await asyncio.sleep(2)
 
         # Wait for form iframe or direct fields
         # TD sometimes uses an iframe for the form editor
@@ -387,24 +397,45 @@ class TransactionDeskClient:
         flat_data = _flatten_deal_data(deal_data)
 
         filled_count = 0
+        expected_count = 0
+        failed: list[str] = []
         for html_name, data_key in field_map.items():
             value = flat_data.get(data_key, "")
             if not value:
                 continue
+            expected_count += 1
 
             try:
-                # Try to find and fill the field
-                field = await frame.query_selector(f'input[name="{html_name}"], textarea[name="{html_name}"]')
-                if field:
-                    await field.click(click_count=3)  # Select all
-                    await field.type(str(value))
+                field = frame.locator(
+                    f'input[name="{html_name}"], textarea[name="{html_name}"]'
+                )
+                if await field.count() == 0:
+                    failed.append(html_name)
+                    logger.debug("Field not found: %s", html_name)
+                    continue
+
+                await field.first.fill(str(value))
+                # Verify the value actually landed — a fill that silently
+                # bounced off must not be reported as success
+                actual = (await field.first.input_value()).strip()
+                if actual == str(value).strip():
                     filled_count += 1
                     logger.debug("Filled %s = %s", html_name, value)
+                else:
+                    failed.append(html_name)
+                    logger.warning(
+                        "Field %s verify failed: wanted %r, got %r",
+                        html_name, value, actual,
+                    )
             except Exception as e:
+                failed.append(html_name)
                 logger.debug("Could not fill %s: %s", html_name, e)
 
-        logger.info("Filled %d / %d fields in form %s", filled_count, len(field_map), form_uuid)
-        return filled_count > 0
+        logger.info(
+            "Filled %d / %d fields in form %s (failed: %s)",
+            filled_count, expected_count, form_uuid, failed or "none",
+        )
+        return {"filled": filled_count, "expected": expected_count, "failed": failed}
 
     async def save_form(self, form_uuid: str) -> bool:
         """Save the current form."""
@@ -521,9 +552,9 @@ class TransactionDeskClient:
                     "transaction_url": f"{TD_BASE}/transaction/detail/{tx_uuid}/overview",
                 }
 
-            # Step 4: Fill form
-            filled = await self.fill_form(form_uuid, deal_data, doc_type)
-            if not filled:
+            # Step 4: Fill form (with per-field verification)
+            fill_stats = await self.fill_form(form_uuid, deal_data, doc_type)
+            if fill_stats["filled"] == 0:
                 logger.warning("No fields were filled — form selectors may need calibration")
 
             # Step 5: Save form
@@ -540,6 +571,9 @@ class TransactionDeskClient:
                 "transaction_url": f"{TD_BASE}/transaction/detail/{tx_uuid}/overview",
                 "form_url": f"{TD_BASE}/form/{form_uuid}/false",
                 "screenshot_path": screenshot_path,
+                "filled_fields": fill_stats["filled"],
+                "expected_fields": fill_stats["expected"],
+                "failed_fields": fill_stats["failed"],
             }
 
         except Exception as e:
