@@ -40,14 +40,15 @@ class TransactionDeskClient:
     def __init__(self, two_factor_callback: Callable[[], Awaitable[str]] | None = None):
         self.settings = get_settings()
         self.two_factor_callback = two_factor_callback
+        self._pw = None
         self._browser: Browser | None = None
         self._context: BrowserContext | None = None
         self._page: Page | None = None
 
     async def _launch_browser(self) -> Page:
         """Launch browser, load saved session cookies, return page."""
-        pw = await async_playwright().start()
-        self._browser = await pw.chromium.launch(
+        self._pw = await async_playwright().start()
+        self._browser = await self._pw.chromium.launch(
             headless=self.settings.browser_headless,
             slow_mo=self.settings.browser_slowmo,
         )
@@ -92,6 +93,12 @@ class TransactionDeskClient:
                 await self._browser.close()
             except Exception:
                 pass
+        if self._pw:
+            try:
+                await self._pw.stop()
+            except Exception:
+                pass
+            self._pw = None
 
     async def _ensure_logged_in(self, page: Page) -> bool:
         """Navigate to TransactionDesk via the portal SSO entry point.
