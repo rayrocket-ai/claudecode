@@ -61,6 +61,12 @@ def main() -> None:
     if not settings.anthropic_api_key:
         log.warning("ANTHROPIC_API_KEY not set — AI features will not work")
 
+    if not settings.authorized_user_id_list:
+        log.error(
+            "AUTHORIZED_USER_IDS is empty — nobody can use the bot. "
+            "Add your Telegram user ID to .env (get it from @userinfobot)."
+        )
+
     # Build application. concurrent_updates is required so a 2FA code
     # message can be processed while another handler is awaiting the
     # browser login workflow — sequential processing would deadlock.

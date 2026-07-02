@@ -78,12 +78,13 @@ def _md_escape(value: Any) -> str:
 
 
 def _is_authorized(user_id: int) -> bool:
-    """Check if a user is authorized. Empty whitelist = allow all."""
+    """Check if a user is authorized. Empty whitelist = deny all.
+
+    This bot drives a real REALM/MLS account and spends API credits,
+    so unknown users must never get access by default.
+    """
     settings = get_settings()
-    allowed = settings.authorized_user_id_list
-    if not allowed:
-        return True
-    return user_id in allowed
+    return user_id in settings.authorized_user_id_list
 
 
 def _is_td_configured() -> bool:
