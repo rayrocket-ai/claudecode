@@ -45,7 +45,7 @@ from db.operations import (
     set_session_state,
     update_session_data,
 )
-from forms.generator import generate_document, get_last_td_result
+from forms.generator import generate_document
 
 logger = logging.getLogger(__name__)
 
@@ -536,10 +536,10 @@ async def _start_generation(update: Update, context: ContextTypes.DEFAULT_TYPE) 
 
     try:
         two_fa = make_two_factor_callback(chat_id, context.bot)
-        pdf_path = await generate_document(doc_type, deal_data, two_factor_callback=two_fa)
+        pdf_path, td_result = await generate_document(
+            doc_type, deal_data, two_factor_callback=two_fa
+        )
 
-        # Store result
-        td_result = get_last_td_result()
         context.user_data["last_pdf_path"] = pdf_path
         context.user_data["last_td_tx_uuid"] = td_result.get("transaction_uuid")
 
