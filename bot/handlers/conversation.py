@@ -68,6 +68,15 @@ DOC_TYPE_NAMES = {
 # ── Helpers ───────────────────────────────────────────────────────
 
 
+def _md_escape(value: Any) -> str:
+    """Escape user-provided text for Telegram legacy Markdown.
+
+    Without this, a name like "John_Smith" makes the Telegram API
+    reject the whole message with a 400 parse error.
+    """
+    return re.sub(r"([_*`\[])", r"\\\1", str(value))
+
+
 def _is_authorized(user_id: int) -> bool:
     """Check if a user is authorized. Empty whitelist = allow all."""
     settings = get_settings()
@@ -413,12 +422,22 @@ async def collecting_message(update: Update, context: ContextTypes.DEFAULT_TYPE)
 
         # Show summary for confirmation
         summary = _format_deal_summary(extracted, doc_type)
-        await update.message.reply_text(
+        summary_text = (
             f"✅ *Data Collection Complete!*\n\n{summary}\n\n"
-            f"Please review and confirm:",
-            parse_mode="Markdown",
-            reply_markup=confirm_keyboard(),
+            f"Please review and confirm:"
         )
+        try:
+            await update.message.reply_text(
+                summary_text,
+                parse_mode="Markdown",
+                reply_markup=confirm_keyboard(),
+            )
+        except Exception:
+            # Formatting rejected by Telegram — deliver as plain text
+            await update.message.reply_text(
+                summary_text.replace("*", ""),
+                reply_markup=confirm_keyboard(),
+            )
         return CONFIRMING
 
     # Send AI response (trim if too long for Telegram)
@@ -444,7 +463,7 @@ def _format_deal_summary(data: dict, doc_type: str) -> str:
         addr += f", Unit {unit}"
     city = data.get("property_city", "")
     if addr or city:
-        lines.append(f"🏠 *Property:* {addr}, {city}")
+        lines.append(f"🏠 *Property:* {_md_escape(addr)}, {_md_escape(city)}")
 
     # Parties
     buyer = data.get("buyer_1", "")
@@ -453,7 +472,7 @@ def _format_deal_summary(data: dict, doc_type: str) -> str:
         b = buyer
         if buyer2:
             b += f" & {buyer2}"
-        lines.append(f"👤 *Buyer(s):* {b}")
+        lines.append(f"👤 *Buyer(s):* {_md_escape(b)}")
 
     seller = data.get("seller_1", "")
     seller2 = data.get("seller_2", "")
@@ -461,27 +480,27 @@ def _format_deal_summary(data: dict, doc_type: str) -> str:
         s = seller
         if seller2:
             s += f" & {seller2}"
-        lines.append(f"👤 *Seller(s):* {s}")
+        lines.append(f"👤 *Seller(s):* {_md_escape(s)}")
 
     # Financial
     price = data.get("purchase_price")
     if price:
-        lines.append(f"💰 *Price:* ${price:,}" if isinstance(price, (int, float)) else f"💰 *Price:* {price}")
+        lines.append(f"💰 *Price:* ${price:,}" if isinstance(price, (int, float)) else f"💰 *Price:* {_md_escape(price)}")
 
     deposit = data.get("deposit")
     if deposit:
-        lines.append(f"💵 *Deposit:* ${deposit:,}" if isinstance(deposit, (int, float)) else f"💵 *Deposit:* {deposit}")
+        lines.append(f"💵 *Deposit:* ${deposit:,}" if isinstance(deposit, (int, float)) else f"💵 *Deposit:* {_md_escape(deposit)}")
 
     holder = data.get("deposit_holder")
     if holder:
-        lines.append(f"🏦 *Deposit Holder:* {holder}")
+        lines.append(f"🏦 *Deposit Holder:* {_md_escape(holder)}")
 
     # Dates
     for label, key in [("Offer Date", "offer_date"), ("Closing Date", "closing_date"),
                        ("Irrevocability", "irrevocability_date")]:
         val = data.get(key)
         if val:
-            lines.append(f"📅 *{label}:* {val}")
+            lines.append(f"📅 *{label}:* {_md_escape(val)}")
 
     # Conditions
     conditions = []
