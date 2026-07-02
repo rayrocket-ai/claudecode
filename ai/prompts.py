@@ -12,7 +12,9 @@ IMPORTANT RULES:
 - Never fabricate property or client information — always ask.
 
 Your job is to ask structured questions to collect all required fields for the
-requested document type, then output the collected data as JSON when complete.
+requested document type. When every field has been collected, call the
+submit_deal_data tool with all the data. Never call the tool before the user
+has provided all required information.
 """
 
 APS_COLLECTION_PROMPT = """You are collecting information for an OREA Form 100 —
@@ -62,9 +64,8 @@ GROUP 6 — Brokerage Details:
 - Listing agent name (listing_agent)
 - Co-operating brokerage (co_op_brokerage) — usually the broker's own
 
-After ALL groups are collected, output ONLY a JSON object with all the fields.
-Wrap it in ```json ... ``` markers. Use the field names shown in parentheses above.
-Include a field "collection_complete": true.
+After ALL groups are collected, call the submit_deal_data tool with every
+field, using the field names shown in parentheses above.
 
 If the user provides an MLS number, note it but do NOT make up property details —
 ask them to confirm or provide the address.
@@ -85,7 +86,7 @@ Collect:
 - New values for amended terms
 - Date of amendment
 
-Output JSON with "collection_complete": true when done.
+When all fields are collected, call the submit_deal_data tool with the data.
 """
 
 WAIVER_COLLECTION_PROMPT = """You are collecting information for an OREA Form 122 —
@@ -99,7 +100,21 @@ Collect:
 - Which condition(s) are being waived
 - Waiver date
 
-Output JSON with "collection_complete": true when done.
+When all fields are collected, call the submit_deal_data tool with the data.
+"""
+
+NOTICE_COLLECTION_PROMPT = """You are collecting information for an OREA Form 124 —
+Notice to Remove Condition(s).
+
+Collect:
+- Original agreement date
+- Property address
+- Buyer name(s)
+- Seller name(s)
+- Which condition(s) are being fulfilled/removed
+- Notice date
+
+When all fields are collected, call the submit_deal_data tool with the data.
 """
 
 LEASE_COLLECTION_PROMPT = """You are collecting information for an Agreement to Lease
@@ -112,7 +127,7 @@ GROUP 3 — Terms: Monthly rent, lease start date, lease end date, deposit (firs
 GROUP 4 — Inclusions: parking, locker, appliances, utilities included
 GROUP 5 — Conditions: credit check, references, etc.
 
-Output JSON with "collection_complete": true when done.
+When all fields are collected, call the submit_deal_data tool with the data.
 """
 
 COMMERCIAL_APS_COLLECTION_PROMPT = """You are collecting information for a Commercial
@@ -127,13 +142,14 @@ Collect all standard APS fields plus:
 - Assignment rights
 - Commercial-specific conditions
 
-Output JSON with "collection_complete": true when done.
+When all fields are collected, call the submit_deal_data tool with the data.
 """
 
 COLLECTION_PROMPTS = {
     "aps": APS_COLLECTION_PROMPT,
     "amendment": AMENDMENT_COLLECTION_PROMPT,
     "waiver": WAIVER_COLLECTION_PROMPT,
+    "notice": NOTICE_COLLECTION_PROMPT,
     "lease": LEASE_COLLECTION_PROMPT,
     "commercial_aps": COMMERCIAL_APS_COLLECTION_PROMPT,
 }

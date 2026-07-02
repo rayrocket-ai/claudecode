@@ -11,13 +11,63 @@ import anthropic
 from ai.prompts import SYSTEM_PROMPT, COLLECTION_PROMPTS
 from config import get_settings
 
+# Tool the model calls once every required field has been collected.
+# Structured output is validated by the API — no JSON-in-text parsing.
+DEAL_DATA_TOOL = {
+    "name": "submit_deal_data",
+    "description": (
+        "Submit the final collected deal data. Call this ONLY when every "
+        "required field for the document has been gathered from the user. "
+        "Include every field you collected, using the field names from the "
+        "collection instructions."
+    ),
+    "input_schema": {
+        "type": "object",
+        "properties": {
+            "buyer_1": {"type": "string"},
+            "buyer_2": {"type": "string"},
+            "buyer_1_email": {"type": "string"},
+            "buyer_2_email": {"type": "string"},
+            "seller_1": {"type": "string"},
+            "seller_2": {"type": "string"},
+            "seller_1_email": {"type": "string"},
+            "seller_2_email": {"type": "string"},
+            "property_street_number": {"type": "string"},
+            "property_street_name": {"type": "string"},
+            "property_unit": {"type": "string"},
+            "property_city": {"type": "string"},
+            "property_province": {"type": "string"},
+            "property_postal_code": {"type": "string"},
+            "mls_number": {"type": "string"},
+            "legal_description": {"type": "string"},
+            "purchase_price": {"type": "number"},
+            "deposit": {"type": "number"},
+            "deposit_holder": {"type": "string"},
+            "offer_date": {"type": "string", "description": "YYYY-MM-DD"},
+            "irrevocability_date": {"type": "string", "description": "YYYY-MM-DD"},
+            "irrevocability_time": {"type": "string"},
+            "closing_date": {"type": "string", "description": "YYYY-MM-DD"},
+            "financing_condition": {"type": "boolean"},
+            "home_inspection": {"type": "boolean"},
+            "status_certificate": {"type": "boolean"},
+            "sale_of_buyers_property": {"type": "boolean"},
+            "inclusions": {"type": "string"},
+            "exclusions": {"type": "string"},
+            "listing_brokerage": {"type": "string"},
+            "listing_agent": {"type": "string"},
+            "co_op_brokerage": {"type": "string"},
+        },
+        "additionalProperties": True,
+    },
+}
+
 
 class RealEstateAgent:
     """Manages the AI conversation for collecting deal data."""
 
     def __init__(self):
         settings = get_settings()
-        self.client = anthropic.Anthropic(api_key=settings.anthropic_api_key)
+        self.client = anthropic.AsyncAnthropic(api_key=settings.anthropic_api_key)
         self.model = settings.claude_model
 
     async def continue_collection(
@@ -39,22 +89,37 @@ class RealEstateAgent:
             messages.append({"role": msg["role"], "content": msg["content"]})
         messages.append({"role": "user", "content": user_message})
 
-        response = self.client.messages.create(
+        response = await self.client.messages.create(
             model=self.model,
             max_tokens=2048,
             system=system,
             messages=messages,
+            tools=[DEAL_DATA_TOOL],
         )
 
-        ai_text = response.content[0].text
+        ai_text = "".join(
+            block.text for block in response.content if block.type == "text"
+        )
+
+        # Structured extraction: the model calls submit_deal_data when done
+        extracted = None
+        for block in response.content:
+            if block.type == "tool_use" and block.name == "submit_deal_data":
+                extracted = dict(block.input)
+                extracted["collection_complete"] = True
+                break
+
+        # Fallback: some replies may still embed JSON in text
+        if extracted is None:
+            extracted = self._try_extract_json(ai_text)
+
+        if not ai_text:
+            ai_text = "✅ I have everything I need."
 
         # Update history
         new_history = list(history)
         new_history.append({"role": "user", "content": user_message})
         new_history.append({"role": "assistant", "content": ai_text})
-
-        # Check if collection is complete (AI outputs JSON)
-        extracted = self._try_extract_json(ai_text)
 
         return ai_text, new_history, extracted
 

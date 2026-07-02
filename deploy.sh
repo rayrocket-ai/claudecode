@@ -27,16 +27,28 @@ fi
 APP_DIR="/opt/realtor-bot"
 echo "[2/4] Setting up project in $APP_DIR..."
 
+REPO_URL="https://github.com/rayrocket-ai/claudecode.git"
+BRANCH="claude/ai-realtor-doc-generator-ov4Xa"
+
 if [ -d "$APP_DIR" ]; then
     echo "Directory exists. Pulling latest changes..."
     cd "$APP_DIR"
-    git pull origin claude/ai-realtor-doc-generator-ov4Xa
+    if ! git pull origin "$BRANCH"; then
+        # Private repo — ask for a token but use it only for this one
+        # fetch so it is never written to .git/config
+        echo "Enter your GitHub Personal Access Token (create one at github.com/settings/tokens):"
+        read -s GH_TOKEN
+        git pull "https://${GH_TOKEN}@github.com/rayrocket-ai/claudecode.git" "$BRANCH"
+        unset GH_TOKEN
+    fi
 else
     echo "Enter your GitHub Personal Access Token (create one at github.com/settings/tokens):"
     read -s GH_TOKEN
-    git clone https://${GH_TOKEN}@github.com/rayrocket-ai/claudecode.git "$APP_DIR"
+    git clone --branch "$BRANCH" "https://${GH_TOKEN}@github.com/rayrocket-ai/claudecode.git" "$APP_DIR"
     cd "$APP_DIR"
-    git checkout claude/ai-realtor-doc-generator-ov4Xa
+    # Strip the token from the persisted remote URL
+    git remote set-url origin "$REPO_URL"
+    unset GH_TOKEN
 fi
 
 # 3. Set up .env if it doesn't exist

@@ -21,6 +21,7 @@ from typing import Any
 from telegram import Update, InputFile, BotCommand
 from telegram.ext import (
     Application,
+    ApplicationHandlerStop,
     CallbackQueryHandler,
     CommandHandler,
     ContextTypes,
@@ -29,7 +30,7 @@ from telegram.ext import (
     filters,
 )
 
-from ai.agent import get_agent
+from ai.agent import DataExtractor, get_agent
 from bot.keyboards import (
     main_menu_keyboard,
     doc_type_keyboard,
@@ -44,7 +45,7 @@ from db.operations import (
     set_session_state,
     update_session_data,
 )
-from forms.generator import generate_document, get_last_td_result
+from forms.generator import generate_document
 
 logger = logging.getLogger(__name__)
 
@@ -67,13 +68,23 @@ DOC_TYPE_NAMES = {
 # ── Helpers ───────────────────────────────────────────────────────
 
 
+def _md_escape(value: Any) -> str:
+    """Escape user-provided text for Telegram legacy Markdown.
+
+    Without this, a name like "John_Smith" makes the Telegram API
+    reject the whole message with a 400 parse error.
+    """
+    return re.sub(r"([_*`\[])", r"\\\1", str(value))
+
+
 def _is_authorized(user_id: int) -> bool:
-    """Check if a user is authorized. Empty whitelist = allow all."""
+    """Check if a user is authorized. Empty whitelist = deny all.
+
+    This bot drives a real REALM/MLS account and spends API credits,
+    so unknown users must never get access by default.
+    """
     settings = get_settings()
-    allowed = settings.authorized_user_id_list
-    if not allowed:
-        return True
-    return user_id in allowed
+    return user_id in settings.authorized_user_id_list
 
 
 def _is_td_configured() -> bool:
@@ -107,6 +118,24 @@ def make_two_factor_callback(chat_id: int, bot):
             _pending_2fa.pop(chat_id, None)
 
     return callback
+
+
+async def two_fa_catcher(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    """Resolve a pending 2FA future from any conversation state.
+
+    Registered in a higher-priority handler group so the code is caught
+    even while another handler is awaiting the browser workflow.
+    """
+    if not update.message or not update.message.text:
+        return
+    chat_id = update.effective_user.id
+    text = update.message.text.strip()
+    if chat_id in _pending_2fa and re.match(r"^\d{4,8}$", text):
+        future = _pending_2fa.get(chat_id)
+        if future and not future.done():
+            future.set_result(text)
+            await update.message.reply_text("✅ Code received, submitting...")
+            raise ApplicationHandlerStop
 
 
 async def _send(update: Update, text: str, **kwargs) -> None:
@@ -158,9 +187,22 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
     await _send(
         update,
         "*Available Commands:*\n\n"
-        "/start — Main menu\n"
+        "*Showings & Tours*\n"
+        "/tour — Book a route-optimized showing tour\n"
+        "/book — Alias for /tour\n"
+        "/showings — Pending & upcoming showings\n"
+        "/today — Today's showing schedule\n"
+        "/summary [date] — Showings for a date\n"
+        "/pending — Pending requests on your listings\n"
+        "/approve <id> — Approve a showing\n"
+        "/decline <id> [reason] — Decline a showing\n"
+        "/listings — View active listings\n"
+        "/status — Bot + session health\n\n"
+        "*Documents (OREA forms)*\n"
         "/new — Create a new document\n"
-        "/realmtest — Test REALM/TransactionDesk connection\n"
+        "/realmtest — Test REALM/TransactionDesk\n\n"
+        "*Utilities*\n"
+        "/whoami — Show your Telegram user ID\n"
         "/cancel — Cancel current operation\n"
         "/help — This message\n\n"
         "*Supported Documents:*\n"
@@ -270,6 +312,16 @@ async def menu_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> i
         # Reuse the realm_test logic
         return await realm_test_command(update, context)
 
+    elif data == "menu_showings":
+        from bot.handlers.showings import showings_command
+        await showings_command(update, context)
+        return IDLE
+
+    elif data == "menu_today":
+        from bot.handlers.showings import today_command
+        await today_command(update, context)
+        return IDLE
+
     elif data == "menu_help":
         return await help_command(update, context)
 
@@ -360,21 +412,15 @@ async def collecting_message(update: Update, context: ContextTypes.DEFAULT_TYPE)
     """Handle messages during AI data collection."""
     text = update.message.text
     chat_id = update.effective_user.id
-    doc_type = context.user_data.get("doc_type", "aps")
-
-    # Check if this is a 2FA code response
-    if chat_id in _pending_2fa and re.match(r"^\d{4,8}$", text.strip()):
-        future = _pending_2fa.get(chat_id)
-        if future and not future.done():
-            future.set_result(text.strip())
-            await update.message.reply_text("✅ Code received, submitting...")
-            return COLLECTING
 
     # Show typing indicator
     await context.bot.send_chat_action(chat_id=chat_id, action="typing")
 
-    # Get conversation history
+    # Get conversation history; fall back to the DB session for doc_type
+    # so an in-flight interview survives a bot restart
     conv = await get_or_create_conversation(chat_id)
+    doc_type = context.user_data.get("doc_type") or conv.doc_type or "aps"
+    context.user_data["doc_type"] = doc_type
     history = list(conv.conversation_history or [])
 
     try:
@@ -397,17 +443,39 @@ async def collecting_message(update: Update, context: ContextTypes.DEFAULT_TYPE)
     if extracted and extracted.get("collection_complete"):
         # Remove the flag
         extracted.pop("collection_complete", None)
+
+        # Block confirmation if required fields are missing
+        if doc_type == "aps":
+            missing = DataExtractor.validate_aps(extracted)
+            if missing:
+                pretty = ", ".join(m.replace("_", " ") for m in missing)
+                await update.message.reply_text(
+                    f"⚠️ A few required fields are still missing: {pretty}.\n"
+                    f"Please provide them so we can continue."
+                )
+                return COLLECTING
+
         context.user_data["deal_data"] = extracted
         await update_session_data(chat_id, extracted)
 
         # Show summary for confirmation
         summary = _format_deal_summary(extracted, doc_type)
-        await update.message.reply_text(
+        summary_text = (
             f"✅ *Data Collection Complete!*\n\n{summary}\n\n"
-            f"Please review and confirm:",
-            parse_mode="Markdown",
-            reply_markup=confirm_keyboard(),
+            f"Please review and confirm:"
         )
+        try:
+            await update.message.reply_text(
+                summary_text,
+                parse_mode="Markdown",
+                reply_markup=confirm_keyboard(),
+            )
+        except Exception:
+            # Formatting rejected by Telegram — deliver as plain text
+            await update.message.reply_text(
+                summary_text.replace("*", ""),
+                reply_markup=confirm_keyboard(),
+            )
         return CONFIRMING
 
     # Send AI response (trim if too long for Telegram)
@@ -433,7 +501,7 @@ def _format_deal_summary(data: dict, doc_type: str) -> str:
         addr += f", Unit {unit}"
     city = data.get("property_city", "")
     if addr or city:
-        lines.append(f"🏠 *Property:* {addr}, {city}")
+        lines.append(f"🏠 *Property:* {_md_escape(addr)}, {_md_escape(city)}")
 
     # Parties
     buyer = data.get("buyer_1", "")
@@ -442,7 +510,7 @@ def _format_deal_summary(data: dict, doc_type: str) -> str:
         b = buyer
         if buyer2:
             b += f" & {buyer2}"
-        lines.append(f"👤 *Buyer(s):* {b}")
+        lines.append(f"👤 *Buyer(s):* {_md_escape(b)}")
 
     seller = data.get("seller_1", "")
     seller2 = data.get("seller_2", "")
@@ -450,27 +518,27 @@ def _format_deal_summary(data: dict, doc_type: str) -> str:
         s = seller
         if seller2:
             s += f" & {seller2}"
-        lines.append(f"👤 *Seller(s):* {s}")
+        lines.append(f"👤 *Seller(s):* {_md_escape(s)}")
 
     # Financial
     price = data.get("purchase_price")
     if price:
-        lines.append(f"💰 *Price:* ${price:,}" if isinstance(price, (int, float)) else f"💰 *Price:* {price}")
+        lines.append(f"💰 *Price:* ${price:,}" if isinstance(price, (int, float)) else f"💰 *Price:* {_md_escape(price)}")
 
     deposit = data.get("deposit")
     if deposit:
-        lines.append(f"💵 *Deposit:* ${deposit:,}" if isinstance(deposit, (int, float)) else f"💵 *Deposit:* {deposit}")
+        lines.append(f"💵 *Deposit:* ${deposit:,}" if isinstance(deposit, (int, float)) else f"💵 *Deposit:* {_md_escape(deposit)}")
 
     holder = data.get("deposit_holder")
     if holder:
-        lines.append(f"🏦 *Deposit Holder:* {holder}")
+        lines.append(f"🏦 *Deposit Holder:* {_md_escape(holder)}")
 
     # Dates
     for label, key in [("Offer Date", "offer_date"), ("Closing Date", "closing_date"),
                        ("Irrevocability", "irrevocability_date")]:
         val = data.get(key)
         if val:
-            lines.append(f"📅 *{label}:* {val}")
+            lines.append(f"📅 *{label}:* {_md_escape(val)}")
 
     # Conditions
     conditions = []
@@ -517,18 +585,30 @@ async def _start_generation(update: Update, context: ContextTypes.DEFAULT_TYPE) 
     """Start document generation."""
     query = update.callback_query
     chat_id = update.effective_user.id
-    doc_type = context.user_data.get("doc_type", "aps")
-    deal_data = context.user_data.get("deal_data", {})
+    doc_type = context.user_data.get("doc_type")
+    deal_data = context.user_data.get("deal_data")
+
+    # Bot may have restarted since collection — recover from the DB session
+    if not deal_data or not doc_type:
+        conv = await get_or_create_conversation(chat_id)
+        deal_data = deal_data or dict(conv.collected_data or {})
+        doc_type = doc_type or conv.doc_type or "aps"
+
+    if not deal_data:
+        await query.edit_message_text(
+            "⚠️ I lost the collected deal data. Please start over with /start."
+        )
+        return ConversationHandler.END
 
     await query.edit_message_text("⏳ Generating document... This may take a moment.")
     await set_session_state(chat_id, "generating")
 
     try:
         two_fa = make_two_factor_callback(chat_id, context.bot)
-        pdf_path = await generate_document(doc_type, deal_data, two_factor_callback=two_fa)
+        pdf_path, td_result = await generate_document(
+            doc_type, deal_data, two_factor_callback=two_fa
+        )
 
-        # Store result
-        td_result = get_last_td_result()
         context.user_data["last_pdf_path"] = pdf_path
         context.user_data["last_td_tx_uuid"] = td_result.get("transaction_uuid")
 
@@ -540,6 +620,16 @@ async def _start_generation(update: Update, context: ContextTypes.DEFAULT_TYPE) 
             if td_result.get("success"):
                 form_url = td_result.get("form_url", "")
                 caption += f"\n\n🔗 [Open in TransactionDesk]({form_url})"
+
+                expected = td_result.get("expected_fields")
+                filled = td_result.get("filled_fields", 0)
+                if expected:
+                    caption += f"\n📋 Filled {filled} of {expected} fields"
+                    if filled < expected:
+                        caption += (
+                            "\n⚠️ *Some fields could not be filled — "
+                            "review the form in TransactionDesk before sending.*"
+                        )
 
             await context.bot.send_document(
                 chat_id=chat_id,
@@ -641,14 +731,6 @@ async def signing_message(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
     """Handle signer email input."""
     text = update.message.text.strip()
     chat_id = update.effective_user.id
-
-    # Check for 2FA code
-    if chat_id in _pending_2fa and re.match(r"^\d{4,8}$", text):
-        future = _pending_2fa.get(chat_id)
-        if future and not future.done():
-            future.set_result(text)
-            await update.message.reply_text("✅ Code received.")
-            return SIGNING
 
     pending = context.user_data.get("pending_action")
 
@@ -785,7 +867,7 @@ def build_conversation_handler() -> ConversationHandler:
     return ConversationHandler(
         entry_points=[
             CommandHandler("start", start_command),
-            CommandHandler("new", lambda u, c: menu_callback.__wrapped__(u, c) if False else _new_doc_entry(u, c)),
+            CommandHandler("new", _new_doc_entry),
             CommandHandler("realmtest", realm_test_command),
             CommandHandler("help", help_command),
             MessageHandler(filters.TEXT & ~filters.COMMAND, idle_message),

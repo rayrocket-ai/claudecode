@@ -31,12 +31,14 @@ class RealmClient:
     def __init__(self, two_factor_callback: Callable[[], Awaitable[str]] | None = None):
         self.settings = get_settings()
         self.two_factor_callback = two_factor_callback
+        self._pw = None
         self._browser: Browser | None = None
         self._context: BrowserContext | None = None
 
     async def login(self) -> dict:
         """Perform full TRREB SSO login. Returns session cookies dict."""
         pw = await async_playwright().start()
+        self._pw = pw
         self._browser = await pw.chromium.launch(
             headless=self.settings.browser_headless,
             slow_mo=self.settings.browser_slowmo,
@@ -94,6 +96,9 @@ class RealmClient:
         finally:
             if self._browser:
                 await self._browser.close()
+            if self._pw:
+                await self._pw.stop()
+                self._pw = None
 
     async def _handle_otp(self, page: Page) -> None:
         """Handle OTP/2FA if the page asks for it."""
