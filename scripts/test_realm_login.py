@@ -1,7 +1,7 @@
 """Standalone script to test TRREB REALM login.
 
 Run this with a visible browser to verify the SSO login flow:
-    python test_realm_login.py
+    python scripts/test_realm_login.py
 
 When TRREB sends an SMS 2FA code, write it to /tmp/realm_otp.txt:
     echo "123456" > /tmp/realm_otp.txt
@@ -13,7 +13,7 @@ import sys
 from pathlib import Path
 
 # Add project root to path
-sys.path.insert(0, str(Path(__file__).parent))
+sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from config import get_settings, STORAGE_DIR
 

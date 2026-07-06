@@ -49,7 +49,7 @@ ai/             Claude agent — collection prompts + submit_deal_data tool
 forms/          Generation orchestrator, TD field maps, ReportLab fallback
 integrations/   TransactionDesk & REALM browser automation (Playwright),
                 BrokerBay (HTTP API + browser client), email (SMTP),
-                SkySlope upload, MLS lookup
+                SkySlope upload
 scheduler/      Tour geocoding (Google Maps) + route optimization
 db/             SQLAlchemy models + async SQLite (transactions, sessions)
 storage/        Runtime data: DB, session cookies, PDFs, screenshots (gitignored)
@@ -98,7 +98,7 @@ collected deal-data keys. TransactionDesk UI updates can rename fields. To
 recalibrate:
 
 1. Set `BROWSER_HEADLESS=false` in `.env`.
-2. Open the target form via `python test_realm_login.py`, then inspect the
+2. Open the target form via `python scripts/test_realm_login.py`, then inspect the
    form editor inputs in DevTools.
 3. Update the `name` → data-key entries in `FORM_100_FIELDS` (etc.).
 4. The bot's fill report ("Filled X of Y fields") tells you which fields
