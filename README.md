@@ -1,6 +1,6 @@
 # AI Realtor Assistant
 
-A Telegram bot for Ontario real estate agents with two capabilities:
+A Telegram bot for Ontario real estate agents with three capabilities:
 
 1. **Document generation** — collects deal information through a natural
    conversation powered by Claude, then fills the matching OREA/TRREB form in
@@ -9,6 +9,24 @@ A Telegram bot for Ontario real estate agents with two capabilities:
 2. **Showing management** — connects to **BrokerBay** to list, approve,
    decline, and counter showing requests, notify you of new requests, and
    book route-optimized showing tours (`/tour`) using Google Maps.
+3. **Listing launch** — turns one listing (`/launch`) into a full marketing
+   campaign: RECO/CREA-compliant copy, a feature-sheet outline, a reel script,
+   a just-listed email + SMS, and an open-house calendar invite.
+
+## Listing launch (`/launch`)
+
+Send `/launch` an MLS number, an address, or a few lines of detail. Claude
+drafts the whole campaign under RECO/CREA advertising rules (no invented
+facts, no Fair-Housing violations), you review it, and — on an explicit
+**Publish** tap — the bot delivers each asset. The email blast goes out over
+your existing SMTP when you set recipients; every other asset is handed back
+ready to paste (Gamma/Canva for the sheet, Higgsfield for the reel) or as a
+downloadable `.ics` for the open house. Nothing is sent without confirmation,
+and any unconfigured channel simply degrades to "drafted" rather than failing.
+
+Direct publishing to Boosend / Gamma / Higgsfield is stubbed behind
+`BOOSEND_API_KEY` / `GAMMA_API_KEY` / `HIGGSFIELD_API_KEY` — each `run_*`
+function in `integrations/campaign.py` is the single seam to wire a provider.
 
 ## Showing commands
 
@@ -45,11 +63,12 @@ bot/            Telegram UI — conversation state machine, keyboards
   main.py       Entry point (polling); global 2FA code catcher
   handlers/     ConversationHandler: IDLE → SELECTING_DOC → COLLECTING
                 → CONFIRMING → GENERATING → POST_GENERATE → SIGNING
-ai/             Claude agent — collection prompts + submit_deal_data tool
+ai/             Claude agents — deal-data collection (submit_deal_data) and
+                listing marketing (listing_agent.py, submit_campaign tool)
 forms/          Generation orchestrator, TD field maps, ReportLab fallback
 integrations/   TransactionDesk & REALM browser automation (Playwright),
                 BrokerBay (HTTP API + browser client), email (SMTP),
-                SkySlope upload, MLS lookup
+                SkySlope upload, MLS lookup, campaign delivery (campaign.py)
 scheduler/      Tour geocoding (Google Maps) + route optimization
 db/             SQLAlchemy models + async SQLite (transactions, sessions)
 storage/        Runtime data: DB, session cookies, PDFs, screenshots (gitignored)

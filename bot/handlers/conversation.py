@@ -201,6 +201,8 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
         "*Documents (OREA forms)*\n"
         "/new — Create a new document\n"
         "/realmtest — Test REALM/TransactionDesk\n\n"
+        "*Marketing*\n"
+        "/launch — Draft a full listing campaign (copy, reel, email/SMS, open house)\n\n"
         "*Utilities*\n"
         "/whoami — Show your Telegram user ID\n"
         "/cancel — Cancel current operation\n"

@@ -78,6 +78,21 @@ def post_generate_keyboard(has_transactiondesk: bool = False) -> InlineKeyboardM
     return InlineKeyboardMarkup(buttons)
 
 
+def launch_review_keyboard(has_recipients: bool = False) -> InlineKeyboardMarkup:
+    """Review/publish controls for a drafted listing campaign."""
+    recipients_label = (
+        "📧 Change blast recipients" if has_recipients else "📧 Set blast recipients"
+    )
+    return InlineKeyboardMarkup([
+        [InlineKeyboardButton("🚀 Publish campaign", callback_data="launch_publish")],
+        [InlineKeyboardButton(recipients_label, callback_data="launch_recipients")],
+        [
+            InlineKeyboardButton("✏️ Revise", callback_data="launch_revise"),
+            InlineKeyboardButton("❌ Cancel", callback_data="cancel"),
+        ],
+    ])
+
+
 def yes_no_keyboard(prefix: str) -> InlineKeyboardMarkup:
     """Generic yes/no keyboard."""
     return InlineKeyboardMarkup([

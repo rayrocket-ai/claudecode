@@ -72,6 +72,18 @@ class Settings(BaseSettings):
     # Google Maps
     google_maps_api_key: str = ""
 
+    # Listing Launch Agent (marketing)
+    # The bot always drafts the full campaign with Claude; these enable
+    # optional direct delivery/publishing to each channel. Anything left
+    # blank simply degrades to "drafted, ready to paste" — never fatal.
+    marketing_brand_voice: str = ""       # e.g. "warm, professional, concise"
+    marketing_segment: str = ""           # default buyer audience id/name (Boosend)
+    marketing_open_house_duration: int = 120  # minutes, for the calendar invite
+    boosend_api_key: str = ""             # future direct email/SMS blast
+    gamma_api_key: str = ""               # future direct feature-sheet generation
+    higgsfield_api_key: str = ""          # future direct reel generation
+    listing_autolaunch: bool = False      # background poller offers auto-launch
+
     # Derived
     @property
     def authorized_user_id_list(self) -> list[int]:
@@ -94,6 +106,17 @@ class Settings(BaseSettings):
     @property
     def is_brokerbay_configured(self) -> bool:
         return bool(self.brokerbay_email and self.brokerbay_password)
+
+    @property
+    def is_marketing_configured(self) -> bool:
+        """Marketing needs only the Claude key (already required) to draft a
+        campaign. Direct-delivery providers are optional add-ons on top."""
+        return bool(self.anthropic_api_key)
+
+    @property
+    def can_send_blast(self) -> bool:
+        """Whether an email blast can actually be delivered (reuses SMTP)."""
+        return self.is_smtp_configured or bool(self.boosend_api_key)
 
 
 # Paths

@@ -17,6 +17,7 @@ from telegram.ext import (
 )
 
 from bot.handlers.conversation import build_conversation_handler, two_fa_catcher
+from bot.handlers.listing import build_listing_handler
 from bot.handlers.showings import register_showing_handlers
 from bot.handlers.status import register_status_handlers
 from bot.handlers.tour import build_tour_handler
@@ -61,6 +62,7 @@ async def post_init(application: Application) -> None:
         BotCommand("status", "Bot + session health check"),
         BotCommand("whoami", "Show your Telegram user ID"),
         BotCommand("new", "Create a document (OREA forms)"),
+        BotCommand("launch", "Launch a listing: draft a full marketing campaign"),
         BotCommand("realmtest", "Test REALM / TransactionDesk connection"),
         BotCommand("help", "Show help"),
         BotCommand("cancel", "Cancel current operation"),
@@ -124,6 +126,10 @@ def main() -> None:
     # Tour booking conversation (must be added before the generic conv handler
     # so its /tour and /book entry points win)
     app.add_handler(build_tour_handler())
+
+    # Listing Launch conversation — registered before the generic conv handler
+    # so its /launch entry point wins over the idle message fallback.
+    app.add_handler(build_listing_handler())
 
     # Add showing management handlers (commands + callback queries + polling)
     register_showing_handlers(app)
