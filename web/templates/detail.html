@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}{{ deal.address }} — Dashboard{% endblock %}
+{% block content %}
+<div class="card">
+  <h2>{{ deal.address }}</h2>
+  <dl class="kv">
+    <dt>Document</dt><dd>{{ deal.doc_type }}</dd>
+    <dt>Status</dt><dd><span class="badge {{ deal.status }}">{{ deal.status }}</span></dd>
+    {% if deal.buyer %}<dt>Buyer(s)</dt><dd>{{ deal.buyer }}</dd>{% endif %}
+    {% if deal.seller %}<dt>Seller(s)</dt><dd>{{ deal.seller }}</dd>{% endif %}
+    {% if deal.price %}<dt>Price</dt><dd>{{ deal.price }}</dd>{% endif %}
+    <dt>Created</dt><dd>{{ deal.created }}</dd>
+    {% if deal.td_transaction_url %}
+    <dt>TransactionDesk</dt>
+    <dd><a class="deal" href="{{ deal.td_transaction_url }}">transaction →</a>
+        {% if deal.td_form_url %} · <a class="deal" href="{{ deal.td_form_url }}">form →</a>{% endif %}</dd>
+    {% endif %}
+  </dl>
+</div>
+
+{% if reminders %}
+<div class="card">
+  <h2>⏰ Upcoming Deadlines</h2>
+  <dl class="kv">
+    {% for r in reminders %}
+    <dt>{{ r.label }}</dt><dd class="deadline">{{ r.when }}</dd>
+    {% endfor %}
+  </dl>
+</div>
+{% endif %}
+
+<div class="card">
+  <h2>All Collected Data</h2>
+  <dl class="kv">
+    {% for label, value in fields %}
+    <dt>{{ label }}</dt><dd>{{ value }}</dd>
+    {% endfor %}
+  </dl>
+</div>
+{% endblock %}

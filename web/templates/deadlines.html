@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Deadlines — Dashboard{% endblock %}
+{% block content %}
+{% if rows %}
+<div class="table-scroll">
+<table>
+  <tr><th>Deadline</th><th>Type</th><th>When</th><th></th></tr>
+  {% for r in rows %}
+  <tr>
+    <td>{{ r.label }}</td>
+    <td class="muted">{{ r.kind }}</td>
+    <td class="deadline">{{ r.when }}</td>
+    <td>{% if r.transaction_id %}<a class="deal" href="/deal/{{ r.transaction_id }}">view deal →</a>{% endif %}</td>
+  </tr>
+  {% endfor %}
+</table>
+</div>
+{% else %}
+<div class="empty">No upcoming deadlines. 🎉</div>
+{% endif %}
+{% endblock %}

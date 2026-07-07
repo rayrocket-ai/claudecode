@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Deals — Dashboard{% endblock %}
+{% block content %}
+{% if deals %}
+<div class="table-scroll">
+<table>
+  <tr>
+    <th>Property</th><th>Document</th><th>Status</th>
+    <th>Buyer</th><th>Price</th><th>Next Deadline</th><th>Created</th>
+  </tr>
+  {% for d in deals %}
+  <tr>
+    <td><a class="deal" href="/deal/{{ d.id }}">{{ d.address }}</a></td>
+    <td class="muted">{{ d.doc_type }}</td>
+    <td><span class="badge {{ d.status }}">{{ d.status }}</span></td>
+    <td>{{ d.buyer or "—" }}</td>
+    <td>{{ d.price or "—" }}</td>
+    <td>{% if d.next_deadline %}<span class="deadline">{{ d.next_deadline[0] }} · {{ d.next_deadline[1] }}</span>{% else %}<span class="muted">—</span>{% endif %}</td>
+    <td class="muted">{{ d.created }}</td>
+  </tr>
+  {% endfor %}
+</table>
+</div>
+{% else %}
+<div class="empty">No deals yet — generate a document from the Telegram bot and it will appear here.</div>
+{% endif %}
+{% endblock %}

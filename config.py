@@ -62,6 +62,10 @@ class Settings(BaseSettings):
     skyslope_api_key: str = ""
     skyslope_api_url: str = "https://api.skyslope.com"
 
+    # Web dashboard (read-only; disabled unless a token is set)
+    dashboard_token: str = ""
+    dashboard_port: int = 8000
+
     # Derived
     @property
     def authorized_user_id_list(self) -> list[int]:

@@ -5,3 +5,15 @@ services:
     env_file: .env
     volumes:
       - ./storage:/app/storage
+
+  # Read-only deal dashboard. Disabled unless DASHBOARD_TOKEN is set in .env.
+  # Shares the bot's SQLite storage volume read-only.
+  dashboard:
+    build: .
+    command: ["uvicorn", "web.app:app", "--host", "0.0.0.0", "--port", "8000"]
+    restart: unless-stopped
+    env_file: .env
+    ports:
+      - "${DASHBOARD_PORT:-8000}:8000"
+    volumes:
+      - ./storage:/app/storage:ro
