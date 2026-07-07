@@ -76,58 +76,120 @@ deposit amounts, standard irrevocability periods, common conditions).
 AMENDMENT_COLLECTION_PROMPT = """You are collecting information for an OREA Form 120 —
 Amendment to Agreement of Purchase and Sale.
 
-Collect:
-- Original agreement date
-- Property address
-- Buyer name(s)
-- Seller name(s)
-- What is being amended (describe changes)
-- New values for amended terms
-- Date of amendment
+Collect the following in groups. After each group, summarize and move on.
 
-Output JSON with "collection_complete": true when done.
+GROUP 1 — Property:
+- Street number (property_street_number)
+- Street name (property_street_name)
+- Unit if applicable (property_unit)
+- City (property_city)
+- Postal code (property_postal_code)
+
+GROUP 2 — Parties (as they appear on the original agreement):
+- Buyer name(s) (buyer_1, buyer_2)
+- Seller name(s) (seller_1, seller_2)
+
+GROUP 3 — The Amendment:
+- Date of the original Agreement of Purchase and Sale (original_agreement_date) — YYYY-MM-DD
+- What is being amended, with old and new values spelled out
+  (amendment_description) — e.g. "Closing date changed from 2026-08-01 to 2026-09-01"
+- Date of this amendment (amendment_date) — YYYY-MM-DD
+- Irrevocability of the amendment, if any (irrevocability_date, irrevocability_time)
+
+After ALL groups are collected, output ONLY a JSON object with all the fields,
+wrapped in ```json ... ``` markers, using the field names in parentheses.
+Include "collection_complete": true.
 """
 
 WAIVER_COLLECTION_PROMPT = """You are collecting information for an OREA Form 122 —
 Waiver.
 
-Collect:
-- Original agreement date
-- Property address
-- Buyer name(s)
-- Seller name(s)
-- Which condition(s) are being waived
-- Waiver date
+Collect the following in groups. After each group, summarize and move on.
 
-Output JSON with "collection_complete": true when done.
+GROUP 1 — Property:
+- Street number (property_street_number)
+- Street name (property_street_name)
+- Unit if applicable (property_unit)
+- City (property_city)
+- Postal code (property_postal_code)
+
+GROUP 2 — Parties (as they appear on the original agreement):
+- Buyer name(s) (buyer_1, buyer_2)
+- Seller name(s) (seller_1, seller_2)
+
+GROUP 3 — The Waiver:
+- Date of the original Agreement of Purchase and Sale (original_agreement_date) — YYYY-MM-DD
+- Which condition(s) are being waived, quoted or described precisely
+  (condition_waived) — e.g. "Financing condition per Schedule A, paragraph 1"
+- Date of this waiver (waiver_date) — YYYY-MM-DD
+
+After ALL groups are collected, output ONLY a JSON object with all the fields,
+wrapped in ```json ... ``` markers, using the field names in parentheses.
+Include "collection_complete": true.
 """
 
-LEASE_COLLECTION_PROMPT = """You are collecting information for an Agreement to Lease
-(Residential).
+LEASE_COLLECTION_PROMPT = """You are collecting information for an OREA Form 400 —
+Agreement to Lease (Residential).
 
-Collect:
-GROUP 1 — Property: address, unit, city, postal code, type (apartment/house/condo)
-GROUP 2 — Parties: Landlord name(s), Tenant name(s), emails
-GROUP 3 — Terms: Monthly rent, lease start date, lease end date, deposit (first/last)
-GROUP 4 — Inclusions: parking, locker, appliances, utilities included
-GROUP 5 — Conditions: credit check, references, etc.
+NOTE ON FIELD NAMES: for pipeline consistency, record the TENANT under the
+buyer_* keys and the LANDLORD under the seller_* keys.
 
-Output JSON with "collection_complete": true when done.
+Collect the following in groups. After each group, summarize and move on.
+
+GROUP 1 — Property:
+- Street number (property_street_number)
+- Street name (property_street_name)
+- Unit if applicable (property_unit)
+- City (property_city)
+- Postal code (property_postal_code)
+- Type — apartment/house/condo (property_type)
+
+GROUP 2 — Parties:
+- Tenant name(s) (buyer_1, buyer_2) and email(s) (buyer_1_email, buyer_2_email)
+- Landlord name(s) (seller_1, seller_2) and email(s) (seller_1_email, seller_2_email)
+
+GROUP 3 — Terms:
+- Monthly rent (monthly_rent) — numeric
+- Lease start date (lease_start_date) — YYYY-MM-DD
+- Lease end date (lease_end_date) — YYYY-MM-DD
+- Deposit, typically first & last month (rent_deposit) — numeric
+- Deposit holder (deposit_holder)
+
+GROUP 4 — Inclusions:
+- Parking details (parking)
+- Locker (locker)
+- Appliances included (appliances)
+- Utilities included in rent (utilities_included)
+
+GROUP 5 — Conditions:
+- Credit check / references / employment letter, and any other conditions (conditions)
+
+After ALL groups are collected, output ONLY a JSON object with all the fields,
+wrapped in ```json ... ``` markers, using the field names in parentheses.
+Include "collection_complete": true.
 """
 
-COMMERCIAL_APS_COLLECTION_PROMPT = """You are collecting information for a Commercial
-Agreement of Purchase and Sale.
+COMMERCIAL_APS_COLLECTION_PROMPT = """You are collecting information for an OREA Form 500 —
+Agreement of Purchase and Sale (Commercial).
 
-Collect all standard APS fields plus:
-- Property type (retail, office, industrial, mixed-use)
-- Zoning classification
-- Due diligence period (days)
-- Environmental assessment requirement
-- HST applicability
-- Assignment rights
-- Commercial-specific conditions
+Collect all the standard APS fields (same field names as the residential APS):
+property_street_number, property_street_name, property_unit, property_city,
+property_postal_code, legal_description, buyer_1, buyer_2, seller_1, seller_2,
+purchase_price, deposit, deposit_holder, offer_date, irrevocability_date,
+irrevocability_time, closing_date.
 
-Output JSON with "collection_complete": true when done.
+PLUS the commercial-specific fields:
+- Property type — retail/office/industrial/mixed-use (commercial_property_type)
+- Zoning classification (zoning)
+- Due diligence period in days (due_diligence_days)
+- Environmental assessment required? (environmental_assessment)
+- Is the price plus HST or included? (hst_applicable)
+- Assignment rights (assignment_rights)
+- Any commercial-specific conditions (conditions)
+
+After ALL fields are collected, output ONLY a JSON object with all the fields,
+wrapped in ```json ... ``` markers, using the field names in parentheses.
+Include "collection_complete": true.
 """
 
 COLLECTION_PROMPTS = {

@@ -35,15 +35,15 @@ REQUIRED_FIELDS: dict[str, list[str]] = {
         "property_street_number", "property_street_name", "property_city",
     ],
     "lease": [
-        "buyer_1", "seller_1",
+        "buyer_1", "seller_1", "monthly_rent",
         "property_street_number", "property_street_name", "property_city",
     ],
     "amendment": [
-        "buyer_1", "seller_1",
+        "buyer_1", "seller_1", "original_agreement_date", "amendment_description",
         "property_street_number", "property_street_name", "property_city",
     ],
     "waiver": [
-        "buyer_1", "seller_1",
+        "buyer_1", "seller_1", "original_agreement_date", "condition_waived",
         "property_street_number", "property_street_name", "property_city",
     ],
     "notice": [
@@ -65,6 +65,15 @@ FIELD_LABELS: dict[str, str] = {
     "offer_date": "Offer date",
     "closing_date": "Closing date",
     "irrevocability_date": "Irrevocability date",
+    "original_agreement_date": "Original agreement date",
+    "amendment_description": "Amendment description",
+    "amendment_date": "Amendment date",
+    "condition_waived": "Condition being waived",
+    "waiver_date": "Waiver date",
+    "monthly_rent": "Monthly rent",
+    "rent_deposit": "Rent deposit",
+    "lease_start_date": "Lease start date",
+    "lease_end_date": "Lease end date",
 }
 
 # Canadian postal code: A1A 1A1 (space optional). Excludes letters D,F,I,O,Q,U.
@@ -120,6 +129,7 @@ def validate_deal(deal_data: dict, doc_type: str = "aps") -> ValidationResult:
     price = _check_price(result, data, doc_type)
     _check_deposit(result, data, price, doc_type)
     _check_dates(result, data)
+    _check_lease_terms(result, data, doc_type)
     _check_postal_code(result, data)
 
     return result
@@ -190,7 +200,11 @@ def _check_deposit(
 
 def _check_dates(result: ValidationResult, data: dict) -> None:
     parsed: dict[str, object] = {}
-    for key in ("offer_date", "closing_date", "irrevocability_date"):
+    for key in (
+        "offer_date", "closing_date", "irrevocability_date",
+        "original_agreement_date", "amendment_date", "waiver_date",
+        "lease_start_date", "lease_end_date",
+    ):
         raw = data.get(key)
         if raw is None or (isinstance(raw, str) and not raw.strip()):
             continue
@@ -218,6 +232,43 @@ def _check_dates(result: ValidationResult, data: dict) -> None:
         result.add_warning(
             "Irrevocability date is after the closing date — please confirm."
         )
+
+    start = parsed.get("lease_start_date")
+    end = parsed.get("lease_end_date")
+    if start and end and end <= start:
+        result.add_error(
+            "Lease end date must be after the lease start date."
+        )
+
+
+def _check_lease_terms(result: ValidationResult, data: dict, doc_type: str) -> None:
+    """Lease-specific amount checks (rent, deposit)."""
+    if doc_type != "lease":
+        return
+
+    raw_rent = data.get("monthly_rent")
+    has_rent = not (raw_rent is None or (isinstance(raw_rent, str) and not raw_rent.strip()))
+    rent = 0.0
+    if has_rent:
+        rent = normalize_number(raw_rent)
+        if rent <= 0:
+            result.add_error(
+                f"Monthly rent '{raw_rent}' is not a valid positive amount."
+            )
+
+    raw_dep = data.get("rent_deposit")
+    has_dep = not (raw_dep is None or (isinstance(raw_dep, str) and not raw_dep.strip()))
+    if has_dep:
+        dep = normalize_number(raw_dep)
+        if dep <= 0:
+            result.add_error(
+                f"Rent deposit '{raw_dep}' is not a valid positive amount."
+            )
+        elif rent > 0 and dep > rent * 3:
+            result.add_warning(
+                f"Rent deposit (${dep:,.2f}) is more than 3 months' rent — "
+                f"Ontario convention is first and last month. Please confirm."
+            )
 
 
 def _check_postal_code(result: ValidationResult, data: dict) -> None:

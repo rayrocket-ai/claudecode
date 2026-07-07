@@ -585,6 +585,13 @@ def _flatten_deal_data(deal_data: dict) -> dict[str, str]:
         "property_city", "property_postal_code", "legal_description",
         "deposit_holder", "listing_brokerage", "listing_agent",
         "co_op_brokerage", "attached_schedules",
+        # Amendment / waiver
+        "amendment_description", "condition_waived",
+        # Lease
+        "parking", "locker", "appliances", "utilities_included", "conditions",
+        # Commercial
+        "commercial_property_type", "zoning", "due_diligence_days",
+        "environmental_assessment", "hst_applicable", "assignment_rights",
     ]:
         if deal_data.get(key):
             flat[key] = str(deal_data[key])
@@ -633,5 +640,32 @@ def _flatten_deal_data(deal_data: dict) -> dict[str, str]:
         flat["closing_date_d"] = d
         flat["closing_date_mmmm"] = m
         flat["closing_date_yy"] = y
+
+    # Amendment / waiver / lease dates — split into day/month/year parts
+    # the same way the form fields expect them.
+    for date_key in (
+        "original_agreement_date", "amendment_date", "waiver_date",
+        "lease_start_date", "lease_end_date",
+    ):
+        value = deal_data.get(date_key)
+        if value:
+            d, m, y = _parse_date(value)
+            flat[f"{date_key}_d"] = d
+            flat[f"{date_key}_mmmm"] = m
+            flat[f"{date_key}_yy"] = y
+            flat[date_key] = str(value)  # full value for single-field forms
+
+    # Lease amounts
+    rent = deal_data.get("monthly_rent")
+    if rent:
+        rent_num = _normalize_number(rent)
+        flat["monthly_rent_formatted"] = f"{rent_num:,.2f}"
+        flat["monthly_rent_words"] = _num_to_words(rent_num)
+
+    rent_deposit = deal_data.get("rent_deposit")
+    if rent_deposit:
+        rd_num = _normalize_number(rent_deposit)
+        flat["rent_deposit_formatted"] = f"{rd_num:,.2f}"
+        flat["rent_deposit_words"] = _num_to_words(rd_num)
 
     return flat

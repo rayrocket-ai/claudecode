@@ -159,21 +159,110 @@ class TestPostalCode:
         assert any("postal" in w.lower() for w in result.warnings)
 
 
+def _valid_lease() -> dict:
+    return {
+        "buyer_1": "Tenant Name",
+        "seller_1": "Landlord Name",
+        "property_street_number": "10",
+        "property_street_name": "King St",
+        "property_city": "Toronto",
+        "monthly_rent": 2500,
+        "rent_deposit": 5000,
+        "lease_start_date": "2026-08-01",
+        "lease_end_date": "2027-07-31",
+    }
+
+
+def _valid_amendment() -> dict:
+    return {
+        "buyer_1": "John Smith",
+        "seller_1": "Jane Doe",
+        "property_street_number": "123",
+        "property_street_name": "Main St",
+        "property_city": "Toronto",
+        "original_agreement_date": "2026-06-15",
+        "amendment_description": "Closing date changed from 2026-08-01 to 2026-09-01",
+        "amendment_date": "2026-07-05",
+    }
+
+
 class TestDocTypes:
     def test_lease_does_not_require_price(self):
-        data = {
-            "buyer_1": "Tenant Name",
-            "seller_1": "Landlord Name",
-            "property_street_number": "10",
-            "property_street_name": "King St",
-            "property_city": "Toronto",
-        }
-        result = validate_deal(data, "lease")
+        result = validate_deal(_valid_lease(), "lease")
         assert result.ok
 
     def test_unknown_doc_type_falls_back_to_aps_rules(self):
         result = validate_deal({}, "some_future_form")
         assert not result.ok  # APS required fields kick in
+
+
+class TestLease:
+    def test_valid_lease_passes(self):
+        assert validate_deal(_valid_lease(), "lease").ok
+
+    def test_missing_rent_is_error(self):
+        data = _valid_lease()
+        del data["monthly_rent"]
+        assert not validate_deal(data, "lease").ok
+
+    def test_zero_rent_is_error(self):
+        data = _valid_lease()
+        data["monthly_rent"] = "free"
+        assert not validate_deal(data, "lease").ok
+
+    def test_lease_end_before_start_is_error(self):
+        data = _valid_lease()
+        data["lease_start_date"] = "2027-08-01"
+        data["lease_end_date"] = "2026-08-01"
+        result = validate_deal(data, "lease")
+        assert not result.ok
+        assert any("lease end" in e.lower() for e in result.errors)
+
+    def test_oversized_deposit_is_warning(self):
+        data = _valid_lease()
+        data["rent_deposit"] = 10000  # 4 months of 2500
+        result = validate_deal(data, "lease")
+        assert result.ok
+        assert any("deposit" in w.lower() for w in result.warnings)
+
+    def test_negative_deposit_is_error(self):
+        data = _valid_lease()
+        data["rent_deposit"] = "-100"
+        assert not validate_deal(data, "lease").ok
+
+
+class TestAmendmentAndWaiver:
+    def test_valid_amendment_passes(self):
+        assert validate_deal(_valid_amendment(), "amendment").ok
+
+    def test_amendment_requires_original_date_and_description(self):
+        for missing in ("original_agreement_date", "amendment_description"):
+            data = _valid_amendment()
+            del data[missing]
+            assert not validate_deal(data, "amendment").ok, missing
+
+    def test_amendment_bad_date_is_error(self):
+        data = _valid_amendment()
+        data["amendment_date"] = "sometime in july"
+        assert not validate_deal(data, "amendment").ok
+
+    def test_waiver_requires_condition_and_original_date(self):
+        data = {
+            "buyer_1": "John Smith",
+            "seller_1": "Jane Doe",
+            "property_street_number": "123",
+            "property_street_name": "Main St",
+            "property_city": "Toronto",
+            "original_agreement_date": "2026-06-15",
+            "condition_waived": "Financing condition per Schedule A",
+            "waiver_date": "2026-07-05",
+        }
+        assert validate_deal(data, "waiver").ok
+
+        for missing in ("original_agreement_date", "condition_waived"):
+            broken = dict(data)
+            del broken[missing]
+            assert not validate_deal(broken, "waiver").ok, missing
 
 
 class TestValidationResult:
