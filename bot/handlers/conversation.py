@@ -182,6 +182,48 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
     return IDLE
 
 
+async def reminders_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    """Handle /reminders — list upcoming deadline reminders.
+
+    Registered as a standalone top-level handler (not part of the FSM) so it
+    works regardless of conversation state and never disturbs it.
+    """
+    user = update.effective_user
+    if not _is_authorized(user.id):
+        return
+
+    from datetime import datetime, timezone
+
+    from bot.reminders import format_deadline_local
+    from db.operations import list_upcoming_reminders
+
+    now = datetime.now(timezone.utc).replace(tzinfo=None)
+    reminders = await list_upcoming_reminders(user.id, now)
+
+    if not reminders:
+        await update.message.reply_text(
+            "📭 No upcoming deadline reminders.\n\n"
+            "Reminders are set automatically when you generate a document "
+            "with irrevocability, closing, or condition dates."
+        )
+        return
+
+    # Each deadline has multiple notify rows (48h/24h) — show each deadline once.
+    seen: set[tuple] = set()
+    lines = []
+    for r in reminders:
+        key = (r.label, r.deadline_at)
+        if key in seen:
+            continue
+        seen.add(key)
+        lines.append(f"• *{r.label}*\n  {format_deadline_local(r.deadline_at)}")
+
+    await update.message.reply_text(
+        "⏰ *Upcoming Deadlines:*\n\n" + "\n".join(lines),
+        parse_mode="Markdown",
+    )
+
+
 async def realm_test_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     """Handle /realmtest — test TransactionDesk connection."""
     user = update.effective_user
@@ -590,10 +632,27 @@ async def _start_generation(update: Update, context: ContextTypes.DEFAULT_TYPE) 
             )
         context.user_data["transaction_id"] = tx.id
 
+        # Schedule deadline reminders (irrevocability / closing / conditions)
+        next_text = "What would you like to do next?"
+        try:
+            from bot.reminders import build_reminders
+            from db.operations import create_reminders
+
+            reminder_rows = build_reminders(deal_data, tx.id, chat_id)
+            if reminder_rows:
+                await create_reminders(reminder_rows)
+                n_deadlines = len({r["deadline_at"] for r in reminder_rows})
+                next_text = (
+                    f"⏰ I set reminders for {n_deadlines} upcoming deadline(s) — "
+                    f"see /reminders.\n\nWhat would you like to do next?"
+                )
+        except Exception:
+            logger.exception("Failed to create reminders for tx %s", tx.id)
+
         # Show next actions
         await context.bot.send_message(
             chat_id=chat_id,
-            text="What would you like to do next?",
+            text=next_text,
             reply_markup=post_generate_keyboard(has_transactiondesk=_is_td_configured()),
         )
         return POST_GENERATE

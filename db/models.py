@@ -5,7 +5,7 @@ from __future__ import annotations
 import uuid
 from datetime import datetime, timezone
 
-from sqlalchemy import Column, DateTime, Float, ForeignKey, Integer, String, Text, JSON
+from sqlalchemy import Boolean, Column, DateTime, Float, ForeignKey, Integer, String, Text, JSON
 from sqlalchemy.orm import DeclarativeBase, relationship
 
 
@@ -90,6 +90,27 @@ class Document(Base):
     created_at = Column(DateTime, default=_utcnow)
 
     transaction = relationship("Transaction", back_populates="documents")
+
+
+class Reminder(Base):
+    """A scheduled deadline notification for a deal.
+
+    All datetimes are stored as naive UTC (the SQLite dialect drops tzinfo on
+    write, so naive-UTC-everywhere keeps reads and writes consistent).
+    """
+
+    __tablename__ = "reminders"
+
+    id = Column(String, primary_key=True, default=_new_id)
+    telegram_chat_id = Column(Integer, index=True, nullable=False)
+    transaction_id = Column(String, ForeignKey("transactions.id"), nullable=True)
+    kind = Column(String, nullable=False)      # irrevocability, closing, condition
+    label = Column(String, nullable=False)     # e.g. "Irrevocability — 123 Main St, Toronto"
+    deadline_at = Column(DateTime, nullable=False)          # the actual deadline (UTC)
+    notify_at = Column(DateTime, nullable=False, index=True)  # when to send the DM (UTC)
+    sent = Column(Boolean, default=False, nullable=False)
+
+    created_at = Column(DateTime, default=_utcnow)
 
 
 class ConversationSession(Base):

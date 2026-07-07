@@ -9,7 +9,7 @@ from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_asyn
 from sqlalchemy.orm.attributes import flag_modified
 
 from config import DB_PATH
-from db.models import Base, ConversationSession, Transaction, Party, Property, Document
+from db.models import Base, ConversationSession, Transaction, Party, Property, Document, Reminder
 
 _engine = create_async_engine(f"sqlite+aiosqlite:///{DB_PATH}", echo=False)
 _session_factory = async_sessionmaker(_engine, expire_on_commit=False)
@@ -140,6 +140,77 @@ async def list_transactions(chat_id: int, limit: int = 20) -> list[Transaction]:
             select(Transaction)
             .where(Transaction.telegram_chat_id == chat_id)
             .order_by(Transaction.created_at.desc())
+            .limit(limit)
+        )
+        return list(result.scalars().all())
+
+
+async def list_all_transactions(limit: int = 200) -> list[Transaction]:
+    """All transactions across chats (dashboard use), newest first."""
+    async with get_session() as session:
+        result = await session.execute(
+            select(Transaction).order_by(Transaction.created_at.desc()).limit(limit)
+        )
+        return list(result.scalars().all())
+
+
+# ── Reminders ──────────────────────────────────────────────────────
+# Datetimes are naive UTC throughout (see db.models.Reminder docstring).
+
+async def create_reminders(rows: list[dict[str, Any]]) -> int:
+    """Bulk-insert reminder rows. Returns the number inserted."""
+    if not rows:
+        return 0
+    async with get_session() as session:
+        for row in rows:
+            session.add(Reminder(**row))
+        await session.commit()
+    return len(rows)
+
+
+async def get_due_reminders(now) -> list[Reminder]:
+    """Unsent reminders whose notify time has arrived."""
+    async with get_session() as session:
+        result = await session.execute(
+            select(Reminder)
+            .where(Reminder.sent == False, Reminder.notify_at <= now)  # noqa: E712
+            .order_by(Reminder.notify_at)
+        )
+        return list(result.scalars().all())
+
+
+async def mark_reminder_sent(reminder_id: str) -> None:
+    async with get_session() as session:
+        result = await session.execute(select(Reminder).where(Reminder.id == reminder_id))
+        reminder = result.scalar_one_or_none()
+        if reminder:
+            reminder.sent = True
+            await session.commit()
+
+
+async def list_upcoming_reminders(chat_id: int, now, limit: int = 20) -> list[Reminder]:
+    """Future, unsent reminders for one chat, soonest deadline first."""
+    async with get_session() as session:
+        result = await session.execute(
+            select(Reminder)
+            .where(
+                Reminder.telegram_chat_id == chat_id,
+                Reminder.sent == False,  # noqa: E712
+                Reminder.deadline_at >= now,
+            )
+            .order_by(Reminder.deadline_at, Reminder.notify_at)
+            .limit(limit)
+        )
+        return list(result.scalars().all())
+
+
+async def list_all_upcoming_reminders(now, limit: int = 100) -> list[Reminder]:
+    """Future, unsent reminders across all chats (dashboard use)."""
+    async with get_session() as session:
+        result = await session.execute(
+            select(Reminder)
+            .where(Reminder.sent == False, Reminder.deadline_at >= now)  # noqa: E712
+            .order_by(Reminder.deadline_at, Reminder.notify_at)
             .limit(limit)
         )
         return list(result.scalars().all())

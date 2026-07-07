@@ -8,9 +8,10 @@ import sys
 
 import structlog
 from telegram import BotCommand
-from telegram.ext import Application
+from telegram.ext import Application, CommandHandler
 
-from bot.handlers.conversation import build_conversation_handler
+from bot.handlers.conversation import build_conversation_handler, reminders_command
+from bot.reminders import reminder_sweep
 from config import get_settings
 from db.operations import init_db
 
@@ -39,6 +40,7 @@ async def post_init(application: Application) -> None:
     commands = [
         BotCommand("start", "Main menu"),
         BotCommand("new", "Create a new document"),
+        BotCommand("reminders", "Show upcoming deadline reminders"),
         BotCommand("realmtest", "Test REALM / TransactionDesk connection"),
         BotCommand("help", "Show help"),
         BotCommand("cancel", "Cancel current operation"),
@@ -70,6 +72,20 @@ def main() -> None:
     # Add conversation handler
     conv_handler = build_conversation_handler()
     app.add_handler(conv_handler)
+
+    # /reminders works in any state — registered outside the FSM
+    app.add_handler(CommandHandler("reminders", reminders_command))
+
+    # Hourly DB-backed reminder sweep (restart-safe: reminders persist in
+    # SQLite; this job just sends whatever has come due).
+    if app.job_queue is not None:
+        app.job_queue.run_repeating(reminder_sweep, interval=3600, first=15)
+        log.info("reminders.sweep_scheduled", interval_seconds=3600)
+    else:
+        log.warning(
+            "JobQueue unavailable — install python-telegram-bot[job-queue] "
+            "to enable deadline reminders"
+        )
 
     # Start polling
     log.info("bot.polling", mode="polling")
