@@ -1,6 +1,6 @@
 # AI Realtor Assistant
 
-A Telegram bot for Ontario real estate agents with two capabilities:
+A Telegram bot for Ontario real estate agents with three capabilities:
 
 1. **Document generation** — collects deal information through a natural
    conversation powered by Claude, then fills the matching OREA/TRREB form in
@@ -9,6 +9,37 @@ A Telegram bot for Ontario real estate agents with two capabilities:
 2. **Showing management** — connects to **BrokerBay** to list, approve,
    decline, and counter showing requests, notify you of new requests, and
    book route-optimized showing tours (`/tour`) using Google Maps.
+3. **Team task management (Ops Manager)** — a manager assigns work in plain
+   language, Claude turns it into tasks for the right agent, the bot follows up
+   automatically, escalates stalled tasks to the manager, and reports back on
+   completion.
+
+## Team task commands
+
+| Command | What it does |
+|---|---|
+| `/assign <plain language>` | Claude parses your request and assigns task(s) to the right team member(s). e.g. `/assign ask Sarah to book the home inspection for 123 Main St by Friday` |
+| `/tasks` | Managers see all open tasks; agents see their own |
+| `/checklist <type> [@Name] <deal ref>` | Fan an Ontario checklist into tasks. Types: `listing`, `buyer`, `deal` |
+| `/team`, `/addagent <id> <name> [manager]`, `/removeagent <id>` | Manage the roster (a person finds their ID with `/whoami`) |
+| `/done <task_id>` | Mark a task complete |
+
+Each assigned task arrives as a DM with **✅ Done / 🚧 Blocked / ⏳ Snooze /
+💬 Update** buttons; tapping *Update* lets the agent reply in natural language
+("done", "waiting on the lawyer", "need another day") which Claude interprets.
+
+**Follow-ups are DB-driven** — a recurring scan (`TASK_SCAN_INTERVAL` seconds)
+reads each task's due follow-up time from the database, so reminders and
+escalations survive restarts. Cadence scales with urgency from the
+`TASK_FOLLOWUP_HOURS` / `TASK_ESCALATE_HOURS` "standard" baseline (high nags
+sooner and escalates faster; low is gentler). Managers are set via
+`MANAGER_USER_IDS` (must also be in `AUTHORIZED_USER_IDS`).
+
+> **Roadmap — Phase B (social/email inbox):** a hybrid front-end where ManyChat
+> forwards Instagram/Facebook/WhatsApp DMs and Gmail forwards email to a webhook
+> on this bot; Claude triages importance, routes each lead to an agent as a
+> task, drafts a suggested reply for approval, and pings the manager on the
+> important ones. Designed but not yet built.
 
 ## Showing commands
 
@@ -51,7 +82,9 @@ integrations/   TransactionDesk & REALM browser automation (Playwright),
                 BrokerBay (HTTP API + browser client), email (SMTP),
                 SkySlope upload, MLS lookup
 scheduler/      Tour geocoding (Google Maps) + route optimization
-db/             SQLAlchemy models + async SQLite (transactions, sessions)
+ops/            Team task layer — Ontario checklists + follow-up cadence logic
+                (bot/handlers/tasks.py drives assign → follow-up → escalate)
+db/             SQLAlchemy models + async SQLite (transactions, sessions, tasks)
 storage/        Runtime data: DB, session cookies, PDFs, screenshots (gitignored)
 ```
 

@@ -5,7 +5,7 @@ from __future__ import annotations
 import uuid
 from datetime import datetime, timezone
 
-from sqlalchemy import Column, DateTime, Float, ForeignKey, Integer, String, Text, JSON
+from sqlalchemy import Boolean, Column, DateTime, Float, ForeignKey, Integer, String, Text, JSON
 from sqlalchemy.orm import DeclarativeBase, relationship
 
 
@@ -90,6 +90,72 @@ class Document(Base):
     created_at = Column(DateTime, default=_utcnow)
 
     transaction = relationship("Transaction", back_populates="documents")
+
+
+class TeamMember(Base):
+    """A person on the real estate team who can be assigned tasks.
+
+    The Telegram user ID doubles as the private-chat ID, so the bot can DM a
+    member directly by `telegram_id`. Managers can assign/see all tasks and
+    receive escalations; agents see and act on their own tasks.
+    """
+
+    __tablename__ = "team_members"
+
+    id = Column(String, primary_key=True, default=_new_id)
+    telegram_id = Column(Integer, unique=True, index=True, nullable=False)
+    name = Column(String, nullable=False)
+    role = Column(String, default="agent")  # manager, agent
+    active = Column(Boolean, default=True)
+
+    created_at = Column(DateTime, default=_utcnow)
+    updated_at = Column(DateTime, default=_utcnow, onupdate=_utcnow)
+
+
+class Task(Base):
+    """A single unit of work assigned to a team member.
+
+    Follow-ups are DB-driven, not per-task timers: a recurring scan reads
+    `next_followup_at`/`status` so reminders and escalations survive restarts.
+    """
+
+    __tablename__ = "tasks"
+
+    id = Column(String, primary_key=True, default=_new_id)
+    title = Column(String, nullable=False)
+    description = Column(Text, nullable=True)
+
+    assignee_telegram_id = Column(Integer, index=True, nullable=False)
+    assigner_telegram_id = Column(Integer, index=True, nullable=False)
+
+    # What deal/property this relates to (free text) and optional link to a
+    # generated Transaction record.
+    deal_ref = Column(String, nullable=True)
+    transaction_id = Column(String, ForeignKey("transactions.id"), nullable=True)
+
+    # assigned, acknowledged, in_progress, blocked, done, cancelled
+    status = Column(String, default="assigned", index=True)
+    urgency = Column(String, default="standard")  # low, standard, high
+
+    due_at = Column(DateTime, nullable=True)
+    next_followup_at = Column(DateTime, nullable=True, index=True)
+    followup_count = Column(Integer, default=0)
+    escalated = Column(Boolean, default=False)
+
+    # Chronological log of events/notes: [{ts, kind, text}]
+    activity = Column(JSON, default=list)
+
+    # Provenance when generated from a checklist template.
+    checklist_key = Column(String, nullable=True)
+    checklist_item = Column(String, nullable=True)
+
+    created_at = Column(DateTime, default=_utcnow)
+    updated_at = Column(DateTime, default=_utcnow, onupdate=_utcnow)
+    completed_at = Column(DateTime, nullable=True)
+
+
+# Terminal statuses that stop follow-ups/escalation.
+TASK_TERMINAL_STATUSES = ("done", "cancelled")
 
 
 class ConversationSession(Base):

@@ -19,6 +19,7 @@ from telegram.ext import (
 from bot.handlers.conversation import build_conversation_handler, two_fa_catcher
 from bot.handlers.showings import register_showing_handlers
 from bot.handlers.status import register_status_handlers
+from bot.handlers.tasks import register_task_handlers
 from bot.handlers.tour import build_tour_handler
 from config import get_settings
 from db.operations import init_db
@@ -58,6 +59,12 @@ async def post_init(application: Application) -> None:
         BotCommand("approve", "Approve a showing: /approve <id>"),
         BotCommand("decline", "Decline a showing: /decline <id> [reason]"),
         BotCommand("listings", "View active listings"),
+        BotCommand("assign", "Assign a task: /assign <what needs doing>"),
+        BotCommand("tasks", "View open tasks"),
+        BotCommand("checklist", "Generate an Ontario checklist: /checklist <type> <deal>"),
+        BotCommand("team", "View the team roster"),
+        BotCommand("addagent", "Register a team member: /addagent <id> <name>"),
+        BotCommand("done", "Mark a task done: /done <task_id>"),
         BotCommand("status", "Bot + session health check"),
         BotCommand("whoami", "Show your Telegram user ID"),
         BotCommand("new", "Create a document (OREA forms)"),
@@ -130,6 +137,9 @@ def main() -> None:
 
     # Add status / summary / pending / approve / decline commands
     register_status_handlers(app)
+
+    # Add team task-management handlers (commands + buttons + follow-up scan)
+    register_task_handlers(app)
 
     # Add conversation handler (OREA document generation) — register last so
     # its message fallback doesn't swallow other command states

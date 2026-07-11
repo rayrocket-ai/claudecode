@@ -8,7 +8,12 @@ from typing import Any
 
 import anthropic
 
-from ai.prompts import SYSTEM_PROMPT, COLLECTION_PROMPTS
+from ai.prompts import (
+    COLLECTION_PROMPTS,
+    INTERPRET_REPLY_PROMPT,
+    OPS_SYSTEM_PROMPT,
+    SYSTEM_PROMPT,
+)
 from config import get_settings
 
 # Tool the model calls once every required field has been collected.
@@ -182,3 +187,139 @@ def get_agent() -> RealEstateAgent:
     if _agent is None:
         _agent = RealEstateAgent()
     return _agent
+
+
+# ── Team Task Management (Ops Manager) ──────────────────────────────
+
+# Structured output: the model returns one or more tasks parsed from the
+# manager's free-text request.
+ASSIGN_TASK_TOOL = {
+    "name": "submit_tasks",
+    "description": (
+        "Submit the structured task(s) parsed from the manager's request. "
+        "Produce one entry per distinct task. Always call this exactly once."
+    ),
+    "input_schema": {
+        "type": "object",
+        "properties": {
+            "tasks": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "assignee_name": {
+                            "type": "string",
+                            "description": "Team member name as best matched to the roster.",
+                        },
+                        "title": {"type": "string", "description": "Short imperative title."},
+                        "description": {"type": "string"},
+                        "deal_ref": {
+                            "type": "string",
+                            "description": "Property/deal this relates to, if mentioned.",
+                        },
+                        "due_date": {"type": "string", "description": "YYYY-MM-DD if given/implied."},
+                        "urgency": {
+                            "type": "string",
+                            "enum": ["low", "standard", "high"],
+                        },
+                    },
+                    "required": ["assignee_name", "title"],
+                },
+            }
+        },
+        "required": ["tasks"],
+    },
+}
+
+# Structured output: classify a team member's reply about their task.
+INTERPRET_REPLY_TOOL = {
+    "name": "submit_interpretation",
+    "description": "Classify the team member's reply about their assigned task.",
+    "input_schema": {
+        "type": "object",
+        "properties": {
+            "intent": {
+                "type": "string",
+                "enum": ["done", "progress", "blocked", "needs_more_time", "question", "unclear"],
+            },
+            "note": {
+                "type": "string",
+                "description": "A one-line summary of what they said, for the activity log.",
+            },
+        },
+        "required": ["intent"],
+    },
+}
+
+
+class OpsAgent:
+    """Claude helper for the team task-management loop.
+
+    Two jobs, both using the existing 'tool = structured output' idiom:
+      - parse_task_request: manager free text -> structured task(s)
+      - interpret_reply:     agent free text  -> a task-status intent
+    """
+
+    def __init__(self):
+        settings = get_settings()
+        self.client = anthropic.AsyncAnthropic(api_key=settings.anthropic_api_key)
+        self.model = settings.claude_model
+
+    async def parse_task_request(
+        self, message: str, roster: list[dict]
+    ) -> list[dict]:
+        """Parse a manager's request into one or more task dicts.
+
+        `roster` is a list of {"name": str, "role": str}. Returns a list of
+        dicts with keys: assignee_name, title, description, deal_ref, due_date,
+        urgency (missing keys default at the call site).
+        """
+        roster_text = "\n".join(
+            f"- {m['name']} ({m.get('role', 'agent')})" for m in roster
+        ) or "(no team members registered yet)"
+        system = f"{OPS_SYSTEM_PROMPT}\n\nCURRENT TEAM ROSTER:\n{roster_text}"
+
+        response = await self.client.messages.create(
+            model=self.model,
+            max_tokens=1024,
+            system=system,
+            messages=[{"role": "user", "content": message}],
+            tools=[ASSIGN_TASK_TOOL],
+            tool_choice={"type": "tool", "name": "submit_tasks"},
+        )
+        for block in response.content:
+            if block.type == "tool_use" and block.name == "submit_tasks":
+                return list(block.input.get("tasks", []))
+        return []
+
+    async def interpret_reply(
+        self, reply: str, task_title: str, task_description: str | None = None
+    ) -> dict:
+        """Classify a team member's free-text reply about a task."""
+        context = f"TASK: {task_title}"
+        if task_description:
+            context += f"\nDETAILS: {task_description}"
+        system = f"{INTERPRET_REPLY_PROMPT}\n\n{context}"
+
+        response = await self.client.messages.create(
+            model=self.model,
+            max_tokens=256,
+            system=system,
+            messages=[{"role": "user", "content": reply}],
+            tools=[INTERPRET_REPLY_TOOL],
+            tool_choice={"type": "tool", "name": "submit_interpretation"},
+        )
+        for block in response.content:
+            if block.type == "tool_use" and block.name == "submit_interpretation":
+                return dict(block.input)
+        return {"intent": "unclear", "note": reply[:200]}
+
+
+_ops_agent: OpsAgent | None = None
+
+
+def get_ops_agent() -> OpsAgent:
+    global _ops_agent
+    if _ops_agent is None:
+        _ops_agent = OpsAgent()
+    return _ops_agent

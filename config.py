@@ -20,6 +20,12 @@ class Settings(BaseSettings):
     # Telegram
     telegram_bot_token: str = ""
     authorized_user_ids: str = ""
+    manager_user_ids: str = ""  # subset who can assign tasks & receive escalations
+
+    # Team task management — follow-up cadence (standard tier; high/low scale from it)
+    task_followup_hours: float = 4.0   # gap between reminders for a standard task
+    task_escalate_hours: float = 24.0  # escalate to manager after this long unresolved
+    task_scan_interval: int = 300      # seconds between follow-up scans
 
     # AI
     anthropic_api_key: str = ""
@@ -78,6 +84,12 @@ class Settings(BaseSettings):
         if not self.authorized_user_ids.strip():
             return []
         return [int(x.strip()) for x in self.authorized_user_ids.split(",") if x.strip()]
+
+    @property
+    def manager_user_id_list(self) -> list[int]:
+        if not self.manager_user_ids.strip():
+            return []
+        return [int(x.strip()) for x in self.manager_user_ids.split(",") if x.strip()]
 
     @property
     def is_realm_configured(self) -> bool:
