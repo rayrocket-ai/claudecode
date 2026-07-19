@@ -118,3 +118,28 @@ pytest tests/
   access restricted.
 - The bot prepares documents under a licensed broker's supervision; it is not
   a substitute for legal review.
+
+## Campaign dashboard
+
+A self-hosted, multi-campaign ads dashboard (`dashboard/`) runs as its own
+docker-compose service next to the bot. The ADMAX daily loop pushes each
+day's results (spend, leads, CPL, CTR) through a keyed API; campaigns,
+kill rules, and the learning log render at `/` and `/c/<slug>`.
+
+Deploy on the server:
+
+```bash
+cd /opt/realtor-bot
+git pull
+# set DASHBOARD_KEY (and optionally DASHBOARD_PORT) in .env
+docker compose up -d --build dashboard
+```
+
+API (all writes need the `X-Dashboard-Key` header):
+
+| Endpoint | Purpose |
+|---|---|
+| `PUT /api/campaigns/<slug>` | Register or update a campaign |
+| `POST /api/campaigns/<slug>/daily` | Report a day's results (same date = correction) |
+| `POST /api/campaigns/<slug>/log` | Append a learning-log entry |
+| `GET /api/campaigns` | Headline KPIs for every campaign |

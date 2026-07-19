@@ -62,9 +62,17 @@ this file adds the campaign-specific configuration and the daily loop.
 3. LOG. Append a dated entry to campaigns/34-buttonleaf/learning-log.md:
    spend, leads, CPL, CTR, decision made, and the generalizable lesson.
    Commit and push to branch claude/admax-paid-ads-agent-9hux3q.
-4. DASHBOARD. Update campaigns/34-buttonleaf/dashboard.html (KPI tiles,
-   daily results table, log timeline, status pill) and republish the
-   artifact to the same URL.
+4. DASHBOARD. Primary: the self-hosted multi-campaign dashboard
+   (dashboard/ service on Ray's Hetzner server, deployed via docker
+   compose). Once Ray provides the server URL and DASHBOARD_KEY, push
+   the day's numbers with:
+     POST {url}/api/campaigns/34-buttonleaf/daily
+       {"date","spend","leads","ctr_pct","impressions","views","notes"}
+     POST {url}/api/campaigns/34-buttonleaf/log  {"date","title","entry"}
+   with header X-Dashboard-Key. Until the server dashboard is live,
+   fallback: update campaigns/34-buttonleaf/dashboard.html and republish
+   the artifact to the same URL. New campaigns register themselves via
+   PUT {url}/api/campaigns/{slug} — one dashboard for everything.
 5. REPORT. Three lines maximum unless something is wrong: spend, leads,
    CPL, anomaly flags, action taken. Plain numbers first. Ray reads on
    mobile.

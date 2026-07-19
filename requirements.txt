@@ -20,6 +20,11 @@ structlog>=23.2.0
 # HTTP
 httpx>=0.25.0
 
+# Campaign dashboard (docker compose service "dashboard")
+fastapi>=0.110.0
+uvicorn>=0.29.0
+jinja2>=3.1.0
+
 # Utilities
 python-dateutil>=2.8.0
 # num2words removed (docopt build issue) — using inline implementation

@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}Ray Homes — Campaign Dashboard{% endblock %}</title>
+<style>
+  :root {
+    --ground: #F6F7F9; --surface: #FFFFFF;
+    --ink: #0A2540; --ink-2: #46586E; --ink-3: #7E8DA0; --line: #DDE3EA;
+    --accent: #E85A1B; --accent-soft: #FFF0E8;
+    --good: #1F7A4D; --good-soft: #E7F3EC;
+    --warn: #9A6A12; --warn-soft: #FBF3E0;
+    --crit: #B03A2E; --crit-soft: #FBEAE7;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ground: #0B1524; --surface: #12233A;
+      --ink: #EAF0F7; --ink-2: #A9B7C8; --ink-3: #74859B; --line: #24384F;
+      --accent: #FF7A42; --accent-soft: #3A2416;
+      --good: #4CC08A; --good-soft: #14332A;
+      --warn: #E0B25C; --warn-soft: #382D14;
+      --crit: #E5766B; --crit-soft: #3B1F1E;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--ground); color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.5; -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 28px 20px 64px; display: flex; flex-direction: column; gap: 20px; }
+  .eyebrow { font-size: 11px; font-weight: 600; letter-spacing: .09em; text-transform: uppercase; color: var(--ink-3); }
+  header .eyebrow { color: var(--accent); }
+  h1 { font-size: 26px; line-height: 1.2; margin: 4px 0 2px; letter-spacing: -.01em; text-wrap: balance; }
+  .sub { color: var(--ink-2); font-size: 14px; margin: 0; }
+  .headrow { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .pill {
+    display: inline-flex; align-items: center; gap: 7px; margin-top: 6px;
+    font-size: 12px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase;
+    padding: 6px 12px; border-radius: 999px; border: 1px solid currentColor; white-space: nowrap;
+  }
+  .pill .dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+  .pill.live { background: var(--good-soft); color: var(--good); }
+  .pill.pre-launch { background: var(--warn-soft); color: var(--warn); }
+  .pill.paused { background: var(--crit-soft); color: var(--crit); }
+  .pill.ended { background: var(--surface); color: var(--ink-3); }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 18px 20px; }
+  .card h2 { font-size: 15px; margin: 0 0 12px; }
+  .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+  .kpi { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; }
+  .kpi .label { font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); }
+  .kpi .value { font-size: 28px; font-weight: 650; font-variant-numeric: tabular-nums; margin: 6px 0 2px; letter-spacing: -.01em; }
+  .kpi .target { font-size: 12px; color: var(--ink-2); }
+  .grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; }
+  dl.config { margin: 0; display: grid; grid-template-columns: max-content 1fr; column-gap: 16px; row-gap: 7px; font-size: 13.5px; }
+  dl.config dt { color: var(--ink-3); font-weight: 500; }
+  dl.config dd { margin: 0; font-variant-numeric: tabular-nums; }
+  .tablewrap { overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; font-size: 13.5px; font-variant-numeric: tabular-nums; }
+  th { text-align: left; font-size: 11px; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; color: var(--ink-3); padding: 8px 12px 8px 0; border-bottom: 1px solid var(--line); }
+  td { padding: 9px 12px 9px 0; border-bottom: 1px solid var(--line); }
+  tr:last-child td { border-bottom: none; }
+  .empty { border: 1.5px dashed var(--line); border-radius: 10px; padding: 26px 20px; text-align: center; color: var(--ink-3); font-size: 13.5px; }
+  .empty strong { color: var(--ink-2); font-weight: 600; }
+  ul.rules { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 9px; font-size: 13.5px; }
+  ul.rules li { display: flex; gap: 10px; align-items: baseline; }
+  .rule-chip { flex: none; font-size: 10.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 2px 8px; border-radius: 5px; }
+  .chip-pause { background: var(--crit-soft); color: var(--crit); }
+  .chip-replace, .chip-review { background: var(--warn-soft); color: var(--warn); }
+  .chip-hold { background: var(--good-soft); color: var(--good); }
+  .log { margin: 0; padding: 0; list-style: none; }
+  .log li { position: relative; padding: 0 0 18px 22px; }
+  .log li:last-child { padding-bottom: 0; }
+  .log li::before { content: ""; position: absolute; left: 4px; top: 7px; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+  .log li::after { content: ""; position: absolute; left: 7.5px; top: 19px; bottom: 2px; width: 1px; background: var(--line); }
+  .log li:last-child::after { display: none; }
+  .log .date { font-size: 11px; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; color: var(--ink-3); }
+  .log .entry { font-size: 13.5px; color: var(--ink-2); margin-top: 2px; }
+  .log .entry strong { color: var(--ink); font-weight: 600; }
+  .cardlink { text-decoration: none; display: block; transition: border-color .12s ease; }
+  .cardlink:hover { border-color: var(--accent); }
+  .cardlink .minikpis { display: flex; gap: 22px; margin-top: 12px; font-variant-numeric: tabular-nums; }
+  .cardlink .minikpis div { font-size: 17px; font-weight: 650; }
+  .cardlink .minikpis .label { display: block; font-size: 10.5px; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; color: var(--ink-3); }
+  .crumb { font-size: 13px; color: var(--ink-3); text-decoration: none; }
+  .crumb:hover { color: var(--accent); }
+  footer { font-size: 12px; color: var(--ink-3); text-align: center; }
+</style>
+</head>
+<body>
+<div class="wrap">
+{% block content %}{% endblock %}
+<footer>Ray Homes Real Estate · eXp Realty · ADMAX campaign engine</footer>
+</div>
+</body>
+</html>

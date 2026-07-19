@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<header>
+  <div class="eyebrow">ADMAX · Ray Homes Real Estate</div>
+  <h1>Campaign Dashboard</h1>
+  <p class="sub">Every live and past campaign, fed daily by the learning loop.</p>
+</header>
+
+{% if cards %}
+<div class="grid2">
+  {% for card in cards %}
+  <a class="card cardlink" href="/c/{{ card.slug }}">
+    <div class="headrow">
+      <div>
+        <div class="eyebrow">{{ card.campaign.playbook }}</div>
+        <h2 style="font-size:17px; margin:4px 0 0;">{{ card.campaign.name }}</h2>
+      </div>
+      <span class="pill {{ card.campaign.status }}"><span class="dot"></span>{{ card.campaign.status | replace("-", " ") }}</span>
+    </div>
+    <div class="minikpis">
+      <div><span class="label">Spend</span>{% if card.kpis.days %}${{ "%.0f" | format(card.kpis.spend) }}{% else %}—{% endif %}</div>
+      <div><span class="label">Leads</span>{% if card.kpis.days %}{{ card.kpis.leads }}{% else %}—{% endif %}</div>
+      <div><span class="label">CPL</span>{% if card.kpis.cpl %}${{ "%.0f" | format(card.kpis.cpl) }}{% else %}—{% endif %}</div>
+    </div>
+  </a>
+  {% endfor %}
+</div>
+{% else %}
+<div class="empty"><strong>No campaigns yet.</strong><br>The daily loop registers campaigns here as they launch.</div>
+{% endif %}
+{% endblock %}

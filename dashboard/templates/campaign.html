@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% block title %}{{ c.name }} — Campaign Dashboard{% endblock %}
+{% block content %}
+<a class="crumb" href="/">← All campaigns</a>
+<header>
+  <div class="headrow">
+    <div>
+      <div class="eyebrow">{{ c.playbook }}</div>
+      <h1>{{ c.name }}</h1>
+      <p class="sub">{{ c.subtitle }}</p>
+    </div>
+    <span class="pill {{ c.status }}"><span class="dot"></span>{{ c.status | replace("-", " ") }}</span>
+  </div>
+</header>
+
+<section class="kpis">
+  <div class="kpi"><div class="label">Spend to date</div>
+    <div class="value">{% if kpis.days %}${{ "%.2f" | format(kpis.spend) }}{% else %}—{% endif %}</div>
+    <div class="target">{{ c.targets.get("budget_note", "") }}</div></div>
+  <div class="kpi"><div class="label">Leads</div>
+    <div class="value">{% if kpis.days %}{{ kpis.leads }}{% else %}—{% endif %}</div>
+    <div class="target">{{ c.targets.get("leads_note", "") }}</div></div>
+  <div class="kpi"><div class="label">CPL</div>
+    <div class="value">{% if kpis.cpl %}${{ "%.2f" | format(kpis.cpl) }}{% else %}—{% endif %}</div>
+    <div class="target">{{ c.targets.get("cpl_note", "") }}</div></div>
+  <div class="kpi"><div class="label">CTR</div>
+    <div class="value">{% if kpis.ctr_pct is not none %}{{ kpis.ctr_pct }}%{% else %}—{% endif %}</div>
+    <div class="target">{{ c.targets.get("ctr_note", "") }}</div></div>
+</section>
+
+<div class="grid2">
+  {% if c.config %}
+  <section class="card">
+    <h2>Approved configuration</h2>
+    <dl class="config">
+      {% for row in c.config %}<dt>{{ row[0] }}</dt><dd>{{ row[1] }}</dd>{% endfor %}
+    </dl>
+  </section>
+  {% endif %}
+  {% if c.rules %}
+  <section class="card">
+    <h2>Kill &amp; decision rules</h2>
+    <ul class="rules">
+      {% for rule in c.rules %}
+      <li><span class="rule-chip chip-{{ rule.chip }}">{{ rule.chip }}</span><span>{{ rule.text }}</span></li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% endif %}
+</div>
+
+<section class="card">
+  <h2>Daily results</h2>
+  {% if daily %}
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Date</th><th>Spend</th><th>Leads</th><th>CPL (day)</th><th>CTR</th><th>Views</th><th>Notes</th></tr></thead>
+      <tbody>
+        {% for row in daily %}
+        <tr>
+          <td>{{ row.date }}</td>
+          <td>${{ "%.2f" | format(row.spend) }}</td>
+          <td>{{ row.leads }}</td>
+          <td>{% if row.leads %}${{ "%.2f" | format(row.spend / row.leads) }}{% else %}—{% endif %}</td>
+          <td>{% if row.ctr_pct is not none %}{{ row.ctr_pct }}%{% else %}—{% endif %}</td>
+          <td>{{ row.views if row.views is not none else "—" }}</td>
+          <td>{{ row.notes }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+  <div class="empty"><strong>Awaiting day 1 of spend.</strong><br>The daily loop fills this table after the first results land.</div>
+  {% endif %}
+</section>
+
+{% if log %}
+<section class="card">
+  <h2>Learning log</h2>
+  <ul class="log">
+    {% for entry in log %}
+    <li>
+      <div class="date">{{ entry.date }}</div>
+      <div class="entry"><strong>{{ entry.title }}.</strong> {{ entry.entry }}</div>
+    </li>
+    {% endfor %}
+  </ul>
+</section>
+{% endif %}
+{% endblock %}
