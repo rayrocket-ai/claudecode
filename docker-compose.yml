@@ -16,10 +16,12 @@ services:
     volumes:
       - ./storage:/app/storage
 
-  # HTTPS front door for the dashboard. Default domain is a free
-  # sslip.io name that resolves to the server's own IP; set
-  # DASHBOARD_DOMAIN in .env to use a real domain instead.
+  # Optional HTTPS front door for the dashboard — only for servers with
+  # no reverse proxy already on ports 80/443 (Ray's Hetzner box has the
+  # realtor-agent Caddy there, which carries the dashboard route
+  # instead). Start explicitly with: docker compose --profile https up -d
   caddy:
+    profiles: ["https"]
     image: caddy:2
     restart: unless-stopped
     depends_on:
