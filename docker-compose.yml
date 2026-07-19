@@ -15,3 +15,25 @@ services:
       - "${DASHBOARD_PORT:-8080}:8080"
     volumes:
       - ./storage:/app/storage
+
+  # HTTPS front door for the dashboard. Default domain is a free
+  # sslip.io name that resolves to the server's own IP; set
+  # DASHBOARD_DOMAIN in .env to use a real domain instead.
+  caddy:
+    image: caddy:2
+    restart: unless-stopped
+    depends_on:
+      - dashboard
+    environment:
+      - DASHBOARD_DOMAIN=${DASHBOARD_DOMAIN:-87-99-139-222.sslip.io}
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./dashboard/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+
+volumes:
+  caddy_data:
+  caddy_config:
