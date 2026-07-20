@@ -73,4 +73,27 @@ assert.strictEqual(c.stressTestRate(0.029), 0.0525, "stress floor 5.25%");
   assert.strictEqual(r.downPayment, 55000, "defaults to min down");
 }
 
+// Ray Homes workbook fixture: $575,000, 10% down, Toronto, first-time buyer,
+// deposit $30,000 (Closing Costs tab of the client's spreadsheet).
+{
+  const r = c.closingCosts({
+    price: 575000,
+    inToronto: true,
+    firstTimeBuyer: true,
+    downPayment: 57500,
+    depositPaid: 30000,
+  });
+  assert.strictEqual(r.onLtt, 7975, "sheet: ON LTT $7,975");
+  assert.strictEqual(r.torontoLtt, 7975, "sheet: Toronto LTT $7,975");
+  assert.strictEqual(r.onRebate, 4000, "sheet: ON rebate $4,000");
+  assert.strictEqual(r.torontoRebate, 4475, "sheet: Toronto rebate $4,475");
+  assert.strictEqual(r.onLtt + r.torontoLtt - r.onRebate - r.torontoRebate, 7475, "sheet: net LTT $7,475");
+  close(r.cmhcPremium, 16042.5, 0.01, "sheet: CMHC premium $16,042.50");
+  close(r.cmhcPst, 1283.4, 0.01, "sheet: PST on CMHC $1,283.40");
+  assert.strictEqual(r.legalFees, 2000, "sheet: legal fees $2,000");
+  assert.strictEqual(r.depositPaid, 30000, "sheet: deposit $30,000");
+  assert.strictEqual(r.balanceOfDownAtClosing, 27500, "sheet: balance of down $27,500");
+  close(r.cashAtClosing, r.totalCashNeeded - 30000, 0.01, "cashAtClosing excludes deposit");
+}
+
 console.log("All calc.js tests passed.");

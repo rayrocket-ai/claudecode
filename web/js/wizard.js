@@ -174,7 +174,7 @@
           html += '<div class="card" id="wizard-lead"></div>';
           return html;
         },
-        leadOptions: { heading: "Get your best renewal rate", cta: "Get my renewal rates", interest: "renewal" },
+        leadOptions: { heading: "Optional — want us to find your best renewal rate?", cta: "Get my renewal rates", interest: "renewal" },
       },
     ],
 
@@ -313,7 +313,7 @@
           html += '<div class="card" id="wizard-lead"></div>';
           return html;
         },
-        leadOptions: { heading: "Ready to get pre-approved?", cta: "Get pre-approved", interest: "new-mortgage" },
+        leadOptions: { heading: "Optional — want help getting pre-approved?", cta: "Get pre-approved", interest: "new-mortgage" },
       },
     ],
 
@@ -364,7 +364,7 @@
           html += '<div class="card" id="wizard-lead"></div>';
           return html;
         },
-        leadOptions: { heading: "See your refinance options", cta: "Discuss my options", interest: "refinance" },
+        leadOptions: { heading: "Optional — want to discuss your refinance options?", cta: "Discuss my options", interest: "refinance" },
       },
     ],
 
@@ -423,7 +423,7 @@
             '<div class="card" id="wizard-lead"></div>'
           );
         },
-        leadOptions: { heading: "Have a question? Ask us anything", cta: "Ask us a question", interest: "learn" },
+        leadOptions: { heading: "Optional — have a question? Ask us anything", cta: "Ask us a question", interest: "learn" },
       },
     ],
   };

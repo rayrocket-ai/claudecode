@@ -3,14 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Closing Cost Calculator — Ontario &amp; Toronto | Mortgage Tools</title>
+  <title>Closing Cost Calculator — Ontario &amp; Toronto | Ray Homes Real Estate</title>
   <meta name="description" content="Estimate your full closing costs for a home purchase in Toronto or anywhere in Ontario: land transfer tax, down payment, CMHC insurance, legal fees and HST implications.">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
   <header class="site-header">
     <div class="inner">
-      <a class="logo" href="/">Mortgage<span>Tools</span></a>
+      <a class="logo" href="/">
+        <svg class="logo-mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l9 8h-3v9h-4v-6h-4v6H6v-9H3z"/></svg>
+        <span class="logo-text">Ray <span>Homes</span><small>REAL ESTATE</small></span>
+      </a>
       <nav class="site-nav">
         <a href="/">Home</a>
         <a href="/closing-costs" class="active">Closing Costs</a>
@@ -57,13 +60,18 @@
         <label for="cc-down-pct">Down Payment</label>
         <div class="control input-suffix"><input id="cc-down-pct" type="number" min="0" max="100" step="0.5" value="20"><span>%</span></div>
       </div>
+
+      <div class="field">
+        <label for="cc-deposit">Deposit Already Paid <small>part of your down payment — optional</small></label>
+        <div class="control input-prefix"><span>$</span><input id="cc-deposit" type="text" inputmode="numeric" placeholder="0"></div>
+      </div>
       <p class="error-msg" id="cc-error" aria-live="polite"></p>
     </div>
 
     <div class="card" id="cc-results-card" hidden>
       <div class="big-figure">
         <div class="amount" id="cc-total-cash">—</div>
-        <div class="label">Total cash needed to close (down payment + closing costs)</div>
+        <div class="label" id="cc-total-label">Cash needed on closing day (after your deposit)</div>
       </div>
 
       <table class="results-table">
@@ -76,39 +84,59 @@
       <p class="disclaimer">Estimates only — residential rates. Not financial or legal advice. Actual fees vary by lawyer, lender and property.</p>
     </div>
 
-    <div class="card">
-      <div class="grid-2">
-        <a class="quick-link" href="/payment-calculator" style="box-shadow:none;border:1px solid var(--border)">
-          <h3>What's my monthly payment?</h3>
-          <p>See your mortgage payment and the income you'd need to qualify.</p>
-        </a>
-        <div id="cc-lead"></div>
+    <div class="card" id="cc-other-costs">
+      <h2 style="color:var(--navy);margin-top:0;font-size:1.15rem">Adjust the estimates</h2>
+      <div class="field">
+        <label for="cc-legal">Legal Fees <small>title search + disbursements</small></label>
+        <div class="control input-prefix"><span>$</span><input id="cc-legal" type="number" min="0" step="100" value="2000"></div>
+      </div>
+      <div class="field">
+        <label for="cc-title">Title Insurance <small>set to 0 to exclude</small></label>
+        <div class="control input-prefix"><span>$</span><input id="cc-title" type="number" min="0" step="50" value="500"></div>
+      </div>
+      <div class="field">
+        <label for="cc-inspect">Home Inspection <small>set to 0 to exclude</small></label>
+        <div class="control input-prefix"><span>$</span><input id="cc-inspect" type="number" min="0" step="50" value="500"></div>
       </div>
     </div>
+
+    <a class="quick-link" href="/payment-calculator" style="max-width:720px;margin:0 auto 1.25rem;display:block">
+      <h3>What's my monthly payment?</h3>
+      <p>See your mortgage payment and the income you'd need to qualify — free, no sign-up.</p>
+    </a>
   </main>
 
   <footer class="site-footer">
-    <p>© <span id="year"></span> Mortgage Tools. Estimates are for information only and do not constitute financial, legal or tax advice.</p>
+    <p>© <span id="year"></span> Ray Homes Real Estate. Estimates are for information only and do not constitute financial, legal or tax advice.</p>
+    <p>Questions? <a id="contact-link" href="#" style="color:var(--navy)">Contact Ray Homes Real Estate</a></p>
   </footer>
 
   <script src="js/config.js"></script>
   <script src="js/calc.js"></script>
   <script src="js/ui.js"></script>
-  <script src="js/lead.js"></script>
   <script>
     (function () {
       document.getElementById("year").textContent = new Date().getFullYear();
 
       var priceInput = document.getElementById("cc-price");
       var downInput = document.getElementById("cc-down-pct");
+      var depositInput = document.getElementById("cc-deposit");
+      var legalInput = document.getElementById("cc-legal");
+      var titleInput = document.getElementById("cc-title");
+      var inspectInput = document.getElementById("cc-inspect");
       var errorEl = document.getElementById("cc-error");
       var resultsCard = document.getElementById("cc-results-card");
       var rowsEl = document.getElementById("cc-rows");
       var totalEl = document.getElementById("cc-total-cash");
+      var totalLabel = document.getElementById("cc-total-label");
       var hstNote = document.getElementById("cc-hst-note");
       var cmhcNote = document.getElementById("cc-cmhc-note");
 
       UI.attachMoneyMask(priceInput);
+      UI.attachMoneyMask(depositInput);
+
+      var contact = document.getElementById("contact-link");
+      contact.href = "mailto:" + (window.SITE_CONFIG.CONTACT_EMAIL || "");
 
       var location_ = UI.attachToggle(document.getElementById("cc-location"), recalc, "toronto");
       var ftb = UI.attachToggle(document.getElementById("cc-ftb"), recalc, "no");
@@ -143,16 +171,30 @@
         }
 
         var inToronto = location_.get() === "toronto";
+        var deposit = UI.parseMoney(depositInput.value);
+        if (isNaN(deposit) || deposit < 0) deposit = 0;
+        var nonNeg = function (el, fallback) {
+          var v = parseFloat(el.value);
+          return isNaN(v) || v < 0 ? fallback : v;
+        };
         var r = closingCosts({
           price: price,
           inToronto: inToronto,
           firstTimeBuyer: ftb.get() === "yes",
           newConstruction: newbuild.get() === "new",
           downPayment: down,
+          depositPaid: deposit,
+          legalFees: nonNeg(legalInput, 2000),
+          titleInsurance: nonNeg(titleInput, 500),
+          homeInspection: nonNeg(inspectInput, 500),
         });
 
         var html = "";
         html += row("Down payment", UI.money(r.downPayment), "", ((r.downPayment / price) * 100).toFixed(1) + "% of purchase price");
+        if (r.depositPaid > 0) {
+          html += row("Deposit already paid", "− " + UI.money(r.depositPaid), "rebate", "excluded from the total — it's already paid");
+          html += row("Balance of down payment at closing", UI.money(r.balanceOfDownAtClosing));
+        }
         html += row("Ontario land transfer tax", UI.money(r.onLtt));
         if (inToronto) html += row("Toronto municipal land transfer tax", UI.money(r.torontoLtt));
         if (r.onRebate > 0) html += row("First-time buyer rebate (Ontario)", "− " + UI.money(r.onRebate), "rebate");
@@ -161,14 +203,19 @@
           html += row("CMHC insurance premium", UI.money(r.cmhcPremium), "", "added to your mortgage, not paid in cash");
           html += row("Ontario PST on CMHC premium (8%)", UI.money(r.cmhcPst), "", "paid in cash at closing");
         }
-        html += row("Legal fees", UI.money(r.legalFees), "", "estimate");
-        html += row("Title insurance", UI.money(r.titleInsurance), "", "estimate");
-        html += row("Home inspection", UI.money(r.homeInspection), "", "estimate");
+        html += row("Legal fees", UI.money(r.legalFees), "", "adjustable below");
+        if (r.titleInsurance > 0) html += row("Title insurance", UI.money(r.titleInsurance), "", "adjustable below");
+        if (r.homeInspection > 0) html += row("Home inspection", UI.money(r.homeInspection), "", "adjustable below");
         html += row("Total closing costs", UI.money(r.totalClosing), "total");
+        html += row("Cash needed at closing", UI.money(r.cashAtClosing), "total", r.depositPaid > 0 ? "balance of down payment + closing costs" : "down payment + closing costs");
+        if (r.depositPaid > 0) html += row("Total cash incl. deposit", UI.money(r.totalCashNeeded), "", "for reference");
         html += row("Mortgage required", UI.money(r.mortgageTotal), "", r.cmhcPremium > 0 ? "includes CMHC premium" : "");
         rowsEl.innerHTML = html;
 
-        totalEl.textContent = UI.money(r.totalCashNeeded);
+        totalEl.textContent = UI.money(r.cashAtClosing);
+        totalLabel.textContent = r.depositPaid > 0
+          ? "Cash needed on closing day (after your deposit)"
+          : "Total cash needed to close (down payment + closing costs)";
 
         if (r.hstApplies) {
           hstNote.hidden = false;
@@ -195,13 +242,7 @@
         return minDownPayment(price);
       }
 
-      UI.liveRecalc([priceInput, downInput], recalc);
-
-      Lead.renderForm(document.getElementById("cc-lead"), {
-        heading: "Questions about your closing costs?",
-        cta: "Ask an expert",
-        interest: "closing-costs",
-      });
+      UI.liveRecalc([priceInput, downInput, depositInput, legalInput, titleInput, inspectInput], recalc);
     })();
   </script>
 </body>

@@ -1,12 +1,12 @@
 /* Mortgage Tools — shared styles */
 
 :root {
-  --navy: #1e2a4a;
-  --navy-hover: #2a3a63;
-  --navy-deep: #16203a;
-  --orange: #f59120;
-  --orange-hover: #e07f0e;
-  --bg: #f4f5f7;
+  --navy: #22304d;
+  --navy-hover: #2e4066;
+  --navy-deep: #131f38;
+  --orange: #f47b20;
+  --orange-hover: #dd690f;
+  --bg: #f2f4f7;
   --card: #ffffff;
   --text: #2b2f3a;
   --muted: #6b7280;
@@ -54,10 +54,32 @@ body {
   color: #fff;
   text-decoration: none;
   letter-spacing: 0.02em;
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
 }
 
-.site-header .logo span {
+.logo-mark {
+  width: 26px;
+  height: 26px;
+  fill: var(--orange);
+  flex-shrink: 0;
+}
+
+.logo-text {
+  line-height: 1.1;
+}
+
+.logo-text > span {
   color: var(--orange);
+}
+
+.logo-text small {
+  display: block;
+  font-size: 0.58rem;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  color: #aab4c8;
 }
 
 .site-nav {

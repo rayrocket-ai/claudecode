@@ -142,7 +142,9 @@ function incomeToQualify(principal, annualRate, years, opts) {
 /**
  * Itemized closing-cost estimate.
  * opts: { price, inToronto, firstTimeBuyer, newConstruction, downPayment,
- *         legalFees, titleInsurance, homeInspection }
+ *         depositPaid, legalFees, titleInsurance, homeInspection }
+ * depositPaid is the portion of the down payment already handed over with the
+ * offer; it is excluded from cashAtClosing (matches the Ray Homes workbook).
  * NOTE: intentionally no mortgage/broker fee line.
  */
 function closingCosts(opts) {
@@ -151,6 +153,7 @@ function closingCosts(opts) {
       inToronto: false,
       firstTimeBuyer: false,
       newConstruction: false,
+      depositPaid: 0,
       legalFees: 2000,
       titleInsurance: 500,
       homeInspection: 500,
@@ -159,6 +162,7 @@ function closingCosts(opts) {
   );
   const price = o.price || 0;
   const down = o.downPayment != null ? o.downPayment : minDownPayment(price);
+  const deposit = Math.min(Math.max(o.depositPaid || 0, 0), down);
 
   const onLtt = ontarioLTT(price);
   const torLtt = o.inToronto ? torontoLTT(price) : 0;
@@ -170,9 +174,13 @@ function closingCosts(opts) {
   const totalClosing =
     onLtt - onRebate + torLtt - torRebate + pst + o.legalFees + o.titleInsurance + o.homeInspection;
 
+  const balanceOfDownAtClosing = down - deposit;
+
   return {
     price: price,
     downPayment: down,
+    depositPaid: deposit,
+    balanceOfDownAtClosing: balanceOfDownAtClosing,
     minDown: minDownPayment(price),
     mortgageBeforePremium: price - down,
     cmhcPremium: premium,
@@ -188,6 +196,7 @@ function closingCosts(opts) {
     hstApplies: !!o.newConstruction,
     totalClosing: totalClosing,
     totalCashNeeded: down + totalClosing,
+    cashAtClosing: balanceOfDownAtClosing + totalClosing,
   };
 }
 

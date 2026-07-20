@@ -3,14 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mortgage Payment &amp; Income Calculator | Mortgage Tools</title>
+  <title>Mortgage Payment &amp; Income Calculator | Ray Homes Real Estate</title>
   <meta name="description" content="Calculate your monthly mortgage payment with Canadian semi-annual compounding, and estimate the income you need to qualify — including the federal stress test.">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
   <header class="site-header">
     <div class="inner">
-      <a class="logo" href="/">Mortgage<span>Tools</span></a>
+      <a class="logo" href="/">
+        <svg class="logo-mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l9 8h-3v9h-4v-6h-4v6H6v-9H3z"/></svg>
+        <span class="logo-text">Ray <span>Homes</span><small>REAL ESTATE</small></span>
+      </a>
       <nav class="site-nav">
         <a href="/">Home</a>
         <a href="/closing-costs">Closing Costs</a>
@@ -61,7 +64,7 @@
         <tbody id="pc-rows"></tbody>
       </table>
       <div class="note" id="pc-cmhc-note" hidden></div>
-      <p class="disclaimer">Estimates only — Canadian fixed-rate compounding (semi-annual). Not financial advice.</p>
+      <p class="disclaimer">Estimates only. Canadian fixed-rate mortgages compound semi-annually — that's the formula used here. Not financial advice.</p>
     </div>
 
     <div class="card" id="pc-income-card" hidden>
@@ -86,25 +89,20 @@
       </div>
     </div>
 
-    <div class="card">
-      <div class="grid-2">
-        <a class="quick-link" href="/closing-costs" style="box-shadow:none;border:1px solid var(--border)">
-          <h3>What about closing costs?</h3>
-          <p>Land transfer tax, legal fees and everything else you'll need at closing.</p>
-        </a>
-        <div id="pc-lead"></div>
-      </div>
-    </div>
+    <a class="quick-link" href="/closing-costs" style="max-width:720px;margin:0 auto 1.25rem;display:block">
+      <h3>What about closing costs?</h3>
+      <p>Land transfer tax, legal fees and everything else you'll need at closing — free, no sign-up.</p>
+    </a>
   </main>
 
   <footer class="site-footer">
-    <p>© <span id="year"></span> Mortgage Tools. Estimates are for information only and do not constitute financial, legal or tax advice.</p>
+    <p>© <span id="year"></span> Ray Homes Real Estate. Estimates are for information only and do not constitute financial, legal or tax advice.</p>
+    <p>Questions? <a id="contact-link" href="#" style="color:var(--navy)">Contact Ray Homes Real Estate</a></p>
   </footer>
 
   <script src="js/config.js"></script>
   <script src="js/calc.js"></script>
   <script src="js/ui.js"></script>
-  <script src="js/lead.js"></script>
   <script>
     (function () {
       document.getElementById("year").textContent = new Date().getFullYear();
@@ -209,11 +207,8 @@
       UI.liveRecalc([priceInput, downInput, rateInput, amortInput, taxInput, heatInput], recalc);
       amortInput.addEventListener("change", recalc);
 
-      Lead.renderForm(document.getElementById("pc-lead"), {
-        heading: "Want today's best rates?",
-        cta: "Get my rate",
-        interest: "mortgage-rates",
-      });
+      document.getElementById("contact-link").href =
+        "mailto:" + (window.SITE_CONFIG.CONTACT_EMAIL || "");
     })();
   </script>
 </body>
