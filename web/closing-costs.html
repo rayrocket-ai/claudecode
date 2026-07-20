@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Closing Cost Calculator — Ontario &amp; Toronto | Mortgage Tools</title>
+  <meta name="description" content="Estimate your full closing costs for a home purchase in Toronto or anywhere in Ontario: land transfer tax, down payment, CMHC insurance, legal fees and HST implications.">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner">
+      <a class="logo" href="/">Mortgage<span>Tools</span></a>
+      <nav class="site-nav">
+        <a href="/">Home</a>
+        <a href="/closing-costs" class="active">Closing Costs</a>
+        <a href="/payment-calculator">Mortgage Calculator</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page page-narrow">
+    <h1>Closing Cost Calculator</h1>
+    <p class="subtitle">Enter your purchase price and where you're buying — we'll estimate every cost you need to close, whether you're in Toronto or anywhere else in Ontario.</p>
+
+    <div class="card">
+      <div class="field">
+        <label for="cc-price">Purchase Price</label>
+        <div class="control input-prefix"><span>$</span><input id="cc-price" type="text" inputmode="numeric" placeholder="1,000,000"></div>
+      </div>
+
+      <div class="field">
+        <label>Property Location</label>
+        <div class="toggle" id="cc-location">
+          <button type="button" data-value="toronto">Toronto</button>
+          <button type="button" data-value="outside">Outside Toronto</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>First-Time Home Buyer? <small>Land transfer tax rebates may apply</small></label>
+        <div class="toggle" id="cc-ftb">
+          <button type="button" data-value="yes">Yes</button>
+          <button type="button" data-value="no">No</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Property Type <small>HST applies differently to new construction</small></label>
+        <div class="toggle" id="cc-newbuild">
+          <button type="button" data-value="resale">Resale</button>
+          <button type="button" data-value="new">New Construction</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="cc-down-pct">Down Payment</label>
+        <div class="control input-suffix"><input id="cc-down-pct" type="number" min="0" max="100" step="0.5" value="20"><span>%</span></div>
+      </div>
+      <p class="error-msg" id="cc-error" aria-live="polite"></p>
+    </div>
+
+    <div class="card" id="cc-results-card" hidden>
+      <div class="big-figure">
+        <div class="amount" id="cc-total-cash">—</div>
+        <div class="label">Total cash needed to close (down payment + closing costs)</div>
+      </div>
+
+      <table class="results-table">
+        <tbody id="cc-rows"></tbody>
+      </table>
+
+      <div class="note" id="cc-hst-note" hidden></div>
+      <div class="note" id="cc-cmhc-note" hidden></div>
+
+      <p class="disclaimer">Estimates only — residential rates. Not financial or legal advice. Actual fees vary by lawyer, lender and property.</p>
+    </div>
+
+    <div class="card">
+      <div class="grid-2">
+        <a class="quick-link" href="/payment-calculator" style="box-shadow:none;border:1px solid var(--border)">
+          <h3>What's my monthly payment?</h3>
+          <p>See your mortgage payment and the income you'd need to qualify.</p>
+        </a>
+        <div id="cc-lead"></div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>© <span id="year"></span> Mortgage Tools. Estimates are for information only and do not constitute financial, legal or tax advice.</p>
+  </footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/calc.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/lead.js"></script>
+  <script>
+    (function () {
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      var priceInput = document.getElementById("cc-price");
+      var downInput = document.getElementById("cc-down-pct");
+      var errorEl = document.getElementById("cc-error");
+      var resultsCard = document.getElementById("cc-results-card");
+      var rowsEl = document.getElementById("cc-rows");
+      var totalEl = document.getElementById("cc-total-cash");
+      var hstNote = document.getElementById("cc-hst-note");
+      var cmhcNote = document.getElementById("cc-cmhc-note");
+
+      UI.attachMoneyMask(priceInput);
+
+      var location_ = UI.attachToggle(document.getElementById("cc-location"), recalc, "toronto");
+      var ftb = UI.attachToggle(document.getElementById("cc-ftb"), recalc, "no");
+      var newbuild = UI.attachToggle(document.getElementById("cc-newbuild"), recalc, "resale");
+
+      function row(label, value, cls, sub) {
+        return (
+          '<tr class="' + (cls || "") + '"><td>' + label +
+          (sub ? " <small>" + sub + "</small>" : "") +
+          "</td><td>" + value + "</td></tr>"
+        );
+      }
+
+      function recalc() {
+        errorEl.textContent = "";
+        var price = UI.parseMoney(priceInput.value);
+        if (isNaN(price) || price <= 0) {
+          resultsCard.hidden = true;
+          return;
+        }
+
+        var pct = parseFloat(downInput.value);
+        if (isNaN(pct) || pct < 0 || pct > 100) pct = 20;
+        var down = (price * pct) / 100;
+        var minDown = calcMin(price);
+
+        if (down < minDown - 0.5) {
+          errorEl.textContent =
+            "Minimum down payment for this price is " + UI.money(minDown) +
+            " (" + ((minDown / price) * 100).toFixed(1) + "%). Using the legal minimum below.";
+          down = minDown;
+        }
+
+        var inToronto = location_.get() === "toronto";
+        var r = closingCosts({
+          price: price,
+          inToronto: inToronto,
+          firstTimeBuyer: ftb.get() === "yes",
+          newConstruction: newbuild.get() === "new",
+          downPayment: down,
+        });
+
+        var html = "";
+        html += row("Down payment", UI.money(r.downPayment), "", ((r.downPayment / price) * 100).toFixed(1) + "% of purchase price");
+        html += row("Ontario land transfer tax", UI.money(r.onLtt));
+        if (inToronto) html += row("Toronto municipal land transfer tax", UI.money(r.torontoLtt));
+        if (r.onRebate > 0) html += row("First-time buyer rebate (Ontario)", "− " + UI.money(r.onRebate), "rebate");
+        if (r.torontoRebate > 0) html += row("First-time buyer rebate (Toronto)", "− " + UI.money(r.torontoRebate), "rebate");
+        if (r.cmhcPremium > 0) {
+          html += row("CMHC insurance premium", UI.money(r.cmhcPremium), "", "added to your mortgage, not paid in cash");
+          html += row("Ontario PST on CMHC premium (8%)", UI.money(r.cmhcPst), "", "paid in cash at closing");
+        }
+        html += row("Legal fees", UI.money(r.legalFees), "", "estimate");
+        html += row("Title insurance", UI.money(r.titleInsurance), "", "estimate");
+        html += row("Home inspection", UI.money(r.homeInspection), "", "estimate");
+        html += row("Total closing costs", UI.money(r.totalClosing), "total");
+        html += row("Mortgage required", UI.money(r.mortgageTotal), "", r.cmhcPremium > 0 ? "includes CMHC premium" : "");
+        rowsEl.innerHTML = html;
+
+        totalEl.textContent = UI.money(r.totalCashNeeded);
+
+        if (r.hstApplies) {
+          hstNote.hidden = false;
+          hstNote.innerHTML =
+            "<strong>HST on new construction:</strong> 13% HST usually applies but is typically included in the builder's price, with rebates assigned to the builder when the home is your primary residence. Investors may need to pay the rebate portion up front at closing and claim it back — budget accordingly and confirm with your lawyer.";
+        } else {
+          hstNote.hidden = false;
+          hstNote.innerHTML = "<strong>HST:</strong> resale homes are exempt from HST — nothing extra to budget here.";
+        }
+
+        if (r.cmhcPremium > 0) {
+          cmhcNote.hidden = false;
+          cmhcNote.innerHTML =
+            "<strong>Less than 20% down:</strong> your mortgage requires default insurance (CMHC). The premium of " +
+            UI.money(r.cmhcPremium) + " is added to your mortgage balance; only the 8% provincial tax on it is due in cash.";
+        } else {
+          cmhcNote.hidden = true;
+        }
+
+        resultsCard.hidden = false;
+      }
+
+      function calcMin(price) {
+        return minDownPayment(price);
+      }
+
+      UI.liveRecalc([priceInput, downInput], recalc);
+
+      Lead.renderForm(document.getElementById("cc-lead"), {
+        heading: "Questions about your closing costs?",
+        cta: "Ask an expert",
+        interest: "closing-costs",
+      });
+    })();
+  </script>
+</body>
+</html>

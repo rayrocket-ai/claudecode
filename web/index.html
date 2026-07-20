@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mortgage Tools — Closing Costs, Payments &amp; Rates for Toronto &amp; Ontario</title>
+  <meta name="description" content="Free mortgage tools for Toronto and Ontario: calculate closing costs, monthly payments and the income you need to qualify — or walk through renewing, buying or refinancing.">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner">
+      <a class="logo" href="/">Mortgage<span>Tools</span></a>
+      <nav class="site-nav">
+        <a href="/" class="active">Home</a>
+        <a href="/closing-costs">Closing Costs</a>
+        <a href="/payment-calculator">Mortgage Calculator</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page">
+    <div class="steps" id="wizard-steps"></div>
+
+    <div id="wizard"></div>
+
+    <div style="text-align:center;color:var(--muted);margin:2.2rem 0 1rem;font-size:0.95rem">
+      — or jump straight to a calculator —
+    </div>
+
+    <div class="quick-links">
+      <a class="quick-link" href="/closing-costs">
+        <h3>🧾 Calculate My Closing Costs</h3>
+        <p>Land transfer tax (Toronto &amp; Ontario), down payment, legal fees, CMHC and HST implications — everything you'll need to close.</p>
+      </a>
+      <a class="quick-link" href="/payment-calculator">
+        <h3>📊 Mortgage Payment Calculator</h3>
+        <p>Your monthly payment at today's rates, plus roughly how much income you'd need to qualify.</p>
+      </a>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>© <span id="year"></span> Mortgage Tools. Estimates are for information only and do not constitute financial, legal or tax advice.</p>
+  </footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/calc.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/lead.js"></script>
+  <script src="js/wizard.js"></script>
+  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+</body>
+</html>

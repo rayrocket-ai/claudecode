@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mortgage Payment &amp; Income Calculator | Mortgage Tools</title>
+  <meta name="description" content="Calculate your monthly mortgage payment with Canadian semi-annual compounding, and estimate the income you need to qualify — including the federal stress test.">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner">
+      <a class="logo" href="/">Mortgage<span>Tools</span></a>
+      <nav class="site-nav">
+        <a href="/">Home</a>
+        <a href="/closing-costs">Closing Costs</a>
+        <a href="/payment-calculator" class="active">Mortgage Calculator</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page page-narrow">
+    <h1>Mortgage Payment Calculator</h1>
+    <p class="subtitle">See your monthly payment and roughly how much income you'd need to qualify — assuming no other debts.</p>
+
+    <div class="card">
+      <div class="field">
+        <label for="pc-price">Home Price</label>
+        <div class="control input-prefix"><span>$</span><input id="pc-price" type="text" inputmode="numeric" placeholder="1,000,000"></div>
+      </div>
+      <div class="field">
+        <label for="pc-down">Down Payment</label>
+        <div class="control input-suffix"><input id="pc-down" type="number" min="0" max="100" step="0.5" value="20"><span>%</span></div>
+      </div>
+      <div class="field">
+        <label for="pc-rate">Interest Rate</label>
+        <div class="control input-suffix"><input id="pc-rate" type="number" min="0" max="20" step="0.05" value="4.00"><span>%</span></div>
+      </div>
+      <div class="field">
+        <label for="pc-amort">Amortization <small>years</small></label>
+        <div class="control">
+          <select id="pc-amort">
+            <option value="30" selected>30 years</option>
+            <option value="25">25 years</option>
+            <option value="20">20 years</option>
+            <option value="15">15 years</option>
+            <option value="10">10 years</option>
+            <option value="5">5 years</option>
+          </select>
+        </div>
+      </div>
+      <p class="error-msg" id="pc-error" aria-live="polite"></p>
+    </div>
+
+    <div class="card" id="pc-results-card" hidden>
+      <div class="big-figure">
+        <div class="amount" id="pc-payment">—</div>
+        <div class="label">Estimated monthly payment <span id="pc-payment-sub"></span></div>
+      </div>
+      <table class="results-table">
+        <tbody id="pc-rows"></tbody>
+      </table>
+      <div class="note" id="pc-cmhc-note" hidden></div>
+      <p class="disclaimer">Estimates only — Canadian fixed-rate compounding (semi-annual). Not financial advice.</p>
+    </div>
+
+    <div class="card" id="pc-income-card" hidden>
+      <h2 style="color:var(--navy);margin-top:0;font-size:1.3rem">Income Needed to Qualify</h2>
+      <p style="color:var(--muted);font-size:0.92rem;margin-top:0">
+        A rough estimate assuming no other debts, using a 39% gross-debt-service ratio.
+      </p>
+      <div class="field">
+        <label for="pc-tax">Property Taxes <small>monthly</small></label>
+        <div class="control input-prefix"><span>$</span><input id="pc-tax" type="number" min="0" step="25" value="500"></div>
+      </div>
+      <div class="field">
+        <label for="pc-heat">Heat &amp; Insurance <small>monthly</small></label>
+        <div class="control input-prefix"><span>$</span><input id="pc-heat" type="number" min="0" step="25" value="250"></div>
+      </div>
+      <table class="results-table">
+        <tbody id="pc-income-rows"></tbody>
+      </table>
+      <div class="note">
+        <strong>Why two numbers?</strong> Lenders must qualify you at the federal <em>stress-test</em> rate —
+        the greater of your rate + 2% or 5.25% — even though you pay your actual rate.
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="grid-2">
+        <a class="quick-link" href="/closing-costs" style="box-shadow:none;border:1px solid var(--border)">
+          <h3>What about closing costs?</h3>
+          <p>Land transfer tax, legal fees and everything else you'll need at closing.</p>
+        </a>
+        <div id="pc-lead"></div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>© <span id="year"></span> Mortgage Tools. Estimates are for information only and do not constitute financial, legal or tax advice.</p>
+  </footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/calc.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/lead.js"></script>
+  <script>
+    (function () {
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      var priceInput = document.getElementById("pc-price");
+      var downInput = document.getElementById("pc-down");
+      var rateInput = document.getElementById("pc-rate");
+      var amortInput = document.getElementById("pc-amort");
+      var taxInput = document.getElementById("pc-tax");
+      var heatInput = document.getElementById("pc-heat");
+      var errorEl = document.getElementById("pc-error");
+
+      UI.attachMoneyMask(priceInput);
+
+      function row(label, value, cls, sub) {
+        return (
+          '<tr class="' + (cls || "") + '"><td>' + label +
+          (sub ? " <small>" + sub + "</small>" : "") +
+          "</td><td>" + value + "</td></tr>"
+        );
+      }
+
+      function recalc() {
+        errorEl.textContent = "";
+        var price = UI.parseMoney(priceInput.value);
+        var resultsCard = document.getElementById("pc-results-card");
+        var incomeCard = document.getElementById("pc-income-card");
+        if (isNaN(price) || price <= 0) {
+          resultsCard.hidden = true;
+          incomeCard.hidden = true;
+          return;
+        }
+
+        var pct = parseFloat(downInput.value);
+        if (isNaN(pct) || pct < 0 || pct > 100) pct = 20;
+        var down = (price * pct) / 100;
+        var minDown = minDownPayment(price);
+        if (down < minDown - 0.5) {
+          errorEl.textContent =
+            "Minimum down payment for this price is " + UI.money(minDown) +
+            " (" + ((minDown / price) * 100).toFixed(1) + "%). Using the legal minimum below.";
+          down = minDown;
+        }
+
+        var rate = parseFloat(rateInput.value) / 100;
+        if (isNaN(rate) || rate < 0) rate = 0.04;
+        var years = parseInt(amortInput.value, 10) || 30;
+
+        var premium = cmhcPremium(price, down);
+        var principal = price - down + premium;
+        var pmt = monthlyPayment(principal, rate, years);
+
+        document.getElementById("pc-payment").textContent = UI.moneyCents(pmt);
+        document.getElementById("pc-payment-sub").textContent =
+          "at " + (rate * 100).toFixed(2) + "% over " + years + " years";
+
+        var html = "";
+        html += row("Down payment", UI.money(down), "", ((down / price) * 100).toFixed(1) + "%");
+        html += row("Mortgage principal", UI.money(price - down));
+        if (premium > 0) html += row("CMHC insurance premium", UI.money(premium), "", "added to mortgage");
+        html += row("Total mortgage", UI.money(principal), "total");
+        document.getElementById("pc-rows").innerHTML = html;
+
+        var cmhcNote = document.getElementById("pc-cmhc-note");
+        if (premium > 0) {
+          cmhcNote.hidden = false;
+          cmhcNote.innerHTML =
+            "<strong>Less than 20% down:</strong> CMHC default insurance is required and its premium is added to your mortgage.";
+        } else {
+          cmhcNote.hidden = true;
+        }
+
+        var tax = parseFloat(taxInput.value);
+        if (isNaN(tax) || tax < 0) tax = 500;
+        var heat = parseFloat(heatInput.value);
+        if (isNaN(heat) || heat < 0) heat = 250;
+
+        var q = incomeToQualify(principal, rate, years, {
+          propertyTaxMonthly: tax,
+          heatMonthly: heat,
+        });
+
+        var ihtml = "";
+        ihtml += row(
+          "Income needed at your rate",
+          UI.money(q.atContract) + "/yr",
+          "",
+          (rate * 100).toFixed(2) + "% — payment " + UI.moneyCents(q.paymentAtContract) + "/mo"
+        );
+        ihtml += row(
+          "Income needed at stress-test rate",
+          UI.money(q.atStressTest) + "/yr",
+          "total",
+          (stressTestRate(rate) * 100).toFixed(2) + "% — what lenders must use"
+        );
+        document.getElementById("pc-income-rows").innerHTML = ihtml;
+
+        resultsCard.hidden = false;
+        incomeCard.hidden = false;
+      }
+
+      UI.liveRecalc([priceInput, downInput, rateInput, amortInput, taxInput, heatInput], recalc);
+      amortInput.addEventListener("change", recalc);
+
+      Lead.renderForm(document.getElementById("pc-lead"), {
+        heading: "Want today's best rates?",
+        cta: "Get my rate",
+        interest: "mortgage-rates",
+      });
+    })();
+  </script>
+</body>
+</html>
