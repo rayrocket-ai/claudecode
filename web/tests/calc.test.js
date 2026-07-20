@@ -96,4 +96,31 @@ assert.strictEqual(c.stressTestRate(0.029), 0.0525, "stress floor 5.25%");
   close(r.cashAtClosing, r.totalCashNeeded - 30000, 0.01, "cashAtClosing excludes deposit");
 }
 
+// Amortization summary: $800k @ 4% / 30y
+{
+  const s = c.amortizationSummary(800000, 0.04, 30);
+  assert.strictEqual(s.rows.length, 30, "30 yearly rows");
+  close(s.payment, c.monthlyPayment(800000, 0.04, 30), 0.001, "summary payment matches");
+  // Year 1 first-month split: interest = principal * monthly rate
+  close(s.rows[0].monthlyInterest, 800000 * c.monthlyRate(0.04), 0.01, "year-1 interest split");
+  close(s.rows[0].monthlyPrincipal + s.rows[0].monthlyInterest, s.payment, 0.01, "split sums to payment");
+  // Balance fully paid off at the end; totals consistent
+  assert.ok(s.rows[29].balanceEnd < 1, "balance ~0 after 30 years");
+  close(s.rows[29].cumPrincipal, 800000, 1, "cumulative principal = loan");
+  close(s.totalPaid, s.payment * 360, s.payment, "total paid ≈ payment × 360");
+  // Split improves monotonically: principal up, interest down, balance down
+  for (let y = 1; y < 30; y++) {
+    assert.ok(s.rows[y].monthlyPrincipal > s.rows[y - 1].monthlyPrincipal, "principal share grows");
+    assert.ok(s.rows[y].monthlyInterest < s.rows[y - 1].monthlyInterest, "interest share shrinks");
+    assert.ok(s.rows[y].balanceEnd < s.rows[y - 1].balanceEnd, "balance decreases");
+  }
+}
+
+// Zero-rate amortization sanity
+{
+  const s = c.amortizationSummary(120000, 0, 10);
+  close(s.totalInterest, 0, 0.001, "no interest at 0%");
+  close(s.rows[9].cumPrincipal, 120000, 0.01, "0% loan fully repaid");
+}
+
 console.log("All calc.js tests passed.");

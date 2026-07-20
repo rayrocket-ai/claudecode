@@ -107,6 +107,19 @@ for (let i = 0; i < RUNS; i++) {
     for (let m = 0; m < n; m++) bal = bal * (1 + mi) - pmt;
     assert.ok(Math.abs(bal) < 1, `amortization zeroes balance (residual ${bal.toFixed(4)})`);
 
+    // --- amortization summary consistency ---
+    {
+      const s = c.amortizationSummary(price - down + c.cmhcPremium(price, down), rate, years);
+      assert.strictEqual(s.rows.length, years, "summary has one row per year");
+      const last = s.rows[years - 1];
+      assert.ok(last.balanceEnd < 1, "summary balance ~0 at end");
+      assert.ok(
+        Math.abs(last.cumPrincipal - (price - down + c.cmhcPremium(price, down))) < 1,
+        "summary cum principal = loan"
+      );
+      assert.ok(Math.abs(last.cumPrincipal + last.cumInterest - s.totalPaid) < 0.01, "summary totals add up");
+    }
+
     // --- income to qualify ---
     const q = c.incomeToQualify(principal, rate, years, { propertyTaxMonthly: 500, heatMonthly: 250 });
     const gds = ((q.paymentAtContract + 750) * 12) / q.atContract;

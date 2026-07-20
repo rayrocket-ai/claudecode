@@ -29,7 +29,7 @@
     <div class="card">
       <div class="field">
         <label for="pc-price">Home Price</label>
-        <div class="control input-prefix"><span>$</span><input id="pc-price" type="text" inputmode="numeric" placeholder="1,000,000"></div>
+        <div class="control input-prefix"><span>$</span><input id="pc-price" type="text" inputmode="numeric" value="1,000,000" placeholder="1,000,000"></div>
       </div>
       <div class="field">
         <label for="pc-down">Down Payment</label>
@@ -65,6 +65,30 @@
       </table>
       <div class="note" id="pc-cmhc-note" hidden></div>
       <p class="disclaimer">Estimates only. Canadian fixed-rate mortgages compound semi-annually — that's the formula used here. Not financial advice.</p>
+    </div>
+
+    <div class="card" id="pc-breakdown-card" hidden>
+      <h2 style="color:var(--navy);margin-top:0;font-size:1.3rem">Payment Breakdown by Year</h2>
+      <p style="color:var(--muted);font-size:0.92rem;margin-top:0">
+        Every payment is part principal (paying off your home) and part interest.
+        Early on, most goes to interest — the split improves every year.
+      </p>
+      <div style="overflow-x:auto">
+        <table class="results-table" id="pc-breakdown-table">
+          <thead>
+            <tr>
+              <th style="text-align:left;color:var(--navy);padding:0.55rem 0">Year</th>
+              <th style="text-align:right;color:var(--navy);padding:0.55rem 0">Principal /mo</th>
+              <th style="text-align:right;color:var(--navy);padding:0.55rem 0">Interest /mo</th>
+              <th style="text-align:right;color:var(--navy);padding:0.55rem 0">Balance Remaining</th>
+            </tr>
+          </thead>
+          <tbody id="pc-breakdown-rows"></tbody>
+        </table>
+      </div>
+      <table class="results-table" style="margin-top:0.8rem">
+        <tbody id="pc-lifetime-rows"></tbody>
+      </table>
     </div>
 
     <div class="card" id="pc-income-card" hidden>
@@ -133,6 +157,7 @@
         if (isNaN(price) || price <= 0) {
           resultsCard.hidden = true;
           incomeCard.hidden = true;
+          document.getElementById("pc-breakdown-card").hidden = true;
           return;
         }
 
@@ -200,8 +225,32 @@
         );
         document.getElementById("pc-income-rows").innerHTML = ihtml;
 
+        // Payment breakdown by year (milestone years + final year)
+        var summary = amortizationSummary(principal, rate, years);
+        var milestones = [1, 5, 10, 15, 20, 25, 30].filter(function (y) {
+          return y <= years;
+        });
+        if (milestones.indexOf(years) < 0) milestones.push(years);
+        var bhtml = "";
+        milestones.forEach(function (y) {
+          var rrow = summary.rows[y - 1];
+          bhtml +=
+            "<tr><td>Year " + y + "</td>" +
+            '<td style="text-align:right;font-variant-numeric:tabular-nums">' + UI.money(rrow.monthlyPrincipal) + "</td>" +
+            '<td style="text-align:right;font-variant-numeric:tabular-nums">' + UI.money(rrow.monthlyInterest) + "</td>" +
+            '<td style="text-align:right;font-variant-numeric:tabular-nums;font-weight:600">' + UI.money(rrow.balanceEnd) + "</td></tr>";
+        });
+        document.getElementById("pc-breakdown-rows").innerHTML = bhtml;
+
+        var lhtml = "";
+        lhtml += row("Total principal paid over " + years + " years", UI.money(principal));
+        lhtml += row("Total interest paid over " + years + " years", UI.money(summary.totalInterest));
+        lhtml += row("Total of all payments", UI.money(summary.totalPaid), "total");
+        document.getElementById("pc-lifetime-rows").innerHTML = lhtml;
+
         resultsCard.hidden = false;
         incomeCard.hidden = false;
+        document.getElementById("pc-breakdown-card").hidden = false;
       }
 
       UI.liveRecalc([priceInput, downInput, rateInput, amortInput, taxInput, heatInput], recalc);

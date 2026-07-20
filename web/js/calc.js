@@ -140,6 +140,46 @@ function incomeToQualify(principal, annualRate, years, opts) {
 }
 
 /**
+ * Year-by-year amortization summary (mirrors the Ray Homes workbook's
+ * "Monthly Payment Breakdown by Year" and "Amortization Milestones" tables).
+ * Returns { payment, rows, totalInterest, totalPaid } where rows[y-1] =
+ * { year, monthlyPrincipal, monthlyInterest, balanceEnd, cumPrincipal, cumInterest }
+ * (monthly split taken at the first month of that year).
+ */
+function amortizationSummary(principal, annualRate, years) {
+  const pmt = monthlyPayment(principal, annualRate, years);
+  const i = annualRate === 0 ? 0 : monthlyRate(annualRate);
+  const rows = [];
+  let bal = principal;
+  let cumP = 0;
+  let cumI = 0;
+  for (let y = 1; y <= years; y++) {
+    let firstPrincipal = 0;
+    let firstInterest = 0;
+    for (let m = 0; m < 12; m++) {
+      const interest = bal * i;
+      const princ = Math.min(pmt - interest, bal);
+      if (m === 0) {
+        firstInterest = interest;
+        firstPrincipal = pmt - interest;
+      }
+      bal -= princ;
+      cumP += princ;
+      cumI += interest;
+    }
+    rows.push({
+      year: y,
+      monthlyPrincipal: firstPrincipal,
+      monthlyInterest: firstInterest,
+      balanceEnd: Math.max(bal, 0),
+      cumPrincipal: cumP,
+      cumInterest: cumI,
+    });
+  }
+  return { payment: pmt, rows: rows, totalInterest: cumI, totalPaid: cumP + cumI };
+}
+
+/**
  * Itemized closing-cost estimate.
  * opts: { price, inToronto, firstTimeBuyer, newConstruction, downPayment,
  *         depositPaid, legalFees, titleInsurance, homeInspection }
@@ -215,6 +255,7 @@ if (typeof module !== "undefined" && module.exports) {
     monthlyPayment,
     stressTestRate,
     incomeToQualify,
+    amortizationSummary,
     closingCosts,
   };
 }

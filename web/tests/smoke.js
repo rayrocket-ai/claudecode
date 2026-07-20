@@ -44,13 +44,13 @@ const toNumber = (s) => parseFloat(String(s).replace(/[^0-9.]/g, ""));
     await page.setViewportSize({ width: 1280, height: 900 });
   }
 
-  // --- Closing costs page: instant results, no lead form ---
+  // --- Closing costs page: numbers visible immediately on load ($1M default) ---
   await page.goto(`${BASE}/closing-costs.html`);
   assert.strictEqual(await page.locator("form.lead-form").count(), 0, "no lead form on closing-costs");
   assert.strictEqual(await page.locator("input[type=email]").count(), 0, "no email field on closing-costs");
-  await page.fill("#cc-price", "1000000");
   await page.waitForSelector("#cc-results-card:not([hidden])");
   let body = await page.textContent("main");
+  assert.ok(body.includes("$235,950"), "default $1M Toronto breakdown shown on load without any typing");
   const lttCount = (body.match(/\$16,475/g) || []).length;
   assert.ok(lttCount >= 2, `expected ON + Toronto LTT of $16,475 twice, saw ${lttCount}`);
 
@@ -75,17 +75,32 @@ const toNumber = (s) => parseFloat(String(s).replace(/[^0-9.]/g, ""));
   await shot("closing-costs", 1280);
   console.log("closing-costs.html OK");
 
-  // --- Payment calculator page: instant results, no lead form ---
+  // --- Payment calculator page: numbers visible immediately on load ($1M default) ---
   await page.goto(`${BASE}/payment-calculator.html`);
   assert.strictEqual(await page.locator("form.lead-form").count(), 0, "no lead form on payment page");
   assert.strictEqual(await page.locator("input[type=email]").count(), 0, "no email field on payment page");
-  await page.fill("#pc-price", "1000000");
   await page.waitForSelector("#pc-results-card:not([hidden])");
   const paymentText = await page.textContent("#pc-payment");
-  // $800k @ 4% / 30y semi-annual => $3,804.15
-  assert.ok(paymentText.includes("3,804"), `expected payment ~$3,804, saw ${paymentText}`);
+  // $800k @ 4% / 30y semi-annual => $3,804.15 — shown on load, no typing
+  assert.ok(paymentText.includes("3,804"), `expected payment ~$3,804 on load, saw ${paymentText}`);
   body = await page.textContent("main");
   assert.ok(body.includes("Income needed"), "income section renders");
+
+  // Breakdown table: milestone years + lifetime totals, values match calc.js
+  await page.waitForSelector("#pc-breakdown-card:not([hidden])");
+  const breakdown = await page.textContent("#pc-breakdown-card");
+  assert.ok(breakdown.includes("Year 1") && breakdown.includes("Year 30"), "breakdown shows year milestones");
+  const summary = calc.amortizationSummary(800000, 0.04, 30);
+  const y1Interest = Math.round(summary.rows[0].monthlyInterest);
+  assert.ok(
+    toNumber(breakdown.match(/\$[\d,]+/g).join(" ")) !== null &&
+      breakdown.includes(y1Interest.toLocaleString("en-CA")),
+    `breakdown includes year-1 interest ${y1Interest}`
+  );
+  assert.ok(
+    breakdown.includes(Math.round(summary.totalInterest).toLocaleString("en-CA")),
+    "breakdown includes lifetime interest total"
+  );
   await shot("payment-calculator", 375);
   await shot("payment-calculator", 1280);
   console.log("payment-calculator.html OK");
