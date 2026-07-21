@@ -185,6 +185,33 @@ const toNumber = (s) => parseFloat(String(s).replace(/[^0-9.]/g, ""));
   await shot("wizard-results", 1280);
   console.log("wizard (new mortgage path) OK");
 
+  // --- Wizard: simplified Renew path (one form step → results) ---
+  await page.goto(`${BASE}/index.html`);
+  await page.click('.option-card[data-path="renew"]');
+  await page.waitForSelector("#balance");
+  await page.fill("#balance", "550000");
+  await page.fill("#currentRate", "5.5");
+  await page.click("#wizard-next");
+  await page.waitForSelector("#wizard-lead");
+  body = await page.textContent("main");
+  const renewPmt = calc.monthlyPayment(550000, 0.04, 25);
+  assert.ok(body.includes(Math.floor(renewPmt).toLocaleString("en-CA").slice(0, 5)), "renew payment shown");
+  assert.ok(body.includes("Potential monthly savings"), "renew shows savings vs current rate");
+  assert.ok(body.includes("120 days"), "renew shows the useful renewal tip");
+  console.log("wizard (renew path) OK");
+
+  // --- Wizard: Learn path (topic cards auto-advance → rich content) ---
+  await page.goto(`${BASE}/index.html`);
+  await page.click('.option-card[data-path="learn"]');
+  await page.waitForSelector('.option-card[data-choice="topic"]');
+  await page.click('.option-card[data-value="closing"]');
+  await page.waitForSelector("#wizard-lead");
+  body = await page.textContent("main");
+  assert.ok(body.includes("$16,475"), "learn/closing includes real LTT figures");
+  assert.ok(body.includes("$4,000"), "learn/closing includes rebate figures");
+  assert.ok((await page.locator('a[href="/closing-costs"]').count()) >= 1, "learn links to calculator");
+  console.log("wizard (learn path) OK");
+
   // --- Landing: chooser + branding ---
   await page.goto(`${BASE}/index.html`);
   const options = await page.locator(".option-card").count();

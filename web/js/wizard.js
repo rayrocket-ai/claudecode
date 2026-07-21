@@ -93,48 +93,23 @@
     renew: [
       chooserStep,
       {
-        id: "renew-refi",
-        title: "Your current mortgage",
-        sub: "This helps us determine your mortgage type (high-ratio, low-ratio or uninsurable).",
-        render: function () {
-          return toggleField("refinanced", "Did you refinance your property?", [
-            { value: "yes", label: "Yes" },
-            { value: "no", label: "No" },
-          ]);
-        },
-        validate: function (a) {
-          return a.refinanced ? null : "Please choose Yes or No.";
-        },
-      },
-      {
-        id: "renew-numbers",
-        title: "Enter your mortgage renewal information",
-        render: function () {
+        id: "renew-info",
+        title: "About your current mortgage",
+        sub: "Rough numbers are fine \u2014 you can adjust them any time.",
+        render: function (a) {
           return (
-            moneyField("originalPrice", "Original Purchase Price", "800,000") +
-            moneyField("balance", "Remaining Mortgage Balance", "550,000", "approximate — leave blank if unsure")
-          );
-        },
-        validate: function (a) {
-          var p = UI.parseMoney(a.originalPrice);
-          return isNaN(p) || p <= 0 ? "Please enter your original purchase price." : null;
-        },
-      },
-      {
-        id: "renew-timing",
-        title: "When is your renewal?",
-        render: function () {
-          return (
-            toggleField("timing", "My renewal date is", [
+            moneyField("balance", "Remaining Mortgage Balance", "550,000", "roughly what you still owe") +
+            suffixField("currentRate", "Current Interest Rate", "%", a.currentRate || "", 'min="0" max="20" step="0.05" placeholder="e.g. 5.25"', "optional \u2014 shows what you could save") +
+            toggleField("timing", "My renewal is", [
               { value: "30days", label: "Within 30 days" },
-              { value: "4months", label: "1–4 months" },
+              { value: "4months", label: "1\u20134 months" },
               { value: "later", label: "4+ months away" },
-            ]) +
-            suffixField("currentRate", "Current Interest Rate", "%", "", 'min="0" max="20" step="0.05" placeholder="optional"', "optional — for comparison")
+            ], "optional")
           );
         },
         validate: function (a) {
-          return a.timing ? null : "Please tell us when your renewal is.";
+          var b = UI.parseMoney(a.balance);
+          return isNaN(b) || b <= 0 ? "Please enter your remaining mortgage balance." : null;
         },
       },
       {
@@ -142,39 +117,39 @@
         title: "Your renewal estimate",
         isResults: true,
         render: function (a) {
-          var original = num("originalPrice", 0);
-          var balance = num("balance", NaN);
-          var assumed = false;
-          if (isNaN(balance)) {
-            balance = original * 0.8;
-            assumed = true;
-          }
+          var balance = num("balance", 0);
           var rate = 0.04;
           var years = 25;
           var pmt = monthlyPayment(balance, rate, years);
 
           var html = '<div class="card"><div class="big-figure"><div class="amount">' +
-            UI.moneyCents(pmt) + '</div><div class="label">Estimated monthly payment at ' +
+            UI.moneyCents(pmt) + '</div><div class="label">Estimated new payment at ' +
             (rate * 100).toFixed(2) + "% over " + years + " years</div></div>" +
             '<table class="results-table"><tbody>';
-          html += resultRow("Remaining balance", UI.money(balance), "", assumed ? "assumed 80% of purchase price — update above for accuracy" : "");
+          html += resultRow("Remaining balance", UI.money(balance));
           var cur = parseFloat(a.currentRate);
           if (!isNaN(cur) && cur > 0) {
             var curPmt = monthlyPayment(balance, cur / 100, years);
-            html += resultRow("At your current rate (" + cur.toFixed(2) + "%)", UI.moneyCents(curPmt) + "/mo");
+            html += resultRow("Payment at your current rate (" + cur.toFixed(2) + "%)", UI.moneyCents(curPmt) + "/mo");
             var diff = curPmt - pmt;
             html += resultRow(
-              diff >= 0 ? "Potential monthly savings" : "Monthly increase",
-              UI.moneyCents(Math.abs(diff)),
-              diff >= 0 ? "rebate" : ""
+              diff >= 0 ? "Potential monthly savings" : "Monthly increase at 4.00%",
+              UI.moneyCents(Math.abs(diff)) + "/mo",
+              diff >= 0 ? "rebate" : "total"
             );
+            if (diff > 0) html += resultRow("Savings over a 5-year term", UI.money(diff * 60), "rebate");
           }
           html += "</tbody></table>";
-          html += '<p class="disclaimer">Estimates only — your actual renewal rate depends on your lender, term and profile.</p></div>';
+          if (a.timing === "30days") {
+            html += '<div class="note"><strong>Renewing within 30 days:</strong> don\'t sign your lender\'s first renewal letter \u2014 it\'s rarely their best rate. Even a quick comparison can save thousands.</div>';
+          } else {
+            html += '<div class="note"><strong>Good to know:</strong> you can lock in a renewal rate up to 120 days before your term ends \u2014 and switching lenders at renewal usually has no penalty.</div>';
+          }
+          html += '<p class="disclaimer">Estimates only \u2014 your actual renewal rate depends on your lender, term and profile.</p></div>';
           html += '<div class="card" id="wizard-lead"></div>';
           return html;
         },
-        leadOptions: { heading: "Optional — want us to find your best renewal rate?", cta: "Get my renewal rates", interest: "renewal" },
+        leadOptions: { heading: "Optional \u2014 want us to find your best renewal rate?", cta: "Get my renewal rates", interest: "renewal" },
       },
     ],
 
@@ -373,57 +348,99 @@
       {
         id: "learn-topic",
         title: "What do you want to learn about?",
+        noNav: true,
         render: function () {
-          return toggleField("topic", "Pick a topic", [
-            { value: "closing", label: "Closing costs" },
-            { value: "payments", label: "Monthly payments" },
-            { value: "qualify", label: "How much I qualify for" },
-            { value: "process", label: "The buying process" },
-          ]);
-        },
-        validate: function (a) {
-          return a.topic ? null : "Please pick a topic.";
+          var topics = [
+            { value: "closing", icon: "\ud83e\uddfe", label: "Closing costs" },
+            { value: "payments", icon: "\ud83d\udcc5", label: "Monthly payments" },
+            { value: "qualify", icon: "\u2705", label: "How much I qualify for" },
+            { value: "process", icon: "\ud83d\uddfa\ufe0f", label: "The home-buying process" },
+          ];
+          return (
+            '<div class="option-list">' +
+            topics
+              .map(function (t) {
+                return (
+                  '<button type="button" class="option-card" data-choice="topic" data-value="' + t.value + '">' +
+                  '<span class="icon">' + t.icon + "</span>" + t.label + "</button>"
+                );
+              })
+              .join("") +
+            "</div>"
+          );
         },
       },
       {
         id: "learn-results",
-        title: "Here's the short version",
+        title: "The essentials",
         isResults: true,
         render: function (a) {
+          var ex30 = monthlyPayment(800000, 0.04, 30);
+          var ex25 = monthlyPayment(800000, 0.04, 25);
+          var exIncome = incomeToQualify(800000, 0.04, 30);
           var topics = {
             closing: {
-              text:
-                "Closing costs are everything you pay on top of your down payment: land transfer tax (doubled inside Toronto), legal fees, title insurance and inspections. In Ontario they typically run 1.5–4% of the purchase price. First-time buyers get rebates of up to $4,000 (Ontario) plus $4,475 (Toronto).",
+              intro: "Closing costs are what you pay on top of your down payment \u2014 in Ontario, plan for roughly 1.5\u20134% of the purchase price.",
+              points: [
+                "<strong>Land transfer tax</strong> is the biggest one \u2014 and Toronto properties pay it twice (provincial + municipal). On a $1M home that\'s $16,475 + $16,475.",
+                "<strong>First-time buyers</strong> get rebates: up to $4,000 (Ontario) plus $4,475 (Toronto).",
+                "<strong>Legal fees</strong> run about $2,000; title insurance and a home inspection add roughly $500 each.",
+                "<strong>Under 20% down?</strong> CMHC insurance is added to your mortgage, but Ontario\'s 8% tax on the premium is due in cash at closing.",
+                "<strong>Resale homes are HST-exempt.</strong> New construction usually includes HST in the builder\'s price.",
+              ],
               link: "/closing-costs",
-              linkLabel: "Calculate my closing costs",
+              linkLabel: "Calculate my exact closing costs",
             },
             payments: {
-              text:
-                "Your monthly payment depends on the mortgage size, interest rate and amortization (how long you take to pay it off — up to 30 years). Canadian fixed-rate mortgages compound semi-annually, so the true monthly rate is slightly lower than rate ÷ 12.",
+              intro: "Your payment depends on three things: how much you borrow, the interest rate, and the amortization (how long you take to pay it off).",
+              points: [
+                "Example: an $800,000 mortgage at 4% costs <strong>" + UI.moneyCents(ex30) + "/mo</strong> over 30 years, or " + UI.moneyCents(ex25) + "/mo over 25 years.",
+                "A longer amortization lowers the monthly payment but adds a lot of interest over the life of the loan.",
+                "Canadian fixed-rate mortgages compound <strong>semi-annually</strong>, so the true monthly rate is slightly lower than rate \u00f7 12.",
+                "Early payments are mostly interest; later ones are mostly principal. Our calculator shows the year-by-year split.",
+              ],
               link: "/payment-calculator",
               linkLabel: "Calculate my payment",
             },
             qualify: {
-              text:
-                "Lenders look at your gross income and cap your housing costs (mortgage payment + property tax + heat) at roughly 39% of it — and they must test you at the greater of your rate + 2% or 5.25%, the federal stress test. No other debts helps a lot.",
+              intro: "Lenders decide your maximum mortgage from your gross income, your debts and the federal stress test.",
+              points: [
+                "Housing costs (mortgage payment + property tax + heat) are capped at roughly <strong>39% of gross income</strong>.",
+                "You must qualify at the <strong>stress-test rate</strong> \u2014 your rate + 2%, or 5.25%, whichever is higher \u2014 even though you pay your actual rate.",
+                "Example: an $800,000 mortgage at 4% needs about <strong>" + UI.money(exIncome.atStressTest) + "/yr</strong> of household income at the stress-test rate.",
+                "To qualify for more: a bigger down payment, a longer amortization, paying down other debts, or adding a co-borrower.",
+              ],
               link: "/payment-calculator",
-              linkLabel: "See the income I'd need",
+              linkLabel: "See the income I\'d need",
             },
             process: {
-              text:
-                "The usual order: get pre-approved → shop with confidence → make an offer (with a financing condition) → satisfy conditions → your lawyer closes the deal and registers title. Pre-approval is free, locks a rate for ~120 days, and tells you your real budget.",
-              link: "/payment-calculator",
+              intro: "Buying a home in Ontario usually follows five steps \u2014 and the first one is free.",
+              points: [
+                "<strong>1. Get pre-approved</strong> \u2014 free, locks a rate for ~120 days, and tells you your real budget.",
+                "<strong>2. Shop with confidence</strong> \u2014 you know your maximum price and monthly payment.",
+                "<strong>3. Make an offer</strong> \u2014 usually with financing and inspection conditions to protect you.",
+                "<strong>4. Satisfy conditions</strong> \u2014 finalize the mortgage and inspection, typically within 5\u201310 days.",
+                "<strong>5. Close</strong> \u2014 your lawyer transfers funds, pays the land transfer tax and registers title. Budget 1.5\u20134% of the price for closing costs.",
+              ],
+              link: "/closing-costs",
               linkLabel: "Start with my numbers",
             },
           };
           var t = topics[a.topic] || topics.closing;
           return (
-            '<div class="card"><p style="font-size:1.05rem">' + t.text + "</p>" +
+            '<div class="card"><p style="font-size:1.05rem;margin-top:0">' + t.intro + "</p>" +
+            '<ul style="padding-left:1.2rem;line-height:1.7;margin:0.8rem 0 1.2rem">' +
+            t.points
+              .map(function (pt) {
+                return '<li style="margin-bottom:0.5rem">' + pt + "</li>";
+              })
+              .join("") +
+            "</ul>" +
             '<a class="btn btn-primary btn-block" href="' + t.link + '">' + t.linkLabel + "</a></div>" +
             '<div class="card" id="wizard-lead"></div>'
           );
         },
-        leadOptions: { heading: "Optional — have a question? Ask us anything", cta: "Ask us a question", interest: "learn" },
+        leadOptions: { heading: "Optional \u2014 have a question? Ask us anything", cta: "Ask us a question", interest: "learn" },
       },
     ],
   };
@@ -488,6 +505,16 @@
         state.stepIndex = 1;
         state.answers = {};
         renderStep();
+      });
+    });
+
+    // Option cards that record an answer and advance (e.g. Learn topics)
+    container.querySelectorAll(".option-card[data-choice]").forEach(function (card) {
+      card.addEventListener("click", function () {
+        state.answers[card.dataset.choice] = card.dataset.value;
+        state.stepIndex++;
+        renderStep();
+        window.scrollTo({ top: 0, behavior: "smooth" });
       });
     });
 
