@@ -9,5 +9,5 @@
 window.SITE_CONFIG = {
   FORM_ENDPOINT: "",
   CONTACT_EMAIL: "info@example.com",
-  SITE_NAME: "Ray Homes Real Estate",
+  SITE_NAME: "Ray Ahmadi Real Estate",
 };

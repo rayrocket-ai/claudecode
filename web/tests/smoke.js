@@ -217,7 +217,7 @@ const toNumber = (s) => parseFloat(String(s).replace(/[^0-9.]/g, ""));
   const options = await page.locator(".option-card").count();
   assert.strictEqual(options, 4, "4 wizard paths on landing");
   const header = await page.textContent(".site-header");
-  assert.ok(header.includes("Ray") && header.includes("Homes"), "Ray Homes branding in header");
+  assert.ok(header.includes("Ray") && header.includes("Ahmadi"), "Ray Ahmadi branding in header");
   await shot("landing", 375);
   await shot("landing", 1280);
   console.log("index.html OK");
