@@ -141,7 +141,7 @@
           }
           html += "</tbody></table>";
           if (a.timing === "30days") {
-            html += '<div class="note"><strong>Renewing within 30 days:</strong> don\'t sign your lender\'s first renewal letter \u2014 it\'s rarely their best rate. Even a quick comparison can save thousands.</div>';
+            html += '<div class="note"><strong>Renewing within 30 days:</strong> don&#39;t sign your lender&#39;s first renewal letter \u2014 it&#39;s rarely their best rate. Even a quick comparison can save thousands.</div>';
           } else {
             html += '<div class="note"><strong>Good to know:</strong> you can lock in a renewal rate up to 120 days before your term ends \u2014 and switching lenders at renewal usually has no penalty.</div>';
           }
@@ -273,7 +273,7 @@
           html += resultRow("Total cash needed", UI.money(cc.totalCashNeeded), "total", "down payment + closing costs");
           html += "</tbody></table>";
           if (cc.hstApplies) {
-            html += '<div class="note"><strong>HST on new construction:</strong> usually included in the builder\'s price with rebates assigned to the builder for primary residences; investors may need to front the rebate at closing.</div>';
+            html += '<div class="note"><strong>HST on new construction:</strong> usually included in the builder&#39;s price with rebates assigned to the builder for primary residences; investors may need to front the rebate at closing.</div>';
           }
           html += "</div>";
 
@@ -327,7 +327,7 @@
           var newPmt = monthlyPayment(maxLoan, rate, years);
 
           var html = '<div class="card"><div class="big-figure"><div class="amount">' +
-            UI.money(equity) + '</div><div class="label">Equity you could unlock (up to 80% of your home\'s value)</div></div>';
+            UI.money(equity) + '</div><div class="label">Equity you could unlock (up to 80% of your home&#39;s value)</div></div>';
           html += '<table class="results-table"><tbody>';
           html += resultRow("Home value", UI.money(value));
           html += resultRow("Maximum new mortgage (80% LTV)", UI.money(maxLoan));
@@ -382,11 +382,11 @@
             closing: {
               intro: "Closing costs are what you pay on top of your down payment \u2014 in Ontario, plan for roughly 1.5\u20134% of the purchase price.",
               points: [
-                "<strong>Land transfer tax</strong> is the biggest one \u2014 and Toronto properties pay it twice (provincial + municipal). On a $1M home that\'s $16,475 + $16,475.",
+                "<strong>Land transfer tax</strong> is the biggest one \u2014 and Toronto properties pay it twice (provincial + municipal). On a $1M home that&#39;s $16,475 + $16,475.",
                 "<strong>First-time buyers</strong> get rebates: up to $4,000 (Ontario) plus $4,475 (Toronto).",
                 "<strong>Legal fees</strong> run about $2,000; title insurance and a home inspection add roughly $500 each.",
-                "<strong>Under 20% down?</strong> CMHC insurance is added to your mortgage, but Ontario\'s 8% tax on the premium is due in cash at closing.",
-                "<strong>Resale homes are HST-exempt.</strong> New construction usually includes HST in the builder\'s price.",
+                "<strong>Under 20% down?</strong> CMHC insurance is added to your mortgage, but Ontario&#39;s 8% tax on the premium is due in cash at closing.",
+                "<strong>Resale homes are HST-exempt.</strong> New construction usually includes HST in the builder&#39;s price.",
               ],
               link: "/closing-costs",
               linkLabel: "Calculate my exact closing costs",
@@ -411,7 +411,7 @@
                 "To qualify for more: a bigger down payment, a longer amortization, paying down other debts, or adding a co-borrower.",
               ],
               link: "/payment-calculator",
-              linkLabel: "See the income I\'d need",
+              linkLabel: "See the income I&#39;d need",
             },
             process: {
               intro: "Buying a home in Ontario usually follows five steps \u2014 and the first one is free.",
