@@ -1,0 +1,34 @@
+<!-- ============================================================
+  Ray Homes Mortgage Tools — GoHighLevel embed snippet
+  Paste this into a Custom Code / HTML element on a GHL page
+  published at rayahmadi.com/mortgage. The calculators fill the
+  page and resize with the visitor's screen.
+  ============================================================ -->
+<style>
+  .rh-tools-wrap {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  .rh-tools-frame {
+    display: block;
+    width: 100%;
+    border: 0;
+    min-height: 100vh;
+    height: 2400px; /* generous fallback so long result pages never clip */
+  }
+  @media (max-width: 640px) {
+    .rh-tools-frame {
+      height: 3200px; /* mobile pages stack taller */
+    }
+  }
+</style>
+<div class="rh-tools-wrap">
+  <iframe
+    class="rh-tools-frame"
+    src="https://site-n7vvh4k8e-ray-rocket.vercel.app/"
+    title="Free Mortgage &amp; Closing Cost Calculators"
+    loading="eager"
+    referrerpolicy="no-referrer-when-downgrade"
+  ></iframe>
+</div>
