@@ -97,7 +97,7 @@ def group_words(words: list[CaptionWord], style: CaptionStyle,
         gap = word.start - current[-1].end if current else 0.0
         too_long = chars + len(word.text) + 1 > max_chars
         too_many = len(current) >= style.max_words
-        if current and (too_long or too_many or gap > 0.7):
+        if current and (word.break_before or too_long or too_many or gap > 0.7):
             groups.append(current)
             current, chars = [], 0
         current.append(word)

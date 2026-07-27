@@ -160,3 +160,14 @@ def test_safe_area_excludes_platform_chrome():
 def test_default_caption_position_is_inside_the_safe_area():
     top, bottom = ass.safe_area(TARGET)
     assert top < STYLE.position * TARGET.height < bottom
+
+
+def test_a_forced_break_starts_a_new_card():
+    w = words(("wrong", 0.0, 0.4), ("we", 0.45, 0.7))
+    w[1].break_before = True
+    assert len(ass.group_words(w, STYLE, TARGET)) == 2
+
+
+def test_without_the_flag_adjacent_words_share_a_card():
+    w = words(("wrong", 0.0, 0.4), ("we", 0.45, 0.7))
+    assert len(ass.group_words(w, STYLE, TARGET)) == 1

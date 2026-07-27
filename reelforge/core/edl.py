@@ -74,6 +74,14 @@ class CaptionWord:
     text: str
     start: float                     # output seconds
     end: float
+    break_before: bool = False
+    """Force a new caption card here.
+
+    Set on the first word after every cut. Without it a card can straddle a
+    cut -- the last word of one segment and the first of the next land close
+    together in *output* time, so nothing else in the grouping rules notices
+    that a cut happened. On screen it reads as a mistake and joins two
+    unrelated sentences."""
 
 
 @dataclass
