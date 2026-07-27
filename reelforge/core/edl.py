@@ -111,6 +111,35 @@ class Transition:
 
 
 @dataclass
+class Chapter:
+    """A YouTube chapter marker, in output seconds.
+
+    YouTube only renders chapters when the first one starts at 0:00 and there
+    are at least three, each ten seconds or longer. Those are its rules, not
+    ours, and :func:`validate` enforces them -- a description with almost-valid
+    chapters silently shows none at all, which is worse than having omitted
+    them.
+    """
+    at: float
+    title: str
+
+
+@dataclass
+class BRollSlot:
+    """A span where the picture wants covering, with what it is about.
+
+    Marked, not filled. An editor cutting a vlog knows where the talking head
+    gets boring long before they know what to put there, and separating those
+    two decisions means the edit is reviewable before any asset is generated
+    or licensed.
+    """
+    start: float                     # output seconds
+    dur: float
+    prompt: str = ""
+    source: str = ""                 # filled in once an asset is chosen
+
+
+@dataclass
 class Audio:
     music: str | None = None
     music_gain_db: float = -18.0
@@ -128,6 +157,8 @@ class EDL:
     overlays: list[Overlay] = field(default_factory=list)
     transitions: list[Transition] = field(default_factory=list)
     audio: Audio = field(default_factory=Audio)
+    chapters: list[Chapter] = field(default_factory=list)
+    broll: list[BRollSlot] = field(default_factory=list)
     version: int = SCHEMA_VERSION
     notes: str = ""
 
@@ -198,6 +229,8 @@ class EDL:
             overlays=[Overlay(**o) for o in d.get("overlays", [])],
             transitions=[Transition(**t) for t in d.get("transitions", [])],
             audio=Audio(**d.get("audio", {})),
+            chapters=[Chapter(**c) for c in d.get("chapters", [])],
+            broll=[BRollSlot(**b) for b in d.get("broll", [])],
             version=version,
             notes=d.get("notes", ""),
         )
@@ -272,5 +305,55 @@ def validate(edl: EDL, *, source_duration: float | None = None) -> list[str]:
         if ov.at > duration:
             problems.append(f"overlay at {ov.at}s is past the end of the edit")
             break
+
+    for slot in edl.broll:
+        if slot.start + slot.dur > duration + 0.05:
+            problems.append(
+                f"b-roll slot at {slot.start}s runs {slot.start + slot.dur - duration:.1f}s "
+                "past the end of the edit"
+            )
+            break
+
+    problems += _chapter_problems(edl.chapters, duration)
+    return problems
+
+
+# YouTube's own rules for rendering chapters at all. Almost-valid chapters show
+# nothing, with no error and no indication anywhere that they were rejected --
+# so these are hard failures here rather than warnings.
+YT_MIN_CHAPTERS = 3
+YT_MIN_CHAPTER_SECONDS = 10.0
+
+
+def _chapter_problems(chapters: list[Chapter], duration: float) -> list[str]:
+    if not chapters:
+        return []
+
+    problems: list[str] = []
+    ordered = sorted(chapters, key=lambda c: c.at)
+
+    if ordered[0].at > 0.001:
+        problems.append(
+            f"chapters must start at 0:00 (first is at {ordered[0].at:.1f}s) "
+            "or YouTube renders none of them"
+        )
+    if len(ordered) < YT_MIN_CHAPTERS:
+        problems.append(
+            f"{len(ordered)} chapter(s): YouTube needs at least {YT_MIN_CHAPTERS}"
+        )
+    for a, b in zip(ordered, ordered[1:]):
+        if b.at - a.at < YT_MIN_CHAPTER_SECONDS:
+            problems.append(
+                f"chapter {b.title!r} is only {b.at - a.at:.1f}s after the "
+                f"previous one; YouTube requires {YT_MIN_CHAPTER_SECONDS:.0f}s"
+            )
+            break
+    if duration and duration - ordered[-1].at < YT_MIN_CHAPTER_SECONDS:
+        problems.append(
+            f"last chapter {ordered[-1].title!r} leaves under "
+            f"{YT_MIN_CHAPTER_SECONDS:.0f}s of video after it"
+        )
+    if any(not c.title.strip() for c in ordered):
+        problems.append("a chapter has no title")
 
     return problems

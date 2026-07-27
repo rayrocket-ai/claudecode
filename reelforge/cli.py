@@ -25,6 +25,8 @@ from .core.edl import EDL, Target, validate
 from .core.playbook import load as load_playbook
 from .core.render import ffmpeg_renderer
 from .core.transcribe import Transcript
+from .core import metadata as meta
+from .core.vlog import Episode, compose_episode
 
 
 def _root() -> Path:
@@ -168,6 +170,96 @@ def cmd_compose(args) -> int:
 
 
 # --------------------------------------------------------------------------
+# vlog
+# --------------------------------------------------------------------------
+
+def cmd_vlog(args) -> int:
+    src = Path(args.video).expanduser().resolve()
+    cache, key, transcript, signals = _load_context(src)
+
+    if transcript is None:
+        print("error: no transcript cached -- run `prepare --wait` first",
+              file=sys.stderr)
+        return 2
+    signals = signals or Signals(duration=transcript.duration)
+
+    episode = Episode(json.loads(Path(args.episode).read_text()))
+    if args.no_cold_open:
+        episode.cold_open = None
+
+    book = load_playbook(_root() / "memory" / "playbook.md")
+    target = Target(platform="youtube", aspect=args.aspect, width=args.width,
+                    fps=args.fps, max_dur=None, loudness=-14.0)
+
+    edl = compose_episode(episode, str(src), transcript, signals, target, book)
+    if not edl.segments:
+        print("error: nothing survived the cuts", file=sys.stderr)
+        return 1
+
+    outdir = Path(args.outdir).expanduser() if args.outdir else _root() / "outbox"
+    outdir.mkdir(parents=True, exist_ok=True)
+    stem = src.stem[:40]
+
+    cold_open_len = (edl.segments[0].out_duration
+                     if edl.segments and edl.segments[0].id == "cold" else 0.0)
+
+    edl_path = edl.save(outdir / f"{stem}-episode.edl.json")
+    problems = validate(edl, source_duration=transcript.duration)
+
+    subs = meta.srt(edl)
+    srt_path = None
+    if subs:
+        srt_path = outdir / f"{stem}-episode.srt"
+        srt_path.write_text(subs, encoding="utf-8")
+
+    chapters = meta.chapter_text(edl)
+    desc = meta.description(edl, summary=episode.description, tags=episode.tags)
+    (outdir / f"{stem}-episode.description.txt").write_text(desc, encoding="utf-8")
+
+    frames = sorted((cache.dir_for(key) / "frames").glob("f-*.jpg"))
+    thumbs = meta.thumbnail_candidates(frames, every_seconds=5.0)
+
+    report = {
+        "edl": str(edl_path),
+        "srt": str(srt_path) if srt_path else None,
+        "source_duration": round(transcript.duration, 1),
+        "edit_duration": edl.duration,
+        # A cold open *adds* time by replaying a moment, so comparing the edit
+        # against the source understates what was actually cut -- and on a
+        # heavily trimmed episode it can read as though nothing came out.
+        "cold_open_seconds": round(cold_open_len, 1),
+        "removed_from_body": round(
+            transcript.duration - (edl.duration - cold_open_len), 1),
+        "segments": len(edl.segments),
+        "cold_open": cold_open_len > 0,
+        "chapters": chapters.splitlines(),
+        # An empty list when the producer supplied chapters means cutting
+        # collapsed them below YouTube's minimum. Called out explicitly:
+        # YouTube's own failure here is completely silent.
+        "chapters_rejected": bool(episode.chapters) and not chapters,
+        "chapters_rejected_why": (
+            f"{len(episode.chapters)} proposed, but a {edl.duration:.0f}s edit "
+            "cannot hold 3 chapters at 10s spacing"
+        ) if episode.chapters and not chapters else None,
+        "broll": [{"at": b.start, "dur": b.dur, "prompt": b.prompt} for b in edl.broll],
+        "thumbnails": [{"at": t.at, "score": t.score, "why": t.reasons,
+                        "path": str(t.path)} for t in thumbs],
+        "title": episode.title,
+        "problems": problems,
+    }
+
+    if not args.no_render:
+        result = ffmpeg_renderer.render(
+            edl, outdir / f"{stem}-episode.mp4",
+            hardware.profile(_root()), draft=args.draft)
+        report["output"] = str(result.output)
+        report["warnings"] = result.warnings
+
+    print(json.dumps(report, indent=2))
+    return 0
+
+
+# --------------------------------------------------------------------------
 # render
 # --------------------------------------------------------------------------
 
@@ -217,6 +309,19 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--fps", type=int, default=30)
     p.add_argument("--outdir", default=None)
     p.set_defaults(func=cmd_compose)
+
+    p = sub.add_parser("vlog", help="compose and render a long-form episode")
+    p.add_argument("video")
+    p.add_argument("--episode", required=True)
+    p.add_argument("--no-cold-open", action="store_true")
+    p.add_argument("--no-render", action="store_true",
+                   help="write the EDL and metadata without encoding")
+    p.add_argument("--draft", action="store_true")
+    p.add_argument("--aspect", default="16:9")
+    p.add_argument("--width", type=int, default=1920)
+    p.add_argument("--fps", type=int, default=30)
+    p.add_argument("--outdir", default=None)
+    p.set_defaults(func=cmd_vlog)
 
     p = sub.add_parser("render", help="render an EDL to video")
     p.add_argument("edl")

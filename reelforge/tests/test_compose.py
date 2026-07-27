@@ -338,3 +338,10 @@ def test_the_first_word_never_forces_a_break():
     edl = compose(Clip(0.0, 12.0), "/a.mp4", steady(30), Signals(duration=60),
                   TARGET, BOOK)
     assert edl.captions.words[0].break_before is False
+
+
+def test_lead_out_cannot_run_past_the_end_of_the_source():
+    """Asking ffmpeg for frames past the end yields a frozen final frame
+    rather than an error, so it is invisible until someone watches the tail."""
+    t = Transcript([Word("last", 9.6, 9.95)], "en", 10.0, "test")
+    assert snap_to_words((9.0, 10.0), t, BOOK)[1] <= 10.0

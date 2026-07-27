@@ -87,7 +87,14 @@ def snap_to_words(window: Span, transcript: Transcript, book: Playbook) -> Span:
     inside = [w for w in transcript.words if w.end > window[0] and w.start < window[1]]
     if not inside:
         return window
-    return (max(0.0, inside[0].start - book.lead_in), inside[-1].end + book.lead_out)
+    # Clamped at both ends. The lead-out matters most: a clip ending on the
+    # last word of the source would otherwise ask ffmpeg for frames past the
+    # end of the file, which yields a frozen final frame rather than an error.
+    limit = transcript.duration or window[1]
+    return (
+        max(0.0, inside[0].start - book.lead_in),
+        min(inside[-1].end + book.lead_out, limit),
+    )
 
 
 # --------------------------------------------------------------------------
