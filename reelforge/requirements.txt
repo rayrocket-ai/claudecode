@@ -17,5 +17,10 @@ jsonschema>=4.23,<5
 # Inbox watcher (server mode).
 watchdog>=5.0,<7
 
+# Link fetching. Pinned loosely and updated often on purpose -- yt-dlp breaks
+# whenever a site changes, and a stale version fails on exactly the links you
+# care about.
+yt-dlp>=2025.1.1
+
 # Config.
 tomli>=2.0; python_version < "3.11"

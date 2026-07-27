@@ -44,9 +44,16 @@ if [ "$PLATFORM" = linux ]; then
     fonts-noto-color-emoji fonts-inter \
     libgl1 libglib2.0-0 \
     git curl tmux
+  # Link fetching. yt-dlp moves fast enough that distro packages go stale and
+  # break on site changes, so it comes from pip inside the venv below.
+  if ! have rclone; then
+    log "Installing rclone (Google Drive, Dropbox, S3)"
+    curl -fsSL https://rclone.org/install.sh | $SUDO bash || \
+      warn "rclone install failed; Drive/Dropbox links unavailable until fixed"
+  fi
 else
   have brew || die "Homebrew required on macOS: https://brew.sh"
-  brew install ffmpeg python@3.12 tmux git || true
+  brew install ffmpeg python@3.12 tmux git rclone || true
   brew install --cask font-inter || warn "Inter font not installed; captions fall back to a system sans"
 fi
 
