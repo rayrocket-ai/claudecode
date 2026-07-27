@@ -100,13 +100,23 @@ def render(
 
 def _render_segments(edl: EDL, src: Path, info: media.MediaInfo, segdir: Path,
                      encode_args: list[str], profile: Profile) -> list[Path]:
+    # Transitions are applied as a dip at the boundary: the tail of the segment
+    # before fades out, the head of the segment after fades in. Both halves are
+    # rendered into their own segment, so the parallel stage is unaffected.
+    boundaries = _transition_boundaries(edl)
+
     jobs = []
+    elapsed = 0.0
     for index, seg in enumerate(edl.segments):
         dst = segdir / f"{index:04d}.mp4"
+        fade_in = boundaries.get(round(elapsed, 2), 0.0)
+        elapsed += seg.out_duration
+        fade_out = boundaries.get(round(elapsed, 2), 0.0)
         cmd = filters.segment_cmd(
             str(src), seg, edl.framing_for(seg.id), edl.target, edl.audio,
             str(dst), src_w=info.width, src_h=info.height,
             has_audio=info.has_audio, encode_args=encode_args,
+            fade_in=fade_in, fade_out=fade_out,
         )
         jobs.append((seg.id, cmd, dst))
 
@@ -133,6 +143,25 @@ def _render_segments(edl: EDL, src: Path, info: media.MediaInfo, segdir: Path,
     if missing:
         raise RenderError(f"ffmpeg reported success but wrote nothing: {missing}")
     return [dst for _, _, dst in jobs]
+
+
+def _transition_boundaries(edl: EDL) -> dict[float, float]:
+    """Output times where a transition sits, mapped to each half's duration.
+
+    Split in half either side of the boundary so the total dip lasts the
+    duration the EDL asked for. The opening and closing boundaries of the whole
+    video are excluded -- a dip there is a fade from black, which is a
+    different decision and not one QC should make silently.
+    """
+    total = edl.duration
+    out: dict[float, float] = {}
+    for transition in edl.transitions:
+        if transition.type == "cut" or transition.dur <= 0:
+            continue
+        if transition.at <= 0.01 or transition.at >= total - 0.01:
+            continue
+        out[round(transition.at, 2)] = transition.dur / 2
+    return out
 
 
 def _concat(parts: list[Path], temp_root: Path) -> Path:

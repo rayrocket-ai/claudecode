@@ -193,9 +193,32 @@ def audio_chain(out_duration: float, audio: Audio, *, speed: float = 1.0) -> str
     return ",".join(parts)
 
 
+def dip_filters(fade_in: float, fade_out: float, out_duration: float) -> list[str]:
+    """Fade filters implementing a transition as a dip at a segment boundary.
+
+    Deliberately *not* `xfade`. A crossfade overlaps its two inputs, which
+    shortens the result by the transition duration -- and every caption,
+    overlay and chapter after that point is timed in output seconds and would
+    silently drift by exactly that much. One transition would desynchronise the
+    rest of the video.
+
+    Fading the tail of one segment and the head of the next preserves duration
+    exactly, keeps the timing contract intact, and for the case that actually
+    matters -- softening a jump cut in a locked-off shot -- a brief dip reads
+    better than a cross-dissolve anyway.
+    """
+    parts = []
+    if fade_in > 0:
+        parts.append(f"fade=t=in:st=0:d={fade_in:.3f}")
+    if fade_out > 0 and out_duration > fade_out:
+        parts.append(f"fade=t=out:st={out_duration - fade_out:.3f}:d={fade_out:.3f}")
+    return parts
+
+
 def segment_cmd(src: str, seg: Segment, framing: Framing, target: Target,
                 audio: Audio, dst: str, *, src_w: int, src_h: int,
-                has_audio: bool, encode_args: list[str]) -> list[str]:
+                has_audio: bool, encode_args: list[str],
+                fade_in: float = 0.0, fade_out: float = 0.0) -> list[str]:
     """Render one segment to an intermediate file.
 
     Segments are rendered independently so they can run in parallel across
@@ -210,9 +233,13 @@ def segment_cmd(src: str, seg: Segment, framing: Framing, target: Target,
         "-ss", f"{seg.src_in:.3f}",
         "-t", f"{seg.src_duration:.3f}",
         "-i", src,
-        "-filter:v", video_chain(src_w, src_h, target, framing,
-                                 seg.out_duration, speed=seg.speed),
     ]
+    chain = video_chain(src_w, src_h, target, framing, seg.out_duration,
+                        speed=seg.speed)
+    dips = dip_filters(fade_in, fade_out, seg.out_duration)
+    if dips:
+        chain = ",".join([chain, *dips])
+    cmd += ["-filter:v", chain]
     if has_audio:
         cmd += ["-filter:a", audio_chain(seg.out_duration, audio, speed=seg.speed)]
     else:

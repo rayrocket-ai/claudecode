@@ -23,6 +23,7 @@ from .core.analyze import Signals, analyze
 from .core.cache import Cache, content_key
 from .core.edl import EDL, Target, validate
 from .core.playbook import load as load_playbook
+from .core import qc as qc_mod
 from .core.render import ffmpeg_renderer
 from .core.transcribe import Transcript
 from .core import metadata as meta
@@ -267,24 +268,62 @@ def cmd_render(args) -> int:
     edl_path = Path(args.edl).expanduser().resolve()
     edl = EDL.load(edl_path)
 
-    problems = validate(edl)
-    blocking = [p for p in problems if "exceeds the" not in p]
-    if blocking:
-        print("error: EDL has problems:\n  " + "\n  ".join(blocking), file=sys.stderr)
-        return 2
+    # Validation only blocks when QC is off. With QC on, most of what validate()
+    # rejects -- flash shots, over-length, bad boundaries -- is precisely what
+    # the repair loop exists to fix, so refusing to start would make the safety
+    # net unreachable.
+    if args.no_qc:
+        problems = validate(edl)
+        blocking = [p for p in problems if "exceeds the" not in p]
+        if blocking:
+            print("error: EDL has problems:\n  " + "\n  ".join(blocking),
+                  file=sys.stderr)
+            print("\nDrop --no-qc to let the repair loop fix these.",
+                  file=sys.stderr)
+            return 2
 
     dst = Path(args.out).expanduser() if args.out else edl_path.with_suffix("").with_suffix(".mp4")
     profile = hardware.profile(_root())
 
-    result = ffmpeg_renderer.render(edl, dst, profile, draft=args.draft)
+    if args.no_qc:
+        result = ffmpeg_renderer.render(edl, dst, profile, draft=args.draft)
+        print(json.dumps({
+            "output": str(result.output),
+            "duration": result.duration,
+            "segments": result.segments,
+            "draft": args.draft,
+            "warnings": result.warnings,
+        }, indent=2))
+        return 0
+
+    # QC needs the transcript to check for mid-word cuts -- the single most
+    # audible fault. Without it every other check still runs.
+    transcript = None
+    src = Path(edl.source)
+    if src.exists():
+        _, _, transcript, _ = _load_context(src)
+
+    book = load_playbook(_root() / "memory" / "playbook.md")
+    run = qc_mod.render_with_qc(edl, dst, profile, transcript=transcript,
+                                book=book, draft=args.draft,
+                                max_passes=args.qc_passes)
+
+    # The repaired EDL is written back: it is what was actually rendered, and
+    # leaving the old one on disk would make the EDL lie about the output.
+    if run.changes:
+        run.edl.save(edl_path)
+
     print(json.dumps({
-        "output": str(result.output),
-        "duration": result.duration,
-        "segments": result.segments,
+        "output": str(run.output),
+        "duration": run.edl.duration,
+        "segments": len(run.edl.segments),
         "draft": args.draft,
-        "warnings": result.warnings,
+        "qc_passes": run.passes,
+        "qc_clean": run.clean,
+        "repairs": run.changes,
+        "remaining": [str(f) for f in run.findings],
     }, indent=2))
-    return 0
+    return 0 if run.clean else 1
 
 
 # --------------------------------------------------------------------------
@@ -328,6 +367,9 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--out", default=None)
     p.add_argument("--draft", action="store_true",
                    help="fast encode for review; use the default for finals")
+    p.add_argument("--no-qc", action="store_true",
+                   help="skip inspection and repair")
+    p.add_argument("--qc-passes", type=int, default=3)
     p.set_defaults(func=cmd_render)
 
     args = ap.parse_args(argv)

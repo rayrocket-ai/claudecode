@@ -269,3 +269,32 @@ def test_anchors_stay_inside_the_frame(anchor):
     x, y = filters.anchor_position(anchor, VERTICAL_TARGET, size=120, margin=48)
     assert 0 <= int(x) <= VERTICAL_TARGET.width - 120
     assert 0 <= int(y) <= VERTICAL_TARGET.height - 120
+
+
+# --------------------------------------------------------------------------
+# transitions -- implemented as a dip, not a crossfade
+# --------------------------------------------------------------------------
+
+def test_a_dip_adds_fades_without_changing_duration():
+    """xfade overlaps its inputs and shortens the result, which would silently
+    drift every caption, overlay and chapter after that point."""
+    parts = filters.dip_filters(0.08, 0.08, 5.0)
+    assert "fade=t=in:st=0:d=0.080" in parts
+    assert "fade=t=out:st=4.920:d=0.080" in parts
+
+
+def test_no_transition_means_no_fade_filters():
+    assert filters.dip_filters(0.0, 0.0, 5.0) == []
+
+
+def test_a_fade_longer_than_the_shot_is_skipped():
+    assert "fade=t=out" not in " ".join(filters.dip_filters(0.0, 2.0, 1.0))
+
+
+def test_dips_reach_the_segment_command():
+    cmd = filters.segment_cmd(
+        "/tmp/a.mp4", Segment("s1", 0, 5), Framing(seg="s1"), VERTICAL_TARGET,
+        Audio(), "/tmp/s1.mp4", src_w=1920, src_h=1080, has_audio=True,
+        encode_args=[], fade_in=0.08, fade_out=0.08)
+    chain = cmd[cmd.index("-filter:v") + 1]
+    assert "fade=t=in" in chain and "fade=t=out" in chain
