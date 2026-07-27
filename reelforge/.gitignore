@@ -1,0 +1,27 @@
+# Local machine config -- config.example.toml is the tracked template.
+config.toml
+
+# Working tree. On a server these live under ~/reelforge, but keep them ignored
+# in case anyone points REELFORGE_ROOT at the repo itself.
+inbox/
+outbox/
+.cache/
+beds/
+engine
+
+# Learned taste is per-user and per-machine. The seed template is tracked;
+# the accumulated state is not -- back it up separately (see SERVER-RUNBOOK.md).
+memory/decisions.jsonl
+memory/playbook.md
+memory/style-profile.md
+
+# Test fixtures are pulled by scripts/fetch-fixtures.sh, never committed.
+evals/fixtures/*
+!evals/fixtures/.gitkeep
+
+# Generated emoji overlay pack.
+assets/emoji/*.png
+
+# Remotion / HyperFrames build output
+remotion/out/
+node_modules/

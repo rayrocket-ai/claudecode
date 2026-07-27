@@ -1,0 +1,80 @@
+# ReelForge configuration. Copy to config.toml and edit.
+#
+# Anything left unset falls back to hardware auto-detection (core/hardware.py),
+# so the common case is to set [paths] and leave the rest alone.
+
+[paths]
+# Syncthing keeps inbox/ and outbox/ in sync with your phone and laptops.
+root   = "~/reelforge"
+inbox  = "~/reelforge/inbox"
+outbox = "~/reelforge/outbox"
+cache  = "~/reelforge/.cache"      # content-hash keyed, safe to delete
+memory = "~/reelforge/memory"      # learned taste -- NEVER auto-deleted
+
+[watcher]
+# The watcher pre-warms the slow deterministic half (probe, audio extract,
+# transcribe, analyse) the moment a file lands, so planning is instant when you
+# SSH in. It does not edit anything -- editorial decisions always need you.
+enabled = true
+# Wait for a file to stop growing before touching it; Syncthing writes in
+# chunks and a large upload can take minutes.
+settle_seconds = 30
+extensions = [".mp4", ".mov", ".mkv", ".webm", ".m4v"]
+# Throttle so renders never starve anything else on the box.
+nice = 15
+ionice_class = 3   # idle
+
+[retention]
+# Sources are never deleted automatically. Only derived data expires.
+renders_days = 30
+cache_max_gb = 100
+min_free_gb  = 20   # below this, /reel-doctor reports a blocker
+
+[transcribe]
+# Leave unset to let hardware.py choose. Override to force accuracy over speed.
+# model    = "large-v3"
+# compute  = "int8"
+# device   = "cpu"
+language   = "en"
+diarize    = true   # speaker labels; useful for interviews and podcasts
+
+[render]
+# parallelism and encoder are auto-detected. Override only to pin behaviour.
+# parallelism = 8
+# encoder     = "libx264"
+
+[reels]
+count       = 3          # default clips per long-form source
+min_seconds = 15
+max_seconds = 59
+aspect      = "9:16"
+fps         = 30
+loudness    = -16        # LUFS; -16 for short-form, -14 for YouTube
+
+[vlog]
+aspect    = "16:9"
+fps       = 30
+loudness  = -14
+chapters  = true
+
+[captions]
+style          = "karaoke-bold"
+font           = "Inter"
+max_chars_line = 22
+# Fraction of frame height kept clear at top and bottom. Platform UI (captions,
+# usernames, the share tray) eats these zones -- text inside them gets covered.
+safe_top       = 0.14
+safe_bottom    = 0.20
+
+[overlays]
+# Emoji are rasterised to PNG and composited, not drawn as ASS glyphs. libass
+# colour-emoji support depends on fontconfig in ways that fail silently on
+# headless Linux, which is exactly what the server is.
+emoji_per_minute_max = 8
+remotion_enabled     = true
+
+[oracles]
+# Optional outside opinions used by /reel-bakeoff. Off by default: they upload
+# footage to third parties, which is the thing self-hosting avoids.
+higgsfield_virality = false
+descript_export     = false

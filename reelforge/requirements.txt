@@ -1,0 +1,21 @@
+# ReelForge Python dependencies.
+#
+# Kept deliberately separate from the repo's root requirements.txt -- ReelForge
+# shares no code with the realtor bot and must not perturb its dependency set.
+
+# Transcription: word-level timestamps are the foundation of every cut.
+faster-whisper==1.2.1
+ctranslate2>=4.5,<5
+
+# Analysis: face detection for auto-reframe focus points, frame sampling.
+opencv-python-headless>=4.10,<5
+numpy>=1.26,<3
+
+# EDL validation -- the schema is a contract, so it is enforced, not assumed.
+jsonschema>=4.23,<5
+
+# Inbox watcher (server mode).
+watchdog>=5.0,<7
+
+# Config.
+tomli>=2.0; python_version < "3.11"

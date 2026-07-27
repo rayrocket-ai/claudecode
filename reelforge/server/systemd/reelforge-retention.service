@@ -1,0 +1,21 @@
+[Unit]
+Description=ReelForge disk retention (expire renders, evict cache)
+Documentation=https://github.com/rayrocket-ai/claudecode/tree/main/reelforge
+
+[Service]
+Type=oneshot
+User=%i
+WorkingDirectory=%h/reelforge
+Environment=REELFORGE_ROOT=%h/reelforge
+ExecStart=%h/reelforge/.venv/bin/python server/retention.py
+
+Nice=19
+IOSchedulingClass=idle
+
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=%h/reelforge
+PrivateTmp=true
+NoNewPrivileges=true
+
+SyslogIdentifier=reelforge-retention

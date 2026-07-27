@@ -1,0 +1,22 @@
+{
+  "name": "reelforge",
+  "version": "0.1.0",
+  "description": "Self-hosted agentic video editor. Long-form footage into ranked vertical reels and finished YouTube episodes, driven by a reviewable edit-decision list and a style memory that improves over time.",
+  "author": {
+    "name": "rayrocket-ai"
+  },
+  "homepage": "https://github.com/rayrocket-ai/claudecode/tree/main/reelforge",
+  "keywords": [
+    "video",
+    "editing",
+    "ffmpeg",
+    "reels",
+    "shorts",
+    "youtube",
+    "whisper",
+    "remotion"
+  ],
+  "commands": "./commands",
+  "agents": "./agents",
+  "skills": "./skills"
+}

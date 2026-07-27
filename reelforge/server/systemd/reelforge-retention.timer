@@ -1,0 +1,12 @@
+[Unit]
+Description=Daily ReelForge disk retention
+Documentation=https://github.com/rayrocket-ai/claudecode/tree/main/reelforge
+
+[Timer]
+OnCalendar=daily
+# Spread the run so it does not collide with every other daily job on the box.
+RandomizedDelaySec=30m
+Persistent=true
+
+[Install]
+WantedBy=timers.target
