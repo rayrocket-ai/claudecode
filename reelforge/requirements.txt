@@ -11,6 +11,10 @@ ctranslate2>=4.5,<5
 opencv-python-headless>=4.10,<5
 numpy>=1.26,<3
 
+# Emoji rasterisation. Emoji are composited as PNGs rather than drawn by
+# libass, whose colour-glyph support fails silently on headless Linux.
+Pillow>=10.0,<12
+
 # EDL validation -- the schema is a contract, so it is enforced, not assumed.
 jsonschema>=4.23,<5
 
