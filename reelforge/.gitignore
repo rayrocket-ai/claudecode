@@ -14,6 +14,8 @@ engine
 memory/decisions.jsonl
 memory/playbook.md
 memory/style-profile.md
+memory/applied.json
+memory/provenance.json
 
 # Test fixtures are pulled by scripts/fetch-fixtures.sh, never committed.
 evals/fixtures/*

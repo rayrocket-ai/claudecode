@@ -23,6 +23,7 @@ from .core.analyze import Signals, analyze
 from .core.cache import Cache, content_key
 from .core.edl import EDL, Target, validate
 from .core.playbook import load as load_playbook
+from .core import feedback as fb
 from .core import qc as qc_mod
 from .core.render import ffmpeg_renderer
 from .core.transcribe import Transcript
@@ -261,6 +262,57 @@ def cmd_vlog(args) -> int:
 
 
 # --------------------------------------------------------------------------
+# feedback
+# --------------------------------------------------------------------------
+
+def cmd_feedback(args) -> int:
+    import datetime
+
+    memory = _root() / "memory"
+    log = memory / "decisions.jsonl"
+
+    parsed: list[fb.Note] = []
+    for raw in args.note:
+        parts = raw.split(":", 2)
+        if len(parts) < 2:
+            print(f"error: {raw!r} is not aspect:direction[:quote]", file=sys.stderr)
+            return 2
+        aspect, direction = parts[0].strip(), parts[1].strip()
+        quote = parts[2].strip() if len(parts) > 2 else ""
+        try:
+            fb.validate_note(aspect, direction)
+        except fb.UnknownCorrection as exc:
+            print(f"error: {exc}", file=sys.stderr)
+            return 2
+        parsed.append(fb.Note(aspect=aspect, direction=direction, quote=quote,
+                              edl=args.edl or "", origin=args.origin))
+
+    for note in parsed:
+        fb.append(log, note)
+
+    book = load_playbook(memory / "playbook.md")
+    when = args.when or datetime.date.today().isoformat()
+    book, promotions = fb.apply_feedback(memory, book, when=when)
+
+    waiting = fb.pending(fb.load(log))
+    print(json.dumps({
+        "recorded": [f"{n.aspect}/{n.direction}" for n in parsed],
+        "applied": [{
+            "rule": p.field,
+            "from": p.before,
+            "to": p.after,
+            "means": p.describe,
+            "heard": p.occurrences,
+        } for p in promotions],
+        # Surfaced explicitly: nothing changes the first time something is
+        # said, and without being told, that reads as having been ignored.
+        "waiting_for_a_second_mention": waiting,
+        "playbook": str(memory / "playbook.md"),
+    }, indent=2))
+    return 0
+
+
+# --------------------------------------------------------------------------
 # render
 # --------------------------------------------------------------------------
 
@@ -361,6 +413,15 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--fps", type=int, default=30)
     p.add_argument("--outdir", default=None)
     p.set_defaults(func=cmd_vlog)
+
+    p = sub.add_parser("feedback", help="record a critique and update the playbook")
+    p.add_argument("--note", action="append", default=[], required=True,
+                   metavar="ASPECT:DIRECTION[:QUOTE]",
+                   help="e.g. captions:too-low:\"they sat too low\"")
+    p.add_argument("--edl", default=None)
+    p.add_argument("--origin", default="user", choices=["user", "qc"])
+    p.add_argument("--when", default=None, help="date for provenance")
+    p.set_defaults(func=cmd_feedback)
 
     p = sub.add_parser("render", help="render an EDL to video")
     p.add_argument("edl")

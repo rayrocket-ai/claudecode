@@ -59,14 +59,14 @@ then repairs the EDL and re-renders, up to three attempts.
 | Phase | | |
 |---|---|---|
 | 0 | Scaffold, tool comparison, `/reel-doctor`, installer | **done** |
-| 1 | Hetzner bring-up: watcher, systemd, Syncthing, retention | in progress |
-| 2 | Ingest, analyse, WhisperX adapter, content-hash cache | |
-| 3 | EDL schema, parallel ffmpeg renderer, ASS captions, emoji | |
-| 4 | The brain + `/reels` end to end | |
-| 5 | `/vlog` — chapters, b-roll slots, music, metadata, thumbnails | |
-| 6 | QC self-eval loop with auto-repair | |
+| 1 | Hetzner bring-up: watcher, systemd, Syncthing, retention | **done** |
+| 2 | Ingest, analyse, WhisperX adapter, content-hash cache | **done** |
+| 3 | EDL schema, parallel ffmpeg renderer, ASS captions, emoji | **done** |
+| 4 | The brain + `/reels` end to end | **done** |
+| 5 | `/vlog` — chapters, b-roll slots, music, metadata, thumbnails | **done** |
+| 6 | QC self-eval loop with auto-repair | **done** |
 | 7 | Premium overlays — Remotion **and** HyperFrames backends | |
-| 8 | `memory/`, `/reel-feedback`, `/reel-bakeoff`, evals | |
+| 8 | `memory/`, `/reel-feedback` — the learning loop | **done** |
 | 9 | MCP server + LibreChat front end — edit from any browser | |
 | 10 | Open-Generative-AI adapter — b-roll, intros, thumbnails | |
 
