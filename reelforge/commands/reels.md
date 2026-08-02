@@ -9,7 +9,7 @@ allowed-tools: Read, Write, Bash(python3:*), Task
 ## 1. Check the source is ready
 
 ```bash
-python3 -m reelforge.cli prepare "$1"
+reelforge prepare "$1"
 ```
 
 Prints the cache key and whether the transcript and signals are warm. If the
@@ -31,8 +31,8 @@ large, and the point of the subagent is that its context is disposable.
 ## 3. Compose and render
 
 ```bash
-python3 -m reelforge.cli compose "$1" --highlights highlights.json --count 3
-python3 -m reelforge.cli render <edl.json> [--draft]
+reelforge compose "$1" --highlights highlights.json --count 3
+reelforge render <edl.json> [--draft]
 ```
 
 `compose` ranks the candidates, suppresses ones covering the same moment, and

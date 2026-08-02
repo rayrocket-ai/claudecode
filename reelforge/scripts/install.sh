@@ -86,8 +86,12 @@ source "$VENV/bin/activate"
 
 python -m pip install --quiet --upgrade pip wheel
 
-log "Installing Python dependencies (this pulls PyTorch; expect a few minutes)"
-pip install --quiet -r "$REELFORGE_DIR/requirements.txt"
+log "Installing ReelForge and its dependencies (expect a few minutes)"
+# Editable install rather than a bare requirements install: it puts a
+# `reelforge` command on PATH and makes the package importable from any
+# directory. Without it, every documented command fails from ~/reelforge,
+# which is exactly where server-setup.sh leaves your shell.
+pip install --quiet -e "$REELFORGE_DIR"
 
 # --- whisper model warm-up --------------------------------------------------
 # Pull the model now rather than on the first real edit, so the first video the
@@ -119,7 +123,8 @@ cat <<EOF
 ReelForge toolchain installed.
 
   Activate:  source $VENV/bin/activate
-  Verify:    /reel-doctor   (from Claude Code)
+  Command:   reelforge --help      (works from any directory)
+  Verify:    /reel-doctor          (from Claude Code)
 
 Next, for server mode on the Hetzner box:
   $REELFORGE_DIR/scripts/server-setup.sh

@@ -9,7 +9,7 @@ allowed-tools: Read, Write, Bash(python3:*), Task
 ## 1. Check the source
 
 ```bash
-python3 -m reelforge.cli prepare "$1"
+reelforge prepare "$1"
 ```
 
 Reports duration and whether the transcript and signals are warm. On the server
@@ -29,7 +29,7 @@ footage, or an hour-long reel.
 ## 3. Compose and render
 
 ```bash
-python3 -m reelforge.cli vlog "$1" --episode episode.json [--draft]
+reelforge vlog "$1" --episode episode.json [--draft]
 ```
 
 Writes the EDL, an `.srt` sidecar, a description with chapters, and thumbnail

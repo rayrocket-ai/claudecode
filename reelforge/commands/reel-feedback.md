@@ -13,12 +13,12 @@ Launch the **critic** agent with what the user said. It returns
 could not map.
 
 Do not classify in the main thread and do not invent corrections outside the
-vocabulary — `reelforge.cli feedback` rejects them, deliberately.
+vocabulary — `reelforge feedback` rejects them, deliberately.
 
 ## 2. Record
 
 ```bash
-python3 -m reelforge.cli feedback \
+reelforge feedback \
   --note captions:too-low:"the captions sat too low" \
   --note zooms:too-many:"way too many zooms" \
   [--edl path/to.edl.json]

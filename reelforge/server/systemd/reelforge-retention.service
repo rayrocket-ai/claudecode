@@ -7,7 +7,7 @@ Type=oneshot
 User=%i
 WorkingDirectory=%h/reelforge
 Environment=REELFORGE_ROOT=%h/reelforge
-ExecStart=%h/reelforge/.venv/bin/python server/retention.py
+ExecStart=%h/reelforge/.venv/bin/python %h/reelforge/engine/server/retention.py
 
 Nice=19
 IOSchedulingClass=idle

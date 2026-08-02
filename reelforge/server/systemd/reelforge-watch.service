@@ -9,7 +9,7 @@ Type=simple
 User=%i
 WorkingDirectory=%h/reelforge
 Environment=REELFORGE_ROOT=%h/reelforge
-ExecStart=%h/reelforge/.venv/bin/python -m server.watcher --config %h/reelforge/config.toml
+ExecStart=%h/reelforge/.venv/bin/reelforge watch --root %h/reelforge
 
 # The whole point of pre-warming is that it happens invisibly. This box runs
 # other things; transcription must never be the reason they get slow.

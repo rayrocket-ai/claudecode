@@ -4,9 +4,9 @@ Slash commands, the MCP server (phase 9), and the watcher are all thin wrappers
 over the same functions in ``core``. This module is one of those wrappers -- it
 must not contain editorial logic, only argument handling and reporting.
 
-    python3 -m reelforge.cli prepare  <video>
-    python3 -m reelforge.cli compose  <video> --highlights h.json --count 3
-    python3 -m reelforge.cli render   <edl.json> [--draft]
+    reelforge prepare  <video>
+    reelforge compose  <video> --highlights h.json --count 3
+    reelforge render   <edl.json> [--draft]
 """
 
 from __future__ import annotations
@@ -262,6 +262,24 @@ def cmd_vlog(args) -> int:
 
 
 # --------------------------------------------------------------------------
+# watch
+# --------------------------------------------------------------------------
+
+def cmd_watch(args) -> int:
+    """Run the inbox watcher.
+
+    Exposed through the CLI so the systemd unit has one stable command to call
+    rather than a module path that depends on the working directory.
+    """
+    from .server.watcher import main as watch_main
+
+    argv = ["--root", str(args.root or _root()), "--settle", str(args.settle)]
+    if args.once:
+        argv.append("--once")
+    return watch_main(argv)
+
+
+# --------------------------------------------------------------------------
 # feedback
 # --------------------------------------------------------------------------
 
@@ -413,6 +431,12 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--fps", type=int, default=30)
     p.add_argument("--outdir", default=None)
     p.set_defaults(func=cmd_vlog)
+
+    p = sub.add_parser("watch", help="run the inbox watcher (used by systemd)")
+    p.add_argument("--root", type=Path, default=None)
+    p.add_argument("--once", action="store_true")
+    p.add_argument("--settle", type=float, default=30.0)
+    p.set_defaults(func=cmd_watch)
 
     p = sub.add_parser("feedback", help="record a critique and update the playbook")
     p.add_argument("--note", action="append", default=[], required=True,

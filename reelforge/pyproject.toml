@@ -1,0 +1,52 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "reelforge"
+version = "0.1.0"
+description = "Self-hosted agentic video editor: long-form footage into ranked reels and finished episodes"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+
+# Kept in step with requirements.txt, which stays as the human-facing list.
+dependencies = [
+    "faster-whisper>=1.2,<2",
+    "ctranslate2>=4.5,<5",
+    "opencv-python-headless>=4.10,<5",
+    "numpy>=1.26,<3",
+    "Pillow>=10.0,<12",
+    "jsonschema>=4.23,<5",
+    "watchdog>=5.0,<7",
+    "yt-dlp>=2025.1.1",
+]
+
+[project.scripts]
+# The whole reason this file exists. Without an installed entry point,
+# `python3 -m reelforge.cli` only resolves from the repository root -- but
+# server-setup.sh puts your shell in ~/reelforge, and the systemd unit runs
+# from there too. Both would fail on import, which is a miserable thing to
+# discover on a first install.
+reelforge = "reelforge.cli:main"
+
+[tool.setuptools]
+# The package directory is this directory, so it is mapped explicitly rather
+# than discovered -- auto-discovery finds `core`, `server` and `tests` as
+# separate top-level packages and installs them into site-packages, where they
+# would collide with anything else called `core`.
+packages = [
+    "reelforge",
+    "reelforge.core",
+    "reelforge.core.render",
+    "reelforge.server",
+]
+
+[tool.setuptools.package-dir]
+"reelforge" = "."
+"reelforge.core" = "core"
+"reelforge.core.render" = "core/render"
+"reelforge.server" = "server"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
