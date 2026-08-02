@@ -1,11 +1,21 @@
-# Ray Growth OS — final build plan
+# Ray Real Estate OS — final build plan
 
-One controlled chief-of-staff system with **three growth engines — Buyer,
-Seller, eXp Agent Recruiting** — on one platform: reliable inbound conversion
-first, every send disclosed and audited, learning that persists.
-Practical build order (supersedes "both equally"): **Buyer first** (VOW + MLS
-already operational), **Seller second**, **Recruiting third** (after messaging
-+ CRM sync are reliable), **productize last** (60–90 days of proven use). Synthesizes the Codex plan
+**A real-estate-only operating system.** Not a generic business platform: every
+pipeline, checklist, script, and knowledge loop is built for the way a real
+estate practice actually runs — and *because* it is vertical, it clones
+cleanly later to other **brokerages, teams, and single agents** (Phase 7).
+The doctrine is E-Myth by design: the business is a set of documented,
+versioned systems (work orders + playbooks), not heroics — this plan IS the
+systems manual, and the software enforces it.
+
+Growth engines: **Buyer, Seller, eXp Agent Recruiting**, with full party-type
+coverage (buyers, sellers, landlords, tenants/lease, investors, pre-con;
+commercial knowledge with routed intake). Reliable inbound conversion first,
+every send disclosed and audited, learning that persists and **adjusts to the
+market monthly**.
+Build order: **Buyer first** (VOW + MLS already operational), **Seller
+second**, **Recruiting third** (after messaging + CRM sync are reliable),
+**productize last** (60–90 days of proven use). Synthesizes the Codex plan
 (reliability-first posture, data architecture, approval policy, CASL) with the
 HQ plan (work orders, classify/decide split, the tested learning engine,
 Media/ReelForge) and three deep code audits of this repo performed 2026-08-02.
@@ -85,7 +95,25 @@ stays inside the VOW.**
 | CRM | **Lofty = customer source of truth** (decided 2026-08-02, supersedes GHL). Ray's leads live there; real-estate-native; API verified capable: 94 endpoints (leads/tasks/listings/transactions/notes), **webhook event subscriptions**, OAuth2/API-key auth, email+SMS send via Lofty, call history. Engine talks to it through a **CRM adapter interface** so the choice is switchable without rewrite. **GHL demoted to dormant** — revisited at Phase 7, where its white-label multi-tenancy fits productization. Postgres remains the automation ledger (messages, jobs, runs, consent evidence, approvals, audit). Known limits to design around: rate limits (integrators report sync lag up to ~30 min under load) → webhook-first, poll as fallback, idempotent writes. |
 | Consent | **Ray confirms (2026-08-02) all current leads consented.** Recorded as owner attestation; the ledger still stores per-lead consent source/timestamp/scope going forward — CRTC places the burden of *proof* on the sender, and attestation without records does not survive a dispute. New leads capture consent evidence at intake. |
 | Decision layers | One orchestrator ("chief of staff"). **Hermes/OpenClaw/Jarvis retired as decision-makers** — one command path. |
-| Learning | The ReelForge feedback engine (vocabulary → threshold-2 promotion → provenance; 28 passing tests) generalized per role. Directly cures "0 learned lessons." |
+| Learning | The ReelForge feedback engine (vocabulary → threshold-2 promotion → provenance; 28 passing tests) generalized per role. Directly cures "0 learned lessons." Plus the **market-learning layer** (§4.5): daily/weekly/monthly loops that adjust playbooks to the market, not just to Ray's taste. |
+| Commercial (ICI) | **Knowledge yes, workflow later** (2026-08-02). KB covers all property types day one so any caller gets an intelligent conversation; commercial *leads* get structured qualified intake routed to Ray personally. A commercial pipeline (cap-rate/NOI analysis, LOIs) is added only when residential engines are proven and volume justifies. |
+| Pre-construction | **Active business line — first-class pipeline** (2026-08-02). Own pipeline + project cards in the KB (builder, deposit schedule, occupancy, assignment policy, incentives), daily new-project intake, worksheet-submission checklists, **10-day rescission deadline monitors** on the reminders engine, investor↔project matching. |
+| Team | **Ray has human team members now.** TeamMember routing (already built + tested in the task-agent branch: roster, per-role assignment, DM task cards with Done/Blocked/Snooze/Update, escalation to managers) goes **live in Phase 1**, not dormant. AI specialists prep and coordinate; humans receive routed appointments and tasks per role. *Input needed: roster — names, roles (buyer's agent / showing partner / admin-TC), Telegram IDs, what each may receive.* |
+
+## 2.2 Doctrine — the books, implemented as systems
+
+The methodologies Ray named, mapped to the mechanism that implements each.
+We implement the **mechanics** (models, cadences, checklist structures, script
+*shapes*) in Ray's own voice — not verbatim copyrighted text.
+
+| Source | What we take | Where it lives |
+|---|---|---|
+| **The E-Myth** (Gerber) | Work ON the business: every recurring activity is a documented, versioned system executed the same way every time; the owner holds the org chart even before headcount fills it | The entire architecture — work orders + playbooks + checklists ARE the operations manual; Phase 7 is literally the franchise prototype |
+| **The Millionaire Real Estate Agent** (Keller) | The three models: **Lead-gen model** (database-centric touch programs — 8×8 onboarding, 33-touch annual for the database, 12-direct for farm) → cadence-engine presets. **Organizational model** (buyer specialist / listing specialist / admin before you) → the AI role agents + human TeamMember routing. **Economic model** (appointments as the pivot metric; conversion economics) → KPI ledger + hiring-trigger metrics |
+| **SHIFT** (Keller) | Market-state machine: seller's / balanced / buyer's market detected monthly from TRREB SNLR + months-of-inventory → playbook defaults switch (pricing-ahead-of-market scripts, lead-gen intensity, seller-consultation framing, expired/FSBO emphasis) | §4.5 market modes; monthly retrospective work order |
+| **Tom Ferry** | Appointment-setting discipline (every conversation drives to an appointment), lifecycle checklists for *every* scenario, listing-attraction reviews/geo-farming presence | Concierge conversation goals; §4.6 lifecycle checklist library; content calendar |
+| **Craig Proctor** | USP-driven offers ("Your Home Sold Guaranteed…"-style, adapted + compliance-checked), reverse-prospecting ad structures, one-step lead-gen ads with specific hooks | Marketing campaign **templates**, all `approve`-tier, RECO/TRESA-vetted before any use |
+| **Mike Ferry** | Prospecting script structures: qualification, objection handling, expired/FSBO frameworks, role-play standards | The Concierge + specialists' **script library** in the KB — versioned, learnable via the feedback engine, EN + Dari |
 
 ## 3. Operating model
 
@@ -94,8 +122,12 @@ Lead sources ─→ Unified intake ─→ Lofty (customers) + Postgres (ledger)
                                         │
                                   ORCHESTRATOR (chief of staff)
        ┌──────────┬──────────┬──────────┼──────────┬──────────┐
-   Lead        Property/   Listing/   Transaction  Operations   Media
-   Concierge   Showing     Marketing  Assistant    Analyst      (ReelForge)
+   Lead        BUYER       LISTING    Transaction  Operations   Media/Content
+   Concierge   SPECIALIST  SPECIALIST Assistant    Analyst      (ReelForge +
+   (intake+    (showings,  (listings, (offers,     (KPIs,        content engine,
+    nurture)    matching,   marketing, deadlines,   market        daily output)
+                precon)     feedback)  lawyers,     learning)
+                                       inspections)
        └──────────┴──────────┴─────────┴──────────┴──────────┘
                           APPROVAL & POLICY LAYER (deterministic, fail-closed)
                                         │
@@ -104,8 +136,22 @@ Lead sources ─→ Unified intake ─→ Lofty (customers) + Postgres (ledger)
                      TELEGRAM COMMAND CENTER → Ray approves sensitive actions
 ```
 
-Six roles (Codex's, adopted) + **Media** (ReelForge + AdMax assets feeding the
-Listing/Marketing role with reels, listing videos, campaign creative).
+Six roles — the MREA organizational model in software: **Buyer Specialist**
+(search/match incl. precon projects, showing coordination, post-showing buyer
+follow-up toward the next showing or offer-prep appointment) and **Listing
+Specialist** (listing decision support, launch, showing-agent feedback loop,
+weekly seller reports) as the two production roles, with Lead Concierge
+feeding them appointments, Transaction Assistant running every file to close
+(inspections, lawyers, conditions, deposits), Operations Analyst watching
+numbers and markets, and **Media/Content** (ReelForge + the content engine +
+AdMax assets) producing daily. Human team members receive routed work through
+the TeamMember layer; AI specialists do the prep either way.
+
+**Party-type coverage:** the data model carries **buyer · seller · landlord ·
+tenant/lease · investor · pre-con purchaser · agent-recruit · commercial
+inquiry** from day one (schema is cheap); *workflows* harden in the build
+order — buyer/precon and seller first, lease/landlord and investor-resale
+flows after Phase 4, commercial workflow deferred per §2.
 Every role: bounded task list, KPI contract, its own playbook + feedback
 vocabulary, workers spawned per work order (disposable), lead persists via
 memory. **Model classifies; code decides** — state changes (pipeline stage,
@@ -148,6 +194,62 @@ requires an ApprovalToken mintable only by Ray's Telegram callback):
 One internal identity per person, mapping all emails/phones/channel handles;
 dedup + sync job (Phase 1). Suppression list checked by the send layer itself,
 not by prompts.
+
+## 4.5 Knowledge & market-learning layer (the "keeps learning daily" part)
+
+**The knowledge base** — structured, versioned, citable; in Postgres + object
+storage, readable by every role and by the receptionist mid-call:
+- **Property-type primers**: freehold/condo/POTL, ownership + fee structures,
+  status certificates; commercial ICI classes at conversational depth.
+- **Pre-con project cards**: builder, location, pricing bands, deposit
+  structure, occupancy/closing estimates, assignment policy, incentives,
+  worksheet requirements — one card per project, dated and versioned.
+- **Neighbourhood/farm profiles**: schools, transit, absorption, price bands.
+- **Rate table**: BoC policy rate, bond-yield trend, representative fixed/
+  variable lender rates, stress-test qualifying rate — dated entries.
+- **Script library** (§2.2): qualification, objection handling, appointment
+  drives; per party type; EN + Dari.
+- **Listing feature cards**: per active listing, the sell-sheet facts the
+  feedback loop and receptionist draw on.
+
+**Hard rule (extends the existing guardrail):** client-facing claims cite a
+KB entry or a RESO field. No citation → the sentence doesn't ship.
+
+**The learning loops** (scheduled work orders; Media/Content and Ops Analyst
+are the owners):
+- **Daily**: rate watch (BoC/yields/lender moves); new + updated precon
+  project intake; new listings/price changes in farm areas; → KB updates +
+  the day's content topics.
+- **Weekly**: inventory + showing-activity snapshot; content performance;
+  follow-up coverage audit.
+- **Monthly retrospective** — "what happened last month": TRREB stats digest
+  (sales, average/median price, SNLR, DOM, months of inventory) → written
+  brief to Ray → **market-mode state machine** update: `seller's / balanced /
+  buyer's` per SNLR + MOI thresholds. Mode switches flip playbook defaults
+  SHIFT-style (pricing-ahead-vs-behind scripts, seller-consultation framing,
+  lead-gen intensity, expired/FSBO emphasis). Mode changes are
+  **recommendation-tier**: the orchestrator proposes, Ray approves the flip.
+- All loops write to the ledger with provenance, same as taste learning:
+  every adjustment traceable to the data that caused it.
+
+## 4.6 Lifecycle checklist library (Ferry-style: a system for every scenario)
+
+Extends the tested TRESA checklist asset (listing 7 · buyer 5 · deal 10) into
+full lifecycle coverage, each fanning into real tasks with owners, due dates
+and cadences via the existing cadence engine:
+- **Buyer**: signed (BRA) → searching → offer accepted → conditional (per-
+  condition monitors) → firm → pre-closing → **closed** → day-1/week-1 move-in
+  care → 30/90-day check-ins → **anniversary yearly** → 33-touch past-client.
+- **Seller**: consult booked → listing decision → pre-market prep → active →
+  offer(s) → conditional → firm → closed → anniversary + past-client program.
+- **Pre-con**: worksheet submitted → allocation → **10-day rescission
+  countdown (hard deadline monitor)** → deposit schedule monitors →
+  interim occupancy → final closing → assignment watch.
+- **Lease/landlord/tenant**: application package, lease signing, move-in,
+  renewal-date monitor (future listing/buyer lead on renewal).
+- **New lead**: 8×8 first-eight-weeks program; **database**: 33-touch annual.
+Every checklist is data (like `ops/checklists.py`), versioned, editable,
+learnable — not prompt text.
 
 ## 5. Asset deployment map (what goes where)
 
@@ -217,8 +319,15 @@ Gmail/SMS/WhatsApp/voice/web/social forms; ≤2-min disclosed responses;
 qualification (intent, timeline, location, budget, financing); CRM stage
 placement via validated transitions (Lofty adapter); scheduling; escalation rules (legal,
 financing, complaints); EN + Dari; follow-up sequences on the cadence engine.
-Inbound-auto ON (gate met). *Exit: inbound handled end-to-end, zero manual
-copying; speed-to-lead measured.*
+Inbound-auto ON (gate met). **Receptionist upgraded to MLS-connected**: the
+voice agent gets tools against the KB + RESO — answer listing-specific
+questions by MLS#/address mid-call, quote KB facts only, capture
+qualification, book approved appointment types; disclosed as AI; every call
+lands in the ledger via the post-call webhook (asset already built). The
+**daily market-intel loop starts here** (thin: rate watch + precon intake +
+content topics) since Media needs it and it is read-only. *Exit: inbound
+handled end-to-end, zero manual copying; speed-to-lead measured; receptionist
+answers a listing question from live data on a test call.*
 
 **Phase 3A — Buyer engine (wk 5–6, leads the parallel pair).** The VOW is the
 centerpiece: qualification → **VOW invitation workflow** (registration, email
@@ -227,16 +336,30 @@ CRM via the adapter** (registrations, searches, saved searches, favourites,
 listing views, showing requests, high-intent repetition,
 inactivity-triggering-nurture) → saved-search
 alerts → tour optimizer + Calendar + BrokerBay → reminders/itineraries →
-post-showing feedback → offer approval workflow. Deterministic validation on
-all bookings. Pre-launch: VOW-vs-agreement compliance audit (§1.D). *Exit:
-inquiry → VOW-registered → completed showing, full audit trail; first real
-consumer registrations on the portal.*
+post-showing **buyer** follow-up (feedback → drive to next showing or
+offer-prep appointment, Ferry-style: every conversation aims at an
+appointment) → offer approval workflow. **Pre-con pipeline live**: project
+cards, investor↔project matching, worksheet checklists, 10-day rescission
+monitors. Deterministic validation on all bookings; human team members
+receive routed showings per the roster. Pre-launch: VOW-vs-agreement
+compliance audit (§1.D). *Exit: inquiry → VOW-registered → completed showing,
+full audit trail; first real consumer registrations; one precon worksheet
+tracked end-to-end.*
 
 **Phase 3B — Seller & listing (wk 5–7, parallel).** Seller intake + listing
-appointment booking; listing prep checklist; **Media**: ReelForge deployed
-(first real footage), listing videos/reels + AdMax campaign workspace; social/
-email approval queue; open-house workflow; weekly seller reports. *Exit: every
-active listing has an approved campaign + follow-up plan + measurable report.*
+appointment booking; listing prep checklist; **the showing-agent feedback
+loop** — BrokerBay showing completes → feedback request to the showing agent
+(24h, 72h) → AI follow-up that *sells the property* from its listing feature
+card → persistent, spaced follow-up **until an explicit no, an offer, or the
+listing ends** (notify-tier, agent-to-agent, unsubscribe honoured, all logged);
+feedback summaries feed the weekly seller report and price-adjustment
+recommendations. **Media/Content**: ReelForge deployed (first real footage);
+the content engine becomes the **daily content desk** — market-intel loop
+feeds topics (rates, stats, precon, neighbourhoods) → scripts → teleprompter →
+ReelForge cuts → publish queue (`approve`); listing videos/reels + AdMax
+campaign workspace (Proctor-style templates, approval-gated); open-house
+workflow. *Exit: every active listing has an approved campaign + follow-up
+plan + weekly measurable report; content ships daily from live market data.*
 
 **Phase 4 — Offers & transactions (wk 7–8).** Structured offer intake with
 required-field validation; TRESA checklist fan-out; deadline monitors
@@ -245,10 +368,15 @@ compliance export. Nothing contractual leaves without explicit authorization.
 
 **Phase 5 — Decision center (wk 8–9).** Morning/evening briefs (deterministic
 composer over the ledger); weekly review (KPI deltas → orchestrator proposes
-work orders from a fixed vocabulary, code validates); dashboard answering the
-five questions (who needs response now / next meetings / stalled / awaiting
-approval / failing automations) with real DB values; AI cost + error
-reporting; learning loop live for all roles via `/feedback`.
+work orders from a fixed vocabulary, code validates); **monthly market
+retrospective + SHIFT market-mode recommendation** (§4.5) — the system reads
+last month and proposes how to adjust; **MREA hiring-trigger metrics**
+(appointments/week unserviced, follow-up coverage slipping → "the model says
+hire/route more"); lease/landlord/tenant + investor-resale workflows turn on;
+dashboard answering the five questions (who needs response now / next
+meetings / stalled / awaiting approval / failing automations) with real DB
+values; AI cost + error reporting; learning loop live for all roles via
+`/feedback`.
 
 **Phase 6 — Controlled outbound + Recruiting engine (after all above).**
 Outbound tiers per the communication policy: *inbound-auto* (live since ph.2);
@@ -263,10 +391,18 @@ rate-limited sends → reply detection → instant suppression → evidence log.
 multistep outreach, discovery-call scheduling, objection/nurture workflows,
 onboarding tracking — separate pipeline, separate consent basis.
 
-**Phase 7 — Productize (after 60–90 days of reliable use in Ray's business).**
-Config-from-core separation, multi-tenant accounts with isolated credentials
-+ data, onboarding wizard, pipeline templates, subscription billing,
-tenant domains, RBAC, standardized deploy; pilot with one trusted agent.
+**Phase 7 — Productize for the real-estate vertical (after 60–90 days of
+reliable use in Ray's business).** Not a generic SaaS: three deployment tiers
+of the same system — **single agent** (one seat, AI plays all specialist
+roles), **team** (TeamMember routing + role RBAC, the MREA org chart with
+humans in it), **brokerage** (multi-agent isolation, office-level reporting,
+recruiting engine as a first-class feature). Config-from-core separation,
+isolated credentials + data per tenant, onboarding wizard, pipeline/checklist
+templates (the §4.6 library ships as the default operations manual — the
+E-Myth franchise prototype), CRM adapters (Lofty first, GHL/kvCORE/FUB as
+demand dictates), subscription billing, tenant domains, standardized deploy;
+pilot with one trusted agent. Board/MLS data access is **per-tenant and never
+shared** — each tenant brings their own VOW/IDX agreements and credentials.
 
 ## 7. Guardrails (adopted + extended)
 No unconstrained agents messaging customers · one CRM · no cold outreach
@@ -308,9 +444,13 @@ GHL/PropTx/VOW (trusted, not independently verifiable from this container).
   Lofty API key** (`growth-os`, with expiry) placed in the box `.env` — Ray
   can mint this in Settings → Integrations → API in one minute (blocks ph.0
   snapshot). VOW behavioural events (ph.3A) route to Lofty via the adapter.
-- Primary GTA service areas; buyer qualification policy; seller
-  consultation/CMA process; eXp recruiting value proposition (block the
-  respective engines' scripts)
+- **Team roster** — names, roles (buyer's agent / showing partner / admin-TC),
+  Telegram IDs, what each may receive (blocks ph.1 routing config)
+- **Pre-con sources** — which builder/platinum lists and project feeds you
+  have access to (blocks the daily precon intake loop)
+- Primary GTA service areas + farm neighbourhoods; buyer qualification
+  policy; seller consultation/CMA process; eXp recruiting value proposition
+  (block the respective engines' scripts)
 - Approved communication identities (numbers, emails, WhatsApp/IG accounts);
   consent rules + suppression policy sign-off (block ph.2 send-layer config)
 - Appointment types + calendar rules; escalation rules (block scheduling)
