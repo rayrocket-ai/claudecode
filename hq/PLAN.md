@@ -41,6 +41,17 @@ lineages** (verified: several branches share no git history):
 **C. Third-party brains not in version control:** the ElevenLabs voice agent's
 entire prompt/behavior lives in their dashboard; GHL holds live customer data.
 
+**D2. Lofty (crm.lofty.com) — Ray's actual live CRM** (screenshot audit
+2026-08-02): active account, **7/10 API keys active** — including `rex`,
+`new claw`, `openclaw` ("telegram open claw nurture") from earlier agent
+projects that may **still be writing to the CRM**, a no-expiry "Legacy Token",
+and duplicate "Lovable API" keys. Zapier + vendor integrations panel present.
+API base `https://api.lofty.com/v1.0/` (`Authorization: token <key>`), docs at
+developer.lofty.com (Cloudflare-blocked from this container; reachable from
+the box). **Snapshot must run on the Hetzner box** — this container's egress
+cannot reach api.lofty.com at all (verified). API keys are provided via the
+box's `.env`, never pasted into chat.
+
 **D. The VOW — verified live (by Codex on the box; unverifiable from this
 container):** GHL location API 200 · PropTx RESO metadata + live listing query
 200 · `homes.rayrealestate.ca` online with registration, email verification,
@@ -50,7 +61,8 @@ field-display policy. **Zero registered consumers, zero sessions** — built but
 unlaunched. Compliance caveat adopted: technical access ≠ contractual
 approval; before public launch, audit the portal against the signed
 board/PropTx VOW agreement. Rule: **behavioural events and permitted property
-references sync to GHL; full MLS listing content stays inside the VOW.**
+references sync to the CRM (Lofty) via the adapter; full MLS listing content
+stays inside the VOW.**
 
 **Ground truths that shape everything:**
 - The mortgage calculators **never reach GHL** — leads go to
@@ -70,14 +82,15 @@ references sync to GHL; full MLS listing content stays inside the VOW.**
 | Revenue focus | **Buyer and seller tracks in parallel** (accepted cost: shared foundation first; ~2 weeks longer to first fully-hardened track) |
 | AI autonomy | **Inbound-auto from day one of Lead Concierge go-live**, gated on the Phase-0 reliability exit (≥95% clean runs), not a drafting period. Always disclosed as "Ray's AI assistant." Cold outbound + public content stay approval-gated. |
 | Canonical app | **`/opt/realtor-agent` = engine** (Postgres = ledger, its queue runs work orders). **Telegram bot = Ray's remote** (approvals, briefs, commands) reading/writing the engine's DB; its overlapping automations retired. Repo assets mount into the engine as workers. |
-| CRM | **GoHighLevel = customer source of truth**; Postgres = automation ledger (messages, jobs, runs, consent evidence, approvals, audit). |
+| CRM | **Lofty = customer source of truth** (decided 2026-08-02, supersedes GHL). Ray's leads live there; real-estate-native; API verified capable: 94 endpoints (leads/tasks/listings/transactions/notes), **webhook event subscriptions**, OAuth2/API-key auth, email+SMS send via Lofty, call history. Engine talks to it through a **CRM adapter interface** so the choice is switchable without rewrite. **GHL demoted to dormant** — revisited at Phase 7, where its white-label multi-tenancy fits productization. Postgres remains the automation ledger (messages, jobs, runs, consent evidence, approvals, audit). Known limits to design around: rate limits (integrators report sync lag up to ~30 min under load) → webhook-first, poll as fallback, idempotent writes. |
+| Consent | **Ray confirms (2026-08-02) all current leads consented.** Recorded as owner attestation; the ledger still stores per-lead consent source/timestamp/scope going forward — CRTC places the burden of *proof* on the sender, and attestation without records does not survive a dispute. New leads capture consent evidence at intake. |
 | Decision layers | One orchestrator ("chief of staff"). **Hermes/OpenClaw/Jarvis retired as decision-makers** — one command path. |
 | Learning | The ReelForge feedback engine (vocabulary → threshold-2 promotion → provenance; 28 passing tests) generalized per role. Directly cures "0 learned lessons." |
 
 ## 3. Operating model
 
 ```
-Lead sources ─→ Unified intake ─→ GHL (customers) + Postgres (ledger)
+Lead sources ─→ Unified intake ─→ Lofty (customers) + Postgres (ledger)
                                         │
                                   ORCHESTRATOR (chief of staff)
        ┌──────────┬──────────┬──────────┼──────────┬──────────┐
@@ -123,7 +136,8 @@ requires an ApprovalToken mintable only by Ray's Telegram callback):
 
 | System | Owns |
 |---|---|
-| GoHighLevel | Contacts, opportunities, stages, human CRM |
+| **Lofty** (via CRM adapter) | Contacts, pipelines/stages, human-facing CRM; optional email/SMS send channel |
+| GoHighLevel | **Dormant** — revisit at Phase 7 (white-label multi-tenancy for productization) |
 | Postgres (engine) | Work orders, messages, AI runs, consent evidence (source/timestamp/scope/proof — CRTC burden-of-proof), approvals, audit, KPI ledger, outbox |
 | Google Calendar | Availability + appointments (authoritative) |
 | RESO/PropTx | Property data |
@@ -143,7 +157,7 @@ not by prompts.
 | TRESA checklists (pure data) | Transaction Assistant task fan-out |
 | Deadline reminders engine + `parse_time_of_day` | Transaction Assistant deadline monitor |
 | Showings approve/decline handler pattern + keyboards | Telegram Decision Queue blueprint (`dq_` prefix, same split/edit-message retire pattern) |
-| `calc.js` + calculators site | Marketing lead magnet — **fix FORM_ENDPOINT → GHL inbound webhook (week 1)** |
+| `calc.js` + calculators site | Marketing lead magnet — **fix FORM_ENDPOINT → engine intake endpoint → Lofty via adapter (week 1)** |
 | AdMax prompt + KPI dashboard app | Marketing role persona + interim KPI surface |
 | Receptionist post-call webhook | Voice intake → engine (auth the `/voice/calls` PII leak first) |
 | ElevenLabs agent prompt | **Export into version control** (week 1); add disclosure line |
@@ -157,48 +171,61 @@ not by prompts.
 132 failed jobs by type); fix agent loop + unsupported job types; channel-
 identity failures; healthchecks on every container; **security sweep**: rotate
 all secrets incl. the root password pasted in chat, protect Portainer, auth
-`/voice/calls`, purge `content.db` from git; structured error alerts →
-Telegram; DB restore test; staging vs prod split; retire double-acting
-automations (one BrokerBay poller only). *Exit: ≥95% clean test conversations,
-zero unhandled job types — this gate is what turns inbound-auto on later.*
+`/voice/calls`, purge `content.db` from git, **Lofty key audit** — inventory
+what `rex`/`new claw`/`openclaw`/"Legacy Token"/duplicate Lovable keys feed,
+revoke the dead ones, mint one new key `growth-os` (with expiry) into the
+box's `.env`; structured error alerts → Telegram; DB restore test; staging vs
+prod split; retire double-acting automations (one BrokerBay poller only; **no
+prior agent may keep writing to Lofty unaudited**). **Lofty snapshot** (from
+the box, read-only): `/v1.0/me`, full lead export with paging, pipelines/
+stages, tasks, smart-plan inventory → versioned into the ledger as the
+baseline; count reconciled against the engine's "120 leads" to find which
+system has the real book. *Exit: ≥95% clean test conversations, zero unhandled
+job types, Lofty baseline captured — this gate is what turns inbound-auto on
+later.*
 
-**Phase 1 — GHL backbone & data foundation (wk 2–3).** The audit found the
-engine has **no complete GHL sync layer** — this phase is that layer:
-contact create/update, opportunity creation, stage sync (two-way), custom-field
-mappings, conversation/activity logging, task + appointment sync, webhook
-intake from GHL, **idempotency/dedup, consent+suppression sync, retry +
-dead-letter handling**. Build the **three pipelines** (Buyer 16 stages, Seller
-15, Recruiting 13 — full stage lists + required-field sets per the 2026-08-02
-Codex spec, frozen into the GHL data dictionary, §6.1) with owner +
-entry/exit + max-idle per stage (no lead sits "new"). Identity dedup (one
-person ↔ all channels ↔ one GHL contact ID). **Recruiting contacts strictly
-segregated from consumer leads** (CASL applies to recruiting messages too).
-Work-order tables + tier engine + ApprovalToken; Telegram Decision Queue +
-`/brief` + outbox drainer (additive handlers in the live bot, image-rollback
-deploy); import/normalize the 120 leads; port feedback engine to Postgres.
-*Exit: every lead has owner, stage, source, consent state, next action;
-approval round-trip works on Ray's phone; GHL↔Postgres sync survives a
-duplicate-webhook storm without double-creating.*
+**Phase 1 — CRM backbone & data foundation (wk 2–3).** Build the **CRM
+adapter interface** (engine-side, CRM-agnostic: `upsert_contact`,
+`set_stage`, `log_activity`, `create_task`, `sync_appointment`,
+`consume_webhook`, `check_suppression`) with the **Lofty adapter** as its
+first implementation: lead create/update, stage sync (two-way), notes +
+activity logging, task sync, **webhook subscriptions first** (poll fallback
+given Lofty's rate limits), **idempotency/dedup, consent+suppression sync,
+retry + dead-letter handling**. Map the **three pipelines** (Buyer 16 stages,
+Seller 15, Recruiting 13 per the frozen data dictionary §6.1) onto Lofty's
+pipeline/stage model — where Lofty's model can't hold a needed field, the
+ledger holds it and Lofty carries a tag. Identity dedup (one person ↔ all
+channels ↔ one Lofty lead ID). **Recruiting contacts strictly segregated from
+consumer leads** (CASL applies to recruiting too). Work-order tables + tier
+engine + ApprovalToken; Telegram Decision Queue + `/brief` + outbox drainer
+(additive handlers in the live bot, image-rollback deploy); reconcile +
+normalize the engine's 120 leads against the Lofty baseline; port feedback
+engine to Postgres. *Exit: every lead has owner, stage, source, consent
+state, next action; approval round-trip works on Ray's phone; Lofty↔Postgres
+sync survives a duplicate-webhook storm without double-creating.*
 
 **§6.1 Next planning artifact (first deliverable of Phase 1, before code):**
-the **GHL data dictionary + three pipeline specifications** — exact custom
-fields, types, tags, stage entry/exit conditions, per-stage owner and max idle
-time. The Codex stage/field lists are the draft; the dictionary freezes them
-as the contract every agent and workflow follows.
+the **CRM data dictionary + three pipeline specifications**, expressed
+against Lofty's actual field/pipeline model as captured in the Phase-0
+snapshot — exact fields, tags, stage entry/exit conditions, per-stage owner
+and max idle time. The Codex stage/field lists are the draft; the snapshot
+tells us what maps natively vs. lives in the ledger; the dictionary freezes
+the result as the contract every agent and workflow follows.
 
 **Phase 2 — Inbound conversion engine (wk 3–4).** Lead Concierge live across
 Gmail/SMS/WhatsApp/voice/web/social forms; ≤2-min disclosed responses;
-qualification (intent, timeline, location, budget, financing); GHL stage
-placement via validated transitions; scheduling; escalation rules (legal,
+qualification (intent, timeline, location, budget, financing); CRM stage
+placement via validated transitions (Lofty adapter); scheduling; escalation rules (legal,
 financing, complaints); EN + Dari; follow-up sequences on the cadence engine.
 Inbound-auto ON (gate met). *Exit: inbound handled end-to-end, zero manual
 copying; speed-to-lead measured.*
 
 **Phase 3A — Buyer engine (wk 5–6, leads the parallel pair).** The VOW is the
 centerpiece: qualification → **VOW invitation workflow** (registration, email
-verification, terms) → authorized RESO search → **behavioural events into GHL**
-(registrations, searches, saved searches, favourites, listing views, showing
-requests, high-intent repetition, inactivity-triggering-nurture) → saved-search
+verification, terms) → authorized RESO search → **behavioural events into the
+CRM via the adapter** (registrations, searches, saved searches, favourites,
+listing views, showing requests, high-intent repetition,
+inactivity-triggering-nurture) → saved-search
 alerts → tour optimizer + Calendar + BrokerBay → reminders/itineraries →
 post-showing feedback → offer approval workflow. Deterministic validation on
 all bookings. Pre-launch: VOW-vs-agreement compliance audit (§1.D). *Exit:
@@ -277,7 +304,10 @@ GHL/PropTx/VOW (trusted, not independently verifiable from this container).
   the document(s) on the box or have Ray drop them into the engine's document
   storage, then run the portal-vs-agreement display-rules comparison before
   VOW public launch (ph.3A). The gate is now a checklist item, not a blocker.
-- GHL admin access for pipeline/custom-field creation (blocks ph.1)
+- ~~GHL admin access~~ superseded by Lofty decision. Now needed: **one new
+  Lofty API key** (`growth-os`, with expiry) placed in the box `.env` — Ray
+  can mint this in Settings → Integrations → API in one minute (blocks ph.0
+  snapshot). VOW behavioural events (ph.3A) route to Lofty via the adapter.
 - Primary GTA service areas; buyer qualification policy; seller
   consultation/CMA process; eXp recruiting value proposition (block the
   respective engines' scripts)
@@ -287,8 +317,8 @@ GHL/PropTx/VOW (trusted, not independently verifiable from this container).
 - Brand voice, English and Dari (blocks message templates)
 
 **Missing — discoverable only on the box (Phase 0 audit):** /opt/realtor-agent
-architecture and the root cause of the failure metrics; actual GHL field/
-pipeline state; ElevenLabs agent prompt (export to git); VOW codebase state.
+architecture and the root cause of the failure metrics; actual Lofty field/
+pipeline/smart-plan state (the snapshot); which old API keys still write; ElevenLabs agent prompt (export to git); VOW codebase state.
 
 ## 10. Build logistics
 Dev happens against `/opt/realtor-agent` on the box (this container cannot SSH
