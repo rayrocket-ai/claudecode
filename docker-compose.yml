@@ -15,6 +15,9 @@ services:
       - "${DASHBOARD_PORT:-8080}:8080"
     volumes:
       - ./storage:/app/storage
+      # Live-mounted so `git pull` on the host surfaces new committed
+      # campaign results without an image rebuild.
+      - ./campaigns:/app/campaigns:ro
 
   # Optional HTTPS front door for the dashboard — only for servers with
   # no reverse proxy already on ports 80/443 (Ray's Hetzner box has the

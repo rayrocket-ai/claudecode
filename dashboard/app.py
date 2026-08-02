@@ -1,10 +1,17 @@
 """Multi-campaign ads dashboard for Ray Homes.
 
 Runs as its own docker-compose service on the same server as the bot.
-The ADMAX daily loop pushes results through the /api endpoints; humans
-read the HTML pages. Data lives in storage/dashboard.json (the same
-volume-mounted storage/ directory the bot uses), seeded from seed.json
-on first run.
+
+Two data sources, merged at read time:
+
+1. Git files (source of truth): campaigns/<slug>/results.json, committed
+   by the ADMAX daily loop and pulled onto the server. This path needs no
+   network call into the server, so it works even when the loop's
+   environment cannot reach the box. This is the primary path.
+2. The API store (storage/dashboard.json): used when the loop CAN reach
+   the server directly. Still supported; git files win on conflict.
+
+Both are seeded from seed.json on first run.
 """
 
 import json
@@ -33,13 +40,57 @@ def _store_path() -> Path:
     return Path(os.environ.get("DASHBOARD_STORE", "storage/dashboard.json"))
 
 
+def _campaign_data_dir() -> Path:
+    return Path(os.environ.get("CAMPAIGN_DATA_DIR", "campaigns"))
+
+
+def _load_git_campaigns() -> dict[str, Any]:
+    """Read campaigns/<slug>/results.json committed to the repo.
+
+    Each file holds the full campaign object (meta + daily + log). These
+    are the source of truth: the daily loop writes and commits them, the
+    server picks them up on git pull. Missing or unreadable files are
+    skipped so one bad file never blanks the dashboard.
+    """
+    out: dict[str, Any] = {}
+    root = _campaign_data_dir()
+    if not root.is_dir():
+        return out
+    for results in sorted(root.glob("*/results.json")):
+        slug = results.parent.name
+        try:
+            out[slug] = json.loads(results.read_text())
+        except (json.JSONDecodeError, OSError):
+            continue
+    return out
+
+
 def _load() -> dict[str, Any]:
     path = _store_path()
     if path.exists():
-        return json.loads(path.read_text())
-    seed = json.loads((BASE_DIR / "seed.json").read_text())
-    _save(seed)
-    return seed
+        data = json.loads(path.read_text())
+    else:
+        data = json.loads((BASE_DIR / "seed.json").read_text())
+        _save(data)
+    # Git files win: overlay committed per-campaign results on the store.
+    git_campaigns = _load_git_campaigns()
+    if git_campaigns:
+        data.setdefault("campaigns", {}).update(git_campaigns)
+    for campaign in data.get("campaigns", {}).values():
+        _normalize(campaign)
+    return data
+
+
+def _normalize(campaign: dict[str, Any]) -> None:
+    """Fill keys the templates read so a minimal file never 500s."""
+    campaign.setdefault("subtitle", "")
+    campaign.setdefault("status", "pre-launch")
+    campaign.setdefault("playbook", "")
+    campaign.setdefault("targets", {})
+    campaign.setdefault("config", [])
+    campaign.setdefault("rules", [])
+    campaign.setdefault("daily", [])
+    campaign.setdefault("log", [])
 
 
 def _save(data: dict[str, Any]) -> None:

@@ -10,7 +10,45 @@ from dashboard import app as dash
 def client(tmp_path, monkeypatch):
     monkeypatch.setenv("DASHBOARD_STORE", str(tmp_path / "dashboard.json"))
     monkeypatch.setenv("DASHBOARD_KEY", "test-key")
+    # Isolate the git-file source so seeded results.json files on disk
+    # don't leak into store-based tests.
+    monkeypatch.setenv("CAMPAIGN_DATA_DIR", str(tmp_path / "campaigns"))
     return TestClient(dash.app)
+
+
+def test_git_file_is_source_of_truth(tmp_path, monkeypatch):
+    monkeypatch.setenv("DASHBOARD_STORE", str(tmp_path / "dashboard.json"))
+    monkeypatch.setenv("DASHBOARD_KEY", "test-key")
+    data_dir = tmp_path / "campaigns"
+    monkeypatch.setenv("CAMPAIGN_DATA_DIR", str(data_dir))
+    # A committed results.json for a brand-new campaign the store never saw.
+    cdir = data_dir / "aurora-sellers"
+    cdir.mkdir(parents=True)
+    (cdir / "results.json").write_text(
+        '{"name": "Aurora Sellers", "status": "live", "playbook": "Seller",'
+        ' "daily": [{"date": "2026-08-01", "spend": 10.0, "leads": 2}], "log": []}'
+    )
+    client = TestClient(dash.app)
+    listing = client.get("/api/campaigns").json()
+    assert "aurora-sellers" in listing
+    assert listing["aurora-sellers"]["leads"] == 2
+    page = client.get("/c/aurora-sellers")
+    assert page.status_code == 200
+    assert "Aurora Sellers" in page.text
+
+
+def test_bad_git_file_is_skipped_not_fatal(tmp_path, monkeypatch):
+    monkeypatch.setenv("DASHBOARD_STORE", str(tmp_path / "dashboard.json"))
+    monkeypatch.setenv("DASHBOARD_KEY", "test-key")
+    data_dir = tmp_path / "campaigns"
+    monkeypatch.setenv("CAMPAIGN_DATA_DIR", str(data_dir))
+    bad = data_dir / "broken"
+    bad.mkdir(parents=True)
+    (bad / "results.json").write_text("{not valid json")
+    client = TestClient(dash.app)
+    # Dashboard still serves (seeded campaigns), bad file ignored.
+    assert client.get("/").status_code == 200
+    assert "broken" not in client.get("/api/campaigns").json()
 
 
 def test_index_seeds_and_lists_buttonleaf(client):

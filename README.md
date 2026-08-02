@@ -143,3 +143,19 @@ API (all writes need the `X-Dashboard-Key` header):
 | `POST /api/campaigns/<slug>/daily` | Report a day's results (same date = correction) |
 | `POST /api/campaigns/<slug>/log` | Append a learning-log entry |
 | `GET /api/campaigns` | Headline KPIs for every campaign |
+
+### Dashboard data: git-file path (no inbound network needed)
+
+The daily loop writes `campaigns/<slug>/results.json` and commits it. The
+server surfaces new results by pulling the repo — no POST into the box, so
+it works even when the loop's environment cannot reach the server.
+
+Enable the 15-minute auto-pull on the server once:
+
+```bash
+( crontab -l 2>/dev/null; \
+  echo "*/15 * * * * cd /opt/realtor-bot && git pull --ff-only origin claude/admax-paid-ads-agent-9hux3q >/dev/null 2>&1" ) | crontab -
+```
+
+The dashboard container live-mounts `./campaigns`, so a pull is picked up
+immediately with no rebuild.

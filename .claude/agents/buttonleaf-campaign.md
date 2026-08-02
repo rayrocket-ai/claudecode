@@ -68,17 +68,19 @@ Combined approved spend when both are live: $30/day.
 3. LOG. Append a dated entry to campaigns/34-buttonleaf/learning-log.md:
    spend, leads, CPL, CTR, decision made, and the generalizable lesson.
    Commit and push to branch claude/admax-paid-ads-agent-9hux3q.
-4. DASHBOARD. Primary: the self-hosted multi-campaign dashboard
-   (dashboard/ service on Ray's Hetzner server, deployed via docker
-   compose). Once Ray provides the server URL and DASHBOARD_KEY, push
-   the day's numbers with:
-     POST {url}/api/campaigns/34-buttonleaf/daily
-       {"date","spend","leads","ctr_pct","impressions","views","notes"}
-     POST {url}/api/campaigns/34-buttonleaf/log  {"date","title","entry"}
-   with header X-Dashboard-Key. Until the server dashboard is live,
-   fallback: update campaigns/34-buttonleaf/dashboard.html and republish
-   the artifact to the same URL. New campaigns register themselves via
-   PUT {url}/api/campaigns/{slug} — one dashboard for everything.
+4. DASHBOARD (git-file path — no network call into the server needed).
+   For each campaign, write the day's numbers into
+   campaigns/<slug>/results.json using the helper, then commit + push in
+   step 3's push:
+     python dashboard/write_results.py <slug> --date YYYY-MM-DD \
+       --spend N --leads N [--ctr N --views N --status live \
+       --notes "..." --log-title "..." --log-entry "..."]
+   The server pulls the repo (cron every 15 min) and the dashboard reads
+   these files live, so results appear without any POST into the box.
+   The old POST API (X-Dashboard-Key) still works if the server is
+   directly reachable, but the git-file path is primary and does not
+   depend on the network allowlist. New campaigns appear automatically
+   the first time their results.json is committed.
 5. REPORT. Three lines maximum unless something is wrong: spend, leads,
    CPL, anomaly flags, action taken. Plain numbers first. Ray reads on
    mobile.

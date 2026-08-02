@@ -1,0 +1,72 @@
+{
+  "name": "34 Buttonleaf Cres \u2014 Stouffville",
+  "subtitle": "$15/day lean flight \u00b7 Meta Leads + YouTube Shorts \u00b7 no price, no address",
+  "status": "pre-launch",
+  "playbook": "Listing Exposure \u00b7 Playbook A",
+  "targets": {
+    "budget_note": "of $105/wk plan",
+    "leads_note": "target 2\u20135 / wk",
+    "cpl_note": "target $15 \u00b7 ceiling $30",
+    "ctr_note": "floor 0.8%"
+  },
+  "config": [
+    [
+      "Meta (FB + IG)",
+      "$10/day \u00b7 Leads \u00b7 instant form"
+    ],
+    [
+      "YouTube Shorts",
+      "$5/day \u00b7 views \u00b7 retargeting pool"
+    ],
+    [
+      "Geo",
+      "Stouffville + 25 km feeder ring"
+    ],
+    [
+      "Category",
+      "Housing (Special Ad Category)"
+    ],
+    [
+      "Hook offer",
+      "Get the price + address + full tour"
+    ],
+    [
+      "Qualifiers",
+      "timeline \u00b7 pre-approval \u00b7 home to sell"
+    ],
+    [
+      "Creative",
+      "3 vertical cuts, BUTTON LEAF (1).mp4"
+    ],
+    [
+      "Lead routing",
+      "GoHighLevel + ARIA Voice callback"
+    ]
+  ],
+  "rules": [
+    {
+      "chip": "pause",
+      "text": "Variant CPL over $30 after $70+ spent on it"
+    },
+    {
+      "chip": "replace",
+      "text": "CTR under 0.8% after 2,000 impressions"
+    },
+    {
+      "chip": "hold",
+      "text": "Judge on 7-day windows \u2014 daily counts are noise at $10/day"
+    },
+    {
+      "chip": "review",
+      "text": "Week 3: YouTube adds nothing \u2192 propose folding $5 into Meta (Ray approves)"
+    }
+  ],
+  "daily": [],
+  "log": [
+    {
+      "date": "2026-07-19",
+      "title": "Plan v2 approved at $15/day",
+      "entry": "Curiosity strategy locked: price and address withheld, the form trade is the hook. Edit brief issued for three vertical cuts (fast / POV walk-in / trending-style, licensed audio only). Hypothesis on deck: fast-cut hook beats POV walk-in on CTR."
+    }
+  ]
+}
