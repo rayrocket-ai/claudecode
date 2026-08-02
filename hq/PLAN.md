@@ -272,8 +272,11 @@ lists for all three pipelines; Codex's live-access verification of
 GHL/PropTx/VOW (trusted, not independently verifiable from this container).
 
 **Missing — Ray must supply (blocks the phases marked):**
-- Executed VOW/PropTx/board agreement + display rules (blocks VOW public
-  launch, ph.3A exit)
+- ~~Executed VOW/PropTx/board agreement~~ **CONFIRMED HELD by Ray (2026-08-02)
+  — signed agreements and approval exist.** Remaining action, Phase 0: locate
+  the document(s) on the box or have Ray drop them into the engine's document
+  storage, then run the portal-vs-agreement display-rules comparison before
+  VOW public launch (ph.3A). The gate is now a checklist item, not a blocker.
 - GHL admin access for pipeline/custom-field creation (blocks ph.1)
 - Primary GTA service areas; buyer qualification policy; seller
   consultation/CMA process; eXp recruiting value proposition (block the
