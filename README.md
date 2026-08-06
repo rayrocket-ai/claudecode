@@ -68,29 +68,31 @@ content-engine/
 |---|---|---|
 | `ANTHROPIC_API_KEY` | Yes | Claude API key |
 | `DATABASE_URL` | No | Defaults to `sqlite:///./content.db` |
-| `ELEVENLABS_WEBHOOK_SECRET` | Receptionist | Secret for ElevenLabs post-call webhook signature |
+| `VAPI_SECRET` | Receptionist | Shared secret Vapi sends as `X-Vapi-Secret` on every webhook |
 | `RECEPTIONIST_EMAIL` | Receptionist | Where call recap emails are sent |
 | `SMTP_HOST/PORT/USER/PASS` | Receptionist | SMTP creds for sending the recap |
 
-## AI Receptionist (ElevenLabs Agent + Twilio)
+## AI Receptionist (Vapi)
 
-When Ray can't pick up, an ElevenLabs Conversational AI agent answers, gets the caller's name and reason, gathers other details, and answers simple questions about Ray. When the call ends, ElevenLabs POSTs the full transcript to this app, Claude writes a sharp recap, and Ray gets an email.
+When Ray can't pick up, a Vapi voice assistant answers, captures the caller's name, reason, and callback details, and answers simple questions about Ray. When the call ends, Vapi POSTs an end-of-call report to this app; Claude writes a sharp recap and Ray gets an email with the transcript and a link to the call recording.
 
 ### Setup
 
-1. **Create the ElevenLabs Agent**
-   - ElevenLabs → Conversational AI → Agents → New Agent
-   - Voice: pick the one you want
-   - System prompt: paste in Ray's bio, GTA markets, and rules ("never quote prices/rates, never schedule, always say Ray will follow up")
-   - Data collection: define fields like `name`, `callback_number`, `reason`
-2. **Connect the Twilio number** in the agent's "Phone numbers" tab (ElevenLabs handles the Twilio integration — no TwiML needed on our side).
-3. **Configure the post-call webhook**
-   - ElevenLabs → Conversational AI → Settings → Webhooks → Post-call
-   - URL: `https://YOUR-APP.up.railway.app/voice/elevenlabs/post-call`
-   - Copy the generated **Webhook secret** into `ELEVENLABS_WEBHOOK_SECRET`
+1. **Create the Vapi assistant** (Vapi dashboard → Assistants → New)
+   - Model: whatever you prefer (GPT-4o / Claude / etc.)
+   - Voice: pick the voice you want
+   - System prompt: paste Ray's bio, GTA markets, and rules ("never quote prices/rates, never schedule appointments, always say Ray will follow up personally")
+   - **Analysis** → enable **Summary** and **Structured Data**. Define fields:
+     - `name` (string)
+     - `callback_number` (string)
+     - `reason` (string)
+2. **Attach the phone number** — buy one inside Vapi, or import your existing Twilio number under Phone Numbers, then assign it to the assistant.
+3. **Wire the server webhook** (Assistant → Advanced → Server):
+   - URL: `https://YOUR-APP.up.railway.app/voice/vapi/webhook`
+   - Secret: any string; put the same value in `VAPI_SECRET`
 4. **Set `RECEPTIONIST_EMAIL`** plus the four `SMTP_*` vars.
 
-Test by calling the Twilio number. Inspect recent calls at `GET /voice/calls`.
+Call the number to test. Inspect recent calls at `GET /voice/calls`.
 
 ## Ray's Story
 
