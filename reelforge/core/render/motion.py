@@ -221,10 +221,26 @@ def find_chromium() -> Path | None:
         if found:
             return found[-1]
 
-    for name in ("chromium", "chromium-browser", "google-chrome", "chrome"):
+    for name in ("chromium", "chromium-browser", "google-chrome",
+                 "google-chrome-stable", "chrome"):
         which = shutil.which(name)
         if which:
             return Path(which)
+
+    # macOS keeps browsers in app bundles, which are never on PATH. Without
+    # these a Mac with Chrome installed reports "no Chromium found".
+    for bundle in (
+        "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+        "/Applications/Chromium.app/Contents/MacOS/Chromium",
+        "/Applications/Brave Browser.app/Contents/MacOS/Brave Browser",
+        "/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge",
+    ):
+        candidate = Path(bundle)
+        if candidate.exists():
+            return candidate
+        user_local = Path.home() / bundle.lstrip("/")
+        if user_local.exists():
+            return user_local
     return None
 
 

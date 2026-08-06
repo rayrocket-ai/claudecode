@@ -26,9 +26,13 @@ FONT_CANDIDATES = [
     "/System/Library/Fonts/Apple Color Emoji.ttc",
 ]
 
-# Noto Color Emoji is a bitmap font shipped at exactly 109px. FreeType refuses
-# any other size for it, so we always rasterise at 109 and let ffmpeg scale.
+# Colour emoji fonts are bitmap fonts, and FreeType refuses any size other
+# than a strike the font actually ships. Noto Color Emoji has one at 109px;
+# Apple Color Emoji does not, which is why a single hardcoded size disabled
+# emoji entirely on macOS -- the load raised and the overlay was dropped with
+# a "no colour emoji font" warning on a machine that has a perfectly good one.
 NOTO_NATIVE_PX = 109
+STRIKE_CANDIDATES = (109, 137, 160, 128, 96, 64)
 
 
 def find_font() -> Path | None:
@@ -43,6 +47,21 @@ def find_font() -> Path | None:
         if out and Path(out).exists():
             return Path(out)
     return None
+
+
+def _load_at_a_strike(image_font, font_path: Path):
+    """Load a bitmap emoji font at whichever strike size it actually ships.
+
+    Returns ``(font, native_px)`` or ``(None, 0)``. Trying sizes is the only
+    portable approach: Pillow exposes no way to ask a font which strikes it
+    has, and the answer differs per platform (109 on Noto, 137 on Apple).
+    """
+    for native in STRIKE_CANDIDATES:
+        try:
+            return image_font.truetype(str(font_path), native), native
+        except OSError:
+            continue
+    return None, 0
 
 
 def cache_path(cache_dir: Path, glyph: str, size: int) -> Path:
@@ -70,15 +89,14 @@ def render(glyph: str, size: int, cache_dir: Path) -> Path | None:
     if font_path is None:
         return None
 
-    try:
-        font = ImageFont.truetype(str(font_path), NOTO_NATIVE_PX)
-    except OSError:
+    font, native = _load_at_a_strike(ImageFont, font_path)
+    if font is None:
         return None
 
-    canvas = Image.new("RGBA", (NOTO_NATIVE_PX * 2, NOTO_NATIVE_PX * 2), (0, 0, 0, 0))
+    canvas = Image.new("RGBA", (native * 2, native * 2), (0, 0, 0, 0))
     draw = ImageDraw.Draw(canvas)
     try:
-        draw.text((NOTO_NATIVE_PX // 2, NOTO_NATIVE_PX // 2), glyph,
+        draw.text((native // 2, native // 2), glyph,
                   font=font, embedded_color=True)
     except (OSError, ValueError):
         return None

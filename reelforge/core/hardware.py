@@ -113,6 +113,19 @@ def _gpu() -> str | None:
     return name or None
 
 
+def _apple_silicon() -> bool:
+    """Whether this is an Apple Silicon Mac.
+
+    Worth detecting separately from ``_gpu``: there is no CUDA here, so the
+    transcription path stays on CPU, but there *is* a dedicated media engine
+    that encodes H.264 far faster than any software encoder. Treating a Mac as
+    a plain CPU box leaves most of the machine unused.
+    """
+    import platform
+
+    return platform.system() == "Darwin" and platform.machine() == "arm64"
+
+
 def _ffmpeg_version() -> str | None:
     out = _run(["ffmpeg", "-version"])
     if not out:
@@ -134,6 +147,7 @@ def profile(workdir: Path | None = None) -> Profile:
     cores = _cores()
     ram = _ram_gb()
     gpu = _gpu()
+    apple = _apple_silicon()
 
     p = Profile(
         cores=cores,
@@ -165,6 +179,13 @@ def profile(workdir: Path | None = None) -> Profile:
         by_ram = int(ram // 4) if ram else 1
         p.transcribe_workers = max(1, min(cores, by_ram or 1, 8))
 
+        if apple:
+            # CTranslate2 has no Metal backend, so transcription stays on the
+            # CPU -- but an Apple Silicon core is several times a cloud vCPU,
+            # and the memory is unified, so the RAM ladder above is too timid
+            # here. One step up is comfortably real-time.
+            p.whisper_model = _CPU_MODEL_DEFAULT if ram >= 16 else p.whisper_model
+
     # --- rendering ---------------------------------------------------------
     # Segments render in parallel then concat: the single biggest CPU win.
     # Leave a core free so the box stays responsive for everything else on it.
@@ -174,6 +195,18 @@ def profile(workdir: Path | None = None) -> Profile:
         p.encoder = "h264_nvenc"
         p.draft_args = ["-c:v", "h264_nvenc", "-preset", "p1", "-cq", "28"]
         p.final_args = ["-c:v", "h264_nvenc", "-preset", "p6", "-cq", "19"]
+    elif apple and _has_encoder("h264_videotoolbox"):
+        # The media engine is quality-limited rather than CRF-driven, so these
+        # are bitrates. They are generous on purpose: VideoToolbox is fast
+        # enough that spending bits is free, and a vertical 1080x1920 reel is
+        # detail-dense in a way a 16:9 frame of the same height is not.
+        p.encoder = "h264_videotoolbox"
+        p.draft_args = ["-c:v", "h264_videotoolbox", "-b:v", "5M", "-realtime", "1"]
+        p.final_args = ["-c:v", "h264_videotoolbox", "-b:v", "12M"]
+        # Hardware encoding is a fixed-function block: running many segments
+        # through it at once queues on the same silicon rather than going
+        # faster, and it starves the machine of memory bandwidth.
+        p.render_parallelism = max(1, min(p.render_parallelism, 4))
     else:
         p.encoder = "libx264"
         threads = str(max(1, cores // max(1, p.render_parallelism)))
