@@ -1,24 +1,22 @@
-"""AI Receptionist — receives ElevenLabs post-call webhook, emails recap to Ray.
+"""AI Receptionist — receives Vapi end-of-call webhook, emails recap to Ray.
 
 Architecture
-    Caller dials Twilio number → Twilio routes to ElevenLabs Agent → agent
-    handles voice (TTS + STT + reasoning) using its own system prompt and Ray's
-    knowledge. When the call ends, ElevenLabs POSTs the full transcript to
-    /voice/elevenlabs/post-call. We persist it, ask Claude for a sharp recap,
-    and email it to RECEPTIONIST_EMAIL.
+    Caller dials Vapi phone number → Vapi assistant handles voice + STT + reasoning
+    (system prompt lives in the Vapi dashboard). When the call ends, Vapi POSTs an
+    "end-of-call-report" message to /voice/vapi/webhook. We persist the transcript
+    + recording URL, run a Claude recap if Vapi's own summary is missing, and email
+    Ray at RECEPTIONIST_EMAIL.
 
 Required env vars
-    ELEVENLABS_WEBHOOK_SECRET  HMAC secret for signature validation
-                               (ElevenLabs → Conversational AI → Settings →
-                                Post-call webhook → "Webhook secret")
-    RECEPTIONIST_EMAIL         where the recap is sent
-    SMTP_HOST/SMTP_PORT/SMTP_USER/SMTP_PASS  (already used by digest_email)
-    ANTHROPIC_API_KEY          for the Claude recap pass
+    VAPI_SECRET               Shared secret set on the Vapi assistant's Server URL.
+                              Vapi sends it as X-Vapi-Secret on every webhook.
+    RECEPTIONIST_EMAIL        Where the recap is sent.
+    SMTP_HOST/PORT/USER/PASS  Reused from digest_email.
+    ANTHROPIC_API_KEY         For the Claude recap pass.
 """
 
 from __future__ import annotations
 
-import hashlib
 import hmac
 import json
 import logging
@@ -44,47 +42,88 @@ logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/voice", tags=["receptionist"])
 
-ELEVENLABS_WEBHOOK_SECRET = os.getenv("ELEVENLABS_WEBHOOK_SECRET", "")
+VAPI_SECRET = os.getenv("VAPI_SECRET", "")
 RECEPTIONIST_EMAIL = os.getenv("RECEPTIONIST_EMAIL", "")
 
-# Tolerance for timestamp drift on the webhook signature (seconds)
-WEBHOOK_TIMESTAMP_TOLERANCE = 30 * 60
 
+# ── Auth ────────────────────────────────────────────────────────────────
 
-# ── Signature validation ─────────────────────────────────────────────────────
-
-def _validate_elevenlabs_signature(raw_body: bytes, header: str) -> bool:
-    """Verify ElevenLabs-Signature header. Format: t=<unix>,v0=<hex>."""
-    if not ELEVENLABS_WEBHOOK_SECRET:
-        logger.warning("ELEVENLABS_WEBHOOK_SECRET not set — webhook validation disabled")
+def _authorized(request: Request) -> bool:
+    """Vapi sends the configured Server URL Secret as X-Vapi-Secret."""
+    if not VAPI_SECRET:
+        logger.warning("VAPI_SECRET not set — webhook auth disabled")
         return True
-    if not header:
-        return False
-    parts = dict(p.split("=", 1) for p in header.split(",") if "=" in p)
-    timestamp = parts.get("t")
-    received_sig = parts.get("v0")
-    if not timestamp or not received_sig:
-        return False
+    sent = request.headers.get("x-vapi-secret") or request.headers.get("X-Vapi-Secret") or ""
+    return bool(sent) and hmac.compare_digest(sent, VAPI_SECRET)
+
+
+# ── Payload helpers ───────────────────────────────────────────────────────────
+
+def _parse_iso(ts: Optional[str]) -> Optional[datetime]:
+    if not ts:
+        return None
     try:
-        ts = int(timestamp)
-    except ValueError:
-        return False
-    if abs(int(datetime.utcnow().timestamp()) - ts) > WEBHOOK_TIMESTAMP_TOLERANCE:
-        return False
-    payload = f"{timestamp}.".encode("utf-8") + raw_body
-    expected = hmac.new(
-        ELEVENLABS_WEBHOOK_SECRET.encode("utf-8"), payload, hashlib.sha256
-    ).hexdigest()
-    return hmac.compare_digest(expected, received_sig)
+        return datetime.fromisoformat(ts.replace("Z", "+00:00")).replace(tzinfo=None)
+    except (ValueError, TypeError):
+        return None
+
+
+def _extract_collected(analysis: dict) -> dict:
+    """Vapi puts assistant-extracted fields under analysis.structuredData."""
+    raw = analysis.get("structuredData") or analysis.get("structured_data") or {}
+    if not isinstance(raw, dict):
+        return {}
+    collected = {}
+    for k, v in raw.items():
+        if v is None:
+            continue
+        if isinstance(v, (str, int, float, bool)):
+            s = str(v).strip()
+            if s:
+                collected[k] = s
+        elif isinstance(v, dict) and "value" in v:
+            s = str(v["value"]).strip()
+            if s:
+                collected[k] = s
+    return collected
+
+
+def _extract_turns(artifact: dict) -> list[tuple[str, str]]:
+    """Return [(role, text), ...] where role is 'ai' or 'caller'."""
+    messages = artifact.get("messages") or []
+    turns = []
+    for m in messages:
+        if not isinstance(m, dict):
+            continue
+        role_raw = (m.get("role") or "").lower()
+        text = (m.get("message") or m.get("content") or "").strip()
+        if not text or role_raw in ("system", "tool", "function"):
+            continue
+        role = "caller" if role_raw == "user" else "ai"
+        turns.append((role, text))
+    if turns:
+        return turns
+    # Fallback: some payloads only include a flat transcript string
+    transcript = (artifact.get("transcript") or "").strip()
+    if transcript:
+        for line in transcript.splitlines():
+            line = line.strip()
+            if not line:
+                continue
+            if ":" in line:
+                who, text = line.split(":", 1)
+                role = "caller" if who.strip().lower() in ("user", "customer", "caller") else "ai"
+                turns.append((role, text.strip()))
+    return turns
 
 
 # ── Persistence ──────────────────────────────────────────────────────────────
 
-def _persist_call(db: Session, payload: dict) -> Optional[CallRecord]:
-    data = payload.get("data") or {}
-    conv_id = data.get("conversation_id") or payload.get("conversation_id")
+def _persist_call(db: Session, message: dict) -> Optional[CallRecord]:
+    call_obj = message.get("call") or {}
+    conv_id = call_obj.get("id") or message.get("callId")
     if not conv_id:
-        logger.error("Webhook missing conversation_id; payload keys=%s", list(payload.keys()))
+        logger.error("Vapi webhook missing call.id; message keys=%s", list(message.keys()))
         return None
 
     existing = db.query(CallRecord).filter(CallRecord.call_sid == conv_id).first()
@@ -92,26 +131,24 @@ def _persist_call(db: Session, payload: dict) -> Optional[CallRecord]:
         logger.info("Recap already sent for %s — skipping", conv_id)
         return existing
 
-    metadata = data.get("metadata") or {}
-    phone_meta = metadata.get("phone_call") or {}
-    from_number = phone_meta.get("external_number") or phone_meta.get("caller_id") or ""
-    to_number = phone_meta.get("agent_number") or ""
+    customer = call_obj.get("customer") or {}
+    phone_meta = call_obj.get("phoneNumber") or {}
+    from_number = customer.get("number") or ""
+    to_number = phone_meta.get("number") or ""
 
-    started_at = datetime.utcnow()
-    if metadata.get("start_time_unix_secs"):
-        try:
-            started_at = datetime.utcfromtimestamp(int(metadata["start_time_unix_secs"]))
-        except (TypeError, ValueError):
-            pass
+    started_at = (
+        _parse_iso(message.get("startedAt"))
+        or _parse_iso(call_obj.get("startedAt"))
+        or _parse_iso(call_obj.get("createdAt"))
+        or datetime.utcnow()
+    )
+    ended_at = _parse_iso(message.get("endedAt")) or datetime.utcnow()
 
-    analysis = data.get("analysis") or {}
-    collected = {}
-    dcr = analysis.get("data_collection_results") or {}
-    for key, val in dcr.items():
-        if isinstance(val, dict) and val.get("value"):
-            collected[key] = str(val["value"])
-        elif isinstance(val, str):
-            collected[key] = val
+    artifact = message.get("artifact") or {}
+    analysis = message.get("analysis") or {}
+    collected = _extract_collected(analysis)
+    recording_url = artifact.get("recordingUrl") or artifact.get("stereoRecordingUrl")
+    ended_reason = message.get("endedReason") or "completed"
 
     if existing:
         call = existing
@@ -123,43 +160,31 @@ def _persist_call(db: Session, payload: dict) -> Optional[CallRecord]:
             call_sid=conv_id,
             from_number=from_number,
             to_number=to_number,
-            status="completed",
+            status=ended_reason,
             collected=json_dump(collected),
             started_at=started_at,
         )
         db.add(call)
         db.flush()
 
-    duration = metadata.get("call_duration_secs")
-    if duration:
-        try:
-            call.ended_at = datetime.utcfromtimestamp(
-                int(metadata.get("start_time_unix_secs", 0)) + int(duration)
-            )
-        except (TypeError, ValueError):
-            call.ended_at = datetime.utcnow()
-    else:
-        call.ended_at = datetime.utcnow()
+    call.status = ended_reason
+    call.ended_at = ended_at
+    call.recording_url = recording_url
 
     db.query(CallTurn).filter(CallTurn.call_id == call.id).delete()
-    transcript = data.get("transcript") or []
-    for i, turn in enumerate(transcript):
-        role = "ai" if turn.get("role") in ("agent", "assistant") else "caller"
-        text = (turn.get("message") or "").strip()
-        if not text:
-            continue
+    for i, (role, text) in enumerate(_extract_turns(artifact)):
         db.add(CallTurn(call_id=call.id, turn_index=i, role=role, text=text))
 
-    eleven_summary = analysis.get("transcript_summary")
-    if eleven_summary:
-        call.summary = eleven_summary
+    vapi_summary = analysis.get("summary")
+    if vapi_summary:
+        call.summary = vapi_summary
 
     db.commit()
     db.refresh(call)
     return call
 
 
-# ── Summary + email recap ────────────────────────────────────────────────────
+# ── Summary + email recap ───────────────────────────────────────────────────────
 
 def _summarize_call(call: CallRecord) -> str:
     transcript = "\n".join(
@@ -198,8 +223,8 @@ def _send_recap_email(call: CallRecord) -> dict:
     reason = collected.get("reason") or collected.get("topic") or "(not stated)"
     callback = (
         collected.get("callback")
-        or collected.get("phone")
         or collected.get("callback_number")
+        or collected.get("phone")
         or call.from_number
         or "(unknown)"
     )
@@ -211,16 +236,25 @@ def _send_recap_email(call: CallRecord) -> dict:
 
     subject = f"📞 Missed call recap — {name} ({reason[:40]})"
 
-    plain = (
-        f"Caller: {name}\n"
-        f"Callback: {callback}\n"
-        f"Reason: {reason}\n"
-        f"Other: {collected.get('other', '')}\n"
-        f"Started: {call.started_at:%Y-%m-%d %H:%M UTC}\n"
-        f"Status: {call.status}\n\n"
-        f"--- Recap ---\n{call.summary or '(none)'}\n\n"
-        f"--- Full transcript ---\n{transcript}\n"
-    )
+    plain_parts = [
+        f"Caller: {name}",
+        f"Callback: {callback}",
+        f"Reason: {reason}",
+        f"Other: {collected.get('other', '')}",
+        f"Started: {call.started_at:%Y-%m-%d %H:%M UTC}",
+        f"Status: {call.status}",
+    ]
+    if call.recording_url:
+        plain_parts.append(f"Recording: {call.recording_url}")
+    plain_parts.extend([
+        "",
+        "--- Recap ---",
+        call.summary or "(none)",
+        "",
+        "--- Full transcript ---",
+        transcript,
+    ])
+    plain = "\n".join(plain_parts) + "\n"
 
     html = _build_recap_html(call, name, callback, reason, collected, transcript_lines)
 
@@ -266,6 +300,16 @@ def _build_recap_html(call, name, callback, reason, collected, transcript_lines)
             f'<strong>{xml_escape(k.title())}:</strong> {xml_escape(str(v))}</td></tr>'
         )
 
+    recording_html = ""
+    if call.recording_url:
+        recording_html = (
+            f'<tr><td style="padding:16px 0 0 0;">'
+            f'<a href="{xml_escape(call.recording_url)}" '
+            f'style="display:inline-block;background:#1a1a1a;color:#f97316;font-size:13px;'
+            f'font-weight:700;text-decoration:none;padding:10px 18px;border-radius:8px;'
+            f'border:1px solid #f97316;">▶ Play call recording</a></td></tr>'
+        )
+
     return f"""<!DOCTYPE html>
 <html><body style="margin:0;padding:0;background:#0a0a0a;font-family:-apple-system,sans-serif;">
 <table width="100%" cellpadding="0" cellspacing="0" style="background:#0a0a0a;">
@@ -283,6 +327,7 @@ def _build_recap_html(call, name, callback, reason, collected, transcript_lines)
           {other_html}
         </table>
       </td></tr>
+      {recording_html}
       <tr><td style="padding:24px 0 12px 0;">
         <p style="margin:0 0 8px 0;color:#f97316;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2px;">AI Recap</p>
         <p style="margin:0;background:#111;border:1px solid #2a2a2a;border-radius:8px;padding:16px;color:#d1d5db;font-size:14px;line-height:1.6;white-space:pre-wrap;">{xml_escape(call.summary or '(no summary)')}</p>
@@ -296,29 +341,28 @@ def _build_recap_html(call, name, callback, reason, collected, transcript_lines)
 </table></body></html>"""
 
 
-# ── Webhook route ────────────────────────────────────────────────────────────
+# ── Webhook route ─────────────────────────────────────────────────────────────
 
-@router.post("/elevenlabs/post-call")
-async def elevenlabs_post_call(request: Request):
-    """Receive ElevenLabs post-call webhook, persist, and email recap."""
-    raw = await request.body()
-    sig = request.headers.get("ElevenLabs-Signature", "") or request.headers.get("elevenlabs-signature", "")
-    if not _validate_elevenlabs_signature(raw, sig):
-        return PlainTextResponse("Invalid signature", status_code=403)
+@router.post("/vapi/webhook")
+async def vapi_webhook(request: Request):
+    """Receive Vapi server messages. We only act on end-of-call-report."""
+    if not _authorized(request):
+        return PlainTextResponse("Forbidden", status_code=403)
 
     try:
-        payload: dict[str, Any] = json.loads(raw.decode("utf-8"))
+        payload: dict[str, Any] = await request.json()
     except json.JSONDecodeError:
         return PlainTextResponse("Invalid JSON", status_code=400)
 
-    event_type = payload.get("type", "")
-    if event_type and event_type != "post_call_transcription":
-        logger.info("Ignoring ElevenLabs event type=%s", event_type)
-        return JSONResponse({"ok": True, "ignored": event_type})
+    message = payload.get("message") or {}
+    msg_type = message.get("type", "")
+    if msg_type != "end-of-call-report":
+        logger.info("Ignoring Vapi event type=%s", msg_type)
+        return JSONResponse({"ok": True, "ignored": msg_type})
 
     db = SessionLocal()
     try:
-        call = _persist_call(db, payload)
+        call = _persist_call(db, message)
         if not call:
             return JSONResponse({"ok": False, "error": "could not persist call"}, status_code=400)
         if call.recap_sent:
@@ -331,12 +375,12 @@ async def elevenlabs_post_call(request: Request):
         result = _send_recap_email(call)
         call.recap_sent = bool(result.get("ok"))
         db.commit()
-        return JSONResponse({"ok": True, "email": result, "conversation_id": call.call_sid})
+        return JSONResponse({"ok": True, "email": result, "call_id": call.call_sid})
     finally:
         db.close()
 
 
-# ── Debug ────────────────────────────────────────────────────────────────────
+# ── Debug ─────────────────────────────────────────────────────────────────────
 
 @router.get("/calls")
 def list_calls(db: Session = Depends(get_db)):
@@ -344,11 +388,12 @@ def list_calls(db: Session = Depends(get_db)):
     calls = db.query(CallRecord).order_by(CallRecord.started_at.desc()).limit(25).all()
     return [
         {
-            "conversation_id": c.call_sid,
+            "call_id": c.call_sid,
             "from": c.from_number,
             "status": c.status,
             "collected": c.collected_dict(),
             "summary": c.summary,
+            "recording_url": c.recording_url,
             "recap_sent": c.recap_sent,
             "started_at": c.started_at.isoformat() if c.started_at else None,
             "turns": [{"role": t.role, "text": t.text} for t in c.turns],
