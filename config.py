@@ -58,6 +58,13 @@ class Settings(BaseSettings):
     smtp_password: str = ""
     smtp_from: str = ""
 
+    # Meta (Facebook/Instagram) Marketing API — see META_ADS_SETUP.md
+    meta_access_token: str = ""
+    meta_ad_account_id: str = ""   # act_XXXXXXXXXX
+    meta_page_id: str = ""
+    meta_instagram_id: str = ""
+    meta_api_version: str = "v21.0"
+
     # SkySlope
     skyslope_api_key: str = ""
     skyslope_api_url: str = "https://api.skyslope.com"
