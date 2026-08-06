@@ -198,6 +198,7 @@ class CallRecord(Base):
     collected = Column(Text, nullable=True)   # JSON: {name, callback, reason, ...}
     summary = Column(Text, nullable=True)
     recap_sent = Column(Boolean, default=False)
+    recording_url = Column(String(500), nullable=True)  # Vapi recordingUrl
     started_at = Column(DateTime, default=datetime.utcnow)
     ended_at = Column(DateTime, nullable=True)
 
@@ -248,8 +249,12 @@ def _migrate_db():
     """Add new columns to existing tables if they don't exist (SQLite-safe)."""
     from sqlalchemy import text
     with engine.connect() as conn:
-        try:
-            conn.execute(text("ALTER TABLE video_scripts ADD COLUMN rating INTEGER"))
-            conn.commit()
-        except Exception:
-            pass  # Column already exists
+        for ddl in (
+            "ALTER TABLE video_scripts ADD COLUMN rating INTEGER",
+            "ALTER TABLE call_records ADD COLUMN recording_url VARCHAR(500)",
+        ):
+            try:
+                conn.execute(text(ddl))
+                conn.commit()
+            except Exception:
+                pass  # Column already exists
