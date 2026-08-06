@@ -140,11 +140,34 @@ class BRollSlot:
 
 
 @dataclass
+class SoundEffect:
+    """One effect, placed in output seconds.
+
+    ``at`` is where the effect should be *heard landing*, not where its file
+    starts. The renderer shifts playback earlier by the catalogue's ``lead`` so
+    a whoosh covers the cut it belongs to instead of arriving just after it --
+    getting this wrong is the difference between "produced" and "someone added
+    sound effects".
+    """
+    at: float
+    name: str                        # a key in render.sfx.CATALOGUE
+    gain_db: float = -6.0
+    why: str = ""
+
+
+@dataclass
 class Audio:
     music: str | None = None
     music_gain_db: float = -18.0
     duck: bool = True
     fade_ms: int = 20                # at every cut -- this is what kills pops
+    #: Compression applied to the music whenever speech is present. Defaults
+    #: chosen to be felt and not heard: enough that words stay in front, slow
+    #: enough on release that the bed does not pump between sentences.
+    duck_threshold: float = 0.045
+    duck_ratio: float = 9.0
+    duck_attack_ms: float = 15.0
+    duck_release_ms: float = 420.0
 
 
 @dataclass
@@ -157,6 +180,7 @@ class EDL:
     overlays: list[Overlay] = field(default_factory=list)
     transitions: list[Transition] = field(default_factory=list)
     audio: Audio = field(default_factory=Audio)
+    sfx: list[SoundEffect] = field(default_factory=list)
     chapters: list[Chapter] = field(default_factory=list)
     broll: list[BRollSlot] = field(default_factory=list)
     version: int = SCHEMA_VERSION
@@ -304,6 +328,18 @@ def validate(edl: EDL, *, source_duration: float | None = None) -> list[str]:
     for ov in edl.overlays:
         if ov.at > duration:
             problems.append(f"overlay at {ov.at}s is past the end of the edit")
+            break
+
+    for cue in edl.sfx:
+        if cue.at > duration + 0.05:
+            problems.append(f"sound effect {cue.name!r} at {cue.at}s is past the end")
+            break
+        if cue.gain_db > 0:
+            # Effects are normalised to a fixed peak, so a positive gain is
+            # asking for clipping rather than for emphasis.
+            problems.append(
+                f"sound effect {cue.name!r} gain {cue.gain_db}dB is above unity"
+            )
             break
 
     for slot in edl.broll:

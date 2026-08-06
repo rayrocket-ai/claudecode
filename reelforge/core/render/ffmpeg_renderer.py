@@ -22,7 +22,7 @@ from pathlib import Path
 from .. import media
 from ..edl import EDL
 from ..hardware import Profile
-from . import ass, emoji, filters
+from . import ass, emoji, filters, motion, sfx
 
 log = logging.getLogger("reelforge.render")
 
@@ -74,12 +74,18 @@ def render(
         subtitle_file = _write_captions(edl, temp_root)
         overlays, overlay_warnings = _prepare_overlays(edl, temp_root)
         warnings += overlay_warnings
+        sequences, motion_warnings = _prepare_sequences(edl, temp_root)
+        warnings += motion_warnings
+        tracks, audio_warnings = _prepare_audio(edl, temp_root)
+        warnings += audio_warnings
 
         dst.parent.mkdir(parents=True, exist_ok=True)
         media.run(filters.finish_cmd(
             str(joined), str(dst), edl.target,
             subtitles=_escape_for_filter(subtitle_file) if subtitle_file else None,
             overlays=overlays, encode_args=encode_args,
+            sequences=sequences, audio_tracks=tracks,
+            audio=edl.audio, duration=edl.duration,
         ))
     finally:
         if not keep_intermediates and workdir is None:
@@ -193,9 +199,9 @@ def _prepare_overlays(edl: EDL, temp_root: Path):
     prepared, warnings = [], []
 
     for overlay in edl.overlays:
+        if overlay.type in motion.BACKENDS:
+            continue                      # handled by _prepare_sequences
         if overlay.type != "emoji":
-            # Remotion and HyperFrames overlays land in phase 7; skipping them
-            # loudly is better than rendering a video that silently lacks them.
             warnings.append(f"overlay type {overlay.type!r} not yet supported, skipped")
             continue
 
@@ -216,6 +222,58 @@ def _prepare_overlays(edl: EDL, temp_root: Path):
         prepared.append((str(png), overlay.at, overlay.dur, x, y))
 
     return prepared, warnings
+
+
+def _prepare_sequences(edl: EDL, temp_root: Path):
+    """Render animated overlays through their motion backend."""
+    prepared, warnings = [], []
+    for overlay in edl.overlays:
+        if overlay.type not in motion.BACKENDS:
+            continue
+        try:
+            seq = motion.render_overlay(
+                overlay, edl.target, temp_root / "motion", fps=edl.target.fps
+            )
+        except motion.BackendUnavailable as exc:
+            # Named loudly rather than dropped. A finished video that quietly
+            # lacks its lower-third is the worst outcome here, because nothing
+            # in the output says anything went wrong.
+            warnings.append(str(exc))
+            continue
+        prepared.append(seq)
+    return prepared, warnings
+
+
+def _prepare_audio(edl: EDL, temp_root: Path):
+    """Resolve the music bed and synthesise every sound effect."""
+    cache_dir = temp_root / "audio"
+    tracks: list[filters.AudioTrack] = []
+    warnings: list[str] = []
+
+    if edl.audio.music:
+        music = Path(edl.audio.music)
+        if music.exists():
+            tracks.append(filters.AudioTrack(
+                str(music), "music", 0.0, edl.audio.music_gain_db
+            ))
+        else:
+            warnings.append(f"music bed not found: {music}")
+
+    for cue in edl.sfx:
+        try:
+            wav = sfx.render(cue.name, cache_dir)
+        except sfx.UnknownEffect as exc:
+            warnings.append(str(exc))
+            continue
+        # `at` is where the effect should land, so playback starts earlier by
+        # the catalogue's lead. Placing a whoosh exactly on the cut makes it
+        # sound like a mistake immediately after it.
+        lead = sfx.CATALOGUE[cue.name].lead
+        tracks.append(filters.AudioTrack(
+            str(wav), "sfx", cue.at + lead, cue.gain_db
+        ))
+
+    return tracks, warnings
 
 
 def _escape_for_filter(path: Path) -> str:

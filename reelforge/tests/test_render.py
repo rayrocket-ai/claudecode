@@ -68,10 +68,29 @@ def test_no_animation_returns_static_coordinates():
 def test_unsupported_overlay_types_warn_rather_than_vanish():
     """Silently dropping an overlay yields a video that is quietly wrong."""
     edl = EDL(source="/tmp/a.mp4", segments=[Segment("s1", 0, 5)],
-              overlays=[Overlay(type="remotion", at=1.0, comp="LowerThird")])
+              overlays=[Overlay(type="image", at=1.0)])
     overlays, warnings = ffmpeg_renderer._prepare_overlays(edl, Path("/tmp/rf-test"))
     assert overlays == []
     assert any("not yet supported" in w for w in warnings)
+
+
+def test_motion_overlays_are_left_for_the_motion_stage():
+    """They must not be warned about here -- they are handled, just elsewhere."""
+    edl = EDL(source="/tmp/a.mp4", segments=[Segment("s1", 0, 5)],
+              overlays=[Overlay(type="hyperframes", at=1.0, comp="lower-third")])
+    overlays, warnings = ffmpeg_renderer._prepare_overlays(edl, Path("/tmp/rf-test"))
+    assert overlays == []
+    assert warnings == []
+
+
+def test_missing_remotion_project_names_the_fix(tmp_path, monkeypatch):
+    """An absent backend must say how to install it, not vanish."""
+    monkeypatch.setenv("REELFORGE_REMOTION_PROJECT", str(tmp_path / "nope"))
+    edl = EDL(source="/tmp/a.mp4", segments=[Segment("s1", 0, 5)],
+              overlays=[Overlay(type="remotion", at=1.0, comp="LowerThird")])
+    sequences, warnings = ffmpeg_renderer._prepare_sequences(edl, tmp_path)
+    assert sequences == []
+    assert any("create-video" in w for w in warnings)
 
 
 def test_missing_font_warns_with_the_fix(monkeypatch):

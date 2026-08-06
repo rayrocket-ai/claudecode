@@ -193,6 +193,124 @@ def audio_chain(out_duration: float, audio: Audio, *, speed: float = 1.0) -> str
     return ",".join(parts)
 
 
+@dataclass(frozen=True)
+class SequenceOverlay:
+    """An animated transparent PNG sequence from a motion backend."""
+
+    pattern: str                 # printf-style, e.g. /path/frame_%05d.png
+    at: float                    # output seconds where the animation begins
+    dur: float
+    x: str = "0"
+    y: str = "0"
+    fps: float = 30.0
+
+
+@dataclass(frozen=True)
+class AudioTrack:
+    """An extra audio input for the finishing pass, in output time."""
+
+    path: str
+    kind: str                    # "music" or "sfx"
+    at: float = 0.0              # already lead-adjusted; may be negative
+    gain_db: float = 0.0
+
+
+def audio_mix_graph(
+    *,
+    first_index: int,
+    tracks: list[AudioTrack],
+    audio: Audio,
+    duration: float,
+    loudness: float,
+) -> tuple[list[list[str]], list[str], str]:
+    """Build the audio half of the finishing pass.
+
+    Returns ``(per-track input args, filter steps, output label)``.
+
+    Two decisions worth stating:
+
+    **The music is compressed against the speech, not scheduled around it.**
+    A bed at a fixed -18 dB either buries a quiet sentence or disappears
+    entirely in a loud one. Keying a compressor off the dialogue makes the bed
+    move with the voice, which is what a human mixer does and what makes the
+    result sound mixed rather than layered.
+
+    **``amix`` runs with ``normalize=0`` and ``duration=first``.** Normalising
+    would silently drop the dialogue by several dB the moment a second input
+    appeared, so a video with music would be quieter than the same video
+    without it -- for no reason the user could see. Locking the duration to the
+    first input keeps the audio exactly as long as the picture even if an
+    effect near the end would otherwise extend it.
+    """
+    inputs: list[list[str]] = []
+    steps: list[str] = []
+    mix: list[str] = []
+
+    music = next((t for t in tracks if t.kind == "music"), None)
+    ducking = music is not None and audio.duck
+
+    speech = "0:a"
+    if ducking:
+        steps.append("[0:a]asplit=2[sp][duckkey]")
+        speech = "sp"
+    mix.append(speech)
+
+    effects = 0
+    for offset, track in enumerate(tracks):
+        index = first_index + offset
+        if track.kind == "music":
+            # Looped at the input so a two-minute bed covers a ten-minute
+            # episode without anyone having to prepare a longer file.
+            inputs.append(["-stream_loop", "-1", "-i", track.path])
+            steps.append(
+                f"[{index}:a]atrim=0:{duration:.3f},asetpts=PTS-STARTPTS,"
+                f"volume={track.gain_db:.2f}dB[music]"
+            )
+            if ducking:
+                steps.append(
+                    "[music][duckkey]sidechaincompress="
+                    f"threshold={audio.duck_threshold:.4f}:ratio={audio.duck_ratio:.2f}:"
+                    f"attack={audio.duck_attack_ms:.0f}:release={audio.duck_release_ms:.0f}"
+                    "[musicduck]"
+                )
+                mix.append("musicduck")
+            else:
+                mix.append("music")
+            continue
+
+        inputs.append(["-i", track.path])
+        label = f"fx{effects}"
+        effects += 1
+        if track.at < 0:
+            # An effect whose lead-in starts before the video does. Trimming its
+            # head is right where delaying it would be wrong: a riser that must
+            # peak on the first frame has to already be running.
+            steps.append(
+                f"[{index}:a]atrim=start={-track.at:.3f},asetpts=PTS-STARTPTS,"
+                f"volume={track.gain_db:.2f}dB[{label}]"
+            )
+        else:
+            delay = int(round(track.at * 1000))
+            steps.append(
+                f"[{index}:a]adelay={delay}|{delay},"
+                f"volume={track.gain_db:.2f}dB[{label}]"
+            )
+        mix.append(label)
+
+    if len(mix) > 1:
+        joined = "".join(f"[{name}]" for name in mix)
+        steps.append(
+            f"{joined}amix=inputs={len(mix)}:normalize=0:dropout_transition=0"
+            ":duration=first[amixed]"
+        )
+        label = "amixed"
+    else:
+        label = mix[0]
+
+    steps.append(f"[{label}]loudnorm=I={loudness}:TP=-1.5:LRA=11[aout]")
+    return inputs, steps, "aout"
+
+
 def dip_filters(fade_in: float, fade_out: float, out_duration: float) -> list[str]:
     """Fade filters implementing a transition as a dip at a segment boundary.
 
@@ -269,20 +387,38 @@ def concat_cmd(list_file: str, dst: str) -> list[str]:
 
 def finish_cmd(src: str, dst: str, target: Target, *, subtitles: str | None,
                overlays: list[tuple[str, float, float, str, str]],
-               encode_args: list[str]) -> list[str]:
-    """Burn captions and overlays, normalise loudness, and encode the final.
+               encode_args: list[str],
+               sequences: list["SequenceOverlay"] | None = None,
+               audio_tracks: list[AudioTrack] | None = None,
+               audio: Audio | None = None,
+               duration: float = 0.0) -> list[str]:
+    """Burn captions and overlays, mix audio, normalise loudness, and encode.
 
     Done in one pass over the joined video rather than per segment, because
     caption and overlay times are in *output* space -- applying them per segment
     would mean re-deriving every timestamp against a moving origin.
+
+    Three kinds of visual layer arrive here, in a fixed order: still overlays
+    (emoji, images), then animated sequences from a motion backend, then
+    captions last so text is never hidden behind a graphic.
     """
-    inputs = ["-i", src]
+    sequences = sequences or []
+    audio_tracks = audio_tracks or []
+
+    inputs: list[str] = ["-i", src]
     for path, *_ in overlays:
         inputs += ["-i", path]
+    for seq in sequences:
+        # A numbered PNG sequence is read as a stream at its own frame rate.
+        # -framerate must precede -i: as an output option it is silently
+        # ignored and the sequence plays at 25fps regardless of intent.
+        inputs += ["-framerate", f"{seq.fps:g}", "-i", seq.pattern]
 
     steps: list[str] = []
     label = "0:v"
-    for index, (_path, at, dur, x, y) in enumerate(overlays, start=1):
+    index = 1
+
+    for (_path, at, dur, x, y) in overlays:
         nxt = f"v{index}"
         # x and y must be quoted: an animated position contains commas (from
         # `clip(v,0,1)`), and ffmpeg reads an unquoted comma as the end of the
@@ -293,6 +429,25 @@ def finish_cmd(src: str, dst: str, target: Target, *, subtitles: str | None,
             f":enable='between(t,{at:.3f},{at + dur:.3f})'[{nxt}]"
         )
         label = nxt
+        index += 1
+
+    for seq in sequences:
+        shifted = f"seq{index}"
+        # The sequence is authored starting at zero, so it is shifted into
+        # position rather than padded with transparent frames -- which would
+        # mean generating (and encoding) hundreds of empty PNGs to place a
+        # two-second graphic late in a long video.
+        steps.append(
+            f"[{index}:v]setpts=PTS-STARTPTS+{seq.at:.3f}/TB[{shifted}]"
+        )
+        nxt = f"v{index}"
+        steps.append(
+            f"[{label}][{shifted}]overlay=x='{seq.x}':y='{seq.y}'"
+            f":enable='between(t,{seq.at:.3f},{seq.at + seq.dur:.3f})'"
+            ":eof_action=pass[" + nxt + "]"
+        )
+        label = nxt
+        index += 1
 
     if subtitles:
         nxt = "vsub"
@@ -302,18 +457,36 @@ def finish_cmd(src: str, dst: str, target: Target, *, subtitles: str | None,
         steps.append(f"[{label}]subtitles='{subtitles}'[{nxt}]")
         label = nxt
 
-    filter_complex = ";".join(steps) if steps else ""
-
     cmd = ["ffmpeg", "-hide_banner", "-nostdin", "-y", *inputs]
+
+    audio_label: str | None = None
+    if audio_tracks:
+        track_inputs, audio_steps, audio_label = audio_mix_graph(
+            first_index=index,
+            tracks=audio_tracks,
+            audio=audio or Audio(),
+            duration=duration,
+            loudness=target.loudness,
+        )
+        for args in track_inputs:
+            cmd += args
+        steps += audio_steps
+
+    filter_complex = ";".join(steps) if steps else ""
     if filter_complex:
         cmd += ["-filter_complex", filter_complex, "-map", f"[{label}]"]
     else:
         cmd += ["-map", "0:v"]
-    cmd += ["-map", "0:a?"]
-    # Single-pass loudnorm drifts slightly versus a measured two-pass run, but
-    # it is well inside what platforms re-normalise anyway, and it halves the
-    # render time of the one stage that cannot be parallelised.
-    cmd += ["-filter:a", f"loudnorm=I={target.loudness}:TP=-1.5:LRA=11"]
+
+    if audio_label:
+        cmd += ["-map", f"[{audio_label}]"]
+    else:
+        cmd += ["-map", "0:a?"]
+        # Single-pass loudnorm drifts slightly versus a measured two-pass run,
+        # but it is well inside what platforms re-normalise anyway, and it
+        # halves the render time of the one stage that cannot be parallelised.
+        cmd += ["-filter:a", f"loudnorm=I={target.loudness}:TP=-1.5:LRA=11"]
+
     cmd += encode_args
     cmd += ["-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart", dst]
     return cmd
