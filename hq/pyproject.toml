@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rayos"
+version = "0.1.0"
+description = "Ray Real Estate OS -- policy, pipelines, work orders, CRM adapters"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+
+# Deliberately dependency-free at the core. The CRM adapter talks through an
+# injected transport rather than importing `requests`, so every rule in here
+# is testable without a network, a database, or an API key -- which is the
+# whole point of building this half off the box.
+dependencies = []
+
+[tool.setuptools]
+packages = ["rayos", "rayos.crm"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]

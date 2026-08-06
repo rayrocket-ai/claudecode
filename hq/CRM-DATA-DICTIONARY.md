@@ -1,10 +1,13 @@
-# CRM data dictionary + pipeline specifications — DRAFT v0.1
+# CRM data dictionary + pipeline specifications — DRAFT v0.2
 
 Plan §6.1: this document is the first deliverable of Phase 1, before code.
 It is the contract every agent and workflow follows: exact fields, tags,
 stage entry/exit conditions, per-stage owner, and max idle time.
 
-**Status: DRAFT.** It freezes to v1.0 only after the Phase-0 Lofty snapshot
+**Status: DRAFT.** v0.2 (2026-08-06) reconciles this document with the
+executable version in `hq/rayos/pipelines.py` — the stage tables below and
+that module are now the same specification, and a test asserts the stage
+counts and that no stage is left ungoverned. It freezes to v1.0 only after the Phase-0 Lofty snapshot
 (`hq/PHASE0-RUNBOOK.md` §3) shows which of these fields/pipelines map
 natively onto Lofty's model and which live in the Postgres ledger with a
 Lofty tag pointing at them. Stage counts follow the agreed targets
@@ -73,20 +76,28 @@ stages have a cadence instead of an idle cap.
 | 3 | In Qualification | two-way conversation live | intent+timeline+location+budget+financing captured | CON | 2 days |
 | 4 | Qualified | qualification complete, timeline ≤12m | consult booked OR moved to Nurture | CON | 3 days |
 | 5 | Nurture | not ready (timeline >12m or unresponsive) | re-engagement reply | CON | cadence: 8×8 then 33-touch |
-| 6 | Consult Booked | buyer consultation on calendar | consult held | BS | until appt (reminder monitors) |
+| 6 | Consult Booked | buyer consultation on calendar | consult held | BS | cadence: appointment reminders (48h/24h/2h + next-day follow-up) |
 | 7 | Consult Done / BRA | consultation held | BRA signed | BS | 5 days |
 | 8 | VOW Active — Searching | BRA signed, VOW registered | first showing requested | BS | 7 days (saved-search alerts running) |
-| 9 | Showing Scheduled | showing booked (BrokerBay+Calendar) | showing completed | BS | until appt |
+| 9 | Showing Scheduled | showing booked (BrokerBay+Calendar) | showing completed | BS | cadence: appointment reminders |
 | 10 | Actively Showing | ≥1 showing done | offer-prep appointment set | BS | 5 days (post-showing follow-up drives next showing or offer-prep — every conversation aims at an appointment) |
 | 11 | Offer Prep | offer-prep appointment held | offer submitted (approval-gated) | BS | 2 days |
-| 12 | Offer Submitted | offer out, irrevocability running | accepted / rejected / expired | BS | deadline monitor (hard) |
-| 13 | Conditional | offer accepted with conditions | all conditions waived/fulfilled | TA | per-condition deadline monitors |
+| 12 | Offer Submitted | offer out, irrevocability running | accepted / rejected / expired | BS | **1 day** + hard deadline monitor |
+| 13 | Conditional | offer accepted with conditions | all conditions waived/fulfilled | TA | cadence: `deal_conditional` + per-condition hard monitors |
 | 14 | Firm | conditions cleared | closing day | TA | pre-closing checklist cadence |
 | 15 | Closed | transaction closed | day-1/week-1/30/90 care done | TA | checklist-driven |
 | 16 | Past Client | care sequence done | (permanent) | CON | anniversary yearly + 33-touch |
 
 Rejected/expired offers return to 10; lost/withdrawn leads exit to Nurture
 or suppression, never deleted.
+
+**Nurture is a branch, not a step.** It is numbered 5 because that is where
+it belongs in the CRM's stage list, but the main sequence runs 4 → 6: a
+qualified lead's next step is a booked consultation. Any stage before Firm
+may fall back to nurture; re-entry from nurture goes to qualification, not
+back into a half-finished showing tour. Enforced in `rayos/pipelines.py`
+(`branch_keys`) and tested.
+The same branch rule applies to the Seller pipeline's stage 5.
 
 **Pre-con track** (first-class per plan §2, §4.6): runs as a parallel
 checklist track on a buyer/investor record from stage 8+ — worksheet
@@ -105,13 +116,13 @@ LS = Listing Specialist.
 | 3 | In Qualification | conversation live | property+motivation+timeline captured | CON | 2 days |
 | 4 | Qualified — CMA Prep | qualification complete | CMA/pre-listing package ready | LS | 3 days |
 | 5 | Nurture | not ready to list | re-engagement | CON | cadence |
-| 6 | Listing Appt Booked | consultation on calendar | appointment held | LS | until appt |
+| 6 | Listing Appt Booked | consultation on calendar | appointment held | LS | cadence: appointment reminders |
 | 7 | Appt Done — Proposal Out | consultation held | listing agreement signed / declined | LS | 5 days |
 | 8 | Listing Signed | agreement executed | pre-market checklist complete | LS | checklist-driven |
 | 9 | Pre-Market Prep | photos/staging/media/campaign in motion | live on MLS | LS | 10 days |
 | 10 | Active on Market | listed | offer registered | LS | weekly seller report + showing-agent feedback loop (24h/72h, persists until an explicit no, an offer, or the listing ends) |
-| 11 | Offer(s) Received | offer registered | acceptance (approval-gated) | LS | irrevocability monitor (hard) |
-| 12 | Conditional | accepted with conditions | conditions cleared | TA | per-condition monitors |
+| 11 | Offer(s) Received | offer registered | acceptance (approval-gated) | LS | **1 day** + irrevocability monitor (hard) |
+| 12 | Conditional | accepted with conditions | conditions cleared | TA | cadence: `deal_conditional` + per-condition hard monitors |
 | 13 | Firm | conditions cleared | closing | TA | pre-closing checklist |
 | 14 | Closed | transaction closed | care sequence done | TA | checklist-driven |
 | 15 | Past Client | care done | (permanent) | CON | anniversary + 33-touch |
@@ -130,16 +141,16 @@ here is campaign-approved (Phase 6 — this pipeline stays dormant until then).
 | 1 | Prospect Identified | added from research | enrichment done | Ops | 7 days |
 | 2 | Researched | production/brokerage profile built | outreach drafted | Ops | 5 days |
 | 3 | Outreach Approved | Ray approved campaign + draft | first send | — | 2 days |
-| 4 | Outreach Sent | sequence running | reply | Ops | sequence cadence, frequency-capped |
+| 4 | Outreach Sent | sequence running | reply | Ops | 5 days (sequence cadence specified at Phase 6) |
 | 5 | In Conversation | two-way reply | discovery call booked | Ray/Ops | 3 days |
-| 6 | Discovery Call Set | call on calendar | call held | Ray | until appt |
+| 6 | Discovery Call Set | call on calendar | call held | Ray | cadence: appointment reminders |
 | 7 | Discovery Done | call held | decision path chosen | Ray | 3 days |
-| 8 | Nurture | interested, not now | re-engagement | Ops | monthly cadence |
+| 8 | Nurture | interested, not now | re-engagement | Ops | 30 days |
 | 9 | Objections / Considering | active objections | resolved either way | Ray | 7 days |
 | 10 | Committed — Paperwork | verbal yes | application sent | Ray | 2 days |
 | 11 | Signed | application executed | onboarding started | Ops | 2 days |
-| 12 | Onboarding | checklist running | checklist complete | Ops | checklist-driven |
-| 13 | Onboarded — Producing | fully active | (permanent; retention touches) | Ops | quarterly |
+| 12 | Onboarding | checklist running | checklist complete | Ops | 7 days |
+| 13 | Onboarded — Producing | fully active | (permanent; retention touches) | Ops | 90 days |
 
 ## 7. Lease / landlord / tenant & investor-resale
 
