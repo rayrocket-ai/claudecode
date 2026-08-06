@@ -30,12 +30,30 @@ uvicorn dashboard.app:app --reload --host 0.0.0.0 --port 8000
 
 Open http://localhost:8000
 
-## Deploy to Railway
+## Deploy to Hetzner (Docker Compose + Caddy)
 
-1. Push to GitHub
-2. Connect repo in Railway
-3. Add environment variable: `ANTHROPIC_API_KEY=your_key`
-4. Deploy — Railway auto-detects the Dockerfile
+On a fresh Ubuntu/Debian Hetzner box with a subdomain pointed at its IP:
+
+```bash
+git clone https://github.com/rayrocket-ai/claudecode.git ~/claudecode
+cd ~/claudecode
+cp .env.example .env
+nano .env                    # fill in DOMAIN, VAPI_SECRET, ANTHROPIC_API_KEY, SMTP_*
+./deploy.sh                  # installs Docker if missing, then docker compose up -d
+```
+
+The stack:
+- **app** — FastAPI on 8000, SQLite persisted in `./data/content.db` (bind mount survives container rebuilds)
+- **caddy** — reverse proxy on 80/443, auto-provisions Let's Encrypt TLS for `$DOMAIN`
+
+After it's up, in the Vapi dashboard set the assistant's Server URL to `https://$DOMAIN/voice/vapi/webhook` and the Server Secret to whatever you set `VAPI_SECRET=` to.
+
+Common ops:
+```bash
+docker compose logs -f app caddy   # tail everything
+docker compose restart app         # after code changes
+docker compose pull && docker compose up -d --build   # after git pull
+```
 
 ## Project Structure
 
@@ -53,7 +71,9 @@ content-engine/
 │   └── static/             # CSS
 ├── requirements.txt
 ├── Dockerfile
-└── railway.toml
+├── docker-compose.yml
+├── Caddyfile
+└── deploy.sh
 ```
 
 ## Pipeline Stages
@@ -67,7 +87,8 @@ content-engine/
 | Variable | Required | Description |
 |---|---|---|
 | `ANTHROPIC_API_KEY` | Yes | Claude API key |
-| `DATABASE_URL` | No | Defaults to `sqlite:///./content.db` |
+| `DATABASE_URL` | No | Defaults to `sqlite:///./content.db` (compose overrides to `/app/data/content.db`) |
+| `DOMAIN` | Deploy | FQDN Caddy provisions Let's Encrypt TLS for (e.g. `receptionist.example.com`) |
 | `VAPI_SECRET` | Receptionist | Shared secret Vapi sends as `X-Vapi-Secret` on every webhook |
 | `RECEPTIONIST_EMAIL` | Receptionist | Where call recap emails are sent |
 | `SMTP_HOST/PORT/USER/PASS` | Receptionist | SMTP creds for sending the recap |
@@ -88,7 +109,7 @@ When Ray can't pick up, a Vapi voice assistant answers, captures the caller's na
      - `reason` (string)
 2. **Attach the phone number** — buy one inside Vapi, or import your existing Twilio number under Phone Numbers, then assign it to the assistant.
 3. **Wire the server webhook** (Assistant → Advanced → Server):
-   - URL: `https://YOUR-APP.up.railway.app/voice/vapi/webhook`
+   - URL: `https://$DOMAIN/voice/vapi/webhook`
    - Secret: any string; put the same value in `VAPI_SECRET`
 4. **Set `RECEPTIONIST_EMAIL`** plus the four `SMTP_*` vars.
 
