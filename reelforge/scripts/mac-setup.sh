@@ -54,17 +54,23 @@ ok "ffmpeg $(ffmpeg -version 2>/dev/null | head -1 | awk '{print $3}')"
 
 # Chromium is only needed for animated overlays, so a failure here is not
 # fatal -- the rest of the editor works without it and says so at render time.
-if [ -d "/Applications/Chromium.app" ] || [ -d "/Applications/Google Chrome.app" ]; then
+if [ -d "/Applications/Google Chrome.app" ] || [ -d "/Applications/Chromium.app" ]; then
     ok "a browser for animated overlays is already installed"
 else
-    if brew install --cask chromium; then
-        # Homebrew's Chromium is unsigned, so Gatekeeper refuses to launch it
-        # until the quarantine flag is cleared. Doing it here saves a baffling
-        # "cannot be opened" dialog later.
+    # Google Chrome rather than Chromium: Homebrew deprecated the Chromium
+    # cask because it fails the macOS Gatekeeper check, and is disabling it
+    # on 2026-09-01. Chrome is signed, needs no quarantine surgery, and is
+    # the same engine as far as frame capture is concerned.
+    if brew install --cask google-chrome; then
+        ok "Google Chrome installed"
+    elif brew install --cask chromium; then
+        # Unsigned, so Gatekeeper refuses to launch it until the quarantine
+        # flag is cleared -- otherwise you get a baffling "cannot be opened"
+        # dialog at render time rather than at install time.
         xattr -dr com.apple.quarantine /Applications/Chromium.app 2>/dev/null || true
-        ok "Chromium installed"
+        warn "installed Chromium (deprecated by Homebrew; Chrome is preferred)"
     else
-        warn "Chromium did not install -- animated overlays will be skipped."
+        warn "no browser installed -- animated overlays will be skipped."
         warn "Everything else (trimming, captions, zooms, emoji, sound) still works."
     fi
 fi
