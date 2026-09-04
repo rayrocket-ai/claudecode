@@ -58,6 +58,12 @@ SAMPLE_WIDTH = 540
 #: the rest of the frame its edge density must be to count as text.
 BAND_FRACTION = 0.08
 BAND_CONTRAST = 1.8
+#: How much the band's edge profile must move between consecutive sampled
+#: frames for it to be captions rather than a static graphic. Profiles are
+#: normalised to a mean of 1, so this is a fraction of the frame's own edge
+#: level; identical frames differ by exactly zero, compressed video by a
+#: few hundredths, changing words by far more.
+STATIC_CHANGE = 0.05
 #: Letterbox borders and UI chrome live in the outer few percent; a burned-in
 #: caption never does.
 BAND_MARGIN = 0.03
@@ -210,10 +216,23 @@ def caption_band(profiles: list[np.ndarray]) -> tuple[float, float | None]:
     start = lo + int(np.argmax(window[lo:hi]))
     centre = (start + band / 2) / height
 
-    per_frame = stack[:, start:start + band].mean(axis=1)
+    band_rows = stack[:, start:start + band]
+    per_frame = band_rows.mean(axis=1)
     present = per_frame >= BAND_CONTRAST
     presence = float(present.mean())
-    return presence, (centre if presence > 0 else None)
+    if presence == 0:
+        return 0.0, None
+
+    # Recurrence alone is not enough: a poster with big lettering behind the
+    # speaker recurs at the same rows in every frame too. What separates
+    # captions from set dressing is that captions *change* -- the words are
+    # different a second later, so the band's edge profile moves. A band
+    # whose profile is the same in every captioned frame is furniture.
+    if stack.shape[0] >= 2:
+        change = np.abs(np.diff(band_rows, axis=0)).mean(axis=1)
+        if float(np.median(change)) < STATIC_CHANGE:
+            return 0.0, None
+    return presence, centre
 
 
 def measure(src: Path, workdir: Path, *, name: str | None = None,

@@ -83,10 +83,13 @@ reference side by side. That comparison is worth more than any report.
 
 ## Notes
 
-The caption detector finds *where text recurs*, not what it says. It is
-reliable on burned-in captions and will miss captions rendered as a small
-sticker in a corner. Say so if the report shows captions absent but the
-editor agent can see them.
+The caption detector finds *where text recurs and changes*, not what it
+says. Lettering that never changes -- a poster on the wall behind the
+speaker, a channel logo -- is deliberately excluded, because captions move
+on to the next words and furniture does not. It is reliable on burned-in
+captions and will miss captions rendered as a small sticker in a corner.
+Say so if the report shows captions absent but the editor agent can see
+them.
 
 Everything in `memory/references/` is a measurement and can be re-derived by
 re-running `study`. `memory/style-profile.md` is judgement and cannot; back

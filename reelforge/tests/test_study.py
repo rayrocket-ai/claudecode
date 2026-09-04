@@ -64,18 +64,33 @@ def test_round_trips_through_json():
 # the caption band
 # --------------------------------------------------------------------------
 
-def frame_with_text(y_fraction: float | None, size=(270, 480)) -> Image.Image:
-    """A frame with a noisy background and, optionally, a text line."""
+def frame_with_text(y_fraction: float | None, size=(270, 480),
+                    phase: int = 0) -> Image.Image:
+    """A frame with a noisy background and, optionally, a text line.
+
+    ``phase`` varies the stroke pattern the way different words would --
+    captions change from frame to frame, and the detector relies on that.
+    Pass the same phase every time to imitate a static poster.
+    """
     rng = np.random.default_rng(7)
     noise = (rng.normal(120, 8, (size[1], size[0]))).clip(0, 255).astype("uint8")
     image = Image.fromarray(noise).convert("RGB")
     if y_fraction is not None:
         draw = ImageDraw.Draw(image)
         y = int(size[1] * y_fraction)
-        # Dense vertical strokes are what text looks like to an edge filter.
-        for x in range(20, size[0] - 20, 4):
-            draw.line([(x, y - 12), (x, y + 12)], fill=(255, 255, 255), width=2)
+        words = np.random.default_rng(1000 + phase)
+        # Dense vertical strokes are what text looks like to an edge filter;
+        # varying their spacing and height is what changing words look like.
+        x = 20
+        while x < size[0] - 20:
+            tall = int(words.integers(6, 14))
+            draw.line([(x, y - tall), (x, y + tall)], fill=(255, 255, 255), width=2)
+            x += int(words.integers(3, 7))
     return image
+
+
+def captioned(n: int, y: float = 0.72) -> list[np.ndarray]:
+    return [study.row_edge_profile(frame_with_text(y, phase=i)) for i in range(n)]
 
 
 def test_row_profile_is_normalised_to_the_frame():
@@ -90,16 +105,24 @@ def test_uniform_frame_has_no_edges_and_does_not_divide_by_zero():
 
 
 def test_caption_band_is_found_where_the_text_recurs():
-    frames = [study.row_edge_profile(frame_with_text(0.72)) for _ in range(12)]
-    presence, position = study.caption_band(frames)
+    presence, position = study.caption_band(captioned(12))
     assert presence == 1.0
     assert position == pytest.approx(0.72, abs=0.04)
 
 
+def test_a_static_poster_is_not_captions():
+    # Big lettering on the wall behind the speaker recurs at the same rows in
+    # every frame, exactly like captions -- except it never changes. That is
+    # the whole difference between subtitles and set dressing.
+    poster = [study.row_edge_profile(frame_with_text(0.4, phase=3)) for _ in range(12)]
+    presence, position = study.caption_band(poster)
+    assert presence == 0.0
+    assert position is None
+
+
 def test_presence_reflects_how_many_frames_carry_text():
-    with_text = [study.row_edge_profile(frame_with_text(0.72)) for _ in range(6)]
     without = [study.row_edge_profile(frame_with_text(None)) for _ in range(6)]
-    presence, _ = study.caption_band(with_text + without)
+    presence, _ = study.caption_band(captioned(6) + without)
     assert 0.4 <= presence <= 0.6
 
 
