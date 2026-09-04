@@ -65,8 +65,9 @@ then repairs the EDL and re-renders, up to three attempts.
 | 4 | The brain + `/reels` end to end | **done** |
 | 5 | `/vlog` — chapters, b-roll slots, music, metadata, thumbnails | **done** |
 | 6 | QC self-eval loop with auto-repair | **done** |
-| 7 | Premium overlays — Remotion **and** HyperFrames backends | |
+| 7 | Sound effects, ducked music bed, animated overlays (HyperFrames proven; Remotion wired, unverified) | **done** |
 | 8 | `memory/`, `/reel-feedback` — the learning loop | **done** |
+| 9b | `/reel-study` — learn cut cadence, pauses, captions, loudness and length from reference videos | **done** |
 | 9 | MCP server + LibreChat front end — edit from any browser | |
 | 10 | Open-Generative-AI adapter — b-roll, intros, thumbnails | |
 
@@ -112,7 +113,7 @@ truth.
 ## Layout
 
 ```
-commands/    slash commands (/reels, /vlog, /reel-doctor, /reel-feedback, /reel-bakeoff)
+commands/    slash commands (/reels, /vlog, /reel-study, /reel-doctor, /reel-feedback, /reel-bakeoff)
 agents/      subagents: editor (the brain), colorist (framing), critic (QC)
 skills/      ffmpeg recipes, caption styles, platform specs
 core/        the engine: ingest, analyse, compose, render, qc, hardware

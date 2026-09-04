@@ -398,6 +398,55 @@ def cmd_render(args) -> int:
 
 # --------------------------------------------------------------------------
 
+def cmd_study(args) -> int:
+    """Measure a reference video and report what it implies for the playbook."""
+    import datetime as _dt
+    import tempfile
+
+    from .core import study
+
+    src = Path(args.video)
+    if not src.exists():
+        print(f"error: {src} not found", file=sys.stderr)
+        return 2
+
+    memory = Path(args.memory)
+    workdir = Path(args.workdir) if args.workdir else Path(tempfile.mkdtemp(prefix="reelforge-study-"))
+    when = _dt.date.today().isoformat()
+
+    reading = study.measure(src, workdir, name=args.name, when=when)
+    study.save(reading, memory)
+
+    everything = study.load_all(memory)
+    suggestions = study.suggest(everything)
+    report = study.render_report(reading, suggestions, total_references=len(everything))
+
+    reports = study.references_dir(memory)
+    reports.mkdir(parents=True, exist_ok=True)
+    report_path = reports / f"{reading.name}.md"
+    report_path.write_text(report, encoding="utf-8")
+
+    if args.apply:
+        study.apply(suggestions, memory, when=when)
+
+    if args.json:
+        print(json.dumps({
+            "reading": json.loads(reading.to_json()),
+            "suggestions": [s.__dict__ for s in suggestions],
+            "references": len(everything),
+            "applied": bool(args.apply),
+            "report": str(report_path),
+            "frames": str(workdir),
+        }, indent=2))
+    else:
+        print(report)
+        print(f"report: {report_path}")
+        print(f"frames: {workdir}")
+        if args.apply:
+            print(f"applied to {memory / 'playbook.md'}")
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(prog="reelforge")
     sub = ap.add_subparsers(dest="command", required=True)
@@ -456,6 +505,16 @@ def main(argv: list[str] | None = None) -> int:
                    help="skip inspection and repair")
     p.add_argument("--qc-passes", type=int, default=3)
     p.set_defaults(func=cmd_render)
+
+    p = sub.add_parser("study", help="learn a style from a reference video")
+    p.add_argument("video")
+    p.add_argument("--name", help="short name for the reference (default: file stem)")
+    p.add_argument("--memory", default=str(Path(__file__).parent / "memory"))
+    p.add_argument("--workdir", help="where sampled frames go (default: temp dir)")
+    p.add_argument("--apply", action="store_true",
+                   help="write the suggested values into playbook.md with provenance")
+    p.add_argument("--json", action="store_true")
+    p.set_defaults(func=cmd_study)
 
     args = ap.parse_args(argv)
     try:

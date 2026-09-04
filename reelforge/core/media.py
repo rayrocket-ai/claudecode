@@ -140,6 +140,22 @@ def loudness_curve_cmd(src: Path, *, window: float = 1.0) -> list[str]:
     ]
 
 
+def loudness_cmd(src: Path) -> list[str]:
+    """Integrated loudness and loudness range, EBU R128.
+
+    Different from :func:`loudness_curve_cmd`, which gives a per-second RMS
+    curve for finding *moments*. This gives one number for the whole file,
+    which is what you compare against a platform target -- and what a
+    reference video tells you about how hot its creator mixes.
+    """
+    return [
+        "ffmpeg", "-hide_banner", "-nostdin",
+        "-i", str(src),
+        "-af", "ebur128=framelog=quiet",
+        "-f", "null", "-",
+    ]
+
+
 def filmstrip_cmd(src: Path, dst_pattern: Path, *, every_seconds: float = 5.0,
                   width: int = 320) -> list[str]:
     """Sample frames as JPEGs.
@@ -227,6 +243,23 @@ def parse_scenes(stderr: str) -> list[float]:
             if t is not None:
                 times.append(t)
     return sorted(set(times))
+
+
+def parse_loudness(stderr: str) -> tuple[float | None, float | None]:
+    """Extract ``(integrated LUFS, loudness range LU)`` from ebur128's summary.
+
+    The summary block prints ``I:`` and ``LRA:`` lines once at the end; the
+    per-frame ``M:`` readings that precede them are deliberately not matched.
+    """
+    integrated: float | None = None
+    lra: float | None = None
+    for line in stderr.splitlines():
+        stripped = line.strip()
+        if stripped.startswith("I:") and "LUFS" in stripped:
+            integrated = _tail_float(stripped, "I:")
+        elif stripped.startswith("LRA:") and "LU" in stripped:
+            lra = _tail_float(stripped, "LRA:")
+    return integrated, lra
 
 
 def _tail_float(line: str, marker: str) -> float | None:
