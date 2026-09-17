@@ -65,6 +65,14 @@ class Settings(BaseSettings):
     meta_instagram_id: str = ""
     meta_api_version: str = "v21.0"
 
+    # Google Ads API — see GOOGLE_ADS_SETUP.md
+    google_ads_developer_token: str = ""
+    google_ads_client_id: str = ""
+    google_ads_client_secret: str = ""
+    google_ads_refresh_token: str = ""
+    google_ads_customer_id: str = ""        # digits only, e.g. 1344350136
+    google_ads_login_customer_id: str = ""  # manager (MCC) id if applicable
+
     # SkySlope
     skyslope_api_key: str = ""
     skyslope_api_url: str = "https://api.skyslope.com"
