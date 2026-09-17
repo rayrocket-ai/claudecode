@@ -154,3 +154,35 @@ P2 — rebuild:
     system-user token in Ray Homes' Business Manager per META_ADS_SETUP.md,
     then build with the ADMAX 2026 structure (one campaign, one ad set,
     10–15 creatives, higher-intent form).
+
+---
+
+## CORRECTION — Sep 17, 2026 (after the Ad Advisor connector came online)
+
+Section 2a above was wrong. The email-only audit concluded Ray's Meta ad
+account was dormant since 2017 because Meta stopped sending "ad approved"
+emails. Ad Advisor shows two Meta ad accounts, both named "Ray Ahmadi":
+
+- **732663023528570** — ACTIVE. Ray's working account. Both ADMAX
+  campaigns are live here: 34 Buttonleaf (sprint Jul 20–27, relaunched
+  Aug 11) and 16 Curry (Aug 11). Through the Aug 20 snapshot: $243.41
+  spend, 21 leads, blended CPL $11.59. Page 1033110506750808, pixel
+  1793927534188323, IG 17841401464994148. Also holds 2024 Marketplace
+  rental boosts and 2025 Instagram post boosts.
+- **1788128334781323** — IDLE since ~Feb 2026. 168 campaigns, 2023–2026,
+  agency-style naming (pre-construction condo lead gen: UnionCity, Burnet,
+  Kipling Station, The Clove, Oakville Yards; listing lead gen; retargeting).
+  Nearly all $5/day ABO — the starved-test anti-pattern. Nothing spending.
+
+Both accounts were authorized against an older Ad Advisor app version, so
+the connector is a frozen snapshot (as of Aug 20 / Apr 26) until Ray
+reconnects Meta at app.adadvisor.ai/settings/integrations. No writes are
+possible until then. Lead-form reads additionally require Ad Advisor's
+Data Use Checkup to be complete on Meta's side.
+
+Section 3's "Meta is a clean slate" is therefore also wrong: Meta is the
+one channel that IS working. Priorities update: keep both Meta campaigns
+running; expand creative to 10–15 per ad set; verify lead quality; then
+scale by 20–30% steps. The Google findings in Section 1 stand unchanged
+and still need the Google API path or the 5-minute manual fix — Ad
+Advisor does not cover Google Ads.

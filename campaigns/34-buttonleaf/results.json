@@ -1,7 +1,7 @@
 {
   "name": "34 Buttonleaf Cres \u2014 Stouffville",
   "subtitle": "$15/day lean flight \u00b7 Meta Leads + YouTube Shorts \u00b7 no price, no address",
-  "status": "pre-launch",
+  "status": "live",
   "playbook": "Listing Exposure \u00b7 Playbook A",
   "targets": {
     "budget_note": "of $105/wk plan",
@@ -61,12 +61,99 @@
       "text": "Week 3: YouTube adds nothing \u2192 propose folding $5 into Meta (Ray approves)"
     }
   ],
-  "daily": [],
+  "daily": [
+    {
+      "date": "2026-08-12",
+      "spend": 10.86,
+      "leads": 1,
+      "ctr_pct": 6.1,
+      "impressions": 508,
+      "views": null,
+      "notes": ""
+    },
+    {
+      "date": "2026-08-13",
+      "spend": 10.01,
+      "leads": 1,
+      "ctr_pct": 5.31,
+      "impressions": 527,
+      "views": null,
+      "notes": ""
+    },
+    {
+      "date": "2026-08-14",
+      "spend": 14.01,
+      "leads": 1,
+      "ctr_pct": 4.99,
+      "impressions": 561,
+      "views": null,
+      "notes": ""
+    },
+    {
+      "date": "2026-08-15",
+      "spend": 9.24,
+      "leads": 0,
+      "ctr_pct": 5.21,
+      "impressions": 557,
+      "views": null,
+      "notes": ""
+    },
+    {
+      "date": "2026-08-16",
+      "spend": 10.76,
+      "leads": 0,
+      "ctr_pct": 4.41,
+      "impressions": 590,
+      "views": null,
+      "notes": ""
+    },
+    {
+      "date": "2026-08-17",
+      "spend": 12.4,
+      "leads": 3,
+      "ctr_pct": 4.84,
+      "impressions": 579,
+      "views": null,
+      "notes": ""
+    },
+    {
+      "date": "2026-08-18",
+      "spend": 10.71,
+      "leads": 2,
+      "ctr_pct": 4.34,
+      "impressions": 692,
+      "views": null,
+      "notes": ""
+    },
+    {
+      "date": "2026-08-19",
+      "spend": 8.48,
+      "leads": 0,
+      "ctr_pct": 2.02,
+      "impressions": 643,
+      "views": null,
+      "notes": "CTR dip"
+    },
+    {
+      "date": "2026-08-20",
+      "spend": 2.26,
+      "leads": 0,
+      "ctr_pct": 4.76,
+      "impressions": 105,
+      "views": null,
+      "notes": "partial day; snapshot froze here"
+    }
+  ],
   "log": [
     {
       "date": "2026-07-19",
       "title": "Plan v2 approved at $15/day",
       "entry": "Curiosity strategy locked: price and address withheld, the form trade is the hook. Edit brief issued for three vertical cuts (fast / POV walk-in / trending-style, licensed audio only). Hypothesis on deck: fast-cut hook beats POV walk-in on CTR."
+    },
+    {
+      "date": "2026-08-12",
+      "title": "Live since Jul 20; relaunched Aug 11",
+      "entry": "Discovered via Ad Advisor on Sep 17: the Jul 20 sprint (campaign 6999756017312, 15s video, instant form, Stouffville 15mi) spent $64.41 for 5 leads (CPL $12.88). Relaunched Aug 11 as campaign 52506208679516: single ad, pixel LEAD optimization, Stouffville 15mi, Advantage+ audience."
     }
   ]
 }

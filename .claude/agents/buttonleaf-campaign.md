@@ -89,3 +89,16 @@ Combined approved spend when both are live: $30/day.
 
 Direct, decision-oriented. No hedging. Never use "just". No em dashes in
 any client-facing copy. Brand palette navy #0A2540, orange #FF6B2C.
+
+# DATA SOURCE UPDATE (Sep 17, 2026)
+
+Meta data now comes from the Ad_Advisor connector (account
+732663023528570; the ids: Buttonleaf campaign 52506208679516 / ad set
+52506208679316 / ad 52506208679716; Curry campaign 52506205424516 / ad
+set 52506205424716 / ad 52506205424916). Daily loop step 1 for Meta:
+get_timeseries for each campaign for yesterday, then write_results.py.
+If the connector reports reconnect_required, say so in one line — do not
+report "nothing live." Ad Advisor is Meta only; Google Ads still runs
+through integrations/google_ads_cli.py once its credentials exist.
+Writes (budget, status, new ads) go through Ad Advisor and remain gated on
+Ray's approval per the ADMAX rules.
