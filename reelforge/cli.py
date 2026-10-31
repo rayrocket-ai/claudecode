@@ -541,6 +541,37 @@ def cmd_transcript(args) -> int:
     return 0
 
 
+def cmd_preview(args) -> int:
+    """Open an edit in Remotion Studio to watch and scrub it in the browser."""
+    import subprocess
+
+    from .core.render import remotion_renderer as rm
+
+    edl_path = Path(args.edl).expanduser().resolve()
+    edl = EDL.load(edl_path)
+    ok, why = rm.available()
+    if not ok:
+        print(f"error: {why}", file=sys.stderr)
+        return 2
+
+    workdir = _root() / ".preview" / edl_path.name.replace(".edl.json", "")
+    props, public, warnings = rm.prepare_preview(edl, workdir)
+    for warning in warnings:
+        print(f"warning: {warning}", file=sys.stderr)
+
+    url = f"http://localhost:{args.port}/Edit"
+    print(f"Opening {edl_path.name} in Remotion Studio at {url}")
+    print("Play, scrub the timeline, and click any track to inspect it.")
+    print("Press Ctrl+C here to close it.")
+    try:
+        subprocess.run(rm.preview_cmd(rm.project_dir(), props, public, port=args.port,
+                                      open_browser=not args.no_open),
+                       cwd=rm.project_dir())
+    except KeyboardInterrupt:
+        pass
+    return 0
+
+
 def cmd_edit(args) -> int:
     """The standalone editor agent: video in, finished edit out.
 
@@ -714,6 +745,12 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--engine", choices=["auto", "remotion", "ffmpeg"], default=None,
                    help="renderer (default: auto -- Remotion when installed, else ffmpeg)")
     p.set_defaults(func=cmd_render)
+
+    p = sub.add_parser("preview", help="open an edit in Remotion Studio to watch and scrub it")
+    p.add_argument("edl")
+    p.add_argument("--port", type=int, default=3000)
+    p.add_argument("--no-open", action="store_true", help="do not open a browser")
+    p.set_defaults(func=cmd_preview)
 
     p = sub.add_parser("transcript", help="print a cached transcript as the brain reads it")
     p.add_argument("video")

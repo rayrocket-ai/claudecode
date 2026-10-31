@@ -491,3 +491,40 @@ def render(edl: EDL, dst: Path, profile: Profile, *, draft: bool = False,
 
     return RenderResult(output=dst, edl_path=None, duration=edl.duration,
                         segments=len(edl.segments), warnings=warnings)
+
+
+# --------------------------------------------------------------------------
+# preview in Remotion Studio
+# --------------------------------------------------------------------------
+
+def preview_cmd(project: Path, props: Path, public: Path, *, port: int = 3000,
+                open_browser: bool = True) -> list[str]:
+    """Remotion Studio on an edit: a browser player with a timeline.
+
+    Every segment, caption card, graphic and sound effect shows up as its own
+    named track, so the edit can be scrubbed, played, and inspected frame by
+    frame before -- or instead of -- waiting for a full render.
+    """
+    cmd = ["npx", "--no-install", "remotion", "studio", "src/index.ts",
+           f"--props={props}", f"--public-dir={public}", f"--port={port}"]
+    if not open_browser:
+        cmd.append("--no-open")
+    return cmd
+
+
+def prepare_preview(edl: EDL, workdir: Path) -> tuple[Path, Path, list[str]]:
+    """Stage an edit for Studio exactly as a render would. Returns paths.
+
+    Same staging and same props as :func:`render`, so what Studio shows is
+    what a render will produce -- a preview built any other way would be a
+    second renderer, and two renderers drift.
+    """
+    src = Path(edl.source)
+    if not src.exists():
+        raise RenderError(f"source not found: {src}")
+    workdir.mkdir(parents=True, exist_ok=True)
+    staged = stage(edl, workdir)
+    props, warnings = build_props(edl, media.probe(src), staged)
+    props_path = workdir / "props.json"
+    props_path.write_text(json.dumps(props), encoding="utf-8")
+    return props_path, staged.public, warnings

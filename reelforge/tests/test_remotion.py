@@ -405,3 +405,24 @@ def test_remotion_really_renders_an_edl(tmp_path):
     assert (info.width, info.height) == (540, 960)
     assert info.duration == pytest.approx(1.8, abs=0.1)
     assert info.has_audio
+
+
+def test_preview_command_shape(tmp_path):
+    cmd = rm.preview_cmd(tmp_path, tmp_path / "p.json", tmp_path / "pub", port=3100,
+                         open_browser=False)
+    assert cmd[:5] == ["npx", "--no-install", "remotion", "studio", "src/index.ts"]
+    assert "--port=3100" in cmd and "--no-open" in cmd
+    assert f"--public-dir={tmp_path / 'pub'}" in cmd
+
+
+def test_prepare_preview_stages_like_a_render(tmp_path):
+    src = tmp_path / "s.mp4"
+    subprocess.run(["ffmpeg", "-y", "-v", "error", "-f", "lavfi", "-i",
+                    "color=c=blue:size=320x180:rate=30:duration=2",
+                    "-c:v", "libx264", "-preset", "ultrafast", "-pix_fmt", "yuv420p",
+                    str(src)], check=True)
+    e = EDL(source=str(src), segments=[Segment("s1", 0.0, 1.5)])
+    props_path, public, warnings = rm.prepare_preview(e, tmp_path / "pv")
+    props = json.loads(props_path.read_text())
+    assert props["durationInFrames"] == 45
+    assert (public / props["source"]["src"]).exists()
