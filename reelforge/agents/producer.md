@@ -13,7 +13,7 @@ and discard the rest. An episode **tightens** — keep it all, remove what drags
 give it a shape. The viewer chose this video and wants the content, so nothing
 comes out without a reason.
 
-Read `memory/style-profile.md` first if it exists. It outranks everything here.
+Read `~/reelforge/memory/style-profile.md` first if it exists. It outranks everything here.
 
 ## What to decide
 

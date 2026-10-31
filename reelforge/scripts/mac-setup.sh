@@ -89,6 +89,18 @@ fi
 ok "installed into $VENV"
 
 # --------------------------------------------------------------------------
+say "Your working folders"
+
+# Footage in, finished edits out, and what the editor learns about your
+# style. Kept apart from the source code so updating ReelForge never touches
+# them. Never put this folder inside Google Drive -- caches and renders change
+# constantly and Drive would sync all day.
+mkdir -p "$HOME/reelforge/inbox" "$HOME/reelforge/outbox" "$HOME/reelforge/memory"
+[ -f "$HOME/reelforge/memory/style-profile.example.md" ] || \
+    cp "$REPO/memory/style-profile.example.md" "$HOME/reelforge/memory/" 2>/dev/null || true
+ok "~/reelforge/{inbox,outbox,memory}"
+
+# --------------------------------------------------------------------------
 say "Remotion (the render engine)"
 
 # Remotion draws every frame as a React composition -- spring-animated
@@ -174,9 +186,11 @@ session needed, just an Anthropic API key in ~/.reelforge/env:
   reelforge edit /path/to/your/video.mp4 --count 3      # vertical reels
   reelforge edit /path/to/your/video.mp4 --mode vlog    # a YouTube episode
 
-or work with it interactively from Claude Code, inside this repository:
+or work with it from Claude Code -- no API key needed that way:
 
-  /reels /path/to/your/video.mp4 --count 3
-  /vlog /path/to/your/video.mp4
+  cd $REPO && claude
+  /edit /path/to/your/video.mp4
+
+Finished edits land in ~/reelforge/outbox.
 
 EOF

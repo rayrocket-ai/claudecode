@@ -310,3 +310,26 @@ def test_measure_finds_known_cuts_and_pauses(tmp_path):
     assert r.loudness_lufs is not None
     # Test patterns are not text; the band detector must not invent captions.
     assert r.caption_presence < 0.5
+
+
+@pytest.mark.skipif(not media.available(), reason="ffmpeg not installed")
+def test_study_shares_memory_with_edit_and_feedback(tmp_path, monkeypatch):
+    """A style learned by study must land where edit reads it.
+
+    study used to default to the repository's own memory/ folder while edit,
+    compose and feedback all read ~/reelforge/memory -- so `--apply` wrote a
+    playbook no edit ever loaded.
+    """
+    from reelforge import cli
+
+    monkeypatch.setenv("REELFORGE_ROOT", str(tmp_path / "root"))
+    clip = tmp_path / "ref.mp4"
+    subprocess.run(["ffmpeg", "-y", "-v", "error",
+                    "-f", "lavfi", "-i", "color=c=blue:size=270x480:rate=30:duration=2",
+                    "-f", "lavfi", "-i", "sine=frequency=300:duration=2",
+                    "-c:v", "libx264", "-preset", "ultrafast", "-pix_fmt", "yuv420p",
+                    "-c:a", "aac", "-shortest", str(clip)], check=True)
+    assert cli.main(["study", str(clip), "--apply", "--json",
+                     "--workdir", str(tmp_path / "work")]) == 0
+    assert (tmp_path / "root" / "memory" / "references" / "ref.json").exists()
+    assert (tmp_path / "root" / "memory" / "playbook.md").exists()

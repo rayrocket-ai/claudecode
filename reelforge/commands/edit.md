@@ -9,7 +9,7 @@ allowed-tools: Read, Write, Edit, Glob, Grep, Bash(reelforge:*), Bash(python3:*)
 Launch the **video-editor** agent with the video path and any options given.
 It owns the whole job: transcribe, decide what to keep, compose, render with
 Remotion, look at the frames, fix what is wrong. It returns a finished video
-in `outbox/`.
+in `~/reelforge/outbox/`.
 
 Do not do the edit in the main thread. An hour of transcript is large, and
 the agent's context is disposable. It also reviews its own frames before

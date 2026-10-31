@@ -29,7 +29,7 @@ reelforge study <path> [--name short-name]
 This measures what a reference can actually tell you: cut cadence, reframe
 cadence (the zoom rhythm), pause tightness, energy dynamics, loudness,
 caption presence and position, and length. It saves the reading under
-`memory/references/` and prints a report with the playbook values the
+`~/reelforge/memory/references/` and prints a report with the playbook values the
 references imply so far.
 
 **One reference is a direction, not a style.** The suggestions are medians
@@ -51,7 +51,7 @@ across the video are enough). Ask it for exactly these, as short observations:
 - Music and sound effects: is there a bed, are cuts marked with sound
 - The hook: quote the first line and say what kind of opening it is
 
-Write these into `memory/style-profile.md` under a `## Reference: <name>`
+Write these into `~/reelforge/memory/style-profile.md` under a `## Reference: <name>`
 heading. That file is what the editor reads before every job; the playbook
 holds the numbers, the profile holds the taste.
 
@@ -61,7 +61,7 @@ holds the numbers, the profile holds the taste.
 reelforge study <path> --apply
 ```
 
-Writes the suggested values into `memory/playbook.md` with provenance naming
+Writes the suggested values into `~/reelforge/memory/playbook.md` with provenance naming
 the reference, in the same format `/reel-feedback` uses. A rule the user later
 disagrees with can be traced to the video that caused it and deleted.
 
@@ -91,6 +91,6 @@ captions and will miss captions rendered as a small sticker in a corner.
 Say so if the report shows captions absent but the editor agent can see
 them.
 
-Everything in `memory/references/` is a measurement and can be re-derived by
-re-running `study`. `memory/style-profile.md` is judgement and cannot; back
-it up with the rest of `memory/`.
+Everything in `~/reelforge/memory/references/` is a measurement and can be re-derived by
+re-running `study`. `~/reelforge/memory/style-profile.md` is judgement and cannot; back
+it up with the rest of `~/reelforge/memory/`.

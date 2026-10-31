@@ -21,7 +21,7 @@ and there is nothing here to work from.
 
 ## 2. Find the moments
 
-Read `memory/style-profile.md` if it exists, then launch the **editor** agent
+Read `~/reelforge/memory/style-profile.md` if it exists, then launch the **editor** agent
 with the transcript, signals summary, and the highlights schema. Ask it for
 about 3x the requested clip count.
 
@@ -36,7 +36,7 @@ reelforge render <edl.json> [--draft]
 ```
 
 `compose` ranks the candidates, suppresses ones covering the same moment, and
-writes one EDL per reel. `render` turns an EDL into an MP4 in `outbox/`.
+writes one EDL per reel. `render` turns an EDL into an MP4 in `~/reelforge/outbox/`.
 
 Render `--draft` first when the user is likely to want changes — it is several
 times faster and the framing, timing, and caption decisions are all visible in

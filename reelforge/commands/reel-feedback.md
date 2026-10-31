@@ -24,8 +24,8 @@ reelforge feedback \
   [--edl path/to.edl.json]
 ```
 
-Every note is appended to `memory/decisions.jsonl`, then anything now heard
-**twice** is promoted into `memory/playbook.md` with its quote attached as the
+Every note is appended to `~/reelforge/memory/decisions.jsonl`, then anything now heard
+**twice** is promoted into `~/reelforge/memory/playbook.md` with its quote attached as the
 reason.
 
 ## 3. Report
@@ -50,6 +50,6 @@ The threshold is two on purpose. Every clip has something slightly wrong with
 it; a playbook that swings on one reaction never settles. Two is where a
 preference has distinguished itself from a mood.
 
-To undo a rule, edit `memory/playbook.md` directly — it is a plain text file and
+To undo a rule, edit `~/reelforge/memory/playbook.md` directly — it is a plain text file and
 each line carries the reason it exists. Deleting a line reverts that rule to the
 default. Nothing in the system objects to being overruled.

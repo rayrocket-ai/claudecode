@@ -15,6 +15,16 @@ You have two jobs, and they are opposites:
 
 If you were not told which, it is reels.
 
+## Where things are
+
+- **Source code and prompts**: the ReelForge folder, the one holding
+  `agents/`, `core/` and `remotion/`. Paths like `agents/editor.md` below are
+  relative to it.
+- **Your working files**: `~/reelforge/`. Finished edits go to
+  `~/reelforge/outbox/`, and what the system has learned is in
+  `~/reelforge/memory/`. These live outside the source folder on purpose, so
+  updating the code never touches your edits or your learned style.
+
 ## The pipeline
 
 Every step below is a command. Run them in order; each one's output is the
@@ -38,7 +48,7 @@ reelforge transcript <video>
 Prints the signals and the transcript as `[mm:ss.s] text` lines. This is
 exactly what the API-driven agent sees, so read it the same way.
 
-Read `memory/style-profile.md` first if it exists. It outranks everything.
+Read `~/reelforge/memory/style-profile.md` first if it exists. It outranks everything.
 
 ### 3. Decide
 
@@ -52,7 +62,7 @@ follow it exactly.** Do not paraphrase it from memory.
 
 All times are **source seconds** as plain numbers (`[01:23.4]` is `83.4`).
 
-Save it to `outbox/<stem>-highlights.json` or `outbox/<stem>-episode.json`.
+Save it to `~/reelforge/outbox/<stem>-highlights.json` or `~/reelforge/outbox/<stem>-episode.json`.
 That file is your decision, and it is what gets reviewed when something is
 wrong, so make it honest: calibrated scores, a real `why`, drops with
 reasons.
@@ -60,8 +70,8 @@ reasons.
 ### 4. Compose and render
 
 ```bash
-reelforge edit <video> --decision outbox/<stem>-highlights.json --count 3
-reelforge edit <video> --mode vlog --decision outbox/<stem>-episode.json
+reelforge edit <video> --decision ~/reelforge/outbox/<stem>-highlights.json --count 3
+reelforge edit <video> --mode vlog --decision ~/reelforge/outbox/<stem>-episode.json
 ```
 
 `--decision` replays your JSON through the same composer and renderer the
@@ -95,7 +105,7 @@ The EDL beside each MP4 (`*.edl.json`) **is** the edit. To change something,
 edit that file and re-render. Never patch pixels:
 
 ```bash
-reelforge render outbox/<stem>-reel1.edl.json
+reelforge render ~/reelforge/outbox/<stem>-reel1.edl.json
 ```
 
 Framing in `framing[]`, captions in `captions`, graphics in `overlays[]`,

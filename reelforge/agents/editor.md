@@ -18,7 +18,7 @@ them. Think about what a viewer would stop scrolling for.
 - `signals.json` — silence spans, scene cuts, a per-second energy curve, face
   positions
 - `filmstrip/` — sampled frames, one every few seconds
-- `memory/style-profile.md` — what this specific user likes, if it exists.
+- `~/reelforge/memory/style-profile.md` — what this specific user likes, if it exists.
   **Read it first.** It outranks every default below.
 
 Read the filmstrip only when the transcript is ambiguous about what is on

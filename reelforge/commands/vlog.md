@@ -17,7 +17,7 @@ the watcher will normally have done this already.
 
 ## 2. Shape the episode
 
-Read `memory/style-profile.md` if it exists, then launch the **producer** agent
+Read `~/reelforge/memory/style-profile.md` if it exists, then launch the **producer** agent
 with the transcript and signals. It returns the body range, an optional cold
 open, drops, chapters, b-roll slots, and metadata — all in source seconds.
 

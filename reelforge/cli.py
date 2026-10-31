@@ -478,7 +478,10 @@ def cmd_study(args) -> int:
         print(f"error: {src} not found", file=sys.stderr)
         return 2
 
-    memory = Path(args.memory)
+    # The same memory edit, compose and feedback read. This used to default
+    # to the repository's own memory/ folder, so a style learned with
+    # --apply landed in a playbook no edit ever loaded.
+    memory = Path(args.memory).expanduser() if args.memory else _root() / "memory"
     workdir = Path(args.workdir) if args.workdir else Path(tempfile.mkdtemp(prefix="reelforge-study-"))
     when = _dt.date.today().isoformat()
 
@@ -742,7 +745,8 @@ def main(argv: list[str] | None = None) -> int:
     p = sub.add_parser("study", help="learn a style from a reference video")
     p.add_argument("video")
     p.add_argument("--name", help="short name for the reference (default: file stem)")
-    p.add_argument("--memory", default=str(Path(__file__).parent / "memory"))
+    p.add_argument("--memory", default=None,
+                   help="default: ~/reelforge/memory, shared with edit and feedback")
     p.add_argument("--workdir", help="where sampled frames go (default: temp dir)")
     p.add_argument("--apply", action="store_true",
                    help="write the suggested values into playbook.md with provenance")
