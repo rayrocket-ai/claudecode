@@ -537,11 +537,14 @@ class QCRun:
     findings: list[Finding]
     changes: list[str]
     clean: bool
+    engine: str = ""
+    warnings: list[str] = field(default_factory=list)
 
 
 def render_with_qc(edl: EDL, dst: Path, profile, *, transcript=None,
                    book: Playbook | None = None, draft: bool = False,
-                   max_passes: int = 3, workdir: Path | None = None) -> QCRun:
+                   max_passes: int = 3, workdir: Path | None = None,
+                   engine: str | None = None) -> QCRun:
     """Render, inspect, repair, re-render -- up to ``max_passes`` times.
 
     Static checks run before the first render, because catching a mid-word cut
@@ -556,13 +559,15 @@ def render_with_qc(edl: EDL, dst: Path, profile, *, transcript=None,
     """
     import tempfile
 
-    from .render import ffmpeg_renderer
+    from .render import engine as engines
 
+    engine_name, render_fn, engine_warnings = engines.choose(engine)
     book = book or Playbook()
     temp = Path(workdir) if workdir else Path(tempfile.mkdtemp(prefix="reelforge-qc-"))
     temp.mkdir(parents=True, exist_ok=True)
 
     all_changes: list[str] = []
+    render_warnings: list[str] = list(engine_warnings)
     findings: list[Finding] = []
     output = dst
 
@@ -574,16 +579,18 @@ def render_with_qc(edl: EDL, dst: Path, profile, *, transcript=None,
             if changes and attempt < max_passes:
                 continue                     # re-check before spending an encode
 
-        result = ffmpeg_renderer.render(edl, dst, profile, draft=draft,
-                                        workdir=temp / f"pass{attempt}")
+        result = render_fn(edl, dst, profile, draft=draft,
+                           workdir=temp / f"pass{attempt}")
         output = result.output
+        render_warnings = engine_warnings + list(result.warnings)
 
         findings = static_checks(edl, transcript, book) + \
             render_checks(edl, output, temp / f"pass{attempt}")
 
         if not [f for f in findings if f.repairable]:
             return QCRun(edl, output, attempt, findings, all_changes,
-                         clean=not [f for f in findings if f.severity == "fail"])
+                         clean=not [f for f in findings if f.severity == "fail"],
+                         engine=engine_name, warnings=render_warnings)
 
         if attempt == max_passes:
             break
@@ -594,4 +601,5 @@ def render_with_qc(edl: EDL, dst: Path, profile, *, transcript=None,
         all_changes += changes
 
     return QCRun(edl, output, max_passes, findings, all_changes,
-                 clean=not [f for f in findings if f.severity == "fail"])
+                 clean=not [f for f in findings if f.severity == "fail"],
+                 engine=engine_name, warnings=render_warnings)

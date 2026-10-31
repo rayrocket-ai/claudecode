@@ -345,3 +345,19 @@ def test_lead_out_cannot_run_past_the_end_of_the_source():
     rather than an error, so it is invisible until someone watches the tail."""
     t = Transcript([Word("last", 9.6, 9.95)], "en", 10.0, "test")
     assert snap_to_words((9.0, 10.0), t, BOOK)[1] <= 10.0
+
+
+def test_learned_caption_position_reaches_the_edit():
+    """`/reel-feedback` "captions too low" moves caption_position; the edit
+    must carry it. For a while it moved a number nothing ever read."""
+    from reelforge.core.compose import build_captions
+    from reelforge.core.edl import EDL, Segment
+    from reelforge.core.playbook import Playbook
+    from reelforge.core.transcribe import Transcript, Word
+
+    edl = EDL(source="/tmp/a.mp4", segments=[Segment("s1", 0.0, 5.0)])
+    transcript = Transcript(words=[Word("hello", 1.0, 1.4)], language="en",
+                            duration=5.0, model="test")
+    book = Playbook(caption_position=0.61)
+    captions = build_captions(edl, transcript, book)
+    assert captions.position == 0.61

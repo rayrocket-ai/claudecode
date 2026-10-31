@@ -171,3 +171,16 @@ def test_a_forced_break_starts_a_new_card():
 def test_without_the_flag_adjacent_words_share_a_card():
     w = words(("wrong", 0.0, 0.4), ("we", 0.45, 0.7))
     assert len(ass.group_words(w, STYLE, TARGET)) == 1
+
+
+def test_explicit_position_moves_the_caption_margin():
+    from reelforge.core.edl import Target
+    from reelforge.core.render import ass
+
+    target = Target()
+    default = ass.header(target, ass.STYLES["karaoke-bold"])
+    raised = ass.header(target, ass.STYLES["karaoke-bold"], position=0.60)
+    assert default != raised
+    # Bottom-aligned: a higher caption means a larger bottom margin.
+    margin = lambda text: int(text.split("Style: RF,")[1].splitlines()[0].split(",")[-2])
+    assert margin(raised) > margin(default)

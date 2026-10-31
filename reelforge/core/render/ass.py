@@ -108,10 +108,14 @@ def group_words(words: list[CaptionWord], style: CaptionStyle,
     return groups
 
 
-def header(target: Target, style: CaptionStyle) -> str:
+def header(target: Target, style: CaptionStyle, position: float | None = None) -> str:
     size = int(round(target.height * style.size_ratio))
-    # ASS vertical margin is measured from the bottom for bottom-aligned text.
-    margin_v = int(round(target.height * (1 - style.position)))
+    # ASS vertical margin is measured from the bottom for bottom-aligned text,
+    # so `position` is where the bottom of the caption block sits. An explicit
+    # position -- the playbook's learned caption_position -- outranks the
+    # style's default.
+    pos = style.position if position is None else position
+    margin_v = int(round(target.height * (1 - pos)))
     margin_h = int(round(target.width * style.margin_ratio))
     return "\n".join([
         "[Script Info]",
@@ -174,13 +178,15 @@ def dialogue_lines(groups: list[list[CaptionWord]], style: CaptionStyle) -> list
     return lines
 
 
-def build(words: list[CaptionWord], target: Target, style_name: str = "karaoke-bold") -> str:
+def build(words: list[CaptionWord], target: Target, style_name: str = "karaoke-bold",
+          position: float | None = None) -> str:
     """Render a complete ASS file for a caption track."""
     style = STYLES.get(style_name, STYLES["karaoke-bold"])
     if not words:
-        return header(target, style) + "\n"
+        return header(target, style, position) + "\n"
     groups = group_words(words, style, target)
-    return "\n".join([header(target, style), *dialogue_lines(groups, style)]) + "\n"
+    return "\n".join([header(target, style, position),
+                      *dialogue_lines(groups, style)]) + "\n"
 
 
 def safe_area(target: Target) -> tuple[int, int]:

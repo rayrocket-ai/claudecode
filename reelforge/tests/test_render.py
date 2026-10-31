@@ -90,7 +90,7 @@ def test_missing_remotion_project_names_the_fix(tmp_path, monkeypatch):
               overlays=[Overlay(type="remotion", at=1.0, comp="LowerThird")])
     sequences, warnings = ffmpeg_renderer._prepare_sequences(edl, tmp_path)
     assert sequences == []
-    assert any("create-video" in w for w in warnings)
+    assert any("npm install" in w for w in warnings)
 
 
 def test_missing_font_warns_with_the_fix(monkeypatch):

@@ -65,9 +65,11 @@ then repairs the EDL and re-renders, up to three attempts.
 | 4 | The brain + `/reels` end to end | **done** |
 | 5 | `/vlog` — chapters, b-roll slots, music, metadata, thumbnails | **done** |
 | 6 | QC self-eval loop with auto-repair | **done** |
-| 7 | Sound effects, ducked music bed, animated overlays (HyperFrames proven; Remotion wired, unverified) | **done** |
+| 7 | Sound effects, ducked music bed, animated overlays (HyperFrames and Remotion both proven) | **done** |
 | 8 | `memory/`, `/reel-feedback` — the learning loop | **done** |
 | 9b | `/reel-study` — learn cut cadence, pauses, captions, loudness and length from reference videos | **done** |
+| 11 | **Remotion render engine** (default; ffmpeg fallback) — `docs/REMOTION.md` | **done** |
+| 12 | **Standalone editor agent** — `reelforge edit`, `/edit`, the `video-editor` agent | **done** |
 | 9 | MCP server + LibreChat front end — edit from any browser | |
 | 10 | Open-Generative-AI adapter — b-roll, intros, thumbnails | |
 
@@ -82,6 +84,26 @@ cp config.example.toml config.toml
 ```
 
 Then from Claude Code, `/reel-doctor` to verify.
+
+## Edit a video
+
+```bash
+reelforge edit video.mp4 --count 3      # vertical reels
+reelforge edit video.mp4 --mode vlog    # a YouTube episode
+```
+
+One command does the whole job: transcribe, decide what to keep, compose,
+render with Remotion, inspect and repair with QC. It calls Claude directly,
+so it runs with no interactive session: from cron, the inbox watcher, or a
+phone over SSH. Put `ANTHROPIC_API_KEY=...` in `~/.reelforge/env`.
+
+The model's decision is saved as JSON before anything is composed. Read it,
+correct it, and replay it with `--decision` without paying for another call.
+
+Inside Claude Code, `/edit video.mp4` hands the same job to the
+`video-editor` agent. In that case Claude itself is the brain, so no API key
+is needed. Both paths share the editorial prompts in `agents/` and the same
+renderer, so they don't drift apart.
 
 See [docs/SERVER-RUNBOOK.md](docs/SERVER-RUNBOOK.md) for the Hetzner setup,
 including how to reach it from a phone.
@@ -113,8 +135,11 @@ truth.
 ## Layout
 
 ```
-commands/    slash commands (/reels, /vlog, /reel-study, /reel-doctor, /reel-feedback, /reel-bakeoff)
-agents/      subagents: editor (the brain), colorist (framing), critic (QC)
+commands/    slash commands (/edit, /reels, /vlog, /reel-study, /reel-doctor, /reel-feedback)
+             -- linked into Claude Code via the repo's .claude/commands
+agents/      subagents: video-editor (the whole job), editor (picks reel moments),
+             producer (shapes episodes), critic (QC) -- linked via .claude/agents
+remotion/    the Remotion render engine (React compositions; npm install here)
 skills/      ffmpeg recipes, caption styles, platform specs
 core/        the engine: ingest, analyse, compose, render, qc, hardware
 server/      inbox watcher, systemd units, retention

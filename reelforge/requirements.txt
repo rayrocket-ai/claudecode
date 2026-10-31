@@ -28,3 +28,5 @@ yt-dlp>=2025.1.1
 
 # Config.
 tomli>=2.0; python_version < "3.11"
+# The standalone editor agent (`reelforge edit`) calls Claude directly.
+anthropic>=0.40

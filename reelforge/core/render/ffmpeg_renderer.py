@@ -187,7 +187,8 @@ def _write_captions(edl: EDL, temp_root: Path) -> Path | None:
     if not edl.captions.enabled or not edl.captions.words:
         return None
     path = temp_root / "captions.ass"
-    path.write_text(ass.build(edl.captions.words, edl.target, edl.captions.style),
+    path.write_text(ass.build(edl.captions.words, edl.target, edl.captions.style,
+                              position=edl.captions.position),
                     encoding="utf-8")
     return path
 

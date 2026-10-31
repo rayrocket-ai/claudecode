@@ -227,7 +227,8 @@ def build_captions(edl: EDL, transcript: Transcript, book: Playbook) -> Captions
                 break_before=first_in_segment and index > 0,
             ))
             first_in_segment = False
-    return Captions(style=book.caption_style, words=words, enabled=True)
+    return Captions(style=book.caption_style, words=words, enabled=True,
+                    position=book.caption_position)
 
 
 def pick_emoji(words: list[Word]) -> str:

@@ -31,6 +31,63 @@ from .transcribe import Transcript
 COLD_OPEN_MAX = 12.0
 COLD_OPEN_MIN = 3.0
 
+_SPAN = {
+    "type": "object",
+    "required": ["start", "end"],
+    "properties": {"start": {"type": "number"}, "end": {"type": "number"}},
+}
+
+#: What the producer returns, as a schema -- the long-form counterpart of
+#: ``highlights.HIGHLIGHTS_SCHEMA``. Everything in source seconds; the composer
+#: maps it into the edited timeline. :class:`Episode` reads it tolerantly, so a
+#: model that gets one chapter wrong still yields an episode.
+EPISODE_SCHEMA = {
+    "type": "object",
+    "required": ["body", "drop", "chapters", "title"],
+    "properties": {
+        "body": {**_SPAN, "description": "where the real content starts and ends"},
+        "cold_open": {**_SPAN, "description": "3-12s lifted from later and played "
+                      "first; omit unless a moment genuinely earns it"},
+        "drop": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "required": ["start", "end", "reason"],
+                "properties": {
+                    "start": {"type": "number"},
+                    "end": {"type": "number"},
+                    "reason": {"type": "string", "enum": ["tangent", "repeat", "dead-air"]},
+                },
+            },
+        },
+        "chapters": {
+            "type": "array",
+            "description": "three or more real topic boundaries, ten seconds apart, "
+                           "or none at all",
+            "items": {
+                "type": "object",
+                "required": ["at", "title"],
+                "properties": {"at": {"type": "number"}, "title": {"type": "string"}},
+            },
+        },
+        "broll": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "required": ["start", "prompt"],
+                "properties": {
+                    "start": {"type": "number"},
+                    "dur": {"type": "number"},
+                    "prompt": {"type": "string"},
+                },
+            },
+        },
+        "title": {"type": "string"},
+        "description": {"type": "string"},
+        "tags": {"type": "array", "items": {"type": "string"}},
+    },
+}
+
 
 class Episode:
     """What the producer agent returns for a long-form edit."""

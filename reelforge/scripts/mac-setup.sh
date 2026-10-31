@@ -89,6 +89,23 @@ fi
 ok "installed into $VENV"
 
 # --------------------------------------------------------------------------
+say "Remotion (the render engine)"
+
+# Remotion draws every frame as a React composition -- spring-animated
+# graphics, real typography, colour emoji. Without it renders still work, on
+# the ffmpeg engine, and every render says so.
+brew list node >/dev/null 2>&1 || brew install node
+if (cd "$REPO/remotion" && npm install --no-audit --no-fund --loglevel=error); then
+    # Fetches Remotion's own headless browser now (once, ~100MB) rather than
+    # in the middle of your first render.
+    (cd "$REPO/remotion" && npx --no-install remotion browser ensure >/dev/null 2>&1) \
+        || warn "browser download deferred -- Remotion will fetch it on first render"
+    ok "Remotion $(cd "$REPO/remotion" && node -p "require('remotion/package.json').version")"
+else
+    warn "Remotion did not install -- renders will use the ffmpeg engine and say so."
+fi
+
+# --------------------------------------------------------------------------
 say "Putting reelforge on your PATH"
 
 mkdir -p "$BIN"
@@ -131,6 +148,10 @@ print(f"    ok  browser: {browser}" if browser
 font = emoji.find_font()
 print(f"    ok  emoji font: {font.name}" if font
       else "    !   no colour emoji font found -- emoji overlays will be skipped")
+from reelforge.core.render import engine
+name, _, warnings = engine.choose()
+print(f"    ok  render engine: {name}" if not warnings
+      else f"    !   render engine: {name} ({warnings[0]})")
 PY
 
 cat <<EOF
@@ -147,9 +168,15 @@ terminal window and it will paste the path for you.
 The first run downloads the speech model (~1.5GB, once) and transcribes.
 After that it is cached and instant.
 
-Then from Claude Code, inside this repository:
+Then either let the standalone agent do the whole edit -- no Claude Code
+session needed, just an Anthropic API key in ~/.reelforge/env:
 
-  /reels /path/to/your/video.mp4 --count 3     # vertical reels
-  /vlog /path/to/your/video.mp4                # a YouTube episode
+  reelforge edit /path/to/your/video.mp4 --count 3      # vertical reels
+  reelforge edit /path/to/your/video.mp4 --mode vlog    # a YouTube episode
+
+or work with it interactively from Claude Code, inside this repository:
+
+  /reels /path/to/your/video.mp4 --count 3
+  /vlog /path/to/your/video.mp4
 
 EOF

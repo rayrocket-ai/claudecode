@@ -89,6 +89,12 @@ class Captions:
     style: str = "karaoke-bold"
     words: list[CaptionWord] = field(default_factory=list)
     enabled: bool = True
+    position: float | None = None
+    """Where the bottom of the caption block sits, 0..1 of frame height.
+
+    ``None`` means the style's default. Set from the playbook's learned
+    ``caption_position`` -- without this field, "the captions sat too low"
+    moved a number in the playbook that no renderer ever read."""
 
 
 @dataclass
@@ -249,10 +255,12 @@ class EDL:
                 style=caps.get("style", "karaoke-bold"),
                 enabled=caps.get("enabled", True),
                 words=[CaptionWord(**w) for w in caps.get("words", [])],
+                position=caps.get("position"),
             ),
             overlays=[Overlay(**o) for o in d.get("overlays", [])],
             transitions=[Transition(**t) for t in d.get("transitions", [])],
             audio=Audio(**d.get("audio", {})),
+            sfx=[SoundEffect(**x) for x in d.get("sfx", [])],
             chapters=[Chapter(**c) for c in d.get("chapters", [])],
             broll=[BRollSlot(**b) for b in d.get("broll", [])],
             version=version,

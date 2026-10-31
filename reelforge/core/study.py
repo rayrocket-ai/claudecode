@@ -343,9 +343,14 @@ def suggest(readings: list[Reading]) -> list[Suggestion]:
     positions = [r.caption_position for r in readings
                  if r.caption_position is not None and r.caption_presence >= 0.5]
     if captioned and positions:
+        # The detector finds the band's centre; the playbook's
+        # caption_position is where the *bottom* of the text sits (both
+        # renderers bottom-anchor captions). Half a default caption line,
+        # 0.055 of frame height, converts one to the other.
+        centre = _median(positions)
         out.append(Suggestion(
-            "caption_position", round(_median(positions), 2),
-            f"reference caption band centre ({names})"))
+            "caption_position", round(_clamp(centre + 0.0275, 0.30, 0.85), 2),
+            f"reference caption band centred at {centre:.0%} ({names})"))
 
     duration = _median([r.duration for r in readings])
     max_s = _clamp(round(1.15 * duration), 15, 180)

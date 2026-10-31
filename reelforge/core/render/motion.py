@@ -358,7 +358,7 @@ def render_hyperframes(overlay: Overlay, target: Target, workdir: Path,
 # ---------------------------------------------------------------------------
 
 def remotion_cmd(project: Path, comp: str, outdir: Path, props: dict,
-                 *, fps: float, target: Target,
+                 *, fps: float, target: Target, duration: float = 2.5,
                  browser: Path | None = None) -> list[str]:
     """The command that renders a Remotion composition to a PNG sequence.
 
@@ -366,13 +366,22 @@ def remotion_cmd(project: Path, comp: str, outdir: Path, props: dict,
     an alpha channel; rendering to a video and keying it back out would lose
     the soft edges that are the reason to use Remotion in the first place.
 
-    ``--browser-executable`` points Remotion at a Chromium that is already on
-    the machine. Left to itself it downloads its own ~150 MB headless shell
-    from remotion.media on first run, which is a slow surprise on a fresh box
-    and an outright failure on any network that does not allow it. The same
-    browser already renders the HyperFrames backend, so reusing it is both
-    faster and one less thing that can be unavailable.
+    ``--browser-executable`` is passed only for a Chrome *headless shell*
+    (see ``remotion_renderer.find_browser``). An earlier version reused
+    whatever Chromium served HyperFrames, and desktop Chrome -- which no
+    longer carries the headless mode Remotion drives -- dies on launch with
+    "Closed with 1 signal". With no headless shell installed Remotion fetches
+    its own once, which is the right outcome on a normal network.
+
+    The composition's length and size travel in the props as well as the
+    flags, because the overlay compositions read their duration from props --
+    without it every graphic would run for its 75-frame default regardless of
+    how long the EDL asked it to stay up.
     """
+    from .remotion_renderer import find_browser
+
+    props = {**props, "durationInFrames": max(1, int(round(duration * fps))),
+             "width": target.width, "height": target.height}
     cmd = [
         "npx", "--no-install", "remotion", "render",
         str(project / "src" / "index.ts"),
@@ -380,14 +389,13 @@ def remotion_cmd(project: Path, comp: str, outdir: Path, props: dict,
         str(outdir),
         "--sequence",
         "--image-format=png",
-        "--pixel-format=yuva420p",
         f"--props={json.dumps(props)}",
         f"--width={target.width}",
         f"--height={target.height}",
         f"--fps={fps:g}",
         "--log=error",
     ]
-    browser = browser or find_chromium()
+    browser = browser or find_browser()
     if browser is not None:
         cmd.append(f"--browser-executable={browser}")
     return cmd
@@ -400,15 +408,18 @@ def remotion_available(project: Path) -> bool:
 
 def render_remotion(overlay: Overlay, target: Target, workdir: Path,
                     *, fps: float, project: Path | None = None) -> Path:
+    from .remotion_renderer import project_dir
+
+    # The same project the Remotion engine renders with -- one set of
+    # components, so a lower-third looks identical whichever engine drew it.
     project = project or Path(
-        os.environ.get("REELFORGE_REMOTION_PROJECT", "")
-        or Path.home() / ".reelforge" / "remotion"
+        os.environ.get("REELFORGE_REMOTION_PROJECT", "") or project_dir()
     )
     if not remotion_available(project):
         raise BackendUnavailable(
-            f"remotion overlay {overlay.comp!r} skipped: no Remotion project at "
-            f"{project}. Create one with `npx create-video@latest {project}` and "
-            "set REELFORGE_REMOTION_PROJECT, or use a hyperframes overlay instead."
+            f"remotion overlay {overlay.comp!r} skipped: Remotion is not installed "
+            f"at {project}. Run `cd {project} && npm install`, or use a "
+            "hyperframes overlay instead."
         )
 
     key = _frames_key(overlay.comp, overlay.props, overlay.dur, fps, target)
@@ -420,7 +431,7 @@ def render_remotion(overlay: Overlay, target: Target, workdir: Path,
 
     result = subprocess.run(
         remotion_cmd(project, overlay.comp, outdir, overlay.props,
-                     fps=fps, target=target),
+                     fps=fps, target=target, duration=overlay.dur),
         cwd=project, capture_output=True, text=True,
     )
     if result.returncode != 0:

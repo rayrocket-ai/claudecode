@@ -97,6 +97,30 @@ else
 fi
 
 # --------------------------------------------------------------------------
+say "Remotion (the render engine)"
+
+# The libraries Chrome's headless shell links against. A bare server image
+# has none of them, and the failure without them is a browser that dies on
+# launch with no explanation. Ubuntu 24.04 renamed libasound2, hence the
+# fallback.
+sudo apt-get install -y --no-install-recommends \
+    libnss3 libdbus-1-3 libatk1.0-0 libatk-bridge2.0-0 libgbm1 libxrandr2 \
+    libxkbcommon0 libxfixes3 libxcomposite1 libxdamage1 libpango-1.0-0 \
+    libcairo2 libcups2 fonts-noto-color-emoji >/dev/null \
+    || warn "some browser libraries did not install"
+sudo apt-get install -y --no-install-recommends libasound2t64 >/dev/null 2>&1 \
+    || sudo apt-get install -y --no-install-recommends libasound2 >/dev/null 2>&1 \
+    || warn "libasound did not install"
+
+if (cd "$REPO/remotion" && npm install --no-audit --no-fund --loglevel=error); then
+    (cd "$REPO/remotion" && npx --no-install remotion browser ensure >/dev/null 2>&1) \
+        || warn "browser download deferred -- Remotion will fetch it on first render"
+    ok "Remotion $(cd "$REPO/remotion" && node -p "require('remotion/package.json').version")"
+else
+    warn "Remotion did not install -- renders will use the ffmpeg engine and say so."
+fi
+
+# --------------------------------------------------------------------------
 say "Verifying"
 
 VENV="$HOME/.reelforge/venv"
@@ -116,6 +140,10 @@ print(f"    ok  browser: {browser}" if browser
 font = emoji.find_font()
 print(f"    ok  emoji font: {font.name}" if font
       else "    !   no colour emoji font -- emoji overlays will be skipped")
+from reelforge.core.render import engine
+name, _, warnings = engine.choose()
+print(f"    ok  render engine: {name}" if not warnings
+      else f"    !   render engine: {name} ({warnings[0]})")
 PY
 
 cat <<EOF
@@ -147,6 +175,17 @@ $(printf "\033[1;32mReady.\033[0m") This box is now the only machine that needs 
 
    Close your laptop mid-render and it keeps going. Reattach from the Mac
    mini, your phone, anywhere.
+
+4. Or skip the conversation and let the standalone agent do the whole edit.
+   Put an Anthropic API key in a private file, once:
+
+     mkdir -p ~/.reelforge && touch ~/.reelforge/env && chmod 600 ~/.reelforge/env
+     nano ~/.reelforge/env        # one line: ANTHROPIC_API_KEY=sk-ant-...
+
+   Then:
+
+     reelforge edit ~/reelforge/inbox/IMG_1200.MOV --count 3
+     reelforge edit ~/reelforge/inbox/IMG_1200.MOV --mode vlog
 
 Finished reels land in ~/reelforge/outbox/.
 

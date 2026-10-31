@@ -1,5 +1,6 @@
 """Animated overlay backends: composition rendering and honest degradation."""
 
+import json
 from pathlib import Path
 
 import pytest
@@ -171,14 +172,22 @@ def test_remotion_renders_a_png_sequence_with_alpha(tmp_path):
                               browser=tmp_path / "chrome")
     assert "--sequence" in cmd            # per-frame files, not a video
     assert "--image-format=png" in cmd    # PNG is what carries the alpha
-    assert "--pixel-format=yuva420p" in cmd
     assert any(a.startswith("--props=") for a in cmd)
 
 
-def test_remotion_reuses_a_local_browser(tmp_path):
-    # Left alone Remotion downloads its own ~150MB headless shell on first
-    # run: slow on a fresh box, and an outright failure on a network that
-    # does not allow it. The same Chromium already serves HyperFrames.
+def test_remotion_props_carry_the_overlay_duration_and_size(tmp_path):
+    # The compositions read their length from props; without it every graphic
+    # ran for its default regardless of how long the EDL wanted it up.
+    cmd = motion.remotion_cmd(tmp_path, "LowerThird", tmp_path / "out", {"title": "R"},
+                              fps=30, target=TARGET, duration=1.5,
+                              browser=tmp_path / "chrome")
+    props = json.loads(next(a for a in cmd if a.startswith("--props="))[len("--props="):])
+    assert props["durationInFrames"] == 45
+    assert (props["width"], props["height"]) == (TARGET.width, TARGET.height)
+    assert props["title"] == "R"
+
+
+def test_remotion_reuses_an_explicit_browser(tmp_path):
     cmd = motion.remotion_cmd(tmp_path, "LowerThird", tmp_path / "out", {},
                               fps=30, target=TARGET, browser=tmp_path / "chrome")
     assert f"--browser-executable={tmp_path / 'chrome'}" in cmd
@@ -186,7 +195,7 @@ def test_remotion_reuses_a_local_browser(tmp_path):
 
 def test_missing_remotion_project_names_the_fix(tmp_path):
     overlay = Overlay(type="remotion", at=0.0, dur=1.0, comp="LowerThird")
-    with pytest.raises(motion.BackendUnavailable, match="create-video"):
+    with pytest.raises(motion.BackendUnavailable, match="npm install"):
         motion.render_remotion(overlay, TARGET, tmp_path, fps=30,
                                project=tmp_path / "absent")
 
@@ -244,3 +253,18 @@ def test_captions_are_layered_above_animated_graphics():
                      overlays=[], encode_args=[], sequences=[seq])
     graph = cmd[cmd.index("-filter_complex") + 1]
     assert graph.index("overlay=") < graph.index("subtitles=")
+
+
+@pytest.mark.skipif(not motion.remotion_available(
+    __import__("reelforge.core.render.remotion_renderer", fromlist=["x"]).project_dir()),
+    reason="Remotion not installed")
+def test_remotion_overlay_really_renders_transparent_frames(tmp_path):
+    """The ffmpeg engine's remotion overlay path, end to end, for real."""
+    overlay = Overlay(type="remotion", at=0.0, dur=0.4, comp="Callout",
+                      props={"text": "Live"})
+    small = Target(width=270)
+    outdir = motion.render_remotion(overlay, small, tmp_path, fps=10)
+    frames = sorted(outdir.glob("*.png"))
+    assert len(frames) == 4                       # 0.4s at 10fps, from props
+    for frame in frames:
+        motion.assert_capture_is_transparent(frame)

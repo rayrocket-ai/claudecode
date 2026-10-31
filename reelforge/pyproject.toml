@@ -19,6 +19,8 @@ dependencies = [
     "jsonschema>=4.23,<5",
     "watchdog>=5.0,<7",
     "yt-dlp>=2025.1.1",
+    # The standalone editor agent (`reelforge edit`) calls Claude directly.
+    "anthropic>=0.40",
 ]
 
 [project.scripts]

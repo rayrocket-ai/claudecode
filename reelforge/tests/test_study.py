@@ -183,7 +183,9 @@ def test_uncaptioned_reference_turns_captions_off_and_gives_no_position():
 def test_captioned_reference_keeps_its_position():
     s = suggestions_for(reading(caption_presence=0.9, caption_position=0.68))
     assert s["captions_enabled"].value is True
-    assert s["caption_position"].value == pytest.approx(0.68)
+    # The band is measured by its centre; the playbook stores where the
+    # bottom of the text sits, so half a caption line is added.
+    assert s["caption_position"].value == pytest.approx(0.71, abs=0.005)
 
 
 def test_length_follows_the_reference():

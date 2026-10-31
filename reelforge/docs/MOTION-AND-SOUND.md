@@ -112,14 +112,16 @@ build step and much lighter on a CPU-only box. Remotion when you want spring
 physics or genuinely complex sequencing. Both composite identically, so
 switching one overlay does not disturb anything else.
 
-**Verification status.** HyperFrames is proven end to end: real Chromium
-captures, real transparency, composited into a finished MP4. Remotion's
-command layer is built and unit-tested and its packages install cleanly, but
-it has **not** been proven rendering a frame here — Chrome refuses to launch
-as root without a sandbox flag that Remotion's CLI does not expose, and this
-development container runs as root. On a box where the renderer runs as an
-ordinary user that constraint does not apply. Until someone has seen it
-produce a frame, treat Remotion as unverified and prefer HyperFrames.
+**Verification status.** Both backends are proven end to end. HyperFrames:
+real Chromium captures, real transparency, composited into a finished MP4.
+Remotion: real renders of whole edits and of transparent overlay sequences,
+checked frame by frame. It is now also the default render engine; see
+`docs/REMOTION.md`.
+
+An earlier version of this note said Remotion could not run as root. That
+diagnosis was wrong. The real cause was handing Remotion desktop Chrome,
+which no longer has the headless mode Remotion drives; a Chrome headless
+shell renders fine as root.
 
 ## Two failure modes this guards against
 

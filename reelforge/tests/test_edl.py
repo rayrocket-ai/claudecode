@@ -167,3 +167,34 @@ def test_missing_optional_sections_get_defaults():
     assert loaded.target.aspect == "9:16"
     assert loaded.audio.fade_ms == 20
     assert loaded.framing_for("a").focus == (0.5, 0.5)
+
+
+def test_roundtrip_preserves_every_field(tmp_path):
+    """Every EDL field must survive save/load -- not just the ones tested above.
+
+    Sound effects were silently dropped on load for a while: the renderer only
+    ever sees a *loaded* EDL, so an edit with four effects rendered with none,
+    and nothing complained. This compares the whole serialised form, so the
+    next field added to the dataclass and forgotten in from_dict fails here
+    instead of in someone's finished video.
+    """
+    from reelforge.core.edl import (Audio, BRollSlot, Captions, CaptionWord,
+                                    Chapter, Framing, Overlay, Segment,
+                                    SoundEffect, Transition)
+
+    original = EDL(
+        source="/tmp/a.mp4",
+        segments=[Segment("s1", 0.0, 12.0, why="hook")],
+        framing=[Framing("s1", (0.4, 0.4), "punch", 1.0, 1.1)],
+        captions=Captions(words=[CaptionWord("hi", 0.1, 0.4, break_before=True)]),
+        overlays=[Overlay(type="emoji", at=1.0, glyph="x")],
+        transitions=[Transition(at=4.0, type="dissolve", dur=0.3)],
+        audio=Audio(music="/tmp/m.m4a", music_gain_db=-20.0),
+        sfx=[SoundEffect(at=4.0, name="whoosh", gain_db=-9.0, why="cover")],
+        chapters=[Chapter(0.0, "start")],
+        broll=[BRollSlot(2.0, 1.5, prompt="house")],
+        notes="all fields",
+    )
+    loaded = EDL.load(original.save(tmp_path / "edl.json"))
+    assert loaded.as_dict() == original.as_dict()
+    assert loaded.sfx[0].name == "whoosh"
