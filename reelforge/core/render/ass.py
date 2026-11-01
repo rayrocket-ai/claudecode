@@ -66,6 +66,12 @@ STYLES = {
                           size_ratio=0.045),
     "punch": CaptionStyle(name="punch", size_ratio=0.07, max_words=3,
                           highlight="&H004CFF4C", outline_w=4.0),
+    # The split-screen seam caption: a few words, sentence case, white on a
+    # black bar across the line between panel and speaker. Small on purpose
+    # -- it sits between two pictures and must not cover either.
+    "seam": CaptionStyle(name="seam", size_ratio=0.028, max_words=4,
+                         highlight="&H00FFFFFF", outline_w=0.0, bold=0,
+                         position=0.5),
 }
 
 

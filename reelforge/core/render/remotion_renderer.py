@@ -36,7 +36,7 @@ import os
 import shutil
 import subprocess
 import tempfile
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from pathlib import Path
 
 from .. import media
@@ -151,6 +151,13 @@ def speech_windows(words: list[CaptionWord], *, gap: float = SPEECH_MERGE_GAP
     return spans
 
 
+VIDEO_EXTS = {".mp4", ".mov", ".m4v", ".webm", ".mkv"}
+
+
+def _even_px(value: float) -> int:
+    return int(round(value / 2)) * 2
+
+
 def db_to_linear(db: float) -> float:
     return round(10 ** (db / 20.0), 5)
 
@@ -168,6 +175,8 @@ class Staged:
     music: str | None = None
     sfx: dict[str, str] = field(default_factory=dict)
     broll: dict[int, str] = field(default_factory=dict)
+    assets: dict[str, str] = field(default_factory=dict)
+    """Top-panel images, videos and prompt results, original path -> public name."""
     warnings: list[str] = field(default_factory=list)
 
 
@@ -226,6 +235,18 @@ def stage(edl: EDL, job: Path) -> Staged:
         _place(wav, public / name)
         staged.sfx[cue.name] = name
 
+    for clip in edl.layout.top:
+        for raw in (clip.asset, clip.result):
+            if not raw or raw in staged.assets:
+                continue
+            path = Path(raw)
+            if not path.exists():
+                staged.warnings.append(f"top-panel asset not found: {path}")
+                continue
+            name = f"top-{len(staged.assets)}{path.suffix.lower() or '.png'}"
+            _place(path, public / name)
+            staged.assets[raw] = name
+
     for index, slot in enumerate(edl.broll):
         if not slot.source:
             continue
@@ -258,6 +279,12 @@ def build_props(edl: EDL, info: media.MediaInfo, staged: Staged) -> tuple[dict, 
 
     # --- segments ----------------------------------------------------------
     boundaries = _transition_boundaries(edl)
+    split = edl.layout.kind == "split"
+    top_h = _even_px(height * edl.layout.ratio) if split else 0
+    # In a split layout the speaker is drawn into the lower region, so their
+    # crop is computed for *that* region's shape -- framed for the space they
+    # actually have rather than a 9:16 window squashed into it.
+    region = replace(target, aspect=f"{width}:{height - top_h}") if split else target
     segments = []
     elapsed = 0.0
     for seg in edl.segments:
@@ -270,12 +297,12 @@ def build_props(edl: EDL, info: media.MediaInfo, staged: Staged) -> tuple[dict, 
         animate = framing.mode == "punch" and abs(framing.zoom_to - framing.zoom_from) > 1e-3
         if animate:
             low = min(framing.zoom_from, framing.zoom_to)
-            window = filters.crop_window(info.width, info.height, target, framing.focus, low)
             zoom_from, zoom_to = framing.zoom_from / low, framing.zoom_to / low
         else:
-            window = filters.crop_window(info.width, info.height, target, framing.focus,
-                                         framing.zoom_to)
+            low = framing.zoom_to
             zoom_from = zoom_to = 1.0
+        window = filters.crop_window(info.width, info.height, region, framing.focus, low)
+        full = filters.crop_window(info.width, info.height, target, framing.focus, low)
         segments.append({
             "id": seg.id,
             "from": start_f,
@@ -283,6 +310,7 @@ def build_props(edl: EDL, info: media.MediaInfo, staged: Staged) -> tuple[dict, 
             "trimBefore": frames(seg.src_in, fps),
             "playbackRate": round(seg.speed, 4),
             "crop": {"x": window.x, "y": window.y, "w": window.w, "h": window.h},
+            "cropFull": {"x": full.x, "y": full.y, "w": full.w, "h": full.h},
             "animate": animate,
             "zoomFrom": round(zoom_from, 5),
             "zoomTo": round(zoom_to, 5),
@@ -311,6 +339,10 @@ def build_props(edl: EDL, info: media.MediaInfo, staged: Staged) -> tuple[dict, 
                           for w in group],
             })
     position = edl.captions.position if edl.captions.position is not None else style.position
+    boxed = style.name == "seam"
+    if boxed and split and edl.captions.position is None:
+        # The seam caption lives on the line between panel and speaker.
+        position = edl.layout.ratio
     captions = {
         "enabled": bool(edl.captions.enabled and pages),
         "pages": pages,
@@ -323,10 +355,46 @@ def build_props(edl: EDL, info: media.MediaInfo, staged: Staged) -> tuple[dict, 
             # paint-order puts half of it under the fill, so it is doubled.
             "outlineWidth": round(2 * style.outline_w * height / 1920, 2),
             "positionY": round(position, 4),
+            "anchor": "center" if boxed else "bottom",
+            "box": boxed,
             "marginX": int(round(width * style.margin_ratio)),
             "fontFamily": FONT_STACK,
         },
     }
+
+    # --- layout ------------------------------------------------------------
+    top = []
+    for clip in edl.layout.top if split else []:
+        src = staged.assets.get(clip.asset, "") if clip.asset else ""
+        if clip.kind in ("image", "video") and not src:
+            warnings.append(f"top-panel {clip.kind} at {clip.at}s has no usable asset, skipped")
+            continue
+        result = staged.assets.get(clip.result, "") if clip.result else ""
+        dur_f = max(1, frames(clip.dur, fps))
+        top.append({
+            "kind": clip.kind,
+            "from": frames(clip.at, fps),
+            "duration": dur_f,
+            "src": src,
+            "panFrom": list(clip.pan_from),
+            "panTo": list(clip.pan_to),
+            "text": clip.text,
+            "result": result,
+            "resultIsVideo": Path(clip.result).suffix.lower() in VIDEO_EXTS if clip.result else False,
+            "label": clip.label or ("WRITE THIS" if clip.kind == "prompt" else ""),
+            "resultLabel": clip.result_label or ("TO GET THIS." if clip.kind == "prompt" else ""),
+            "reveal": max(1, int(round(dur_f * min(max(clip.reveal, 0.1), 0.95)))),
+        })
+    layout = {"kind": "split" if split else "full", "topHeight": top_h,
+              "background": edl.layout.background, "top": top}
+
+    end_card = None
+    if edl.end_card is not None:
+        card = edl.end_card
+        start_f = frames(card.at, fps)
+        end_card = {"from": start_f, "duration": max(1, min(total, frames(card.at + card.dur, fps)) - start_f),
+                    "keyword": card.keyword, "subtitle": card.subtitle, "handle": card.handle,
+                    "outro": frames(card.outro, fps), "accent": card.accent}
 
     # --- overlays ----------------------------------------------------------
     overlays = []
@@ -401,6 +469,8 @@ def build_props(edl: EDL, info: media.MediaInfo, staged: Staged) -> tuple[dict, 
         "broll": broll,
         "music": music,
         "sfx": effects,
+        "layout": layout,
+        "endCard": end_card,
     }
     return props, warnings
 

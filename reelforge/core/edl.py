@@ -177,6 +177,72 @@ class Audio:
 
 
 @dataclass
+class TopClip:
+    """One visual in the top panel of a split-screen layout, in output seconds.
+
+    Three kinds, taken from the two reference formats the layout copies:
+
+    - ``image`` -- a screenshot, diagram or photo, with an optional pan/zoom
+      from ``pan_from`` to ``pan_to`` (each ``(cx, cy, zoom)``, centre in
+      0..1). One big diagram panned across while the speaker walks through
+      it is the explainer format.
+    - ``video`` -- a screen recording or b-roll clip, muted, cover-fitted.
+    - ``prompt`` -- the showcase format: a chat box types ``text`` in, then
+      ``result`` (an image or video) appears beside it. ``label`` is the pill
+      at the seam -- "WRITE THIS" while typing, "TO GET THIS." on the reveal.
+    """
+    at: float
+    dur: float
+    kind: Literal["image", "video", "prompt"] = "image"
+    asset: str = ""
+    pan_from: tuple[float, float, float] = (0.5, 0.5, 1.0)
+    pan_to: tuple[float, float, float] = (0.5, 0.5, 1.0)
+    text: str = ""
+    result: str = ""
+    label: str = ""
+    result_label: str = ""
+    """Seam pill once the result is showing; defaults to "TO GET THIS." for
+    prompts. ``label`` defaults to "WRITE THIS" while the text types."""
+    reveal: float = 0.5
+    """Fraction of ``dur`` after which a prompt's result appears."""
+
+
+@dataclass
+class Layout:
+    """How the frame is divided.
+
+    ``full`` is the classic reel: the speaker fills the frame. ``split`` puts
+    a visual panel on top and the speaker underneath, cropped to the lower
+    region around their face, with captions on the seam -- the layout both
+    reference reels use, because it lets the viewer see the thing being
+    talked about *and* the person talking, all the time.
+    """
+    kind: Literal["full", "split"] = "full"
+    ratio: float = 0.5
+    """Share of the frame height given to the top panel."""
+    top: list[TopClip] = field(default_factory=list)
+    background: str = "#141416"
+
+
+@dataclass
+class EndCard:
+    """A "Comment KEYWORD" call to action over the last seconds of the edit.
+
+    The speaker keeps talking inside a phone-shaped frame while the keyword
+    sits above them -- the comment-to-DM lead magnet both references end on.
+    ``outro`` seconds at the very end fade to the handle and an Instagram
+    mark.
+    """
+    keyword: str
+    at: float
+    dur: float
+    subtitle: str = ""
+    handle: str = ""
+    outro: float = 0.0
+    accent: str = "#FF6B2C"
+
+
+@dataclass
 class EDL:
     source: str
     target: Target = field(default_factory=Target)
@@ -189,6 +255,8 @@ class EDL:
     sfx: list[SoundEffect] = field(default_factory=list)
     chapters: list[Chapter] = field(default_factory=list)
     broll: list[BRollSlot] = field(default_factory=list)
+    layout: Layout = field(default_factory=Layout)
+    end_card: EndCard | None = None
     version: int = SCHEMA_VERSION
     notes: str = ""
 
@@ -263,9 +331,25 @@ class EDL:
             sfx=[SoundEffect(**x) for x in d.get("sfx", [])],
             chapters=[Chapter(**c) for c in d.get("chapters", [])],
             broll=[BRollSlot(**b) for b in d.get("broll", [])],
+            layout=_layout_from(d.get("layout")),
+            end_card=EndCard(**d["end_card"]) if d.get("end_card") else None,
             version=version,
             notes=d.get("notes", ""),
         )
+
+
+def _layout_from(raw: dict | None) -> Layout:
+    if not raw:
+        return Layout()
+    top = []
+    for clip in raw.get("top", []):
+        clip = dict(clip)
+        for key in ("pan_from", "pan_to"):
+            if key in clip:
+                clip[key] = tuple(clip[key])
+        top.append(TopClip(**clip))
+    return Layout(kind=raw.get("kind", "full"), ratio=raw.get("ratio", 0.5), top=top,
+                  background=raw.get("background", "#141416"))
 
 
 # --------------------------------------------------------------------------
@@ -357,6 +441,23 @@ def validate(edl: EDL, *, source_duration: float | None = None) -> list[str]:
                 "past the end of the edit"
             )
             break
+
+    if edl.layout.kind == "split":
+        if not 0.3 <= edl.layout.ratio <= 0.7:
+            problems.append(f"split ratio {edl.layout.ratio} outside 0.3-0.7")
+        for clip in edl.layout.top:
+            if clip.at + clip.dur > duration + 0.05:
+                problems.append(f"top-panel {clip.kind} at {clip.at}s runs past the end")
+                break
+            if clip.kind == "prompt" and not clip.text:
+                problems.append(f"prompt panel at {clip.at}s has no text to type")
+                break
+    if edl.end_card is not None:
+        card = edl.end_card
+        if card.at + card.dur > duration + 0.05:
+            problems.append(f"end card at {card.at}s runs past the end of the edit")
+        if not card.keyword.strip():
+            problems.append("end card has no keyword to comment")
 
     problems += _chapter_problems(edl.chapters, duration)
     return problems

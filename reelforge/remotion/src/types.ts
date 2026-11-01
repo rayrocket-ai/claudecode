@@ -24,6 +24,7 @@ export type Seg = {
   trimBefore: number; // source frames skipped before this segment starts
   playbackRate: number;
   crop: Crop; // widest point of the move, already clamped inside the frame
+  cropFull: Crop; // the same, at the full-frame aspect -- for the end card's phone frame
   animate: boolean;
   zoomFrom: number; // normalised so the smaller end is 1.0
   zoomTo: number;
@@ -42,7 +43,9 @@ export type CaptionStyle = {
   highlight: string;
   outline: string;
   outlineWidth: number;
-  positionY: number; // bottom of the caption block, 0..1 of frame height
+  positionY: number; // bottom (or centre, see anchor) of the caption block, 0..1
+  anchor: 'bottom' | 'center';
+  box: boolean; // white on a full-width black bar -- the split-screen seam caption
   marginX: number; // px each side
   fontFamily: string;
 };
@@ -98,4 +101,40 @@ export type EditProps = {
   broll: BRoll[];
   music: Music | null;
   sfx: Sfx[];
+  layout: Layout;
+  endCard: EndCard | null;
+};
+
+export type Pan = [number, number, number]; // centre x, centre y (0..1), zoom
+
+export type TopClip = {
+  kind: 'image' | 'video' | 'prompt';
+  from: number;
+  duration: number;
+  src: string; // image or video for image/video kinds
+  panFrom: Pan;
+  panTo: Pan;
+  text: string; // prompt kind: what types into the box
+  result: string; // prompt kind: what appears beside it
+  resultIsVideo: boolean;
+  label: string; // seam pill while typing
+  resultLabel: string; // seam pill once the result shows
+  reveal: number; // frames into the clip when the result appears
+};
+
+export type Layout = {
+  kind: 'full' | 'split';
+  topHeight: number; // px
+  background: string;
+  top: TopClip[];
+};
+
+export type EndCard = {
+  from: number;
+  duration: number;
+  keyword: string;
+  subtitle: string;
+  handle: string;
+  outro: number; // frames at the very end
+  accent: string;
 };

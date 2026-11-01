@@ -179,8 +179,8 @@ def test_roundtrip_preserves_every_field(tmp_path):
     instead of in someone's finished video.
     """
     from reelforge.core.edl import (Audio, BRollSlot, Captions, CaptionWord,
-                                    Chapter, Framing, Overlay, Segment,
-                                    SoundEffect, Transition)
+                                    Chapter, EndCard, Framing, Layout, Overlay,
+                                    Segment, SoundEffect, TopClip, Transition)
 
     original = EDL(
         source="/tmp/a.mp4",
@@ -193,8 +193,28 @@ def test_roundtrip_preserves_every_field(tmp_path):
         sfx=[SoundEffect(at=4.0, name="whoosh", gain_db=-9.0, why="cover")],
         chapters=[Chapter(0.0, "start")],
         broll=[BRollSlot(2.0, 1.5, prompt="house")],
+        layout=Layout(kind="split", ratio=0.5, top=[
+            TopClip(0.0, 3.0, kind="image", asset="/tmp/d.png",
+                    pan_from=(0.2, 0.3, 1.0), pan_to=(0.7, 0.5, 1.6)),
+            TopClip(3.0, 2.0, kind="prompt", text="/listing-reel",
+                    result="/tmp/r.png", label="WRITE THIS")]),
+        end_card=EndCard(keyword="TOUR", at=9.0, dur=3.0, subtitle="to get the list",
+                         handle="@ray", outro=1.0),
         notes="all fields",
     )
     loaded = EDL.load(original.save(tmp_path / "edl.json"))
     assert loaded.as_dict() == original.as_dict()
     assert loaded.sfx[0].name == "whoosh"
+
+
+def test_split_layout_and_end_card_are_validated():
+    from reelforge.core.edl import EndCard, Layout, TopClip
+
+    e = EDL(source="/tmp/a.mp4", segments=[Segment("s1", 0.0, 5.0)],
+            layout=Layout(kind="split", ratio=0.9,
+                          top=[TopClip(4.0, 3.0, kind="prompt")]),
+            end_card=EndCard(keyword=" ", at=4.0, dur=3.0))
+    problems = " | ".join(validate(e))
+    assert "split ratio" in problems
+    assert "runs past the end" in problems
+    assert "no keyword" in problems

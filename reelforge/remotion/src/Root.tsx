@@ -23,12 +23,16 @@ const EMPTY_EDIT: EditProps = {
       positionY: 0.72,
       marginX: 65,
       fontFamily: 'Inter, "DejaVu Sans", sans-serif',
+      anchor: 'bottom',
+      box: false,
     },
   },
   overlays: [],
   broll: [],
   music: null,
   sfx: [],
+  layout: {kind: 'full', topHeight: 960, background: '#141416', top: []},
+  endCard: null,
 };
 
 type GraphicProps = {durationInFrames?: number; width?: number; height?: number} & Record<string, unknown>;

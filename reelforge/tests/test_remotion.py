@@ -426,3 +426,102 @@ def test_prepare_preview_stages_like_a_render(tmp_path):
     props = json.loads(props_path.read_text())
     assert props["durationInFrames"] == 45
     assert (public / props["source"]["src"]).exists()
+
+
+# --------------------------------------------------------------------------
+# split layout, seam captions, end card
+# --------------------------------------------------------------------------
+
+from reelforge.core.edl import EndCard, Layout, TopClip  # noqa: E402
+
+
+def split_edl(**overrides):
+    base = dict(layout=Layout(kind="split", ratio=0.5, top=[
+        TopClip(0.0, 2.0, kind="image", asset="/a.png", pan_from=(0.2, 0.3, 1.0),
+                pan_to=(0.8, 0.5, 1.5)),
+        TopClip(2.0, 1.8, kind="prompt", text="/listing-reel", result="/r.mp4"),
+        TopClip(4.0, 1.0, kind="video", asset="/missing.mp4")]))
+    base.update(overrides)
+    return edl(**base)
+
+
+def test_split_speaker_is_cropped_for_the_lower_region():
+    props, _ = props_for(split_edl(), staged(assets={"/a.png": "top-0.png", "/r.mp4": "top-1.mp4"}))
+    seg = props["segments"][0]
+    region = (seg["crop"]["w"] / seg["crop"]["h"])
+    full = (seg["cropFull"]["w"] / seg["cropFull"]["h"])
+    assert region == pytest.approx(1080 / 960, abs=0.02)     # the lower half's shape
+    assert full == pytest.approx(9 / 16, abs=0.02)          # kept for the end card
+    assert props["layout"]["topHeight"] == 960
+
+
+def test_full_layout_uses_one_crop_for_both():
+    props, _ = props_for(edl())
+    seg = props["segments"][0]
+    assert seg["crop"] == seg["cropFull"]
+    assert props["layout"]["kind"] == "full"
+
+
+def test_top_clips_are_resolved_and_missing_assets_warn():
+    props, warnings = props_for(split_edl(), staged(assets={"/a.png": "top-0.png", "/r.mp4": "top-1.mp4"}))
+    top = props["layout"]["top"]
+    assert [c["kind"] for c in top] == ["image", "prompt"]   # the missing video is skipped
+    assert any("no usable asset" in w for w in warnings)
+    image, prompt = top
+    assert image["panTo"] == [0.8, 0.5, 1.5]
+    assert prompt["label"] == "WRITE THIS" and prompt["resultLabel"] == "TO GET THIS."
+    assert prompt["resultIsVideo"] is True
+    assert prompt["reveal"] == round(54 * 0.5)
+
+
+def test_seam_captions_sit_on_the_split_line_in_a_box():
+    ws = words(("so", 0.0, 0.4, False))
+    props, _ = props_for(split_edl(captions=Captions(style="seam", words=ws),
+                                   layout=Layout(kind="split", ratio=0.42)))
+    style = props["captions"]["style"]
+    assert style["box"] is True and style["anchor"] == "center"
+    assert style["positionY"] == 0.42
+
+
+def test_end_card_is_clamped_to_the_edit():
+    card = EndCard(keyword="TOUR", at=6.0, dur=5.0, subtitle="for the list", outro=1.0)
+    props, _ = props_for(edl(end_card=card))
+    ec = props["endCard"]
+    assert ec["from"] == 180 and ec["from"] + ec["duration"] == props["durationInFrames"]
+    assert ec["outro"] == 30 and ec["keyword"] == "TOUR"
+
+
+def test_stage_places_top_panel_assets_once(tmp_path):
+    src = tmp_path / "s.mp4"
+    src.write_bytes(b"v")
+    img = tmp_path / "diagram.PNG"
+    img.write_bytes(b"i")
+    e = EDL(source=str(src), segments=[Segment("s1", 0, 1)],
+            layout=Layout(kind="split", top=[TopClip(0, 1, asset=str(img)),
+                                             TopClip(1, 1, asset=str(img)),
+                                             TopClip(1, 1, kind="prompt", text="x",
+                                                     result=str(tmp_path / "gone.png"))]))
+    st = rm.stage(e, tmp_path / "job")
+    assert st.assets == {str(img): "top-0.png"}
+    assert any("gone.png" in w for w in st.warnings)
+
+
+def test_ffmpeg_engine_says_what_it_cannot_draw(tmp_path, monkeypatch):
+    from reelforge.core.render import ffmpeg_renderer
+
+    monkeypatch.setattr(ffmpeg_renderer, "_render_segments", lambda *a, **k: [])
+    monkeypatch.setattr(ffmpeg_renderer, "_concat", lambda *a, **k: tmp_path / "j.mp4")
+    monkeypatch.setattr(ffmpeg_renderer.media, "run", lambda *a, **k: "")
+    monkeypatch.setattr(ffmpeg_renderer.media, "probe", lambda *a, **k: INFO)
+    src = tmp_path / "s.mp4"
+    src.write_bytes(b"v")
+    e = EDL(source=str(src), segments=[Segment("s1", 0, 1)], layout=Layout(kind="split"),
+            end_card=EndCard(keyword="X", at=0.0, dur=0.5))
+
+    class P:
+        draft_args = final_args = []
+        render_parallelism = 1
+
+    result = ffmpeg_renderer.render(e, tmp_path / "o.mp4", P(), workdir=tmp_path / "w")
+    assert any("split-screen" in w for w in result.warnings)
+    assert any("end card" in w for w in result.warnings)

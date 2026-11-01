@@ -62,6 +62,15 @@ def render(
     info = media.probe(src)
     encode_args = profile.draft_args if draft else profile.final_args
     warnings: list[str] = []
+    # Split layouts and end cards are drawn by the Remotion composition only.
+    # Rendering here gives the plain full-frame edit -- said out loud, because
+    # a video that silently lost its top panel and its call to action looks
+    # finished and is not.
+    if edl.layout.kind == "split":
+        warnings.append("split-screen layout needs the Remotion engine; "
+                        "rendered full-frame without the top panel")
+    if edl.end_card is not None:
+        warnings.append("the Comment end card needs the Remotion engine; it was not drawn")
 
     temp_root = Path(workdir) if workdir else Path(tempfile.mkdtemp(prefix="reelforge-"))
     temp_root.mkdir(parents=True, exist_ok=True)

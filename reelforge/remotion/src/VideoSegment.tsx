@@ -8,26 +8,34 @@ import {
   useVideoConfig,
 } from 'remotion';
 import {CLAMP, ease} from './ease';
-import type {Seg, Source} from './types';
+import type {Crop, Seg, Source} from './types';
 
-// One kept span of the source, reframed to the output aspect.
+// One kept span of the source, reframed to the region it is drawn into.
 //
 // The crop window arrives from Python already computed by the same function
 // the ffmpeg engine uses (filters.crop_window), centred on the subject and
 // clamped so it never runs off the frame. Here it only has to be honoured:
-// scale the source so the window fills the output, offset it so the window
-// sits at the origin, then magnify around the centre for a push-in. That is
-// the ffmpeg engine's animated path -- crop at the widest point, then scale
-// up over time -- expressed as a CSS transform.
-export const VideoSegment: React.FC<{seg: Seg; source: Source}> = ({seg, source}) => {
+// scale the source so the window fills the region's width, offset it so the
+// window sits at the origin, then magnify around the centre for a push-in.
+//
+// `crop` overrides the segment's own window -- the end card's phone frame
+// draws the speaker at the full-frame aspect even when the edit is split.
+// `muted` is for that same copy: the speaker's voice must play once.
+export const VideoSegment: React.FC<{seg: Seg; source: Source; crop?: Crop; muted?: boolean}> = ({
+  seg,
+  source,
+  crop,
+  muted = false,
+}) => {
   const frame = useCurrentFrame();
   const {width} = useVideoConfig();
+  const window = crop ?? seg.crop;
 
   const zoom = seg.animate
     ? seg.zoomFrom + (seg.zoomTo - seg.zoomFrom) * ease(seg.ease, frame / Math.max(1, seg.duration))
     : 1;
 
-  const scale = width / seg.crop.w;
+  const scale = width / window.w;
   const opacity = Math.min(
     seg.fadeIn > 0 ? interpolate(frame, [0, seg.fadeIn], [0, 1], CLAMP) : 1,
     seg.fadeOut > 0
@@ -53,10 +61,11 @@ export const VideoSegment: React.FC<{seg: Seg; source: Source}> = ({seg, source}
           trimBefore={seg.trimBefore}
           playbackRate={seg.playbackRate}
           volume={volume}
+          muted={muted}
           style={{
             position: 'absolute',
-            left: -seg.crop.x * scale,
-            top: -seg.crop.y * scale,
+            left: -window.x * scale,
+            top: -window.y * scale,
             width: source.width * scale,
             height: source.height * scale,
             maxWidth: 'none',
