@@ -108,6 +108,23 @@ renderer, so they don't drift apart.
 See [docs/SERVER-RUNBOOK.md](docs/SERVER-RUNBOOK.md) for the Hetzner setup,
 including how to reach it from a phone.
 
+## Turn an edit into a post, and a reel into carousels
+
+```bash
+# split screen: "write this → get this" prompts, or a diagram walked by pan/zoom,
+# seam captions, and a "Comment KEYWORD" end card
+reelforge post reel.edl.json --assets result.mp4 diagram.png --keyword EDIT --render
+
+# Instagram carousels (1080×1350 slides + caption), from a brief or from a reel that worked
+reelforge carousel --problem "..." --context @context.md --idea "..." --variants 3
+reelforge carousel --from-reel reel.edl.json --keyword CAROUSEL
+```
+
+In Claude Code these are `/post` (the `post-designer` agent) and `/carousel`
+(the `carousel-writer` agent). Colours and the handle come from
+`~/reelforge/memory/brand.json`. The formats, measured from two reference
+reels, are in [docs/REFERENCE-FORMATS.md](docs/REFERENCE-FORMATS.md).
+
 ## Design notes worth knowing
 
 **Emoji render as PNG overlays, not ASS glyphs.** libass colour-emoji support

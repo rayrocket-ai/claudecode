@@ -317,10 +317,11 @@ def build_props(edl: EDL, info: media.MediaInfo, staged: Staged) -> tuple[dict, 
             "ease": framing.ease,
             "fadeIn": frames(boundaries.get(round(start_s, 2), 0.0), fps),
             "fadeOut": frames(boundaries.get(round(end_s, 2), 0.0), fps),
-            # Sub-frame ramps cannot be expressed per frame; one frame is the
-            # nearest thing to the ffmpeg engine's 20 ms, and QC listens for
-            # any pop that survives it.
-            "audioFade": 1 if edl.audio.fade_ms > 0 else 0,
+            # No fade here. Remotion applies volume once per video frame, so
+            # any ramp it draws is a staircase -- and each stair is itself a
+            # discontinuity that clicks. Splices are smoothed sample by sample
+            # in the ffmpeg pass instead (see splice_filter).
+            "audioFade": 0,
         })
         elapsed = end_s
 
@@ -503,12 +504,35 @@ def render_cmd(project: Path, props: Path, public: Path, out: Path, *,
     return cmd
 
 
-def loudness_cmd(src: Path, dst: Path, loudness: float) -> list[str]:
-    """Normalise loudness with the picture copied untouched."""
+def cut_times(props: dict) -> list[float]:
+    """Output seconds of every splice between two segments."""
+    fps = props["fps"]
+    return [round(seg["from"] / fps, 4) for seg in props["segments"][1:]]
+
+
+def splice_filter(cuts: list[float], half: float) -> str:
+    """A V-shaped volume dip, ``half`` seconds each side, centred on every splice.
+
+    Two spans of speech joined at arbitrary sample values click; pulling the
+    level to zero at the join and back over ~20 ms removes the step without an
+    audible gap -- what the ffmpeg engine's afade pair does per segment. The
+    terms are summed, not nested, so a vlog with hundreds of cuts does not
+    build an expression ffmpeg cannot parse; ``asetnsamples`` makes the
+    volume re-evaluate every 1 ms, so the ramp is smooth, not a staircase.
+    """
+    if not cuts or half <= 0:
+        return ""
+    terms = "+".join(f"max(0,1-abs(t-{c:.4f})/{half:.4f})" for c in cuts)
+    return f"asetnsamples=n=48:p=0,volume='max(0,1-({terms}))':eval=frame,"
+
+
+def loudness_cmd(src: Path, dst: Path, loudness: float, *,
+                 cuts: list[float] | None = None, half: float = 0.02) -> list[str]:
+    """Smooth the splices and normalise loudness, with the picture copied untouched."""
     return [
         "ffmpeg", "-hide_banner", "-nostdin", "-y", "-i", str(src),
         "-map", "0:v", "-map", "0:a?", "-c:v", "copy",
-        "-af", f"loudnorm=I={loudness}:TP=-1.5:LRA=11",
+        "-af", f"{splice_filter(cuts or [], half)}loudnorm=I={loudness}:TP=-1.5:LRA=11",
         "-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart", str(dst),
     ]
 
@@ -554,7 +578,9 @@ def render(edl: EDL, dst: Path, profile: Profile, *, draft: bool = False,
             raise RenderError(f"remotion render failed:\n{detail}")
 
         dst.parent.mkdir(parents=True, exist_ok=True)
-        media.run(loudness_cmd(raw, dst, edl.target.loudness))
+        half = max(0.01, edl.audio.fade_ms / 1000) if edl.audio.fade_ms > 0 else 0.0
+        media.run(loudness_cmd(raw, dst, edl.target.loudness,
+                               cuts=cut_times(props), half=half))
     finally:
         if not keep_intermediates and workdir is None:
             shutil.rmtree(job, ignore_errors=True)

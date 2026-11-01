@@ -36,6 +36,8 @@ from .highlights import HIGHLIGHTS_SCHEMA, Clip, parse
 from .playbook import Playbook
 from .transcribe import Transcript
 from .vlog import EPISODE_SCHEMA
+from .carousel import CAROUSEL_SCHEMA
+from .post import POST_SCHEMA
 
 #: The most capable current model by default. Editorial judgment -- which take
 #: was the good one, whether a clip stands alone -- is exactly where a stronger
@@ -261,4 +263,24 @@ class Brain:
             tool="submit_episode",
             schema=EPISODE_SCHEMA,
             description="Submit the episode plan.",
+        )
+
+    def design_post(self, request: str, *, style_profile: str | None = None) -> Decision:
+        """Choose the post format, place the top-panel clips, pick the comment keyword."""
+        return self._ask(
+            system=agent_prompt("post-designer", style_profile),
+            request=request,
+            tool="submit_post",
+            schema=POST_SCHEMA,
+            description="Submit the post layout.",
+        )
+
+    def write_carousel(self, request: str, *, style_profile: str | None = None) -> Decision:
+        """Write carousel copy: hook, body slides, call to action, caption."""
+        return self._ask(
+            system=agent_prompt("carousel-writer", style_profile),
+            request=request,
+            tool="submit_carousels",
+            schema=CAROUSEL_SCHEMA,
+            description="Submit the carousels.",
         )

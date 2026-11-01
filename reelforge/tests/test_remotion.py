@@ -525,3 +525,25 @@ def test_ffmpeg_engine_says_what_it_cannot_draw(tmp_path, monkeypatch):
     result = ffmpeg_renderer.render(e, tmp_path / "o.mp4", P(), workdir=tmp_path / "w")
     assert any("split-screen" in w for w in result.warnings)
     assert any("end card" in w for w in result.warnings)
+
+
+def test_splices_are_smoothed_in_the_ffmpeg_pass_not_per_frame():
+    props, _ = props_for(edl())
+    assert all(seg["audioFade"] == 0 for seg in props["segments"])
+    cuts = rm.cut_times(props)
+    assert cuts == [round(s["from"] / 30, 4) for s in props["segments"][1:]]
+    cmd = rm.loudness_cmd(Path("/i.mp4"), Path("/o.mp4"), -14.0, cuts=[1.5, 3.0], half=0.02)
+    af = cmd[cmd.index("-af") + 1]
+    assert af.startswith("asetnsamples=n=48")
+    assert "abs(t-1.5000)/0.0200" in af and "abs(t-3.0000)" in af
+    assert af.endswith("loudnorm=I=-14.0:TP=-1.5:LRA=11")
+    assert rm.splice_filter([], 0.02) == ""
+
+
+def test_pop_check_skips_cuts_under_a_sound_effect():
+    from reelforge.core import qc
+    from reelforge.core.edl import SoundEffect
+
+    e = edl(sfx=[SoundEffect(at=1.0, name="whoosh")])
+    assert qc.masked_by_sfx(e, 1.05)
+    assert not qc.masked_by_sfx(e, 2.0)

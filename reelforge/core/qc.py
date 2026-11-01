@@ -380,6 +380,14 @@ def cut_times(edl: EDL) -> list[float]:
     return times
 
 
+SFX_MASK = 0.15   # seconds either side of a cut a sound effect can cover
+
+
+def masked_by_sfx(edl: EDL, at: float) -> bool:
+    """True when a sound effect sits on this cut and would drown the measurement."""
+    return any(abs(fx.at - at) <= SFX_MASK + 0.05 for fx in edl.sfx)
+
+
 def render_checks(edl: EDL, rendered: Path, workdir: Path) -> list[Finding]:
     """Everything that requires looking at, and listening to, the output."""
     findings: list[Finding] = []
@@ -391,6 +399,11 @@ def render_checks(edl: EDL, rendered: Path, workdir: Path) -> list[Finding]:
         return findings
 
     for at in cuts:
+        # A whoosh or impact placed on the cut is broadband noise on purpose:
+        # its sample-to-sample jumps are the sound, not a splice fault, and
+        # "repairing" them only lengthens fades that were already fine.
+        if masked_by_sfx(edl, at):
+            continue
         findings += judge_pop(measure_pop(rendered, at), at)
 
     # One frame either side of each cut, far enough out to miss the boundary

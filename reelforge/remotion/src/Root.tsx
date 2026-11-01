@@ -1,5 +1,6 @@
 import React from 'react';
 import {AbsoluteFill, Composition} from 'remotion';
+import {Carousel, type CarouselProps} from './Carousel';
 import {Edit} from './Edit';
 import {GRAPHICS} from './graphics';
 import type {EditProps, GraphicName} from './types';
@@ -56,6 +57,15 @@ const graphicMetadata = ({props}: {props: GraphicProps}) => ({
   height: Number(props.height ?? 1920),
 });
 
+const EMPTY_CAROUSEL: CarouselProps = {
+  slides: [{role: 'hook', headline: 'Your *hook* here'}],
+  brand: {primary: '#0A2540', accent: '#FF6B2C', text: '#FFFFFF', muted: '#C9D3E0',
+    font: 'Inter, "DejaVu Sans", sans-serif', handle: '', name: ''},
+  keyword: '',
+  width: 1080,
+  height: 1350,
+};
+
 const GRAPHIC_IDS: [string, GraphicName][] = [
   ['LowerThird', 'lower-third'],
   ['Callout', 'callout'],
@@ -79,6 +89,21 @@ export const Root: React.FC = () => (
       calculateMetadata={({props}) => ({
         durationInFrames: Math.max(1, props.durationInFrames),
         fps: props.fps,
+        width: props.width,
+        height: props.height,
+      })}
+    />
+    <Composition
+      id="Carousel"
+      component={Carousel}
+      defaultProps={EMPTY_CAROUSEL}
+      durationInFrames={1}
+      fps={1}
+      width={1080}
+      height={1350}
+      // One frame per slide: rendered with --sequence, frame N is slide N.
+      calculateMetadata={({props}) => ({
+        durationInFrames: Math.max(1, props.slides.length),
         width: props.width,
         height: props.height,
       })}

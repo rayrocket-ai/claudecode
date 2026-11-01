@@ -682,6 +682,171 @@ def cmd_edit(args) -> int:
     return 0 if all(r.get("qc_clean", True) for r in renders) else 1
 
 
+def _text_arg(value: str | None) -> str:
+    """A text option, or the contents of a file when given as @path."""
+    if not value:
+        return ""
+    if value.startswith("@"):
+        return Path(value[1:]).expanduser().read_text(encoding="utf-8")
+    return value
+
+
+def _style_profile() -> str | None:
+    path = _root() / "memory" / "style-profile.md"
+    return path.read_text(encoding="utf-8") if path.exists() else None
+
+
+def cmd_post(args) -> int:
+    """Lay out an edit as a post: showcase, explainer or full, with an end card."""
+    from .core import agent as agent_mod
+    from .core import brand as brand_mod
+    from .core import post as post_mod
+
+    edl_path = Path(args.edl).expanduser().resolve()
+    edl = EDL.load(edl_path)
+    brand = brand_mod.load(_root() / "memory")
+    stem = edl_path.name.replace(".edl.json", "").replace(".json", "")
+    spec_path = Path(args.spec).expanduser().resolve() if args.spec else None
+    usage: dict = {"model": "spec given"}
+
+    if spec_path is not None:
+        spec = json.loads(spec_path.read_text(encoding="utf-8"))
+        base = spec_path.parent
+    else:
+        assets = [str(Path(a).expanduser().resolve()) for a in args.assets or []]
+        missing = [a for a in assets if not Path(a).exists()]
+        if missing:
+            print("error: assets not found:\n  " + "\n  ".join(missing), file=sys.stderr)
+            return 2
+        try:
+            decision = agent_mod.Brain(model=args.model).design_post(
+                post_mod.post_request(edl, assets, keyword=args.keyword, offer=args.offer),
+                style_profile=_style_profile())
+        except agent_mod.AgentError as exc:
+            print(f"error: {exc}", file=sys.stderr)
+            return 2
+        spec, usage = decision.payload, decision.usage()
+        spec_path = edl_path.with_name(f"{stem}.post.json")
+        spec_path.write_text(json.dumps(spec, indent=2), encoding="utf-8")
+        base = None
+    if args.format:
+        spec["format"] = args.format
+    if args.keyword and spec.get("end_card"):
+        spec["end_card"]["keyword"] = args.keyword
+    elif args.keyword:
+        spec["end_card"] = {"keyword": args.keyword, "subtitle": args.offer or ""}
+
+    try:
+        laid_out, notes = post_mod.apply(edl, spec, brand, base=base)
+    except post_mod.PostError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return 2
+    problems = [p for p in validate(laid_out) if "exceeds the" not in p]
+    out_path = edl_path.with_name(f"{stem}-{spec.get('format', 'full')}.edl.json")
+    laid_out.save(out_path)
+    report: dict = {"edl": str(out_path), "spec": str(spec_path), "format": spec.get("format"),
+                    "why": spec.get("why", ""), "notes": notes, "problems": problems,
+                    "usage": usage}
+    if args.render:
+        if problems:
+            print(json.dumps(report, indent=2))
+            print("error: the laid-out EDL has problems; not rendering", file=sys.stderr)
+            return 2
+        report["render"] = _render_edl(out_path, laid_out, out_path.with_suffix("").with_suffix(".mp4"),
+                                       hardware.profile(_root()), draft=args.draft,
+                                       engine=args.engine or "remotion", qc_passes=args.qc_passes)
+    print(json.dumps(report, indent=2))
+    return 0 if not problems else 1
+
+
+def _reel_words(path: Path, profile) -> str:
+    """What a reel says: from an EDL's captions, a text file, or a video's transcript."""
+    from .core import agent as agent_mod
+    from .core import post as post_mod
+
+    if path.name.endswith(".json"):
+        return post_mod.edit_text(EDL.load(path))
+    if path.suffix.lower() in (".txt", ".md"):
+        return path.read_text(encoding="utf-8")
+    cache, key, transcript, signals = _load_context(path)
+    if transcript is None:
+        print(f"transcribing {path.name}", file=sys.stderr)
+        transcript, _ = _warm(path, cache, key, transcript, signals, profile)
+    return agent_mod.transcript_text(transcript)
+
+
+def cmd_carousel(args) -> int:
+    """Write and draw Instagram carousels, from a brief or from a reel that worked."""
+    from .core import agent as agent_mod
+    from .core import brand as brand_mod
+    from .core import carousel as car
+
+    memory = _root() / "memory"
+    brand = brand_mod.load(memory)
+    if args.handle:
+        brand.handle = args.handle
+    keyword = (args.keyword or "").strip().upper() or None
+    outdir = Path(args.outdir).expanduser() if args.outdir else _root() / "outbox" / "carousels"
+    usage: dict = {"model": "replayed from --decision"}
+
+    if args.decision:
+        payload = json.loads(Path(args.decision).expanduser().read_text(encoding="utf-8"))
+        keyword = keyword or (payload.get("keyword") or "").upper() or None
+    else:
+        context = _text_arg(args.context)
+        if not context and (memory / "context.md").exists():
+            context = (memory / "context.md").read_text(encoding="utf-8")
+        if args.from_reel:
+            src = Path(args.from_reel).expanduser().resolve()
+            if not src.exists():
+                print(f"error: {src} not found", file=sys.stderr)
+                return 2
+            request = car.reel_request(transcript=_reel_words(src, hardware.profile(_root())),
+                                       context=context, variants=args.variants,
+                                       keyword=keyword, offer=args.offer)
+        else:
+            problem, idea = _text_arg(args.problem), _text_arg(args.idea)
+            missing = [n for n, v in (("--problem", problem), ("--context", context),
+                                      ("--idea", idea)) if not v.strip()]
+            if missing:
+                print("error: a carousel brief needs " + ", ".join(missing)
+                      + " (or use --from-reel with a reel that performed). "
+                      "--context defaults to ~/reelforge/memory/context.md.", file=sys.stderr)
+                return 2
+            request = car.brief_request(problem=problem, context=context, idea=idea,
+                                        variants=args.variants, keyword=keyword, offer=args.offer)
+        try:
+            decision = agent_mod.Brain(model=args.model).write_carousel(
+                request, style_profile=_style_profile())
+        except agent_mod.AgentError as exc:
+            print(f"error: {exc}", file=sys.stderr)
+            return 2
+        payload, usage = decision.payload, decision.usage()
+
+    try:
+        plans, notes = car.parse(payload)
+    except car.CarouselError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return 2
+
+    rows = []
+    for n, plan in enumerate(plans, 1):
+        folder = outdir / f"{n:02d}-{car.slug(plan.angle, f'carousel-{n}')}"
+        car.save(plan, folder, keyword)
+        row = {"folder": str(folder), "angle": plan.angle, "slides": len(plan.slides),
+               "hook": plan.slides[0].headline.replace("*", "")}
+        if not args.no_render:
+            try:
+                row["images"] = [str(p) for p in car.render(plan, folder, brand, keyword=keyword)]
+            except car.CarouselError as exc:
+                print(f"error: {exc}", file=sys.stderr)
+                return 1
+        rows.append(row)
+    print(json.dumps({"carousels": rows, "keyword": keyword, "notes": notes, "usage": usage},
+                     indent=2))
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     _load_env_file()
     ap = argparse.ArgumentParser(prog="reelforge")
@@ -778,6 +943,45 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--decision", default=None,
                    help="replay a saved highlights/episode JSON instead of calling the API")
     p.set_defaults(func=cmd_edit)
+
+    p = sub.add_parser("post", help="lay out an edit as a post: showcase, explainer or full, with an end card")
+    p.add_argument("edl")
+    p.add_argument("--spec", default=None,
+                   help="a post spec JSON (written by hand or by the post-designer agent); "
+                        "without it Claude designs one from the edit and --assets")
+    p.add_argument("--assets", nargs="*", default=None,
+                   help="images/videos the designer may place in the top panel")
+    p.add_argument("--format", choices=["showcase", "explainer", "full"], default=None,
+                   help="override the spec's format")
+    p.add_argument("--keyword", default=None, help="end-card comment keyword, e.g. EDIT")
+    p.add_argument("--offer", default=None, help="what commenters get, for the end card")
+    p.add_argument("--render", action="store_true", help="render the laid-out edit")
+    p.add_argument("--draft", action="store_true")
+    p.add_argument("--qc-passes", type=int, default=3)
+    p.add_argument("--engine", choices=["auto", "remotion", "ffmpeg"], default=None,
+                   help="default remotion: the split layout and end card are drawn there")
+    p.add_argument("--model", default=None)
+    p.set_defaults(func=cmd_post)
+
+    p = sub.add_parser("carousel", help="write and draw Instagram carousels")
+    p.add_argument("--problem", default=None, help="the audience's problem (text or @file)")
+    p.add_argument("--context", default=None,
+                   help="who you are and what you sell (text or @file; "
+                        "default ~/reelforge/memory/context.md)")
+    p.add_argument("--idea", default=None,
+                   help="a carousel idea that already worked (text or @file)")
+    p.add_argument("--from-reel", default=None,
+                   help="a reel that performed: video, EDL, or transcript .txt")
+    p.add_argument("--variants", type=int, default=3, help="carousels to write, each a different angle")
+    p.add_argument("--keyword", default=None, help="comment keyword for the last slide")
+    p.add_argument("--offer", default=None, help="what commenters get")
+    p.add_argument("--handle", default=None, help="override brand.json's handle for this run")
+    p.add_argument("--outdir", default=None, help="default ~/reelforge/outbox/carousels")
+    p.add_argument("--decision", default=None,
+                   help="render a saved carousel JSON instead of calling the API")
+    p.add_argument("--no-render", action="store_true", help="write the copy only")
+    p.add_argument("--model", default=None)
+    p.set_defaults(func=cmd_carousel)
 
     p = sub.add_parser("study", help="learn a style from a reference video")
     p.add_argument("video")
