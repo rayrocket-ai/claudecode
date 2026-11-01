@@ -847,6 +847,81 @@ def cmd_carousel(args) -> int:
     return 0
 
 
+def cmd_camera(args) -> int:
+    """Plan a multicam shot list for footage shot from one angle."""
+    from .core import camera
+
+    edl_path = Path(args.edl).expanduser().resolve()
+    edl = EDL.load(edl_path)
+    src = Path(edl.source)
+    if not src.exists():
+        print(f"error: source not found: {src}", file=sys.stderr)
+        return 2
+    info = media.probe(src)
+    _, _, _, signals = _load_context(src)
+    if signals is None:
+        print("note: no cached signals for this source -- framing on the frame centre. "
+              "Run `reelforge prepare --wait` first for face-tracked shots.", file=sys.stderr)
+    try:
+        result = camera.plan(edl, info, signals, style=args.style, max_upscale=args.max_upscale,
+                             src=None if args.no_detail else src)
+    except ValueError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return 2
+    stem = edl_path.name.replace(".edl.json", "").replace(".json", "")
+    out_path = edl_path.with_name(f"{stem}-camera.edl.json")
+    problems = [p for p in validate(result.edl) if "exceeds the" not in p]
+    result.edl.save(out_path)
+    sizes: dict[str, int] = {}
+    for f in result.edl.framing:
+        for sh in f.shots:
+            sizes[sh.size] = sizes.get(sh.size, 0) + 1
+    report: dict = {"edl": str(out_path), "style": args.style, "shots": result.shots,
+                    "sizes": sizes, "max_zoom": result.max_zoom, "notes": result.notes,
+                    "problems": problems}
+    if args.render and not problems:
+        report["render"] = _render_edl(out_path, result.edl,
+                                       out_path.with_suffix("").with_suffix(".mp4"),
+                                       hardware.profile(_root()), draft=args.draft,
+                                       engine=args.engine or "remotion", qc_passes=args.qc_passes)
+    print(json.dumps(report, indent=2))
+    return 0 if not problems else 1
+
+
+def cmd_angles(args) -> int:
+    """Hand shots to a generative video tool for new angles, and bring them back."""
+    from .core import camera
+
+    edl_path = Path(args.edl).expanduser().resolve()
+    edl = EDL.load(edl_path)
+    if not any(f.shots for f in edl.framing):
+        print("error: this edit has no shot list -- run `reelforge camera` on it first",
+              file=sys.stderr)
+        return 2
+    stem = edl_path.name.replace(".edl.json", "").replace(".json", "")
+    folder = Path(args.dir).expanduser() if args.dir else edl_path.with_name(f"{stem}-angles")
+
+    if args.action == "export":
+        rows = camera.export_requests(edl, folder, count=args.count, location=args.location or "")
+        print(json.dumps({"folder": str(folder), "requests": rows,
+                          "next": "Generate each request in your video tool with its prompt, save the "
+                                  "result into this folder under the same name (angle-01.mp4 ...), "
+                                  f"then run: reelforge angles ingest {edl_path}"}, indent=2))
+        return 0 if rows else 1
+
+    manifest = folder / camera.MANIFEST
+    if not manifest.exists():
+        print(f"error: no {camera.MANIFEST} in {folder} -- run `reelforge angles export` first",
+              file=sys.stderr)
+        return 2
+    results = Path(args.results).expanduser() if args.results else folder / "results"
+    laid, notes = camera.ingest_angles(edl, manifest, results)
+    out_path = edl_path.with_name(f"{stem}-angles.edl.json")
+    laid.save(out_path)
+    print(json.dumps({"edl": str(out_path), "notes": notes}, indent=2))
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     _load_env_file()
     ap = argparse.ArgumentParser(prog="reelforge")
@@ -982,6 +1057,29 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--no-render", action="store_true", help="write the copy only")
     p.add_argument("--model", default=None)
     p.set_defaults(func=cmd_carousel)
+
+    p = sub.add_parser("camera", help="a multicam shot list for footage shot from one angle")
+    p.add_argument("edl")
+    p.add_argument("--style", choices=["multicam", "documentary", "cinematic"], default="multicam")
+    p.add_argument("--max-upscale", type=float, default=2.6,
+                   help="sharpest magnification of the source allowed for close-ups")
+    p.add_argument("--no-detail", action="store_true", help="skip detail shots of moving hands")
+    p.add_argument("--render", action="store_true")
+    p.add_argument("--draft", action="store_true")
+    p.add_argument("--qc-passes", type=int, default=3)
+    p.add_argument("--engine", choices=["auto", "remotion", "ffmpeg"], default=None,
+                   help="default remotion: shots inside segments are drawn there")
+    p.set_defaults(func=cmd_camera)
+
+    p = sub.add_parser("angles", help="AI-generated camera angles: export requests, ingest results")
+    p.add_argument("action", choices=["export", "ingest"])
+    p.add_argument("edl", help="an edit with a shot list (from `reelforge camera`)")
+    p.add_argument("--count", type=int, default=3, help="shots to regenerate (export)")
+    p.add_argument("--location", default=None,
+                   help="put the speaker somewhere else, e.g. 'a penthouse with an ocean view'")
+    p.add_argument("--dir", default=None, help="default: <edit>-angles/ beside the EDL")
+    p.add_argument("--results", default=None, help="where generated clips are (default <dir>/results)")
+    p.set_defaults(func=cmd_angles)
 
     p = sub.add_parser("study", help="learn a style from a reference video")
     p.add_argument("video")

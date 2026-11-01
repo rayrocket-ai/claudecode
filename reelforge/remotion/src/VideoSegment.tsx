@@ -1,6 +1,8 @@
 import React from 'react';
 import {
   AbsoluteFill,
+  Audio,
+  Sequence,
   interpolate,
   OffthreadVideo,
   staticFile,
@@ -8,6 +10,7 @@ import {
   useVideoConfig,
 } from 'remotion';
 import {CLAMP, ease} from './ease';
+import {ShotPicture} from './Shot';
 import type {Crop, Seg, Source} from './types';
 
 // One kept span of the source, reframed to the region it is drawn into.
@@ -52,6 +55,25 @@ export const VideoSegment: React.FC<{seg: Seg; source: Source; crop?: Crop; mute
       interpolate(f, [seg.duration - seg.audioFade, seg.duration], [1, 0], CLAMP),
     );
   };
+
+  // Several camera setups inside one segment: the picture cuts between them
+  // while the voice plays once, unbroken, underneath -- a picture cut with no
+  // audio cut is what makes one camera read as several. The end card's phone
+  // frame (which passes its own crop) keeps the plain single-window path.
+  if (!crop && seg.shots && seg.shots.length > 0) {
+    return (
+      <AbsoluteFill style={{backgroundColor: 'black', overflow: 'hidden', opacity}}>
+        {seg.shots.map((shot, i) => (
+          <Sequence key={i} from={shot.from} durationInFrames={shot.duration} name={`shot ${shot.size}`}>
+            <ShotPicture shot={shot} source={source} playbackRate={seg.playbackRate} />
+          </Sequence>
+        ))}
+        {muted ? null : (
+          <Audio src={staticFile(source.src)} trimBefore={seg.trimBefore} playbackRate={seg.playbackRate} />
+        )}
+      </AbsoluteFill>
+    );
+  }
 
   return (
     <AbsoluteFill style={{backgroundColor: 'black', overflow: 'hidden'}}>

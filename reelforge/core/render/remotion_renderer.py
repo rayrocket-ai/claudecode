@@ -31,6 +31,7 @@ never silently renders a different-looking video.
 from __future__ import annotations
 
 import json
+import zlib
 import logging
 import os
 import shutil
@@ -247,6 +248,20 @@ def stage(edl: EDL, job: Path) -> Staged:
             _place(path, public / name)
             staged.assets[raw] = name
 
+    for framing in edl.framing:
+        for shot in framing.shots:
+            raw = shot.angle
+            if not raw or raw in staged.assets:
+                continue
+            path = Path(raw)
+            if not path.exists():
+                staged.warnings.append(f"generated angle not found, shot falls back to "
+                                       f"the source framing: {path}")
+                continue
+            name = f"angle-{len(staged.assets)}{path.suffix.lower() or '.mp4'}"
+            _place(path, public / name)
+            staged.assets[raw] = name
+
     for index, slot in enumerate(edl.broll):
         if not slot.source:
             continue
@@ -264,6 +279,79 @@ def stage(edl: EDL, job: Path) -> Staged:
 # --------------------------------------------------------------------------
 # EDL -> props
 # --------------------------------------------------------------------------
+
+def _window(info: media.MediaInfo, region, focus: tuple[float, float], zoom: float) -> dict:
+    fx = min(1.0, max(0.0, focus[0]))
+    fy = min(1.0, max(0.0, focus[1]))
+    w = filters.crop_window(info.width, info.height, region, (fx, fy), max(1.0, zoom))
+    return {"x": w.x, "y": w.y, "w": w.w, "h": w.h}
+
+
+def shot_states(shot) -> tuple[tuple[float, float], float, tuple[float, float], float]:
+    """(focus, zoom) at the shot's first and last frame, from its move."""
+    f0 = tuple(shot.focus)
+    z0 = shot.zoom
+    a = shot.amount
+    if shot.move in ("push", "punch"):
+        return f0, z0, f0, z0 * (1 + a)
+    if shot.move == "pull":
+        return f0, z0 * (1 + a), f0, z0
+    if shot.move == "pan":
+        return (f0[0] - a / 2, f0[1]), z0, (f0[0] + a / 2, f0[1]), z0
+    if shot.move == "tilt":
+        return (f0[0], f0[1] - a / 2), z0, (f0[0], f0[1] + a / 2), z0
+    return f0, z0, f0, z0
+
+
+# A punch lands in about a third of a second -- a beat, not a move. Every other
+# move runs the whole shot, eased at both ends like a dolly that starts and
+# stops under control.
+PUNCH_FRAMES = 10
+
+
+def shot_props(seg, framing, info, region, start_s: float, end_s: float, fps: int,
+               staged: Staged, warnings: list[str]) -> list[dict]:
+    """The segment's shots as Remotion props, or [] for a single-shot segment.
+
+    Frame boundaries come from cumulative output time, like the segments', so
+    a shot cut lands on the same frame the caption word it was snapped to does.
+    """
+    if not framing.shots:
+        return []
+    seg_from = frames(start_s, fps)
+    seg_len = max(1, frames(end_s, fps) - seg_from)
+    out = []
+    for i, shot in enumerate(framing.shots):
+        a = frames(start_s + shot.at, fps) - seg_from
+        nxt = framing.shots[i + 1].at if i + 1 < len(framing.shots) else None
+        b = (frames(start_s + nxt, fps) - seg_from) if nxt is not None else seg_len
+        a, b = max(0, min(a, seg_len - 1)), max(1, min(b, seg_len))
+        if b <= a:
+            continue
+        f0, z0, f1, z1 = shot_states(shot)
+        angle = staged.assets.get(shot.angle) if shot.angle else None
+        out.append({
+            "from": a,
+            "duration": b - a,
+            "size": shot.size,
+            # Source frames skipped before this shot: the segment's own trim
+            # plus however much of the segment has already played.
+            "trimBefore": frames(seg.src_in, fps) + int(round(a * seg.speed)),
+            "windowFrom": _window(info, region, f0, z0),
+            "windowTo": _window(info, region, f1, z1),
+            "moveFrames": min(PUNCH_FRAMES, b - a) if shot.move == "punch" else b - a,
+            "ease": "outCubic" if shot.move == "punch" else "inOutCubic",
+            "drift": round(shot.drift, 5),
+            # crc32, not hash(): str hashes change per process, and a render
+            # must be a pure function of its EDL.
+            "seed": (zlib.crc32(seg.id.encode()) + i * 131) % 1000,
+            "peek": shot.peek,
+            "angle": angle,
+            "angleTrimBefore": frames(shot.angle_in, fps),
+            "angleRate": round(shot.angle_rate, 4),
+        })
+    return out
+
 
 def build_props(edl: EDL, info: media.MediaInfo, staged: Staged) -> tuple[dict, list[str]]:
     """Resolve an EDL into the composition's props, all in frames.
@@ -322,6 +410,7 @@ def build_props(edl: EDL, info: media.MediaInfo, staged: Staged) -> tuple[dict, 
             # discontinuity that clicks. Splices are smoothed sample by sample
             # in the ffmpeg pass instead (see splice_filter).
             "audioFade": 0,
+            "shots": shot_props(seg, framing, info, region, start_s, end_s, fps, staged, warnings),
         })
         elapsed = end_s
 

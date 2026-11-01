@@ -141,6 +141,19 @@ Python decides, Remotion draws. If a graphic needs to know *when* something
 happens, compute it in Python and pass it in as props. Do not make the
 composition work it out.
 
+## Footage from one fixed camera
+
+A talking head from a single locked-off camera looks static once it is
+cut. After the edit renders cleanly, offer the multicam pass, which cuts the
+picture between shot sizes and moves while the voice runs on:
+
+```bash
+reelforge camera <edl> --style multicam --render
+```
+
+The **camera-director** agent owns this step, including AI-generated angles.
+See `docs/VIRTUAL-CAMERA.md`.
+
 ## Report
 
 When you are done, say plainly:

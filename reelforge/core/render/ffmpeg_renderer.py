@@ -71,6 +71,9 @@ def render(
                         "rendered full-frame without the top panel")
     if edl.end_card is not None:
         warnings.append("the Comment end card needs the Remotion engine; it was not drawn")
+    if any(f.shots for f in edl.framing):
+        warnings.append("camera shots inside segments need the Remotion engine; each segment "
+                        "was rendered as one shot with its base framing")
 
     temp_root = Path(workdir) if workdir else Path(tempfile.mkdtemp(prefix="reelforge-"))
     temp_root.mkdir(parents=True, exist_ok=True)

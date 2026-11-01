@@ -120,7 +120,20 @@ reelforge carousel --problem "..." --context @context.md --idea "..." --variants
 reelforge carousel --from-reel reel.edl.json --keyword CAROUSEL
 ```
 
-In Claude Code these are `/post` (the `post-designer` agent) and `/carousel`
+## One camera, edited like several
+
+```bash
+reelforge camera reel.edl.json --style multicam --render     # close-ups, hand details, pro moves
+reelforge angles export reel-camera.edl.json --count 3        # side/overhead/orbit via your AI video tool
+```
+
+The voice runs on unbroken while the picture cuts between shot sizes, each
+with its own push, pan, sway or foreground edge. Angles no crop can contain
+are exported to a generative video tool and locked back onto the voice. In
+Claude Code: `/camera` (the `camera-director` agent). See
+[docs/VIRTUAL-CAMERA.md](docs/VIRTUAL-CAMERA.md).
+
+In Claude Code, posts and carousels are `/post` (the `post-designer` agent) and `/carousel`
 (the `carousel-writer` agent). Colours and the handle come from
 `~/reelforge/memory/brand.json`. The formats, measured from two reference
 reels, are in [docs/REFERENCE-FORMATS.md](docs/REFERENCE-FORMATS.md).

@@ -547,3 +547,26 @@ def test_pop_check_skips_cuts_under_a_sound_effect():
     e = edl(sfx=[SoundEffect(at=1.0, name="whoosh")])
     assert qc.masked_by_sfx(e, 1.05)
     assert not qc.masked_by_sfx(e, 2.0)
+
+
+def test_shots_become_per_shot_props_with_continuous_source_time():
+    from reelforge.core.edl import Framing, Shot
+    e = edl(framing=[Framing(seg="s1", shots=[
+        Shot(at=0.0, size="wide", move="push", amount=0.1),
+        Shot(at=1.0, size="close", zoom=1.8, focus=(0.6, 0.4), drift=0.005, peek="left")])])
+    props, _ = props_for(e)
+    seg = props["segments"][0]
+    a, b = seg["shots"]
+    assert (a["from"], a["duration"]) == (0, 30) and b["from"] == 30
+    assert a["from"] + a["duration"] + b["duration"] == seg["duration"]
+    assert b["trimBefore"] == seg["trimBefore"] + 30          # the voice carries on
+    assert a["windowTo"]["w"] < a["windowFrom"]["w"]          # a push tightens
+    assert b["windowFrom"] == b["windowTo"] and b["drift"] == 0.005 and b["peek"] == "left"
+    assert b["windowFrom"]["w"] < a["windowFrom"]["w"]        # close is tighter than wide
+    again, _ = props_for(e)
+    assert again["segments"][0]["shots"] == seg["shots"]      # deterministic
+
+
+def test_single_shot_segments_have_no_shot_props():
+    props, _ = props_for(edl())
+    assert all(s["shots"] == [] for s in props["segments"])

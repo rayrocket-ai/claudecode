@@ -58,6 +58,32 @@ class Segment:
         return self.src_duration / max(0.01, self.speed)
 
 
+ShotSize = Literal["wide", "medium", "close", "extreme", "detail", "angle"]
+ShotMove = Literal["static", "push", "pull", "pan", "tilt", "punch"]
+
+
+@dataclass
+class Shot:
+    """One camera setup inside a segment: a picture cut with no audio cut.
+
+    A multicam edit from a single camera is exactly this -- the voice runs on
+    unbroken while the picture cuts between a wide, a close-up and a detail of
+    the hands, each with its own slow move. ``at`` is output seconds from the
+    segment's start; the shot runs until the next shot or the segment's end.
+    """
+    at: float = 0.0
+    size: ShotSize = "medium"
+    focus: tuple[float, float] = (0.5, 0.5)
+    zoom: float = 1.0          # magnification over the base crop at the shot's start
+    move: ShotMove = "static"
+    amount: float = 0.0        # push/pull: zoom change as a fraction; pan/tilt: focus travel (0-1)
+    drift: float = 0.0         # handheld sway, as a fraction of the frame (0.004-0.012 reads as a hand)
+    peek: str = ""             # "left"/"right": a soft foreground edge, as if shot past an object
+    angle: str = ""            # an AI-generated clip that replaces the picture for this shot
+    angle_in: float = 0.0      # seconds into that clip where the shot starts
+    angle_rate: float = 1.0    # playback rate that keeps the clip locked to the voice
+
+
 @dataclass
 class Framing:
     """How the crop window moves during one segment."""
@@ -67,6 +93,7 @@ class Framing:
     zoom_from: float = 1.0
     zoom_to: float = 1.0
     ease: Ease = "outCubic"
+    shots: list[Shot] = field(default_factory=list)   # empty: one shot, as above
 
 
 @dataclass
@@ -317,8 +344,7 @@ class EDL:
             source=d["source"],
             target=Target(**target_fields),
             segments=[Segment(**s) for s in d.get("segments", [])],
-            framing=[Framing(**{**f, "focus": tuple(f.get("focus", (0.5, 0.5)))})
-                     for f in d.get("framing", [])],
+            framing=[_framing_from(f) for f in d.get("framing", [])],
             captions=Captions(
                 style=caps.get("style", "karaoke-bold"),
                 enabled=caps.get("enabled", True),
@@ -336,6 +362,12 @@ class EDL:
             version=version,
             notes=d.get("notes", ""),
         )
+
+
+def _framing_from(raw: dict) -> Framing:
+    shots = [Shot(**{**sh, "focus": tuple(sh.get("focus", (0.5, 0.5)))})
+             for sh in raw.get("shots", [])]
+    return Framing(**{**raw, "focus": tuple(raw.get("focus", (0.5, 0.5))), "shots": shots})
 
 
 def _layout_from(raw: dict | None) -> Layout:
@@ -405,6 +437,21 @@ def validate(edl: EDL, *, source_duration: float | None = None) -> list[str]:
             problems.append(f"{f.seg}: focus {f.focus} outside the frame")
         if not (0.5 <= f.zoom_from <= 3.0 and 0.5 <= f.zoom_to <= 3.0):
             problems.append(f"{f.seg}: zoom outside 0.5-3.0")
+        seg_len = next((sg.out_duration for sg in edl.segments if sg.id == f.seg), None)
+        last_at = -1.0
+        for i, shot in enumerate(f.shots):
+            if shot.at <= last_at:
+                problems.append(f"{f.seg}: shot {i + 1} does not start after the one before")
+            if seg_len is not None and shot.at >= seg_len - 0.25:
+                problems.append(f"{f.seg}: shot {i + 1} starts at {shot.at}s, too close to the "
+                                f"segment's end ({seg_len:.2f}s) to read")
+            if not 1.0 <= shot.zoom <= 4.0:
+                problems.append(f"{f.seg}: shot {i + 1} zoom {shot.zoom} outside 1.0-4.0")
+            if not 0.0 <= shot.drift <= 0.03:
+                problems.append(f"{f.seg}: shot {i + 1} drift {shot.drift} outside 0-0.03")
+            last_at = shot.at
+        if f.shots and f.shots[0].at != 0.0:
+            problems.append(f"{f.seg}: the first shot must start at 0")
 
     duration = edl.duration
     if edl.target.max_dur and duration > edl.target.max_dur:

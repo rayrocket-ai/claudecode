@@ -32,6 +32,25 @@ export type Seg = {
   fadeIn: number; // frames of dip from black (transitions)
   fadeOut: number; // frames of dip to black
   audioFade: number; // frames of volume ramp at each edge -- kills pops
+  shots: Shot[]; // camera setups inside the segment; empty means one shot
+};
+
+// One camera setup inside a segment: the picture cuts, the voice does not.
+export type Shot = {
+  from: number; // frames from the segment's start
+  duration: number;
+  size: string;
+  trimBefore: number; // source frames skipped before this shot
+  windowFrom: Crop; // crop window on the shot's first frame
+  windowTo: Crop; // ...and once the move has finished
+  moveFrames: number; // frames the move takes (a punch lands fast; a dolly runs the shot)
+  ease: Ease;
+  drift: number; // handheld sway, fraction of the frame
+  seed: number;
+  peek: string; // '' | 'left' | 'right': soft foreground edge
+  angle: string | null; // generated clip replacing the picture, staged under public/
+  angleTrimBefore: number;
+  angleRate: number;
 };
 
 export type CaptionWord = {text: string; start: number; end: number};
