@@ -5,6 +5,11 @@ Newest entries at the top. Never re-test a settled question without new
 justification.
 
 ---
+## 2026-11-03 — Priority listing
+
+- Ray named Buttonleaf a priority on Nov 3. Already live. Server ops lower it to $5/day and swap in the no-address copy.
+
+---
 ## 2026-11-03 — Creative audit: live ad shows the address
 
 - Read from Ad Advisor's saved copy (as of Aug 20). The only live ad

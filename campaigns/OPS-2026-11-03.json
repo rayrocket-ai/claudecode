@@ -1,5 +1,5 @@
 {
-  "_about": "Reviewed by ADMAX on 2026-11-03 for Ray. Run on the server: docker compose run --rm bot python -m integrations.meta_ads_cli run-ops campaigns/OPS-2026-11-03.json . Safe to rerun; done ops are skipped. Nothing is activated.",
+  "_about": "Reviewed by ADMAX on 2026-11-03 for Ray. Run on the server: docker compose run --rm bot python -m integrations.meta_ads_cli run-ops campaigns/OPS-2026-11-03.json . Safe to rerun; done ops are skipped. Only 53 Alpha is switched on (Ray approved Buttonleaf and Alpha on Nov 3; Buttonleaf is already live). Sidney and Jackman stay paused.",
   "ops": [
     {
       "id": "pause-16-curry",
@@ -46,6 +46,12 @@
           "url": "https://drive.usercontent.google.com/download?export=download&confirm=t&id=135OAcBCSvubHwPB2iHZ9lWlO2-m2u09m"
         }
       ]
+    },
+    {
+      "id": "activate-53-alpha",
+      "op": "activate_finished",
+      "config": "campaigns/53-alpha/meta.json",
+      "approved_by": "Ray, 2026-11-03: 'buttonleaf and alpha lets promote this'"
     },
     {
       "id": "finish-85-sidney",

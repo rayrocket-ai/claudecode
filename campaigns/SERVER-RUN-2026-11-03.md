@@ -1,8 +1,9 @@
 # Finish the Nov 3 ad work from the server (about 10 minutes, once)
 
 The server talks to Facebook directly, so there is no Ad Advisor action
-limit and no expiring link. Nothing here turns an ad on. Everything new is
-created PAUSED; Ray activates after looking at the previews.
+limit and no expiring link. Ray approved promoting 34 Buttonleaf and 53
+Alpha on Nov 3, so 53 Alpha switches ON as soon as it is built (Buttonleaf
+is already live). 85 Sidney and 97 Jackman are built PAUSED.
 
 ## 1. Let the server read the creative (2 clicks)
 
@@ -47,7 +48,8 @@ docker compose run --rm bot python -m integrations.meta_ads_cli run-ops campaign
 2. Lowers **34 Buttonleaf** to $5/day.
 3. Replaces Buttonleaf's ad copy with a no-address version (same video,
    same lead form).
-4. **53 Alpha**: adds the $5/day ad set (Vaughan, 25 km) and two video ads.
+4. **53 Alpha**: adds the $5/day ad set (Vaughan, 25 km) and two video ads,
+   then switches the campaign ON.
 5. **85 Sidney**: adds the $5/day ad set (Bowmanville, 25 km) and a
    5-photo carousel ad.
 6. **97 Jackman**: adds the $5/day ad set only. It still needs a video.

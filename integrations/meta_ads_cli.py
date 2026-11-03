@@ -13,7 +13,8 @@ is gated on Ray's approval (the daily loop never activates on its own).
 run-ops applies a reviewed list of operations (pause a campaign, change a
 budget, swap ad copy, finish a half-built campaign). Each op is recorded in
 <ops>.state.json and skipped on a rerun, so it is safe to run twice. It
-never activates anything: new ad sets and ads are created PAUSED.
+only activates a listing through an explicit activate_finished op that
+names who approved it; everything else is created PAUSED.
 
 Build writes the created object IDs next to the config as
 <slug>/meta_state.json so later commands know what to act on.
@@ -203,6 +204,21 @@ def _op_finish(client: MetaAdsClient, op: dict, workdir: Path) -> dict:
     return out
 
 
+def _op_activate_finished(client: MetaAdsClient, op: dict) -> dict:
+    """Turn ON a finished campaign. Only for listings Ray approved by name."""
+    cfg = json.loads(Path(op["config"]).read_text())
+    ids = cfg["meta_ids"]
+    if not ids.get("adset_id") or not ids.get("ad_ids"):
+        raise MetaAdsError("not finished yet (no ad set or no ads); run finish first")
+    acct = client.for_account(ids["ad_account_id"])
+    for ad_id in ids["ad_ids"]:
+        acct.set_status(ad_id, "ACTIVE")
+    acct.set_status(ids["adset_id"], "ACTIVE")
+    acct.set_status(ids["campaign_id"], "ACTIVE")
+    return {"live": ids["campaign_id"], "ads": ids["ad_ids"],
+            "approved_by": op["approved_by"]}
+
+
 def cmd_run_ops(ops_path: Path) -> None:
     import tempfile
     spec = json.loads(ops_path.read_text())
@@ -225,6 +241,10 @@ def cmd_run_ops(ops_path: Path) -> None:
                 res = _op_swap_copy(client, op)
             elif op["op"] == "finish":
                 res = _op_finish(client, op, workdir)
+            elif op["op"] == "activate_finished":
+                if not op.get("approved_by"):
+                    raise MetaAdsError("activation needs approved_by")
+                res = _op_activate_finished(client, op)
             else:
                 raise MetaAdsError(f"unknown op {op['op']}")
             state[key] = {"ok": True, **res}
@@ -234,7 +254,10 @@ def cmd_run_ops(ops_path: Path) -> None:
             state[key] = {"ok": False, "error": str(e)}
             print(f"FAIL  {key}: {e}", file=sys.stderr)
         state_path.write_text(json.dumps(state, indent=2))
-    print(f"\n{len(spec['ops']) - failed} ok, {failed} failed. Nothing was activated.")
+    live = [o["id"] for o in spec["ops"] if o["op"] == "activate_finished"
+            and state.get(o["id"], {}).get("ok")]
+    print(f"\n{len(spec['ops']) - failed} ok, {failed} failed. "
+          + (f"Switched ON: {', '.join(live)}." if live else "Nothing was activated."))
     if failed:
         raise SystemExit(1)
 

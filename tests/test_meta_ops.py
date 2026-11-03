@@ -90,8 +90,27 @@ def test_swap_copy_builds_lead_video_creative_then_repoints_ad(tmp_path, monkeyp
     assert json.loads(fake.calls[1][2]["creative"]) == {"creative_id": "CR"}
 
 
-def test_real_ops_file_never_activates():
+def test_real_ops_file_only_activates_what_ray_approved():
     spec = json.loads(open("campaigns/OPS-2026-11-03.json").read())
-    blob = json.dumps(spec).lower()
-    assert "resume" not in blob and '"active"' not in blob
-    assert {o["op"] for o in spec["ops"]} <= {"pause_campaign", "set_budget", "swap_copy", "finish"}
+    assert {o["op"] for o in spec["ops"]} <= {"pause_campaign", "set_budget", "swap_copy",
+                                              "finish", "activate_finished"}
+    acts = [o for o in spec["ops"] if o["op"] == "activate_finished"]
+    assert [o["config"] for o in acts] == ["campaigns/53-alpha/meta.json"]
+    assert all(o.get("approved_by") for o in acts)
+    order = [o["id"] for o in spec["ops"]]
+    assert order.index("finish-53-alpha") < order.index("activate-53-alpha")
+
+
+def test_activate_refuses_unfinished_campaign(tmp_path, monkeypatch):
+    cfg = tmp_path / "meta.json"
+    cfg.write_text(json.dumps({"meta_ids": {"ad_account_id": "1", "campaign_id": "C",
+                                            "adset_id": None, "ad_ids": []}}))
+    ops = tmp_path / "ops.json"
+    ops.write_text(json.dumps({"ops": [{"id": "a", "op": "activate_finished",
+                                        "config": str(cfg), "approved_by": "Ray"}]}))
+    fake = Fake([])
+    monkeypatch.setattr(meta_ads_cli, "_client", lambda: _client(fake))
+    import pytest
+    with pytest.raises(SystemExit):
+        meta_ads_cli.cmd_run_ops(ops)
+    assert fake.calls == []

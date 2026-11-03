@@ -4,6 +4,11 @@ Every test gets: hypothesis, variants, spend, result, decision, lesson.
 Newest entries at the top.
 
 ---
+## 2026-11-03 — Priority listing
+
+- Ray approved promoting 53 Alpha on Nov 3 ('buttonleaf and alpha lets promote this'). The server ops file now switches it ON right after the ad set and two video ads are built.
+
+---
 ## 2026-11-03 — Built in Meta (partial, paused)
 
 - Ad account 1788128334781323 (the second "Ray Ahmadi" account; the only one with a
