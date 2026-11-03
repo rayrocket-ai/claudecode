@@ -1,0 +1,92 @@
+{
+  "name": "Jackman-Woodbridge-Leads",
+  "daily_budget_cad": 10.0,
+  "geo": {
+    "lat": 43.782,
+    "lng": -79.618,
+    "radius_km": 20
+  },
+  "form": {
+    "intro_headline": "See the full details on this home",
+    "privacy_url": "REPLACE_WITH_YOUR_PRIVACY_POLICY_URL",
+    "questions": [
+      {
+        "type": "FULL_NAME"
+      },
+      {
+        "type": "EMAIL"
+      },
+      {
+        "type": "PHONE"
+      },
+      {
+        "type": "CUSTOM",
+        "key": "timeline",
+        "label": "When are you looking to buy?",
+        "options": [
+          {
+            "value": "In the next 30 days"
+          },
+          {
+            "value": "1-3 months"
+          },
+          {
+            "value": "3-6 months"
+          },
+          {
+            "value": "Just browsing"
+          }
+        ]
+      },
+      {
+        "type": "CUSTOM",
+        "key": "preapproved",
+        "label": "Are you pre-approved for a mortgage?",
+        "options": [
+          {
+            "value": "Yes, pre-approved"
+          },
+          {
+            "value": "In progress"
+          },
+          {
+            "value": "Not yet"
+          }
+        ]
+      },
+      {
+        "type": "CUSTOM",
+        "key": "hometosell",
+        "label": "Do you have a home to sell first?",
+        "options": [
+          {
+            "value": "Yes"
+          },
+          {
+            "value": "No"
+          }
+        ]
+      }
+    ],
+    "thank_you": {
+      "title": "Thank you. The full details are on the way.",
+      "body": "Ray Homes will text you the price, address, and full tour shortly.",
+      "button_type": "VIEW_WEBSITE",
+      "button_text": "Visit Ray Homes",
+      "website_url": "https://www.rayhomes.ca"
+    }
+  },
+  "creative": {
+    "message": "Two kitchens. One quiet West Woodbridge crescent. Three big bedrooms upstairs, and downstairs a second full kitchen, a rec room, a full bath, and space for a fourth bedroom. Fresh paint, hardwood, pot lights, a huge backyard with a big deck, and a two-car garage. Parents, rent, or room to grow. Tap for the price, address, and full tour.",
+    "headline": "Two kitchens, one Woodbridge home",
+    "description": "Price, address, and full tour",
+    "link": "https://www.rayhomes.ca",
+    "image_paths": [
+      "REPLACE: path to 97 Jackman Crescent photo 1",
+      "REPLACE: path to 97 Jackman Crescent photo 2",
+      "REPLACE: path to 97 Jackman Crescent photo 3",
+      "REPLACE: path to 97 Jackman Crescent photo 4",
+      "REPLACE: path to 97 Jackman Crescent photo 5"
+    ]
+  }
+}

@@ -15,8 +15,14 @@ ADMAX operating rules (see .claude/agents/admax.md); this file adds the
 campaign configuration and the daily loop.
 
 ACTIVE CAMPAIGNS — run every step of the daily loop for EACH of:
-- 34-buttonleaf: 34 Buttonleaf Cres, Stouffville (campaigns/34-buttonleaf/)
-Combined approved spend: $15/day.
+- 34-buttonleaf: 34 Buttonleaf Cres, Stouffville (campaigns/34-buttonleaf/) — LIVE
+- 53-alpha: 53 Alpha Court, Woodbridge (campaigns/53-alpha/) — pre-launch
+- 85-sidney: 85 Sidney Rundle Ave, Bowmanville (campaigns/85-sidney/) — pre-launch
+- 97-jackman: 97 Jackman Cres, West Woodbridge (campaigns/97-jackman/) — pre-launch
+Each follows the Buttonleaf structure and rules; property-specific hooks
+and copy live in its plan.md. Proposed combined spend when all four are
+live: $60/day ($15 each). Ray has NOT yet approved $60/day; until he does,
+nothing beyond Buttonleaf's $15/day activates.
 
 RETIRED (do not report daily; verify paused once Meta access exists):
 - 16-curry: 16 Curry Cres, Georgetown — SOLD, confirmed by Ray 2026-11-03.

@@ -12,21 +12,60 @@
         "ctr_note": "floor 0.8%"
       },
       "config": [
-        ["Meta (FB + IG)", "$10/day · Leads · instant form"],
-        ["YouTube Shorts", "$5/day · views · retargeting pool"],
-        ["Geo", "Georgetown + 25 km feeder ring"],
-        ["Category", "Housing (Special Ad Category)"],
-        ["Hook offer", "Get the price + address + full tour"],
-        ["Hook angles", "4-car garage · in-law suite · work already done"],
-        ["Qualifiers", "timeline · pre-approval · home to sell"],
-        ["Creative", "3 vertical cuts, GEORGETOWN RAY.mp4"],
-        ["Lead routing", "GoHighLevel + ARIA Voice callback"]
+        [
+          "Meta (FB + IG)",
+          "$10/day · Leads · instant form"
+        ],
+        [
+          "YouTube Shorts",
+          "$5/day · views · retargeting pool"
+        ],
+        [
+          "Geo",
+          "Georgetown + 25 km feeder ring"
+        ],
+        [
+          "Category",
+          "Housing (Special Ad Category)"
+        ],
+        [
+          "Hook offer",
+          "Get the price + address + full tour"
+        ],
+        [
+          "Hook angles",
+          "4-car garage · in-law suite · work already done"
+        ],
+        [
+          "Qualifiers",
+          "timeline · pre-approval · home to sell"
+        ],
+        [
+          "Creative",
+          "3 vertical cuts, GEORGETOWN RAY.mp4"
+        ],
+        [
+          "Lead routing",
+          "GoHighLevel + ARIA Voice callback"
+        ]
       ],
       "rules": [
-        {"chip": "pause", "text": "Variant CPL over $30 after $70+ spent on it"},
-        {"chip": "replace", "text": "CTR under 0.8% after 2,000 impressions"},
-        {"chip": "hold", "text": "Judge on 7-day windows — daily counts are noise at $10/day"},
-        {"chip": "review", "text": "After 2 full weeks: shift budget toward whichever property wins on CPL (Ray approves)"}
+        {
+          "chip": "pause",
+          "text": "Variant CPL over $30 after $70+ spent on it"
+        },
+        {
+          "chip": "replace",
+          "text": "CTR under 0.8% after 2,000 impressions"
+        },
+        {
+          "chip": "hold",
+          "text": "Judge on 7-day windows — daily counts are noise at $10/day"
+        },
+        {
+          "chip": "review",
+          "text": "After 2 full weeks: shift budget toward whichever property wins on CPL (Ray approves)"
+        }
       ],
       "daily": [],
       "log": [
@@ -49,20 +88,56 @@
         "ctr_note": "floor 0.8%"
       },
       "config": [
-        ["Meta (FB + IG)", "$10/day · Leads · instant form"],
-        ["YouTube Shorts", "$5/day · views · retargeting pool"],
-        ["Geo", "Stouffville + 25 km feeder ring"],
-        ["Category", "Housing (Special Ad Category)"],
-        ["Hook offer", "Get the price + address + full tour"],
-        ["Qualifiers", "timeline · pre-approval · home to sell"],
-        ["Creative", "3 vertical cuts, BUTTON LEAF (1).mp4"],
-        ["Lead routing", "GoHighLevel + ARIA Voice callback"]
+        [
+          "Meta (FB + IG)",
+          "$10/day · Leads · instant form"
+        ],
+        [
+          "YouTube Shorts",
+          "$5/day · views · retargeting pool"
+        ],
+        [
+          "Geo",
+          "Stouffville + 25 km feeder ring"
+        ],
+        [
+          "Category",
+          "Housing (Special Ad Category)"
+        ],
+        [
+          "Hook offer",
+          "Get the price + address + full tour"
+        ],
+        [
+          "Qualifiers",
+          "timeline · pre-approval · home to sell"
+        ],
+        [
+          "Creative",
+          "3 vertical cuts, BUTTON LEAF (1).mp4"
+        ],
+        [
+          "Lead routing",
+          "GoHighLevel + ARIA Voice callback"
+        ]
       ],
       "rules": [
-        {"chip": "pause", "text": "Variant CPL over $30 after $70+ spent on it"},
-        {"chip": "replace", "text": "CTR under 0.8% after 2,000 impressions"},
-        {"chip": "hold", "text": "Judge on 7-day windows — daily counts are noise at $10/day"},
-        {"chip": "review", "text": "Week 3: YouTube adds nothing → propose folding $5 into Meta (Ray approves)"}
+        {
+          "chip": "pause",
+          "text": "Variant CPL over $30 after $70+ spent on it"
+        },
+        {
+          "chip": "replace",
+          "text": "CTR under 0.8% after 2,000 impressions"
+        },
+        {
+          "chip": "hold",
+          "text": "Judge on 7-day windows — daily counts are noise at $10/day"
+        },
+        {
+          "chip": "review",
+          "text": "Week 3: YouTube adds nothing → propose folding $5 into Meta (Ray approves)"
+        }
       ],
       "daily": [],
       "log": [
@@ -70,6 +145,234 @@
           "date": "2026-07-19",
           "title": "Plan v2 approved at $15/day",
           "entry": "Curiosity strategy locked: price and address withheld, the form trade is the hook. Edit brief issued for three vertical cuts (fast / POV walk-in / trending-style, licensed audio only). Hypothesis on deck: fast-cut hook beats POV walk-in on CTR."
+        }
+      ]
+    },
+    "53-alpha": {
+      "name": "53 Alpha Court — Woodbridge",
+      "subtitle": "$15/day lean flight · Meta Leads + YouTube Shorts · no price, no address",
+      "status": "pre-launch",
+      "playbook": "Listing Exposure · Playbook A",
+      "targets": {
+        "budget_note": "of $105/wk plan",
+        "leads_note": "target 2–5 / wk",
+        "cpl_note": "target $15 · ceiling $30",
+        "ctr_note": "floor 0.8%"
+      },
+      "config": [
+        [
+          "Meta (FB + IG)",
+          "$10/day · Leads · instant form"
+        ],
+        [
+          "YouTube Shorts",
+          "$5/day · views · retargeting pool"
+        ],
+        [
+          "Geo",
+          "Islington Woods + 20 km ring"
+        ],
+        [
+          "Category",
+          "Housing (Special Ad Category)"
+        ],
+        [
+          "Hook offer",
+          "Get the price + address + full tour"
+        ],
+        [
+          "Hook angles",
+          "golf-course lot · basement apartment · pool + solarium · size"
+        ],
+        [
+          "Qualifiers",
+          "timeline · pre-approval · home to sell"
+        ],
+        [
+          "Creative",
+          "6–10 ads in one ad set from day one"
+        ],
+        [
+          "Lead routing",
+          "GoHighLevel + ARIA Voice callback"
+        ]
+      ],
+      "rules": [
+        {
+          "chip": "pause",
+          "text": "Variant CPL over $30 after $70+ spent on it"
+        },
+        {
+          "chip": "replace",
+          "text": "CTR under 0.8% after 2,000 impressions"
+        },
+        {
+          "chip": "hold",
+          "text": "Judge on 7-day windows. Daily counts are noise at $10/day"
+        },
+        {
+          "chip": "review",
+          "text": "After 2 full weeks: shift budget toward whichever listing wins on CPL (Ray approves)"
+        }
+      ],
+      "daily": [],
+      "log": [
+        {
+          "date": "2026-11-03",
+          "title": "Campaign drafted",
+          "entry": "Ray asked for 53 Alpha Court on Nov 3. Plan, hooks and copy drafted from the listing material in Drive. Waiting on: Ray's budget approval ($60/day for four listings) and Meta access (Ad Advisor or system-user token)."
+        }
+      ]
+    },
+    "85-sidney": {
+      "name": "85 Sidney Rundle Ave — Bowmanville",
+      "subtitle": "$15/day lean flight · Meta Leads + YouTube Shorts · no price, no address",
+      "status": "pre-launch",
+      "playbook": "Listing Exposure · Playbook A",
+      "targets": {
+        "budget_note": "of $105/wk plan",
+        "leads_note": "target 2–5 / wk",
+        "cpl_note": "target $15 · ceiling $30",
+        "ctr_note": "floor 0.8%"
+      },
+      "config": [
+        [
+          "Meta (FB + IG)",
+          "$10/day · Leads · instant form"
+        ],
+        [
+          "YouTube Shorts",
+          "$5/day · views · retargeting pool"
+        ],
+        [
+          "Geo",
+          "Bowmanville + 25 km ring"
+        ],
+        [
+          "Category",
+          "Housing (Special Ad Category)"
+        ],
+        [
+          "Hook offer",
+          "Get the price + address + full tour"
+        ],
+        [
+          "Hook angles",
+          "freehold · backyard · move-in ready · commute"
+        ],
+        [
+          "Qualifiers",
+          "timeline · pre-approval · home to sell"
+        ],
+        [
+          "Creative",
+          "6–10 ads in one ad set from day one"
+        ],
+        [
+          "Lead routing",
+          "GoHighLevel + ARIA Voice callback"
+        ]
+      ],
+      "rules": [
+        {
+          "chip": "pause",
+          "text": "Variant CPL over $30 after $70+ spent on it"
+        },
+        {
+          "chip": "replace",
+          "text": "CTR under 0.8% after 2,000 impressions"
+        },
+        {
+          "chip": "hold",
+          "text": "Judge on 7-day windows. Daily counts are noise at $10/day"
+        },
+        {
+          "chip": "review",
+          "text": "After 2 full weeks: shift budget toward whichever listing wins on CPL (Ray approves)"
+        }
+      ],
+      "daily": [],
+      "log": [
+        {
+          "date": "2026-11-03",
+          "title": "Campaign drafted",
+          "entry": "Ray asked for 85 Sidney Rundle on Nov 3. Plan, hooks and copy drafted from the listing material in Drive. Waiting on: Ray's budget approval ($60/day for four listings) and Meta access (Ad Advisor or system-user token)."
+        }
+      ]
+    },
+    "97-jackman": {
+      "name": "97 Jackman Crescent — West Woodbridge",
+      "subtitle": "$15/day lean flight · Meta Leads + YouTube Shorts · no price, no address",
+      "status": "pre-launch",
+      "playbook": "Listing Exposure · Playbook A",
+      "targets": {
+        "budget_note": "of $105/wk plan",
+        "leads_note": "target 2–5 / wk",
+        "cpl_note": "target $15 · ceiling $30",
+        "ctr_note": "floor 0.8%"
+      },
+      "config": [
+        [
+          "Meta (FB + IG)",
+          "$10/day · Leads · instant form"
+        ],
+        [
+          "YouTube Shorts",
+          "$5/day · views · retargeting pool"
+        ],
+        [
+          "Geo",
+          "West Woodbridge + 20 km ring"
+        ],
+        [
+          "Category",
+          "Housing (Special Ad Category)"
+        ],
+        [
+          "Hook offer",
+          "Get the price + address + full tour"
+        ],
+        [
+          "Hook angles",
+          "in-law suite · backyard + deck · flex space · updated"
+        ],
+        [
+          "Qualifiers",
+          "timeline · pre-approval · home to sell"
+        ],
+        [
+          "Creative",
+          "6–10 ads in one ad set from day one"
+        ],
+        [
+          "Lead routing",
+          "GoHighLevel + ARIA Voice callback"
+        ]
+      ],
+      "rules": [
+        {
+          "chip": "pause",
+          "text": "Variant CPL over $30 after $70+ spent on it"
+        },
+        {
+          "chip": "replace",
+          "text": "CTR under 0.8% after 2,000 impressions"
+        },
+        {
+          "chip": "hold",
+          "text": "Judge on 7-day windows. Daily counts are noise at $10/day"
+        },
+        {
+          "chip": "review",
+          "text": "After 2 full weeks: shift budget toward whichever listing wins on CPL (Ray approves)"
+        }
+      ],
+      "daily": [],
+      "log": [
+        {
+          "date": "2026-11-03",
+          "title": "Campaign drafted",
+          "entry": "Ray asked for 97 Jackman Crescent on Nov 3. Plan, hooks and copy drafted from the listing material in Drive. Waiting on: Ray's budget approval ($60/day for four listings) and Meta access (Ad Advisor or system-user token)."
         }
       ]
     }

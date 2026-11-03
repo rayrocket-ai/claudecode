@@ -1,0 +1,92 @@
+{
+  "name": "Alpha-Woodbridge-Leads",
+  "daily_budget_cad": 10.0,
+  "geo": {
+    "lat": 43.797,
+    "lng": -79.598,
+    "radius_km": 20
+  },
+  "form": {
+    "intro_headline": "See the full details on this home",
+    "privacy_url": "REPLACE_WITH_YOUR_PRIVACY_POLICY_URL",
+    "questions": [
+      {
+        "type": "FULL_NAME"
+      },
+      {
+        "type": "EMAIL"
+      },
+      {
+        "type": "PHONE"
+      },
+      {
+        "type": "CUSTOM",
+        "key": "timeline",
+        "label": "When are you looking to buy?",
+        "options": [
+          {
+            "value": "In the next 30 days"
+          },
+          {
+            "value": "1-3 months"
+          },
+          {
+            "value": "3-6 months"
+          },
+          {
+            "value": "Just browsing"
+          }
+        ]
+      },
+      {
+        "type": "CUSTOM",
+        "key": "preapproved",
+        "label": "Are you pre-approved for a mortgage?",
+        "options": [
+          {
+            "value": "Yes, pre-approved"
+          },
+          {
+            "value": "In progress"
+          },
+          {
+            "value": "Not yet"
+          }
+        ]
+      },
+      {
+        "type": "CUSTOM",
+        "key": "hometosell",
+        "label": "Do you have a home to sell first?",
+        "options": [
+          {
+            "value": "Yes"
+          },
+          {
+            "value": "No"
+          }
+        ]
+      }
+    ],
+    "thank_you": {
+      "title": "Thank you. The full details are on the way.",
+      "body": "Ray Homes will text you the price, address, and full tour shortly.",
+      "button_type": "VIEW_WEBSITE",
+      "button_text": "Visit Ray Homes",
+      "website_url": "https://www.rayhomes.ca"
+    }
+  },
+  "creative": {
+    "message": "A backyard that ends at a former golf course. A pool. A solarium under skylights. And a fully separate three-bedroom apartment downstairs with its own entrance and laundry. Close to 5,000 square feet of finished space in one of Woodbridge's most private pockets. Tap for the price, address, and full tour.",
+    "headline": "Backs onto a former golf course",
+    "description": "Price, address, and full tour",
+    "link": "https://www.rayhomes.ca",
+    "image_paths": [
+      "REPLACE: path to 53 Alpha Court photo 1",
+      "REPLACE: path to 53 Alpha Court photo 2",
+      "REPLACE: path to 53 Alpha Court photo 3",
+      "REPLACE: path to 53 Alpha Court photo 4",
+      "REPLACE: path to 53 Alpha Court photo 5"
+    ]
+  }
+}
