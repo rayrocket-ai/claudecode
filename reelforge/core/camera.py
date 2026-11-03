@@ -54,6 +54,11 @@ class Style:
     moves: dict[str, tuple[str, ...]]      # allowed moves by size, tried in order
     peek_every: float = 0.0                # seconds between foreground-edge shots; 0 = never
     detail_every: int = 3                  # at most one detail shot per this many shots
+    # ...and at least this many seconds apart. A presenter who gestures while
+    # talking trips the motion detector constantly, and cutting away from a
+    # face mid-sentence to its hands reads as a mistake, not a second camera.
+    # Inserts earn their place when hands show something; keep them rare.
+    detail_gap: float = 12.0
 
 
 STYLES: dict[str, Style] = {
@@ -254,6 +259,7 @@ def plan(edl: EDL, info: media.MediaInfo, signals: Signals | None, *, style: str
     last_move = ""
     since_peek = 1e9
     since_detail = 99
+    last_detail_t = -1e9
     rot = 0
     count = 0
     for si, seg in enumerate(out.segments):
@@ -276,7 +282,8 @@ def plan(edl: EDL, info: media.MediaInfo, signals: Signals | None, *, style: str
                 size = "close"                 # the hook: start on the face
             elif emphasis:
                 size = "extreme" if last_size != "extreme" else "close"
-            elif src is not None and since_detail >= st.detail_every and end - at >= 1.2:
+            elif (src is not None and since_detail >= st.detail_every and end - at >= 1.2
+                  and elapsed + at - last_detail_t >= st.detail_gap):
                 hit = motion_focus(src, src_t, face)
                 if hit and hit[2] >= 0.12:
                     size = "detail"
@@ -303,6 +310,8 @@ def plan(edl: EDL, info: media.MediaInfo, signals: Signals | None, *, style: str
                               drift=st.drift.get(size, 0.0), peek=peek))
             since_peek += end - at
             since_detail = 0 if size == "detail" else since_detail + 1
+            if size == "detail":
+                last_detail_t = elapsed + at
             last_size, last_move = size, move
             count += 1
         framing.shots = shots

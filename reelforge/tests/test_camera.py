@@ -188,3 +188,19 @@ def test_missing_results_are_reported_not_fatal(tmp_path):
     manifest.write_text(json.dumps({"angles": [{**pick, "name": "angle-01"}]}))
     _, notes = camera.ingest_angles(plan.edl, manifest, tmp_path / "none")
     assert "no generated clip yet" in notes[0]
+
+
+def test_detail_shots_are_rare_even_when_hands_never_stop(monkeypatch):
+    # a presenter gesturing the whole time: every probe finds strong motion
+    monkeypatch.setattr(camera, "motion_focus", lambda src, t, face: (0.5, 0.75, 0.5))
+    e = edit()
+    plan = camera.plan(e, UHD, None, src=Path("/s.mp4"))
+    times, elapsed = [], 0.0
+    for seg in plan.edl.segments:
+        for sh in plan.edl.framing_for(seg.id).shots:
+            if sh.size == "detail":
+                times.append(elapsed + sh.at)
+        elapsed += seg.out_duration
+    assert times, "motion should still earn an insert"
+    assert all(b - a >= camera.STYLES["multicam"].detail_gap for a, b in zip(times, times[1:]))
+    assert len(times) <= 1 + plan.edl.duration // camera.STYLES["multicam"].detail_gap
