@@ -1,4 +1,8 @@
-# 34 Buttonleaf Cres — Campaign Plan (v2, approved 2026-07-19)
+# 34 Buttonleaf Cres — Campaign Plan (v3, budget changed by Ray 2026-11-03)
+
+v3 change: Meta $10 to $5/day, YouTube stays $5/day and now runs through
+Google Ads with Presence-only geo. Total $10/day. Everything else below
+still applies.
 
 Playbook A: Listing Exposure — lean always-on variant. Approved by Ray.
 

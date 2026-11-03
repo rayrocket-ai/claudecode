@@ -4,17 +4,18 @@ Playbook A: Listing Exposure, lean always-on variant. Same structure and
 rules as 34 Buttonleaf. Nothing spends until Ray approves the budget and
 Meta access is connected.
 
-## Budget (proposed)
+## Budget (approved by Ray, 2026-11-03)
 
 | Where | Daily | Objective |
 |---|---|---|
-| Meta (FB + IG, one campaign, automatic placements) | $10 | Leads (instant form) |
-| YouTube Shorts | $5 | Views / retargeting pool |
-| **Total** | **$15** | |
+| Meta (FB + IG, one campaign, automatic placements) | $5 | Leads (instant form) |
+| YouTube via Google Ads | $5 | Views, Presence-only geo, builds a retargeting pool |
+| **Total** | **$10** | |
 
-With 34 Buttonleaf, 53 Alpha, 85 Sidney and 97 Jackman all live this is
-$60/day combined. Ray approves that number, or a reduced Meta-only
-$10/day per listing ($40/day), before anything activates.
+Four listings (34 Buttonleaf, 53 Alpha, 85 Sidney, 97 Jackman) at $10/day
+each is $40/day. Meta is the lead engine; YouTube puts the home in front
+of local buyers and grows a viewer audience Meta and Google can retarget.
+Google setup is in campaigns/LAUNCH-PACK-NOV-2026.md.
 
 ## The property (facts used in creative; no price, no address in ads)
 
@@ -31,7 +32,7 @@ $10/day per listing ($40/day), before anything activates.
 - No price, no address in creative or copy. The instant form trades
   "Get the price + address + full tour" for name, phone, email and three
   qualifiers (timeline, pre-approval, home to sell first).
-- Geo: Islington Woods + 20 km ring: Woodbridge, Kleinburg, Vaughan, Etobicoke, Brampton east, Richmond Hill west. Broad within the radius; the creative does the
+- Geo: Islington Woods + 25 km ring: Woodbridge, Kleinburg, Vaughan, Etobicoke, Brampton east, Richmond Hill west. Broad within the radius; the creative does the
   targeting (Meta Andromeda rewards creative variety over audience
   slicing). Housing Special Ad Category, so no age, gender or interest
   targeting.
@@ -39,8 +40,8 @@ $10/day per listing ($40/day), before anything activates.
 - Launch with 6 to 10 creatives in ONE ad set from day one (the single-ad
   gap that limited Buttonleaf and Curry): 3 video cuts x 2 hooks, plus 2
   image carousels. Meta picks winners; we read the breakdown weekly.
-- YouTube Shorts: same cuts, same geo ring, CPV bidding, real estate
-  contextual placements only. Warms the pool; leads convert on Meta.
+- YouTube via Google Ads: same cuts, same geo ring, Presence-only
+  location setting, CPV bidding. Warms the pool; leads convert on Meta.
 
 ## Hooks (each becomes at least one ad)
 
@@ -67,7 +68,7 @@ Newcomer and Afghan-community variant adds one Dari line to the primary text: م
 
 ## Expectations and rules
 
-- 2 to 5 leads/week after the learning week. Meta CPL target $15,
+- 1 to 3 leads/week after the learning week at $5/day Meta. Meta CPL target $15,
   ceiling $30. Benchmarks from Buttonleaf and Curry: CPL $11 to $12,
   CTR 5 to 6% on one ad each.
 - Pause a variant at CPL over $30 after $70 spent on it. Replace a

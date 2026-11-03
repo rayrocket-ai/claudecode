@@ -1,26 +1,26 @@
 {
   "name": "53 Alpha Court — Woodbridge",
-  "subtitle": "$15/day lean flight · Meta Leads + YouTube Shorts · no price, no address",
+  "subtitle": "$10/day · Meta $5 Leads + YouTube $5 via Google Ads · no price, no address",
   "status": "pre-launch",
   "playbook": "Listing Exposure · Playbook A",
   "targets": {
-    "budget_note": "of $105/wk plan",
-    "leads_note": "target 2–5 / wk",
+    "budget_note": "of $70/wk plan",
+    "leads_note": "target 1–3 / wk",
     "cpl_note": "target $15 · ceiling $30",
     "ctr_note": "floor 0.8%"
   },
   "config": [
     [
       "Meta (FB + IG)",
-      "$10/day · Leads · instant form"
+      "$5/day · Leads · instant form"
     ],
     [
-      "YouTube Shorts",
-      "$5/day · views · retargeting pool"
+      "YouTube (Google Ads)",
+      "$5/day · views · Presence-only geo · retargeting pool"
     ],
     [
       "Geo",
-      "Islington Woods + 20 km ring"
+      "Islington Woods + 25 km ring"
     ],
     [
       "Category",
@@ -71,6 +71,11 @@
       "date": "2026-11-03",
       "title": "Campaign drafted",
       "entry": "Ray asked for 53 Alpha Court on Nov 3. Plan, hooks and copy drafted from the listing material in Drive. Waiting on: Ray's budget approval ($60/day for four listings) and Meta access (Ad Advisor or system-user token)."
+    },
+    {
+      "date": "2026-11-03",
+      "title": "Budget set by Ray: $10/day",
+      "entry": "Ray set $10/day per listing on Nov 3: $5 Meta (FB + IG Leads), $5 YouTube through Google Ads. Four listings, $40/day total."
     }
   ]
 }

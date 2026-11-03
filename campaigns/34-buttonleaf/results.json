@@ -1,22 +1,22 @@
 {
-  "name": "34 Buttonleaf Cres \u2014 Stouffville",
-  "subtitle": "$15/day lean flight \u00b7 Meta Leads + YouTube Shorts \u00b7 no price, no address",
+  "name": "34 Buttonleaf Cres — Stouffville",
+  "subtitle": "$10/day · Meta $5 Leads + YouTube $5 via Google Ads · no price, no address",
   "status": "live",
-  "playbook": "Listing Exposure \u00b7 Playbook A",
+  "playbook": "Listing Exposure · Playbook A",
   "targets": {
-    "budget_note": "of $105/wk plan",
-    "leads_note": "target 2\u20135 / wk",
-    "cpl_note": "target $15 \u00b7 ceiling $30",
+    "budget_note": "of $70/wk plan",
+    "leads_note": "target 1–3 / wk",
+    "cpl_note": "target $15 · ceiling $30",
     "ctr_note": "floor 0.8%"
   },
   "config": [
     [
       "Meta (FB + IG)",
-      "$10/day \u00b7 Leads \u00b7 instant form"
+      "$5/day · Leads · instant form"
     ],
     [
-      "YouTube Shorts",
-      "$5/day \u00b7 views \u00b7 retargeting pool"
+      "YouTube (Google Ads)",
+      "$5/day · views · Presence-only geo · retargeting pool"
     ],
     [
       "Geo",
@@ -32,7 +32,7 @@
     ],
     [
       "Qualifiers",
-      "timeline \u00b7 pre-approval \u00b7 home to sell"
+      "timeline · pre-approval · home to sell"
     ],
     [
       "Creative",
@@ -54,11 +54,11 @@
     },
     {
       "chip": "hold",
-      "text": "Judge on 7-day windows \u2014 daily counts are noise at $10/day"
+      "text": "Judge on 7-day windows — daily counts are noise at $10/day"
     },
     {
       "chip": "review",
-      "text": "Week 3: YouTube adds nothing \u2192 propose folding $5 into Meta (Ray approves)"
+      "text": "Week 3: YouTube adds nothing → propose folding $5 into Meta (Ray approves)"
     }
   ],
   "daily": [
@@ -154,6 +154,11 @@
       "date": "2026-08-12",
       "title": "Live since Jul 20; relaunched Aug 11",
       "entry": "Discovered via Ad Advisor on Sep 17: the Jul 20 sprint (campaign 6999756017312, 15s video, instant form, Stouffville 15mi) spent $64.41 for 5 leads (CPL $12.88). Relaunched Aug 11 as campaign 52506208679516: single ad, pixel LEAD optimization, Stouffville 15mi, Advantage+ audience."
+    },
+    {
+      "date": "2026-11-03",
+      "title": "Budget set by Ray: $10/day",
+      "entry": "Ray set $10/day per listing on Nov 3: $5 Meta (FB + IG Leads), $5 YouTube through Google Ads. Four listings, $40/day total. Buttonleaf Meta drops from $10 to $5 once Meta access is restored."
     }
   ]
 }

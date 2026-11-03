@@ -20,9 +20,10 @@ ACTIVE CAMPAIGNS — run every step of the daily loop for EACH of:
 - 85-sidney: 85 Sidney Rundle Ave, Bowmanville (campaigns/85-sidney/) — pre-launch
 - 97-jackman: 97 Jackman Cres, West Woodbridge (campaigns/97-jackman/) — pre-launch
 Each follows the Buttonleaf structure and rules; property-specific hooks
-and copy live in its plan.md. Proposed combined spend when all four are
-live: $60/day ($15 each). Ray has NOT yet approved $60/day; until he does,
-nothing beyond Buttonleaf's $15/day activates.
+and copy live in its plan.md. APPROVED BUDGET (Ray, 2026-11-03): $10/day per listing = $5 Meta (FB + IG
+Leads) + $5 YouTube via Google Ads. Four listings = $40/day total. This
+supersedes the $15/day split below. Buttonleaf Meta goes from $10 to $5.
+New campaigns are still built PAUSED; Ray activates after review.
 
 RETIRED (do not report daily; verify paused once Meta access exists):
 - 16-curry: 16 Curry Cres, Georgetown — SOLD, confirmed by Ray 2026-11-03.
