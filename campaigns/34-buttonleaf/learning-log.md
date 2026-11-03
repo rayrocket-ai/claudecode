@@ -5,6 +5,20 @@ Newest entries at the top. Never re-test a settled question without new
 justification.
 
 ---
+## 2026-11-03 — Creative audit: live ad shows the address
+
+- Read from Ad Advisor's saved copy (as of Aug 20). The only live ad
+  (52506208679716, "Over 4,000 Sq Ft of Luxury Living in Stouffville",
+  one video) prints "34 Buttonleaf Cres, Whitchurch-Stouffville" in the
+  primary text and links to the rayahmadi.com listing page. That breaks
+  Ray's no-address rule and gives away the curiosity trade. The July
+  7-day test ("See This Stouffville Move-Up Home") followed the rule; it
+  ended Jul 27.
+- Decision once Meta access is back: replace the copy with the no-address
+  version in plan.md, lower budget to $5/day, add the other two Sid cuts
+  so the ad set has 3+ ads.
+
+---
 ## 2026-09-17 — Discovery: campaign has been LIVE since Jul 20 (via Ad Advisor)
 
 - Correction to eight weeks of "nothing live" reports: the loop had no data
