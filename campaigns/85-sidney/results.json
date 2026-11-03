@@ -1,22 +1,22 @@
 {
-  "name": "85 Sidney Rundle Ave — Bowmanville",
-  "subtitle": "$10/day · Meta $5 Leads + YouTube $5 via Google Ads · no price, no address",
-  "status": "pre-launch",
-  "playbook": "Listing Exposure · Playbook A",
+  "name": "85 Sidney Rundle Ave \u2014 Bowmanville",
+  "subtitle": "$10/day \u00b7 Meta $5 Leads + YouTube $5 via Google Ads \u00b7 no price, no address",
+  "status": "built-partial",
+  "playbook": "Listing Exposure \u00b7 Playbook A",
   "targets": {
     "budget_note": "of $70/wk plan",
-    "leads_note": "target 1–3 / wk",
-    "cpl_note": "target $15 · ceiling $30",
+    "leads_note": "target 1\u20133 / wk",
+    "cpl_note": "target $15 \u00b7 ceiling $30",
     "ctr_note": "floor 0.8%"
   },
   "config": [
     [
       "Meta (FB + IG)",
-      "$5/day · Leads · instant form"
+      "$5/day \u00b7 Leads \u00b7 instant form"
     ],
     [
       "YouTube (Google Ads)",
-      "$5/day · views · Presence-only geo · retargeting pool"
+      "$5/day \u00b7 views \u00b7 Presence-only geo \u00b7 retargeting pool"
     ],
     [
       "Geo",
@@ -32,15 +32,15 @@
     ],
     [
       "Hook angles",
-      "freehold · backyard · move-in ready · commute"
+      "freehold \u00b7 backyard \u00b7 move-in ready \u00b7 commute"
     ],
     [
       "Qualifiers",
-      "timeline · pre-approval · home to sell"
+      "timeline \u00b7 pre-approval \u00b7 home to sell"
     ],
     [
       "Creative",
-      "6–10 ads in one ad set from day one"
+      "6\u201310 ads in one ad set from day one"
     ],
     [
       "Lead routing",
@@ -65,7 +65,17 @@
       "text": "After 2 full weeks: shift budget toward whichever listing wins on CPL (Ray approves)"
     }
   ],
-  "daily": [],
+  "daily": [
+    {
+      "date": "2026-11-03",
+      "spend": 0.0,
+      "leads": 0,
+      "ctr_pct": null,
+      "impressions": null,
+      "views": null,
+      "notes": "Campaign + lead form built PAUSED in Meta; ad set and ads pending"
+    }
+  ],
   "log": [
     {
       "date": "2026-11-03",

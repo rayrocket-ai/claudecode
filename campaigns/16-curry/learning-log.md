@@ -13,6 +13,11 @@ Newest entries at the top.
   reconnected, ADMAX verifies the pause and pulls the final Aug 21 to
   Nov 3 spend and lead totals for the closing report.
 - YouTube Shorts ad set (if it was ever created) also pauses.
+- 2026-11-03 update: the Curry pause FAILED. Its ad account (732663023528570)
+  is still on the expired Ad Advisor link. Ray pauses it in Ads Manager.
+  Live form count from Meta: 23 lifetime leads on form 1609491857413497
+  (Buttonleaf form 985332827899566: 27).
+
 - Last verified numbers (through Aug 20): $90.27 spend, 8 leads, CPL
   $11.28, CTR 5.9%. No kill rule ever triggered.
 - Lessons to carry to the next listing: the curiosity trade (price +

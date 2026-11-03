@@ -4,6 +4,21 @@ Every test gets: hypothesis, variants, spend, result, decision, lesson.
 Newest entries at the top.
 
 ---
+## 2026-11-03 — Built in Meta (partial, paused)
+
+- Ad account 1788128334781323 (the second "Ray Ahmadi" account; the only one with a
+  live Ad Advisor link today). Page: Ray Homes Team. Instagram: rayahmadi.
+- Campaign 120250450873580620: OUTCOME_LEADS, Housing (CA), PAUSED, $200 lifetime spend cap.
+- Lead form 1352946643466035: higher-intent (review step), intro card, name / email /
+  phone + timeline, pre-approval, home-to-sell. Privacy:
+  rayahmadi.com/privacy-policy. Thank-you button to rayahmadi.com (not the
+  listing page, so the address stays behind the form).
+- NOT built yet: the ad set ($5/day, 25 km radius, instant form) and the
+  ads. Ad Advisor's plan limit (20 actions/month) ran out on this call.
+  Resets 2026-11-07, or Ray upgrades the plan, or Ray adds the ad set in
+  Ads Manager by hand.
+
+---
 ## 2026-11-03 — Day 0 (drafted)
 
 - Ray asked for this listing on Nov 3, together with 85 Sidney Rundle,

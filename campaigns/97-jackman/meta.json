@@ -88,5 +88,17 @@
       "REPLACE: path to 97 Jackman Crescent photo 4",
       "REPLACE: path to 97 Jackman Crescent photo 5"
     ]
+  },
+  "meta_ids": {
+    "ad_account_id": "1788128334781323",
+    "page_id": "1033110506750808",
+    "instagram_user_id": "17841401464994148",
+    "campaign_id": "120250450873580620",
+    "lead_form_id": "1352946643466035",
+    "adset_id": null,
+    "ad_ids": [],
+    "spend_cap_cad": 200,
+    "status": "PAUSED",
+    "created": "2026-11-03"
   }
 }
