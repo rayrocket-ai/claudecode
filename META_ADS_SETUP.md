@@ -72,7 +72,7 @@ is missing it tells you exactly which one.
    docker compose run --rm bot python -m integrations.meta_ads_cli pause campaigns/34-buttonleaf/meta.json
    ```
 
-Repeat for `campaigns/16-curry/meta.json`.
+Repeat for each listing's `campaigns/<slug>/meta.json`.
 
 ## After launch
 

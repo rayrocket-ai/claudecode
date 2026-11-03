@@ -28,7 +28,8 @@ New campaigns are still built PAUSED; Ray activates after review.
 RETIRED (do not report daily; verify paused once Meta access exists):
 - 16-curry: 16 Curry Cres, Georgetown — SOLD, confirmed by Ray 2026-11-03.
   Meta campaign 52506205424516 / ad set 52506205424716 must be PAUSED.
-  Files stay in campaigns/16-curry/ as the record.
+  Removed from the dashboard (Ray, Nov 3). Record kept in campaigns/_sold/16-curry/.
+  Its Meta campaign is paused by step 1 of campaigns/OPS-2026-11-03.json.
 
 # Approved configuration (Ray, 2026-07-19)
 

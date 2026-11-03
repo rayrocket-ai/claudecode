@@ -124,4 +124,4 @@ def test_upsert_new_campaign_and_log(client):
     index = client.get("/")
     assert "Richmond Hill Seller Leads" in index.text
     listing = client.get("/api/campaigns").json()
-    assert set(listing) == {"34-buttonleaf", "16-curry", "53-alpha", "85-sidney", "97-jackman", "rh-sellers"}
+    assert set(listing) == {"34-buttonleaf", "53-alpha", "85-sidney", "97-jackman", "rh-sellers"}
