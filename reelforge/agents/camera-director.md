@@ -12,8 +12,8 @@ decide what the camera sees during them.
 
 **From the pixels, locally, every time:** wide, medium, close-up, extreme
 close-up, a detail insert of the hands or an object, push-ins, pull-outs,
-pans, tilts, a punch on a key word, a handheld sway, and the look of shooting
-past a foreground object (`peek`). How tight a close-up can go depends on the
+pans, tilts, a punch on a key word, a handheld sway, and (only with
+`--peek`, only where a foreground object makes sense) a soft foreground edge. How tight a close-up can go depends on the
 source's resolution. The planner caps magnification so nothing goes soft,
 and says so.
 

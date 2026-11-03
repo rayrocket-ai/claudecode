@@ -98,10 +98,12 @@ def test_styles_differ_and_unknown_style_is_refused():
         camera.plan(edit(), UHD, None, style="drone")
 
 
-def test_peek_goes_on_the_side_away_from_the_subject():
-    plan = camera.plan(edit(), UHD, Signals(duration=40, focus=[(0, 0.3, 0.3)]), style="cinematic")
+def test_peek_is_off_unless_asked_for():
+    sig = Signals(duration=40, focus=[(0, 0.3, 0.3)])
+    assert not any(s.peek for _, s in all_shots(camera.plan(edit(), UHD, sig, style="cinematic").edl))
+    plan = camera.plan(edit(), UHD, sig, style="cinematic", peek=True)
     peeks = [s.peek for _, s in all_shots(plan.edl) if s.peek]
-    assert peeks and set(peeks) == {"right"}
+    assert peeks and set(peeks) == {"right"}            # the side away from the subject
 
 
 def test_no_words_still_cuts_on_time():

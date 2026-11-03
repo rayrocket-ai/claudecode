@@ -864,7 +864,7 @@ def cmd_camera(args) -> int:
               "Run `reelforge prepare --wait` first for face-tracked shots.", file=sys.stderr)
     try:
         result = camera.plan(edl, info, signals, style=args.style, max_upscale=args.max_upscale,
-                             src=None if args.no_detail else src)
+                             src=None if args.no_detail else src, peek=args.peek)
     except ValueError as exc:
         print(f"error: {exc}", file=sys.stderr)
         return 2
@@ -1064,6 +1064,9 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--max-upscale", type=float, default=2.6,
                    help="sharpest magnification of the source allowed for close-ups")
     p.add_argument("--no-detail", action="store_true", help="skip detail shots of moving hands")
+    p.add_argument("--peek", action="store_true",
+                   help="add a soft dark foreground edge to some wide shots (off by default: "
+                        "without a real object in frame it reads as a smudge)")
     p.add_argument("--render", action="store_true")
     p.add_argument("--draft", action="store_true")
     p.add_argument("--qc-passes", type=int, default=3)

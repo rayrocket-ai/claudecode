@@ -63,7 +63,9 @@ export const ShotPicture: React.FC<{shot: Shot; source: Source; playbackRate: nu
 
   const s = sway(frame / fps, shot.seed);
   const amp = shot.drift * width;
-  const overscan = 1 + shot.drift * 3.2;
+  // Sway peaks at ~1.45x amp plus a hint of roll; 4.5x drift of overscan covers
+  // both with margin, so the frame edge can never come into view.
+  const overscan = 1 + shot.drift * 4.5;
   const handheld = shot.drift > 0
     ? `translate(${s.x * amp}px, ${s.y * amp}px) rotate(${s.r * shot.drift * 12}deg) scale(${overscan})`
     : 'none';

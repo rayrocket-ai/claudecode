@@ -46,7 +46,7 @@ identical to no cut).
 | pan / tilt | the frame travels across the subject |
 | punch | a fast push in a third of a second, on an emphasised word |
 | drift | handheld sway: two slow sines per axis plus a hint of roll, with overscan so edges never show |
-| peek | a soft dark edge drifting across one side, as if shot past an object; placed away from the subject |
+| peek | opt-in (`--peek`): a soft dark edge drifting across one side, as if shot past an object. Off by default: with no real object in the room it reads as a dark smudge, not depth |
 
 Rules: cut on word starts (sentence ends and pauses preferred), consecutive
 sizes at least 25% apart, never the same move twice in a row, open close on

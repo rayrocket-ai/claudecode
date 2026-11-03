@@ -52,7 +52,7 @@ class Style:
     order: tuple[str, ...]                 # size rotation when nothing else decides
     drift: dict[str, float]                # handheld sway by size
     moves: dict[str, tuple[str, ...]]      # allowed moves by size, tried in order
-    peek_every: float = 0.0                # seconds between foreground-edge shots; 0 = never
+    peek_every: float = 0.0                # seconds between foreground-edge shots when peek is on
     detail_every: int = 3                  # at most one detail shot per this many shots
     # ...and at least this many seconds apart. A presenter who gestures while
     # talking trips the motion detector constantly, and cutting away from a
@@ -233,11 +233,16 @@ def _framing_focus(size: str, face: tuple[float, float]) -> tuple[float, float]:
 
 
 def plan(edl: EDL, info: media.MediaInfo, signals: Signals | None, *, style: str = "multicam",
-         max_upscale: float = 2.6, src: Path | None = None) -> Plan:
+         max_upscale: float = 2.6, src: Path | None = None, peek: bool = False) -> Plan:
     """Return a copy of ``edl`` with a shot list on every segment.
 
     ``src`` enables detail shots (it is read to find moving hands); without
     it the plan uses face framing only.
+
+    ``peek`` (off by default) adds the soft foreground edge to some wide and
+    medium shots. With no real object in the room for it to be, it reads as a
+    dark smudge down one side -- which is exactly what it looked like on the
+    first real edit -- so it is opt-in, for footage where it fits.
     """
     if style not in STYLES:
         raise ValueError(f"unknown camera style {style!r}; use one of {', '.join(STYLES)}")
@@ -299,15 +304,15 @@ def plan(edl: EDL, info: media.MediaInfo, signals: Signals | None, *, style: str
 
             move = "punch" if emphasis else next(
                 (m for m in st.moves[size] if m != last_move), st.moves[size][0])
-            peek = ""
-            if st.peek_every and since_peek >= st.peek_every and size in ("wide", "medium", "detail") \
+            edge = ""
+            if peek and st.peek_every and since_peek >= st.peek_every and size in ("wide", "medium", "detail") \
                     and end - at >= 1.5:
-                peek = "right" if face[0] < 0.5 else "left"   # the edge away from the subject
+                edge = "right" if face[0] < 0.5 else "left"   # the edge away from the subject
                 since_peek = 0.0
             focus = face if size == "detail" else _framing_focus(size, face)
             shots.append(Shot(at=round(at, 3), size=size, focus=(round(focus[0], 4), round(focus[1], 4)),
                               zoom=sizes[size], move=move, amount=AMOUNTS[move],
-                              drift=st.drift.get(size, 0.0), peek=peek))
+                              drift=st.drift.get(size, 0.0), peek=edge))
             since_peek += end - at
             since_detail = 0 if size == "detail" else since_detail + 1
             if size == "detail":
