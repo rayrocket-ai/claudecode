@@ -1,0 +1,74 @@
+{
+  "_about": "Reviewed by ADMAX on 2026-11-03 for Ray. Run on the server: docker compose run --rm bot python -m integrations.meta_ads_cli run-ops campaigns/OPS-2026-11-03.json . Safe to rerun; done ops are skipped. Nothing is activated.",
+  "ops": [
+    {
+      "id": "pause-16-curry",
+      "op": "pause_campaign",
+      "account": "732663023528570",
+      "campaign_id": "52506205424516",
+      "why": "16 Curry Cres is SOLD (Ray, Nov 3)"
+    },
+    {
+      "id": "buttonleaf-budget-5",
+      "op": "set_budget",
+      "account": "732663023528570",
+      "adset_id": "52506208679316",
+      "daily_cad": 5,
+      "why": "Ray's Nov 3 split: $5 Meta + $5 YouTube"
+    },
+    {
+      "id": "buttonleaf-no-address-copy",
+      "op": "swap_copy",
+      "account": "732663023528570",
+      "ad_id": "52506208679716",
+      "name": "34 Buttonleaf - no-address copy - Nov 2026",
+      "video_id": "1553311682394230",
+      "thumbnail_hash": "b25639b88c4913adb2d2dcab0b4937cb",
+      "form_id": "985332827899566",
+      "message": "Over 4,000 square feet of finished space in one of Stouffville's most wanted family neighbourhoods.\n\nFully renovated with the builder. Move-in ready. A finished lower level with its own separate entrance for parents, a nanny suite, or rental income.\n\nTap to get the price, the address, and the full video tour sent to you.",
+      "headline": "Over 4,000 sq ft in Stouffville",
+      "description": "Price, address and full tour",
+      "why": "Live copy printed the street address and linked to the listing page"
+    },
+    {
+      "id": "finish-53-alpha",
+      "op": "finish",
+      "config": "campaigns/53-alpha/meta.json",
+      "city_key": "2674278",
+      "adset_name": "53 Alpha - Vaughan 25km - Instant Form",
+      "videos": [
+        {
+          "name": "53 Alpha - Tour 15s",
+          "url": "https://drive.usercontent.google.com/download?export=download&confirm=t&id=1dmzCnzBinLwVAZFHqeAJ3sThNeABAyFm"
+        },
+        {
+          "name": "53 Alpha - Tour 25s",
+          "url": "https://drive.usercontent.google.com/download?export=download&confirm=t&id=135OAcBCSvubHwPB2iHZ9lWlO2-m2u09m"
+        }
+      ]
+    },
+    {
+      "id": "finish-85-sidney",
+      "op": "finish",
+      "config": "campaigns/85-sidney/meta.json",
+      "city_key": "292371",
+      "adset_name": "85 Sidney - Bowmanville 25km - Instant Form",
+      "carousel_name": "85 Sidney - Photo Carousel",
+      "images": [
+        "https://drive.usercontent.google.com/download?export=download&confirm=t&id=1o15SZAYjndESXpDAIqbLhzMZydg54JWc",
+        "https://drive.usercontent.google.com/download?export=download&confirm=t&id=1XvzEQ8o9SdIxJ3dE7p5CJeDAGdbdEj2H",
+        "https://drive.usercontent.google.com/download?export=download&confirm=t&id=1obLmk2FeWtuy-2n2trnHERS0SUvSV0zO",
+        "https://drive.usercontent.google.com/download?export=download&confirm=t&id=1jJ8-04522o44bwo9t4SNxJ8WGkPZN78z",
+        "https://drive.usercontent.google.com/download?export=download&confirm=t&id=14KIYLdMPrZrBgVjpPTxF1rqHec4YorEC"
+      ]
+    },
+    {
+      "id": "finish-97-jackman",
+      "op": "finish",
+      "config": "campaigns/97-jackman/meta.json",
+      "city_key": "2674278",
+      "adset_name": "97 Jackman - Vaughan 25km - Instant Form",
+      "why": "Ad set only; no video exists yet"
+    }
+  ]
+}

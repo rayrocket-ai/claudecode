@@ -116,6 +116,7 @@ class MetaAdsClient:
                 "objective": "OUTCOME_LEADS",
                 "status": "PAUSED",
                 "special_ad_categories": ["HOUSING"],
+                "special_ad_category_country": ["CA"],
             },
         )
         return out["id"]
@@ -229,6 +230,112 @@ class MetaAdsClient:
             },
         )
         return out["id"]
+
+
+    # -- media + finishing helpers (Nov 2026) ------------------------------
+    def for_account(self, ad_account_id: str) -> "MetaAdsClient":
+        """Same token and page, different ad account (act_ prefix added)."""
+        acct = ad_account_id if ad_account_id.startswith("act_") else f"act_{ad_account_id}"
+        creds = MetaCreds(self.creds.access_token, acct, self.creds.page_id,
+                          self.creds.instagram_id, self.creds.api_version)
+        return MetaAdsClient(creds, self._client)
+
+    def create_adset_city(self, campaign_id: str, name: str, daily_budget_cents: int,
+                          city_key: str, radius_km: int) -> str:
+        """PAUSED instant-form ad set around a Meta city key (housing-safe radius)."""
+        if radius_km < 24:
+            raise ValueError("Housing ads need a radius of at least 24 km")
+        targeting = {
+            "geo_locations": {"cities": [{"key": city_key, "radius": radius_km,
+                                          "distance_unit": "kilometer"}]},
+            "targeting_automation": {"advantage_audience": 1},
+        }
+        out = self._post(f"{self.creds.ad_account_id}/adsets", {
+            "name": name, "campaign_id": campaign_id, "status": "PAUSED",
+            "daily_budget": daily_budget_cents, "billing_event": "IMPRESSIONS",
+            "optimization_goal": "LEAD_GENERATION", "destination_type": "ON_AD",
+            "bid_strategy": "LOWEST_COST_WITHOUT_CAP",
+            "promoted_object": {"page_id": self.creds.page_id},
+            "targeting": targeting,
+        })
+        return out["id"]
+
+    def download(self, url: str, dest: str) -> str:
+        """Fetch a public file (e.g. a link-shared Drive file) to dest."""
+        with self._client.stream("GET", url, follow_redirects=True, timeout=300.0) as r:
+            if r.status_code >= 400:
+                raise MetaAdsError(f"download {r.status_code}: {url}")
+            with open(dest, "wb") as fh:
+                for chunk in r.iter_bytes():
+                    fh.write(chunk)
+        return dest
+
+    def upload_video(self, path: str, title: str = "") -> str:
+        """Upload a local video, return its video id."""
+        with open(path, "rb") as fh:
+            resp = self._client.post(
+                self._url(f"{self.creds.ad_account_id}/advideos"),
+                data={"access_token": self.creds.access_token, "title": title},
+                files={"source": fh}, timeout=600.0,
+            )
+        return self._parse(resp)["id"]
+
+    def wait_video_thumbnail(self, video_id: str, tries: int = 40,
+                             sleep: float = 6.0) -> str:
+        """Wait until Meta finishes processing; return a thumbnail URL."""
+        import time
+        for _ in range(tries):
+            body = self._get(video_id, {"fields": "status,thumbnails{uri,is_preferred}"})
+            status = (body.get("status") or {}).get("video_status")
+            thumbs = (body.get("thumbnails") or {}).get("data") or []
+            if status == "ready" and thumbs:
+                pref = [t for t in thumbs if t.get("is_preferred")] or thumbs
+                return pref[0]["uri"]
+            if status == "error":
+                raise MetaAdsError(f"video {video_id} failed processing")
+            time.sleep(sleep)
+        raise MetaAdsError(f"video {video_id} still processing; rerun later")
+
+    def create_video_lead_creative(self, name: str, video_id: str, thumbnail_url: str,
+                                   message: str, headline: str, description: str,
+                                   form_id: str, cta: str = "LEARN_MORE",
+                                   image_hash: str = "") -> str:
+        thumb = {"image_hash": image_hash} if image_hash else {"image_url": thumbnail_url}
+        spec = {"page_id": self.creds.page_id, "video_data": {
+            "video_id": video_id, **thumb, "message": message,
+            "title": headline, "link_description": description,
+            "call_to_action": {"type": cta, "value": {"lead_gen_form_id": form_id,
+                                                      "link": "http://fb.me/"}}}}
+        if self.creds.instagram_id:
+            spec["instagram_user_id"] = self.creds.instagram_id
+        out = self._post(f"{self.creds.ad_account_id}/adcreatives",
+                         {"name": name, "object_story_spec": spec})
+        return out["id"]
+
+    def create_carousel_lead_creative(self, name: str, message: str, headline: str,
+                                      description: str, image_hashes: list[str],
+                                      form_id: str, cta: str = "LEARN_MORE") -> str:
+        cards = [{"image_hash": h, "name": headline, "description": description,
+                  "link": "http://fb.me/",
+                  "call_to_action": {"type": cta, "value": {"lead_gen_form_id": form_id,
+                                                            "link": "http://fb.me/"}}}
+                 for h in image_hashes]
+        spec = {"page_id": self.creds.page_id, "link_data": {
+            "message": message, "link": "http://fb.me/", "child_attachments": cards,
+            "call_to_action": {"type": cta, "value": {"lead_gen_form_id": form_id,
+                                                      "link": "http://fb.me/"}}}}
+        if self.creds.instagram_id:
+            spec["instagram_user_id"] = self.creds.instagram_id
+        out = self._post(f"{self.creds.ad_account_id}/adcreatives",
+                         {"name": name, "object_story_spec": spec})
+        return out["id"]
+
+    def set_daily_budget(self, adset_id: str, daily_budget_cents: int) -> dict[str, Any]:
+        return self._post(adset_id, {"daily_budget": daily_budget_cents})
+
+    def swap_creative(self, ad_id: str, creative_id: str) -> dict[str, Any]:
+        """Point an existing ad at a new creative (creatives are immutable)."""
+        return self._post(ad_id, {"creative": {"creative_id": creative_id}})
 
     # -- control -----------------------------------------------------------
     def set_status(self, object_id: str, status: str) -> dict[str, Any]:
