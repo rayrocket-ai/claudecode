@@ -4,6 +4,25 @@ Every test gets: hypothesis, variants, spend, result, decision, lesson.
 Newest entries at the top.
 
 ---
+## 2026-11-03 — SOLD. Campaign retired.
+
+- Ray confirmed 16 Curry Crescent is sold.
+- Decision: stop all spend. Meta campaign 52506205424516 (ad set
+  52506205424716) must be PAUSED. This session has no Ad Advisor or Meta
+  API access, so Ray pauses it in Ads Manager today. Once Meta is
+  reconnected, ADMAX verifies the pause and pulls the final Aug 21 to
+  Nov 3 spend and lead totals for the closing report.
+- YouTube Shorts ad set (if it was ever created) also pauses.
+- Last verified numbers (through Aug 20): $90.27 spend, 8 leads, CPL
+  $11.28, CTR 5.9%. No kill rule ever triggered.
+- Lessons to carry to the next listing: the curiosity trade (price +
+  address + tour behind the form) produced CPL well under the $15 target
+  on one ad; the 4-car-garage hook was never A/B tested because only one
+  ad ran. Next listing launches with 10 to 15 creatives from day one.
+- Removed from the ACTIVE CAMPAIGNS list in
+  .claude/agents/buttonleaf-campaign.md. Daily loop no longer reports it.
+
+---
 ## 2026-09-17 — Discovery: campaign has been LIVE since Aug 11 (via Ad Advisor)
 
 - Campaign 52506205424516 / ad set 52506205424716, launched Aug 11 with
