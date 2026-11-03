@@ -76,6 +76,12 @@ def _load() -> dict[str, Any]:
     git_campaigns = _load_git_campaigns()
     if git_campaigns:
         data.setdefault("campaigns", {}).update(git_campaigns)
+    # Sold or retired listings live under campaigns/_sold/<slug>/ as a
+    # record. Hide them even if an older store copy still has them.
+    sold_dir = _campaign_data_dir() / "_sold"
+    if sold_dir.is_dir():
+        for retired in sold_dir.iterdir():
+            data.get("campaigns", {}).pop(retired.name, None)
     for campaign in data.get("campaigns", {}).values():
         _normalize(campaign)
     return data

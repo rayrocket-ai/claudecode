@@ -125,3 +125,18 @@ def test_upsert_new_campaign_and_log(client):
     assert "Richmond Hill Seller Leads" in index.text
     listing = client.get("/api/campaigns").json()
     assert set(listing) == {"34-buttonleaf", "53-alpha", "85-sidney", "97-jackman", "rh-sellers"}
+
+
+def test_sold_listings_are_hidden_even_if_store_has_them(tmp_path, monkeypatch):
+    import json as _json
+    import importlib
+    store = tmp_path / "store.json"
+    store.write_text(_json.dumps({"campaigns": {"16-curry": {"name": "Curry"},
+                                                "keep": {"name": "Keep"}}}))
+    camp = tmp_path / "campaigns"
+    (camp / "_sold" / "16-curry").mkdir(parents=True)
+    monkeypatch.setenv("DASHBOARD_STORE", str(store))
+    monkeypatch.setenv("CAMPAIGN_DATA_DIR", str(camp))
+    import dashboard.app as dash
+    importlib.reload(dash)
+    assert set(dash._load()["campaigns"]) == {"keep"}
