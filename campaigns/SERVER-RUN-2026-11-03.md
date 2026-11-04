@@ -53,6 +53,12 @@ docker compose run --rm bot python -m integrations.meta_ads_cli run-ops campaign
 5. **85 Sidney**: adds the $5/day ad set (Bowmanville, 25 km) and a
    5-photo carousel ad.
 6. **97 Jackman**: adds the $5/day ad set only. It still needs a video.
+7. **34 Buttonleaf**: adds a second video ad (the July move-up cut) and
+   switches it on, so Meta tests two ads instead of one.
+8. **Report**: prints 7-day, 30-day and lifetime spend, leads and cost per
+   lead for Buttonleaf, Curry and Alpha on a line starting with REPORT.
+   Send that line to ADMAX. You can rerun the same command any time just
+   to get a fresh report; finished steps are skipped.
 
 Each step is recorded in `campaigns/OPS-2026-11-03.state.json`. If one
 fails, fix the cause and run the same command again; finished steps are

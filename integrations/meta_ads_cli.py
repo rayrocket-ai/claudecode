@@ -219,6 +219,38 @@ def _op_activate_finished(client: MetaAdsClient, op: dict) -> dict:
             "approved_by": op["approved_by"]}
 
 
+def _op_add_video_ad(client: MetaAdsClient, op: dict) -> dict:
+    """Add one more video ad (existing Meta video) to an existing ad set."""
+    acct = client.for_account(op["account"])
+    creative_id = acct.create_video_lead_creative(
+        name=op["name"], video_id=op["video_id"], thumbnail_url="",
+        image_hash=op["thumbnail_hash"], message=op["message"],
+        headline=op["headline"], description=op["description"],
+        form_id=op["form_id"])
+    ad_id = acct.create_ad(op["adset_id"], op["name"], creative_id)
+    if op.get("activate"):
+        if not op.get("approved_by"):
+            raise MetaAdsError("activate needs approved_by")
+        acct.set_status(ad_id, "ACTIVE")
+    return {"ad_id": ad_id, "creative_id": creative_id, "active": bool(op.get("activate"))}
+
+
+def _op_report(client: MetaAdsClient, op: dict) -> dict:
+    """Print spend / leads / CPL for named campaigns so ADMAX can log them."""
+    out = {}
+    for name, ref in op["campaigns"].items():
+        acct = client.for_account(ref["account"])
+        row = {}
+        for preset in ("last_7d", "last_30d", "maximum"):
+            d = acct.insights(ref["campaign_id"], date_preset=preset)
+            if d.get("leads"):
+                d["cpl"] = round(d["spend"] / d["leads"], 2)
+            row[preset] = d
+        out[name] = row
+    print("REPORT " + json.dumps(out))
+    return {"reported": list(out)}
+
+
 def cmd_run_ops(ops_path: Path) -> None:
     import tempfile
     spec = json.loads(ops_path.read_text())
@@ -241,13 +273,19 @@ def cmd_run_ops(ops_path: Path) -> None:
                 res = _op_swap_copy(client, op)
             elif op["op"] == "finish":
                 res = _op_finish(client, op, workdir)
+            elif op["op"] == "add_video_ad":
+                res = _op_add_video_ad(client, op)
+            elif op["op"] == "report":
+                res = _op_report(client, op)
+                state.pop(key, None)  # always rerun reports
             elif op["op"] == "activate_finished":
                 if not op.get("approved_by"):
                     raise MetaAdsError("activation needs approved_by")
                 res = _op_activate_finished(client, op)
             else:
                 raise MetaAdsError(f"unknown op {op['op']}")
-            state[key] = {"ok": True, **res}
+            if op["op"] != "report":
+                state[key] = {"ok": True, **res}
             print(f"done  {key}: {json.dumps(res)}")
         except (MetaAdsError, OSError, KeyError, ValueError) as e:
             failed += 1

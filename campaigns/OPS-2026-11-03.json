@@ -31,6 +31,22 @@
       "why": "Live copy printed the street address and linked to the listing page"
     },
     {
+      "id": "buttonleaf-second-ad",
+      "op": "add_video_ad",
+      "account": "732663023528570",
+      "adset_id": "52506208679316",
+      "name": "34 Buttonleaf - Move-up video - Nov 2026",
+      "video_id": "2107347619854878",
+      "thumbnail_hash": "527edbc22eb562c0822bc3857cfba804",
+      "form_id": "985332827899566",
+      "message": "Thinking about moving up in Stouffville? Step inside a bright, renovated home with over 4,000 square feet finished, 4+1 bedrooms, 5 bathrooms and a finished lower level with its own separate entrance.\n\nTap to get the price, the address and a private tour.",
+      "headline": "See this Stouffville move-up home",
+      "description": "Price, address and full tour",
+      "activate": true,
+      "approved_by": "Ray, 2026-11-03: 'buttonleaf and alpha lets promote this'",
+      "why": "Give Meta two ads to test instead of one; this cut ran in the July 7-day test with no-address copy"
+    },
+    {
       "id": "finish-53-alpha",
       "op": "finish",
       "config": "campaigns/53-alpha/meta.json",
@@ -75,6 +91,24 @@
       "city_key": "2674278",
       "adset_name": "97 Jackman - Vaughan 25km - Instant Form",
       "why": "Ad set only; no video exists yet"
+    },
+    {
+      "id": "report",
+      "op": "report",
+      "campaigns": {
+        "34-buttonleaf": {
+          "account": "732663023528570",
+          "campaign_id": "52506208679516"
+        },
+        "16-curry-final": {
+          "account": "732663023528570",
+          "campaign_id": "52506205424516"
+        },
+        "53-alpha": {
+          "account": "1788128334781323",
+          "campaign_id": "120250450871140620"
+        }
+      }
     }
   ]
 }

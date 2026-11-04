@@ -5,6 +5,22 @@ Newest entries at the top. Never re-test a settled question without new
 justification.
 
 ---
+## 2026-11-04 — Listing activity from Ray's inbox (ad numbers still locked)
+
+- Buyer-agent showings booked through BrokerBay: Oct 19, Oct 21, Oct 23,
+  Oct 26, Nov 1. Offer presentation night Oct 21: one registered offer;
+  sellers did not work with it. Documents signed on Authentisign Oct 26
+  (type not visible in the subject line). Showings were still being
+  booked after that, so treat the listing as active unless Ray says
+  otherwise.
+- Meta form 985332827899566 shows 27 lifetime leads (live read Nov 3).
+  Spend since Aug 20 is unknown until the server report runs or Ad Advisor
+  resets Nov 7.
+- Improvement queued in campaigns/OPS-2026-11-03.json: second ad in the
+  live ad set (the July "move-up" cut, no-address copy) so Meta has two
+  ads to test; first ad's copy swapped to no-address; budget $5/day.
+
+---
 ## 2026-11-03 — Priority listing
 
 - Ray named Buttonleaf a priority on Nov 3. Already live. Server ops lower it to $5/day and swap in the no-address copy.

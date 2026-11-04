@@ -4,6 +4,18 @@ Every test gets: hypothesis, variants, spend, result, decision, lesson.
 Newest entries at the top.
 
 ---
+## 2026-11-04 — Listing activity from Ray's inbox
+
+- Showings booked: Oct 17, Oct 18, Oct 20, Oct 23, and a new request for
+  today (Nov 4, 5:30 PM, REN/TEX Realty). Offer emailed Oct 25 by a buyer
+  through Nadiya. Seller thread Oct 26 on backyard water accumulation and
+  offer conversations. A REALTOR.ca information request Oct 17 and a
+  potential client callback Oct 19.
+- Takeaway: organic and MLS demand is real. The Meta campaign adds local
+  buyers who are not yet working with an agent; launch is queued (ad set,
+  two tour videos, then ON) in the server ops file.
+
+---
 ## 2026-11-03 — Priority listing
 
 - Ray approved promoting 53 Alpha on Nov 3 ('buttonleaf and alpha lets promote this'). The server ops file now switches it ON right after the ad set and two video ads are built.

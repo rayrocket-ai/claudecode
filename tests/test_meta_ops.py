@@ -93,7 +93,11 @@ def test_swap_copy_builds_lead_video_creative_then_repoints_ad(tmp_path, monkeyp
 def test_real_ops_file_only_activates_what_ray_approved():
     spec = json.loads(open("campaigns/OPS-2026-11-03.json").read())
     assert {o["op"] for o in spec["ops"]} <= {"pause_campaign", "set_budget", "swap_copy",
-                                              "finish", "activate_finished"}
+                                              "finish", "activate_finished",
+                                              "add_video_ad", "report"}
+    for o in spec["ops"]:
+        if o.get("activate"):
+            assert o.get("approved_by") and o["account"] == "732663023528570"
     acts = [o for o in spec["ops"] if o["op"] == "activate_finished"]
     assert [o["config"] for o in acts] == ["campaigns/53-alpha/meta.json"]
     assert all(o.get("approved_by") for o in acts)
@@ -114,3 +118,18 @@ def test_activate_refuses_unfinished_campaign(tmp_path, monkeypatch):
     with pytest.raises(SystemExit):
         meta_ads_cli.cmd_run_ops(ops)
     assert fake.calls == []
+
+
+def test_report_prints_and_always_reruns(tmp_path, monkeypatch, capsys):
+    ops = tmp_path / "ops.json"
+    ops.write_text(json.dumps({"ops": [{"id": "r", "op": "report", "campaigns": {
+        "x": {"account": "1", "campaign_id": "C"}}}]}))
+    row = {"data": [{"spend": "10.0", "impressions": "1000", "ctr": "2.0",
+                     "actions": [{"action_type": "lead", "value": "2"}]}]}
+    for _ in range(2):
+        fake = Fake([Resp(row), Resp(row), Resp(row)])
+        monkeypatch.setattr(meta_ads_cli, "_client", lambda: _client(fake))
+        meta_ads_cli.cmd_run_ops(ops)
+        assert len(fake.calls) == 3
+    out = capsys.readouterr().out
+    assert '"cpl": 5.0' in out
