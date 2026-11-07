@@ -95,10 +95,19 @@
     "instagram_user_id": "17841401464994148",
     "campaign_id": "120250450871140620",
     "lead_form_id": "1112543945036414",
-    "adset_id": null,
-    "ad_ids": [],
+    "adset_id": "120250513336680620",
+    "ad_ids": [
+      "120250513340880620"
+    ],
     "spend_cap_cad": 200,
     "status": "PAUSED",
-    "created": "2026-11-03"
+    "created": "2026-11-03",
+    "creatives": {
+      "120250513340880620": {
+        "creative_id": "2145526649387908",
+        "video_id": "876779404654435",
+        "video_note": "2024 upload '53 alpha court video tour' 9x16, 34s. Ray to preview before it goes live."
+      }
+    }
   }
 }

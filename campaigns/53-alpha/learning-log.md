@@ -4,6 +4,21 @@ Every test gets: hypothesis, variants, spend, result, decision, lesson.
 Newest entries at the top.
 
 ---
+## 2026-11-07 — Ad set and first ad built (paused, waiting on Ray's preview)
+
+- Ad set 120250513336680620: $5/day, Vaughan + 25 km, instant form, Advantage+
+  audience and placements. Ad 120250513340880620 with creative 2145526649387908.
+- Video: 876779404654435, the 2024 upload "53 alpha court video tour" (9:16,
+  34 s) already in ad account 1788128334781323. Used because the new Sep 2026
+  cuts cannot reach Meta until the Drive folders are link-shared or the
+  server runs. Copy is the no-price, no-address version; form 1112543945036414.
+- Kept PAUSED: Ray has not seen this 2024 video in the new campaign. One tap
+  to go live once he approves (campaign, ad set, ad). The server ops file
+  still adds the two Sep 2026 cuts to this same ad set and then switches it on.
+- Main account 732663023528570 (Buttonleaf, Curry) is still on the expired
+  Ad Advisor link, so no Buttonleaf numbers or fixes today.
+
+---
 ## 2026-11-04 — Listing activity from Ray's inbox
 
 - Showings booked: Oct 17, Oct 18, Oct 20, Oct 23, and a new request for

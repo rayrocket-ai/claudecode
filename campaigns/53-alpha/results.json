@@ -1,7 +1,7 @@
 {
   "name": "53 Alpha Court \u2014 Woodbridge",
   "subtitle": "$10/day \u00b7 Meta $5 Leads + YouTube $5 via Google Ads \u00b7 no price, no address",
-  "status": "built-partial",
+  "status": "built-paused",
   "playbook": "Listing Exposure \u00b7 Playbook A",
   "targets": {
     "budget_note": "of $70/wk plan",
@@ -74,6 +74,15 @@
       "impressions": null,
       "views": null,
       "notes": "Campaign + lead form built PAUSED in Meta; ad set and ads pending"
+    },
+    {
+      "date": "2026-11-07",
+      "spend": 0.0,
+      "leads": 0,
+      "ctr_pct": null,
+      "impressions": null,
+      "views": null,
+      "notes": "Ad set + 1 video ad built; waiting on Ray's preview"
     }
   ],
   "log": [
