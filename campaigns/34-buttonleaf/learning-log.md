@@ -5,6 +5,18 @@ Newest entries at the top. Never re-test a settled question without new
 justification.
 
 ---
+## 2026-11-08 — Lead form flat for 5 days
+
+- Live form read (Ad Advisor via account 1788128334781323): Buttonleaf form
+  985332827899566 still at 27 lifetime leads, unchanged since Nov 3. Curry's
+  form also unchanged at 23. Before Aug 20 Buttonleaf averaged about one lead
+  a day, so the ad is most likely no longer delivering (paused, ended, or a
+  billing hold). Cannot confirm: account 732663023528570 is still on the
+  expired Ad Advisor link.
+- Kill rules: not applicable without spend data.
+- Action: none possible from here. Asked Ray to check Delivery in Ads Manager.
+
+---
 ## 2026-11-04 — Listing activity from Ray's inbox (ad numbers still locked)
 
 - Buyer-agent showings booked through BrokerBay: Oct 19, Oct 21, Oct 23,
