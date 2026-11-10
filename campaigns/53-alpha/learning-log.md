@@ -4,6 +4,27 @@ Every test gets: hypothesis, variants, spend, result, decision, lesson.
 Newest entries at the top.
 
 ---
+## 2026-11-10 (Ads Manager screenshot from Ray) — Alpha IS on Facebook already
+
+- Ray's Ads Manager screenshot of account 732663023528570 (last 30 days,
+  Oct 11 to Nov 9) shows campaign "53 Alpha Court | Local Video Awareness |
+  CAD5 | ..." ACTIVE: reach 47,109, frequency 1.65. So an awareness video
+  campaign for Alpha has been running on Meta in the MAIN account all along.
+  Earlier notes said Alpha had no Facebook delivery. Wrong: I only looked at
+  the second account (1788128334781323), where the lead-form ad sits paused.
+- So Alpha today: Meta awareness video live (account 732...), YouTube live
+  (24273515703). Missing piece: the lead-form ad that captures buyers.
+- Same screenshot: banner "Verification may be required soon" with a Start
+  verification button. That is the authentication Meta wants. Also 8
+  unpublished drafts ("Review and publish (8)"), including "Brooklin town -
+  Lead Gen" and a GTA Buyer Consultation draft. Told Ray not to bulk-publish.
+- 34 buttomleaf - Lead Gen and 16 Curry show Off. Two boosted Instagram
+  posts show "Ad errors", not delivering.
+- Next read: pull this awareness campaign's ID and creative through Adspirer
+  (same account, so it is reachable) and check its copy for price, address
+  and the pool claim.
+
+---
 ## 2026-11-10 (late) — Ray: execute. Seller approved relist + $10,000 agent bonus
 
 - Seller approved Ray's plan at 10:37 AM: relist at the same price, ads on
