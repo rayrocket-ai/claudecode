@@ -4,6 +4,30 @@ Every test gets: hypothesis, variants, spend, result, decision, lesson.
 Newest entries at the top.
 
 ---
+## 2026-11-10 (late) — Ray: execute. Seller approved relist + $10,000 agent bonus
+
+- Seller approved Ray's plan at 10:37 AM: relist at the same price, ads on
+  Facebook, Instagram and YouTube, flat $10,000 buyer-agent bonus for an
+  accepted offer by Nov 24. Ray told the seller the campaign launches the day
+  the listing goes live and promised regular updates. Ray to me: start
+  running ads on YouTube and Facebook.
+- YouTube: confirmed running. Campaign 24273515703, $5/day, YouTube only,
+  presence-only geo, ad group "Alpha | Vaughan | Homebuyers", link
+  rayahmadi.com/contact.
+- Facebook: NOT live. Two blocks. (1) Ad Advisor's token for account
+  1788128334781323 is invalid since Nov 9 (provenance: token_invalid), and
+  that account is not connected to Adspirer. (2) Meta's security hold on
+  Ray's login blocks ad edits by API anyway.
+- Copy error caught before launch: the paused ad 120250513340880620
+  (creative 2145526649387908) says "A pool." and "three-bedroom apartment".
+  Ray's own email to the seller says "pool-sized yard" and "walkout lower
+  level with its own entrance". Treat Ray's wording as the truth. New copy is
+  in plan.md. The old ad must not be switched on as is. Thumbnail hash of
+  the video for the rebuild: de12bad50dc4b58fc8e053349b1b2a19.
+- Lesson: check ad claims against what Ray tells the seller before launch.
+  A wrong feature claim on a $2M listing is a complaint waiting to happen.
+
+---
 ## 2026-11-10 (evening) — YouTube is already live for Alpha
 
 - Google Ads campaign "53 Alpha Court | YouTube In-Market | CAD5 | Sep 2026"

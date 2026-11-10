@@ -23,8 +23,8 @@ Google setup is in campaigns/LAUNCH-PACK-NOV-2026.md.
 - Premium pie-shaped lot (57 x 168 ft, about 75 ft at the rear) backing onto a former golf course
 - Renovated throughout: gourmet kitchen with granite and pantry, sunlit solarium with vaulted ceilings and skylights
 - Primary with 6-piece ensuite, walk-in closet and walk-out balcony
-- Professionally landscaped backyard with private pool
-- Finished walkout basement apartment: private entrance, full kitchen, 3 bedrooms, full bath, separate laundry
+- Professionally landscaped, pool-sized backyard. NOT a pool: Ray's Nov 10 email to the seller says "pool-sized yard". Never claim a pool in any ad.
+- Finished walkout lower level with its own entrance (Ray's wording to the seller). Do not call it an apartment in ads.
 - 3-car garage plus 6 driveway spaces
 
 ## Strategy
@@ -47,14 +47,16 @@ Google setup is in campaigns/LAUNCH-PACK-NOV-2026.md.
 
 - **golf-course lot**: A backyard that ends at a former golf course. In Woodbridge.
 - **basement apartment**: Three bedrooms downstairs. Own entrance, own kitchen, own laundry. Parents or income, your call.
-- **pool + solarium**: A pool, a solarium, and skylights. This is not the usual Woodbridge resale.
+- **pool-sized lot**: A pool-sized backyard on a rare Woodbridge lot. (Old "pool + solarium" hook retired Nov 10: no pool.)
 - **size**: Close to 5,000 square feet of finished space. The kind of room a big family stops compromising for.
 
 ## Primary text (Ray's voice, no price, no address)
 
-A backyard that ends at a former golf course. A pool. A solarium under skylights. And a fully separate three-bedroom apartment downstairs with its own entrance and laundry. Close to 5,000 square feet of finished space in one of Woodbridge's most private pockets. Tap for the price, address, and full tour.
+A rare lot in Woodbridge. A pool-sized backyard. And a walkout lower level with its own entrance, ready for parents or extended family.
 
-Headline: Backs onto a former golf course
+Tap to get the price, the address, and the full video tour sent to you.
+
+Headline: Pool-sized lot in Woodbridge
 Description: Price, address, and full tour
 
 Newcomer and Afghan-community variant adds one Dari line to the primary text: ما به زبان دری در خدمت شما هستیم. (Ray reviews before it runs.)
