@@ -4,6 +4,20 @@ Every test gets: hypothesis, variants, spend, result, decision, lesson.
 Newest entries at the top.
 
 ---
+## 2026-11-10 (evening) — YouTube is already live for Alpha
+
+- Google Ads campaign "53 Alpha Court | YouTube In-Market | CAD5 | Sep 2026"
+  (ID 24273515703, VIDEO, $5/day) is ENABLED. Last 30 days: $148.75 spent,
+  23 clicks, 0 tracked conversions. So the YouTube half of the $10/day plan
+  has been running since September. No change made.
+- Several older Alpha campaigns sit paused in the same account (IDs
+  23485439458, 23095237597, 23091114365, 23085204372, 21507215037).
+- Meta ad 120250513340880620 (account 1788128334781323) is still paused.
+  That account is not connected to Adspirer, and Meta's security hold on
+  Ray's Facebook user (code 31/3858385) blocks ad edits by API anyway.
+- Next: Ray clears the Meta security check, then says go.
+
+---
 ## 2026-11-10 — Seller agreed to relist. Ad still paused. Ray: "we must sell"
 
 - Seller replied Nov 10 to Ray's Nov 7 market update: agrees to relist at the

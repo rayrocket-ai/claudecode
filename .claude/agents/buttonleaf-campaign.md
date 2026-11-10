@@ -19,6 +19,12 @@ ACTIVE CAMPAIGNS — run every step of the daily loop for EACH of:
 - 53-alpha: 53 Alpha Court, Woodbridge (campaigns/53-alpha/) — PRIORITY. Relist agreed 2026-11-10; ad built and paused, launch on relist day
 - 85-sidney: 85 Sidney Rundle Ave, Bowmanville (campaigns/85-sidney/) — pre-launch
 - 97-jackman: 97 Jackman Cres, West Woodbridge (campaigns/97-jackman/) — pre-launch
+CONNECTORS (2026-11-10): Adspirer covers Google Ads 1344350136 and Meta
+732663023528570 (free plan, 15 calls/month; search_tools and get_tool_schema
+are free). Ad Advisor covers Meta 1788128334781323 (20 calls/month). Read the
+live account state before planning. Google: 53 Alpha YouTube campaign
+24273515703 is live at $5/day; 34 Buttonleaf Demand Gen 24114799139 is paused.
+16 Curry Meta campaign was paused 2026-11-10.
 Each follows the Buttonleaf structure and rules; property-specific hooks
 and copy live in its plan.md. APPROVED BUDGET (Ray, 2026-11-03): $10/day per listing = $5 Meta (FB + IG
 Leads) + $5 YouTube via Google Ads. Four listings = $40/day total. This

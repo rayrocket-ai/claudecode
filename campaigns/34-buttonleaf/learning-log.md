@@ -5,6 +5,39 @@ Newest entries at the top. Never re-test a settled question without new
 justification.
 
 ---
+## 2026-11-10 (evening) — Adspirer connected. Real account state read for the first time
+
+- New connector: Adspirer (Google Ads 134-435-0136 and Meta account
+  732663023528570). Free plan: 15 tool calls a month, 6 used today.
+  search_tools and get_tool_schema are free. Failed calls did not count.
+- Meta campaign 52506208679516 is PAUSED. No delivery in the last 30 days.
+  That explains the lead form sitting at 27. It is a website-conversion
+  campaign (pixel LEAD event, CBO $10/day, Stouffville +15 mi), not an
+  instant-form campaign, and its one ad links to the listing page.
+- Tried to add an instant-form ad set to it: Meta refused (all ad sets in a
+  lowest-cost CBO campaign must share one optimization). A lead-form version
+  needs its own campaign.
+- Tried to create that campaign (34Buttonleaf-Stouffville-Leads, $5/day,
+  Whitchurch-Stouffville city key 297205 + 25 km, form 985332827899566, video
+  1553311682394230, no-address copy): Meta refused with code 31/3858385.
+  Meta is holding a security check on Ray's Facebook user after the Nov 9
+  logins. No ad can be created or edited by API until Ray authenticates in
+  Ads Manager (Billing and payments, Start Authentication). Nothing was
+  created.
+- Google Ads: "Video ad - 34 Buttonleaf Cres" (Demand Gen, ID 24114799139,
+  $5/day) exists and is PAUSED. Copy has no price and no address. It targets
+  a 20-mile radius, presence only, but only the database retargeting list,
+  and its final URL is the old listing page (lid 29957682), which may die at
+  relist. "34 Buttonleaf | Stouffville | YouTube Views | 7D" (ID 24045317940)
+  is paused at $0. Left both paused pending Ray's word and the new URL.
+- 16 Curry Meta campaign 52506205424516: PAUSED today through Adspirer.
+- Open question: campaign files use https://www.rayhomes.ca as the ad link.
+  Ray's live ads use rayahmadi.com and rayrealestate.ca. Confirm the right
+  domain with Ray before any ad is built with it.
+- Lesson: read the live account before planning. Ten days of work assumed
+  this campaign was live. It was paused the whole time.
+
+---
 ## 2026-11-10 — Relist signed. Facebook connections broken. Ray: "we must sell"
 
 - Authentisign "Signing complete" Nov 10, 9:26 AM: Form 242 Cancellation of
