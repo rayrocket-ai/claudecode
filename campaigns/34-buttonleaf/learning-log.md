@@ -5,6 +5,25 @@ Newest entries at the top. Never re-test a settled question without new
 justification.
 
 ---
+## 2026-11-10 (night) — YouTube resumed on Ray's word. Website settled
+
+- Ray: "you take over and get this done". Resumed Google Ads campaign
+  24114799139 ("Video ad - 34 Buttonleaf Cres", Demand Gen, $5/day). Status
+  PAUSED to ENABLED. Copy has no price or address.
+- Known weak points to fix next: audience is the database list only (add an
+  in-market home-buyer audience), bidding is Maximize Conversions with no
+  conversion data, and the final URL is the old listing page (lid 29957682).
+  Swap the URL the day the relist page exists.
+- Website: rayahmadi.com (Ray's team email runs on it and the live lead forms
+  already point there). rayhomes.ca in the campaign files was wrong. Replaced
+  in all active files.
+- Retried the Meta lead-form campaign with the right link: still refused,
+  code 31/3858385. Meta's hold needs Ray in Ads Manager on his own login.
+  No tool here can do it. Retry is free, so retry at every daily loop.
+- Hypothesis for the first read (Nov 14): the database-only audience is too
+  small to spend $5/day. If spend is under $2/day, widen the audience.
+
+---
 ## 2026-11-10 (evening) — Adspirer connected. Real account state read for the first time
 
 - New connector: Adspirer (Google Ads 134-435-0136 and Meta account

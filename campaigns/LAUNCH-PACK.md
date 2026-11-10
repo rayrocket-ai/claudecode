@@ -64,7 +64,7 @@ Completion / thank-you screen:
 - Headline: "Thank you. The full details are on the way."
 - Description: "Ray Homes will text you the price, address, and full tour
   shortly. Prefer a call? We can reach out within minutes."
-- Button: View website  → https://www.rayhomes.ca (or your listing link)
+- Button: View website  → https://rayahmadi.com (or your listing link)
 
 Privacy policy URL: (your privacy policy link — REQUIRED to publish)
 Business name shown: eXp Realty / Ray Homes

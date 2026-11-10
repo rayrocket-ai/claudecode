@@ -24,7 +24,7 @@ Ads Manager, Create, objective **Leads**.
    three custom questions (When are you looking to buy? / Are you
    pre-approved? / Do you have a home to sell first?). Privacy policy:
    your Ray Homes privacy URL. Thank-you: "Thank you. The full details
-   are on the way." Button: Visit Ray Homes, https://www.rayhomes.ca.
+   are on the way." Button: Visit website, https://rayahmadi.com.
 5. Ads: put every cut and the carousel in this ONE ad set (6 to 10 ads
    when creative allows). Primary text, headline and description are in
    that listing's plan.md under "Primary text".
@@ -56,7 +56,7 @@ YouTube channel as **Unlisted** first, then:
    under the housing policy, remove it and keep geo only.
 7. Content exclusions: Standard inventory; exclude embedded videos and
    live streams.
-8. Ad: the unlisted video, final URL https://www.rayhomes.ca, call to
+8. Ad: the unlisted video, final URL https://rayahmadi.com, call to
    action **Get the price**, headline from the table below. In Audience
    Manager create a **YouTube users: viewed any video as an ad** list for
    retargeting.
