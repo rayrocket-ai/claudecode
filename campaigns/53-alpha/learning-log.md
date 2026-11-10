@@ -4,6 +4,25 @@ Every test gets: hypothesis, variants, spend, result, decision, lesson.
 Newest entries at the top.
 
 ---
+## 2026-11-10 — Seller agreed to relist. Ad still paused. Ray: "we must sell"
+
+- Seller replied Nov 10 to Ray's Nov 7 market update: agrees to relist at the
+  same price. Asked three things: what extra marketing will boost the new
+  listing, whether a higher buyer-agent commission would help, and whether
+  the lower of the two interested buyers can be moved up.
+- Draft reply written for Ray in Gmail (not sent). It answers the marketing
+  question with the paid plan. Commission and negotiation are Ray's calls
+  and are left as blanks for him to fill.
+- Ad 120250513340880620 is still built and PAUSED. It cannot be switched on
+  from here today: Facebook invalidated every session on Nov 9, so Ad
+  Advisor lost the Page on this account too (error 190/460).
+- Decision: launch on relist day so the ad and the new MLS listing land
+  together. Needs Ray's "go" plus the Meta reconnect (or Ray flips the three
+  switches in Ads Manager himself).
+- Hypothesis unchanged: the golf-course and basement-apartment hooks carry
+  this one. First test once two ads are live.
+
+---
 ## 2026-11-07 — Ad set and first ad built (paused, waiting on Ray's preview)
 
 - Ad set 120250513336680620: $5/day, Vaughan + 25 km, instant form, Advantage+

@@ -15,8 +15,8 @@ ADMAX operating rules (see .claude/agents/admax.md); this file adds the
 campaign configuration and the daily loop.
 
 ACTIVE CAMPAIGNS — run every step of the daily loop for EACH of:
-- 34-buttonleaf: 34 Buttonleaf Cres, Stouffville (campaigns/34-buttonleaf/) — LIVE
-- 53-alpha: 53 Alpha Court, Woodbridge (campaigns/53-alpha/) — pre-launch
+- 34-buttonleaf: 34 Buttonleaf Cres, Stouffville (campaigns/34-buttonleaf/) — PRIORITY. Relist signed 2026-11-10; relaunch ads on relist day
+- 53-alpha: 53 Alpha Court, Woodbridge (campaigns/53-alpha/) — PRIORITY. Relist agreed 2026-11-10; ad built and paused, launch on relist day
 - 85-sidney: 85 Sidney Rundle Ave, Bowmanville (campaigns/85-sidney/) — pre-launch
 - 97-jackman: 97 Jackman Cres, West Woodbridge (campaigns/97-jackman/) — pre-launch
 Each follows the Buttonleaf structure and rules; property-specific hooks

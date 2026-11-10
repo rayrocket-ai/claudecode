@@ -5,6 +5,31 @@ Newest entries at the top. Never re-test a settled question without new
 justification.
 
 ---
+## 2026-11-10 — Relist signed. Facebook connections broken. Ray: "we must sell"
+
+- Authentisign "Signing complete" Nov 10, 9:26 AM: Form 242 Cancellation of
+  Listing Agreement, new Form 271 Listing Agreement, and PropTx 290 MLS Data
+  Form, signed by Ray and the seller. The listing is being cancelled and
+  relisted as new. Not sold.
+- Facebook invalidated every session on Nov 9 (Ray logged in with codes around
+  4 PM). Result: Ad Advisor cannot reach the Page on either ad account
+  (error 190/460), and the Pabbly workflow "34 Buttonleaf Cres - Lead form
+  Automation" is paused with the same error. New Facebook leads are NOT
+  reaching the CRM. They still sit in the Page's Leads Center.
+- Lead form 985332827899566 was flat at 27 from Nov 3 to Nov 8. No newer read
+  is possible until Meta is reconnected.
+- The old ad links to the old listing page and prints the address. A relist
+  gets a new MLS number and usually a new page URL, so the old ad is wrong
+  twice over. Replace it on relist day with the no-address lead-form copy
+  (already written in OPS-2026-11-03.json, op buttonleaf-no-address-copy).
+- Decision: relist day is launch day. New-listing status is the strongest
+  hook the property will get this year. Fresh ad, $5/day Meta, second video
+  ad alongside it, YouTube $5/day from the launch pack.
+- Lesson: one Facebook security reset silently broke ads access and the lead
+  pipeline at the same time. Check Pabbly alerts and Ad Advisor status at the
+  start of every daily loop, before reading any numbers.
+
+---
 ## 2026-11-08 — Lead form flat for 5 days
 
 - Live form read (Ad Advisor via account 1788128334781323): Buttonleaf form
