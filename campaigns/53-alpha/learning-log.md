@@ -4,6 +4,24 @@ Every test gets: hypothesis, variants, spend, result, decision, lesson.
 Newest entries at the top.
 
 ---
+## 2026-11-12 — Relist paperwork in motion. YouTube 7-day read
+
+- Relist: new listing documents signed Nov 10 (Authentisign, 1:40 PM).
+  Floricel sent the cancellation of the old listing to eXp on Nov 11, 6:22 PM.
+  No "live on REALTOR.ca" email yet, so the new listing is not live as of
+  this morning. One buyer-agent showing confirmed Nov 10, 12:30 PM.
+- YouTube (24273515703), Nov 4 to Nov 11: $42.16 spent (about $6/day
+  against a $5 budget, within Google's allowance), CTR 0.13%, about 8 clicks,
+  0 tracked conversions. This is a views campaign, so clicks are not the
+  goal, but nothing measures what the views lead to.
+- Kill rules: no kill. Spend is steady and on budget.
+- Still open: Meta lead-form ad paused with wrong copy (pool, apartment);
+  rebuild with the corrected text once Ray clears the Facebook verification.
+- Improvement to propose after relist day: add a second YouTube ad that says
+  "new listing" and the $10,000 agent bonus is NOT for consumer ads, keep it
+  to the agent email blast.
+
+---
 ## 2026-11-10 (Ads Manager screenshot from Ray) — Alpha IS on Facebook already
 
 - Ray's Ads Manager screenshot of account 732663023528570 (last 30 days,

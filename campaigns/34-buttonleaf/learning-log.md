@@ -5,6 +5,31 @@ Newest entries at the top. Never re-test a settled question without new
 justification.
 
 ---
+## 2026-11-12 — Relist is live. First YouTube numbers
+
+- Relist live on REALTOR.ca Nov 11, 4:35 PM: MLS N14172060, $1,299,000,
+  4+1 bed, 5 bath. SkySlope offer link issued the same day.
+  realtor.ca/real-estate/30504118/34-buttonleaf-crescent-whitchurch-stouffville-stouffville
+- YouTube (Google Ads 24114799139), resumed Nov 10. Through Nov 11: $9.40
+  spent, about 16 clicks, CTR 1.19%, about $0.59 a click, 0 tracked
+  conversions. Nearly all of it on Nov 11 (about $9.20, Google is allowed to
+  run up to twice the daily budget on one day and averages it out).
+- Hypothesis "database-only audience is too small to spend $5/day": refuted.
+  It spent the full budget and more on day one.
+- Problem: those clicks went to the OLD listing page (lid 29957682). The
+  relist has a new MLS number, so that page is probably dead or stale.
+  Proposed fix for Ray: point the ad at the new listing page on
+  rayahmadi.com (need the link) or at rayahmadi.com/contact like the Alpha ad.
+- Kill rules: not applicable yet, two days of data. First real read Nov 16.
+- Meta: no Facebook security or verification email since Nov 9, so the hold
+  is assumed still on. Did not retry the lead-form build: the Nov 11
+  unattended run stalled on an approval prompt for that write and never
+  reported. Writes now wait until Ray is in the chat.
+- Pabbly: no new alert for the Buttonleaf workflow. Still paused as far as
+  the inbox shows. A separate alert today is for the Google Review workflow.
+- Adspirer quota: 9 of 15 used after today's pull.
+
+---
 ## 2026-11-10 (night) — YouTube resumed on Ray's word. Website settled
 
 - Ray: "you take over and get this done". Resumed Google Ads campaign
