@@ -5,6 +5,25 @@ Newest entries at the top. Never re-test a settled question without new
 justification.
 
 ---
+## 2026-11-12 (afternoon) — Sell-now review from Ray's inbox
+
+- Price history (REALTOR.ca go-live emails): Sep 2 $1,349,000 (N13738830);
+  Oct 15 $999,000 with an offer night Oct 21; Nov 11 $1,299,000 (N14172060).
+- At $999,000: about 10 showings in 12 days and one registered offer (Oct 21,
+  Veedu Realty). Sellers declined it. Ray's Oct 22 note to agents said the
+  price would be adjusted. After that: 2 showings in the two weeks before the
+  relist (Nov 1, Nov 7).
+- Agents who showed it since Oct 9: Phoebe Li (RE/MAX Excel), Christine Ann
+  Breen (RE/MAX Hallmark, twice), Kenny Liu (Avision), Ivan Wu (First Class),
+  Mani Reddy (Metapro), Tam Sivathasan (Veedu, wrote the offer), Alkarim
+  Shivji (Sotheby's), Valerie Hazell (RE/MAX All-Stars), Andrew Chin
+  (HomeLife Broadway), Jessica Kee (Right At Home), Bruce Lin (KW Referred
+  Urban). One direct non-agent buyer inquiry Oct 26, showing booked by Nadiya.
+- Read: demand showed up near $1M. The gap is price, not exposure. Ads can
+  widen the top of the funnel, but the fastest path is the buyers who were
+  already inside, plus the 27 form leads.
+
+---
 ## 2026-11-12 — Relist is live. First YouTube numbers
 
 - Relist live on REALTOR.ca Nov 11, 4:35 PM: MLS N14172060, $1,299,000,

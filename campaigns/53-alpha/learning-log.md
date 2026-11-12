@@ -4,6 +4,23 @@ Every test gets: hypothesis, variants, spend, result, decision, lesson.
 Newest entries at the top.
 
 ---
+## 2026-11-12 (afternoon) — Sell-now review from Ray's inbox
+
+- Listed Sep 14 at $1,999,990 (REALTOR.ca). About 12 showings Sep 29 to
+  Nov 10. Max Kamali (RE/MAX West) showed it twice, Oct 13 and Oct 16.
+  Most recent: Massimo Breda (Ren/Tex) Nov 4, Anthony Arci (RE/MAX Hallmark)
+  Nov 10. One direct buyer inquiry through the office Oct 19.
+- Two buyers on record: $1,750,000 needing a March close, $1,690,000 with a
+  Dec/Jan close. Seller hopes for about $1,800,000.
+- Showing feedback Oct 18 (HomeLife G1): client not interested, "problem in
+  the backyard ... swampy drenching wet lawn. Very unusual. Please
+  investigate." The yard is the lead claim in the new ad copy ("pool-sized
+  backyard"), so this has to be checked before the relist push.
+- Read: this home already has its buyers. The gap to the seller's number is
+  $50,000 to $110,000 and one closing date. Closing that gap is faster than
+  finding a new buyer.
+
+---
 ## 2026-11-12 — Relist paperwork in motion. YouTube 7-day read
 
 - Relist: new listing documents signed Nov 10 (Authentisign, 1:40 PM).
