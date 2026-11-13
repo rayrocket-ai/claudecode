@@ -5,6 +5,15 @@ Newest entries at the top. Never re-test a settled question without new
 justification.
 
 ---
+## 2026-11-13 — Day 2 of the relist. Nothing new in the inbox
+
+- No new Buttonleaf showing, offer or lead emails since the Nov 11 go-live.
+- Facebook code login on Nov 12, 1:27 PM (Vaughan) may mean the verification
+  is done. Lead-form campaign build waits for Ray's word in the chat.
+- Open items unchanged: YouTube ad still points at the old listing page;
+  Pabbly Buttonleaf workflow still looks paused.
+
+---
 ## 2026-11-12 (afternoon) — Sell-now review from Ray's inbox
 
 - Price history (REALTOR.ca go-live emails): Sep 2 $1,349,000 (N13738830);

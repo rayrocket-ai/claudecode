@@ -4,6 +4,22 @@ Every test gets: hypothesis, variants, spend, result, decision, lesson.
 Newest entries at the top.
 
 ---
+## 2026-11-13 — Relist is live at $1,899,000
+
+- Live on REALTOR.ca Nov 12, 3:36 PM, $1,899,000 (first listing was
+  $1,999,990 on Sep 14). Old listing cancellation completed in SkySlope the
+  same day, offer link issued. Bonus clock: $10,000 to the buyer's agent for
+  an accepted offer by Nov 24, eleven days from now.
+- YouTube and the Meta awareness video were already running, so the "ads
+  launch on relist day" promise to the seller holds for those two. The
+  lead-form ad is still paused with the wrong copy.
+- Facebook sent a confirmation code and a "logged in with a code" alert on
+  Nov 12, 1:27 PM, from Vaughan. That may be Ray completing the
+  verification. Not tested: unattended runs make no write calls.
+- No new reply from the seller. No Google Ads policy or lead emails.
+- Not a numbers day (next pull Monday Nov 16). Adspirer 9 of 15 used.
+
+---
 ## 2026-11-12 (afternoon) — Sell-now review from Ray's inbox
 
 - Listed Sep 14 at $1,999,990 (REALTOR.ca). About 12 showings Sep 29 to
