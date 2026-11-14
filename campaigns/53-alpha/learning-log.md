@@ -4,6 +4,17 @@ Every test gets: hypothesis, variants, spend, result, decision, lesson.
 Newest entries at the top.
 
 ---
+## 2026-11-14 — Day 2 of the relist. No showings booked yet
+
+- No BrokerBay showing request or confirmation for 53 Alpha in the inbox
+  since the relist went live Nov 12. Ten days left on the $10,000 bonus.
+- An outside agent (HomeLife/Bayview) asked permission on Nov 13 to
+  advertise the listing. Ray said yes. Free extra exposure.
+- No Facebook, Pabbly (Buttonleaf), seller or Google Ads emails. Meta
+  verification status unchanged: possibly done Nov 12, untested.
+- Not a numbers day. Adspirer 9 of 15.
+
+---
 ## 2026-11-13 — Relist is live at $1,899,000
 
 - Live on REALTOR.ca Nov 12, 3:36 PM, $1,899,000 (first listing was

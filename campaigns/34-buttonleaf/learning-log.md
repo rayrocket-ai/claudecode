@@ -5,6 +5,14 @@ Newest entries at the top. Never re-test a settled question without new
 justification.
 
 ---
+## 2026-11-14 — Day 3 of the relist. No showings booked yet
+
+- No BrokerBay showing request, offer or lead email for 34 Buttonleaf since
+  the relist went live Nov 11 at $1,299,000. The $999,000 listing drew about
+  a showing a day. Three quiet days is the first signal on the new price.
+- Open items unchanged: YouTube link, Meta lead-form build, Pabbly.
+
+---
 ## 2026-11-13 — Day 2 of the relist. Nothing new in the inbox
 
 - No new Buttonleaf showing, offer or lead emails since the Nov 11 go-live.
