@@ -1,0 +1,8 @@
+{
+  "_about": "Example for: python -m integrations.meta_ads_cli run-ops <file>. Copy, fill in real IDs, have Ray review, then run on the server. Nothing here activates spend.",
+  "ops": [
+    {"id": "pause-old-campaign", "op": "pause_campaign", "account": "AD_ACCOUNT_ID", "campaign_id": "CAMPAIGN_ID", "why": "listing sold"},
+    {"id": "budget-5", "op": "set_budget", "account": "AD_ACCOUNT_ID", "adset_id": "ADSET_ID", "daily_cad": 5, "why": "approved split"},
+    {"id": "report", "op": "report", "campaigns": {"example": {"account": "AD_ACCOUNT_ID", "campaign_id": "CAMPAIGN_ID"}}}
+  ]
+}

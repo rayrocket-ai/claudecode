@@ -80,8 +80,24 @@ The daily loop runs `insights` on each live campaign, writes the numbers to
 the dashboard, applies the kill rules, and reports to you. You approve
 activations and budget changes; the engine does the rest.
 
+## Batch changes with run-ops (direct access, no connector limits)
+
+Once `META_ACCESS_TOKEN` (a system-user token with access to the ad
+accounts, the Page and Instagram) is in the server `.env`, a reviewed list
+of changes can run in one go, with no monthly action limits:
+
+```bash
+docker compose run --rm bot python -m integrations.meta_ads_cli run-ops campaigns/<file>.json
+```
+
+Start from `campaigns/ops.example.json`. Each op is recorded in
+`<file>.state.json` and skipped on a rerun. Only an `activate_finished` op
+that names who approved it can start spend. Delete an ops file once it has
+run or gone stale: an old one can re-apply copy or budgets that are no
+longer right.
+
 ## Google Ads
 
 Google Ads uses a separate API with a developer token that Google must
-approve (a few days). That track is scaffolded separately; Meta above gets
-Facebook + Instagram live now without waiting on Google.
+approve (a few days). See GOOGLE_ADS_SETUP.md. Until then Google Ads is
+reached through the Adspirer connector.

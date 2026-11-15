@@ -90,19 +90,13 @@ def test_swap_copy_builds_lead_video_creative_then_repoints_ad(tmp_path, monkeyp
     assert json.loads(fake.calls[1][2]["creative"]) == {"creative_id": "CR"}
 
 
-def test_real_ops_file_only_activates_what_ray_approved():
-    spec = json.loads(open("campaigns/OPS-2026-11-03.json").read())
+def test_example_ops_file_is_valid_and_never_activates():
+    spec = json.loads(open("campaigns/ops.example.json").read())
     assert {o["op"] for o in spec["ops"]} <= {"pause_campaign", "set_budget", "swap_copy",
                                               "finish", "activate_finished",
                                               "add_video_ad", "report"}
-    for o in spec["ops"]:
-        if o.get("activate"):
-            assert o.get("approved_by") and o["account"] == "732663023528570"
-    acts = [o for o in spec["ops"] if o["op"] == "activate_finished"]
-    assert [o["config"] for o in acts] == ["campaigns/53-alpha/meta.json"]
-    assert all(o.get("approved_by") for o in acts)
-    order = [o["id"] for o in spec["ops"]]
-    assert order.index("finish-53-alpha") < order.index("activate-53-alpha")
+    assert not [o for o in spec["ops"] if o["op"] == "activate_finished" or o.get("activate")]
+    assert len({o["id"] for o in spec["ops"]}) == len(spec["ops"])
 
 
 def test_activate_refuses_unfinished_campaign(tmp_path, monkeypatch):

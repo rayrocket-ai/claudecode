@@ -8,7 +8,7 @@ is gated on Ray's approval (the daily loop never activates on its own).
   python -m integrations.meta_ads_cli activate campaigns/34-buttonleaf/meta.json
   python -m integrations.meta_ads_cli pause    campaigns/34-buttonleaf/meta.json
   python -m integrations.meta_ads_cli insights campaigns/34-buttonleaf/meta.json
-  python -m integrations.meta_ads_cli run-ops  campaigns/OPS-2026-11-03.json
+  python -m integrations.meta_ads_cli run-ops  campaigns/ops.example.json
 
 run-ops applies a reviewed list of operations (pause a campaign, change a
 budget, swap ad copy, finish a half-built campaign). Each op is recorded in
