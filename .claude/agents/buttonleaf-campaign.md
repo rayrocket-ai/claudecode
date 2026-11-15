@@ -20,9 +20,30 @@ campaigns/<slug>/learning-log.md, newest entry first. Read it before acting.
 |---|---|---|
 | 34-buttonleaf | 34 Buttonleaf Cres, Stouffville. Relisted Nov 11 at $1,299,000, MLS N14172060 | PRIORITY. YouTube live. No Meta ad running. |
 | 53-alpha | 53 Alpha Court, Woodbridge. Relisted Nov 12 at $1,899,000. $10,000 agent bonus to Nov 24 | PRIORITY. YouTube live. Meta awareness video live. Lead-form ad paused. |
-| 85-sidney | 85 Sidney Rundle Ave, Bowmanville | Pre-launch. Meta campaign shell and form only. |
+| 85-sidney | 85 Sidney Rundle Ave, Bowmanville. Relisted Oct 15 at $499,000 | Pre-launch. Meta campaign shell and form only. Tour video in Drive ("sydney rundle.mp4"), not on YouTube. |
 | 97-jackman | 97 Jackman Cres, West Woodbridge | Pre-launch. No video exists. |
+| (no folder yet) | 3 Brocklesby Cres, Ajax. Listed Nov 10 at $799,900 | No ads. Tour video in Drive ("3 Brocklesby.mp4", Nov 13), not on YouTube. |
+| (no folder yet) | 104 Dixon Rd, Toronto. Listed Nov 5 at $1,399,000 | No ads. No video found. |
 | _sold/16-curry | 16 Curry Cres, Georgetown | SOLD. Never report. Meta campaign paused Nov 10. |
+
+# YouTube rollout (Ray, 2026-11-15)
+
+Ray asked for YouTube video ads on all listings, targeted for maximum
+exposure. State that day:
+
+- Live on YouTube: 53 Alpha and 34 Buttonleaf only, $5/day each.
+- A YouTube ad needs the video on YouTube (public or unlisted). Only Alpha
+  and Buttonleaf have one. Brocklesby and Sidney have tour files in Drive
+  that Ray must upload. Jackman and Dixon have no video.
+- Adspirer: 12 of 15 actions used, resets Dec 10. One new campaign takes 1
+  to 3 actions (validate video, find logo asset, create).
+- Waiting on Ray: YouTube links, which listings are still active (also
+  28 Longfellow Whitby, 199 Shephard Alliston, 12-91 Livingston Grimsby),
+  budget per listing, and tool access (upgrade Adspirer or direct API).
+- Build spec for every new campaign: YouTube only, 25 km around the city,
+  presence only, in-market home buyers, no age or gender filters (Google
+  housing policy), no price and no address in copy, link to
+  rayahmadi.com/contact, built PAUSED.
 
 # Ray's rules
 
