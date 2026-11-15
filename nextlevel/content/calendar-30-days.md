@@ -1,6 +1,6 @@
 # Next Level content calendar: 30 days
 
-Draft for Ray to approve. Nothing posts until Ray approves each piece in Slack #agent-marketing.
+Draft for Ray to approve. Nothing posts until Ray approves each piece in Slack #nextlevel-approvals.
 
 Start date: [Ray to set: the Monday the calendar starts]. Day 1 is a Monday.
 
@@ -9,7 +9,7 @@ Start date: [Ray to set: the Monday the calendar starts]. Day 1 is a Monday.
 - One row per piece. Row IDs: `a` and `b` are the two shorts Ray films that day, `c` is a carousel (Monday, Wednesday, Friday), `y` is the weekly long-form YouTube video (posts Thursday, filmed Tuesday).
 - **The `a` row is the lead piece of the day.** The Approval Desk drafts the `a` row of the next unused day, one per run. The other rows are drafted when Ray asks for more or approves a script week in one batch.
 - Hook ref points to `hooks.md`. Source points to the finished script in `scripts-week-1.md` (S, C, Y numbers). "Write from hook" means the script is drafted from the hook, using a week 1 script of the same format as the pattern.
-- Audience "Business" rows are the waitlist lane: no price, no offer, no checkout.
+- Audience "Business" rows speak to owners outside real estate. Approved by Ray, 2026-11-15: 3 of the 10 founding spots are open to mortgage brokers and to contractors and renovators, so rows 4b (H51) and 10b (H52) may send the viewer to the quiz. Every other Business row is the waitlist lane: no sale and no checkout. The keyword stays WAITLIST on all of them, and the reply in `dm-replies.md` sorts the person by industry.
 - LinkedIn: one post each weekday, built from that day's `a` short, plus every Business piece.
 - One keyword per piece. The keyword decides the lead magnet.
 - A day is "used" once its `a` row has a MOS Posts row.
@@ -20,7 +20,7 @@ Start date: [Ray to set: the Monday the calendar starts]. Day 1 is a Monday.
 | SCRIPT | The Front Desk Script |
 | DEMO | The Live Line (demo number and test card) |
 | PLAN | The 7-Day Go-Live Plan |
-| WAITLIST | Business waitlist opt-in. Not a lead magnet. |
+| WAITLIST | Business waitlist opt-in. Not a lead magnet. Mortgage brokers and contractors and renovators are sent to the quiz. |
 
 ## The calendar
 
@@ -35,7 +35,7 @@ Start date: [Ray to set: the Monday the calendar starts]. Day 1 is a Monday.
 | 3b | 3 | Wed | IG, TikTok, FB, YT Shorts | Short: screen recording | 2 Hear It Live | H20 | Agent | SCRIPT | The Front Desk Script | S06 |  |
 | 3c | 3 | Wed | IG, FB | Carousel, 7 slides | 4 Straight Answers | H43 | Agent | DEMO | The Live Line | C2 | Dari slide 1 available. Ray to review Dari |
 | 4a | 4 | Thu | IG, TikTok, FB, YT Shorts, LinkedIn | Short: screen recording | 3 Inside Ray's Business | H31 | Agent | SCRIPT | The Front Desk Script | S07 |  |
-| 4b | 4 | Thu | IG, TikTok, FB, YT Shorts, LinkedIn | Short: talking head | 5 Beyond Real Estate | H51 | Business | WAITLIST | Business waitlist (opt-in, not a lead magnet) | S08 |  |
+| 4b | 4 | Thu | IG, TikTok, FB, YT Shorts, LinkedIn | Short: talking head | 5 Beyond Real Estate | H51 | Business | WAITLIST | Business waitlist (opt-in, not a lead magnet) | S08 | Founding spots open to mortgage brokers: the reply sends them to the quiz. S08 closes on "be told when it opens" and needs that line rewritten before filming |
 | 4y | 4 | Thu | YouTube | Long-form, 10 to 14 min: Y1 Five calls to my own line | 2 Hear It Live | H15 | Agent | DEMO | The Live Line | Y1 | Filmed Tuesday, posts Thursday. Cut 6 shorts for the buffer |
 | 5a | 5 | Fri | IG, TikTok, FB, YT Shorts, LinkedIn | Short: talking head | 1 Missed Call | H09 | Agent | AUDIT | The Evening Line Test | S09 | Dari cut. Ray to review Dari |
 | 5b | 5 | Fri | IG, TikTok, FB, YT Shorts | Short: live call | 2 Hear It Live | H17 | Agent | DEMO | The Live Line | S10 |  |
@@ -50,7 +50,7 @@ Start date: [Ray to set: the Monday the calendar starts]. Day 1 is a Monday.
 | 9a | 9 | Tue | IG, TikTok, FB, YT Shorts, LinkedIn | Short: talking head | 3 Inside Ray's Business | H34 | Agent | SCRIPT | The Front Desk Script | Write from hook |  |
 | 9b | 9 | Tue | IG, TikTok, FB, YT Shorts | Short: talking head | 4 Straight Answers | H45 | Agent | DEMO | The Live Line | Write from hook |  |
 | 10a | 10 | Wed | IG, TikTok, FB, YT Shorts, LinkedIn | Short: talking head | 1 Missed Call | H05 | Agent | AUDIT | The Evening Line Test | Write from hook |  |
-| 10b | 10 | Wed | IG, TikTok, FB, YT Shorts, LinkedIn | Short: street interview | 5 Beyond Real Estate | H52 | Business | WAITLIST | Business waitlist (opt-in, not a lead magnet) | Write from hook | Interview needs written permission |
+| 10b | 10 | Wed | IG, TikTok, FB, YT Shorts, LinkedIn | Short: street interview | 5 Beyond Real Estate | H52 | Business | WAITLIST | Business waitlist (opt-in, not a lead magnet) | Write from hook | Interview needs written permission. Founding spots open to contractors and renovators: the reply sends them to the quiz |
 | 10c | 10 | Wed | IG, FB, LinkedIn | Carousel, 7 slides | 5 Beyond Real Estate | H58 | Business | WAITLIST | Business waitlist (opt-in, not a lead magnet) | Write from hook |  |
 | 11a | 11 | Thu | IG, TikTok, FB, YT Shorts, LinkedIn | Short: live call | 2 Hear It Live | H21 | Agent | DEMO | The Live Line | Write from hook |  |
 | 11b | 11 | Thu | IG, TikTok, FB, YT Shorts | Short: talking head | 4 Straight Answers | H44 | Agent | PLAN | The 7-Day Go-Live Plan | Write from hook |  |
@@ -59,9 +59,9 @@ Start date: [Ray to set: the Monday the calendar starts]. Day 1 is a Monday.
 | 12b | 12 | Fri | IG, TikTok, FB, YT Shorts | Short: screen recording | 3 Inside Ray's Business | H38 | Agent | SCRIPT | The Front Desk Script | Write from hook |  |
 | 12c | 12 | Fri | IG, FB | Carousel, 7 slides | 1 Missed Call | H05 | Agent | AUDIT | The Evening Line Test | Write from hook |  |
 | 13a | 13 | Sat | IG, TikTok, FB, YT Shorts | Short: live call | 2 Hear It Live | H23 | Agent | DEMO | The Live Line | Write from hook |  |
-| 13b | 13 | Sat | IG, TikTok, FB, YT Shorts | Short: talking head | 4 Straight Answers | H42 | Agent | AUDIT | The Evening Line Test | Write from hook | States $300 a month. NEEDS RAY'S OK ON FIGURES |
+| 13b | 13 | Sat | IG, TikTok, FB, YT Shorts | Short: talking head | 4 Straight Answers | H42 | Agent | AUDIT | The Evening Line Test | Write from hook | States $300 a month, and may state the 250 included minutes and the $0.30 extra minute. NEEDS RAY'S OK ON FIGURES |
 | 14a | 14 | Sun | IG, TikTok, FB, YT Shorts | Short: before and after | 1 Missed Call | H13 | Agent | AUDIT | The Evening Line Test | Write from hook |  |
-| 14b | 14 | Sun | IG, TikTok, FB, YT Shorts, LinkedIn | Short: talking head | 5 Beyond Real Estate | H57 | Business | WAITLIST | Business waitlist (opt-in, not a lead magnet) | Write from hook |  |
+| 14b | 14 | Sun | IG, TikTok, FB, YT Shorts, LinkedIn | Short: talking head | 5 Beyond Real Estate | H57 | Business | WAITLIST | Business waitlist (opt-in, not a lead magnet) | Write from hook | Pay-off: mortgage brokers and contractors and renovators now, 3 spots. Lawyers, accountants and insurance on 1 March 2027 |
 | 15a | 15 | Mon | IG, TikTok, FB, YT Shorts, LinkedIn | Short: talking head | 1 Missed Call | H06 | Agent | AUDIT | The Evening Line Test | Write from hook |  |
 | 15b | 15 | Mon | IG, TikTok, FB, YT Shorts | Short: live call | 2 Hear It Live | H16 | Agent | DEMO | The Live Line | Write from hook |  |
 | 15c | 15 | Mon | IG, FB | Carousel, 7 slides | 3 Inside Ray's Business | H35 | Agent | PLAN | The 7-Day Go-Live Plan | Write from hook |  |
@@ -89,19 +89,19 @@ Start date: [Ray to set: the Monday the calendar starts]. Day 1 is a Monday.
 | 24b | 24 | Wed | IG, TikTok, FB, YT Shorts, LinkedIn | Short: talking head | 5 Beyond Real Estate | H54 | Business | WAITLIST | Business waitlist (opt-in, not a lead magnet) | Write from hook |  |
 | 24c | 24 | Wed | IG, FB | Carousel, 7 slides | 4 Straight Answers | H46 | Agent | AUDIT | The Evening Line Test | Write from hook |  |
 | 25a | 25 | Thu | IG, TikTok, FB, YT Shorts, LinkedIn | Short: talking head | 2 Hear It Live | H24 | Agent | DEMO | The Live Line | Write from hook | Dari cut. Ray to review Dari |
-| 25b | 25 | Thu | IG, TikTok, FB, YT Shorts, LinkedIn | Short: talking head | 5 Beyond Real Estate | H60 | Business | WAITLIST | Business waitlist (opt-in, not a lead magnet) | Write from hook | Dari cut. Ray to review Dari |
+| 25b | 25 | Thu | IG, TikTok, FB, YT Shorts, LinkedIn | Short: talking head | 5 Beyond Real Estate | H60 | Business | WAITLIST | Business waitlist (opt-in, not a lead magnet) | Write from hook | Dari cut. Ray to review Dari. Names no language as working: English is live, others are tested on the client's line, Dari is not promised |
 | 25y | 25 | Thu | YouTube | Long-form, 10 to 14 min: Y4 Every question my receptionist asks, and why | 3 Inside Ray's Business | H31 | Agent | SCRIPT | The Front Desk Script | Outline to write | Filmed Tuesday, posts Thursday. Cut 6 shorts for the buffer |
 | 26a | 26 | Fri | IG, TikTok, FB, YT Shorts, LinkedIn | Short: talking head | 1 Missed Call | H12 | Agent | AUDIT | The Evening Line Test | Write from hook |  |
 | 26b | 26 | Fri | IG, TikTok, FB, YT Shorts | Short: screen recording | 2 Hear It Live | H26 | Agent | SCRIPT | The Front Desk Script | Write from hook |  |
 | 26c | 26 | Fri | IG, FB | Carousel, 7 slides | 2 Hear It Live | H19 | Agent | DEMO | The Live Line | Write from hook |  |
-| 27a | 27 | Sat | IG, TikTok, FB, YT Shorts | Short: live call | 3 Inside Ray's Business | H36 | Agent | DEMO | The Live Line | Write from hook | NOT PUBLISHABLE YET: languages the voice agent handles. Dari line available. Ray to review Dari |
-| 27b | 27 | Sat | IG, TikTok, FB, YT Shorts | Short: talking head | 4 Straight Answers | H47 | Agent | PLAN | The 7-Day Go-Live Plan | Write from hook | NOT PUBLISHABLE YET: supported CRMs |
+| 27a | 27 | Sat | IG, TikTok, FB, YT Shorts | Short: live call | 3 Inside Ray's Business | H36 | Agent | DEMO | The Live Line | Write from hook | NOT PUBLISHABLE YET: needs a Dari test call on Ray's own line. The AI is not promised in Dari. Dari line available. Ray to review Dari |
+| 27b | 27 | Sat | IG, TikTok, FB, YT Shorts | Short: talking head | 4 Straight Answers | H47 | Agent | PLAN | The 7-Day Go-Live Plan | Write from hook | NOT PUBLISHABLE YET: the CRM push is not verified. Needs one real test call into each CRM named |
 | 28a | 28 | Sun | IG, TikTok, FB, YT Shorts | Short: talking head | 3 Inside Ray's Business | H37 | Agent | PLAN | The 7-Day Go-Live Plan | Write from hook | NOT PUBLISHABLE YET: real number from Ray Homes |
 | 28b | 28 | Sun | IG, TikTok, FB, YT Shorts, LinkedIn | Short: talking head | 5 Beyond Real Estate | H55 | Business | WAITLIST | Business waitlist (opt-in, not a lead magnet) | Write from hook |  |
 | 29a | 29 | Mon | IG, TikTok, FB, YT Shorts, LinkedIn | Short: live call | 2 Hear It Live | H27 | Business | WAITLIST | Business waitlist (opt-in, not a lead magnet) | Write from hook |  |
 | 29b | 29 | Mon | IG, TikTok, FB, YT Shorts | Short: talking head | 4 Straight Answers | H48 | Agent | PLAN | The 7-Day Go-Live Plan | Write from hook | NOT PUBLISHABLE YET: Founding 10 terms approved |
-| 29c | 29 | Mon | IG, FB, LinkedIn | Carousel, 7 slides | 5 Beyond Real Estate | H59 | Business | WAITLIST | Business waitlist (opt-in, not a lead magnet) | Write from hook |  |
-| 30a | 30 | Tue | IG, TikTok, FB, YT Shorts, LinkedIn | Short: talking head | 5 Beyond Real Estate | H59 | Business | WAITLIST | Business waitlist (opt-in, not a lead magnet) | Write from hook |  |
+| 29c | 29 | Mon | IG, FB, LinkedIn | Carousel, 7 slides | 5 Beyond Real Estate | H59 | Business | WAITLIST | Business waitlist (opt-in, not a lead magnet) | Write from hook | H59 reworded: who can buy today, and who goes on the list |
+| 30a | 30 | Tue | IG, TikTok, FB, YT Shorts, LinkedIn | Short: talking head | 5 Beyond Real Estate | H59 | Business | WAITLIST | Business waitlist (opt-in, not a lead magnet) | Write from hook | H59 reworded: who can buy today, and who goes on the list |
 | 30b | 30 | Tue | IG, TikTok, FB, YT Shorts | Short: talking head | 3 Inside Ray's Business | H39 | Agent | PLAN | The 7-Day Go-Live Plan | Write from hook |  |
 
 ## Totals
@@ -114,14 +114,15 @@ Start date: [Ray to set: the Monday the calendar starts]. Day 1 is a Monday.
 
 | Row | Hook | What is missing |
 |---|---|---|
-| 13b | H42 | Ray's OK on stating the $300 a month Founding 10 price |
-| 27a | H36 | [Ray to confirm: which languages the voice agent handles today] |
-| 27b | H47 | [Ray to confirm: which CRMs, if any, are supported at launch] |
+| 13b | H42 | Ray's OK on the figures as written in the piece. The $300 price, the 250 included minutes and the $0.30 extra minute are approved by Ray, 2026-11-15 |
+| 27a | H36 | A Dari test call on Ray's own line. The AI is not promised in Dari. [Ray to run: a Dari test call on his own line] |
+| 27b | H47 | The CRM wording is approved by Ray, 2026-11-15. The connection method is not verified: one real test call into each CRM named, before filming |
 | 28a | H37 | [Ray to add: real number from Ray Homes] |
 | 29b | H48 | Nothing more on terms: the Founding 10 terms in `offer.md` section 6 are approved by Ray, 2026-11-15 |
 | 6b | H29 | Ray's own call log with names hidden, or film it as a live demonstration |
-| Every DEMO row | | [Ray to add: demo line number, if Ray wants it public] |
+| Every DEMO row | | [Ray to add: demo phone number]. The same number goes on the sales page |
 | Every Business row | | [Ray to confirm: waitlist opt-in form link] |
+| 4b | H51 | The close of script S08 rewritten for the 3 founding spots |
 
 ## If a day is missed
 

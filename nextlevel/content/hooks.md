@@ -70,7 +70,7 @@ Ten hooks also carry a Dari line. Each is marked **Ray to review Dari**.
 | H33 | I did not want software. I wanted my calls answered. There is a difference. | A | Talking head |
 | H34 | Twelve years, about 50 deals a year, and the thing I changed this year was who answers the phone. | A | Talking head |
 | H35 | Here is what I let the AI do on my line, and what I never let it do. | A | Talking head |
-| H36 | I work in English and Dari. Here is what happens when a caller prefers Dari. [Ray to confirm: which languages the voice agent handles today] | A | Live call |
+| H36 | I work in English and Dari. Here is what happens when a caller prefers Dari. [Ray to run: a Dari test call on his own line before this is filmed] | A | Live call |
 | H37 | An agent asked me what this did for my business. Here is the honest answer. [Ray to add: real number from Ray Homes] | A | Talking head |
 | H38 | This is what a call summary looks like on my phone, and what I do with it in the first five minutes. | A | Screen recording |
 | H39 | People ask if this replaces an assistant. Here is how I think about it. | A | Talking head |
@@ -79,6 +79,9 @@ Ten hooks also carry a Dari line. Each is marked **Ray to review Dari**.
 
 - H28: «من یک بروکر فعال هستم. این سیستم را اول برای تلفن خودم ساختم.»
 - H36: «من به انگلیسی و دری کار می‌کنم. ببینید وقتی کسی دری را ترجیح می‌دهد چه می‌شود.»
+
+Notes for the desk:
+- H36 is not publishable yet. The round 3 wording, approved by Ray, 2026-11-15: English is live today, and the AI is not promised in Dari. The piece can be filmed only after a Dari test call on Ray's own line. It shows what happened on that call and makes no wider claim. If the test is not run, the pay-off is the honest version: Ray speaks Dari himself, the AI is not promised in Dari, and any language is tested on the client's own line with no charge if it does not handle their callers to their standard.
 
 ## Pillar 4: Straight Answers
 
@@ -102,13 +105,14 @@ Ten hooks also carry a Dari line. Each is marked **Ray to review Dari**.
 
 Notes for the desk:
 - H41 is perspective only. The piece says the rules differ by province and state and that Ray confirms them for each client's location. It gives no legal advice. [Ray to confirm with counsel]
-- H42 states a price. $300 a month is the Founding 10 price in `offer.md`. The approval message must list it under "NEEDS RAY'S OK ON FIGURES".
-- H47 cannot be filmed until Ray answers: [Ray to confirm: which CRMs, if any, are supported at launch]
+- H42 states a price. $300 a month is the Founding 10 price in `offer.md`. The piece may add the round 3 usage line, approved by Ray, 2026-11-15: the $300 includes 250 AI call minutes a month, extra minutes are $0.30 CAD each, and the client sets the cap. It may say there is no cheaper plan today. The approval message must list every figure under "NEEDS RAY'S OK ON FIGURES".
+- H44 may add the round 3 line, approved by Ray, 2026-11-15: Next Level never recruits a client to Ray's brokerage or team.
+- H47 uses the round 3 CRM wording, approved by Ray, 2026-11-15: a text and an email summary for every call, a one-way push through Zapier for Follow Up Boss and BoldTrail (kvCORE), Lofty and Sierra Interactive tested in set-up, and the summary for everything else. It never says "integrates" or "syncs". [not verified: the connection method came from search-result text. The piece is not publishable until one real test call has reached each CRM it names]
 - H48 depends on the month-to-month terms in `offer.md` section 6. Those terms are approved by Ray, 2026-11-15. The piece states them only in the words of that section.
 
 ## Pillar 5: Beyond Real Estate
 
-Waitlist only. No price, no sale, no checkout. One industry per piece.
+One industry per piece. Approved by Ray, 2026-11-15: 3 of the 10 founding spots are open now to mortgage brokers and to contractors and renovators, so H51 and H52 may send the viewer to the quiz and may state the founding price in the words of `offer.md` section 6. Every other hook in this pillar is waitlist only: no sale and no checkout. For real estate lawyers, accountants and insurance (H53, H54, H55) the piece may state the opening date, 1 March 2027, and the price, $500 setup plus $400 a month.
 
 | ID | Hook | Audience | Best format |
 |---|---|---|---|
@@ -120,13 +124,18 @@ Waitlist only. No price, no sale, no checkout. One industry per piece.
 | H56 | You run a local business. Call your own number tonight at 8. Tell me what you hear. | B | Talking head |
 | H57 | I built this for real estate agents. Here is who it opens to next, and in what order. | B | Talking head |
 | H58 | A customer called you at lunch and left no message. Where did they call next? | B | Carousel |
-| H59 | Not an agent? You cannot buy this yet. Here is how to get on the list. | B | Talking head |
+| H59 | Not an agent? Here is who can buy this today, and who goes on the list. | B | Talking head |
 | H60 | Your customers call in their own language. Who answers them? | B | Talking head |
 
 **Dari lines (Ray to review Dari)**
 
 - H56: «شما یک کار و بار محلی دارید. امشب ساعت هشت به نمبر خودتان زنگ بزنید و ببینید چه می‌شنوید.»
 - H60: «مشتریان شما به زبان خودشان زنگ می‌زنند. کی جواب‌شان را می‌دهد؟»
+
+Notes for the desk:
+- H57 pays off with the approved order: mortgage brokers and contractors and renovators now, within 3 founding spots. Real estate lawyers, accountants and insurance on 1 March 2027. Any other business: the waitlist, with no date.
+- H59 was reworded on 2026-11-15, because mortgage brokers and contractors and renovators can now buy. The pay-off is the same list as H57.
+- H60 names no language. The pay-off is the round 3 language wording: English is live today, any other language is tested on the client's own line, and Dari, Farsi, Punjabi, Mandarin, Cantonese, Urdu and Arabic are not promised.
 
 ## Count
 

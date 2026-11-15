@@ -2,7 +2,7 @@
 
 Draft for Ray to approve. 14 short scripts (2 a day for 7 days), 2 long-form YouTube outlines, 3 carousels.
 
-Every piece goes to Slack #agent-marketing for Ray's check mark before it posts. Perspective from a working broker, not legal or financial advice.
+Every piece goes to Slack #nextlevel-approvals for Ray's check mark before it posts. Perspective from a working broker, not legal or financial advice.
 
 ## Before filming: rules for every piece
 

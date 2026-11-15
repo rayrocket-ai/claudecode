@@ -15,13 +15,14 @@ Draft for Ray to approve. Four sequences, three emails each. Each email is under
 
 ## Terms used in these emails
 
-Set 2026-11-15 after the persona test; Ray to confirm. The round 2 offer (`../testing/offer-pitch-v2.md`) is the working offer. The assistant set these terms after the persona test, under Ray's instruction to fix the offer. Ray has not approved them yet. Only the emails that already touched one of these topics were changed, and each is still under 120 words. Full list: `../offer.md` section 6.
+The round 3 offer (`../testing/offer-pitch-v3.md`) is the working offer. Approved by Ray, 2026-11-15. Only the emails that already touched one of these topics were changed, and each is still under 120 words. Full list: `../offer.md` section 6.
 
-- Usage: phone, text and AI minutes are billed at cost with no markup for founding clients, up to a monthly cap the client sets.
-- The demo: the agent dials the live system themselves on the call.
+- Usage (Approved by Ray, 2026-11-15): the $300 includes 250 AI call minutes a month. Extra minutes are $0.30 CAD each, up to a monthly cap the client sets. An email states no other usage figure.
+- The first 10 are founding clients: 7 real estate agents, and 3 mortgage brokers or contractors and renovators (Approved by Ray, 2026-11-15). The emails say "10 founding clients".
+- The demo: the buyer dials the live system themselves. Once Ray supplies the demo number, it is on the page before the call.
 - The summary of each call arrives by text and by email.
 
-The other round 2 terms (languages, callers and data, CRM, brokerage, urgent calls, forwarding, teams, other businesses, Canada and the US) are not in these emails. They are answered on the sales page and on the call.
+The other round 3 terms (languages, callers and data, CRM, brokerage, urgent calls, forwarding, teams, other businesses, Canada and the US list) are not in these emails. They are answered on the sales page and on the call. These emails go to people in Canada who took the quiz. A US contact gets the US list message, not these.
 
 ## Timing
 
@@ -101,7 +102,7 @@ On my own line, an AI receptionist answers the calls I cannot take. It tells the
 
 I have worked in GTA real estate for 12+ years. I will show you my own numbers on the call. [Ray to add: real number from Ray Homes]
 
-I am setting it up for 10 agents first, at $300 a month. Usage is at cost with no markup, up to a cap you set. It is live in 7 days.
+I am setting it up for 10 founding clients first, at $300 a month. That includes 250 AI call minutes a month. It is live in 7 days.
 
 Book 15 minutes, dial it yourself, and I will tell you plainly if it fits: {{custom_values.nl_booking_link}}
 
@@ -173,7 +174,7 @@ That part is ready today. An AI receptionist answers every call you cannot take,
 
 I have worked in GTA real estate for 12+ years. I will show you my own numbers on the call. [Ray to add: real number from Ray Homes]
 
-I am setting it up for 10 agents first, at $300 a month, live in 7 days. Usage is at cost with no markup, up to a cap you set. Founders are first in line for the review system.
+I am setting it up for 10 founding clients first, at $300 a month, live in 7 days. That includes 250 AI call minutes a month. Founders are first in line for the review system.
 
 Book your call here: {{custom_values.nl_booking_link}}
 
@@ -245,7 +246,7 @@ So I start with the phone. An AI receptionist answers every call I cannot take, 
 
 I have worked in GTA real estate for 12+ years. I will show you my own numbers on the call. [Ray to add: real number from Ray Homes]
 
-I am setting it up for 10 agents first, at $300 a month, live in 7 days. Usage is at cost with no markup, up to a cap you set. Founders are first in line when the reactivation campaign opens.
+I am setting it up for 10 founding clients first, at $300 a month, live in 7 days. That includes 250 AI call minutes a month. Founders are first in line when the reactivation campaign opens.
 
 Book your call here: {{custom_values.nl_booking_link}}
 
@@ -317,7 +318,7 @@ If an ad works and nobody answers, you paid for a lead who can call someone else
 
 I have worked in GTA real estate for 12+ years. I will show you my own numbers on the call. [Ray to add: real number from Ray Homes]
 
-I am setting it up for 10 agents first, at $300 a month, live in 7 days. Usage is at cost with no markup, up to a cap you set. Founders are first in line when ad management opens.
+I am setting it up for 10 founding clients first, at $300 a month, live in 7 days. That includes 250 AI call minutes a month. Founders are first in line when ad management opens.
 
 Book your call here: {{custom_values.nl_booking_link}}
 
@@ -341,15 +342,15 @@ When: the same day as a 15-minute call that did not end in a yes. Only when the 
 
 Hi {{contact.first_name}},
 
-Here is the summary you asked for.
+Here is your summary.
 
 What you told me: {{their words from question 1}}. What you want: {{their words from question 5}}.
 
-What Next Level Answer does: it answers the calls you cannot take, asks your questions, books the appointment and sends you a summary by text and email. We set it up, live in 7 days from the day we have your details.
+What Next Level Answer does: it answers the calls you cannot take, asks your questions, books the appointment, and texts and emails you a summary. We set it up, live in 7 days from the day we have your details.
 
-The founding price is $300 a month, no setup fee, month to month. Usage is at cost with no markup, up to a monthly cap you set.
+The founding price is $300 a month, no setup fee, month to month. It includes 250 AI call minutes a month. Extra minutes are $0.30 each, up to a cap you set.
 
-Our next step is booked for {{next step date and time}}. Test the demo line: [Ray to add: demo line number]
+Our next step is booked for {{next step date and time}}. Test the demo line: [Ray to add: demo phone number]
 
 Ray
 
@@ -389,7 +390,7 @@ Hi {{contact.first_name}},
 
 It was good to meet you at {{event name}} yesterday. You mentioned {{what they said about their business}}.
 
-Here is the number I told you about. It is the AI receptionist on my own line: [Ray to add: demo line number]. Call it and try to trip it up.
+Here is the number I told you about. It is the AI receptionist on my own line: [Ray to add: demo phone number]. Call it and try to trip it up.
 
 If you like what you hear, we will take 15 minutes and I will show you how it would work for your business.
 
@@ -407,4 +408,4 @@ No text follow-up is written here. Texts need their own consent (the second chec
 
 ## Next step
 
-Ray reads all 12, fills or removes each proof bracket, and marks each email approve or change. Ray also confirms or changes the terms under "Terms used in these emails". The three one-off emails added on 2026-11-15 need the same review.
+Ray reads all 12, fills or removes each proof bracket, and marks each email approve or change. The terms under "Terms used in these emails" are approved by Ray, 2026-11-15, as part of the round 3 offer. The three one-off emails added on 2026-11-15 need the same review.

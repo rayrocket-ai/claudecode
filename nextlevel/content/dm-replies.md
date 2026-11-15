@@ -18,25 +18,30 @@ Draft for Ray to approve.
 
 ## Terms a reply may state
 
-Set 2026-11-15 after the persona test; Ray to confirm. The round 2 offer (`../testing/offer-pitch-v2.md`) is the working offer. The assistant set these terms after the persona test, under Ray's instruction to fix the offer. Ray has not approved them yet. A reply states a term only when the person asks about that topic, one term per message. Full wording: `../offer.md` section 6.
+The round 3 offer (`../testing/offer-pitch-v3.md`) is the working offer. Approved by Ray, 2026-11-15. A reply states a term only when the person asks about that topic, one term per message. Full wording: `../offer.md` section 6.
 
-- Usage: phone, text and AI minutes are billed at cost with no markup for founding clients, on top of the $300. The client sets a monthly spending cap before go-live. Ray shows the real usage bill for his own line on the call.
-- The demo: on the call the agent dials the live system themselves.
-- Languages: English at launch. Any other language is tested on the client's own line during setup. No charge if it is not good enough for them.
-- Callers and data: no one at Next Level or Ray Homes contacts a client's callers or uses their contacts, and that is in the agreement. The transcript stays in the client's own account. Audio recording is off unless the client turns it on, and the AI announces it when it is on. Contacts and transcripts are exported and deleted when the client leaves.
-- CRM: every call arrives as a text and an email summary. A direct push is confirmed for the specific CRM on the call, before payment.
+- Usage (Approved by Ray, 2026-11-15): the $300 includes 250 AI call minutes a month, the phone number and the summary texts, up to 500 text segments. Extra minutes are $0.30 CAD each. A part minute counts as a minute, and unused minutes do not carry over. The client sets a monthly cap on extra minutes before go-live, and it can be zero. Minutes used are on every invoice.
+- The demo: a demo number is on the page, once Ray supplies it. On the call the buyer dials the live system again.
+- Languages: English is live today. Any other language is tested on the client's own line during set-up. No charge if it does not handle their callers to their standard. Dari, Farsi, Punjabi, Mandarin, Cantonese, Urdu and Arabic are not promised.
+- Callers and data: no one at Next Level or Ray Homes contacts a client's callers or uses their contacts, and that is in the agreement. The people who can read a transcript are the client, and the set-up team only during set-up or a fix the client asked for. Audio recording is off unless the client turns it on, and the AI announces it when it is on. Contacts and transcripts are exported and deleted within 30 days of leaving. The account runs on HighLevel, in the United States, not in Canada.
+- No recruiting: Next Level never recruits a client to Ray's brokerage or team.
+- CRM: every call arrives as a text and an email summary. For Follow Up Boss and BoldTrail (kvCORE) there is a one-way push through Zapier. Lofty and Sierra Interactive are tested during set-up. Any other CRM gets the summary.
 - Brokerage: a one-page summary for the broker of record. First month back if the brokerage says no within 14 days.
 - Urgent calls: the AI offers a callback and alerts the client by text.
 - Forwarding: only when the client does not answer. Switched off the day they cancel.
-- Teams: one subscription covers one business line. A team is quoted on the call.
-- Other businesses: Answer opens after the first 10 agents are live, in the order in `offer.md`, from $500 setup plus $400 a month.
-- Where: Canada first. US agents where setup is confirmed for their state on the call.
+- Teams (Approved by Ray, 2026-11-15): one subscription covers one business line. Each extra agent line on the same account is half the monthly price, $150 at the founding price, and adds 125 minutes to a shared pool.
+- Other businesses (Approved by Ray, 2026-11-15): 3 of the 10 founding spots are open now to mortgage brokers and to contractors and renovators, on the same founding terms. Real estate lawyers, accountants and insurance open on 1 March 2027 at $500 setup plus $400 a month, with first notice to the waitlist.
+- Where (Approved by Ray, 2026-11-15): founding clients are in Canada only. US agents can join the US list and are told the opening date and the US dollar price by 1 March 2027.
+- A cheaper plan: there is none today.
+
+**Not verified.** The language list beyond English, the hosting statement and the CRM connection method came from search-result text, not official pages. So did the HighLevel rates behind the bundle. Replies that rely on one carry a `[not verified]` note for Ray below. The note is not sent. Check each one first: `../README.md`, "Verify before publishing".
 
 Links used below:
 - Quiz: [Ray to confirm: quiz page link]
 - 15-minute call: [Ray to confirm: 15-minute call booking link]
-- Demo line: [Ray to add: demo line number, if Ray wants it public]
+- Demo line: [Ray to add: demo phone number]
 - Waitlist form: [Ray to confirm: waitlist opt-in form link]
+- US list form: [Ray to add: US list form link]
 - Audit request form or the details to collect: [Ray to confirm: how an agent asks for the audit, quiz page or a form]
 
 ## Step 0: reply to the comment in public
@@ -126,7 +131,7 @@ One follow-up, 3 days later, then stop:
 Hi {{first name}}, it is Ray. Here is the line. It is my AI receptionist, the same setup I run on my own business. It will tell you it is an AI when it answers.
 
 **2. Resource handoff**
-Number: [Ray to add: demo line number, if Ray wants it public]
+Number: [Ray to add: demo phone number]
 
 Five things to try:
 1. Call as a buyer who wants to see homes next month.
@@ -137,7 +142,7 @@ Five things to try:
 
 It is a demo line. Use a made-up name if you like.
 
-(If Ray has not made the number public: replace this step with "The demo happens on the call. Book 15 minutes and you dial it yourself with me on the line: [Ray to confirm: 15-minute call booking link]" and skip to step 5.)
+(Until Ray supplies the number: replace this step with "The demo happens on the call. Book 15 minutes and you dial it yourself with me on the line: [Ray to confirm: 15-minute call booking link]" and skip to step 5.)
 
 **3. Qualifying question**
 After you call it, tell me one thing: what did it do better or worse than you expected?
@@ -171,19 +176,20 @@ What you supply:
 - Calendar access, Google or Outlook.
 - Your top questions and the answers you want given.
 - What counts as a qualified caller for you, and who gets the text alert when a caller asks for a person.
-- The monthly spending cap you want for usage.
+- The monthly cap on extra minutes you want. It can be zero.
+- The name of your CRM, and the languages your callers use.
 
 What we do:
 - Set up your account and your receptionist with your details.
 - Connect your calendar and the missed-call text-back.
 - Set forwarding so calls reach the receptionist only when you do not answer. You keep your number.
-- Test any language other than English on your own line with you. If it is not good enough for you, you do not go live and you are not charged.
+- Test any language other than English on your own line with you. If it does not handle your callers to your standard, you do not go live and you are not charged.
 - Run test calls with you before anything goes live.
 - Check in with you at day 3 and day 14.
 
 (Send as text until the one-page PDF exists. The day-by-day order is set by Ray: [Ray to confirm: the day-by-day order of the 7-day setup])
 
-Before going live we confirm the call recording and AI disclosure rules for your province or state. That part is not legal advice from me. It is a check we do for every client. [Ray to confirm with counsel]
+Before going live we confirm the call recording and AI disclosure rules for your province. That part is not legal advice from me. It is a check we do for every client. [Ray to confirm with counsel]
 
 **3. Qualifying question**
 Are you a solo agent, or do you have an assistant or a team taking calls with you?
@@ -193,8 +199,8 @@ For any answer:
 That helps. The fastest way to see if this fits is 15 minutes with me. You dial my own receptionist yourself and I walk you through the plan for your setup: [Ray to confirm: 15-minute call booking link]
 
 If they ask the price:
-The first 10 agents pay $300 a month. I will go through what that includes on the call: [Ray to confirm: 15-minute call booking link]
-(Only this price may be stated in a first reply. If they ask about terms: the founding terms in `offer.md` section 6 are approved by Ray, 2026-11-15, and may be given in those exact words: no setup fee for founders, month to month, cancel before the next billing date. If they ask about usage: "Phone, text and AI minutes are billed at cost with no markup for the first 10, on top of the $300. You set a monthly cap before you go live, and I show you the real bill for my own line on the call." The rate per minute is not stated in a DM: [Ray to add: usage rate per minute]. The price after the first 10 is answered on the call, by Ray.)
+The first 10 clients pay $300 a month. That includes 250 AI call minutes a month and your phone number. I will go through the rest on the call: [Ray to confirm: 15-minute call booking link]
+(Only this price may be stated in a first reply. If they ask about terms: the founding terms in `offer.md` section 6 are approved by Ray, 2026-11-15, and may be given in those exact words: no setup fee for founders, month to month, cancel before the next billing date. If they ask about usage, use the "Is usage extra?" reply below. No HighLevel rate is stated in a DM. The price after the first 10 is answered on the call, by Ray.)
 
 **5. If they say no**
 Understood. Keep the plan. If the timing changes, send me a message and we will pick it up from there.
@@ -208,33 +214,39 @@ One follow-up, 3 days later, then stop:
 
 ## Keyword: WAITLIST (business owners outside real estate)
 
-No offer, no checkout and no call invitation for this lane until that industry opens. The one price a reply may state is the starting price: $500 setup plus $400 a month. (Set 2026-11-15 after the persona test; Ray to confirm.)
+Approved by Ray, 2026-11-15. Two groups answer this keyword, and they get different replies.
+
+- Mortgage brokers, and contractors and renovators: 3 of the 10 founding spots are open to them now. They get the quiz and the call, the same as an agent.
+- Real estate lawyers, accountants, insurance and any other business: the waitlist only. No offer, no checkout and no call invitation until their industry opens. The one price a reply may state is $500 setup plus $400 a month, and the one date is 1 March 2027 for real estate lawyers, accountants and insurance.
 
 **1. First reply**
-Hi {{first name}}, it is Ray. Thanks for asking. Today I set this up for real estate agents only. It opens to other businesses once my first 10 agents are live, one industry at a time.
+Hi {{first name}}, it is Ray. Thanks for asking. It depends on your business, so one question first.
 
-**2. Resource handoff**
-To be told when it opens, add yourself to the list here: [Ray to confirm: waitlist opt-in form link]
-You add yourself, so you choose to hear from us. You get first notice when your industry opens. Nothing else.
+**2. Qualifying question**
+What kind of business do you run, and what is your biggest phone problem?
 
-**3. Qualifying question**
-One question now, so I build the right thing: what kind of business do you run, and what is your biggest phone problem?
+**3. Invitation**
+If mortgage broker, or contractor or renovator:
+Good news. 3 of my 10 founding spots are open to your industry now, on the same founding terms as agents: $300 a month, no setup fee, price locked, 250 minutes included. Start with this 6-question quiz: [Ray to confirm: quiz page link]
+(The quiz is worded for agents. Say so if they ask. If the 3 spots are full on that day, say so and offer the waitlist.)
 
-**4. Invitation**
-If mortgage broker:
-Good to know. Mortgage brokers are the first group I open after agents. You will hear from me through the list.
-
-If real estate lawyer, accountant, contractor or insurance broker:
-Thank you. Your industry is on the plan. The order is mortgage brokers, real estate lawyers, accountants, contractors and renovators, then insurance. I cannot give you a date yet. The list is how you will hear.
+If real estate lawyer, accountant or insurance:
+Thank you. Answer opens to your industry on 1 March 2027, at $500 setup plus $400 a month. Add yourself to the list and you get first notice before that date: [Ray to confirm: waitlist opt-in form link]
 
 If another kind of business:
-Thank you. I do not have a date for your industry. If you are on the list, you will hear when that changes.
+Thank you. I do not have a date for your industry. You can add yourself to the list here, and you will hear when that changes: [Ray to confirm: waitlist opt-in form link]
 
 If they turn out to be a real estate agent:
 Then you do not need the waitlist. It is open for agents now. Start with this 6-question quiz: [Ray to confirm: quiz page link]
 
-If they ask the price or ask to buy now:
-The starting price will be $500 setup plus $400 a month. I will not sell it before my first 10 agents are live and your industry opens. The list is the right place for now.
+If they turn out to be in the US:
+Founding clients are in Canada only. You can join the US list here: [Ray to add: US list form link]. By 1 March 2027 everyone on it is told the US opening date and the price in US dollars.
+
+**4. Resource handoff, for the waitlist**
+You add yourself, so you choose to hear from us. You get first notice before your industry opens. Nothing else.
+
+If they ask to buy now and their industry is not open:
+I will not sell it before your industry opens. The list is the right place for now.
 
 **5. If they say no**
 No problem at all. Thanks for watching.
@@ -248,49 +260,63 @@ No follow-up. They were invited once. The list is their choice.
 ## Messages that are not a keyword
 
 **"How much is it?" (from an agent)**
-The first 10 agents pay $300 a month. The best way to see if it is worth it for you is your own line. Want me to test it one evening, free?
+The first 10 clients pay $300 a month. That includes 250 AI call minutes a month and your phone number. The best way to see if it is worth it for you is your own line. Want me to test it one evening, free?
 (If yes, go to AUDIT step 2.)
 
 **"Is usage extra?"**
-Yes, and at cost. Phone, text and AI minutes are billed with no markup for the first 10, on top of the $300. You set a monthly cap before you go live. On the call I show you the real bill for my own line.
+The $300 includes 250 AI call minutes a month, your phone number and the summary texts. Extra minutes are $0.30 each, in Canadian dollars. You set a monthly cap on extra minutes before you go live, and it can be zero. With the cap at zero, the most you can be billed is $300.
+(If they ask about tax: [Ray to confirm: whether HST is added]. [verify in HighLevel: the cap and its stop, before the first client])
+
+**"Is there a cheaper plan?"**
+There is no cheaper plan today. If $300 a month is more than your phone problem is worth, this is not the right service for you yet.
 
 **"Does it speak {{language}}?"**
-English at launch. Any other language we test on your own line, with you, during setup. If it is not good enough for your callers, you do not go live and you are not charged. Which language do your callers use?
-(Note the language for Ray. [Ray to confirm: which languages the voice agent handles today])
+If the language is English:
+Yes. English is live today.
+
+If the language is French, Spanish, Hindi, German, Portuguese, Italian, Dutch, Russian or Japanese:
+The platform lists it. We switch it on at your request and test it on your own line with you first. If it does not handle your callers to your standard, you do not go live and you are not charged.
+([not verified: the language list came from search-result text. Read the Language picker in the account before sending this reply.])
+
+If the language is Dari, Farsi, Punjabi, Mandarin, Cantonese, Urdu or Arabic, or any other:
+It is not promised. If you need it, we check it against the platform's current list and test it on your own line with you during set-up. If it does not handle your callers to your standard, you do not go live and you are not charged.
+(Note the language for Ray. Do not say the AI speaks it.)
 
 **"Will my brokerage allow it?"**
 I will send you a one-page summary to show your broker of record before you sign. If your brokerage says no within 14 days, you get your first month back.
 
 **"I run a team."**
-One subscription covers one business line. For a team routing calls to several agents I quote it on the call. How many agents take calls?
-([Ray to set: team pricing])
+One subscription covers one business line. Each extra agent line on the same account is half the monthly price: $150 a month at the founding price. Each extra line adds 125 minutes, and all lines share one pool of minutes. How many agents take calls?
 
 **"I am in the US. Can I get it?"**
-Canada first. I take US agents into the first 10 only where I can confirm setup for your state on the call. The price is in Canadian dollars. Which state are you in?
-(Note the state for Ray. [Ray to confirm: which US states])
+Not yet. Founding clients are in Canada only. You can join the US list here: [Ray to add: US list form link]. By 1 March 2027 everyone on it is told the US opening date and the price in US dollars.
+(Nothing is sold to a US client before then. No US price is stated.)
 
 **"Is this legal?"**
-The rules on recording calls and on telling callers they are speaking with an AI differ by province and state. We confirm them for your location before you go live. Audio recording is off unless you turn it on, and when it is on the AI says so at the start of the call. I am not giving legal advice here. Where are you based?
+The rules on recording calls and on telling callers they are speaking with an AI differ by province. We confirm them for your location before you go live. Audio recording is off unless you turn it on, and when it is on the AI says so at the start of the call. I am not giving legal advice here. Where are you based?
 (Note the location for Ray. [Ray to confirm with counsel])
 
-**"Will you take my leads?"**
-No. Your callers stay yours. No one at Next Level or Ray Homes contacts your callers or uses your contacts, and that is written in the agreement.
-[Ray to confirm: put this in the client agreement]
+**"Will you take my leads?" or "Will you try to recruit me?"**
+No. Your callers stay yours. No one at Next Level or Ray Homes contacts your callers or uses your contacts, and that is written in the agreement. Next Level never recruits a client to my brokerage or my team.
+[Ray to confirm: put both in the client agreement]
 
 **"Who can read my calls?"**
-Each call is transcribed so you get the summary. The transcript stays in your own account. The people who can read it are you, and the set-up team only while they are setting up or fixing your account. Audio recording is off unless you turn it on.
-(If they ask where it is hosted: [Ray to add: where client data is hosted])
+Each call is transcribed so you get the summary. The people who can read a transcript are you, and the set-up team only while they are setting up your account or fixing something you asked them to fix. Audio recording is off unless you turn it on.
+
+**"Where is my data stored?"**
+Your account runs on HighLevel, a US software company. HighLevel says its infrastructure is in the United States. Your data is not stored in Canada.
+([not verified: the hosting statement came from search-result text. Read HighLevel's security and compliance help page before sending this reply.])
 
 **"Do you have results from other agents?"**
-Not yet. The first 10 are the first, and that is the reason the founding price and the founding terms exist. What I have is my own business, and a line you can call and judge for yourself. Want the number?
+Not yet. The first 10 are the first, and that is the reason for the founding terms: a lower price, no setup fee and a locked price, in return for being first. What I have is my own business, and a line you can call and judge for yourself. Want the number?
 (If yes, go to DEMO step 2.)
 
 **"Does it work with my CRM?"**
-It works beside any CRM from day one: you get every call as a text and an email summary. A direct push into your CRM I confirm for your specific CRM on the call, before you pay. Which CRM do you use?
-(Note the CRM for Ray. Do not promise a direct push in a DM. [Ray to confirm: which CRMs get a direct push])
+It works beside any CRM from day one: you get every call as a text and an email summary. Which CRM do you use?
+(Then, by CRM. Follow Up Boss or BoldTrail (kvCORE): "There is also a one-way push into your CRM through Zapier. No extra charge." Lofty or Sierra Interactive: "Zapier lists the same kind of connection. We test it in your account during set-up week." For those four: "If the push does not work in your account during set-up, you can cancel and you are not charged." Any other CRM: "You get the text and email summary." Do not say "integrates" or "syncs". [not verified: the connection method came from search-result text, and none of the four has been tested])
 
 **A message in Dari**
-Reply in Dari. Every Dari reply is marked "Ray to review Dari" and is sent by Ray himself.
+Reply in Dari. Every Dari reply is marked "Ray to review Dari" and is sent by Ray himself. The reply does not say the AI speaks Dari. It is not promised in Dari.
 
 **A caller, client or member of the public who is not an agent or business owner (for example, someone asking about buying a home)**
 This is a Ray Homes conversation, not a Next Level one. Hand it to Ray the same day. Do not use these scripts.

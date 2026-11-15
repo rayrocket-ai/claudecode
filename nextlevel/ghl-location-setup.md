@@ -58,6 +58,7 @@ Have these ready:
 20. Pick a local number that can do voice and text. Buying a number costs money. Get Ray's yes before clicking buy.
 21. Name the number "Next Level main".
 22. Set where calls forward for now: Ray's phone. The demo voice agent is attached later.
+    - The round 3 offer puts a demo number on the sales page, for a buyer to dial before the call (Approved by Ray, 2026-11-15). The number is still to be supplied. That page line is not published until a demo line exists, answers as an AI and holds no real contacts. [Ray to decide: whether the demo number is this number or a separate one] [Ray to add: demo phone number]
 23. Open "Trust Center" or the messaging registration page. [verify menu name] Read what must be filed before texts can send from this number. Start the registration with the legal business details. Approval can take days.
 24. Do not send any text from this number until registration shows approved.
 
@@ -167,6 +168,7 @@ Paste into one message. No client names, phone numbers or emails.
 | Calendar link (15-minute call) | |
 | Checkout link (Founding 10) | Blocked until Stripe verification |
 | Next Level phone number | |
+| Demo phone number for the sales page (or "not set up yet") | |
 | Sending domain and from address | |
 | Messaging registration status | |
 | NL Demo sub-account created (yes or no) | |

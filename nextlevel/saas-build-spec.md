@@ -39,6 +39,7 @@ It holds:
 - Booking page for the 15-minute call.
 - Checkout page (Stripe). Blocked until Stripe verification.
 - Thank-you page that starts onboarding.
+- Waitlist form and US list form. Each has a consent checkbox that is not pre-ticked.
 
 **The quiz**
 - 6 questions plus a contact step: name, email, biggest problem.
@@ -176,7 +177,7 @@ Start from the existing "John" prompt on HighLevel Voice AI. Turn every client-s
 - Whether Voice AI prompts can read custom values directly, or must be pasted per client: [verify in HighLevel]
 - Whether the voice agent copies inside a snapshot: [verify in HighLevel]
 - Listing lookup through Repliers ("is this home still available?"): needs a custom action from the voice agent to an outside service. [verify in HighLevel] Agent edition only.
-- Dari and other languages: [verify in HighLevel]
+- Languages: English is live today. The other languages offered are the ones in the Language picker on the voice agent. [not verified: the list of French, Spanish, Hindi, German, Portuguese, Italian, Dutch, Russian and Japanese came from search-result text; read the picker in the account] Dari, Farsi, Punjabi, Mandarin, Cantonese, Urdu and Arabic are not promised. Whether the agent can change language by itself in the middle of a call: [verify in HighLevel]
 
 ### Workflows in the snapshot
 
@@ -215,7 +216,7 @@ Added from the course notes, 2026-11-15. Check each line before a workflow goes 
 4. Test the after-hours case: a form filled at 10 PM on a Friday. What does the lead receive, and when?
 5. Open the enrollment history and the execution log. Confirm the contact reached the last step and did not stall at a wait or a branch.
 6. Reply STOP as the sample contact. Confirm every workflow ends.
-7. Run the promise tests in section 13 before any client account goes live, and again after every snapshot change. (Set 2026-11-15 after the persona test; Ray to confirm.)
+7. Run the promise tests in section 13 before any client account goes live, and again after every snapshot change.
 
 ### Review requests: one rule
 
@@ -275,7 +276,7 @@ How to hold the two editions:
 - **PROPOSED, Ray to approve:** one master snapshot with `nl_edition` as the switch, and one small prompt file per industry kept outside the snapshot. Reasoning: one thing to maintain. A fix made once reaches every client.
 - If HighLevel cannot switch stage names or prompts by custom value, fall back to one snapshot per industry, cloned from the master. [verify in HighLevel]
 
-Gate reminder: the business edition is designed here and nothing more. No business sub-account is created for a paying or free client until real estate has paying clients and a repeatable onboarding. Mortgage brokers first.
+Gate reminder, with the exception decided by Ray. Approved by Ray, 2026-11-15: 3 of the 10 founding spots are open now to mortgage brokers and to contractors and renovators, so the mortgage and contractor prompt blocks and stage names are needed before the first of those clients goes live. Real estate lawyers, accountants and insurance open on 1 March 2027. No other business sub-account is created for a paying or free client before its industry opens.
 
 ## 5. Listing data (agent edition only)
 
@@ -289,7 +290,7 @@ Create these in the SaaS configurator. How many plans the configurator allows: [
 
 | SaaS plan in HighLevel | Product | Price | Status |
 |---|---|---|---|
-| NL Answer Founding | Next Level Answer, Founding 10 | $300 a month | Ready to create once Stripe is verified. Cap at 10 sales. |
+| NL Answer Founding | Next Level Answer, Founding 10 | $300 a month, including 250 AI call minutes, the phone number and up to 500 text segments | Ready to create once Stripe is verified. Cap at 10 sales: 7 real estate agents, 3 mortgage brokers or contractors and renovators. |
 | NL Answer | Next Level Answer | $500 setup + $400 a month | Approved by Ray, 2026-11-15 |
 | NL Reviews | Next Level Reviews | $250 setup + $150 a month | Approved by Ray, 2026-11-15 |
 | NL Nurture | Next Level Nurture | $500 setup + $250 a month | Approved by Ray, 2026-11-15 |
@@ -300,34 +301,43 @@ All prices in Canadian dollars. Product names and prices: Approved by Ray, 2026-
 
 - Each plan switches on only the features that rung needs, so a Reviews client does not see the voice agent. [verify in HighLevel]
 - Setup fees: whether the configurator can charge a one-time fee with a plan, or needs a separate Stripe product: [verify in HighLevel]
-- A hard cap of 10 on the founding plan may need to be done by hand (hide the checkout after sale 10). [verify in HighLevel]
+- A hard cap of 10 on the founding plan may need to be done by hand (hide the checkout after sale 10). The split of 7 and 3 is counted by hand too. [verify in HighLevel]
+- Extra agent lines. Approved by Ray, 2026-11-15: $150 a month at the founding price and $200 a month at the standard price, each adding 125 minutes to a shared pool. Whether this is an add-on to a plan or a second plan: [verify in HighLevel]
+- Founding clients are in Canada only. No checkout is shown to a US buyer. (Approved by Ray, 2026-11-15.)
 
 ## 7. Rebilling
 
-| Usage | Rebilled to the client | Markup |
-|---|---|---|
-| Phone (minutes, numbers) | Yes | markup: [Ray to set] |
-| SMS | Yes | markup: [Ray to set] |
-| Email | Yes | markup: [Ray to set] |
-| AI usage (voice minutes, conversation AI, content AI) | Yes | markup: [Ray to set] |
+Approved by Ray, 2026-11-15. Usage with Next Level Answer is a bundle, at the founding price and at the standard price. It replaces every earlier usage rule in this section.
 
+| Usage | What the client pays | Check |
+|---|---|---|
+| AI call minutes, up to 250 a month (plus 125 for each extra agent line) | Included in the monthly price | [verify in HighLevel: a plan with a minute allowance] |
+| AI call minutes past the allowance | $0.30 CAD each, up to the monthly cap the client sets. The cap can be zero. | [verify in HighLevel: fixed-rate rebilling for Voice AI minutes, and whether it can be charged in Canadian dollars] |
+| Phone number | Included | [verify in HighLevel] |
+| Text segments, up to 500 a month | Included | [verify in HighLevel: a plan with a text allowance] |
+| Text segments past 500 a month | Not decided | [Ray to set: text segments past 500] |
+| Email | Not decided | [Ray to set] |
+| Usage on Reviews, Nurture, Ads and Complete | Not decided | [Ray to set: usage terms for rungs 2 to 5] |
+
+- A part minute counts as a minute. Unused minutes do not carry over. Minutes used are shown on each invoice. Build requirements are in section 13.
 - Rebilling needs Stripe connected and a card on file in each sub-account. Blocked until Stripe verification.
-- Each sub-account has a prepaid balance that refills. Set the starting amount and refill amount. [Ray to set: starting balance and refill amount] [verify in HighLevel]
-- For the Founding 10: usage is rebilled at cost with no markup, up to a monthly cap the client sets. (Set 2026-11-15 after the persona test; Ray to confirm.) The markup in the table above applies after the Founding 10. Build requirements are in section 13. The rate per minute as a number, and whether the margin at $300 is acceptable: [Ray to add: usage rate per minute] [Ray to confirm: margin at $300 with usage at cost]
-- Tell every client in writing, before they pay, what is rebilled and how.
+- Each sub-account has a prepaid balance that refills. With a bundle, decide whether the client sees a balance at all. [Ray to set: starting balance and refill amount] [verify in HighLevel]
+- The voice on this plan is one of the lower-cost voices. The premium voice that the cost table in section 13 excludes is not used on this plan.
+- HighLevel's own rates are never quoted to a buyer as Next Level's rate. The buyer's number is the bundle.
+- Tell every client in writing, before they pay, what is included and what an extra minute costs.
 
 ## 8. The 9-step onboarding checklist
 
 PROPOSED, Ray to approve. Goal: live in 7 days. The live-in-7-days commitment itself is approved by Ray, 2026-11-15: live within 7 days of the client supplying everything needed, or the first month is not charged (once per client, first month only, not for carrier or registration delays). Feedback calls at day 14 and day 30 are also approved for founders.
 
-1. **Payment and welcome.** Payment received. Welcome email sent with the intake form and the onboarding call link. Stage moves to Won, then Onboarding. Added from the course notes, 2026-11-15: the welcome email also carries one short welcome video (what happens in the 7 days, what the form asks, how to reach us). Ray chose an AI-made video, 2026-11-15. The script is in `onboarding/welcome-video-script.md`, DRAFT for Ray's approval. PROPOSED, Ray to approve: the client agreement is accepted before work starts [Ray to confirm with counsel: the client agreement].
-2. **Intake form back.** Business details, hours, areas, top questions, who gets hand-offs, calendar, number to forward. The 7 days start here.
+1. **Agreement, payment and welcome.** Approved by Ray, 2026-11-15: the client gets a written agreement before payment. It names the registered business and its address, and the set-up team. [Ray to confirm with counsel: the client agreement] [Ray to confirm: business name and mailing address for Next Level] [Ray to add: names of the set-up team] Then payment is received. Welcome email sent with the intake form and the onboarding call link. Stage moves to Won, then Onboarding. Added from the course notes, 2026-11-15: the welcome email also carries one short welcome video (what happens in the 7 days, what the form asks, how to reach us). Ray chose an AI-made video, 2026-11-15. The script is in `onboarding/welcome-video-script.md`, DRAFT for Ray's approval.
+2. **Intake form back.** Business details, hours, areas, top questions, who gets hand-offs, calendar, number to forward, the monthly cap on extra minutes (it can be zero), the name of their CRM and the languages their callers use. The 7 days start here.
 3. **Sub-account cloned.** New sub-account created from the Next Level snapshot. Client user added. The client user sees the features of the rung they bought and nothing half-built. They are told in writing what else exists and when it opens. The client connects their own Google, Facebook and Instagram accounts while logged in as themselves. Next Level never asks for or stores a client's passwords. (Added from the course notes, 2026-11-15.)
 4. **Custom values filled.** Every `nl_` value entered and read back.
 5. **Phone ready.** Number bought or forwarding set from the client's current number. Messaging registration filed if required.
 6. **Calendar connected.** Client's calendar linked. A test booking made and removed.
-7. **Voice agent set.** Prompt slots filled. AI disclosure line and recording line confirmed for the client's province or state. [Ray to confirm with counsel] Internal test calls done.
-8. **Client test and sign-off.** The client calls their own line, hears the agent, asks for changes, approves.
+7. **Voice agent set.** Prompt slots filled. AI disclosure line and recording line confirmed for the client's province. [Ray to confirm with counsel] Internal test calls done. If the client's CRM is Follow Up Boss, BoldTrail (kvCORE), Lofty or Sierra Interactive, the client authorises the Zapier connection and a test record is sent. If that push does not work, the client can cancel and is not charged.
+8. **Client test and sign-off.** The client calls their own line, hears the agent, asks for changes, approves. Any language other than English is tested here, on the client's own line, with the client. If it does not handle their callers to their standard, the account does not go live and no charge is made.
 9. **Go live.** Forwarding on. Missed-call text-back on. Client logged into the app. Day 3 and day 14 checks booked. Stage moves to Live.
 
 ## 9. Day 3 and day 14 checks
@@ -354,6 +364,7 @@ Set these as internal notifications to Ray and Diana.
 
 - No calls reaching the agent in [Ray to set: threshold] days. Forwarding may be off.
 - Prepaid balance low or card declined.
+- A client's minutes reach the allowance (250, plus 125 for each extra line), or reach the cap they set.
 - A spike in calls marked "needs a human".
 - Text or email delivery failing.
 - Client has not logged in for [Ray to set: threshold] days.
@@ -394,58 +405,103 @@ No targets are set here beyond the ones in the Blueprint: 10 paying agents by en
 
 ## 13. Promises the build must keep
 
-Set 2026-11-15 after the persona test; Ray to confirm. The round 2 offer (`testing/offer-pitch-v2.md`) is the working offer. The assistant set these terms after the persona test, under Ray's instruction to fix the offer. Ray has not approved them yet. Each term is a promise made to a buyer, so each one is a build requirement here. Full wording: `offer.md` section 6.
+The round 3 offer (`testing/offer-pitch-v3.md`) is the working offer. Approved by Ray, 2026-11-15. Each term is a promise made to a buyer, so each one is a build requirement here. Full wording: `offer.md` section 6.
 
-A promise marked `[verify in HighLevel]` depends on the platform. If the check comes back "no", the promise is kept by hand with a written procedure, or the wording in `offer.md` changes before anyone is sold on it. No client goes live on a promise that has not been checked.
+Ray approved the offer. The platform has not been checked against it. A promise marked `[verify in HighLevel]` depends on the platform. If the check comes back "no", the promise is kept by hand with a written procedure, or the wording in `offer.md` changes before anyone is sold on it. No client goes live on a promise that has not been checked.
 
 | # | Promise | What the build must do | Check |
 |---|---|---|---|
-| 1 | Usage at cost, no markup, for founders | Rebilling for the NL Answer Founding plan is set to pass usage through with no markup on phone, text and AI minutes. The client can see their usage in their own account. | [verify in HighLevel: rebilling with no markup on one plan while other plans carry a markup] |
-| 2 | Client-set monthly cap, with a stop and an alert | A per-account spending cap, entered at intake and stored as `nl_usage_cap`. When usage reaches the cap, the AI stops taking calls, the client is alerted by text and email, and calls ring through to the client's own phone or voicemail as they did before. | [verify in HighLevel: per-account spending cap and stop] |
-| 3 | Ray's own bill shown on the call | The usage and billing view for the Ray Homes account can be shown on a shared screen with no caller details in view. | [verify in HighLevel] |
-| 4 | Dial the live system on the call | A demo line that is always on, answers as an AI, and holds no real contacts. It is tested before every sales call. | [Ray to add: demo line number] |
-| 5 | English at launch, other languages tested on the client's line | Onboarding step 7 gains a language test: the client calls their own line in each language their callers use and signs off, or the account does not go live and no charge is made. `nl_languages` lists only languages that passed. | [verify in HighLevel: languages the voice agent supports] |
-| 6 | No contact with a client's callers | No agency-level workflow, campaign or list reads a client sub-account's contacts. Nothing is copied from a client account into the Next Level or Ray Homes accounts. The clause is in the client agreement. | [Ray to confirm with counsel: the client agreement] |
-| 7 | The transcript stays in the client's account. Staff read it only during setup or a fix | Staff reach a client account through a named user with the lowest role that does the job. Access is opened for setup or for a fix the client asked for, then removed. Every access is logged with the date and the reason. | [verify in HighLevel: access control for staff, per sub-account, with a log] |
-| 8 | Transcripts kept only while the client stays | A stated retention rule for transcripts and call summaries in each account, and a way to delete them. | [verify in HighLevel: transcript retention] [Ray to add: where client data is hosted] |
-| 9 | Audio recording off by default | Call recording is off in the snapshot and in every new account. Turning it on is the client's choice, made in writing. | [verify in HighLevel: recording off by default] |
-| 10 | Recording announced when on | When recording is on, `nl_recording_line` is filled and the AI says it at the start of every call. When recording is off, the line is empty and nothing is recorded. | [Ray to confirm with counsel] |
-| 11 | Export and deletion on leaving | An offboarding procedure: export contacts and transcripts to the client, confirm they received the file, delete both from the account, then close the account. | [verify in HighLevel: export and deletion] |
-| 12 | Summary by text and by email | The "AI call finished" workflow sends the summary to the client by text and by email after every call. | Test call |
-| 13 | Direct CRM push confirmed before payment | A written list of the CRMs with a tested push, kept current. A CRM is on the list only after a test record arrived in it. Anything else gets the text and email summary. | [verify in HighLevel: outbound webhooks or integrations] [Ray to confirm: which CRMs get a direct push] |
-| 14 | One-page brokerage summary, first month back if the brokerage says no within 14 days | The one-page summary exists as a file. A refund procedure exists for the first month and is logged on the contact. | [Ray to confirm: the day the 14 days are counted from] |
-| 15 | Urgent-call callback and text alert | When a caller asks for a person or the call is urgent, the AI offers a callback, the "Needs a human" workflow texts the client at once, and a task is created. The copy promises a callback and an alert. It does not promise a live transfer, so `nl_transfer_number` is used only where a transfer has been tested. | Test call |
-| 16 | Forwarding only when unanswered, including when the phone is off | Forwarding is set as conditional: no answer, busy and unreachable. It is never set to forward every call. | [verify in HighLevel: call forwarding conditions] [verify with the client's carrier] |
-| 17 | Forwarding off on the day of cancelling | The offboarding procedure removes forwarding on the cancel date and a test call confirms the client's phone rings as before. | Test call |
-| 18 | One subscription, one business line | One sub-account and one number per subscription. Routing to several agents is built only after a team quote is accepted. | [verify in HighLevel: routing one line to several users] [Ray to set: team pricing] |
-| 19 | Other businesses after the first 10 agents are live | The waitlist form has a consent box that is not pre-ticked and one question: industry and biggest phone problem. No checkout exists for a non-agent plan until the industry opens. | Form test |
-| 20 | Canada first, US confirmed per state | Before a US client is accepted: a number can be bought for their state, text registration can be filed, and the recording and AI disclosure rules are confirmed for that state. | [verify in HighLevel] [Ray to confirm with counsel] [Ray to confirm: which US states] |
-| 21 | Registered name and address on the agreement | The agreement and every footer carry the registered business name and address. | [Ray to confirm: business name and mailing address for Next Level] |
+| 1 | The bundle: the monthly price includes 250 AI call minutes, the phone number and up to 500 text segments | The NL Answer Founding plan and the NL Answer plan each carry the allowance. Usage inside it is not billed to the client. The summary and alert texts are kept short enough that a normal month stays inside 500 segments. | [verify in HighLevel: a plan with a minute and text allowance, and what the client sees] |
+| 2 | Extra minutes are $0.30 CAD each, at the founding price and at the standard price | Minutes past the allowance are billed at a fixed rate of $0.30 CAD, not at a percentage of cost. | [verify in HighLevel: fixed-rate rebilling per Voice AI minute, in Canadian dollars] |
+| 3 | The cap: the client sets a monthly cap on extra minutes, and it can be zero. The system stops and alerts the client | The cap is entered at intake and stored as `nl_usage_cap`, in minutes. When the allowance plus the cap is used, the AI stops taking calls, the client is alerted by text and email, and calls ring through to the client's own phone or voicemail as they did before. With the cap at zero the bill cannot pass the monthly price. | [verify in HighLevel: a per-account minute cap with a stop. No source confirmed this setting exists. Must be tested before the first client] |
+| 4 | The shared team pool: each extra agent line is half the monthly price ($150 founding, $200 standard) and adds 125 minutes, and all lines on the account share one pool | One account holds every line. The allowance is 250 plus 125 for each extra line, stored as `nl_minutes_included`. Minutes are counted across all lines against that one figure. | [verify in HighLevel: several numbers or agents in one sub-account counted against one allowance] |
+| 5 | Minute rounding: a part minute counts as a minute, and unused minutes do not carry over | The minute count on the client's statement rounds each call up to the next full minute. The count returns to zero at each billing date. | [verify in HighLevel: how call length is rounded in the usage report, and when the count resets] |
+| 6 | Invoice display: minutes used are shown on each invoice | Each invoice, or a statement sent with it, shows minutes included, minutes used and extra minutes billed. | [verify in HighLevel: whether the invoice can show minutes used] |
+| 7 | Ray's own usage shown on the call | The usage view for the Ray Homes account can be shown on a shared screen with no caller details in view. | [verify in HighLevel] |
+| 8 | A demo number on the page before the call, and a live dial on the call | A demo line that is always on, answers as an AI, and holds no real contacts. It is tested before every sales call. The page line is not published until the number exists. | [Ray to add: demo phone number] |
+| 9 | A written agreement before payment that names the registered business | The agreement is sent and accepted before the checkout link. It names the registered business and its address, and the set-up team. Every footer carries the same name and address. | [Ray to confirm: business name and mailing address for Next Level] [Ray to add: names of the set-up team] [Ray to confirm with counsel: the client agreement] |
+| 10 | English live today. A listed language is switched on at the client's request and tested first. Dari, Farsi, Punjabi, Mandarin, Cantonese, Urdu and Arabic are not promised | Onboarding step 8 holds the language test: the client calls their own line in each language their callers use and signs off, or the account does not go live and no charge is made. `nl_languages` lists only languages that passed. | [verify in HighLevel: the Language picker list] [not verified: the language list came from search-result text] |
+| 11 | No contact with a client's callers, and no recruiting | No agency-level workflow, campaign or list reads a client sub-account's contacts. Nothing is copied from a client account into the Next Level or Ray Homes accounts. No client is added to any Ray Homes or eXp recruiting list. Both clauses are in the client agreement. | [Ray to confirm with counsel: the client agreement] |
+| 12 | A transcript is read by the client, and by the set-up team only during set-up or a fix the client asked for | Staff reach a client account through a named user with the lowest role that does the job. Access is opened for set-up or for a fix the client asked for, then removed. Every access is logged with the date and the reason. No AI tool outside the platform reads client transcripts. If one ever does, the data wording in `offer.md` changes first. | [verify in HighLevel: access control for staff, per sub-account, with a log] |
+| 13 | Where data is held: HighLevel, in the United States, not in Canada | Nothing in the build says or implies Canadian storage. The data wording is used as written in `offer.md` section 6. | [not verified: the hosting statement and the SOC 2 Type II report came from search-result text; read the help pages] |
+| 14 | Audio recording off unless the client turns it on | Call recording is off in the snapshot and in every new account. Turning it on is the client's choice, made in writing. The transcript and summary must still be produced with recording off. | [verify in HighLevel: recording off on a Voice AI line while the transcript is still produced. No source confirmed it. Must be tested before the first client. If it fails, the wording changes to a recording that is deleted within a day] |
+| 15 | Recording announced when on | When recording is on, `nl_recording_line` is filled and the AI says it at the start of every call. When recording is off, the line is empty and nothing is recorded. | [Ray to confirm with counsel] |
+| 16 | Export and deletion within 30 days of leaving | An offboarding procedure: export contacts and transcripts to the client, confirm they received the file, delete both from the account within 30 days of the day they leave, then close the account. | [verify in HighLevel: export and deletion of transcripts] |
+| 17 | Summary by text and by email | The "AI call finished" workflow sends the summary to the client by text and by email after every call. | Test call |
+| 18 | CRM: a one-way push through Zapier for Follow Up Boss and BoldTrail (kvCORE). Lofty and Sierra Interactive tested in set-up. Text and email summary for everything else. No extra charge | A workflow that fires when a Voice AI call ends and sends the caller and the summary to Zapier. One Zap per CRM, authorised by the client. It creates or updates a contact or lead and reads nothing back. If the push for one of the four fails in set-up, the client can cancel and is not charged. Sierra Interactive may need fields a caller did not give. | [verify in HighLevel: the call-ended trigger and the Zapier action] [not verified: the connection method came from search-result text; none of the four has been tested] [Ray to confirm: the Zapier plan and who pays for it] |
+| 19 | One-page brokerage summary, first month back if the brokerage says no within 14 days | The one-page summary exists as a file. A refund procedure exists for the first month and is logged on the contact. | [Ray to confirm: the day the 14 days are counted from] |
+| 20 | Urgent-call callback and text alert | When a caller asks for a person or the call is urgent, the AI offers a callback, the "Needs a human" workflow texts the client at once, and a task is created. The copy promises a callback and an alert. It does not promise a live transfer, so `nl_transfer_number` is used only where a transfer has been tested. | Test call |
+| 21 | Forwarding only when unanswered, including when the phone is off | Forwarding is set as conditional: no answer, busy and unreachable. It is never set to forward every call. | [verify in HighLevel: call forwarding conditions] [verify with the client's carrier] |
+| 22 | Forwarding off on the day of cancelling | The offboarding procedure removes forwarding on the cancel date and a test call confirms the client's phone rings as before. | Test call |
+| 23 | It only answers calls that come in. It does not place sales calls | No outbound AI call is switched on in a Next Level Answer account. In the speed-to-lead workflow the outbound AI call step stays off and the call task is used. | Test in NL Demo |
+| 24 | Founding spots: 7 for real estate agents, 3 for mortgage brokers and for contractors and renovators. Real estate lawyers, accountants and insurance on 1 March 2027 | The founding checkout closes at 10 sales, with the 7 and the 3 counted by hand. The waitlist form has a consent box that is not pre-ticked and one question: industry and biggest phone problem. No checkout exists for a real estate lawyer, an accountant or an insurance business before 1 March 2027. | Form test |
+| 25 | Founding clients in Canada only. A US list, told the opening date and US dollar price by 1 March 2027 | No US client account is created. The US list form has a consent box that is not pre-ticked. One message goes to that list by 1 March 2027. | Form test. [Ray to set: US opening date and US dollar price] |
 
-New custom values for the snapshot: `nl_usage_cap` (the monthly cap the client chose), `nl_recording_on` (yes or no, default no), `nl_summary_email` and `nl_summary_mobile` (where summaries and alerts go), `nl_crm_name` (the client's CRM, and whether a push was confirmed).
+Custom values for the snapshot: `nl_usage_cap` (the monthly cap on extra minutes the client chose, zero allowed), `nl_minutes_included` (250, plus 125 for each extra agent line), `nl_lines` (the number of agent lines on the account), `nl_recording_on` (yes or no, default no), `nl_summary_email` and `nl_summary_mobile` (where summaries and alerts go), `nl_crm_name` (the client's CRM, and whether a push was tested).
+
+### Unit cost behind the bundle
+
+[not verified] Copied from `testing/facts-round3.md`. Every rate is a HighLevel rate seen in search-result text on 2026-11-15, in US dollars. None was read from an official page or from Ray's own bill.
+
+Two assumptions sit inside the arithmetic:
+
+1. **Token cost.** The language model is taken at one US cent a minute in the planning case. No per-minute figure exists for it.
+2. **Exchange rate.** 1 USD = 1.40 CAD. No exchange rate was looked up.
+
+Cost of one AI call minute, in US dollars:
+
+| Part | Low case | Planning case | Note |
+|---|---|---|---|
+| Voice Engine | 0.045 | 0.045 | |
+| Speech | 0.015 | 0.035 | The premium voice at 0.170 is excluded and is not used on this plan. |
+| Language model tokens | 0.002 | 0.010 | Assumption 1. |
+| Phone, inbound | 0.01165 | 0.0129 | The two figures seen. |
+| Transcription | 0 | 0.024 | In the planning case in case it is charged on Voice AI calls. |
+| Recording | 0 | 0 | Off by default in the offer. |
+| Total, USD | 0.0737 | 0.1269 | |
+| Total, CAD at 1.40 | 0.103 | 0.178 | Assumption 2. |
+
+The bundle, planning case:
+
+| Item | Sum | USD | CAD at 1.40 |
+|---|---|---|---|
+| 250 minutes | 250 x 0.1269 | 31.73 | 44.42 |
+| Local number | 1 x 1.15 | 1.15 | 1.61 |
+| 500 text segments | 500 x (0.00747 + 0.005 carrier estimate) | 6.24 | 8.73 |
+| Bundle cost | | 39.12 | 54.76 |
+| Share of $300 CAD | 54.76 / 300 | | 18.3% |
+
+- The same bundle at the standard price of $400 a month is 13.7%.
+- An extra minute at $0.30 CAD against a planning cost of 0.178 CAD leaves 0.122 CAD, 41% of the price.
+- An extra agent line at $150: 125 minutes, a number and 250 text segments cost 20.13 USD, 28.18 CAD, 18.8% of $150.
+- What would break it: a real all-in minute above 0.142 USD, the premium voice, two phone legs billed on every call, the Canadian dollar past about 1.53, or text use far above 500 segments.
+
+Recheck margin against a real invoice after the first month.
 
 ### Promise tests
 
 Run in NL Demo first, then in each client account before go-live. Tick a line only when seen on screen or heard on a call.
 
-- [ ] Usage: the founding plan shows usage at cost with no markup on a test invoice.
-- [ ] Cap: set a low cap in NL Demo, use it up, and confirm the AI stops, the alert arrives by text and email, and the phone rings through as before.
+- [ ] Bundle: a test month with fewer than 250 minutes produces an invoice for the monthly price only.
+- [ ] Extra minutes: a test month past the allowance bills each extra minute at $0.30 CAD.
+- [ ] Rounding: a test call of under one minute counts as one minute. The count is zero after the billing date.
+- [ ] Invoice: the test invoice, or the statement sent with it, shows minutes included, minutes used and extra minutes billed.
+- [ ] Cap: set a low cap in NL Demo, use it up, and confirm the AI stops, the alert arrives by text and email, and the phone rings through as before. Repeat with the cap at zero.
+- [ ] Team pool: on a test account with two lines, calls on either line count against one allowance of 375 minutes.
 - [ ] Demo line: dial it from an outside phone. It answers, says it is an AI, and books a sample appointment.
 - [ ] Language: for each language in `nl_languages`, the client made a test call on their own line and signed off.
 - [ ] No contact: search the agency account and the Ray Homes account for a sample contact that exists only in the test client account. It is not there.
-- [ ] Staff access: a staff user with no open setup or fix cannot open the test client account. The access log shows who opened it, when and why.
-- [ ] Transcript retention: the retention setting is as written, and a deleted transcript cannot be opened afterwards.
-- [ ] Recording off: make a test call in a new account. No audio file exists afterwards.
+- [ ] Staff access: a staff user with no open set-up or fix cannot open the test client account. The access log shows who opened it, when and why.
+- [ ] Recording off: make a test call in a new account. No audio file exists afterwards, and the transcript and summary still arrive.
 - [ ] Recording on: switch it on in NL Demo. The AI says the recording line at the start of the call.
 - [ ] Summary: after a test call, the summary arrives by text and by email.
-- [ ] CRM push: for each CRM on the list, a test record arrives in that CRM.
+- [ ] CRM push: for each of the four CRMs, a test record arrives in that CRM after a real test call.
 - [ ] Urgent call: ask for a person on a test call. The AI offers a callback and the text alert arrives at once.
 - [ ] Forwarding when unanswered: let the client's phone ring out. The AI answers. Answer the phone on the next call. The AI does not.
 - [ ] Forwarding when the phone is off: switch the phone off and call. The AI answers.
 - [ ] Cancel: run the offboarding procedure on a test account. The export arrives, the contacts and transcripts are gone from the account, and forwarding is off.
-- [ ] One line: the test account holds one number.
-- [ ] Waitlist form: submit it with the box unticked. No message is sent.
-- [ ] US state: for a US test, the number, the text registration and the rules check are all recorded before go-live.
+- [ ] Inbound only: no outbound AI call step is switched on in the account.
+- [ ] Waitlist form and US list form: submit each with the box unticked. No message is sent.
 
 ## Next step
 

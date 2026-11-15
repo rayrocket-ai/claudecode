@@ -4,8 +4,8 @@
 
 Ray chose an AI-made video on 2026-11-15. It goes in the welcome email, step 1 of the onboarding checklist in `saas-build-spec.md` section 8. The steps below follow that checklist. If Ray changes the checklist, this script changes with it.
 
-- Length: 60 to 90 seconds. The spoken script is about 190 words.
-- Viewer: an agent who has paid for Next Level Answer and has not sent the intake form yet.
+- Length: 60 to 90 seconds. The spoken script is about 205 words.
+- Viewer: a founding client who has paid for Next Level Answer and has not sent the intake form yet. Most are real estate agents. Since 2026-11-15, 3 of the 10 founding spots are open to mortgage brokers and to contractors and renovators (Approved by Ray, 2026-11-15), so the script must work for them too.
 - One next step: send the intake form back today.
 - No results, numbers or earnings are promised anywhere in the video.
 
@@ -25,7 +25,7 @@ Written in Ray's voice. If the video does not use Ray's likeness, change the fir
 >
 > Then you call your own line, hear it answer, and tell us what to change. When you approve it, you go live. Calls you cannot take are answered and booked, and anyone who hangs up gets a text back.
 >
-> What we need from you: your business name, brokerage, hours and service areas. The number to forward. Access to your calendar. Your top questions, with the answers you want given. And who gets the call when a person is needed.
+> What we need from you: your business name, your brokerage if you have one, hours and service areas. The number to forward. Access to your calendar. Your top questions, with the answers you want given. Who gets the call when a person is needed. And the monthly cap you want on extra minutes.
 >
 > After you go live, we check in on day 3 and day 14.
 >
@@ -43,7 +43,7 @@ Written in Ray's voice. If the video does not use Ray's likeness, change the fir
 | 4. Account, phone, calendar | 0:22 to 0:30 | "Then we build your account..." | Step 2: We build your account. Phone and calendar connected. |
 | 5. Receptionist set and tested | 0:30 to 0:37 | "Next, we set up your receptionist..." | Step 3: Your receptionist, set up and tested by us |
 | 6. Your test, then live | 0:37 to 0:52 | "Then you call your own line..." | Step 4: You test it. You approve it. You go live. |
-| 7. What we need from you | 0:52 to 1:08 | "What we need from you..." | We need from you: business details, hours and areas. Number to forward. Calendar access. Top questions and answers. Who gets hand-offs. |
+| 7. What we need from you | 0:52 to 1:08 | "What we need from you..." | We need from you: business details, hours and areas. Number to forward. Calendar access. Top questions and answers. Who gets hand-offs. Your monthly cap on extra minutes. |
 | 8. Check-ins | 1:08 to 1:13 | "After you go live..." | Check-ins: day 3 and day 14 |
 | 9. Support | 1:13 to 1:19 | "Questions at any point?..." | Support: [Ray to set: support email for Next Level] |
 | 10. Next step | 1:19 to 1:25 | "Your next step..." | Open the intake form. Send it back today. |
@@ -75,5 +75,5 @@ Screen recordings and simple motion graphics only. Every screen recording comes 
 - **Credits and approval.** Generation spends credits. The video is made only after Ray approves this script in Slack (#nextlevel-approvals) with the clapper reaction. A check mark alone approves the words. It does not start a generation.
 - **One note on the Publisher routine.** Its clapper rule says "Never a likeness of Ray or any real person". A version with Ray's likeness is therefore not made by that routine on its own. Ray has to say so himself, after recording his consent clip. Without that, the video is made with screen recordings, motion graphics and a stock AI voice.
 - **Placeholders.** The support email is still open: [Ray to set: support email for Next Level]. The video is not final until it is filled in.
-- **Facts.** The video states the 7-day timeline and the steps only. The first-month commitment and the price are in the client's welcome email and agreement, in the exact words of `offer.md` section 6, not in this video.
+- **Facts.** The video states the 7-day timeline and the steps only. It names the cap on extra minutes and gives no figure. The first-month commitment, the price, the 250 included minutes and the $0.30 extra minute are in the client's agreement and welcome email, in the exact words of `offer.md` section 6, not in this video. The agreement reaches the client before payment, so the viewer has already seen it.
 - **Screen recordings.** NL Demo only. That sub-account must exist first (see `ghl-location-setup.md`, Part J).

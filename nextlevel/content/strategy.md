@@ -1,6 +1,6 @@
 # Next Level content: the inbound engine
 
-Draft for Ray to approve. Nothing here posts until Ray approves each piece in Slack #agent-marketing.
+Draft for Ray to approve. Nothing here posts until Ray approves each piece in Slack #nextlevel-approvals.
 
 The goal Ray set: inbound. Agents and business owners reach out to Ray because of what they saw. No cold outreach is needed for this engine to work.
 
@@ -18,21 +18,25 @@ What content never does: promise leads, deals, commission or income. It shows th
 
 ### Lane 1: agents (now)
 
-Working real estate agents and small teams who take their own calls and miss some during showings, listing appointments and evenings. Canada first. US agents can join the Founding 10 only where setup is confirmed for their state on the call. (Set 2026-11-15 after the persona test; Ray to confirm.)
+Working real estate agents and small teams who take their own calls and miss some during showings, listing appointments and evenings. Founding clients are in Canada only. US agents can join a US list and are told the opening date and the US dollar price by 1 March 2027. (Approved by Ray, 2026-11-15.)
 
 What they should think after a video: "That is my phone. He is one of us. I can hear it for myself."
 
-Where it leads: the quiz, then a 15-minute call, then one of the Founding 10 places for Next Level Answer.
+Where it leads: the quiz, then a 15-minute call, then one of the 7 founding places for agents on Next Level Answer.
 
-### Lane 2: business owners (waitlist only)
+### Lane 2: business owners
 
-Mortgage brokers, real estate lawyers, accountants, contractors and insurance brokers. Same missed-call problem, different day.
+Approved by Ray, 2026-11-15. This lane now has two parts. It is a decided exception to the gate in `offer.md` section 1.
 
-The gate in `offer.md` still holds. For this lane, content may show the problem and the system, and invite the owner to join the waitlist by their own choice. Content may not offer a sale to a non-agent business or link to a checkout. The one price it may state for this lane is the starting price, $500 setup plus $400 a month, with the line that Answer opens to other businesses once the first 10 agents are live. (Set 2026-11-15 after the persona test; Ray to confirm.) Industries open one at a time, mortgage brokers first.
+**Founding spots, open now: mortgage brokers, and contractors and renovators.** 3 of the 10 founding spots are open to them on the same founding terms as agents. Content for these two may show the problem and the system and send the owner to the same quiz and the same 15-minute call. It may state the founding price and terms in the words of `offer.md` section 6.
 
-Share of the calendar: about 1 piece in 5. Enough to build the waitlist without blurring who the offer is for today.
+**Waitlist: real estate lawyers, accountants and insurance.** Answer opens to them on 1 March 2027 at $500 setup plus $400 a month, with first notice to the waitlist before that date. Content may show the problem and the system, state that date and that price, and invite the owner to join the waitlist by their own choice. It may not offer a sale or link to a checkout. Any other business can join the waitlist, and content promises them no date.
 
-[Ray to confirm: organic content that speaks to business owners and ends in a waitlist keyword is allowed before the gate. The gate in offer.md blocks ads, pages and outbound aimed at non-agent industries. This file assumes organic content with a waitlist keyword is on the allowed side.]
+Share of the calendar: about 1 piece in 5. Enough to fill the 3 spots and build the waitlist without blurring who the offer is mainly for today.
+
+No paid ad and no outbound message is aimed at a non-agent industry. The exception covers organic content, the page and the call.
+
+[Ray to confirm: organic content that speaks to business owners and ends in a waitlist keyword is allowed for the industries that are not open yet. This file assumes it is.]
 
 ## 3. The five pillars
 
@@ -42,7 +46,7 @@ Share of the calendar: about 1 piece in 5. Enough to build the waitlist without 
 | 2 | **Hear It Live** | Proof by demonstration. Ray calls the receptionist on speaker and the viewer hears it. Removes "callers will hate an AI". | The live call. No claims needed. |
 | 3 | **Inside Ray's Business** | Authority. A working broker showing what he runs on his own line, what he changed, what he got wrong. | Ray's own practice. Real numbers only when Ray supplies them. |
 | 4 | **Straight Answers** | Handles objections before the call: cost, legality, CRM, "will it take my leads", "I have an assistant". | The objection in the viewer's words. |
-| 5 | **Beyond Real Estate** | Builds the business waitlist. One industry per piece. | The owner's day: on a job site, in a closing, in tax season. |
+| 5 | **Beyond Real Estate** | Speaks to other businesses. Founding spots for mortgage brokers and for contractors and renovators. The waitlist for everyone else. One industry per piece. | The owner's day: on a job site, in a closing, in tax season. |
 
 Pillar mix across the 60 shorts in the 30-day calendar: Missed Call 14, Hear It Live 13, Inside Ray's Business 12, Straight Answers 11, Beyond Real Estate 10.
 
@@ -80,7 +84,7 @@ Rules:
 
 - The video asks only for the comment. The DM asks only for the next step. Never stack two asks in one message.
 - A comment is permission to reply to that comment by DM about that resource. It is not consent to add anyone to an email or text list. Email and text consent is collected on the quiz page with the unticked boxes already written there.
-- If the viewer is not an agent, the DM offers the waitlist and nothing else.
+- If the viewer is a mortgage broker or a contractor or renovator, the DM offers the same quiz and call as an agent, for the 3 founding spots. For any other business that is not real estate, the DM offers the waitlist and nothing else.
 
 ## 6. The lead magnets
 
@@ -90,14 +94,14 @@ Four, each with one keyword. Names are PROPOSED, Ray to approve.
 |---|---|---|---|---|---|
 | 1 | **The Evening Line Test** | AUDIT | The free missed-call audit. We call the agent's business line once on a weekday evening and send back exactly what happened: rings, voicemail, callback time. Method is in `sales/missed-call-audit.md`. | Agents | Approval of the audit checks in that file. [Ray to confirm with counsel: the calling and consent checks in missed-call-audit.md] |
 | 2 | **The Front Desk Script** | SCRIPT | A one-page PDF: the questions Ray's receptionist asks every caller, in order, and why each one is there. Usable by a human assistant too. | Agents and business owners | The final question list from Ray's live agent. [Ray to add: the current receptionist question list] |
-| 3 | **The Live Line** | DEMO | The demo phone number, plus a short card: five things to try on the call to test it properly. | Agents and business owners | [Ray to add: demo line number, if Ray wants it public] |
+| 3 | **The Live Line** | DEMO | The demo phone number, plus a short card: five things to try on the call to test it properly. The same number goes on the sales page, so a buyer can dial it before the call. | Agents and business owners | [Ray to add: demo phone number] |
 | 4 | **The 7-Day Go-Live Plan** | PLAN | A one-page checklist: what an agent supplies, what happens each day, and what is tested before the line goes live. Built from sections 5 and 9 of `offer.md`. | Agents close to deciding | Nothing more on terms: the founding terms in `offer.md` section 6 are approved by Ray, 2026-11-15. |
 
 One more keyword that is not a lead magnet:
 
 | Keyword | What it does |
 |---|---|
-| WAITLIST | Business owners outside real estate ask to be told when their industry opens. They get a reply and a link to opt in themselves. [Ray to confirm: waitlist opt-in form link] |
+| WAITLIST | Business owners outside real estate ask about their industry. Mortgage brokers and contractors and renovators are sent to the quiz. Everyone else gets a reply and a link to opt in themselves. [Ray to confirm: waitlist opt-in form link] |
 
 Until the PDFs exist, the reply to SCRIPT and PLAN sends the content as text in the DM. Nothing is promised that cannot be sent that day.
 
@@ -132,12 +136,12 @@ Weekly output: 14 shorts, 1 long video, 3 carousels, 5 LinkedIn posts. If a day 
 
 A buffer: film 2 extra shorts every Sunday so a busy closing week does not break the rhythm.
 
-## 9. Approval: every piece goes through Slack #agent-marketing
+## 9. Approval: every piece goes through Slack #nextlevel-approvals
 
 Nothing posts without Ray's check mark.
 
 1. The Approval Desk routine runs Monday, Wednesday and Friday morning. On each run it drafts at most one Next Level piece from `calendar-30-days.md` (the next unused day), using the matching script or hook.
-2. It saves a MOS Posts row and posts one message in #agent-marketing: "APPROVAL NEEDED", with the full caption exactly as it would go out.
+2. It saves a MOS Posts row and posts one message in #nextlevel-approvals: "APPROVAL NEEDED", with the full caption exactly as it would go out.
 3. Ray reacts with a check mark to approve, an x to reject, or replies in the thread with changes.
 4. A piece with a placeholder still in it goes to Ray marked "NOT PUBLISHABLE YET" so he can supply the missing item in the thread.
 5. Any price in a piece is listed under "NEEDS RAY'S OK ON FIGURES". Only prices in `offer.md` may appear.
@@ -169,50 +173,66 @@ What is not a goal: views and followers. They are watched, not chased. A video w
 ## 11. What Ray needs to supply before this runs
 
 - [Ray to add: real number from Ray Homes]
-- [Ray to add: demo line number, if Ray wants it public]
+- [Ray to add: demo phone number]
 - [Ray to add: the current receptionist question list]
 - [Ray to confirm: quiz page link]
 - [Ray to confirm: 15-minute call booking link]
 - [Ray to confirm: waitlist opt-in form link]
-- [Ray to confirm: which languages the voice agent handles today]
+- A second-language test on Ray's own line, before any piece names a language beyond English. [Ray to run: a test call in one of Punjabi, Mandarin or Farsi on his own line]
+- [Ray to add: US list form link]
 - [Ray to confirm: what can be said about eXp on a Next Level piece]
 - [Ray to confirm with counsel: recording a call with the AI receptionist for content, and showing it publicly]
 
 ## Prices in content (updated 2026-11-15)
 
-Ray approved the full price ladder on 2026-11-15. Content may state the Founding 10 price ($300 a month for Next Level Answer) and, where a piece needs it, the standard prices exactly as written in `nextlevel/offer.md`. The founding terms approved by Ray on 2026-11-15 (no setup fee, price locked while the subscription is active, month to month, the live-in-7-days commitment) may be stated, only in the exact words of `offer.md` section 6. No other price, discount or term appears in any piece. Usage is no longer "quoted on the call". See the rules below.
+Ray approved the full price ladder on 2026-11-15. Content may state the Founding 10 price ($300 a month for Next Level Answer) and, where a piece needs it, the standard prices exactly as written in `nextlevel/offer.md`. The founding terms approved by Ray on 2026-11-15 (no setup fee, price locked while the subscription is active, month to month, the live-in-7-days commitment) may be stated, only in the exact words of `offer.md` section 6. No other price, discount or term appears in any piece. Usage is stated as the bundle in the rules below, and in no other way.
 
-## Price and claims rules after the persona test
+## Price and claims rules: the round 3 offer
 
-Set 2026-11-15 after the persona test; Ray to confirm. The round 2 offer (`../testing/offer-pitch-v2.md`) is the working offer. The assistant set these terms after the persona test, under Ray's instruction to fix the offer. Ray has not approved them yet, so every piece that states one is listed under "NEEDS RAY'S OK ON FIGURES" in the approval message. Full wording: `../offer.md` section 6. A piece states a term in those words or not at all.
+The round 3 offer (`../testing/offer-pitch-v3.md`) is the working offer. Approved by Ray, 2026-11-15. Full wording: `../offer.md` section 6. A piece states a term in those words or not at all. Any price in a piece is still listed under "NEEDS RAY'S OK ON FIGURES" in the approval message.
 
-**Price rules**
+**Price rules** (Approved by Ray, 2026-11-15)
 
-- Usage: "billed at cost with no markup for founding clients, up to a monthly cap you set." No rate per minute appears in content until Ray supplies it. [Ray to add: usage rate per minute]
-- Other businesses: "from $500 setup plus $400 a month, once the first 10 agents are live." No date.
-- Teams: "quoted on the call." No team price appears in content. [Ray to set: team pricing]
-- US viewers: prices are in Canadian dollars. Say so when a piece speaks to US agents.
-- No smaller plan is mentioned. [Ray to decide: a smaller plan for very small practices]
+- Usage: "The $300 includes 250 AI call minutes a month, your phone number and the summary texts. Extra minutes are $0.30 CAD each, up to a monthly cap you set. The cap can be zero." A part minute counts as a minute and unused minutes do not carry over. No HighLevel rate and no other usage figure appears in content.
+- Standard price: $500 setup plus $400 a month, with the same 250 minutes and the same $0.30.
+- Teams: "Each extra agent line on the same account is half the monthly price: $150 a month at the founding price, $200 at the standard price. Each extra line adds 125 minutes to a shared pool."
+- Founding spots: 7 for real estate agents, 3 for mortgage brokers and for contractors and renovators, on the same founding terms.
+- Real estate lawyers, accountants and insurance: "Answer opens on 1 March 2027 at $500 setup plus $400 a month. The waitlist gets first notice." No other date for any industry.
+- US viewers: "Founding clients are in Canada only. Join the US list. By 1 March 2027 everyone on it is told the US opening date and the price in US dollars." No US price appears in content.
+- A cheaper plan: "There is no cheaper plan today."
+- Whether HST is added is not stated in content until Ray confirms it. [Ray to confirm: whether HST is added]
 
 **Claims a piece may make, in these words**
 
-- You dial the live system yourself on the call. Ray shows the real usage bill for his own line before you pay.
-- English at launch. Any other language is tested on your own line, and there is no charge if it is not good enough for you. A piece in Dari, or about Dari-speaking callers, carries this line and does not say the AI speaks Dari. [Ray to confirm: which languages the voice agent handles today]
+- A demo number is on the page. You can dial it before you book anything. On the call you dial the live system again. (Only once the number exists: [Ray to add: demo phone number])
+- You get a written agreement before you pay, and it names the registered business.
+- Next Level never recruits a client to Ray's brokerage or team.
+- English is live today. Any other language is tested on your own line, and there is no charge if it does not handle your callers to your standard. Dari, Farsi, Punjabi, Mandarin, Cantonese, Urdu and Arabic are not promised. A piece in Dari, or about Dari-speaking callers, carries this line and does not say the AI speaks Dari.
 - Your callers stay yours. No one at Next Level or Ray Homes contacts your callers or uses your contacts.
-- The transcript stays in your own account. The people who can read it are you, and the set-up team only while they are setting up or fixing your account.
-- Audio recording is off unless you turn it on. When it is on, the AI says so at the start of the call.
-- Your contacts and transcripts are exported to you and deleted when you leave.
-- Every call arrives as a text and an email summary. A direct push into your CRM is confirmed on the call before you pay. No CRM is named in content. [Ray to confirm: which CRMs get a direct push]
+- The people who can read a transcript are you, and the set-up team only while they are setting up your account or fixing something you asked them to fix.
+- Audio recording is off unless you turn it on. When it is on, the AI says so at the start of the call. [verify in HighLevel: test in the account before a piece says this]
+- Your contacts and transcripts are exported to you and deleted within 30 days of the day you leave.
+- Every call reaches you as a text and an email summary, so it works beside any CRM.
 - A one-page summary for your broker of record. First month back if your brokerage says no within 14 days.
 - If a caller asks for a person, or it is urgent, the AI offers a callback and alerts you by text.
 - You keep your number. Calls forward only when you do not answer, and forwarding is switched off the day you cancel.
-- One subscription covers one business line.
-- Canada first. US agents where setup is confirmed for their state on the call.
+- It only answers calls that come in. It does not place sales calls.
+
+**Not verified. A piece may make these claims only after the check in `../README.md`, "Verify before publishing"**
+
+Each came from search-result text, not an official page. Until it is checked, a piece that needs one is marked "NOT PUBLISHABLE YET".
+
+- The named languages beyond English: French, Spanish, Hindi, German, Portuguese, Italian, Dutch, Russian and Japanese. [not verified]
+- Where data is held: "Your account runs on HighLevel, a US software company. HighLevel says its infrastructure is in the United States. Your data is not stored in Canada." [not verified]
+- The CRM push: "a one-way push through Zapier for Follow Up Boss and BoldTrail (kvCORE). Lofty and Sierra Interactive are tested in your account during set-up." [not verified, and none of the four has been tested]
+- That the system stops at your cap. [verify in HighLevel]
 
 **Claims a piece may not make**
 
 - That the AI passes a caller to a person in the middle of a call. The term is a callback and a text alert.
-- That any named language other than English works today.
-- That any named CRM is connected.
-- That a US state is open, or that an industry opens on a date.
-- Any result, client count or testimonial. There are none yet. When a piece mentions that, it says so as the reason the founding price and the founding terms exist.
+- That the AI speaks Dari, Farsi, Punjabi, Mandarin, Cantonese, Urdu or Arabic, or that it changes language by itself in the middle of a call.
+- That data is stored in Canada, or that Next Level is certified. The SOC 2 report belongs to HighLevel.
+- "Integrates with" or "syncs with" a CRM. It is a one-way push. No partnership with HighLevel, Zapier or a CRM company is implied.
+- "Unlimited minutes", or any HighLevel rate as Next Level's rate.
+- That the US is open, a US price, or an opening date for any industry other than 1 March 2027 for real estate lawyers, accountants and insurance.
+- Any result, client count or testimonial. There are none yet. When a piece mentions that, it says so as the reason for the founding terms.
