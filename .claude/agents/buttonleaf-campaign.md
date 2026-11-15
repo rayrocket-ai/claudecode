@@ -105,6 +105,15 @@ exposure. State that day:
 
 # Fix queue
 
+RAY APPROVED TO RUN (chat, 2026-11-15): YouTube video ads for 53 Alpha,
+34 Buttonleaf, 85 Sidney and 97 Jackman, shown near each property (25 km),
+to in-market home buyers, and monitored daily. Budget stays $5/day per
+listing (his Nov 3 figure) until he names another. So a campaign built from
+this queue for one of these four listings may be switched on once its video
+and link are checked. Any other listing, or any other budget, still needs
+his word.
+
+
 Approved by Ray's "make these better" (2026-11-15). Work in order the next
 time a tool has room, then delete the line.
 
@@ -135,6 +144,14 @@ time a tool has room, then delete the line.
    within about a day. Download one file at a time, cut a 20 to 25 second
    draft with the hooks in campaigns/97-jackman/edit-brief.md, and send it
    to Ray. Do not publish it until he approves.
+
+6. Jackman finished video. Ray says Sid Media made one and sent a Dropbox
+   folder (link is in the Nov 15 chat). This session cannot download from
+   it: Dropbox serves files from random uc*.dl.dropboxusercontent.com
+   hosts, which need a wildcard in the environment's allowed hosts (Ray
+   adds "*.dl.dropboxusercontent.com" in Settings), or Ray sends the direct
+   link to the one file, which Metricool can take as is. The Drive folder he
+   sent the same day ("RAW BUTTON LEAF") is Buttonleaf, not Jackman.
 
 How to put a video on YouTube without Ray: Metricool createScheduledPost,
 provider youtube, privacy unlisted, notifySubscribers false, media = a
