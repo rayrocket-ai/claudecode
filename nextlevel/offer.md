@@ -21,6 +21,18 @@ The main goal for marketing is inbound. Businesses and agents reach out to Next 
 
 The missed-call audit is a secondary, optional tactic (see `sales/missed-call-audit.md`). Business owners outside real estate who reach out join the waitlist below until their industry opens.
 
+**Secondary channels, from the course notes. PROPOSED, Ray to approve.** Inbound stays the main source. These sit beside it. Drafts are in `learning/content-additions.md`.
+
+| Channel | How Next Level uses it | Condition |
+|---|---|---|
+| People Ray already knows | Ray lists agents he knows personally and offers each a 15-minute look at their phone line, with a short written note afterward. One person at a time, by Ray. | Consent basis for any email or text: [Ray to confirm with counsel] |
+| Rooms where agents gather | Ray asks about their business and does not pitch in the room. The follow-up happens the next day, and only with people who asked for it. | Ask in person: "May I email you?" Log the yes. |
+| Partners who already serve agents | Team leaders, coaches, photographers and marketing shops who serve agents. Opens after the Founding 10 have results they agreed to share. | Referral terms: [Ray to set]. Referral fee rules for a registrant: [Ray to confirm with counsel and eXp] |
+
+Not used: bought or scraped lists, and bulk cold email. See section 10.
+
+**One rule for every first contact.** The first message, comment reply or hello has one goal: the 15-minute call. No price and no pitch before the call.
+
 ### Business edition (after the gate)
 
 Ray wants an offer for businesses, not only agents. The offer is built for that from day one: one master snapshot, two editions. The agent edition sells now. The business edition is the same snapshot with the prompt, stage names, custom values and review links swapped for the industry.
@@ -74,6 +86,16 @@ Use their words on the page and on the call. These come from the four problems i
 **Every call answered, qualified and booked, live in 7 days.**
 
 For the brand as a whole: systems a working broker runs on his own business, set up for yours. You pay for the result being run for you, not for a login.
+
+**One plain line per rung. PROPOSED, Ray to approve.** Each line has two parts: what it does, then the pain it removes. No line promises leads, deals or income.
+
+| Rung | The line |
+|---|---|
+| Answer | Your calls are answered and booked without you stepping out of a showing. |
+| Reviews | Every client is asked for a review at closing and at day 30 without you having to remember. |
+| Nurture | The contacts you have permission to message hear from you without hours on the phone. |
+| Ads | Your ads are watched every day without you opening the ad account. |
+| Complete | All four run as one system without four vendors to manage. |
 
 Proof for every page and call. Ray Homes is the proof for now, in this order:
 
@@ -139,6 +161,7 @@ For Next Level Answer (the rung on sale to the Founding 10 now):
 - Month to month. Cancel any time before the next billing date.
 - The 7 days start when the agent has supplied everything in section 9, not at payment. Reasoning: the clock should not run on the client's delay.
 - In return, founders agree to a short feedback call at day 14 and at day 30, and may be asked for written permission to share their numbers. Sharing is their choice.
+- At day 30, founders may also be asked for a short review in their own words, or to take part in a written case study. It is their choice and never a condition of the founding price. Nothing is published without their written permission. (Added from the course notes, 2026-11-15.)
 - Live-in-7-days commitment: if the receptionist is not live 7 days after the agent supplied everything in section 9, the first month is not charged. Exact terms: applies once per client, applies only to the first month, does not apply when the delay is a carrier or registration approval outside Next Level's control. PROPOSED, Ray to approve. Not to be published until approved.
 
 **Open**
@@ -225,8 +248,36 @@ No. Your sub-account is yours. Ray's team does not work your contacts. [Ray to c
 **"Do you have results from other agents?"**
 Not yet. The Founding 10 are the first. What we have is Ray's own business. Ray is a GTA real estate broker, Ray Homes Real Estate under eXp Realty, 12+ years, about 50 deals a year, multi-year eXp Icon agent, bilingual in English and Dari. He runs this system on Ray Homes, and we will show you ours live on the call. [Ray to add: real number from Ray Homes] That is why the founding price is what it is.
 
+**"I do not have time to set this up."** (Added from the course notes, 2026-11-15. Draft for Ray to approve.)
+We set it up for you. Your part is one short form and one test call to your own line. The first call with Ray is 15 minutes.
+
+**"AI does not apply to my business."** (Added from the course notes, 2026-11-15. Draft for Ray to approve.)
+You do not have to use AI anywhere else. This does one job: it picks up the calls you cannot take, asks your questions and books the appointment. Call the demo line and judge that one job.
+
+**"Next Level is new."** (Added from the course notes, 2026-11-15. Draft for Ray to approve.)
+It is. Ray's business is not. He has worked in GTA real estate for 12+ years and he runs this system on Ray Homes today. You will hear it live on the call before you decide anything.
+
 **"I am not an agent. Can I buy it?"**
 Not yet. The business edition opens one industry at a time, mortgage brokers first. Join the waitlist and we will contact you when your industry opens.
+
+## 12. Product check, from the course notes
+
+Added 2026-11-15. The notes give five tests for a product that can be sold the same way to every client. This is how the ladder scores. It changes no name and no price.
+
+| Test | Answer | Reviews | Nurture | Ads |
+|---|---|---|---|---|
+| Solves a problem that comes back every week | Yes | Yes | Yes | Yes |
+| Needs little customizing | Yes: custom values and prompt slots | Yes | Partly: each list must be sorted for consent first | Partly: each market and listing differs |
+| Shows a result the client can see quickly | Yes: the first answered call | Yes: the first request sent | Slower | Slower |
+| Simple to explain | Yes | Yes | Yes | Yes |
+| Urgent | Yes | Less | Less | Depends on spend |
+
+What this confirms:
+
+- Answer is the right first rung. It passes all five.
+- Sell one rung at a time. The gate rule already says this: each rung opens after it runs on Ray Homes.
+- No custom builds outside the snapshot (section 10). A request for one goes on a list for Ray, not into a client account.
+- Onboarding should be the same three things for every client: the snapshot, one short welcome video and the intake form. See `saas-build-spec.md` section 8.
 
 ## Next step
 

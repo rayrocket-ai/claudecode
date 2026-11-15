@@ -44,7 +44,7 @@ Share of the calendar: about 1 piece in 5. Enough to build the waitlist without 
 | 4 | **Straight Answers** | Handles objections before the call: cost, legality, CRM, "will it take my leads", "I have an assistant". | The objection in the viewer's words. |
 | 5 | **Beyond Real Estate** | Builds the business waitlist. One industry per piece. | The owner's day: on a job site, in a closing, in tax season. |
 
-Pillar mix over 30 days: Missed Call 25%, Hear It Live 25%, Inside Ray's Business 20%, Straight Answers 15%, Beyond Real Estate 15%.
+Pillar mix across the 60 shorts in the 30-day calendar: Missed Call 14, Hear It Live 13, Inside Ray's Business 12, Straight Answers 11, Beyond Real Estate 10.
 
 ## 4. The formats
 

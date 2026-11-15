@@ -23,6 +23,9 @@ Work through this in the agency view. Tick each line only when seen on screen.
 - [ ] Agency-level users: Ray (owner), Diana (admin). Nadiya gets access to the sales sub-account only.
 - [ ] Default snapshot for new SaaS sign-ups set to the Next Level master snapshot. [verify in HighLevel]
 - [ ] Terms of service and privacy policy links for checkout. [Ray to confirm with counsel]
+- [ ] Three working sub-accounts exist and are named clearly: Ray Homes (Ray's own business, where everything is proven), Next Level (sales, section 2) and NL Demo (section 2a). Client accounts come after these. (Added from the course notes, 2026-11-15.)
+
+**Out of scope for version 1.** (Added from the course notes, 2026-11-15.) Leave these parts of the platform alone until the Founding 10 are live: memberships and courses, the app marketplace, blogs, media storage. The work is the workflows, the voice agent and the CRM. The community in section 2 is the one exception already planned. Whether it also waits: [Ray to decide].
 
 ## 2. The "Next Level" sales sub-account
 
@@ -70,6 +73,16 @@ It holds:
 **The community**
 - Free "AI for Agents" group on HighLevel Communities. [verify in HighLevel]
 - Joining the community is not consent to marketing email. Keep the two separate.
+
+## 2a. The NL Demo sub-account
+
+PROPOSED, Ray to approve. Added from the course notes, 2026-11-15.
+
+- A third sub-account, cloned from the master snapshot, holding made-up contacts only. No real person's name, number or call is in it.
+- Use: Ray shares this screen on the 15-minute call to show the pipeline, a call summary and the monthly report. The live call to the receptionist still goes to the real line.
+- Why: showing the Ray Homes account on a shared screen puts real callers' names and numbers in front of a stranger. Ray Homes numbers can still be read out or shown as totals with contact details off screen.
+- Label every made-up record "sample" so nobody mistakes it for a result.
+- It is also the place to test every snapshot change before it reaches a client.
 
 ## 3. The master snapshot, item by item
 
@@ -173,7 +186,7 @@ Start from the existing "John" prompt on HighLevel Voice AI. Turn every client-s
 | NL 01 | AI call finished | Writes summary, sets fields and tags, moves stage, notifies the client. | Answer |
 | NL 01 | Needs a human | Creates a task and alerts the client at once. | Answer |
 | NL 01 | Speed-to-lead | New form or ad lead: instant text and email, then an AI call or a call task. [verify in HighLevel: outbound AI calls] | Answer, Ads |
-| NL 01 | Appointment reminders | Confirmation and reminders. | Answer |
+| NL 01 | Appointment reminders | Confirmation at booking. Reminder one day before, asking for a reply to confirm. No reply: one reschedule message with the booking link and a task for the client. (Branch added from the course notes, 2026-11-15.) | Answer |
 | NL 02 | Review request at closing | Triggered when the stage moves to Closed. | Reviews |
 | NL 02 | Review request at day 30 | Second request 30 days after closing, only if no review yet. | Reviews |
 | NL 02 | Review reply draft | New review arrives: AI drafts a reply for the client to approve. Never auto-posts. [verify in HighLevel] | Reviews |
@@ -184,6 +197,38 @@ Start from the existing "John" prompt on HighLevel Voice AI. Turn every client-s
 | NL 00 | Monthly report | Builds and sends the client report (below). | All |
 
 All workflows ship switched off. They are turned on during onboarding, one at a time.
+
+### Build and test standard for every workflow
+
+Added from the course notes, 2026-11-15. Check each line before a workflow goes into the snapshot.
+
+**Settings**
+- Re-entry: decided and written in the workflow description. Off for one-time messages (review request at closing). On where the same contact can trigger it again (missed-call text-back).
+- Stop on response: on for every sequence that sends more than one message. A reply ends the sequence and creates a task.
+- Sending window: set for every workflow that texts or emails. No messages outside the hours the client set. [Ray to set: default sending hours]
+- Triggers: list every trigger in the description. A workflow can have several, and a forgotten one is the usual cause of a surprise send.
+
+**Testing**
+1. Save and publish in NL Demo, never in a client account.
+2. Run a manual test with a sample contact. Remember that a manual test skips the trigger conditions.
+3. Then fire the real trigger (submit the form, miss the call, move the stage) and confirm the contact enrolled.
+4. Test the after-hours case: a form filled at 10 PM on a Friday. What does the lead receive, and when?
+5. Open the enrollment history and the execution log. Confirm the contact reached the last step and did not stall at a wait or a branch.
+6. Reply STOP as the sample contact. Confirm every workflow ends.
+
+### Review requests: one rule
+
+Added 2026-11-15. The course notes describe a review request that first asks for a rating and sends only the high ratings to the public review page. Next Level does not build that. Every client who is asked receives the same public review link. A private "tell us what went wrong" option may be offered to everyone alongside it. Reason: sorting people by rating before the public ask is commonly restricted by review platforms. [verify against Google's current review policy] [Ray to confirm with counsel]
+
+### Parked ideas from the course notes
+
+Not built and not priced. Each needs Ray's decision before any work starts.
+
+- Website chat that books to the calendar. Could sit inside Answer.
+- Auto-reply to social comments and direct messages. Could sit inside Nurture.
+- Invoicing for clients.
+- A check that the client's name, phone, address, hours and services read the same on their website and their Google Business Profile. Could be one line on the Reviews intake.
+- Claiming the business profile that AI assistants show. The notes say the process was not confirmed with the provider. [verify] before it is offered to anyone. It applies to Ray Homes first.
 
 Every email carries the sender name, mailing address and unsubscribe link. Every text names the sender and honours STOP. The client is the sender for messages from their sub-account.
 
@@ -274,9 +319,9 @@ All prices in Canadian dollars. Product names and prices: Approved by Ray, 2026-
 
 PROPOSED, Ray to approve. Goal: live in 7 days.
 
-1. **Payment and welcome.** Payment received. Welcome email sent with the intake form and the onboarding call link. Stage moves to Won, then Onboarding.
+1. **Payment and welcome.** Payment received. Welcome email sent with the intake form and the onboarding call link. Stage moves to Won, then Onboarding. Added from the course notes, 2026-11-15, PROPOSED: the welcome email also carries one short welcome video from Ray (what happens in the 7 days, what the form asks, how to reach us) [Ray to record], and the client agreement is accepted before work starts [Ray to confirm with counsel: the client agreement].
 2. **Intake form back.** Business details, hours, areas, top questions, who gets hand-offs, calendar, number to forward. The 7 days start here.
-3. **Sub-account cloned.** New sub-account created from the Next Level snapshot. Client user added.
+3. **Sub-account cloned.** New sub-account created from the Next Level snapshot. Client user added. The client user sees the features of the rung they bought and nothing half-built. They are told in writing what else exists and when it opens. The client connects their own Google, Facebook and Instagram accounts while logged in as themselves. Next Level never asks for or stores a client's passwords. (Added from the course notes, 2026-11-15.)
 4. **Custom values filled.** Every `nl_` value entered and read back.
 5. **Phone ready.** Number bought or forwarding set from the client's current number. Messaging registration filed if required.
 6. **Calendar connected.** Client's calendar linked. A test booking made and removed.
@@ -340,7 +385,9 @@ One short table, same day each week.
 | Calls answered | Calls answered by the AI across all client accounts, and as a share of calls received. |
 | Appointments booked by AI | Bookings made by the voice agent across all client accounts. |
 
-Also watch, from the sales side: inbound inquiries by platform, quiz completions, calls booked, calls held, Won. Audits sent, if the optional audit is run.
+Also watch, from the sales side: inbound inquiries by platform, lead magnet requests by post, quiz completions, calls booked, calls held, Won. Audits sent, if the optional audit is run.
+
+Script review, added from the course notes, 2026-11-15, PROPOSED: after every [Ray to set: number] calls held, compare calls held to Won. If the share is below [Ray to set: threshold], the script is rewritten before more calls are taken. Objections logged in the contact notes are the input.
 
 No targets are set here beyond the ones in the Blueprint: 10 paying agents by end of January, $3,000 monthly recurring revenue from the Founding 10, churn under 5%.
 

@@ -321,10 +321,82 @@ Unsubscribe: {{unsubscribe_link}}
 
 ---
 
+## One-off emails
+
+Added from the course notes, 2026-11-15. Draft for Ray to approve. These are single emails, not sequences. Each is sent by Ray to one person who asked for it. Each is under 120 words and carries the sender block.
+
+### After-call summary
+
+When: the same day as a 15-minute call that did not end in a yes. Only when the person said yes to "Shall I email you a one-page summary?" Log the yes in the contact.
+
+**Subject:** What we covered today
+
+Hi {{contact.first_name}},
+
+Thank you for the call today. Here is the summary you asked for.
+
+What you told me: {{their words from question 1}}. What you want: {{their words from question 5}}.
+
+What Next Level Answer does: it answers the calls you cannot take, asks your questions, books the appointment and sends you a summary. We set it up for you. It is live in 7 days from the day we have your details.
+
+The founding price is $300 a month. [Ray to set: usage included or rebilled for the Founding 10]
+
+Our next step is booked for {{next step date and time}}. Until then, call the demo line and test it: [Ray to add: demo line number]
+
+Ray
+
+Ray Ahmadi | Next Level
+[Ray to confirm: business name and mailing address for Next Level]
+Unsubscribe: {{unsubscribe_link}}
+
+### Lead magnet delivery
+
+When: someone asked for a free guide by commenting on a post or filling its form. This email delivers what they asked for. Marketing follow-up after it goes only to people who ticked the consent box on the form.
+
+**Subject:** Your copy of {{lead magnet name}}
+
+Hi {{contact.first_name}},
+
+Here is the guide you asked for: {{lead magnet link}}
+
+It takes about 10 minutes. Start with step 1 tonight.
+
+When you have done it, you will know where your business leaks first. The 6-question quiz on our page shows you what fixes it.
+
+If you would like to hear the fix on a live call, book 15 minutes with me here: {{custom_values.nl_booking_link}}
+
+Ray
+
+Ray Ahmadi | Next Level
+[Ray to confirm: business name and mailing address for Next Level]
+Unsubscribe: {{unsubscribe_link}}
+
+### The day after meeting in person
+
+When: the day after an event or a coffee. Only to a person who said yes to "May I email you?" Log the yes, the date and the place. Whether a business card alone is enough: [Ray to confirm with counsel].
+
+**Subject:** Good to meet you at {{event name}}
+
+Hi {{contact.first_name}},
+
+It was good to meet you at {{event name}} yesterday. You mentioned {{what they said about their business}}.
+
+Here is the number I told you about. It is the AI receptionist on my own line: [Ray to add: demo line number]. Call it and try to trip it up.
+
+If you like what you hear, we will take 15 minutes and I will show you how it would work for your business.
+
+Book a time here: {{custom_values.nl_booking_link}}
+
+Ray
+
+Ray Ahmadi | Next Level
+[Ray to confirm: business name and mailing address for Next Level]
+Unsubscribe: {{unsubscribe_link}}
+
 ## Text messages
 
 No text follow-up is written here. Texts need their own consent (the second checkbox on the quiz), a named sender and STOP handling, and the number must be registered first. Draft them once the number is approved.
 
 ## Next step
 
-Ray reads all 12, fills or removes each proof bracket, and marks each email approve or change.
+Ray reads all 12, fills or removes each proof bracket, and marks each email approve or change. The three one-off emails added on 2026-11-15 need the same review.

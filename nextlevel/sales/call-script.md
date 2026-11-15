@@ -4,6 +4,8 @@ Draft for Ray to approve. Ray is the seller and the closer on every call for now
 
 Builds on Ray's 5-step pitch script. Steps here: open, discover, demo, offer, close.
 
+**Before this call ever happens.** Every first contact (a comment reply, a direct message, a hello at an event) has one goal: this 15-minute call. No price and no pitch before it. (Added from the course notes, 2026-11-15.)
+
 ## Before the call (2 minutes)
 
 - Open the contact. Read the quiz result: missed calls, reviews, dead database or ads.
@@ -12,6 +14,7 @@ Builds on Ray's 5-step pitch script. Steps here: open, discover, demo, offer, cl
 - Have the demo line ready to dial on speaker. [Ray to add: demo line number]
 - Have the checkout link ready. Blocked until Stripe verification. Until then: take the yes, book the onboarding call, send the link when it is live.
 - Know how many founding places are left. Say the true number.
+- Read the pre-call brief if there is one: three lines drafted by the Leads and Booking role from the quiz answers and the content they came from. It is a draft to read, not a script to follow. (Added from the course notes, 2026-11-15. See `learning/apply-map.md`.)
 
 ## Timing
 
@@ -54,6 +57,19 @@ Ask, then stop talking. Write down their exact words.
 
 5. **"If every call was answered and booked for the next 30 days, what would be different for you?"**
    Listening for: the result they want. Repeat it back in their words.
+
+**What to listen for beyond the phone.** (Added from the course notes, 2026-11-15.) Each of these points to a later rung. Write it down. Do not sell it on this call.
+
+| They say | It points to |
+|---|---|
+| Web or ad leads wait hours for a reply | Answer (speed-to-lead), later Ads |
+| Calls after hours and on weekends go nowhere | Answer |
+| Few Google reviews, or they forget to ask | Reviews |
+| Contacts are in a phone, a spreadsheet or nowhere | Nurture |
+| Nobody watches the ads | Ads |
+
+One extra question when they came from a form or an ad, not a phone problem:
+"What happens when someone fills in the form on your website at 10 PM on a Friday?"
 
 Bridge:
 "So today {{their words from Q1}}. You get about {{their number}} new calls a week and some of them are gone by the time you call back. And what you want is {{their words from Q5}}. Did I get that right?"
@@ -99,6 +115,8 @@ You get the same receptionist, set up for your business: your name, your areas, 
 
 We set all of it up for you. You are live in 7 days from the day you send us your details. We check in on day 3 and day 14, and you get a results report every month."
 
+One-line version, if they ask what it is in a sentence. PROPOSED, Ray to approve: "Your calls are answered and booked without you stepping out of a showing."
+
 ## 5. The price
 
 "The founding price is $300 a month."
@@ -134,6 +152,14 @@ Listen. It is usually one of three:
 
 Do not push. Do not invent a deadline. If the founding places are nearly gone, say the true number.
 
+### Three more, short answers
+
+Added from the course notes, 2026-11-15. Draft for Ray to approve.
+
+- **"I do not have time to set this up."** "You do not set it up. We do. Your part is one short form and one test call to your own line."
+- **"AI does not apply to my business."** "You do not have to use AI anywhere else. This does one job: it picks up the calls you cannot take and books them. You heard it a minute ago."
+- **"Next Level is new."** "It is. My business is not. I have worked in GTA real estate for 12+ years and this runs on my own line today. That is why I showed it to you live."
+
 ## 7. The close
 
 "Based on what you told me, this fits. You miss calls when you are with clients and you want {{their words from Q5}}. Let's get you set up.
@@ -149,6 +175,7 @@ If not today:
 1. Agree one clear next step with a date and time. Book it on the calendar now.
 2. Send the demo line number so they can test it.
 3. Log their exact objection in the contact.
+4. Ask: "Shall I email you a one-page summary of what we covered?" If yes, send the after-call summary the same day (`follow-up-emails.md`, "After-call summary"). Log the yes. (Added from the course notes, 2026-11-15.)
 
 If it is a no:
 "Understood. Thank you for the time." Offer the community. Mark the stage. No more sales emails unless they asked for them.
@@ -177,6 +204,14 @@ The one thing I need from you is the form, today. We will talk on {{onboarding c
 - Paste their exact words for Q1 and Q5 into the contact notes. No deal details.
 - Log the outcome: Won, next step booked, or no.
 - If Won: check the intake form went out.
+
+## Reviewing this script
+
+Added from the course notes, 2026-11-15. PROPOSED, Ray to approve.
+
+- After every [Ray to set: number] calls held, Ray looks at calls held against Won and at the objections logged.
+- If the same objection comes up again and again, the answer is rewritten here first, then on the sales page.
+- The Analytics Loop role prepares the count. Ray decides the change.
 
 ## Handing the call to Nadiya
 

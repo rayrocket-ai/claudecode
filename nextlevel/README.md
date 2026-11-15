@@ -97,6 +97,30 @@ This rule decides the build order below. It also decides what the "for businesse
 | `sales/call-script.md` | The 15-minute call. | Ray. Nadiya later. |
 | `sales/follow-up-emails.md` | Four follow-up sequences by problem, with the CASL sender block. | Ray, Diana |
 | `learning/course-notes-template.md` | Empty note-taking template for any training the team owns. | Ray's team |
+| `learning/course-notes-digest.md` | Digest of Ray's course notes, in our own words, section by section. | Ray, Diana |
+| `learning/apply-map.md` | Each lesson mapped to where it lands in Next Level, with status. Where the notes and Ray's decisions differ. How the one-person company system runs it. | Ray |
+| `learning/content-additions.md` | Content ideas, hooks, lead magnets and outreach drafts from the notes, to be merged into `content/`. | Ray, Diana |
+| `learning/open-questions.md` | What the notes leave unanswered, and the next lessons worth taking. | Ray |
+
+## What we took from the course notes
+
+Added 2026-11-15. Ray's notes on a training course he is enrolled in were read in full and applied. Next Level is Ray's own product on his own platform. It is not connected to the course or its author, and no income figure, student result or template from the course is used anywhere in this folder.
+
+- `learning/course-notes-digest.md`: what the notes say, in our own words.
+- `learning/apply-map.md`: where each idea landed, what conflicts with Ray's decisions, and which AI team does what.
+
+What changed in these files (each change is marked "Added from the course notes, 2026-11-15"):
+
+| File | What was added |
+|---|---|
+| `offer.md` | Secondary channels and the first-contact rule (section 1). One plain line per rung (section 3). Optional founder review at day 30 (section 6). Three objections (section 11). The five-test product check (section 12). |
+| `saas-build-spec.md` | Three working sub-accounts and the version 1 scope (section 1). The NL Demo sub-account (section 2a). The build and test standard for every workflow, the reminder branch, the review request rule and the parked ideas (section 3). Welcome video, client agreement and client user access (section 8). Script review measure (section 12). |
+| `sales/call-script.md` | First-contact rule, pre-call brief, what to listen for, the after-hours question, the one-line version, three short objection answers, the after-call summary step, the script review. |
+| `sales/follow-up-emails.md` | Three one-off emails: after-call summary, lead magnet delivery, the day after meeting in person. |
+
+Nothing approved was changed: brand, platform, product names, prices, who sells, the proof and the inbound-first plan all stand. Every addition that is a suggestion is marked `PROPOSED, Ray to approve`.
+
+New questions for Ray from this work are in `learning/open-questions.md`. The main ones: approve or cut the secondary channels, approve the NL Demo sub-account, set the script review numbers, and confirm with counsel the consent basis for any message to a person who has not asked.
 
 ## Build order
 
