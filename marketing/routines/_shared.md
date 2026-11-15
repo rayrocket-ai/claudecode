@@ -7,7 +7,8 @@
 - Meta ad account for Ad Advisor: 732663023528570.
 - Rulebook: marketing/knowledge in this repo (mirrored in MOS Knowledge). Read voice/, content/, channels/, compliance/ and rules/ before writing anything.
 - Gmail: read for lead notifications and create drafts only. Never send, reply, forward, label, archive or delete.
-- Load connector tools with ToolSearch (airtable, slack, metricool, google drive, gmail, canva, ad advisor).
+- Zoom for Claude: read meeting lists and recaps only, for calls held and question themes. Never create, change or delete a meeting.
+- Load connector tools with ToolSearch (airtable, slack, metricool, google drive, gmail, zoom, canva, ad advisor).
 
 ## Hard rules
 - Unattended run: do not ask questions. If a tool fails twice or needs a sign-in, note it in one line and move on.

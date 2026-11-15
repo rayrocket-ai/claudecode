@@ -29,6 +29,8 @@ Weekdays 7:52  Morning brief                one page: what worked, what's booked
 | Scheduling and post analytics | Metricool brand "rayahmadi" |
 | Leads, email sending, consent | HighLevel, through Viktor |
 | Meta lead ads | Ad Advisor, read only |
+| Calls held and what people asked | Zoom for Claude recaps, read only |
+| Lead counts when Viktor has not reported | Gmail lead notifications, read only |
 
 ## Changing how it behaves
 
