@@ -85,8 +85,8 @@ exposure. State that day:
   ad group 198558882666, ad 820207161773. Link fixed Nov 15: now
   rayahmadi.com/contact with UTM tags. Audience widened Nov 15: in-market
   80157 plus database list plus video viewers).
-- Google: 85 Sidney Demand Gen 24461687730, built Nov 15, PAUSED, $10/day
-  (Google refused $5). Live ad group 202330243619 (Clarington, Oshawa,
+- Google: 85 Sidney Demand Gen 24461687730, built Nov 15, PAUSED, $7/day
+  (Google refuses $5 and $6; $7 is the lowest it took). Live ad group 202330243619 (Clarington, Oshawa,
   Whitby; YouTube only; in-market 80157; presence only). Ad group
   202233108156 (Bowmanville only) is paused to avoid overlap. Video
   hSIkkg-5ANc.
@@ -129,9 +129,9 @@ time a tool has room, then delete the line.
    on YouTube (Ray uploads 53-alpha-A-tour-15s from Drive), then build a
    YouTube campaign with it PAUSED and ask Ray to switch over.
 
-3. 85 Sidney launch. Campaign 24461687730 is built and paused at $10/day.
-   Ray approved $5/day; Google's minimum for this campaign type is higher.
-   Switch on (resume_campaign) only after Ray approves $10/day in chat.
+3. 85 Sidney launch. Campaign 24461687730 is built and paused at $7/day,
+   the lowest Google accepts. Ray said "5 on all" on Nov 15, so do not
+   switch it on until he approves $7/day in chat.
 4. 53 Alpha tour cut to YouTube. The file 53-alpha-A-tour-15s-9x16.mp4 is
    private in Ray's Drive, so Metricool cannot fetch it. Once Ray sets it to
    "Anyone with the link", upload it unlisted through Metricool (brand
@@ -201,8 +201,8 @@ live ad on a listing that is still for sale.
 
 # Building YouTube campaigns through Adspirer (learned Nov 15)
 
-- create_youtube_campaign makes a Demand Gen campaign. Google refuses $5 a
-  day for a new one; $10 was accepted. The existing $5 campaigns predate
+- create_youtube_campaign makes a Demand Gen campaign. Google refuses $5
+  and $6 a day for a new one; $7 is accepted. The existing $5 campaigns predate
   this or are a different type.
 - Locations live on the ad group, not the campaign. Campaign-level radius
   and city adds are refused. Use add_demandgen_ad_group with
@@ -215,6 +215,16 @@ live ad on a listing that is still for sale.
 - get_ad_creative fails on Demand Gen video ads (Adspirer bug). Videos
   already in the account: 53 Alpha full video No5y2mid2OE, Buttonleaf
   sVpajNRcXic.
+
+# Leads
+
+campaigns/LEAD-WORKFLOW.md is the lead workflow: where leads arrive, Gmail
+labels, reply templates, time limits. The "Lead desk" scheduled task
+(trig_01Wx577ApU37LZhcHh2hMww3, every 2 hours from 8:17 AM to 8:17 PM
+Toronto) runs it: logs new leads, drafts replies, flags overdue ones. It
+never sends email. The daily run adds one line of lead numbers. The saved
+GoHighLevel token is refused for workflows, forms and pipelines, so nothing
+is built inside GoHighLevel from here. Lead details never go in the repo.
 
 # Dashboard
 
