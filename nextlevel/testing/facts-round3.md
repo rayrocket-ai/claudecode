@@ -5,13 +5,70 @@ Purpose: replace vague lines in the offer with lines that are true, or that are 
 ## How to read this file
 
 - Every row was found on 2026-11-15.
-- **No official page could be opened.** In this session `help.gohighlevel.com` and `gohighlevel.com` did not resolve (blocked by the session's network settings), so page fetching was stopped after those two hosts, as instructed. Everything below comes from web search result text. That is why no row is marked "confirmed on an official page".
+- **Updated 2026-11-15 after reading the official pages.** In the first pass no official page could be opened, and everything came from web search result text. Later the same day help.gohighlevel.com, www.gohighlevel.com and marketplace.gohighlevel.com were opened to the session and read. The section "Updated 2026-11-15 after reading the official pages" below lists every row that is now confirmed and every fact that changed. Where it and an older row disagree, the update section is right. Rows about ideas.gohighlevel.com, Zapier, the CRMs and the Canadian regulators were not re-read and keep their old labels.
 - Confidence labels used:
   - **Snippet, official page**: seen in search result text only, and the result is the vendor's or the government's own page. Open the URL and check before publishing.
   - **Snippet, third party**: seen in search result text only, from a blog, a reseller or a connector listing.
   - **Not found**: no source turned up.
+  - **Confirmed on the official page**: the page was opened and read on 2026-11-15. Used in the update section.
 - To raise any row to "confirmed", someone opens the URL in a normal browser, or checks the setting inside the HighLevel account. The in-account check is the stronger one for prices, languages and recording.
 - All HighLevel prices are in US dollars. This is headline information, not legal advice.
+
+## Updated 2026-11-15 after reading the official pages
+
+Full tables with every URL are in `research/platform-teardown.md` section f. Page text is saved in `research/pages/`. All prices are in US dollars and HighLevel says to confirm them in-app before quoting.
+
+### Rows that are now confirmed, unchanged
+
+| Row | New label |
+|---|---|
+| a. Voice Engine $0.045 a minute from 20 May 2026, and the $0.60 worked example | Confirmed on the official page |
+| a. Rebilling AI with a markup or a fixed rate | Confirmed on the official page |
+| a. Inbound call $0.01165 (list $0.0129), outbound $0.0166 (list $0.0180), toll-free inbound $0.0198, whole-minute billing, two legs on inbound | Confirmed on the official page |
+| a. SMS $0.00747 a segment, Canada and US, in and out | Confirmed on the official page |
+| a. Local number $1.15 a month | Confirmed on the official page. The $3.45 figure is not on the page |
+| a. Recording $0.0025 a minute, storage $0.0005 a minute a month, transcription $0.024 a minute | Confirmed on the official page |
+| b. Language picker, and the ten migrated languages | Confirmed on the official page |
+| c. Recording can be switched on or off for a number, with a separate recording message | Confirmed on the official page (help article, not the changelog) |
+| c. Transcripts stay in the account, admins can view, delete or export, and text leaves only through a workflow action | Confirmed on the official page |
+| d. Hosting on Google Cloud and Amazon Web Services, infrastructure in the United States, TLS 1.2 or 1.3, AES-256 | Confirmed on the official page |
+| e. Zapier through the LeadConnector app. Outbound webhook as a workflow action | Confirmed on the official page |
+
+### Facts that changed or are new
+
+| # | Topic | What facts-round3 said | What the official page says | URL |
+|---|---|---|---|---|
+| 1 | Speech rates | Four rates: $0.015, $0.015, $0.035, $0.170 | Seven rows. New: ElevenLabs Multilingual V2 $0.05, ElevenLabs V4 $0.17, ElevenLabs V4 Turbo $0.07 | https://help.gohighlevel.com/support/solutions/articles/155000006652-ai-product-pricing-update |
+| 2 | Speech-to-speech agents | Not mentioned | A second way to run an agent at one all-in rate per minute: $0.10 (two Gemini models), $0.12 (GPT Live 1), $0.20 (GPT Realtime 2 and 2.1). Phone charges are extra. Prompts capped at 15,000 tokens | Same article |
+| 3 | Language model examples | GPT-4o Mini $0.15, Claude 4.5 Sonnet $3.00 per million tokens | GPT-4o Mini is not listed now. Listed examples include GPT-5 Nano $0.05, GPT-5 Mini $0.25, GPT-4.1 Mini $0.40, Claude 4.5 Sonnet $3.00. Still no per-minute figure, so the token line in the arithmetic stays an assumption | Same article |
+| 4 | AI Employee plans | Two: Growth $50 and Unlimited $97 | Three: Starter $20 (only for agencies on the $497 Founder plan, no Voice AI allowance), Growth $50 (100 minutes), Unlimited $97 | Same article |
+| 5 | Past the allowance | Articles disagree; latest says paused by default | Still two statements. Pricing article (10 Nov): paused until Extra Usage is on. Usage-limits article (22 Sep): with no spending limit, usage continues and is billed. Test in the account | Same article, and https://help.gohighlevel.com/support/solutions/articles/155000007813-ai-usage-limits |
+| 6 | Plan needed to rebill | Not stated | Rebilling at cost: $297 and $497 plans. Rebilling with markup, and rebilling AI usage: $497 plan only. SaaS mode is on the $497 Founder plan | https://help.gohighlevel.com/support/solutions/articles/155000001156-highlevel-pricing-guide , https://www.gohighlevel.com/pricing |
+| 7 | "At cost" | Usage passed through with no markup | With rebilling on, HighLevel adds a fixed 5% at the sub-account level to registration fees and SMS and MMS carrier fees | https://help.gohighlevel.com/support/solutions/articles/48001223556-phone-system-pricing-billing-guide |
+| 8 | Carrier fee per text | "About $0.005", third party | Official US table: $0.0035 to $0.005 outbound, $0.0025 to $0.01 inbound, by carrier. No Canadian carrier row | Same guide |
+| 9 | Inbound call forwarded to an outside phone | Not listed | $0.02 a minute in total for the two legs | Same guide |
+| 10 | **The cap** | "A per-client minute cap may not exist as a setting" | **It exists, in two forms.** AI Usage Limits: a monthly dollar limit per sub-account, up to $1,000, with a choice to block AI at the limit; the default only notifies; alerts at 70, 80, 90 and 100 percent. SaaS Usage Limits (Labs beta): a monthly Voice AI minute allowance inside a SaaS plan, with overage set to Bill or Block and a Usage tab the client can see | https://help.gohighlevel.com/support/solutions/articles/155000007813-ai-usage-limits , https://help.gohighlevel.com/support/solutions/articles/155000009635-saas-usage-limits-manage-client-usage |
+| 11 | What a caller hears when AI is blocked | Not covered | Not stated on any page. Must be tested | n/a |
+| 12 | The longer language list | "Not read in full" | Read in full. It includes Persian, Urdu, Arabic, Tamil, Hindi and "Chinese" with no dialect. **Punjabi and Dari are not on it.** The newer article still says to rely on the picker | https://help.gohighlevel.com/support/solutions/articles/155000004683-voice-ai-multi-language-support |
+| 13 | Switching language by itself | "Not confirmed" | Stated for speech-to-speech agents: with Multilingual on, the agent replies in the caller's language. Other agents use only the languages selected. Still test before promising | https://help.gohighlevel.com/support/solutions/articles/155000009013-multi-language-support-for-voice-ai-agents |
+| 14 | Recording off on a Voice AI agent with a transcript still produced | Not found | Still not stated. The logs article says recordings appear "only when recording is enabled". The transcript trigger is described for a "recorded call". Test in the account | https://help.gohighlevel.com/support/solutions/articles/155000007687-voice-ai-agent-logs-and-call-details |
+| 15 | How long data is kept | Recordings auto-delete at 90 days by default; no period for transcripts | The 90-day setting was on a changelog host that was not open, so it stays unconfirmed. The security overview says customer data is retained while the agency is an active customer, with deletion on written request | https://help.gohighlevel.com/support/solutions/articles/155000000574-highlevel-security-and-compliance-overview |
+| 16 | Exporting call logs | "Call logs can be exported" | The page says a bulk export holds up to the 50 most recent calls matching the filters. Test before relying on it for the leaving export | https://help.gohighlevel.com/support/solutions/articles/155000005900-call-logs-for-voice-ai-agents |
+| 17 | Deleting an account | Not covered | A sub-account deletion can be undone for 24 hours, then it is permanent, and its numbers are deleted for good | https://help.gohighlevel.com/support/solutions/articles/48001184862-how-to-delete-a-subaccount-location |
+| 18 | What a snapshot copies | Not covered | Voice AI agents (prompts, settings, actions) and Conversation AI bots copy inside a snapshot. Phone numbers, contacts, conversations and integrations do not | https://help.gohighlevel.com/support/solutions/articles/48000982511-snapshots-overview |
+| 19 | What the API can create | Not covered | Custom values, custom fields, tags, pipelines, calendars, contacts, voice agents and their actions: yes. Workflows: only where HighLevel has enabled the workflow API for the sub-account. Forms: read only | https://marketplace.gohighlevel.com/docs/ghl/workflows/create-workflow and the pages listed in the teardown |
+| 20 | Webhook cost | $0.01 per execution | Confirmed for premium workflow executions, with 100 free in total and paid Workflow Pro plans from $10 a month | Pricing article |
+| 21 | Sending data out during a call | Not covered | Voice AI Custom Actions can send a request to an outside system during a live call | https://help.gohighlevel.com/support/solutions/articles/155000005461-voice-ai-custom-actions |
+| 22 | ISO/IEC 27001 certificate | Reported in the Trust Center | Not seen on the pages read today. SOC 2 Type II is referred to | Security overview |
+
+### What this does to the arithmetic and the lines below
+
+- The planning case of 0.1269 US dollars a minute still stands for a Voice Engine agent on an ElevenLabs Flash voice. A speech-to-speech agent costs $0.10 to $0.20 before phone charges, so with phone it is about 0.112 to 0.213. At the top of that range the $0.30 CAD extra minute (break-even 0.214 US dollars at 1.40) has no margin. Ray chooses the model before the first client.
+- "What we can safely say" item 4: the ten languages are confirmed. Persian, Urdu, Arabic and "Chinese" are on the longer official list and still need a test call. Punjabi and Dari are on no official list.
+- "What we can safely say" items 5 and 6: the hosting statement is confirmed. Say "HighLevel says".
+- "Do not say" item 2 stays. Automatic language switching is described for one type of agent and has not been tested.
+- "Do not say" item 10 stays until the recording test is done.
+- "Things only the account can settle" item 2 is partly settled: the cap is a real setting. What remains is the test of what a caller hears when AI is blocked, and whether the dollar limit counts HighLevel's cost or the rebilled price.
 
 ## The table
 

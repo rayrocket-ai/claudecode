@@ -1,6 +1,8 @@
 # Research: what Hexona Systems and the Automation Institute sell
 
-**Neither site could be read from this session.** www.hexonasystems.com, www.hexonasystems.com/firm, licensing.hexonasystems.com and automationinstitute.ai were each tried once on 2026-11-15 and each failed at the network level (the hosts are outside this session's allowed domains). Nothing below is "read on the official page". Everything comes from search result snippets of those pages, or from Ray's earlier notes.
+**Updated 2026-11-15 after reading the official pages.** Later the same day the hosts were opened to this session and the official pages were read: www.hexonasystems.com (25 pages), licensing.hexonasystems.com, automationinstitute.ai (4 pages) and hamzaautomates.com (19 pages). The section "Updated 2026-11-15 after reading the official pages" below corrects the tables and raises or lowers each confidence rating. Where that section and an older table disagree, that section is right. The full teardown is in `platform-teardown.md` and the saved page text is in `pages/`.
+
+The first pass of this file was written when none of the sites could be read, from search result snippets and Ray's earlier notes. Rows not mentioned in the update section still rest on snippets only.
 
 Draft for Ray. Research date: 2026-11-15. Public sources only. Next Level has no affiliation with Hamza Baig, Hexona Systems, the Automation Institute or any of their programs, and nothing here should be read as implying one.
 
@@ -8,13 +10,42 @@ Draft for Ray. Research date: 2026-11-15. Public sources only. Next Level has no
 
 | Label | Meaning |
 |---|---|
-| Read on the official page | The page was opened and read. **No finding in this file has this label.** |
+| Read on the official page | The page was opened and read on 2026-11-15. Used in the update section below. |
 | Seen in a search snippet | A search engine showed this text as an excerpt of the named URL on 2026-11-15. The page itself was not opened. Snippets can be old, cut short or merged from two pages. |
 | From Ray's earlier notes, unverified | Recorded in Ray's planning doc (dated 2026-10-29) or his course notes (dated 2026-11-14). Not confirmed from here. |
 
-Confidence: **Medium** means two or more snippets agree. **Low** means one snippet, or snippets that conflict. Nothing is rated High, because no page was read.
+Confidence: **High** means read on the official page on 2026-11-15. **Medium** means two or more snippets agree. **Low** means one snippet, or snippets that conflict.
 
 Every revenue figure, client count, member count, student count and rating below is **the seller's own claim** or a number displayed by a platform at an unknown date. None is verified. None should be repeated in Next Level material.
+
+## Updated 2026-11-15 after reading the official pages
+
+Every figure below is still the seller's own claim. None is repeated in Next Level material.
+
+| Row in the tables below | What the official page says | URL | New confidence |
+|---|---|---|---|
+| Paid diagnostic, $5,000 | **Not on any page read.** /firm is now an About page. The diagnostic is not in the navigation or the sitemap. /diagnostic, /get-started and /general-1 were not opened because nothing links to them | https://www.hexonasystems.com/firm | High that it is no longer the public offer. The conflict noted below is settled: the site moved to "AI employees" |
+| Implementation, $15,000 to $75,000 | Not on any page read. The About page says an engagement starts with a free one-hour consult, "then a fixed scope and fixed price". No price is published | https://www.hexonasystems.com/firm | Low that the range is current |
+| Done-for-you "AI employees" | **Confirmed as the main offer.** Six named roles: receptionist, sales follow-up, dispatcher, office admin, collections, retention. Built and run by the firm. Entry step: a free one-hour consult booked through a form that asks revenue band, tools in use and what to hand over first. Price: not published | https://www.hexonasystems.com/ , https://www.hexonasystems.com/ai-employees , https://www.hexonasystems.com/book | High |
+| Software licence, two monthly plans | The page shows $147 a month and $97 a month side by side with no text separating them. It reads as an old price and a current price, not two plans. Month to month, and cancelling closes the account and its sub-accounts: confirmed | https://licensing.hexonasystems.com/ | High on $97, on month to month and on the closing of accounts. Low on "two plans" |
+| 3 sub-accounts on registration, $14.99 per extra sub-account | Not on the page read | https://licensing.hexonasystems.com/ | Low |
+| Licence extras recorded by Ray | Confirmed on the page: a resource vault of playbooks and scripts, an onboarding course, live chat support, support queries handled for the licensee at the start, use of the firm's brand and case studies, a community with sales coaches. **Not confirmed:** a set of custom AI assistants, and a snapshot for moving out later | https://licensing.hexonasystems.com/ | High on the confirmed items. Low on the rest |
+| "Done-for-you setup in 10 to 14 days" | **Correction.** The page says a reasonable time to learn the software and be ready to sell is "10 days to 2 weeks". It does not describe a setup service | https://licensing.hexonasystems.com/ | High that the earlier note was a misreading |
+| Suggested resale price | The page suggests anything from $99 a month to a one-time $10,000. The $1,000 figure was not seen | https://licensing.hexonasystems.com/ | High on what the page says. It is a suggestion, not a result |
+| "Essential" licence, support add-on, licensee community, "learn SaaS" page | Those hosts were not open to this session | n/a | Unchanged |
+| Founding year | The site says the founder started building automations in 2021 and founded the firm in 2022 | https://www.hexonasystems.com/firm | High. Replaces "2021" |
+| Guarantee | None found on any page read. The firm's terms say nothing on the site is an offer and each engagement has its own written agreement | https://www.hexonasystems.com/terms | High that none is published |
+| Free community ("Incubator") and paid community ("Accelerator") | Confirmed as the two programs of the Automation Institute, both hosted on Skool. The Accelerator lists mentorship, weekly group events and an advanced curriculum. **No price is on the official site** | https://automationinstitute.ai/ | High on the structure. Price still Low |
+| Institute membership at $99, $149, $299 and $399 a month | **Not on automationinstitute.ai.** That snippet came from a different domain | https://automationinstitute.ai/ | Low. Treat as not part of the current offer |
+| Institute as an umbrella brand | Confirmed. The site also runs a certified partner program with a public directory and referrals, and a partner application page | https://automationinstitute.ai/partners/ | High |
+| Refunds and earnings disclaimer | Refund terms "vary by program" and sit on each checkout page. The Institute's terms say it does not guarantee business outcomes or income | https://hamzaautomates.com/faq , https://automationinstitute.ai/terms/ | High |
+| 1:1 coaching | The courses page lists three programs and a "Book a Call" button. No coaching product or price is described | https://hamzaautomates.com/courses | Low |
+| New: an affiliate bonus for HighLevel signups | Signing up to HighLevel through the founder's link is described as adding a setup call, onboarding and weekly calls, recordings, courses, a community and 100 industry snapshots | https://hamzaautomates.com/gohighlevel/gohighlevel-bonus | High |
+| New: a public HighLevel how-to hub | About 60 public articles on the personal site that also carry the affiliate link | https://hamzaautomates.com/gohighlevel | High |
+
+**What this changes in the reading of the model.** The client side no longer starts with a paid diagnostic. It starts with a free consult and a fixed-price proposal. The ladder diagram below still shows the diagnostic; read that box as "free one-hour consult, then a fixed scope and price". The education side is as described, with a partner certification step added at the top and an affiliate link added at the bottom.
+
+**The 20-minute check list near the end of this file** is now done for items 1 to 4 and 6. Item 5 (the two community pages) is still open because that host was not available.
 
 ## Business 1: Hexona Systems
 
@@ -142,7 +173,7 @@ Then correct the tables above and raise or lower each confidence rating.
 
 ## Sources
 
-All reached on 2026-11-15 as search listings and indexed excerpts only. None could be opened from this session.
+First pass: all reached on 2026-11-15 as search listings and indexed excerpts only. Second pass, the same day: the pages on www.hexonasystems.com, licensing.hexonasystems.com, automationinstitute.ai and hamzaautomates.com named in the update section were opened and read. The other hosts in this list were not.
 
 - https://www.hexonasystems.com/
 - https://www.hexonasystems.com/firm

@@ -33,3 +33,6 @@ Thumbs.db
 # Temp
 /tmp/
 *.tmp
+
+# Private reference copies of third-party web pages (not ours to republish)
+nextlevel/research/pages/
