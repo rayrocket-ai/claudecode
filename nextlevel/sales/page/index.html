@@ -3,13 +3,17 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..600;1,6..96,400..600&family=DM+Mono:wght@400;500&family=Hanken+Grotesk:wght@400;500;600&family=Mrs+Saint+Delafield&display=swap">
 <style>
 /* Layout: full-bleed bands on a strict column, a fixed numbered index in the left margin on desktop, hairline rules between everything.
-   Ink and paper carry the page; brass is the only accent. The two dark bands are the intake and the founding offer. */
+   True white and near-black carry the page. One vivid primary (electric blue) does the pointing; one warm secondary (coral) is kept for
+   the missed-call marks and the "opening next" tags. The intake sits on a pale blue tint band; the founding offer is the one dark band. */
 :root{
-  --paper:#f2efe8; --paper-2:#e8e4da; --ink:#141311; --muted:#5c5850; --rule:#cdc7ba; --accent:#8a5a17;
-  --btn-bg:#141311; --btn-ink:#f2efe8; --btn-hover:#8a5a17;
-  --band:#121110; --band-ink:#f2efe8; --band-muted:#aaa497; --band-rule:#35322c; --band-line:#8d8779; --band-accent:#d8b06c; --band-warn:#f2ab9b;
-  --sheet:#f6f3ed; --sheet-ink:#141311; --sheet-muted:#5c5850; --sheet-rule:#cdc7ba; --sheet-accent:#8a5a17;
-  --index:#ffffff; --index-dim:#9a9a9a;
+  --paper:#ffffff; --paper-2:#f4f6fc; --ink:#0b0d17; --muted:#555c6e; --rule:#dde2ee; --rule-strong:#0b0d17;
+  --accent:#1f3fff; --accent-tint:#e9edff; --on-accent:#ffffff; --warm:#f2551c; --warm-ink:#c2410c; --warm-tint:#fff1ea; --warn:#b3261e;
+  --btn-bg:#1f3fff; --btn-ink:#ffffff; --btn-hover:#0b0d17; --btn-glow:rgba(31,63,255,.45);
+  --tint:#f2f5ff; --tint-rule:#d3dbf3; --tint-line:#7a84a3;
+  --band:#0a0f24; --band-ink:#ffffff; --band-muted:#aab2c8; --band-rule:#252c4a; --band-line:#7c86a6; --band-accent:#93a6ff; --band-warn:#ffb4a2; --band-glow:rgba(63,95,255,.34);
+  --band-btn:#ffffff; --band-btn-ink:#0a0f24; --band-btn-hover:#93a6ff;
+  --live-a:#1f3fff; --live-b:#1631d6; --live-ink:#ffffff; --live-glow:rgba(31,63,255,.38);
+  --sheet:#ffffff; --sheet-ink:#0b0d17; --sheet-muted:#555c6e; --sheet-rule:#dde2ee; --sheet-accent:#1f3fff; --sheet-tint:#e9edff; --sheet-edge:#d3dbf3; --sheet-shadow:rgba(31,63,255,.22);
   --display:"Bodoni Moda","Didot","Bodoni 72","Playfair Display",Georgia,serif;
   --body:"Hanken Grotesk",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
   --mono:"DM Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
@@ -17,16 +21,24 @@
   --ease:cubic-bezier(.2,.75,.2,1);
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --paper:#0f0e0c; --paper-2:#181613; --ink:#efebe2; --muted:#a59f92; --rule:#2e2b26; --accent:#d8b06c;
-  --btn-bg:#efebe2; --btn-ink:#0f0e0c; --btn-hover:#d8b06c;
-  --band:#191714; --band-ink:#f2efe8; --band-muted:#aaa497; --band-rule:#3a362f; --band-line:#8d8779; --band-accent:#d8b06c; --band-warn:#f2ab9b;
-  --sheet:#ebe7de; --sheet-ink:#141311; --sheet-muted:#55514a; --sheet-rule:#c4bdaf; --sheet-accent:#7d5113;
+  --paper:#090b14; --paper-2:#11152a; --ink:#f3f5fb; --muted:#a3abc0; --rule:#252a3d; --rule-strong:#59617d;
+  --accent:#93a6ff; --accent-tint:#171d3d; --on-accent:#090b14; --warm:#ff7a4d; --warm-ink:#ffa27d; --warm-tint:#2a1810; --warn:#ffb4a2;
+  --btn-bg:#93a6ff; --btn-ink:#090b14; --btn-hover:#ffffff; --btn-glow:rgba(147,166,255,.28);
+  --tint:#0f1324; --tint-rule:#262d4a; --tint-line:#7c86a6;
+  --band:#111732; --band-ink:#ffffff; --band-muted:#aab2c8; --band-rule:#2b3358; --band-line:#8f99b8; --band-accent:#93a6ff; --band-warn:#ffb4a2; --band-glow:rgba(84,112,255,.30);
+  --band-btn:#ffffff; --band-btn-ink:#0a0f24; --band-btn-hover:#93a6ff;
+  --live-a:#2a48ff; --live-b:#1a33d0; --live-ink:#ffffff; --live-glow:rgba(42,72,255,.45);
+  --sheet:#f6f8fd; --sheet-ink:#0b0d17; --sheet-muted:#555c6e; --sheet-rule:#d9dfec; --sheet-accent:#1f3fff; --sheet-tint:#e6ebff; --sheet-edge:#262d4a; --sheet-shadow:rgba(0,0,0,.5);
   color-scheme:dark}}
 :root[data-theme="dark"]{
-  --paper:#0f0e0c; --paper-2:#181613; --ink:#efebe2; --muted:#a59f92; --rule:#2e2b26; --accent:#d8b06c;
-  --btn-bg:#efebe2; --btn-ink:#0f0e0c; --btn-hover:#d8b06c;
-  --band:#191714; --band-ink:#f2efe8; --band-muted:#aaa497; --band-rule:#3a362f; --band-line:#8d8779; --band-accent:#d8b06c; --band-warn:#f2ab9b;
-  --sheet:#ebe7de; --sheet-ink:#141311; --sheet-muted:#55514a; --sheet-rule:#c4bdaf; --sheet-accent:#7d5113;
+  --paper:#090b14; --paper-2:#11152a; --ink:#f3f5fb; --muted:#a3abc0; --rule:#252a3d; --rule-strong:#59617d;
+  --accent:#93a6ff; --accent-tint:#171d3d; --on-accent:#090b14; --warm:#ff7a4d; --warm-ink:#ffa27d; --warm-tint:#2a1810; --warn:#ffb4a2;
+  --btn-bg:#93a6ff; --btn-ink:#090b14; --btn-hover:#ffffff; --btn-glow:rgba(147,166,255,.28);
+  --tint:#0f1324; --tint-rule:#262d4a; --tint-line:#7c86a6;
+  --band:#111732; --band-ink:#ffffff; --band-muted:#aab2c8; --band-rule:#2b3358; --band-line:#8f99b8; --band-accent:#93a6ff; --band-warn:#ffb4a2; --band-glow:rgba(84,112,255,.30);
+  --band-btn:#ffffff; --band-btn-ink:#0a0f24; --band-btn-hover:#93a6ff;
+  --live-a:#2a48ff; --live-b:#1a33d0; --live-ink:#ffffff; --live-glow:rgba(42,72,255,.45);
+  --sheet:#f6f8fd; --sheet-ink:#0b0d17; --sheet-muted:#555c6e; --sheet-rule:#d9dfec; --sheet-accent:#1f3fff; --sheet-tint:#e6ebff; --sheet-edge:#262d4a; --sheet-shadow:rgba(0,0,0,.5);
   color-scheme:dark}
 
 *,*::before,*::after{box-sizing:border-box}
@@ -35,9 +47,12 @@ main{overflow-x:clip}
 h1,h2,h3,h4,p,ul,ol,dl,dd,figure{margin:0}
 ul,ol{padding:0;list-style:none}
 a{color:inherit}
+::selection{background:var(--accent);color:var(--on-accent)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 button{font:inherit;color:inherit}
 :focus-visible{outline:2px solid var(--accent);outline-offset:4px}
 .dark :focus-visible{outline-color:var(--band-accent)}
+input:focus-visible{outline-offset:6px}
 .wrap{max-width:1320px;margin-inline:auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));min-width:0}
 @media (min-width:720px){.wrap{padding-left:max(40px,env(safe-area-inset-left,0px));padding-right:max(40px,env(safe-area-inset-right,0px))}}
 @media (min-width:1180px){.wrap{padding-left:max(232px,env(safe-area-inset-left,0px));padding-right:max(56px,env(safe-area-inset-right,0px))}}
@@ -56,6 +71,10 @@ h3{font-size:clamp(1.5rem,2.6vw,2rem);line-height:1.08;letter-spacing:-.02em}
 /* bands and section heads */
 .band{padding-block:clamp(72px,10vw,148px);scroll-margin-top:0}
 .dark{background:var(--band);color:var(--band-ink)}
+/* the tint band reuses every band rule with the page's own light values */
+.tint{--band:var(--tint);--band-ink:var(--ink);--band-muted:var(--muted);--band-rule:var(--tint-rule);--band-line:var(--tint-line);--band-accent:var(--accent);--band-warn:var(--warn);--band-btn:var(--btn-bg);--band-btn-ink:var(--btn-ink);--band-btn-hover:var(--btn-hover)}
+.glow{background:radial-gradient(62% 78% at 14% 46%,var(--band-glow),transparent 72%),var(--band)}
+.soft{background:var(--tint)}
 .sec-top{display:flex;align-items:center;gap:16px;margin-bottom:clamp(28px,4vw,52px)}
 .sec-top .no{font-family:var(--mono);font-size:12px;letter-spacing:.14em;color:var(--accent)}
 .dark .sec-top .no{color:var(--band-accent)}
@@ -64,18 +83,21 @@ h3{font-size:clamp(1.5rem,2.6vw,2rem);line-height:1.08;letter-spacing:-.02em}
 .sec-body{margin-top:clamp(36px,5vw,72px)}
 
 /* buttons and links */
-.btn{position:relative;isolation:isolate;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;gap:14px;min-height:56px;padding:16px 28px;border:0;border-radius:0;background:var(--btn-bg);color:var(--btn-ink);font-family:var(--mono);font-size:12.5px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;cursor:pointer;transition:transform .35s var(--ease)}
+.btn{position:relative;isolation:isolate;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;gap:14px;min-height:56px;padding:16px 28px;border:0;border-radius:2px;background:var(--btn-bg);color:var(--btn-ink);font-family:var(--mono);font-size:12.5px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;text-align:center;cursor:pointer;box-shadow:0 14px 30px -16px var(--btn-glow);transition:transform .35s var(--ease)}
 .btn::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--btn-hover);transform:scaleY(0);transform-origin:bottom;transition:transform .45s var(--ease)}
 .btn:hover::before,.btn:focus-visible::before{transform:scaleY(1)}
 .btn .arr{display:inline-block;transition:transform .35s var(--ease)}
 .btn:hover .arr{transform:translateX(6px)}
 .btn[disabled]{opacity:.6;cursor:default}
-.dark .btn{background:var(--band-ink);color:var(--band)}
-.dark .btn::before{background:var(--band-accent)}
+.dark .btn{background:var(--band-btn);color:var(--band-btn-ink);box-shadow:none}
+.dark .btn::before{background:var(--band-btn-hover)}
 .u,.textbtn{background:none;border:0;padding:0 0 3px;cursor:pointer;text-decoration:none;color:inherit;background-image:linear-gradient(currentColor,currentColor),linear-gradient(var(--rule),var(--rule));background-repeat:no-repeat;background-position:0 100%,0 100%;background-size:0% 1px,100% 1px;transition:background-size .5s var(--ease)}
 .u:hover,.textbtn:hover,.u:focus-visible,.textbtn:focus-visible{background-size:100% 1px,100% 1px}
 .dark .u,.dark .textbtn{background-image:linear-gradient(currentColor,currentColor),linear-gradient(var(--band-line),var(--band-line))}
 .textbtn{font-size:15px;color:var(--muted);text-align:left}
+/* standalone text controls get a 44px tap target; the underline stays close to the words */
+.u.label,.textbtn{display:inline-flex;align-items:center;min-height:44px;padding:0;background-position:0 calc(100% - 9px),0 calc(100% - 9px)}
+.u.label{color:var(--accent)}
 
 /* top bar and wordmark */
 .top{padding-block:22px}
@@ -85,19 +107,23 @@ h3{font-size:clamp(1.5rem,2.6vw,2rem);line-height:1.08;letter-spacing:-.02em}
 .wm-mark{position:relative;width:18px;height:13px;flex:none}
 .wm-mark::before,.wm-mark::after{content:"";position:absolute;height:1.5px;width:10px;background:currentColor}
 .wm-mark::before{left:0;bottom:1px}
-.wm-mark::after{right:0;top:1px;background:var(--accent)}
+.wm-mark::after{right:0;top:1px;background:var(--accent);height:2px}
 .dark .wm-mark::after{background:var(--band-accent)}
 
-/* side index (desktop). White text with difference blending reads on both paper and dark bands. */
+/* side index (desktop). Script marks each link that sits over the dark band so it switches to the band colours. */
 .index{display:none}
 @media (min-width:1180px){
-  .index{display:block;position:fixed;z-index:5;top:50%;transform:translateY(-50%);left:calc(max(0px,(100vw - 1320px)/2) + max(40px,env(safe-area-inset-left,0px)));width:168px;mix-blend-mode:difference;color:var(--index-dim)}
+  .index{display:block;position:fixed;z-index:5;top:50%;transform:translateY(-50%);left:calc(max(0px,(100vw - 1320px)/2) + max(40px,env(safe-area-inset-left,0px)));width:168px}
   .index ol{display:grid;gap:2px}
-  .index a{display:flex;align-items:center;gap:10px;padding:6px 0;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;color:var(--index-dim);transition:color .3s}
-  .index a::before{content:"";height:1px;width:14px;background:currentColor;transition:width .45s var(--ease)}
-  .index a:hover,.index a[aria-current="true"]{color:var(--index)}
-  .index a[aria-current="true"]::before{width:36px}
-  .index :focus-visible{outline-color:var(--index)}
+  .index a{display:flex;align-items:center;gap:10px;padding:6px 0;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;color:var(--muted);transition:color .3s}
+  .index a::before{content:"";height:1px;width:14px;background:currentColor;transition:width .45s var(--ease),height .2s}
+  .index a:hover{color:var(--ink)}
+  .index a[aria-current="true"]{color:var(--accent)}
+  .index a[aria-current="true"]::before{width:36px;height:2px}
+  .index a.on-dark{color:var(--band-muted)}
+  .index a.on-dark:hover{color:var(--band-ink)}
+  .index a.on-dark[aria-current="true"]{color:var(--band-accent)}
+  .index a.on-dark:focus-visible{outline-color:var(--band-accent)}
 }
 
 /* hero */
@@ -105,7 +131,7 @@ h3{font-size:clamp(1.5rem,2.6vw,2rem);line-height:1.08;letter-spacing:-.02em}
 .hero h1{font-size:clamp(2.6rem,13.4vw,8.6rem);line-height:.92;letter-spacing:-.045em;margin-top:clamp(18px,2.4vw,30px)}
 .h-line{display:block;overflow:hidden;padding:.04em .08em .14em .12em;margin:0 0 -.14em -.12em}
 .h-line>span{display:block}
-.hero-grid{display:grid;gap:44px;margin-top:clamp(36px,5vw,64px);padding-top:clamp(28px,3.4vw,44px);border-top:1px solid var(--ink)}
+.hero-grid{display:grid;gap:44px;margin-top:clamp(36px,5vw,64px);padding-top:clamp(28px,3.4vw,44px);border-top:1px solid var(--rule-strong)}
 .hero-copy{display:grid;gap:26px;align-content:start;justify-items:start;min-width:0}
 .hero-copy .sub{font-size:clamp(1.2rem,2vw,1.5rem);line-height:1.38;max-width:26ch;font-family:var(--display);letter-spacing:-.01em}
 .hero-copy .by{font-size:14.5px;line-height:1.55;color:var(--muted);max-width:40ch}
@@ -120,38 +146,38 @@ h3{font-size:clamp(1.5rem,2.6vw,2rem);line-height:1.08;letter-spacing:-.02em}
 .tick{position:absolute;top:10px;width:1px;height:9px;background:var(--ink)}
 .tick b{position:absolute;top:18px;left:0;font-weight:400;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
 .tick.end b{left:auto;right:0}
-.mark{position:absolute;top:8px;width:13px;height:13px;margin-left:-6px;border:1.5px solid var(--ink);border-radius:50%;background:var(--paper)}
+.mark{position:absolute;top:8px;width:13px;height:13px;margin-left:-6px;border-radius:50%;background:var(--warm);box-shadow:0 0 0 4px var(--warm-tint)}
 .tally{display:flex;align-items:baseline;gap:14px;padding:6px 0 16px}
-.tally .num{font-family:var(--display);font-size:clamp(3.4rem,7vw,5rem);line-height:.8;letter-spacing:-.04em;font-variant-numeric:tabular-nums lining-nums;min-width:.62em}
+.tally .num{font-family:var(--display);font-size:clamp(3.4rem,7vw,5rem);line-height:.8;letter-spacing:-.04em;font-variant-numeric:tabular-nums lining-nums;min-width:.62em;color:var(--warm)}
 .rows{border-top:1px solid var(--rule)}
 .row{display:grid;grid-template-columns:74px 1fr;gap:12px;align-items:baseline;padding:13px 0;border-bottom:1px solid var(--rule)}
 .row .t{color:var(--muted);font-variant-numeric:tabular-nums}
 .row .w{min-width:0;display:flex;flex-wrap:wrap;gap:2px 14px;justify-content:space-between;align-items:baseline}
 .row b{font-weight:500}
 .row small{font-family:var(--body);font-size:14px;color:var(--muted)}
-.live{margin-top:18px;background:var(--btn-bg);color:var(--btn-ink);padding:20px 20px 22px;display:grid;gap:16px}
+.live{margin-top:18px;background:linear-gradient(135deg,var(--live-a),var(--live-b));color:var(--live-ink);padding:20px 20px 22px;display:grid;gap:16px;border-radius:2px;box-shadow:0 34px 60px -34px var(--live-glow)}
 .live-top{display:flex;justify-content:space-between;gap:12px;align-items:center;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase}
-.clock{font-variant-numeric:tabular-nums;min-width:11ch;text-align:right;opacity:.75}
+.clock{font-variant-numeric:tabular-nums;min-width:11ch;text-align:right}
 .stages{display:flex;flex-wrap:wrap;gap:4px 18px;font-family:var(--display);font-size:clamp(1.55rem,3.1vw,2.2rem);line-height:1.05;letter-spacing:-.025em}
 .stages span{transition:opacity .5s ease}
-.stages span.off{opacity:.28}
+.stages span.off{opacity:.34}
 .wave{display:flex;align-items:center;gap:3px;height:22px}
 .wave i{flex:1;max-width:5px;height:100%;background:currentColor;opacity:.85;transform:scaleY(.18);transform-origin:center}
-.live small{font-family:var(--body);font-size:14px;opacity:.75}
+.live small{font-family:var(--body);font-size:14px}
 
 /* marquee */
 .mq{border-block:1px solid var(--rule);overflow:hidden;padding-block:clamp(18px,2.6vw,30px)}
 .mq-track{display:flex;width:max-content}
 .mq-set{display:flex;align-items:center;flex:none}
 .mq-set span{font-family:var(--display);font-style:italic;font-size:clamp(1.9rem,4.6vw,3.6rem);letter-spacing:-.03em;line-height:1.1;white-space:nowrap;padding-inline:clamp(18px,2.6vw,36px)}
-.mq-set i{width:9px;height:9px;flex:none;background:var(--accent);transform:rotate(45deg)}
+.mq-set i{width:9px;height:9px;flex:none;background:var(--warm);transform:rotate(45deg)}
 
 /* intake (quiz) */
 .intake-grid{display:grid;gap:40px}
 .intake-side{display:grid;gap:22px;align-content:start;min-width:0}
 .intake-side ol{display:grid;border-top:1px solid var(--band-rule);font-size:15px;color:var(--band-muted)}
-.intake-side li{display:grid;grid-template-columns:34px 1fr;padding:11px 0;border-bottom:1px solid var(--band-rule)}
-.intake-side li span{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;color:var(--band-accent);padding-top:3px}
+.intake-side li{display:grid;grid-template-columns:26px 1fr;padding:11px 0;border-bottom:1px solid var(--band-rule)}
+.intake-side li::before{content:"";width:7px;height:7px;margin-top:.55em;background:var(--band-accent);transform:rotate(45deg)}
 @media (min-width:1000px){.intake-grid{grid-template-columns:4fr 8fr;gap:72px}.intake-side h2{font-size:clamp(2.4rem,4.4vw,4rem)}}
 .stage{position:relative;min-width:0;min-height:30rem;scroll-margin-top:calc(env(safe-area-inset-top,0px) + 20px)}
 @media (max-width:999px){.intake-side ol,.intake-side .lede{display:none}.intake-grid{gap:32px}}
@@ -161,7 +187,7 @@ h3{font-size:clamp(1.5rem,2.6vw,2rem);line-height:1.08;letter-spacing:-.02em}
 .prog-row{display:flex;justify-content:space-between;gap:12px}
 .prog-text,.prog-n{font-family:var(--mono);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--band-accent)}
 .prog-n{color:var(--band-muted);font-variant-numeric:tabular-nums}
-.bar{height:2px;background:var(--band-rule);overflow:hidden}
+.bar{height:3px;border-radius:2px;background:var(--band-rule);overflow:hidden}
 .bar i{display:block;height:100%;width:100%;background:var(--band-accent);transform-origin:left center}
 .q{font-size:clamp(1.9rem,4.3vw,3.3rem);line-height:1.02;letter-spacing:-.03em;outline:none;max-width:20ch}
 .opts{display:grid;border-top:1px solid var(--band-rule)}
@@ -173,22 +199,25 @@ h3{font-size:clamp(1.5rem,2.6vw,2rem);line-height:1.08;letter-spacing:-.02em}
 .opt:hover::after,.opt:focus-visible::after,.opt[aria-pressed="true"]::after{transform:scaleX(1)}
 .opt:hover .go,.opt:focus-visible .go,.opt[aria-pressed="true"] .go{opacity:1;transform:none}
 .opt[aria-pressed="true"] span:first-child{color:var(--band-accent)}
-.back{justify-self:start;background:none;border:0;padding:8px 0;font-family:var(--mono);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--band-muted);cursor:pointer;transition:color .3s}
+.navrow{display:flex;justify-content:space-between;align-items:center;gap:16px}
+.back{justify-self:start;display:inline-flex;align-items:center;gap:10px;min-height:44px;background:none;border:0;padding:0;font-family:var(--mono);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--band-muted);cursor:pointer;transition:color .3s}
 .back:hover{color:var(--band-ink)}
+.back.fwd{color:var(--band-accent)}
 .hint{color:var(--band-muted);font-size:15px}
 .cform{display:grid;gap:22px;max-width:560px}
 .field{display:grid;gap:4px}
 .field label{font-family:var(--mono);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--band-muted)}
 .field input{font:inherit;font-size:20px;width:100%;padding:10px 0 12px;border:0;border-bottom:1px solid var(--band-line);border-radius:0;background:transparent;color:var(--band-ink);transition:border-color .3s}
 .field input:focus{border-bottom-color:var(--band-accent)}
-.check{display:grid;grid-template-columns:26px 1fr;gap:12px;align-items:start;font-size:15.5px;cursor:pointer}
+.field input[aria-invalid="true"]{border-bottom-color:var(--band-warn)}
+.check{display:grid;grid-template-columns:26px 1fr;gap:12px;align-items:start;min-height:44px;padding-block:6px;font-size:15.5px;cursor:pointer}
 .check input{width:22px;height:22px;margin:2px 0 0;accent-color:var(--band-accent)}
 .err{color:var(--band-warn);font-size:15px;min-height:1.5em}
 .fine{font-size:13.5px;color:var(--band-muted);max-width:56ch}
 
-/* result: the intake brief, a sheet of paper on the dark band */
+/* result: the intake brief, a white sheet lifted off the tint band */
 .res{display:grid;gap:22px}
-.brief{background:var(--sheet);color:var(--sheet-ink);padding:clamp(22px,4.4vw,56px);display:grid;gap:clamp(24px,3vw,36px);min-width:0}
+.brief{background:var(--sheet);color:var(--sheet-ink);padding:clamp(22px,4.4vw,56px);display:grid;gap:clamp(24px,3vw,36px);min-width:0;border:1px solid var(--sheet-edge);border-top:3px solid var(--sheet-accent);border-radius:2px;box-shadow:0 40px 70px -48px var(--sheet-shadow)}
 .brief :focus-visible{outline-color:var(--sheet-accent)}
 .brief-top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding-bottom:18px;border-bottom:1px solid var(--sheet-ink)}
 .brief .label,.brief .res-kicker{color:var(--sheet-muted)}
@@ -201,7 +230,7 @@ h3{font-size:clamp(1.5rem,2.6vw,2rem);line-height:1.08;letter-spacing:-.02em}
 .brief h3{font-size:clamp(2rem,4.6vw,3.4rem);line-height:1;letter-spacing:-.035em;outline:none}
 .brief-find{display:grid;gap:14px}
 .brief-find p{max-width:58ch}
-.echo{display:grid;gap:8px;padding-left:18px;border-left:1px solid var(--sheet-accent)}
+.echo{display:grid;gap:8px;padding-left:18px;border-left:2px solid var(--sheet-accent)}
 .echo q{font-family:var(--display);font-style:italic;font-size:clamp(1.15rem,2vw,1.4rem);line-height:1.25;letter-spacing:-.01em}
 .res-block{display:grid;gap:14px;padding-top:22px;border-top:1px solid var(--sheet-rule)}
 .res-block h4{font-family:var(--mono);font-weight:400;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--sheet-muted)}
@@ -215,19 +244,24 @@ h3{font-size:clamp(1.5rem,2.6vw,2rem);line-height:1.08;letter-spacing:-.02em}
 .price .amt{font-family:var(--display);font-size:clamp(1.4rem,2.6vw,1.9rem);letter-spacing:-.02em;line-height:1.1;font-variant-numeric:lining-nums}
 .price .note{font-size:14.5px;color:var(--sheet-muted);max-width:62ch}
 .brief .hint,.brief .fine{color:var(--sheet-muted)}
-.brief .btn{background:var(--sheet-ink);color:var(--sheet)}
-.brief .btn::before{background:var(--sheet-accent)}
+.brief .btn{background:var(--sheet-accent);color:var(--sheet)}
+.brief .btn::before{background:var(--sheet-ink)}
+.brief .fb-status{color:var(--sheet-accent)}
+.terms-mini{display:grid;gap:8px;font-size:15px;color:var(--sheet-muted);max-width:62ch}
+.terms-mini li{display:grid;grid-template-columns:18px 1fr;gap:8px}
+.terms-mini li::before{content:"";width:6px;height:6px;margin-top:.6em;background:var(--sheet-accent);transform:rotate(45deg)}
 .brief .u{background-image:linear-gradient(currentColor,currentColor),linear-gradient(var(--sheet-muted),var(--sheet-muted))}
 .brief-sign{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;padding-top:18px;border-top:1px solid var(--sheet-ink)}
 .brief-sign .sig{font-size:44px}
 .book{display:grid;gap:12px;justify-items:start}
-.fallback{padding:4px 0 4px 18px;border-left:1px solid var(--accent);font-size:17px;line-height:1.5;max-width:52ch}
-.fallback b{font-family:var(--mono);font-weight:500;letter-spacing:.08em}
-.dark .fallback{border-left-color:var(--band-accent)}
-.brief .fallback{border-left-color:var(--sheet-accent)}
+.fallback{display:grid;gap:10px;justify-items:start;max-width:56ch}
+.fb-status{font-family:var(--mono);font-size:12.5px;letter-spacing:.04em;color:var(--accent)}
+.fb-status:empty{display:none}
+.fb-text{font-size:16px;line-height:1.5}
+.fb-text b{font-family:var(--mono);font-weight:500;letter-spacing:.08em}
 
 /* leaks */
-.leaks{border-top:1px solid var(--ink)}
+.leaks{border-top:1px solid var(--rule-strong)}
 .leak{display:grid;gap:14px 40px;padding:clamp(26px,3.4vw,44px) 0;border-bottom:1px solid var(--rule)}
 .leak-name{display:flex;gap:16px;align-items:baseline}
 .leak-name .label{color:var(--accent);min-width:1.5em}
@@ -235,21 +269,29 @@ h3{font-size:clamp(1.5rem,2.6vw,2rem);line-height:1.08;letter-spacing:-.02em}
 .leak .said{font-family:var(--display);font-style:italic;font-size:clamp(1.15rem,1.7vw,1.35rem);line-height:1.3;letter-spacing:-.01em;max-width:30ch}
 .leak .fix{display:grid;gap:10px;align-content:start;color:var(--muted);max-width:40ch}
 .leak .fix b{color:var(--ink);font-weight:600}
-.tag{justify-self:start;font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;padding:5px 10px;border:1px solid var(--rule);color:var(--muted);white-space:nowrap}
-.tag.now{border-color:var(--accent);color:var(--accent)}
+/* status badges, not controls: tinted, small, with a dot */
+.tag{justify-self:start;display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;padding:5px 10px 5px 9px;border-radius:2px;background:var(--warm-tint);color:var(--warm-ink);white-space:nowrap;cursor:default}
+.tag::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--warm);flex:none}
+.tag.now{background:var(--accent-tint);color:var(--accent)}
+.tag.now::before{background:var(--accent)}
+.tag.later{background:var(--paper-2);color:var(--muted)}
+.tag.later::before{background:var(--muted)}
 @media (min-width:900px){.leak{grid-template-columns:4fr 4fr 4fr;align-items:start}}
 .after{margin-top:clamp(32px,4vw,52px)}
 
 /* how and who */
 .steps{display:grid;gap:36px;counter-reset:s}
 .steps li{counter-increment:s;display:grid;gap:12px;align-content:start;position:relative;padding-top:26px}
-.steps li::before{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:var(--ink)}
+.steps li::before{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:var(--accent)}
 .steps .label{color:var(--accent)}
 .steps p{color:var(--muted);max-width:34ch}
 @media (min-width:860px){.steps{grid-template-columns:repeat(3,1fr);gap:40px}}
 .who{display:grid;gap:40px;margin-top:clamp(56px,7vw,96px)}
 .who-col{display:grid;gap:16px;align-content:start;min-width:0}
-.who-col ul{border-top:1px solid var(--rule)}
+.who-col ul,.who-col ol{border-top:1px solid var(--rule)}
+.who-col ol{counter-reset:w}
+.who-col ol li{counter-increment:w;display:grid;grid-template-columns:26px 1fr;align-items:baseline}
+.who-col ol li::before{content:counter(w);font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent)}
 .who-col li{padding:11px 0;border-bottom:1px solid var(--rule);font-family:var(--display);font-size:clamp(1.3rem,2vw,1.6rem);letter-spacing:-.02em;line-height:1.15}
 .who-col.quiet li{color:var(--muted)}
 .who-col p{color:var(--muted);font-size:15.5px;max-width:44ch}
@@ -257,22 +299,22 @@ h3{font-size:clamp(1.5rem,2.6vw,2rem);line-height:1.08;letter-spacing:-.02em}
 
 /* founding (dark band) */
 .found-grid{display:grid;gap:48px}
-.figure-price{display:grid;gap:10px;align-content:start}
+.figure-price{display:grid;gap:10px;align-content:start;min-width:0}
 .figure-price .amt{font-family:var(--display);font-size:clamp(6.5rem,25vw,17rem);line-height:.78;letter-spacing:-.06em;font-variant-numeric:tabular-nums lining-nums;color:var(--band-ink);white-space:nowrap}
 .figure-price .amt sup{font-size:.34em;vertical-align:top;position:relative;top:.16em;letter-spacing:0;margin-right:.04em;color:var(--band-accent)}
 .figure-price .per{font-family:var(--display);font-style:italic;font-size:clamp(1.5rem,3vw,2.4rem);letter-spacing:-.02em;margin-top:14px}
-.terms{border-top:1px solid var(--band-ink)}
+.terms{border-top:1px solid var(--band-line)}
 .terms li{display:grid;gap:4px 24px;padding:18px 0;border-bottom:1px solid var(--band-rule)}
 .terms h3{font-size:clamp(1.3rem,2vw,1.6rem)}
 .terms p{color:var(--band-muted);font-size:15.5px;max-width:48ch}
 @media (min-width:640px){.terms li{grid-template-columns:minmax(150px,5fr) 7fr;align-items:baseline}}
-@media (min-width:1000px){.found-grid{grid-template-columns:5fr 7fr;gap:72px}}
+@media (min-width:1000px){.found-grid{grid-template-columns:5fr 7fr;gap:72px;align-items:start}.figure-price{position:sticky;top:calc(env(safe-area-inset-top,0px) + 48px)}}
 .found-cta{display:flex;flex-wrap:wrap;gap:18px 28px;align-items:center;margin-top:clamp(36px,4vw,56px)}
 
 /* the menu (price table) */
 .tablewrap{min-width:0}
 table.menu{border-collapse:collapse;width:100%}
-.menu thead th{font-family:var(--mono);font-size:11.5px;font-weight:400;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);text-align:right;padding:0 0 14px 24px;border-bottom:1px solid var(--ink);white-space:nowrap}
+.menu thead th{font-family:var(--mono);font-size:11.5px;font-weight:400;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);text-align:right;padding:0 0 14px 24px;border-bottom:1px solid var(--rule-strong);white-space:nowrap}
 .menu thead th:first-child{text-align:left;padding-left:0}
 .menu tbody th,.menu td{padding:clamp(20px,2.4vw,30px) 0;border-bottom:1px solid var(--rule);vertical-align:top;text-align:left;font-weight:400}
 .dish{display:flex;align-items:baseline;gap:14px}
@@ -284,7 +326,7 @@ table.menu{border-collapse:collapse;width:100%}
 @media (max-width:719px){
   table.menu,.menu tbody,.menu tr,.menu tbody th,.menu td{display:block}
   .menu thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
-  .menu tbody{border-top:1px solid var(--ink)}
+  .menu tbody{border-top:1px solid var(--rule-strong)}
   .menu tr{padding:20px 0;border-bottom:1px solid var(--rule);display:grid;grid-template-columns:1fr 1fr;gap:12px 16px}
   .menu tbody th{grid-column:1/-1}
   .menu tbody th,.menu td{padding:0;border:0}
@@ -296,17 +338,18 @@ table.menu{border-collapse:collapse;width:100%}
 
 /* ray */
 .ray-grid{display:grid;gap:44px}
-.portrait{position:relative;aspect-ratio:4/5;width:100%;max-width:460px;border:1px solid var(--ink);background:var(--paper-2);display:grid;place-items:center;overflow:hidden}
+.portrait{position:relative;aspect-ratio:4/5;width:100%;max-width:460px;border:1px solid var(--rule);background:var(--paper-2);display:grid;place-items:center;overflow:hidden}
 .portrait::before{content:"";position:absolute;inset:12px;border:1px solid var(--rule)}
 .portrait .mono{font-family:var(--display);font-style:italic;font-size:clamp(7rem,22vw,13rem);letter-spacing:-.08em;line-height:1;color:var(--rule);user-select:none}
 .portrait .crop{position:absolute;width:14px;height:14px;border:0 solid var(--accent)}
-.portrait .crop.a{left:24px;top:24px;border-left-width:1px;border-top-width:1px}
-.portrait .crop.b{right:24px;top:24px;border-right-width:1px;border-top-width:1px}
-.portrait .crop.c{left:24px;bottom:24px;border-left-width:1px;border-bottom-width:1px}
-.portrait .crop.d{right:24px;bottom:24px;border-right-width:1px;border-bottom-width:1px}
+.portrait figcaption{color:var(--muted)}
+.portrait .crop.a{left:24px;top:24px;border-left-width:2px;border-top-width:2px}
+.portrait .crop.b{right:24px;top:24px;border-right-width:2px;border-top-width:2px}
+.portrait .crop.c{left:24px;bottom:24px;border-left-width:2px;border-bottom-width:2px}
+.portrait .crop.d{right:24px;bottom:24px;border-right-width:2px;border-bottom-width:2px}
 .portrait figcaption{position:absolute;left:0;right:0;bottom:36px;text-align:center}
 .ray-copy{display:grid;gap:clamp(28px,3.4vw,44px);align-content:start;min-width:0}
-.facts{border-top:1px solid var(--ink)}
+.facts{border-top:1px solid var(--rule-strong)}
 .facts li{display:grid;grid-template-columns:minmax(104px,170px) 1fr;gap:14px;align-items:baseline;padding:14px 0;border-bottom:1px solid var(--rule)}
 .facts div{font-family:var(--display);font-size:clamp(1.2rem,1.9vw,1.5rem);letter-spacing:-.02em;line-height:1.2}
 .note-ray{display:grid;gap:8px;justify-items:start}
@@ -318,18 +361,19 @@ table.menu{border-collapse:collapse;width:100%}
 /* faq */
 .faq-grid{display:grid;gap:36px}
 @media (min-width:1000px){.faq-grid{grid-template-columns:4fr 8fr;gap:72px}.faq-grid h2{position:sticky;top:calc(env(safe-area-inset-top,0px) + 40px);font-size:clamp(2.4rem,4.4vw,4rem)}}
-.faq{border-top:1px solid var(--ink);min-width:0}
+.faq{border-top:1px solid var(--rule-strong);min-width:0}
 details{border-bottom:1px solid var(--rule)}
+summary:hover{color:var(--accent)}
 summary{display:grid;grid-template-columns:1fr 20px;gap:20px;align-items:center;padding:20px 0;cursor:pointer;list-style:none;font-family:var(--display);font-size:clamp(1.25rem,2vw,1.6rem);letter-spacing:-.02em;line-height:1.2}
 summary::-webkit-details-marker{display:none}
 summary .pm{position:relative;width:16px;height:16px;justify-self:end}
-summary .pm::before,summary .pm::after{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:var(--accent);transition:transform .45s var(--ease)}
+summary .pm::before,summary .pm::after{content:"";position:absolute;left:0;right:0;top:50%;height:2px;margin-top:-1px;background:var(--accent);transition:transform .45s var(--ease)}
 summary .pm::after{transform:rotate(90deg)}
 details[open] summary .pm::after{transform:rotate(0)}
 details p{padding:0 40px 24px 0;color:var(--muted);max-width:62ch}
 
 /* book */
-.book-band{border-top:1px solid var(--ink)}
+.book-band{border-top:0}
 .book-band h2{font-size:clamp(3rem,9.6vw,8rem);letter-spacing:-.045em;line-height:.9}
 .book-grid{display:grid;gap:28px;margin-top:clamp(32px,4vw,56px);justify-items:start}
 
@@ -354,6 +398,8 @@ footer .wm{color:var(--ink);margin-bottom:10px}
   .mq-track{animation:slide 46s linear infinite}
   .mq:hover .mq-track{animation-play-state:paused}
   .wave.on i{animation:wave 1.1s ease-in-out infinite;animation-delay:calc(var(--i)*-137ms)}
+  @keyframes ping{0%{box-shadow:0 0 0 0 var(--accent)}70%,100%{box-shadow:0 0 0 6px transparent}}
+  .tag.now::before{animation:ping 2.4s ease-out infinite}
 }
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
@@ -403,7 +449,7 @@ footer .wm{color:var(--ink);margin-bottom:10px}
             <button type="button" class="btn" data-go="quiz">Start the intake <span class="arr" aria-hidden="true">&rarr;</span></button>
             <a class="u label" href="#menu">See the prices</a>
           </div>
-          <p class="by h-fade" style="--i:3">Built and run by Ray Ahmadi on his own real estate business. He shows it to you live on a 15-minute call.</p>
+          <p class="by h-fade" style="--i:3">Built and run by Ray Ahmadi on his own real estate business. On a 15-minute call you dial the live system yourself.</p>
         </div>
         <figure class="line" id="line" role="img" aria-label="Illustration of one day on an agent's phone line. Three calls are missed: 2:14 pm during a showing, 6:40 pm during a listing appointment, and 9:05 pm, a voicemail with no message. With Next Level Answer, the 2:14 pm call is answered, qualified and booked.">
           <div class="line-head label"><span>Tuesday, your line</span><span>Illustration</span></div>
@@ -441,7 +487,7 @@ footer .wm{color:var(--ink);margin-bottom:10px}
     </div>
   </div>
 
-  <section class="band dark" id="quiz" aria-labelledby="h-quiz">
+  <section class="band dark tint" id="quiz" aria-labelledby="h-quiz">
     <div class="wrap">
       <div class="sec-top"><span class="no">01</span><span class="label">The intake</span><i class="hr" data-r="draw"></i></div>
       <div class="intake-grid">
@@ -449,14 +495,14 @@ footer .wm{color:var(--ink);margin-bottom:10px}
           <h2 id="h-quiz">Six questions. <em>One brief.</em></h2>
           <p class="lede">Tell us how your business runs today. You leave with a one-page brief, written to you.</p>
           <ol>
-            <li><span>A</span>One tap per answer</li>
-            <li><span>B</span>Your biggest leak, named</li>
-            <li><span>C</span>What fixes it, with the price</li>
+            <li>One tap per answer</li>
+            <li>Your biggest leak, named</li>
+            <li>What fixes it, with the price</li>
           </ol>
         </div>
         <div class="stage" id="stage">
           <div class="quiz-inner" id="app">
-            <noscript><p>The intake needs JavaScript. Message NEXT to @rayahmadi on Instagram and Ray will send you a time for a call.</p></noscript>
+            <noscript><p>The intake needs JavaScript. Message NEXT to <a href="https://www.instagram.com/rayahmadi/" target="_blank" rel="noopener">@rayahmadi on Instagram</a> and Ray will send you a time for a call.</p></noscript>
           </div>
         </div>
       </div>
@@ -471,7 +517,7 @@ footer .wm{color:var(--ink);margin-bottom:10px}
         <article class="leak" data-r>
           <div class="leak-name"><span class="label">i</span><h3>Missed calls</h3></div>
           <p class="said">You were in a showing. By the time you called back, they had booked with someone else.</p>
-          <div class="fix"><p><b>Next Level Answer.</b> An AI receptionist answers every call, qualifies the caller and books the appointment.</p><span class="tag now">Available now</span></div>
+          <div class="fix"><p><b>Next Level Answer.</b> An AI receptionist answers every call you miss, qualifies the caller and books the appointment. You get a summary by text and email.</p><span class="tag now">Available now</span></div>
         </article>
         <article class="leak" data-r>
           <div class="leak-name"><span class="label">ii</span><h3>Reviews</h3></div>
@@ -499,7 +545,7 @@ footer .wm{color:var(--ink);margin-bottom:10px}
       <h2 id="h-how" data-r>Three steps.<br><em>We set it up.</em></h2>
       <ol class="sec-body steps" data-r="stagger">
         <li><span class="label">Step one</span><h3>Take the intake</h3><p>Six questions. You see your biggest leak and what fixes it, with the price.</p></li>
-        <li><span class="label">Step two</span><h3>Book 15 minutes with Ray</h3><p>Ray asks about your business and shows you the system live, running on his own.</p></li>
+        <li><span class="label">Step two</span><h3>Book 15 minutes with Ray</h3><p>Ray asks about your business. You dial the live system yourself and hear it answer, before you pay.</p></li>
         <li><span class="label">Step three</span><h3>We set it up for you</h3><p>You send your details. We build it and test it with you before it goes live.</p></li>
       </ol>
       <div class="who">
@@ -509,15 +555,15 @@ footer .wm{color:var(--ink);margin-bottom:10px}
           <p>Any brokerage. You do not have to join Ray's team.</p>
         </div>
         <div class="who-col quiet" data-r>
-          <span class="label">Waitlist: other businesses</span>
-          <ul><li>Mortgage brokers</li><li>Real estate lawyers</li><li>Accountants</li><li>Contractors and renovation</li><li>Insurance</li></ul>
-          <p>Take the same intake and pick "I run a different kind of business". You join the waitlist. No price is set for these yet.</p>
+          <span class="label">Next: other businesses, in this order</span>
+          <ol><li>Mortgage brokers</li><li>Real estate lawyers</li><li>Accountants</li><li>Contractors and renovators</li><li>Insurance</li></ol>
+          <p>Next Level Answer opens to other businesses once the first 10 agents are live, from $500 setup plus $400 a month. Take the same intake, pick "I run a different kind of business" and join the waitlist for first notice.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="band dark" id="founding" aria-labelledby="h-found">
+  <section class="band dark glow" id="founding" aria-labelledby="h-found">
     <div class="wrap">
       <div class="sec-top"><span class="no">04</span><span class="label">The Founding 10</span><i class="hr" data-r="draw"></i></div>
       <div class="found-grid">
@@ -534,9 +580,17 @@ footer .wm{color:var(--ink);margin-bottom:10px}
           <ul class="terms" data-r="stagger">
             <li><h3>No setup fee</h3><p>For the Founding 10. After the first 10 clients, Answer is $500 setup + $400 a month.</p></li>
             <li><h3>Price locked</h3><p>The $300 price stays locked while your subscription is active.</p></li>
-            <li><h3>Month to month</h3><p>Cancel before the next billing date.</p></li>
+            <li><h3>Month to month</h3><p>Cancel before the next billing date. When you leave, your contacts and transcripts are exported to you and deleted from the account.</p></li>
             <li><h3>Live within 7 days</h3><p>Live within 7 days of you supplying everything needed, or the first month is not charged. Once per client, first month only, and not for carrier or registration delays.</p></li>
-            <li><h3>Usage</h3><p>Phone, text and AI minutes: usage is quoted on the call.</p></li>
+            <li><h3>Usage at cost</h3><p>Phone, text and AI minutes are billed at cost with no markup for founding clients, on top of the $300. You set a monthly cap before go-live, and the system stops and alerts you if it is reached. Ray shows you his own line's bill on the call.</p></li>
+            <li><h3>Try it first</h3><p>On the call you dial the live system yourself and hear it answer, before you pay.</p></li>
+            <li><h3>Languages</h3><p>English at launch. Any other language is tested on your own line with you during setup. If it is not good enough for your callers, you do not go live and you are not charged.</p></li>
+            <li><h3>Your callers stay yours</h3><p>No one at Next Level or Ray Homes contacts your callers or uses your contacts, and that is written in the agreement.</p></li>
+            <li><h3>Recording off</h3><p>Audio recording is off unless you turn it on. When it is on, the AI says so at the start of the call.</p></li>
+            <li><h3>Call summaries</h3><p>Every call arrives as a text and an email summary, so it works beside any CRM. A direct push into your CRM is confirmed for your specific CRM on the call, before you pay.</p></li>
+            <li><h3>Urgent callers</h3><p>If a caller asks for a person, or the call is urgent, the AI offers a callback and you get a text alert straight away.</p></li>
+            <li><h3>Your brokerage</h3><p>You get a one-page summary to show your broker of record before you sign.</p></li>
+            <li><h3>Why a founding price</h3><p>Next Level is new and there are no client testimonials yet. That is the reason the founding price and the founding terms exist.</p></li>
           </ul>
         </div>
       </div>
@@ -557,11 +611,11 @@ footer .wm{color:var(--ink);margin-bottom:10px}
             <tr><th scope="row"><div class="dish"><span class="nm">Reviews</span><i class="leader" aria-hidden="true"></i></div><div class="dish-note"><span class="tag">Opening next</span><span>Review requests at closing and at day 30.</span></div></th><td class="m" data-l="Setup">$250</td><td class="m" data-l="A month">$150</td></tr>
             <tr><th scope="row"><div class="dish"><span class="nm">Nurture</span><i class="leader" aria-hidden="true"></i></div><div class="dish-note"><span class="tag">Opening next</span><span>Database reactivation, follow-up and past-client touches.</span></div></th><td class="m" data-l="Setup">$500</td><td class="m" data-l="A month">$250</td></tr>
             <tr><th scope="row"><div class="dish"><span class="nm">Ads</span><i class="leader" aria-hidden="true"></i></div><div class="dish-note"><span class="tag">Opening next</span><span>Listing and buyer ads, run and watched daily. Ad spend goes on your own card.</span></div></th><td class="m" data-l="Setup">$500</td><td class="m" data-l="A month">$750</td></tr>
-            <tr><th scope="row"><div class="dish"><span class="nm">Complete</span><i class="leader" aria-hidden="true"></i></div><div class="dish-note"><span class="tag">When all four are open</span><span>All four as one system.</span></div></th><td class="m" data-l="Setup">$1,500</td><td class="m" data-l="A month">$1,500</td></tr>
+            <tr><th scope="row"><div class="dish"><span class="nm">Complete</span><i class="leader" aria-hidden="true"></i></div><div class="dish-note"><span class="tag later">When all four are open</span><span>All four as one system.</span></div></th><td class="m" data-l="Setup">$1,500</td><td class="m" data-l="A month">$1,500</td></tr>
           </tbody>
         </table>
       </div>
-      <p class="tnote" data-r>All prices in Canadian dollars. Usage is quoted on the call. Next Level does not promise leads, deals or income. It makes sure the business you already have is answered and followed up.</p>
+      <p class="tnote" data-r>All prices in Canadian dollars. For founding clients, phone, text and AI minutes are billed at cost with no markup, up to a monthly cap you set. Ray shows you his own line's bill on the call. Next Level does not promise leads, deals or income. It makes sure the business you already have is answered and followed up.</p>
     </div>
   </section>
 
@@ -586,7 +640,7 @@ footer .wm{color:var(--ink);margin-bottom:10px}
             <li><span class="label">On your call</span><div>Ray himself, every time</div></li>
           </ul>
           <div class="note-ray" data-r>
-            <blockquote>I run this system on my own business. On your call, I show it to you live.</blockquote>
+            <blockquote>I run this system on my own business. On your call, you dial it yourself.</blockquote>
             <!-- SIGNATURE: typeset placeholder. Replace with Ray's real signature image when available. -->
             <span class="sig" data-r="wipe" aria-hidden="true">Ray Ahmadi</span>
             <span class="label">Ray Ahmadi, broker</span>
@@ -602,34 +656,41 @@ footer .wm{color:var(--ink);margin-bottom:10px}
       <div class="faq-grid">
         <h2 id="h-faq" data-r>Before you <em>book.</em></h2>
         <div class="faq" data-r>
-          <details><summary>Will callers know it is an AI?<i class="pm" aria-hidden="true"></i></summary><p>Yes. It says so at the start of the call. A caller can ask for a person at any time and the call is passed to you.</p></details>
-          <details><summary>What does it sound like?<i class="pm" aria-hidden="true"></i></summary><p>Book the call. Ray shows it to you live so you hear it for yourself.</p></details>
+          <details><summary>Will callers know it is an AI?<i class="pm" aria-hidden="true"></i></summary><p>Yes. It says so at the start of the call. If a caller asks for a person, or it is urgent, it offers a callback and alerts you by text straight away.</p></details>
+          <details><summary>What does it sound like?<i class="pm" aria-hidden="true"></i></summary><p>Book the call and dial the live system yourself. You hear it answer before you pay anything.</p></details>
           <details><summary>What is available today?<i class="pm" aria-hidden="true"></i></summary><p>Next Level Answer is available now. Reviews, Nurture and Ads are opening next, in that order. Complete follows when all four are open.</p></details>
           <details><summary>What do the Founding 10 pay?<i class="pm" aria-hidden="true"></i></summary><p>$300 a month for Next Level Answer, with no setup fee. The $300 price stays locked while your subscription is active.</p></details>
           <details><summary>What does Answer cost after the Founding 10?<i class="pm" aria-hidden="true"></i></summary><p>$500 setup and $400 a month, in Canadian dollars.</p></details>
-          <details><summary>Is there a contract?<i class="pm" aria-hidden="true"></i></summary><p>No long contract. It is month to month. Cancel before the next billing date.</p></details>
+          <details><summary>What does usage cost?<i class="pm" aria-hidden="true"></i></summary><p>Phone, text and AI minutes are billed at cost with no markup for founding clients, on top of the $300. You set a monthly spending cap before go-live. If it is reached, the system stops and alerts you. On the call Ray shows you the real usage bill for his own line before you pay.</p></details>
+          <details><summary>Is there a contract?<i class="pm" aria-hidden="true"></i></summary><p>No long contract. It is month to month. Cancel before the next billing date. When you leave, your contacts and transcripts are exported to you and deleted from the account.</p></details>
           <details><summary>How long does setup take?<i class="pm" aria-hidden="true"></i></summary><p>For the Founding 10: live within 7 days of you supplying everything needed, or the first month is not charged. This applies once per client, to the first month only, and not to carrier or registration delays.</p></details>
-          <details><summary>Is phone and AI usage included in the price?<i class="pm" aria-hidden="true"></i></summary><p>Usage is quoted on the call. That covers phone, text and AI minutes.</p></details>
-          <details><summary>Do I have to change my phone number?<i class="pm" aria-hidden="true"></i></summary><p>No. Your number forwards to the receptionist when you do not pick up.</p></details>
-          <details><summary>What do you need from me?<i class="pm" aria-hidden="true"></i></summary><p>Your business details, your hours and areas, the questions you want asked, calendar access, and the number to forward.</p></details>
+          <details><summary>Do I have to change my phone number?<i class="pm" aria-hidden="true"></i></summary><p>No. You keep your number. Calls forward only when you do not answer, including when your phone is off. Forwarding is switched off the day you cancel.</p></details>
+          <details><summary>What do you need from me?<i class="pm" aria-hidden="true"></i></summary><p>Your business details, your hours and areas, the questions you want asked, calendar access, the number to forward, and the monthly spending cap you choose.</p></details>
+          <details><summary>Does it speak other languages?<i class="pm" aria-hidden="true"></i></summary><p>English at launch. Any other language is tested on your own line with you during setup. If it does not handle your callers' language to your standard, you do not go live and you are not charged.</p></details>
+          <details><summary>I am on another CRM. Does this replace it?<i class="pm" aria-hidden="true"></i></summary><p>No. It works beside it. You get every call as a text and an email summary from day one. A direct push into your CRM is confirmed for your specific CRM on the call, before you pay. If it cannot be done, you are told then.</p></details>
+          <details><summary>Who can see my callers and my call transcripts?<i class="pm" aria-hidden="true"></i></summary><p>Your callers stay yours. No one at Next Level or Ray Homes contacts your callers or uses your contacts, and that is written in the agreement. Each call is transcribed so you get the summary. The transcript stays in your own account. The people who can read it are you, and the set-up team only while they are setting up or fixing your account. Audio recording is off unless you turn it on.</p></details>
+          <details><summary>Will my brokerage allow it?<i class="pm" aria-hidden="true"></i></summary><p>You get a one-page summary to show your broker of record before you sign. If your brokerage says no within 14 days, you get your first month back.</p></details>
+          <details><summary>Is it allowed where I work?<i class="pm" aria-hidden="true"></i></summary><p>Rules on call recording and on telling callers they are speaking with an AI differ by province and state. We confirm them for your location before you go live. Audio recording is off unless you turn it on, and when it is on the AI says so at the start of the call. Check with your brokerage as well.</p></details>
+          <details><summary>Do you have client testimonials?<i class="pm" aria-hidden="true"></i></summary><p>Not yet. Next Level is new and the first 10 agents are its founding clients. That is the reason the founding price and the founding terms exist. What you can check today is Ray's own track record and the live system, which you dial yourself on the call.</p></details>
+          <details><summary>I run a team. How does that work?<i class="pm" aria-hidden="true"></i></summary><p>One subscription covers one business line. A team routing calls to several agents is quoted on the call.</p></details>
+          <details><summary>I am in the US. Can I join?<i class="pm" aria-hidden="true"></i></summary><p>Canada first. US agents can join the Founding 10 only where setup is confirmed for their state on the call. The price is in Canadian dollars.</p></details>
           <details><summary>Who pays for the ads?<i class="pm" aria-hidden="true"></i></summary><p>You do, on your own card, straight to the ad platform. The Next Level Ads fee covers running and watching them.</p></details>
           <details><summary>Does this promise me more leads or deals?<i class="pm" aria-hidden="true"></i></summary><p>No. It makes sure the calls, clients and contacts you already have are answered and followed up.</p></details>
-          <details><summary>Is it allowed where I work?<i class="pm" aria-hidden="true"></i></summary><p>Rules on call recording and on telling callers they are speaking with an AI differ by province and state. We confirm them for your location before you go live. Check with your brokerage as well.</p></details>
           <details><summary>Do I have to join Ray's team?<i class="pm" aria-hidden="true"></i></summary><p>No. Next Level is open to agents at any brokerage.</p></details>
-          <details><summary>I run a business that is not real estate. Can I use it?<i class="pm" aria-hidden="true"></i></summary><p>Not yet. Take the intake, pick "I run a different kind of business" and join the waitlist. Ray will contact you when your industry opens.</p></details>
+          <details><summary>I run a business that is not real estate. Can I use it?<i class="pm" aria-hidden="true"></i></summary><p>Not yet. Answer opens to other businesses once the first 10 agents are live, in this order: mortgage brokers, real estate lawyers, accountants, contractors and renovators, insurance. The starting price is $500 setup plus $400 a month. Take the intake, pick "I run a different kind of business" and join the waitlist for first notice. Outside those five industries you can still join, and no date is promised.</p></details>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="band book-band" id="book" aria-labelledby="h-cta">
+  <section class="band book-band soft" id="book" aria-labelledby="h-cta">
     <div class="wrap">
       <div class="sec-top"><span class="no">08</span><span class="label">Your next step</span><i class="hr" data-r="draw"></i></div>
       <h2 id="h-cta" data-r>Hear it answer <em>a call.</em></h2>
       <div class="book-grid" data-r>
-        <p class="lede">Book 15 minutes with Ray. He asks about your business, shows you the system live, and tells you plainly if it fits.</p>
+        <p class="lede">Book 15 minutes with Ray. He asks about your business, has you dial the AI receptionist yourself, and tells you plainly if it fits.</p>
         <div class="book" id="cta-book">
-          <p class="fallback">Booking opens shortly. Message <b>NEXT</b> to @rayahmadi on Instagram and Ray will send you a time.</p>
+          <div class="fallback"><p class="fb-text">Booking opens shortly. Message <b>NEXT</b> to <a href="https://www.instagram.com/rayahmadi/" target="_blank" rel="noopener">@rayahmadi on Instagram</a> and Ray will send you a time.</p></div>
         </div>
         <button type="button" class="textbtn" data-go="quiz">Not sure which problem is yours? Take the intake first.</button>
       </div>
@@ -641,7 +702,7 @@ footer .wm{color:var(--ink);margin-bottom:10px}
 <footer>
   <div class="wrap">
     <span class="wm"><span class="wm-mark" aria-hidden="true"></span><span>Next <i>Level</i></span></span>
-    <p>Ray Ahmadi</p>
+    <p>Operated by Ray Ahmadi</p>
     <p>Software and set-up service. Not real estate brokerage services.</p>
     <p>[Business name and mailing address to be added]</p>
     <!-- BEFORE LAUNCH: add Privacy Policy and Terms links here (to be confirmed with counsel). Replace the business name and mailing address placeholder above. -->
@@ -650,7 +711,7 @@ footer .wm{color:var(--ink);margin-bottom:10px}
 
 <script>
 /* ===== SETTINGS =====
-   BOOKING_URL: Ray's 15-minute calendar link. Empty = the Instagram fallback is shown instead of a button.
+   BOOKING_URL: Ray's 15-minute calendar link. Empty = the Instagram fallback is shown: a button that copies NEXT and opens Ray's profile, plus the plain instruction.
    WEBHOOK_URL: HighLevel Inbound Webhook URL. Empty = no network request is ever made. */
 const CONFIG = {
   BOOKING_URL: "",
@@ -718,30 +779,30 @@ const PROBLEMS = {
     head: "Your biggest leak: calls you do not get to.",
     body: "You cannot be in a showing and on the phone. A caller who reaches voicemail can hang up and call the next agent. Something else has to pick up.",
     product: "Next Level Answer",
-    fix: "An AI receptionist answers every call, asks the questions you would ask, and books the appointment on your calendar.",
+    fix: "An AI receptionist answers every call you miss, says it is an AI, asks the questions you choose, and books the appointment on your calendar. You get a summary of each call by text and by email.",
     price: "$500 setup + $400 a month", priceNote: "The price after the Founding 10.",
-    next: "Book a 15-minute call. Ray will show you the receptionist live, running on his own business." },
+    next: "Book a 15-minute call. You dial the live system yourself and hear it answer. Ray shows you the real usage bill for his own line before you pay." },
   reviews: { tag: "nl-problem-reviews", short: "reviews", label: "Not enough reviews",
     head: "Your biggest leak: happy clients who were never asked.",
     body: "Buyers and sellers can compare agents on Google before they call anyone. When the request only goes out if you remember, most clients are never asked.",
     product: "Next Level Reviews",
     fix: "A review request goes out at closing and again at day 30, every time, with replies drafted for you to approve.",
     price: "$250 setup + $150 a month", priceNote: "",
-    next: "Book a 15-minute call. Ray will show you the review system he runs on his own business." },
+    next: "Book a 15-minute call. Ray will show you the review system he runs on his own business. You can also dial the live receptionist yourself on the call." },
   database: { tag: "nl-problem-dead-database", short: "a quiet database", label: "A database I never contact",
     head: "Your biggest leak: a database nobody is talking to.",
     body: "Some of your contacts will move. The agent who stayed in touch is the one they think of.",
     product: "Next Level Nurture",
     fix: "A reactivation campaign to the people you have permission to contact, follow-up with everyone who raises a hand, and regular past-client touches.",
     price: "$500 setup + $250 a month", priceNote: "",
-    next: "Book a 15-minute call. Ray will walk you through what he runs on his own list." },
+    next: "Book a 15-minute call. Ray will walk you through what he runs on his own list. You can also dial the live receptionist yourself on the call." },
   ads: { tag: "nl-problem-ads", short: "ads", label: "Ads that do not pay",
     head: "Your biggest leak: ad money with nobody watching it.",
     body: "Ads fail in two places. Nobody watches them daily, and nobody calls the lead fast.",
     product: "Next Level Ads",
     fix: "Listing and buyer ads, run and watched daily.",
     price: "$500 setup + $750 a month", priceNote: "Ad spend goes on your own card.",
-    next: "Book a 15-minute call. Bring your last ad report. Ray will go through it with you." }
+    next: "Book a 15-minute call. Bring your last ad report. Ray will go through it with you. You can also dial the live receptionist yourself on the call." }
 };
 
 const blank = () => ({ i: 0, who: "", industry: "", q1: "", q2: "", q3: "", q4: "", problem: "", name: "", done: false, sent: "" });
@@ -760,15 +821,28 @@ const isBiz = () => st.who === "business";
 const flow = () => isBiz() ? ["who", "industry", "problem", "contact"] : ["who", "q1", "q2", "q3", "q4", "problem", "contact"];
 const labelOf = (key, id) => { const o = QUESTIONS[key].opts.find(x => x[0] === id); return o ? o[1] : ""; };
 const igUrl = () => "https://www.instagram.com/" + encodeURIComponent(CONFIG.INSTAGRAM_HANDLE) + "/";
-const igLink = () => `<a class="u" href="${igUrl()}" target="_blank" rel="noopener">@${esc(CONFIG.INSTAGRAM_HANDLE)}</a>`;
 const ARR = ` <span class="arr" aria-hidden="true">&rarr;</span>`;
 
+const NEWTAB = ` <span class="sr">(opens in a new tab)</span>`;
+/* No booking link yet: one button copies the word and opens Ray's Instagram profile in a new tab; the plain instruction stays beside it. */
 function fallbackHTML(word, tail) {
-  return `<p class="fallback">${word === "NEXT" ? "Booking opens shortly. " : ""}Message <b>${word}</b> to ${igLink()} on Instagram and Ray will ${tail}.</p>`;
+  const h = esc(CONFIG.INSTAGRAM_HANDLE);
+  return `<div class="fallback"><a class="btn" data-copy="${word}" href="${igUrl()}" target="_blank" rel="noopener">Copy ${word} and open Instagram <span class="arr" aria-hidden="true">&nearr;</span>${NEWTAB}</a>
+    <p class="fb-status" role="status"></p>
+    <p class="fb-text">${word === "NEXT" ? "Booking opens shortly. " : ""}Message <b>${word}</b> to @${h} on Instagram and Ray will ${tail}. The button copies the word and opens his profile.</p></div>`;
 }
+document.addEventListener("click", e => {
+  const a = e.target.closest && e.target.closest("[data-copy]");
+  if (!a) return;
+  const word = a.dataset.copy, out = a.parentNode.querySelector(".fb-status");
+  const say = t => { if (out) out.textContent = t; };
+  const ok = () => say(`Copied ${word}. Paste it in a message to @${CONFIG.INSTAGRAM_HANDLE}.`);
+  const no = () => say(`Copy did not work here. Type ${word} in a message to @${CONFIG.INSTAGRAM_HANDLE}.`);
+  try { navigator.clipboard.writeText(word).then(ok, no); } catch (err) { no(); }
+});
 function bookingHTML() {
   if (CONFIG.BOOKING_URL) {
-    return `<a class="btn" href="${esc(CONFIG.BOOKING_URL)}" target="_blank" rel="noopener">Book my 15-minute call${ARR}</a><p class="fine">15 minutes. With Ray.</p>`;
+    return `<a class="btn" href="${esc(CONFIG.BOOKING_URL)}" target="_blank" rel="noopener">Book my 15-minute call${ARR}${NEWTAB}</a><p class="fine">15 minutes. With Ray.</p>`;
   }
   return fallbackHTML("NEXT", "send you a time");
 }
@@ -833,13 +907,17 @@ function renderQuestion(focus) {
     <h3 class="q" id="qt" tabindex="-1">${esc(q.title)}</h3>
     <div class="opts" role="group" aria-labelledby="qt">${q.opts.map((o, n) =>
       `<button type="button" class="opt" data-v="${esc(o[0])}" aria-pressed="${st[key] === o[0]}"><span aria-hidden="true">${letters[n]}</span><span>${esc(o[1])}</span><span class="go" aria-hidden="true">&rarr;</span></button>`).join("")}</div>
-    ${st.i > 0 ? `<button type="button" class="back" id="bk">Back</button>` : `<p class="hint">One tap per answer. Your name and email are only asked at the end.</p>`}`, progressOf(st.i, steps).pct);
+    ${st.i > 0 || st[key] ? `<div class="navrow">${st.i > 0 ? `<button type="button" class="back" id="bk">Back</button>` : `<span></span>`}${st[key] ? `<button type="button" class="back fwd" id="nx">Next${ARR}</button>` : ""}</div>` : ""}
+    ${st.i === 0 ? `<p class="hint">One tap per answer. Your name and email are only asked at the end.</p>` : ""}`, progressOf(st.i, steps).pct);
   app.querySelectorAll(".opt").forEach(b => b.addEventListener("click", () => {
     st[key] = b.dataset.v;
     st.i += 1; save(); renderQuestion(true);
   }));
   const bk = document.getElementById("bk");
   if (bk) bk.addEventListener("click", () => { st.i -= 1; save(); renderQuestion(true); });
+  /* shown only when this question already has an answer, so nobody moves on without a choice */
+  const nx = document.getElementById("nx");
+  if (nx) nx.addEventListener("click", () => { st.i += 1; save(); renderQuestion(true); });
   if (focus) focusTop("qt");
 }
 
@@ -849,8 +927,8 @@ function renderContact(focus) {
   swap(`${progressHTML(st.i, steps)}
     <h3 class="q" id="qt" tabindex="-1">${biz ? "Where should Ray reach you when your industry opens?" : "Where should we send your result?"}</h3>
     <form id="cf" class="cform" novalidate>
-      <div class="field"><label for="nl-name">First name</label><input id="nl-name" name="name" autocomplete="given-name" value="${esc(st.name)}"></div>
-      <div class="field"><label for="nl-email">Email</label><input id="nl-email" name="email" type="email" autocomplete="email" inputmode="email"></div>
+      <div class="field"><label for="nl-name">First name</label><input id="nl-name" name="name" autocomplete="given-name" aria-describedby="er" value="${esc(st.name)}"></div>
+      <div class="field"><label for="nl-email">Email</label><input id="nl-email" name="email" type="email" autocomplete="email" inputmode="email" aria-describedby="er"></div>
       <div class="field"><label for="nl-phone">Mobile (optional)</label><input id="nl-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel"></div>
       <label class="check" for="nl-consent"><input type="checkbox" id="nl-consent" name="consent"><span>Yes, email me my result and follow-up from Next Level. I can unsubscribe at any time.</span></label>
       <label class="check" for="nl-sms" id="sms-row" hidden><input type="checkbox" id="nl-sms" name="sms"><span>Yes, you may text me at this number about my result. Reply STOP to end.</span></label>
@@ -861,6 +939,9 @@ function renderContact(focus) {
     <button type="button" class="back" id="bk">Back</button>`, 100);
   const f = document.getElementById("cf"), er = document.getElementById("er");
   const ph = document.getElementById("nl-phone"), smsRow = document.getElementById("sms-row");
+  const nm = document.getElementById("nl-name"), em = document.getElementById("nl-email");
+  nm.addEventListener("input", () => { st.name = nm.value.trim(); save(); nm.removeAttribute("aria-invalid"); });
+  em.addEventListener("input", () => em.removeAttribute("aria-invalid"));
   ph.addEventListener("input", () => { smsRow.hidden = !ph.value.trim(); if (smsRow.hidden) document.getElementById("nl-sms").checked = false; });
   document.getElementById("bk").addEventListener("click", () => { st.i -= 1; save(); renderQuestion(true); });
   f.addEventListener("submit", async e => {
@@ -870,8 +951,9 @@ function renderContact(focus) {
     const phone = ph.value.trim();
     const consent = document.getElementById("nl-consent").checked;
     const sms = !smsRow.hidden && document.getElementById("nl-sms").checked;
-    if (!name) { er.textContent = "Add your first name so the result is written to you."; document.getElementById("nl-name").focus(); return; }
-    if (consent && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { er.textContent = "Enter a valid email, like name@example.com, or untick the box to see your result here only."; document.getElementById("nl-email").focus(); return; }
+    nm.removeAttribute("aria-invalid"); em.removeAttribute("aria-invalid");
+    if (!name) { er.textContent = "Add your first name so the result is written to you."; nm.setAttribute("aria-invalid", "true"); nm.focus(); return; }
+    if (consent && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { er.textContent = "Enter a valid email, like name@example.com, or untick the box to see your result here only."; em.setAttribute("aria-invalid", "true"); em.focus(); return; }
     er.textContent = "";
     st.name = name;
     const btn = document.getElementById("sub");
@@ -960,16 +1042,16 @@ function renderResult(focus) {
   try { today = new Date().toLocaleDateString("en-CA", { year: "numeric", month: "long", day: "numeric" }); } catch (e) {}
   let html;
   if (isBiz()) {
-    const ind = st.industry === "other" ? "your industry" : labelOf("industry", st.industry).toLowerCase() + "s";
+    const other = st.industry === "other";
     const joined = st.sent === "ok";
     html = `${briefTop("Waitlist brief")}
       ${briefMeta([["Prepared for", name || "You"], ["Date", esc(today)], ["Business", esc(labelOf("industry", st.industry))], ["Costing you most", esc(p.label)]])}
       <div class="brief-find"><span class="res-kicker">Your result${name ? ", " + name : ""}</span>
-      <h3 id="rt" tabindex="-1">Real estate agents go first. ${st.industry === "other" ? "Your industry can join the waitlist." : "Your industry is on the list."}</h3>
-      <p>You told us the thing costing you most is ${esc(p.short)}. The same systems Ray runs on his own business are being set up for ${esc(ind)} next. There is no price for your industry yet, and nothing to buy today.</p></div>
+      <h3 id="rt" tabindex="-1">Real estate agents go first. ${other ? "You can still join the waitlist." : "Your industry is on the list."}</h3>
+      <p>You told us the thing costing you most is ${esc(p.short)}. Next Level Answer opens to other businesses once the first 10 agents are live, in this order: mortgage brokers, real estate lawyers, accountants, contractors and renovators, insurance. The starting price is $500 setup plus $400 a month. ${other ? "Outside those five industries you can still join, and no date is promised." : "There is nothing to buy today."}</p></div>
       <div class="res-block"><h4>Your next step</h4>
       ${joined
-        ? `<p>You are on the waitlist. Ray will contact you when your industry opens.</p>`
+        ? `<p>You are on the waitlist. You get first notice when your industry opens.</p>`
         : `<p>Join the waitlist with one message.</p>${fallbackHTML("WAITLIST", "add you to the list")}`}</div>
       ${briefSign()}`;
   } else {
@@ -991,7 +1073,16 @@ function renderResult(focus) {
               ? "You also said calls get missed. An AI receptionist answers every call, qualifies the caller and books the appointment."
               : "Ready today. An AI receptionist answers every call, qualifies the caller and books the appointment.")}
         ${flags.length >= 2 ? `<p class="hint">Your answers point to ${flags.length + 1} of the four problems. Next Level Complete runs all four as one system, when all four are open: $1,500 setup + $1,500 a month.</p>` : ""}
-        <p class="fine">Prices in Canadian dollars. Usage is quoted on the call.</p>
+        <p class="fine">Prices in Canadian dollars.</p>
+      </div>
+      <div class="res-block"><h4>Before you pay</h4>
+        <ul class="terms-mini">
+          <li>$300 a month for the first 10 agents. Phone, text and AI minutes are billed at cost with no markup, up to a monthly cap you set.</li>
+          <li>You dial the live system yourself on the call, before you pay.</li>
+          <li>English at launch. Any other language is tested on your own line. No charge if it is not good enough for you.</li>
+          <li>Your callers stay yours. Audio recording is off unless you turn it on.</li>
+          <li>Canada first. US agents where setup is confirmed for their state on the call.</li>
+        </ul>
       </div>
       <div class="res-block"><h4>Your next step</h4><p>${esc(p.next)}</p>
         <div class="book">${bookingHTML()}</div>
@@ -1002,7 +1093,8 @@ function renderResult(focus) {
   swap(`<div class="res"><article class="brief" aria-label="Your intake brief">${html}</article>
     <button type="button" class="back" id="re">Change my answers</button></div>`);
   lastPct = 0;
-  document.getElementById("re").addEventListener("click", () => { const n = st.name; st = blank(); st.name = n; save(); renderQuestion(true); });
+  /* answers are kept, so the reader changes only what they want and steps forward with Next */
+  document.getElementById("re").addEventListener("click", () => { st.done = false; st.sent = ""; st.i = 0; save(); renderQuestion(true); });
   if (focus) focusTop("rt");
 }
 
@@ -1045,6 +1137,26 @@ if ("IntersectionObserver" in window) {
   }), { rootMargin: "-45% 0px -54% 0px" });
   Object.keys(links).forEach(k => { const s = document.getElementById(k); if (s) spy.observe(s); });
 }
+/* side index: links sitting over the dark band take the band colours */
+(function () {
+  const items = Array.from(document.querySelectorAll(".index a"));
+  const bands = Array.from(document.querySelectorAll(".dark:not(.tint)"));
+  if (!items.length || !bands.length) return;
+  let queued = false;
+  const paint = () => {
+    queued = false;
+    const rs = bands.map(b => b.getBoundingClientRect());
+    items.forEach(a => {
+      const r = a.getBoundingClientRect(); if (!r.height) return;
+      const y = r.top + r.height / 2;
+      a.classList.toggle("on-dark", rs.some(b => y >= b.top && y <= b.bottom));
+    });
+  };
+  const ask = () => { if (!queued) { queued = true; requestAnimationFrame(paint); } };
+  window.addEventListener("scroll", ask, { passive: true });
+  window.addEventListener("resize", ask);
+  paint();
+})();
 
 /* ---------- motion (enhancement only; content is complete without it) ---------- */
 if (MOTION) {

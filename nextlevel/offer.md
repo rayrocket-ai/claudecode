@@ -2,7 +2,9 @@
 
 Draft for Ray to review. Nothing here is public until Ray approves it.
 
-**Working offer.** The round 2 offer in `testing/offer-pitch-v2.md` is the working offer as of 2026-11-15. Ray asked for the offer to be fixed after the persona test, and the assistant set the new terms under that instruction. Each one is marked "Set 2026-11-15 after the persona test; Ray to confirm" where it first appears in this file. None of them is approved by Ray yet. The full list is in section 6. Test results: `testing/offer-round1/RESULTS.md` and `testing/offer-round2/RESULTS.md`.
+**Working offer.** The round 3 offer in `testing/offer-pitch-v3.md` is the working offer. Approved by Ray, 2026-11-15: Ray said yes to it after the third persona test. It replaces the round 2 terms. The decisions that carry a number (usage, founding spots, teams, geography) and the adopted wording are in section 6 under "Round 3 terms". Test results: `testing/offer-round1/RESULTS.md`, `testing/offer-round2/RESULTS.md` and `testing/offer-round3/RESULTS.md`.
+
+**Not verified.** Ray approved the offer. He did not verify the facts under it. Every HighLevel rate, the language list, the hosting statement and the CRM connection method came from search-result text, not official pages (`testing/facts-round3.md`). Each is marked `[not verified]` where it appears in this file and is listed in `README.md` under "Verify before publishing". None of them is published as checked until someone has checked it.
 
 ## 1. Who it is for
 
@@ -15,7 +17,7 @@ Working real estate agents and small teams who:
 - ask for reviews when they remember,
 - run ads, or want to, and do not watch them daily.
 
-Where: Canada first. US agents can join the Founding 10 only where setup is confirmed for their state on the call. The price is in Canadian dollars. (Set 2026-11-15 after the persona test; Ray to confirm.) [Ray to confirm: which US states]
+Where: founding clients are in Canada only, and the price is in Canadian dollars. US agents can join a US list. By 1 March 2027 everyone on the US list is told the US opening date and the price in US dollars. Nothing is sold to US clients before then. (Approved by Ray, 2026-11-15.) The US opening date and the US dollar price: [Ray to set: US opening date and US dollar price]
 
 Sold by a working GTA broker who runs the same systems on his own business. Ray is the seller and the closer on every call for now. Nadiya later.
 
@@ -23,7 +25,7 @@ Sold by a working GTA broker who runs the same systems on his own business. Ray 
 
 The main goal for marketing is inbound. Businesses and agents reach out to Next Level because of content on every platform (see `content/`). Content leads to the sales page and quiz, then to the 15-minute call with Ray.
 
-The missed-call audit is a secondary, optional tactic (see `sales/missed-call-audit.md`). Business owners outside real estate who reach out join the waitlist below until their industry opens.
+The missed-call audit is a secondary, optional tactic (see `sales/missed-call-audit.md`). Mortgage brokers and contractors and renovators who reach out take the same quiz and the same 15-minute call as agents, for the 3 founding spots open to them. Other business owners join the waitlist below until their industry opens.
 
 **Secondary channels, from the course notes. Approved by Ray, 2026-11-15, managed in Slack.** Inbound stays the main source. These sit beside it. Drafts are in `learning/content-additions.md`. They are run through Slack: Viktor, the Slack assistant that holds the HighLevel connection, manages the HighLevel side under its propose-only rule, so nothing changes in HighLevel until Ray approves it. The conditions in the table still apply.
 
@@ -37,38 +39,43 @@ Not used: bought or scraped lists, and bulk cold email. See section 10.
 
 **One rule for every first contact.** The first message, comment reply or hello has one goal: the 15-minute call. No price and no pitch before the call.
 
-### Business edition (after the gate)
+### Business edition
 
-Ray wants an offer for businesses, not only agents. The offer is built for that from day one: one master snapshot, two editions. The agent edition sells now. The business edition is the same snapshot with the prompt, stage names, custom values and review links swapped for the industry.
+Ray wants an offer for businesses, not only agents. The offer is built for that from day one: one master snapshot, two editions. The business edition is the same snapshot with the prompt, stage names, custom values and review links swapped for the industry.
 
-**What the gate allows today**
+**The decided exception. Approved by Ray, 2026-11-15.** The earlier rule was that nothing is sold to a non-agent business until real estate has paying clients and a repeatable onboarding. Ray decided one exception to that rule on 2026-11-15:
 
-- Design the snapshot so the swap is a settings change, not a rebuild. (Covered in `saas-build-spec.md`.)
-- Write the industry versions of the prompt and stage names as drafts.
-- Keep a waitlist of business owners who ask. They must opt in themselves (CASL). The waitlist asks one question now: their industry and their biggest phone problem. People on it get first notice when their industry opens. (Set 2026-11-15 after the persona test; Ray to confirm.)
-- State the order of industries and the starting price below. Nothing else about price.
+- **Mortgage brokers, and contractors and renovators.** 3 of the 10 founding spots are open to them now, on the same founding terms as agents: $300 a month, no setup fee, price locked, 250 minutes included. Same quiz, same 15-minute call. The other 7 founding spots are for real estate agents.
+- **Real estate lawyers, accountants and insurance.** Answer opens to them on 1 March 2027 at $500 setup plus $400 a month. People on the waitlist get first notice before that date.
+- **Any other business.** They can join the waitlist. No date is promised.
 
-**What waits for the gate**
+Outside that exception the gate still holds.
 
-- Any sale or checkout link for a non-agent business. The only price that may be stated is the starting price below.
-- Any ad, page or outbound message aimed at a non-agent industry.
-- Onboarding a non-agent business, paid or free.
-
-The gate, from the Blueprint: each new industry starts only when real estate has paying clients and a repeatable onboarding. Industries open one at a time, in this order.
-
-| Order | Industry | First offer (PROPOSED, Ray to approve) | Why this one first |
+| Industry | Opens | Price | Notes |
 |---|---|---|---|
-| 1 | Mortgage brokers | AI receptionist | Their callers are the same people Ray's callers are, and a missed call goes to the next broker. Closest to what is already proven. |
-| 2 | Real estate lawyers | AI receptionist, set to intake only | Closing calls arrive in bursts. The agent books and collects details. It gives no legal information. |
-| 3 | Accountants | Reviews | Work is seasonal and referral-led. Review requests at filing are the simplest fit. |
-| 4 | Contractors and renovation | AI receptionist | Owners are on job sites and cannot pick up. |
-| 5 | Insurance | Nurture | Renewal and past-client touches are the core of the business. |
+| Mortgage brokers | Now, within the 3 founding spots | Founding terms | Their callers are the same people Ray's callers are, and a missed call goes to the next broker. |
+| Contractors and renovators | Now, within the same 3 founding spots | Founding terms | Owners are on job sites and cannot pick up. |
+| Real estate lawyers | 1 March 2027 | $500 setup plus $400 a month | Closing calls arrive in bursts. The AI books and collects details. It gives no legal information. |
+| Accountants | 1 March 2027 | $500 setup plus $400 a month | Work is seasonal and referral-led. |
+| Insurance | 1 March 2027 | $500 setup plus $400 a month | Renewal and past-client calls are the core of the business. |
 
-**When other businesses open.** Set 2026-11-15 after the persona test; Ray to confirm. Next Level Answer opens to other businesses once the first 10 agents are live, in the order in the table: mortgage brokers, real estate lawyers, accountants, contractors and renovators, insurance. Starting price: $500 setup plus $400 a month. A business outside those five industries can still join the waitlist. No date is promised to them. A waitlist date for anyone: [Ray to set: waitlist date, if any].
+Every industry opens with Next Level Answer. This settles the earlier question of whether accountants would start on Reviews and insurance on Nurture.
 
-The internal gate still holds: paying real estate clients and a repeatable onboarding come first. The round 2 offer opens every industry with Answer. The "first offer" column above lists Reviews for accountants and Nurture for insurance, which is an earlier proposal. [Ray to decide: Answer first in all five industries, or the first offers in the table]
+**What is allowed today**
 
-Mortgage, law and insurance are regulated. What the AI may say, record and send in each one: [Ray to confirm with counsel] before that industry opens.
+- Selling Answer to a mortgage broker or a contractor or renovator in Canada, up to 3 founding spots between them, through the same quiz, call, agreement and checkout as an agent.
+- Designing the snapshot so the swap is a settings change, not a rebuild. (Covered in `saas-build-spec.md`.)
+- Writing the industry versions of the prompt and stage names. The mortgage version and the contractor version are needed before the first of those clients goes live.
+- Keeping a waitlist of business owners who ask. They must opt in themselves (CASL). The waitlist asks one question now: their industry and their biggest phone problem. People on it get first notice before their industry opens.
+- Stating the dates and prices above. Nothing else about price.
+
+**What still waits**
+
+- Any sale or checkout link for a real estate lawyer, accountant or insurance business before 1 March 2027, and for any other business until a date is set.
+- A fourth founding spot for a business that is not a real estate agent.
+- Any ad or outbound message aimed at a non-agent industry. The exception was approved for the offer, the page and the call. Ads and outbound were not part of it.
+
+Mortgage, law and insurance are regulated. What the AI may say, record and send in each one: [Ray to confirm with counsel] before the first client in that industry goes live. For mortgage brokers that check is needed now.
 
 ## 2. The problem, in the buyer's words
 
@@ -130,8 +137,8 @@ All names below are **Approved by Ray, 2026-11-15**. They replace "ARIA". Each i
 
 - One niche first. Built for agents, sold by a working broker who runs it on his own business and shows it live.
 - Listing data through Repliers, so the AI can answer "is this home still available?" [Ray to confirm: is the listing lookup live for the Founding 10, and does the Repliers licence cover client accounts outside Ray's board]
-- Dari and the newcomer market, for each language that passes the test on the client's own line. English at launch. Any other language is tested on the client's own line with them during setup. If it does not handle their callers' language to their standard, they do not go live and they are not charged. (Set 2026-11-15 after the persona test; Ray to confirm.) [Ray to confirm: which languages the voice agent handles today]
-- A path to Ray's team at eXp for agents who want it. This is a separate conversation, never a condition of the software. [Ray to confirm: what can be said about eXp on a Next Level page]
+- Languages, stated plainly. English is live today. The platform also lists French, Spanish, Hindi, German, Portuguese, Italian, Dutch, Russian and Japanese; any of these is switched on at the client's request and tested with them first. [not verified: the language list came from search-result text; check the Language picker in the account] Dari, Farsi, Punjabi, Mandarin, Cantonese, Urdu and Arabic are not promised. Ray speaks Dari himself; the AI is not promised in Dari. The rule for every language is the same: it is tested on the client's own line with them, and if it does not handle their callers to their standard, they do not go live and they are not charged. (Approved by Ray, 2026-11-15.)
+- No recruiting. Next Level never recruits a client to Ray's brokerage or team. Joining anything of Ray's is not a condition of the price, the service or the support. (Approved by Ray, 2026-11-15. This replaces the earlier line about a path to Ray's team at eXp.) [Ray to confirm: what can be said about eXp on a Next Level page]
 
 The low-price reseller market is crowded. Next Level sells results, not a cheap tool.
 
@@ -140,22 +147,21 @@ The low-price reseller market is crowded. Next Level sells results, not a cheap 
 For Next Level Answer (the rung on sale to the Founding 10 now):
 
 1. A HighLevel sub-account cloned from the Next Level snapshot.
-2. A phone number or call forwarding from the agent's current number. The agent keeps their number. Calls forward only when the agent does not answer, including when their phone is off. Forwarding is switched off the day the agent cancels. (Set 2026-11-15 after the persona test; Ray to confirm.)
-3. The voice agent set up with the agent's name, areas, hours, services and common questions.
+2. A phone number or call forwarding from the client's current number. The client keeps their number. Calls forward only when the client does not answer, including when their phone is off. Forwarding is switched off the day the client cancels.
+3. The voice agent set up with the client's name, areas, hours, services and common questions.
 4. Calendar connected so calls are booked into real openings.
 5. Missed-call text-back.
 6. A pipeline so every caller is a contact with a stage.
-7. Test calls with the agent before going live.
+7. Test calls with the client before going live.
 8. The 9-step onboarding checklist, a day 3 check and a day 14 check.
 9. A monthly results report.
-
-Items 10 to 14: Set 2026-11-15 after the persona test; Ray to confirm.
-
-10. A summary of every call by text and by email, so it works beside any CRM from day one. A direct push into the agent's CRM is confirmed for their specific CRM on the call, before they pay.
-11. A callback offer to any caller who asks for a person or whose call is urgent, with a text alert to the agent straight away.
-12. A monthly spending cap for usage, set by the agent before go-live. The system stops and alerts the agent if the cap is reached.
-13. A test of any language other than English on the agent's own line, with the agent, before go-live.
-14. A one-page summary the agent can show their broker of record before signing.
+10. 250 AI call minutes a month, the phone number, and the summary and alert texts, up to 500 text segments a month. (Approved by Ray, 2026-11-15. Full terms in section 6.)
+11. A summary of every call by text and by email, so it works beside any CRM from day one. For Follow Up Boss and BoldTrail (kvCORE), a one-way push into the CRM through Zapier. Lofty and Sierra Interactive are tested in the client's account during set-up week. Any other CRM gets the text and email summary. [not verified: the CRM connection method came from search-result text]
+12. A callback offer to any caller who asks for a person or whose call is urgent, with a text alert to the client straight away.
+13. A monthly cap on extra minutes, set by the client before go-live. It can be zero. The system stops and alerts the client if the cap is reached. [verify in HighLevel: the cap and the stop must be tested in the account before the first client]
+14. A test of any language other than English on the client's own line, with the client, before go-live.
+15. A one-page summary the client can show their broker of record before signing.
+16. A written agreement before payment. It names the registered business and its address, and the set-up team.
 
 ## 6. Founding 10 terms
 
@@ -185,44 +191,66 @@ Items 10 to 14: Set 2026-11-15 after the persona test; Ray to confirm.
 
 - At day 30, founders may also be asked for a short review in their own words, or to take part in a written case study. It is their choice and never a condition of the founding price. Nothing is published without their written permission. (Added from the course notes, 2026-11-15.)
 
-**Founding terms set after the persona test. Set 2026-11-15 after the persona test; Ray to confirm**
+**Round 3 terms. Approved by Ray, 2026-11-15**
 
-These are the round 2 terms from `testing/offer-pitch-v2.md`. Ray said "fix and heal and make it better" and the assistant set them under that instruction. Ray has not approved them one by one. Each is a policy Next Level can keep, not a new capability claim. Copy uses these words and adds nothing to them.
+Ray said yes to the round 3 offer (`testing/offer-pitch-v3.md`) on 2026-11-15. These terms replace the round 2 terms. Copy uses these words and adds nothing to them.
 
-- **Usage.** Phone, text and AI minutes are billed at cost with no markup for founding clients, on top of the $300. The client sets a monthly spending cap before go-live. If the cap is reached, the system stops and alerts the client. Ray shows his own line's real usage bill on the call, before the client pays.
-- **Try before paying.** On the call the agent dials the live system and hears it answer as their business would.
-- **Languages.** English at launch. Any other language is tested on the client's own line with them during setup. If it does not handle their callers' language to their standard, they do not go live and they are not charged.
-- **Callers and data.** The client's callers stay the client's. No one at Next Level or Ray Homes contacts a client's callers or uses a client's contacts, and that is written in the agreement. Each call is transcribed so the client gets the summary. The transcript stays in the client's own account. The people who can read it are the client, and the set-up team only while they are setting up or fixing that account. Audio recording is off unless the client turns it on. When it is on, the AI says so at the start of the call. When the client leaves, their contacts and transcripts are exported to them and deleted from the account.
-- **CRM.** Every call arrives as a text and an email summary, so it works beside any CRM from day one. A direct push into the client's CRM is confirmed for their specific CRM on the call, before they pay. If it cannot be done, they are told then.
+Decisions that carry a number:
+
+- **Usage.** The $300 founding price includes 250 AI call minutes a month, the phone number, and the summary and alert texts, up to 500 text segments a month. Extra minutes are $0.30 CAD each. A part minute counts as a minute. Unused minutes do not carry over. Minutes used are shown on each invoice. Before go-live the client sets a monthly cap on extra minutes, and it can be zero. The system stops and alerts the client if the cap is reached. With the cap at zero, the most a client can be billed is $300. With a cap of 100 extra minutes, the most is $330. The same 250 minutes and the same $0.30 apply at the standard price. Ray shows his own line's real usage on the call, before the client pays. This replaces every earlier usage line in these files. [not verified: the bundle is priced from HighLevel rates seen in search-result text; see `saas-build-spec.md` section 13]
+- **Founding spots.** 3 of the 10 founding spots are open now to mortgage brokers and to contractors and renovators, on the same founding terms. 7 are for real estate agents. Real estate lawyers, accountants and insurance open on 1 March 2027 at $500 setup plus $400 a month, with first notice to the waitlist. This is a decided exception to the gate rule (section 1).
+- **Teams.** One subscription covers one business line. Each extra agent line on the same account is half the monthly price: $150 a month at the founding price, $200 a month at the standard price. Each extra line adds 125 minutes, and all lines on the account share one pool of minutes.
+- **Where.** Founding clients are in Canada only, and the price is in Canadian dollars. US agents can join a US list. By 1 March 2027 everyone on the US list is told the US opening date and the price in US dollars. Nothing is sold to US clients before then.
+
+Adopted wording that carries no new number:
+
+- **Try before paying.** A demo number is on the page. The buyer dials it before booking anything and hears the AI answer. On the call they dial the live system again and hear it answer as their business would. [Ray to add: demo phone number] This line is not used anywhere until the number exists.
+- **Written agreement.** The client gets a written agreement before paying. It names the registered business and its address. [Ray to confirm: business name and mailing address for Next Level]
+- **No recruiting.** Next Level never recruits a client to Ray's brokerage or team. Joining anything of Ray's is not a condition of the price, the service or the support.
+- **No cheaper plan.** "There is no cheaper plan today. If $300 a month is more than your phone problem is worth, this is not the right service for you yet."
+- **Languages.** English is live today. The platform also lists French, Spanish, Hindi, German, Portuguese, Italian, Dutch, Russian and Japanese; any of these is switched on at the client's request and tested with them first. Dari, Farsi, Punjabi, Mandarin, Cantonese, Urdu and Arabic are not promised: if a client needs one, it is checked against the platform's current list and tested with them during set-up. Ray speaks Dari himself; the AI is not promised in Dari. The rule for every language is the same: it is tested on the client's own line with them, and if it does not handle their callers to their standard, they do not go live and they are not charged. [not verified: the language list came from search-result text]
+- **Callers.** The client's callers stay the client's. No one at Next Level or Ray Homes contacts a client's callers or uses a client's contacts, and that is written in the agreement.
+- **Where data is held.** The client's account runs on HighLevel, a US software company. HighLevel says its infrastructure is in the United States, on Google Cloud and Amazon Web Services, and it publishes a SOC 2 Type II report. The client's data is not stored in Canada. Next Level is a customer of HighLevel, not a partner or affiliate of it. [not verified: the hosting statement came from search-result text]
+- **Who can read a transcript.** The client, and the set-up team only while they are setting up the account or fixing something the client asked them to fix. The set-up team is named in the agreement. To turn speech into text and back, the call passes through the platform's speech and AI suppliers. [Ray to add: names of the set-up team]
+- **Recording.** Calls are transcribed so the client gets the summary. Audio recording is off unless the client turns it on, and when it is on the AI says so at the start of the call. [verify in HighLevel: that recording stays off while the transcript is still produced. Test before the first client]
+- **Leaving.** The client's contacts and transcripts are exported to them and deleted from the account within 30 days of the day they leave.
+- **CRM.** Every call reaches the client as a text and an email summary, so it works beside any CRM from day one. For four CRMs there is also a push into the CRM: after each call the caller is created or updated as a contact or lead, with the summary. Follow Up Boss and BoldTrail (kvCORE) go through Zapier. Lofty and Sierra Interactive are listed by Zapier with the same kind of connection, and are tested in the client's account during set-up week. The push is one way, from Next Level Answer into the CRM. It does not read or change anything else in the CRM. The client authorises it during set-up, and there is no extra charge for it. If the push for one of these four does not work in the client's account during set-up, the client can cancel and is not charged. Any other CRM gets the text and email summary. Next Level is not affiliated with Zapier or with any CRM company. [not verified: the connection method came from search-result text; none of the four has been tested]
 - **Brokerage.** The client gets a one-page summary to show their broker of record before signing. If their brokerage says no within 14 days, they get their first month back. [Ray to confirm: the day the 14 days are counted from]
 - **Urgent calls.** If a caller asks for a person, or the call is urgent, the AI offers a callback and alerts the client by text straight away.
 - **Forwarding.** The client keeps their number. Calls forward only when the client does not answer, including when their phone is off. Forwarding is switched off the day the client cancels.
-- **Teams.** One subscription covers one business line. A team routing calls to several agents is quoted on the call.
-- **Other businesses.** Answer opens to other businesses once the first 10 agents are live, in the order in section 1, from $500 setup plus $400 a month.
-- **Where.** Canada first. US clients can join the Founding 10 only where setup is confirmed for their state on the call. The price is in Canadian dollars.
-- **Who operates it.** The service is called Next Level and is operated by Ray Ahmadi. The registered business name and address are on the agreement the client signs before paying.
-- **No testimonials yet, and why that helps a founder.** Next Level is new. The first 10 clients are its founding clients and there are no client testimonials yet. That is the reason the founding price and the founding terms exist: $300 a month in place of $500 setup plus $400 a month, no setup fee and a locked price. Founders take the place of the proof that does not exist yet, and the terms are what they get for it.
+- **Inbound only.** Next Level Answer only answers calls that come in. It does not place sales calls.
+- **Who operates it.** The service is called Next Level and is operated by Ray Ahmadi.
+- **No testimonials yet, and why that helps a founder.** Next Level is new. The first 10 clients are its founding clients and there are no client testimonials yet. That is the reason for the founding terms: a lower price, no setup fee and a locked price, in return for being first.
+
+**Not verified. Check before anything is published**
+
+These came from search-result text on 2026-11-15, not from official pages or the account. Where to check each one: `README.md`, "Verify before publishing".
+
+- Every HighLevel rate behind the bundle and the $0.30.
+- The language list.
+- The hosting statement, including the SOC 2 Type II report.
+- The CRM connection method.
+
+Two behaviours must be tested in the account before the first client: recording stays off unless switched on, and the system stops at the client's cap.
 
 **Open**
 
-Facts only Ray can supply. The round 2 test showed these are what still stops a buyer (`testing/offer-round2/RESULTS.md`).
+Facts only Ray can supply, and one test.
 
-- The usage rate per minute as a number. [Ray to add: usage rate per minute] And whether "at cost, no markup" leaves an acceptable margin at $300. [Ray to confirm: margin at $300 with usage at cost]
-- The languages the AI handles today. [Ray to confirm: which languages the voice agent handles today]
-- Which CRMs get a direct push. [Ray to confirm: which CRMs get a direct push]
 - The registered business name and address. [Ray to confirm: business name and mailing address for Next Level]
-- Where data is hosted. [Ray to add: where client data is hosted]
-- Team pricing. [Ray to set: team pricing]
-- Which US states. [Ray to confirm: which US states]
-- A waitlist date. [Ray to set: waitlist date, if any]
-- Whether to offer a smaller plan for very small practices. [Ray to decide: a smaller plan for very small practices]
-- Taxes on the $300 (HST for Ontario clients and others): [Ray to confirm with his accountant]
+- The demo phone number. [Ray to add: demo phone number]
+- Whether HST is added to the prices. [Ray to confirm with his accountant]
+- The names of the set-up team. [Ray to add: names of the set-up team]
+- A second-language test on Ray's own line. In round 3, 22 of the 100 personas serve callers in a language the AI is not promised to speak. It is the biggest remaining lever the test found. [Ray to run: a test call in one of Punjabi, Mandarin or Farsi on his own line]
+- The US opening date and the US dollar price. [Ray to set: US opening date and US dollar price]
+- What happens past 500 text segments in a month. The round 3 offer does not say. [Ray to set: text segments past 500]
+- A setup fee for an extra agent line at the standard price. The round 3 offer does not say. [Ray to set: setup fee for extra lines at the standard price]
 
 ## 7. Price ladder after the Founding 10
 
 Everything in this table is **Approved by Ray, 2026-11-15**. The Founding 10 price stays $300 a month for Answer.
 
-All prices in Canadian dollars, for US clients too. (Set 2026-11-15 after the persona test; Ray to confirm.)
+All prices in Canadian dollars. Founding clients are in Canada only. The US dollar price is set later (section 6).
 
 | Rung | Setup fee | Monthly | Reasoning |
 |---|---|---|---|
@@ -232,15 +260,15 @@ All prices in Canadian dollars, for US clients too. (Set 2026-11-15 after the pe
 | Next Level Ads | $500 | $750, with ad spend on the client's own card | Daily watching is real labour. Ad spend stays on the client's own card so there is no confusion about whose money it is. |
 | Next Level Complete | $1,500 | $1,500 | Slightly under the four rungs added together ($1,550), with coaching on top. A bundle should cost less than its parts. |
 
-Usage for founding clients: billed at cost with no markup, up to the monthly cap the client sets (section 6). (Set 2026-11-15 after the persona test; Ray to confirm.)
+Usage with Answer, at the founding price and at the standard price: 250 AI call minutes a month, the phone number and up to 500 text segments are included. Extra minutes are $0.30 CAD each, up to the monthly cap the client sets (section 6). Approved by Ray, 2026-11-15.
 
-Usage on every rung after the Founding 10: rebilled at cost plus markup. Markup: [Ray to set].
+Usage on Reviews, Nurture, Ads and Complete: not decided. [Ray to set: usage terms for rungs 2 to 5]
 
-Other businesses: Answer from $500 setup plus $400 a month when their industry opens (section 1).
+Other businesses: mortgage brokers and contractors and renovators on the founding terms within the 3 spots. Real estate lawyers, accountants and insurance from 1 March 2027 at $500 setup plus $400 a month (section 1).
 
-Teams: one subscription covers one business line. A team is quoted on the call. [Ray to set: team pricing]
+Teams: one subscription covers one business line. Each extra agent line on the same account is half the monthly price, $150 at the founding price and $200 at the standard price, and adds 125 minutes to a shared pool. Approved by Ray, 2026-11-15. A setup fee for an extra line at the standard price: [Ray to set: setup fee for extra lines at the standard price]
 
-A smaller plan: not offered. In round 2 the small-practice owners on the panel wanted something under $100, which is a different product from this one. [Ray to decide: a smaller plan for very small practices]
+A smaller plan: not offered. The working line is "there is no cheaper plan today" (section 6). In round 2 the small-practice owners on the panel wanted something under $100, which is a different product from this one.
 
 ## 8. What Ray Homes proves, rung by rung
 
@@ -263,9 +291,9 @@ Ray Homes is the proof for now. Decided by Ray, 2026-11-15: the Founding 10 open
 - What counts as a qualified caller for them, and who the call goes to when a person is needed.
 - Their Google Business Profile access (for Reviews).
 - A payment card.
-- Confirmation that their brokerage allows the tool. Next Level supplies a one-page summary to show the broker of record before signing. If the brokerage says no within 14 days, the first month is returned. (Set 2026-11-15 after the persona test; Ray to confirm.) [Ray to confirm: wording for this]
-- The monthly spending cap they want for usage, chosen before go-live.
-- The name of their CRM, so a direct push can be confirmed on the call before they pay.
+- Confirmation that their brokerage allows the tool. Next Level supplies a one-page summary to show the broker of record before signing. If the brokerage says no within 14 days, the first month is returned. [Ray to confirm: wording for this]
+- The monthly cap on extra minutes they want, chosen before go-live. It can be zero.
+- The name of their CRM, so the push can be set up or tested during set-up week.
 - The languages their callers use.
 - Their own consent for texts and emails sent from their account. The client is the sender under CASL. Next Level sets up the tool.
 
@@ -273,61 +301,64 @@ Ray Homes is the proof for now. Decided by Ray, 2026-11-15: the Founding 10 open
 
 - No promise of leads, deals, commission or income.
 - Ad spend.
-- Phone, text and AI usage. For founding clients it is billed at cost with no markup, on top of the $300, up to the monthly cap the client sets. (Set 2026-11-15 after the persona test; Ray to confirm.)
-- A language other than English, until it passes the test on the client's own line.
-- Routing calls to several agents on a team. One subscription covers one business line. A team is quoted on the call.
-- A direct push into a CRM that was not confirmed on the call. The text and email summary is always included.
+- AI call minutes past the 250 included each month. They are $0.30 CAD each, up to the monthly cap the client sets. Text segments past 500 a month: [Ray to set: text segments past 500]
+- A cheaper plan. There is none today.
+- A language that has not passed the test on the client's own line. Dari, Farsi, Punjabi, Mandarin, Cantonese, Urdu and Arabic are not promised.
+- Data storage in Canada. The account runs on HighLevel, in the United States. [not verified: the hosting statement came from search-result text]
+- More than one business line on one subscription. Each extra agent line is half the monthly price (section 6).
+- A push into a CRM other than Follow Up Boss, BoldTrail (kvCORE), Lofty and Sierra Interactive. The text and email summary is always included.
+- Outbound sales calls. Next Level Answer only answers calls that come in.
 - Legal advice. Call recording and AI disclosure rules must be confirmed for each client's province or state. [Ray to confirm with counsel]
 - Buying, renting or scraping contact lists. Never.
 - Importing a client's contacts without a consent basis for each one.
 - Custom builds outside the snapshot.
 - Rungs 2 to 5 until each is released. Their prices are approved (section 7).
-- Any business edition until the gate is met.
-- A seat on Ray's team. That is a separate conversation.
+- A sale to any business outside the decided exception in section 1.
+- A seat on Ray's team or at his brokerage. Next Level never recruits a client to either.
 
 ## 11. Objections, with honest answers
 
 **"My callers will hate talking to an AI."**
-Some will. The agent says at the start that it is an AI assistant. If a caller asks for a person, or the call is urgent, it offers a callback and alerts you by text straight away. (Set 2026-11-15 after the persona test; Ray to confirm.) The comparison is not AI against you. It is AI against voicemail. On the call you dial the live system yourself and judge it. On the call we will show you our own numbers from Ray Homes live. [Ray to add: real number from Ray Homes]
+Some will. The agent says at the start that it is an AI assistant. If a caller asks for a person, or the call is urgent, it offers a callback and alerts you by text straight away. The comparison is not AI against you. It is AI against voicemail. On the call you dial the live system yourself and judge it. On the call we will show you our own numbers from Ray Homes live. [Ray to add: real number from Ray Homes]
 
 **"I already have voicemail, or an assistant."**
 Voicemail does not qualify or book. An assistant does, during the hours they work. This covers the rest: showings, evenings, weekends.
 
 **"$300 a month is a lot."**
-It is. The honest test is your own missed calls. Call your own line tonight from another phone and see what a new caller gets. We can also run a free missed-call audit for you. If you rarely miss a call, you do not need this, and we will say so.
+It is. The $300 includes 250 AI call minutes a month, your phone number and the summary texts. There is no cheaper plan today. If $300 a month is more than your phone problem is worth, this is not the right service for you yet. The honest test is your own missed calls. Call your own line tonight from another phone and see what a new caller gets. We can also run a free missed-call audit for you. If you rarely miss a call, you do not need this, and we will say so.
 
 **"Is this legal? Recording calls, AI on the phone?"**
-The rules on recording and on telling callers they are speaking with an AI differ by province and state. We confirm them for your location before you go live. Audio recording is off unless you turn it on, and when it is on the AI says so at the start of the call. (Set 2026-11-15 after the persona test; Ray to confirm.) [Ray to confirm with counsel]
+The rules on recording and on telling callers they are speaking with an AI differ by province and state. We confirm them for your location before you go live. Audio recording is off unless you turn it on, and when it is on the AI says so at the start of the call. [Ray to confirm with counsel]
 
-**"Will it work with my CRM?"** (Set 2026-11-15 after the persona test; Ray to confirm.)
-Yes, beside it, from day one. You get every call as a text and an email summary. A direct push into your CRM is confirmed for your specific CRM on the call, before you pay. If it cannot be done, you are told then. [Ray to confirm: which CRMs get a direct push]
+**"Will it work with my CRM?"**
+Yes, beside it, from day one. Every call reaches you as a text and an email summary. For four CRMs there is also a push into the CRM: after each call the caller is created or updated as a contact or lead, with the summary. Follow Up Boss and BoldTrail (kvCORE) go through Zapier. Lofty and Sierra Interactive are tested in your account during set-up week. It is one way, from Next Level Answer into your CRM. You authorise it yourself, and there is no extra charge for it. If the push for one of those four does not work in your account during set-up, you can cancel and you are not charged. Any other CRM gets the text and email summary. [not verified: the connection method came from search-result text]
 
 **"What if I want out?"**
-Month to month, cancel before the next billing date. Your contacts are yours and we export them for you. (Approved by Ray, 2026-11-15.) Your transcripts are exported with them, both are deleted from the account, and call forwarding is switched off the day you cancel. (Set 2026-11-15 after the persona test; Ray to confirm.)
+Month to month, cancel before the next billing date. Your contacts are yours and we export them for you. Your transcripts are exported with them, both are deleted from the account within 30 days of the day you leave, and call forwarding is switched off the day you cancel.
 
-**"You are a broker. Are you going to take my leads?"**
-No. Your callers stay yours. No one at Next Level or Ray Homes contacts your callers or uses your contacts, and that is written in the agreement you sign. (Set 2026-11-15 after the persona test; Ray to confirm.) [Ray to confirm: put this in the client agreement]
+**"You are a broker. Are you going to take my leads, or recruit me?"**
+No to both. Your callers stay yours. No one at Next Level or Ray Homes contacts your callers or uses your contacts, and that is written in the agreement you sign. Next Level never recruits a client to Ray's brokerage or team, and joining anything of Ray's is not a condition of the price, the service or the support. [Ray to confirm: put both in the client agreement]
 
-**"Who can read my call transcripts?"** (Set 2026-11-15 after the persona test; Ray to confirm.)
-Each call is transcribed so you get the summary. The transcript stays in your own account. The people who can read it are you, and the set-up team only while they are setting up or fixing your account. Audio recording is off unless you turn it on. When you leave, your contacts and transcripts are exported to you and deleted from the account. Where the data is hosted: [Ray to add: where client data is hosted]
+**"Who can read my call transcripts, and where is my data?"**
+Each call is transcribed so you get the summary. The people who can read a transcript are you, and the set-up team only while they are setting up your account or fixing something you asked them to fix. The set-up team is named in your agreement. To turn speech into text and back, the call passes through the platform's speech and AI suppliers. Audio recording is off unless you turn it on. When you leave, your contacts and transcripts are exported to you and deleted from the account within 30 days. Your account runs on HighLevel, a US software company. HighLevel says its infrastructure is in the United States, on Google Cloud and Amazon Web Services, and it publishes a SOC 2 Type II report. Your data is not stored in Canada. [not verified: the hosting statement came from search-result text] [Ray to add: names of the set-up team]
 
 **"Do you have results from other agents?"**
-Not yet, and that is the reason the founding price and the founding terms exist. The Founding 10 are the first clients. In return for going first they pay $300 a month with no setup fee and a locked price, where everyone after them pays $500 setup plus $400 a month. (Set 2026-11-15 after the persona test; Ray to confirm.) What we have is Ray's own business. Ray is a GTA real estate broker, Ray Homes Real Estate under eXp Realty, 12+ years, about 50 deals a year, multi-year eXp Icon agent, bilingual in English and Dari. He runs this system on Ray Homes, and we will show you ours live on the call. [Ray to add: real number from Ray Homes] You also dial the live system yourself on the call before you pay anything.
+Not yet, and that is the reason the founding price and the founding terms exist. The Founding 10 are the first clients. In return for going first they pay $300 a month with no setup fee and a locked price, where everyone after them pays $500 setup plus $400 a month. What we have is Ray's own business. Ray is a GTA real estate broker, Ray Homes Real Estate under eXp Realty, 12+ years, about 50 deals a year, multi-year eXp Icon agent, bilingual in English and Dari. He runs this system on Ray Homes, and we will show you ours live on the call. [Ray to add: real number from Ray Homes] You also dial the live system yourself on the call before you pay anything.
 
-**"What does usage cost on top of the $300?"** (Set 2026-11-15 after the persona test; Ray to confirm.)
-Phone, text and AI minutes are billed at cost with no markup for founding clients. You set a monthly spending cap before you go live, and the system stops and alerts you if it is reached. On the call Ray shows you the real usage bill for his own line before you pay. The rate per minute as a number: [Ray to add: usage rate per minute]
+**"What does usage cost on top of the $300?"**
+Nothing, up to 250 AI call minutes a month. The $300 includes those minutes, your phone number, and the summary and alert texts, up to 500 text segments. If a call runs two minutes, 250 minutes is 125 answered calls. Extra minutes are $0.30 CAD each. A part minute counts as a minute and unused minutes do not carry over. You set a monthly cap on extra minutes before you go live, and it can be zero. With the cap at zero, the most you can be billed is $300. Minutes used are shown on every invoice, and on the call Ray shows you the real usage on his own line before you pay. Whether HST is added: [Ray to confirm with his accountant]
 
-**"Does it speak my callers' language?"** (Set 2026-11-15 after the persona test; Ray to confirm.)
-English at launch. Any other language is tested on your own line with you during setup. If it does not handle your callers' language to your standard, you do not go live and you are not charged. [Ray to confirm: which languages the voice agent handles today]
+**"Does it speak my callers' language?"**
+English is live today. The platform also lists French, Spanish, Hindi, German, Portuguese, Italian, Dutch, Russian and Japanese; any of these is switched on at your request and tested with you first. Dari, Farsi, Punjabi, Mandarin, Cantonese, Urdu and Arabic are not promised. If you need one, it is checked against the platform's current list and tested with you during set-up. Every language is tested on your own line with you. If it does not handle your callers to your standard, you do not go live and you are not charged. [not verified: the language list came from search-result text]
 
-**"Will my brokerage allow it?"** (Set 2026-11-15 after the persona test; Ray to confirm.)
+**"Will my brokerage allow it?"**
 You get a one-page summary to show your broker of record before you sign. If your brokerage says no within 14 days, you get your first month back.
 
-**"I run a team."** (Set 2026-11-15 after the persona test; Ray to confirm.)
-One subscription covers one business line. A team routing calls to several agents is quoted on the call. [Ray to set: team pricing]
+**"I run a team."**
+One subscription covers one business line. Each extra agent line on the same account is half the monthly price: $150 a month at the founding price. Each extra line adds 125 minutes, and all lines on the account share one pool of minutes.
 
-**"I am in the US."** (Set 2026-11-15 after the persona test; Ray to confirm.)
-Canada first. US agents can join the Founding 10 only where setup is confirmed for their state on the call. The price is in Canadian dollars. [Ray to confirm: which US states]
+**"I am in the US."**
+Founding clients are in Canada only. You can join the US list. By 1 March 2027 everyone on it is told the US opening date and the price in US dollars. Nothing is sold to US clients before then.
 
 **"I do not have time to set this up."** (Added from the course notes, 2026-11-15. Draft for Ray to approve.)
 We set it up for you. Your part is one short form and one test call to your own line. The first call with Ray is 15 minutes.
@@ -339,7 +370,7 @@ You do not have to use AI anywhere else. This does one job: it picks up the call
 It is. Ray's business is not. He has worked in GTA real estate for 12+ years and he runs this system on Ray Homes today. You will hear it live on the call before you decide anything.
 
 **"I am not an agent. Can I buy it?"**
-Not yet. Answer opens to other businesses once the first 10 agents are live, in this order: mortgage brokers, real estate lawyers, accountants, contractors and renovators, insurance. The starting price is $500 setup plus $400 a month. Join the waitlist and you get first notice. We ask you one question now: your industry and your biggest phone problem. Outside those five industries you can still join, and no date is promised. (Set 2026-11-15 after the persona test; Ray to confirm.)
+It depends on your business. Mortgage brokers, and contractors and renovators: 3 of the 10 founding spots are open to you now, on the same founding terms as agents. Same quiz, same 15-minute call. Real estate lawyers, accountants and insurance: Answer opens to you on 1 March 2027 at $500 setup plus $400 a month. Join the waitlist and you get first notice before that date. We ask you one question now: your industry and your biggest phone problem. Any other business can join the waitlist, and no date is promised.
 
 ## 12. Product check, from the course notes
 
@@ -362,4 +393,4 @@ What this confirms:
 
 ## Next step
 
-Sections 4 and 7 are approved by Ray, 2026-11-15. The founding terms in section 6, including the live-in-7-days commitment, are approved by Ray, 2026-11-15. Ray marks each remaining PROPOSED line approve, change or cut. Ray confirms or changes each term marked "Set 2026-11-15 after the persona test; Ray to confirm", and supplies the facts under "Open" in section 6, starting with the usage rate per minute.
+Ray said yes to the round 3 offer on 2026-11-15, so sections 4, 6 and 7 are approved. What is left: Ray marks each remaining PROPOSED line approve, change or cut, and supplies the facts under "Open" in section 6. Before anything is published, the four items under "Not verified" in section 6 are checked, and the cap and the recording setting are tested in the account.
