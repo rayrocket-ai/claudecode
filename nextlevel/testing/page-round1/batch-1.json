@@ -1,0 +1,663 @@
+[
+ {
+  "id": "P001",
+  "device": "phone",
+  "furthest_point": "founding",
+  "started_quiz": false,
+  "finished_quiz": false,
+  "quiz_path": "none",
+  "gave_contact_details": false,
+  "ticked_email_consent": false,
+  "outcome": "left",
+  "seconds_on_page": 150,
+  "first_impression": "Clean and serious, and the showing headline is exactly my Friday afternoon.",
+  "main_reason": "I scrolled to the languages line and it says Dari and Farsi are not promised today, so half my callers would get English from a system run by a broker who works my own community.",
+  "element_that_helped_most": "Your callers stay yours",
+  "element_that_hurt_most": "Dari, Farsi, Punjabi, Mandarin, Cantonese, Urdu and Arabic are not promised today.",
+  "confusion": [
+   "The reel was in Dari but the page says Dari is not promised",
+   "The languages answer is buried far down a long list of terms on my phone"
+  ],
+  "missing": [
+   "A list of languages the AI actually speaks today",
+   "Who exactly is on the set-up team that can read transcripts"
+  ],
+  "booking_fallback_reaction": "did not reach it",
+  "design_score": 4,
+  "clarity_score": 3
+ },
+ {
+  "id": "P002",
+  "device": "desktop",
+  "furthest_point": "result",
+  "started_quiz": true,
+  "finished_quiz": true,
+  "quiz_path": "agent",
+  "gave_contact_details": false,
+  "ticked_email_consent": false,
+  "outcome": "quiz only",
+  "seconds_on_page": 260,
+  "first_impression": "Looks expensive and polished, more like a magazine than a realtor tool.",
+  "main_reason": "My result says each extra agent line is $150, so five agents is $900 a month, Punjabi is not promised, and nothing says a call can go to whoever is on duty.",
+  "element_that_helped_most": "Running a team: each additional agent line on the same account is $150 a month at the founding price",
+  "element_that_hurt_most": "Dari, Farsi, Punjabi, Mandarin, Cantonese, Urdu and Arabic are not promised today.",
+  "confusion": [
+   "Is one 'business line' the team number or each agent's cell",
+   "Booking is an Instagram message instead of a calendar"
+  ],
+  "missing": [
+   "Call routing to the agent on duty",
+   "Proof it handles Punjabi and English mixed in one call",
+   "Whether calls are logged into Follow Up Boss per agent"
+  ],
+  "booking_fallback_reaction": "annoyed",
+  "design_score": 4,
+  "clarity_score": 3
+ },
+ {
+  "id": "P003",
+  "device": "phone",
+  "furthest_point": "problems",
+  "started_quiz": false,
+  "finished_quiz": false,
+  "quiz_path": "none",
+  "gave_contact_details": false,
+  "ticked_email_consent": false,
+  "outcome": "left",
+  "seconds_on_page": 40,
+  "first_impression": "Pretty page, but the headline is about phone calls and my clients do not phone me.",
+  "main_reason": "Everything available now is a phone receptionist, and the database product I might want is tagged 'Opening next' with nothing about WeChat or Chinese.",
+  "element_that_helped_most": "Next Level Nurture",
+  "element_that_hurt_most": "Who answered your phone?",
+  "confusion": [
+   "What 'the intake' means"
+  ],
+  "missing": [
+   "Anything about WeChat or text messages",
+   "Mandarin"
+  ],
+  "booking_fallback_reaction": "did not reach it",
+  "design_score": 4,
+  "clarity_score": 3
+ },
+ {
+  "id": "P004",
+  "device": "desktop",
+  "furthest_point": "method",
+  "started_quiz": false,
+  "finished_quiz": false,
+  "quiz_path": "none",
+  "gave_contact_details": false,
+  "ticked_email_consent": false,
+  "outcome": "left",
+  "seconds_on_page": 75,
+  "first_impression": "Big fancy letters, and yes, I have been in a showing when the phone rang.",
+  "main_reason": "There is no number to dial to hear it, it wants me to do a questionnaire and then a call, and I will not have a robot answering people who have known me twenty years.",
+  "element_that_helped_most": "See the prices",
+  "element_that_hurt_most": "An AI receptionist answers every call you miss",
+  "confusion": [
+   "'Start the intake' does not sound like something for me",
+   "The moving strip of words"
+  ],
+  "missing": [
+   "A phone number to dial and hear it",
+   "A plain answer near the top on whether callers know it is a machine"
+  ],
+  "booking_fallback_reaction": "did not reach it",
+  "design_score": 3,
+  "clarity_score": 2
+ },
+ {
+  "id": "P005",
+  "device": "phone",
+  "furthest_point": "result",
+  "started_quiz": true,
+  "finished_quiz": true,
+  "quiz_path": "agent",
+  "gave_contact_details": true,
+  "ticked_email_consent": true,
+  "outcome": "tried to book",
+  "seconds_on_page": 420,
+  "first_impression": "It looks calm and grown-up, and that headline is my 5 to 8 pm every single day.",
+  "main_reason": "It says with the cap at zero the most I can be billed is $300, no setup fee and month to month, which is the answer I needed, so I messaged NEXT to hear it.",
+  "element_that_helped_most": "With the cap at zero, the most you can be billed is $300.",
+  "element_that_hurt_most": "Booking opens shortly. Message NEXT to @rayahmadi on Instagram and Ray will send you a time.",
+  "confusion": [
+   "I ticked the email box but no brief arrived in my inbox",
+   "I had to wait for a reply instead of picking an evening time"
+  ],
+  "missing": [
+   "Whether HST is added on top of the $300",
+   "What happens to calls if I set the cap to zero and run out of minutes mid-month, beyond 'the system stops'"
+  ],
+  "booking_fallback_reaction": "fine",
+  "design_score": 5,
+  "clarity_score": 4
+ },
+ {
+  "id": "P006",
+  "device": "desktop",
+  "furthest_point": "method",
+  "started_quiz": false,
+  "finished_quiz": false,
+  "quiz_path": "none",
+  "gave_contact_details": false,
+  "ticked_email_consent": false,
+  "outcome": "left",
+  "seconds_on_page": 80,
+  "first_impression": "Handsome typography, better than most of what gets sent to me, but the top bar says it is another broker's company.",
+  "main_reason": "It is run by a GTA broker under eXp, there is no recording to hear the voice, and I am not putting a competitor's operation between me and a seven-figure client.",
+  "element_that_helped_most": "the hero illustration of the 2:14 pm call",
+  "element_that_hurt_most": "By Ray Ahmadi, GTA real estate broker",
+  "confusion": [
+   "I only hear it if I book a call with the competing broker"
+  ],
+  "missing": [
+   "A recording of a real call",
+   "A statement near the top that the operator cannot see my callers"
+  ],
+  "booking_fallback_reaction": "did not reach it",
+  "design_score": 4,
+  "clarity_score": 3
+ },
+ {
+  "id": "P007",
+  "device": "phone",
+  "furthest_point": "first screen",
+  "started_quiz": false,
+  "finished_quiz": false,
+  "quiz_path": "none",
+  "gave_contact_details": false,
+  "ticked_email_consent": false,
+  "outcome": "left",
+  "seconds_on_page": 12,
+  "first_impression": "Nice looking, but it is about missed calls and my phone does not ring.",
+  "main_reason": "It asks who answered my phone when nobody is calling me, and nothing on the first screen says it gets me clients.",
+  "element_that_helped_most": "",
+  "element_that_hurt_most": "Who answered your phone?",
+  "confusion": [],
+  "missing": [
+   "Anything about getting leads",
+   "A price on the first screen"
+  ],
+  "booking_fallback_reaction": "did not reach it",
+  "design_score": 4,
+  "clarity_score": 2
+ },
+ {
+  "id": "P008",
+  "device": "phone",
+  "furthest_point": "result",
+  "started_quiz": true,
+  "finished_quiz": true,
+  "quiz_path": "agent",
+  "gave_contact_details": false,
+  "ticked_email_consent": false,
+  "outcome": "tried to book",
+  "seconds_on_page": 300,
+  "first_impression": "Clean, and the missed call at 2:14 pm is literally me at my day job.",
+  "main_reason": "It says month to month, cancel before the next billing date, and that it books the appointment on my calendar, so I am willing to hear it on a call.",
+  "element_that_helped_most": "Month to month",
+  "element_that_hurt_most": "Copy NEXT and open Instagram",
+  "confusion": [
+   "The $300 'includes your phone number', so do I get a new number or keep mine",
+   "I cannot pick an evening slot myself and have to wait for a message back",
+   "Is the 15-minute call during my work day"
+  ],
+  "missing": [
+   "Google Calendar named specifically",
+   "'You keep your number' anywhere before the FAQ"
+  ],
+  "booking_fallback_reaction": "annoyed",
+  "design_score": 4,
+  "clarity_score": 4
+ },
+ {
+  "id": "P009",
+  "device": "desktop",
+  "furthest_point": "result",
+  "started_quiz": true,
+  "finished_quiz": true,
+  "quiz_path": "agent",
+  "gave_contact_details": false,
+  "ticked_email_consent": false,
+  "outcome": "quiz only",
+  "seconds_on_page": 600,
+  "first_impression": "Elegant and restrained, which I did not expect given who is behind it.",
+  "main_reason": "The page promises nobody contacts my callers, but my account still sits in a system this broker operates, a set-up team can read transcripts, and the footer has no registered business name to hold to that promise.",
+  "element_that_helped_most": "No one at Next Level or Ray Homes contacts your callers or uses your contacts, and that is written in the agreement.",
+  "element_that_hurt_most": "[Business name and mailing address to be added]",
+  "confusion": [
+   "'Contacts' and 'uses' are covered but 'can log in and see' is not",
+   "The booking step is a message to the broker's personal Instagram",
+   "Farsi is listed as not promised"
+  ],
+  "missing": [
+   "Who can log in to my account, by name or role",
+   "The agreement text itself or a sample clause",
+   "Who the set-up team are",
+   "A privacy policy"
+  ],
+  "booking_fallback_reaction": "annoyed",
+  "design_score": 5,
+  "clarity_score": 4
+ },
+ {
+  "id": "P010",
+  "device": "desktop",
+  "furthest_point": "final cta",
+  "started_quiz": false,
+  "finished_quiz": false,
+  "quiz_path": "none",
+  "gave_contact_details": false,
+  "ticked_email_consent": false,
+  "outcome": "left",
+  "seconds_on_page": 540,
+  "first_impression": "Tidy and professional, and it does not shout, which I appreciate.",
+  "main_reason": "On compliance it says the rules differ and 'we confirm them for your location before you go live', which is exactly the vague wording I will not rely on, and there is no business name in the footer.",
+  "element_that_helped_most": "Yes. It says so at the start of the call.",
+  "element_that_hurt_most": "Rules on call recording and on telling callers they are speaking with an AI differ by province and state. We confirm them for your location before you go live.",
+  "confusion": [
+   "Summary and alert texts are mentioned but not whether callers are ever texted, or on what consent",
+   "The footer placeholder where the business name should be"
+  ],
+  "missing": [
+   "The exact disclosure wording the caller hears",
+   "Who is liable if the AI says something wrong",
+   "A CASL statement",
+   "Limits on what the AI will say about price or advice",
+   "Privacy policy and terms"
+  ],
+  "booking_fallback_reaction": "did not reach it",
+  "design_score": 4,
+  "clarity_score": 4
+ },
+ {
+  "id": "P011",
+  "device": "desktop",
+  "furthest_point": "result",
+  "started_quiz": true,
+  "finished_quiz": true,
+  "quiz_path": "agent",
+  "gave_contact_details": true,
+  "ticked_email_consent": true,
+  "outcome": "quiz only",
+  "seconds_on_page": 660,
+  "first_impression": "Well designed and unusually candid for a sales page.",
+  "main_reason": "The one-page summary for the broker of record is what I need, but the contracting party is a blank in the footer, my liability is not addressed, and the only way to ask is an Instagram message.",
+  "element_that_helped_most": "You get a one-page summary to show your broker of record before you sign.",
+  "element_that_hurt_most": "[Business name and mailing address to be added]",
+  "confusion": [
+   "I ticked the email box and nothing came",
+   "The agreement 'names the registered business' but the page itself does not",
+   "Teams pricing covers agent lines, not a brokerage main line with routing"
+  ],
+  "missing": [
+   "The registered business name and address",
+   "The broker-of-record summary to download now",
+   "What a brokerage is responsible for when an agent uses it",
+   "What the AI does with deposit or trust questions",
+   "An email address or calendar to book"
+  ],
+  "booking_fallback_reaction": "gave up",
+  "design_score": 4,
+  "clarity_score": 4
+ },
+ {
+  "id": "P012",
+  "device": "desktop",
+  "furthest_point": "first screen",
+  "started_quiz": false,
+  "finished_quiz": false,
+  "quiz_path": "none",
+  "gave_contact_details": false,
+  "ticked_email_consent": false,
+  "outcome": "left",
+  "seconds_on_page": 18,
+  "first_impression": "Slick, but it is the same pitch as the AI assistant I already pay for.",
+  "main_reason": "Nothing in the first screen says what this does that my current AI does not, and I am locked into mine until next summer.",
+  "element_that_helped_most": "",
+  "element_that_hurt_most": "Six questions. One brief on where your business leaks first, and what fixes it.",
+  "confusion": [],
+  "missing": [
+   "A comparison with other AI assistants",
+   "A price without clicking"
+  ],
+  "booking_fallback_reaction": "did not reach it",
+  "design_score": 4,
+  "clarity_score": 2
+ },
+ {
+  "id": "P013",
+  "device": "phone",
+  "furthest_point": "first screen",
+  "started_quiz": false,
+  "finished_quiz": false,
+  "quiz_path": "none",
+  "gave_contact_details": false,
+  "ticked_email_consent": false,
+  "outcome": "left",
+  "seconds_on_page": 14,
+  "first_impression": "Looks like another top producer's funnel with a fancy font.",
+  "main_reason": "A broker's name at the top and 'six questions, one brief' reads like a coaching quiz, with no price and no other agent vouching for it.",
+  "element_that_helped_most": "",
+  "element_that_hurt_most": "Six questions. One brief on where your business leaks first, and what fixes it.",
+  "confusion": [
+   "Could not tell in one screen if it is a course or a thing that answers my phone"
+  ],
+  "missing": [
+   "A result from another agent",
+   "The price on the first screen"
+  ],
+  "booking_fallback_reaction": "did not reach it",
+  "design_score": 3,
+  "clarity_score": 1
+ },
+ {
+  "id": "P014",
+  "device": "desktop",
+  "furthest_point": "founding",
+  "started_quiz": false,
+  "finished_quiz": false,
+  "quiz_path": "none",
+  "gave_contact_details": false,
+  "ticked_email_consent": false,
+  "outcome": "left",
+  "seconds_on_page": 170,
+  "first_impression": "Nice and clear, and the 5 pm problem is real for me.",
+  "main_reason": "A one-page summary for my broker is thoughtful, but nothing here is on my brokerage's approved list and I cannot forward the office line without the owner's sign-off.",
+  "element_that_helped_most": "You get a one-page summary to show your broker of record before you sign.",
+  "element_that_hurt_most": "",
+  "confusion": [
+   "Whether it works when calls come through the front desk and not my cell"
+  ],
+  "missing": [
+   "Any Century 21 broker of record in Ontario who has approved it"
+  ],
+  "booking_fallback_reaction": "did not reach it",
+  "design_score": 4,
+  "clarity_score": 4
+ },
+ {
+  "id": "P015",
+  "device": "desktop",
+  "furthest_point": "result",
+  "started_quiz": true,
+  "finished_quiz": true,
+  "quiz_path": "agent",
+  "gave_contact_details": false,
+  "ticked_email_consent": false,
+  "outcome": "quiz only",
+  "seconds_on_page": 480,
+  "first_impression": "Good typography and a clean quiz funnel, better than most HighLevel pages.",
+  "main_reason": "It confirms the account runs on HighLevel, which is what I came to find out, and I clicked through the quiz to see how the result is built, not to buy.",
+  "element_that_helped_most": "Your account runs on HighLevel, a US software company.",
+  "element_that_hurt_most": "",
+  "confusion": [
+   "The result is not actually sent anywhere"
+  ],
+  "missing": [
+   "Which voice model",
+   "What the workflow or snapshot looks like",
+   "Any white-label option"
+  ],
+  "booking_fallback_reaction": "fine",
+  "design_score": 4,
+  "clarity_score": 5
+ },
+ {
+  "id": "P016",
+  "device": "desktop",
+  "furthest_point": "result",
+  "started_quiz": true,
+  "finished_quiz": true,
+  "quiz_path": "agent",
+  "gave_contact_details": false,
+  "ticked_email_consent": false,
+  "outcome": "quiz only",
+  "seconds_on_page": 560,
+  "first_impression": "Sharp and confident, and it matched my search exactly.",
+  "main_reason": "I read all of it and nothing says the AI can check whether a listing is still available, and an urgent caller only gets a callback offer, so for my investors it is a polite voicemail.",
+  "element_that_helped_most": "asks the questions you choose, and books the appointment on your calendar",
+  "element_that_hurt_most": "If a caller asks for a person, or the call is urgent, the AI offers a callback and you get a text alert straight away.",
+  "confusion": [
+   "No calendar link, only an Instagram message",
+   "HubSpot is not among the named CRMs"
+  ],
+  "missing": [
+   "Whether it can look up live listing status",
+   "Mid-call transfer to me",
+   "What the AI says when it does not know an answer"
+  ],
+  "booking_fallback_reaction": "annoyed",
+  "design_score": 5,
+  "clarity_score": 4
+ },
+ {
+  "id": "P017",
+  "device": "phone",
+  "furthest_point": "result",
+  "started_quiz": true,
+  "finished_quiz": true,
+  "quiz_path": "agent",
+  "gave_contact_details": true,
+  "ticked_email_consent": true,
+  "outcome": "tried to book",
+  "seconds_on_page": 520,
+  "first_impression": "It looks very professional, like Ray's brand has levelled up.",
+  "main_reason": "I follow Ray already, so messaging NEXT is easy, even though the page says it never recruits to his team and $300 is more than I can pay.",
+  "element_that_helped_most": "On your call: Ray, every time",
+  "element_that_hurt_most": "Next Level never recruits a client to Ray's brokerage or team.",
+  "confusion": [
+   "I wanted mentorship and the page only sells software",
+   "The email with my result never came"
+  ],
+  "missing": [
+   "Any way to work with or learn from Ray directly",
+   "A cheaper plan"
+  ],
+  "booking_fallback_reaction": "fine",
+  "design_score": 5,
+  "clarity_score": 3
+ },
+ {
+  "id": "P018",
+  "device": "desktop",
+  "furthest_point": "result",
+  "started_quiz": true,
+  "finished_quiz": true,
+  "quiz_path": "agent",
+  "gave_contact_details": false,
+  "ticked_email_consent": false,
+  "outcome": "quiz only",
+  "seconds_on_page": 330,
+  "first_impression": "Refined and quiet, it looks trustworthy.",
+  "main_reason": "Recording is off unless I turn it on, which is good, but every call is still transcribed, the data sits in the United States, and Cantonese and Mandarin are not promised for my overseas callers.",
+  "element_that_helped_most": "Audio recording is off unless you turn it on.",
+  "element_that_hurt_most": "Each call is transcribed so you get the summary.",
+  "confusion": [
+   "Recording can be off but transcripts cannot",
+   "How long transcripts are kept while I am still a client"
+  ],
+  "missing": [
+   "A retention period for transcripts",
+   "A way to switch transcription off",
+   "Cantonese or Mandarin"
+  ],
+  "booking_fallback_reaction": "fine",
+  "design_score": 5,
+  "clarity_score": 4
+ },
+ {
+  "id": "P019",
+  "device": "phone",
+  "furthest_point": "first screen",
+  "started_quiz": false,
+  "finished_quiz": false,
+  "quiz_path": "none",
+  "gave_contact_details": false,
+  "ticked_email_consent": false,
+  "outcome": "left",
+  "seconds_on_page": 16,
+  "first_impression": "Beautiful, but the headline is a question and I have a showing in two minutes.",
+  "main_reason": "The first screen has no price and does not say what it is, just a six-question intake, and I am not doing a quiz between showings.",
+  "element_that_helped_most": "See the prices",
+  "element_that_hurt_most": "Six questions. One brief on where your business leaks first, and what fixes it.",
+  "confusion": [
+   "The product is not named above the buttons"
+  ],
+  "missing": [
+   "The price on the first screen",
+   "'Answers your calls' in plain words on the first screen",
+   "Cancel anytime"
+  ],
+  "booking_fallback_reaction": "did not reach it",
+  "design_score": 5,
+  "clarity_score": 2
+ },
+ {
+  "id": "P020",
+  "device": "phone",
+  "furthest_point": "founding",
+  "started_quiz": false,
+  "finished_quiz": false,
+  "quiz_path": "none",
+  "gave_contact_details": false,
+  "ticked_email_consent": false,
+  "outcome": "left",
+  "seconds_on_page": 160,
+  "first_impression": "Clean and not spammy, which is more than I expected from a Reddit link.",
+  "main_reason": "It is all buyers and showings with no word on rentals, and 250 minutes with $0.30 after that would be gone in two weeks at forty calls a week.",
+  "element_that_helped_most": "A cap you set",
+  "element_that_hurt_most": "Extra minutes are $0.30 each. A part minute counts as a minute, and unused minutes do not carry over.",
+  "confusion": [
+   "The quiz question is about a new buyer, not a rental enquiry",
+   "With the cap at zero the system just stops when minutes run out"
+  ],
+  "missing": [
+   "Rental screening on income, move-in date and pets",
+   "A higher-volume plan",
+   "How many calls 250 minutes usually covers"
+  ],
+  "booking_fallback_reaction": "did not reach it",
+  "design_score": 4,
+  "clarity_score": 4
+ },
+ {
+  "id": "P021",
+  "device": "desktop",
+  "furthest_point": "method",
+  "started_quiz": false,
+  "finished_quiz": false,
+  "quiz_path": "none",
+  "gave_contact_details": false,
+  "ticked_email_consent": false,
+  "outcome": "left",
+  "seconds_on_page": 85,
+  "first_impression": "Lovely design, but the answer to the headline is 'my assistant did'.",
+  "main_reason": "A person who knows my clients by name already picks up seven days a week, and nothing here shows an AI doing that better.",
+  "element_that_helped_most": "",
+  "element_that_hurt_most": "Who answered your phone?",
+  "confusion": [],
+  "missing": [
+   "Any comparison with a human assistant"
+  ],
+  "booking_fallback_reaction": "did not reach it",
+  "design_score": 5,
+  "clarity_score": 4
+ },
+ {
+  "id": "P022",
+  "device": "desktop",
+  "furthest_point": "problems",
+  "started_quiz": false,
+  "finished_quiz": false,
+  "quiz_path": "none",
+  "gave_contact_details": false,
+  "ticked_email_consent": false,
+  "outcome": "left",
+  "seconds_on_page": 35,
+  "first_impression": "Tasteful, I will give it that.",
+  "main_reason": "It is a computer answering my telephone and transcribing my clients, and they have my home number for a reason.",
+  "element_that_helped_most": "",
+  "element_that_hurt_most": "An AI receptionist answers every call you miss",
+  "confusion": [],
+  "missing": [],
+  "booking_fallback_reaction": "did not reach it",
+  "design_score": 4,
+  "clarity_score": 3
+ },
+ {
+  "id": "P023",
+  "device": "phone",
+  "furthest_point": "first screen",
+  "started_quiz": false,
+  "finished_quiz": false,
+  "quiz_path": "none",
+  "gave_contact_details": false,
+  "ticked_email_consent": false,
+  "outcome": "left",
+  "seconds_on_page": 15,
+  "first_impression": "Nice fonts on what looks like another AI answering funnel.",
+  "main_reason": "The first screen gives no price and no reason this is different from the $97 account I already rent, just a quiz.",
+  "element_that_helped_most": "",
+  "element_that_hurt_most": "Start the intake",
+  "confusion": [
+   "Could not tell what platform it is built on"
+  ],
+  "missing": [
+   "The price up top",
+   "What I get beyond the software itself"
+  ],
+  "booking_fallback_reaction": "did not reach it",
+  "design_score": 4,
+  "clarity_score": 2
+ },
+ {
+  "id": "P024",
+  "device": "desktop",
+  "furthest_point": "problems",
+  "started_quiz": false,
+  "finished_quiz": false,
+  "quiz_path": "none",
+  "gave_contact_details": false,
+  "ticked_email_consent": false,
+  "outcome": "left",
+  "seconds_on_page": 55,
+  "first_impression": "Well made, but it is plainly for residential agents.",
+  "main_reason": "It says 'For real estate agents' and then talks only about showings, buyers and closings, with nothing on commercial leasing.",
+  "element_that_helped_most": "Missed calls",
+  "element_that_hurt_most": "You were in a showing.",
+  "confusion": [],
+  "missing": [
+   "Any mention of commercial real estate or leasing sign calls"
+  ],
+  "booking_fallback_reaction": "did not reach it",
+  "design_score": 4,
+  "clarity_score": 4
+ },
+ {
+  "id": "P025",
+  "device": "desktop",
+  "furthest_point": "method",
+  "started_quiz": false,
+  "finished_quiz": false,
+  "quiz_path": "none",
+  "gave_contact_details": false,
+  "ticked_email_consent": false,
+  "outcome": "left",
+  "seconds_on_page": 70,
+  "first_impression": "Looks like a Toronto design studio made it for Toronto agents.",
+  "main_reason": "It is a GTA broker's AI with no client testimonials and nobody from up here vouching for it, and I am not being the coffee-shop joke.",
+  "element_that_helped_most": "",
+  "element_that_hurt_most": "By Ray Ahmadi, GTA real estate broker",
+  "confusion": [],
+  "missing": [
+   "An agent outside the GTA using it",
+   "Anything about local place names"
+  ],
+  "booking_fallback_reaction": "did not reach it",
+  "design_score": 3,
+  "clarity_score": 3
+ }
+]

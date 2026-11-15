@@ -1,0 +1,649 @@
+[
+  {
+    "id": "P076",
+    "device": "desktop",
+    "furthest_point": "founding",
+    "started_quiz": false,
+    "finished_quiz": false,
+    "quiz_path": "none",
+    "gave_contact_details": false,
+    "ticked_email_consent": false,
+    "outcome": "left",
+    "seconds_on_page": 150,
+    "first_impression": "Handsome page, but the top bar says 'By Ray Ahmadi, GTA real estate broker' and the headline is about a showing.",
+    "main_reason": "The line that no one at Ray Homes contacts my callers is good, but a realtor still runs my phone line and my realtor partners would read that as me taking sides.",
+    "element_that_helped_most": "Your callers stay yours: 'No one at Next Level or Ray Homes contacts your callers or uses your contacts, and that is written in the agreement.'",
+    "element_that_hurt_most": "Top bar: 'By Ray Ahmadi, GTA real estate broker'",
+    "confusion": [
+      "'No recruiting' talks about agents joining Ray's brokerage, not about mortgage referrals",
+      "The hero is written for agents and mortgage brokers are a single line under the button"
+    ],
+    "missing": [
+      "A statement that Ray's real estate business earns nothing, including referral fees, from a mortgage broker's callers",
+      "Why a real estate broker wants to answer a mortgage broker's phone"
+    ],
+    "booking_fallback_reaction": "did not reach it",
+    "design_score": 4,
+    "clarity_score": 4
+  },
+  {
+    "id": "P077",
+    "device": "desktop",
+    "furthest_point": "result",
+    "started_quiz": true,
+    "finished_quiz": true,
+    "quiz_path": "waitlist",
+    "gave_contact_details": false,
+    "ticked_email_consent": false,
+    "outcome": "quiz only",
+    "seconds_on_page": 420,
+    "first_impression": "Elegant and restrained, though the headline tells me at once this was written for agents, not a law office.",
+    "main_reason": "Every call is transcribed and stored in the United States by a realtor's company, and nothing says a confidentiality agreement suited to a law practice exists, so I looked at the waitlist brief and stopped there.",
+    "element_that_helped_most": "Transcripts and recording: 'Audio recording is off unless you turn it on.'",
+    "element_that_hurt_most": "Where your data is: 'Your data is stored in the United States, not in Canada.'",
+    "confusion": [
+      "The waitlist is joined by messaging the word WAITLIST on Instagram, which is not how I engage a vendor",
+      "The contact step asks where to reach me but then says nothing is sent",
+      "'Each call is transcribed' sits beside 'recording is off', and a transcript is still a record of a client conversation"
+    ],
+    "missing": [
+      "How confidentiality and conflicts are handled for a law office",
+      "Whether a confidentiality agreement acceptable to the Law Society can be signed",
+      "A privacy policy",
+      "Business name and address (footer reads '[Business name and mailing address to be added]')",
+      "What the AI will and will not say to a legal client"
+    ],
+    "booking_fallback_reaction": "gave up",
+    "design_score": 4,
+    "clarity_score": 4
+  },
+  {
+    "id": "P078",
+    "device": "desktop",
+    "furthest_point": "method",
+    "started_quiz": false,
+    "finished_quiz": false,
+    "quiz_path": "none",
+    "gave_contact_details": false,
+    "ticked_email_consent": false,
+    "outcome": "left",
+    "seconds_on_page": 75,
+    "first_impression": "Well made, but it is an AI receptionist pitch aimed at real estate agents.",
+    "main_reason": "Firm policy is no AI in client intake, and seeing 'Real estate lawyers' listed for 1 March 2027 does not change what our insurer permits.",
+    "element_that_helped_most": "",
+    "element_that_hurt_most": "Section 02: 'An AI receptionist answers every call you miss'",
+    "confusion": [],
+    "missing": [
+      "Any mention of a law firm's insurer having approved this"
+    ],
+    "booking_fallback_reaction": "did not reach it",
+    "design_score": 4,
+    "clarity_score": 4
+  },
+  {
+    "id": "P079",
+    "device": "desktop",
+    "furthest_point": "result",
+    "started_quiz": true,
+    "finished_quiz": true,
+    "quiz_path": "waitlist",
+    "gave_contact_details": true,
+    "ticked_email_consent": true,
+    "outcome": "joined a list",
+    "seconds_on_page": 480,
+    "first_impression": "Calm, serious page, and I could see quickly it is for agents first with lawyers coming later.",
+    "main_reason": "Recording is off unless I turn it on and lawyers have a real date, 1 March 2027, so I joined the list even though Farsi is not promised and nothing says the legal version is intake only.",
+    "element_that_helped_most": "Transcripts and recording: 'Audio recording is off unless you turn it on. When it is on, the AI says so at the start of the call.'",
+    "element_that_hurt_most": "Languages: 'Dari, Farsi, Punjabi, Mandarin, Cantonese, Urdu and Arabic are not promised today.'",
+    "confusion": [
+      "I ticked the email box and typed my address, then the result still told me to message WAITLIST on Instagram to be added",
+      "Calls are transcribed even with recording off, and I am not sure that is acceptable for client calls"
+    ],
+    "missing": [
+      "A statement that the version for lawyers only takes a message and books, and never answers legal questions",
+      "Whether transcription can be switched off",
+      "Whether Farsi will be available by March 2027"
+    ],
+    "booking_fallback_reaction": "annoyed",
+    "design_score": 5,
+    "clarity_score": 4
+  },
+  {
+    "id": "P080",
+    "device": "desktop",
+    "furthest_point": "problems",
+    "started_quiz": false,
+    "finished_quiz": false,
+    "quiz_path": "none",
+    "gave_contact_details": false,
+    "ticked_email_consent": false,
+    "outcome": "left",
+    "seconds_on_page": 40,
+    "first_impression": "Nice looking, but 'You were in a showing' is not about a law office.",
+    "main_reason": "My receptionist of 19 years answers our phones and knows every client, and nothing here gives me a reason to change that.",
+    "element_that_helped_most": "",
+    "element_that_hurt_most": "Hero label: 'For real estate agents'",
+    "confusion": [],
+    "missing": [],
+    "booking_fallback_reaction": "did not reach it",
+    "design_score": 4,
+    "clarity_score": 4
+  },
+  {
+    "id": "P081",
+    "device": "phone",
+    "furthest_point": "first screen",
+    "started_quiz": false,
+    "finished_quiz": false,
+    "quiz_path": "none",
+    "gave_contact_details": false,
+    "ticked_email_consent": false,
+    "outcome": "left",
+    "seconds_on_page": 18,
+    "first_impression": "Pretty page, but it says 'For real estate agents' and talks about showings.",
+    "main_reason": "The first screen names agents, mortgage brokers and contractors, and lawyers are nowhere on it, so I assumed it is not for my office.",
+    "element_that_helped_most": "",
+    "element_that_hurt_most": "'Also open now to mortgage brokers and to contractors and renovators' (lawyers not named)",
+    "confusion": [
+      "'Start the intake' gave me no hint that a law office could do anything with it"
+    ],
+    "missing": [
+      "The word lawyers on the first screen"
+    ],
+    "booking_fallback_reaction": "did not reach it",
+    "design_score": 4,
+    "clarity_score": 2
+  },
+  {
+    "id": "P082",
+    "device": "desktop",
+    "furthest_point": "founding",
+    "started_quiz": false,
+    "finished_quiz": false,
+    "quiz_path": "none",
+    "gave_contact_details": false,
+    "ticked_email_consent": false,
+    "outcome": "left",
+    "seconds_on_page": 170,
+    "first_impression": "Clean and expensive looking, but the whole opening is about agents missing phone calls.",
+    "main_reason": "Reviews is what I would pay for, but it is 'Opening next' for agents, and the only thing promised to accountants is the phone answering from $500 setup plus $400 a month, which I do not need.",
+    "element_that_helped_most": "Section 02: 'Next Level Reviews. A review request goes out at closing and again at day 30, every time.'",
+    "element_that_hurt_most": "Method: 'From $500 setup plus $400 a month' for accountants, for Answer only",
+    "confusion": [
+      "Answer, Reviews, Nurture, Ads and Complete are a lot of product names before I know which apply to me",
+      "Reviews is described with 'at closing', which is real estate wording"
+    ],
+    "missing": [
+      "Whether Reviews will be sold to accountants, and when",
+      "What an accountant gets if calls are not the problem"
+    ],
+    "booking_fallback_reaction": "did not reach it",
+    "design_score": 4,
+    "clarity_score": 3
+  },
+  {
+    "id": "P083",
+    "device": "desktop",
+    "furthest_point": "founding",
+    "started_quiz": false,
+    "finished_quiz": false,
+    "quiz_path": "none",
+    "gave_contact_details": false,
+    "ticked_email_consent": false,
+    "outcome": "left",
+    "seconds_on_page": 140,
+    "first_impression": "Sharp design, clearly aimed at realtors.",
+    "main_reason": "Accountants open on 1 March 2027 at $500 setup plus $400 a month, and paying about $1,300 to cover March and April is too much for a solo tax preparer.",
+    "element_that_helped_most": "Month to month: 'Cancel before the next billing date.'",
+    "element_that_hurt_most": "Method: 'From $500 setup plus $400 a month'",
+    "confusion": [
+      "Month to month suggests I could cancel after April, but nothing says whether I pay the setup fee again next year"
+    ],
+    "missing": [
+      "A seasonal or pause option",
+      "Whether the setup fee repeats if I cancel and come back"
+    ],
+    "booking_fallback_reaction": "did not reach it",
+    "design_score": 4,
+    "clarity_score": 4
+  },
+  {
+    "id": "P084",
+    "device": "desktop",
+    "furthest_point": "final cta",
+    "started_quiz": false,
+    "finished_quiz": false,
+    "quiz_path": "none",
+    "gave_contact_details": false,
+    "ticked_email_consent": false,
+    "outcome": "left",
+    "seconds_on_page": 460,
+    "first_impression": "Polished typography, but it is a real estate product with accountants mentioned as a later waitlist.",
+    "main_reason": "There is no privacy policy or data-processing terms anywhere, the footer still reads '[Business name and mailing address to be added]', and client data sits in the United States, so I will not give even an email.",
+    "element_that_helped_most": "Where your data is: stated plainly that data is stored in the United States",
+    "element_that_hurt_most": "Footer: '[Business name and mailing address to be added]'",
+    "confusion": [
+      "The waitlist is joined by an Instagram message rather than a form",
+      "The contact step asks for a first name as well as an email"
+    ],
+    "missing": [
+      "A privacy policy",
+      "Data-processing terms",
+      "What happens to tax or SIN details a caller says aloud, since every call is transcribed",
+      "Mandarin, which is 'not promised today'"
+    ],
+    "booking_fallback_reaction": "gave up",
+    "design_score": 4,
+    "clarity_score": 4
+  },
+  {
+    "id": "P085",
+    "device": "desktop",
+    "furthest_point": "method",
+    "started_quiz": false,
+    "finished_quiz": false,
+    "quiz_path": "none",
+    "gave_contact_details": false,
+    "ticked_email_consent": false,
+    "outcome": "left",
+    "seconds_on_page": 80,
+    "first_impression": "Looks expensive, and it is run by a real estate broker selling to everyone.",
+    "main_reason": "A broker listing agents, mortgage brokers, contractors, lawyers, accountants and insurance is exactly the jack-of-all-trades I avoid, and there is not one accounting client to reference.",
+    "element_that_helped_most": "",
+    "element_that_hurt_most": "Method: 'Opening 1 March 2027: Real estate lawyers, Accountants, Insurance'",
+    "confusion": [],
+    "missing": [
+      "Why a real estate broker is qualified to serve an accounting practice",
+      "Any accounting client reference"
+    ],
+    "booking_fallback_reaction": "did not reach it",
+    "design_score": 3,
+    "clarity_score": 4
+  },
+  {
+    "id": "P086",
+    "device": "phone",
+    "furthest_point": "menu",
+    "started_quiz": false,
+    "finished_quiz": false,
+    "quiz_path": "none",
+    "gave_contact_details": false,
+    "ticked_email_consent": false,
+    "outcome": "left",
+    "seconds_on_page": 25,
+    "first_impression": "Beautiful page, and I like that Ray built it, but it is talking to realtors.",
+    "main_reason": "I tapped 'See the prices' and the cheapest thing is $300 a month, which is far past anything I can pay for a home tax business.",
+    "element_that_helped_most": "'See the prices' link beside the main button",
+    "element_that_hurt_most": "Menu: 'Answer, Founding 10 ... $300'",
+    "confusion": [],
+    "missing": [
+      "Something small for a one-person business under $50 a month"
+    ],
+    "booking_fallback_reaction": "did not reach it",
+    "design_score": 5,
+    "clarity_score": 4
+  },
+  {
+    "id": "P087",
+    "device": "phone",
+    "furthest_point": "result",
+    "started_quiz": true,
+    "finished_quiz": true,
+    "quiz_path": "founding-business",
+    "gave_contact_details": true,
+    "ticked_email_consent": false,
+    "outcome": "tried to book",
+    "seconds_on_page": 210,
+    "first_impression": "Fancy looking, and right under the button it says it is open to contractors and renovators.",
+    "main_reason": "It is $300 a month with no setup fee and it picks up while I am on a ladder, so I wanted to pay, but the only way forward was to message a word to Ray on Instagram.",
+    "element_that_helped_most": "Hero line: 'Also open now to mortgage brokers and to contractors and renovators: 3 founding spots, on the same terms.'",
+    "element_that_hurt_most": "'Booking opens shortly. Message NEXT to @rayahmadi on Instagram and Ray will send you a time.'",
+    "confusion": [
+      "I gave my name and number and nobody is going to call me from that",
+      "Why copy a word and open Instagram instead of picking a time or just paying",
+      "The headline about a showing made me check twice that it was for me"
+    ],
+    "missing": [
+      "A way to pay and start today",
+      "A phone number to call"
+    ],
+    "booking_fallback_reaction": "annoyed",
+    "design_score": 4,
+    "clarity_score": 5
+  },
+  {
+    "id": "P088",
+    "device": "phone",
+    "furthest_point": "result",
+    "started_quiz": true,
+    "finished_quiz": true,
+    "quiz_path": "founding-business",
+    "gave_contact_details": false,
+    "ticked_email_consent": false,
+    "outcome": "quiz only",
+    "seconds_on_page": 190,
+    "first_impression": "Clean and modern, written for agents but it says contractors are open now.",
+    "main_reason": "My callers want quotes in Punjabi and the page says Punjabi is not promised today, so I looked at my result and left it there.",
+    "element_that_helped_most": "Result: 'asks the questions you choose, and books the appointment on your calendar'",
+    "element_that_hurt_most": "Languages: 'Dari, Farsi, Punjabi, Mandarin, Cantonese, Urdu and Arabic are not promised today.'",
+    "confusion": [
+      "The result says any other language is tested on my own line, while the founding terms say Punjabi is not promised, and I cannot tell which one applies to me"
+    ],
+    "missing": [
+      "A yes or no on Punjabi",
+      "An example of it collecting an address and basement size for a quote"
+    ],
+    "booking_fallback_reaction": "gave up",
+    "design_score": 4,
+    "clarity_score": 4
+  },
+  {
+    "id": "P089",
+    "device": "desktop",
+    "furthest_point": "founding",
+    "started_quiz": false,
+    "finished_quiz": false,
+    "quiz_path": "none",
+    "gave_contact_details": false,
+    "ticked_email_consent": false,
+    "outcome": "left",
+    "seconds_on_page": 160,
+    "first_impression": "Looks professional, but it is about house showings, with contractors added in a line under the button.",
+    "main_reason": "On a storm day 60 people call in one afternoon, and all I found was 250 minutes a month and a system that stops when the cap is reached, with nothing on handling many calls at once.",
+    "element_that_helped_most": "A cap you set: 'With the cap at zero, the most you can be billed is $300.'",
+    "element_that_hurt_most": "A cap you set: 'The system stops and alerts you if the cap is reached.'",
+    "confusion": [
+      "Whether it can answer several callers at the same moment",
+      "What a caller hears once the cap is reached"
+    ],
+    "missing": [
+      "What happens when 60 people call in one afternoon",
+      "How it deals with an upset caller with an emergency",
+      "Any example from a trade rather than a real estate agent"
+    ],
+    "booking_fallback_reaction": "did not reach it",
+    "design_score": 4,
+    "clarity_score": 4
+  },
+  {
+    "id": "P090",
+    "device": "desktop",
+    "furthest_point": "first screen",
+    "started_quiz": false,
+    "finished_quiz": false,
+    "quiz_path": "none",
+    "gave_contact_details": false,
+    "ticked_email_consent": false,
+    "outcome": "left",
+    "seconds_on_page": 15,
+    "first_impression": "Big stylish headline about a showing, so it is for real estate agents.",
+    "main_reason": "It says 'For real estate agents', and I build three homes a year with my wife answering every call.",
+    "element_that_helped_most": "",
+    "element_that_hurt_most": "Hero label: 'For real estate agents'",
+    "confusion": [],
+    "missing": [],
+    "booking_fallback_reaction": "did not reach it",
+    "design_score": 4,
+    "clarity_score": 4
+  },
+  {
+    "id": "P091",
+    "device": "desktop",
+    "furthest_point": "founding",
+    "started_quiz": false,
+    "finished_quiz": false,
+    "quiz_path": "none",
+    "gave_contact_details": false,
+    "ticked_email_consent": false,
+    "outcome": "left",
+    "seconds_on_page": 130,
+    "first_impression": "Slick, but it is a realtor's product and HVAC is not named anywhere.",
+    "main_reason": "It is $300 a month against the $180 I pay now, it sends a text and email summary instead of booking into my dispatch software, and my trade is not listed.",
+    "element_that_helped_most": "",
+    "element_that_hurt_most": "Summaries and your CRM: only Follow Up Boss, BoldTrail, Lofty and Sierra Interactive are named",
+    "confusion": [
+      "Whether an HVAC service company counts under 'Contractors and renovators'"
+    ],
+    "missing": [
+      "Integration with field-service or dispatch software",
+      "How a 3 am emergency call is dispatched beyond 'offers a callback and you get a text alert'"
+    ],
+    "booking_fallback_reaction": "did not reach it",
+    "design_score": 4,
+    "clarity_score": 4
+  },
+  {
+    "id": "P092",
+    "device": "desktop",
+    "furthest_point": "final cta",
+    "started_quiz": false,
+    "finished_quiz": false,
+    "quiz_path": "none",
+    "gave_contact_details": false,
+    "ticked_email_consent": false,
+    "outcome": "left",
+    "seconds_on_page": 400,
+    "first_impression": "The typography is lovely, but the first thing I read is 'By Ray Ahmadi, GTA real estate broker'.",
+    "main_reason": "No testimonials, 'Portrait to come', a footer with no business name and booking by Instagram message tell me this is a realtor's side business, and my studio cannot sit behind that.",
+    "element_that_helped_most": "Why a founding price: 'Next Level is new and there are no client testimonials yet.'",
+    "element_that_hurt_most": "Footer: '[Business name and mailing address to be added]'",
+    "confusion": [
+      "Whether a kitchen and bath design-build studio counts as 'Contractors and renovators'",
+      "The About section shows an empty frame captioned 'Portrait to come'"
+    ],
+    "missing": [
+      "Anyone outside real estate using it",
+      "A sample of the voice",
+      "A registered company name and address"
+    ],
+    "booking_fallback_reaction": "gave up",
+    "design_score": 4,
+    "clarity_score": 4
+  },
+  {
+    "id": "P093",
+    "device": "desktop",
+    "furthest_point": "final cta",
+    "started_quiz": false,
+    "finished_quiz": false,
+    "quiz_path": "none",
+    "gave_contact_details": false,
+    "ticked_email_consent": false,
+    "outcome": "left",
+    "seconds_on_page": 430,
+    "first_impression": "Well designed and unusually candid, though clearly written for realtors.",
+    "main_reason": "Nothing says what the AI may or may not say about coverage, and 'Is it allowed where I work?' only covers call recording, so I have no regulatory answer to take to my insurers.",
+    "element_that_helped_most": "FAQ: 'Rules on call recording and on telling callers they are speaking with an AI differ by province and state. We confirm them for your location before you go live.'",
+    "element_that_hurt_most": "Where your data is: 'Your data is stored in the United States, not in Canada.'",
+    "confusion": [
+      "Insurance is one word in a list, with nothing on brokerages versus advisors"
+    ],
+    "missing": [
+      "Whether this has been checked against RIBO rules on unlicensed staff",
+      "Limits on what the AI says about coverage or binding",
+      "A privacy policy",
+      "How client policy details in transcripts are handled"
+    ],
+    "booking_fallback_reaction": "gave up",
+    "design_score": 4,
+    "clarity_score": 4
+  },
+  {
+    "id": "P094",
+    "device": "desktop",
+    "furthest_point": "result",
+    "started_quiz": true,
+    "finished_quiz": true,
+    "quiz_path": "waitlist",
+    "gave_contact_details": false,
+    "ticked_email_consent": false,
+    "outcome": "quiz only",
+    "seconds_on_page": 200,
+    "first_impression": "Good looking page, but it is a missed-call pitch for agents and I came for follow-up.",
+    "main_reason": "Nurture is what I want and the waitlist for insurance only covers Answer from $500 setup plus $400 a month, so I viewed the result without ticking the email box and did not message anyone.",
+    "element_that_helped_most": "Contact step: 'Without the tick you still see your result here, and nothing is sent. We do not sell or share your details.'",
+    "element_that_hurt_most": "Waitlist result: 'Next Level Answer opens to real estate lawyers, accountants and insurance on 1 March 2027, from $500 setup plus $400 a month'",
+    "confusion": [
+      "Nurture is 'Opening next' with no date and no word on whether insurance advisors can ever buy it",
+      "Joining the list means messaging an Instagram account, and I do not know what I would be sent after that"
+    ],
+    "missing": [
+      "What emails the waitlist receives and how often",
+      "Whether Nurture will open to insurance",
+      "Any insurance background for the founder"
+    ],
+    "booking_fallback_reaction": "gave up",
+    "design_score": 4,
+    "clarity_score": 3
+  },
+  {
+    "id": "P095",
+    "device": "desktop",
+    "furthest_point": "first screen",
+    "started_quiz": false,
+    "finished_quiz": false,
+    "quiz_path": "none",
+    "gave_contact_details": false,
+    "ticked_email_consent": false,
+    "outcome": "left",
+    "seconds_on_page": 12,
+    "first_impression": "Nice page for real estate agents.",
+    "main_reason": "It is for real estate agents, and my insurer supplies and dictates my phone system anyway.",
+    "element_that_helped_most": "",
+    "element_that_hurt_most": "Hero label: 'For real estate agents'",
+    "confusion": [],
+    "missing": [],
+    "booking_fallback_reaction": "did not reach it",
+    "design_score": 4,
+    "clarity_score": 4
+  },
+  {
+    "id": "P096",
+    "device": "desktop",
+    "furthest_point": "result",
+    "started_quiz": true,
+    "finished_quiz": true,
+    "quiz_path": "waitlist",
+    "gave_contact_details": true,
+    "ticked_email_consent": true,
+    "outcome": "quiz only",
+    "seconds_on_page": 600,
+    "first_impression": "Better design than most HighLevel resellers put out, with a strong agent headline.",
+    "main_reason": "I got what I came for: insurance opens 1 March 2027 from $500 setup plus $400 a month, on HighLevel, with Answer the only live product, and I am not a buyer.",
+    "element_that_helped_most": "Method: 'Opening 1 March 2027: Real estate lawyers, Accountants, Insurance. From $500 setup plus $400 a month.'",
+    "element_that_hurt_most": "",
+    "confusion": [
+      "I entered a throwaway email with the box ticked and the result still told me to message WAITLIST on Instagram, so the form does not appear to capture anything"
+    ],
+    "missing": [
+      "Dates for Reviews, Nurture and Ads",
+      "Whether Nurture will be sold to insurance brokers"
+    ],
+    "booking_fallback_reaction": "gave up",
+    "design_score": 4,
+    "clarity_score": 5
+  },
+  {
+    "id": "P097",
+    "device": "desktop",
+    "furthest_point": "founding",
+    "started_quiz": false,
+    "finished_quiz": false,
+    "quiz_path": "none",
+    "gave_contact_details": false,
+    "ticked_email_consent": false,
+    "outcome": "left",
+    "seconds_on_page": 150,
+    "first_impression": "Attractive, but the ad and the headline are plainly for real estate agents.",
+    "main_reason": "Dental is not listed, other businesses get a waitlist with no date, and patient calls would be transcribed and stored in the United States with nothing said about health privacy law.",
+    "element_that_helped_most": "Method: 'Any other business can join the waitlist too, and no date is promised.'",
+    "element_that_hurt_most": "Where your data is: 'Your data is stored in the United States, not in Canada.'",
+    "confusion": [],
+    "missing": [
+      "Any mention of dental or health practices",
+      "How patient information is protected under health privacy law"
+    ],
+    "booking_fallback_reaction": "did not reach it",
+    "design_score": 4,
+    "clarity_score": 4
+  },
+  {
+    "id": "P098",
+    "device": "phone",
+    "furthest_point": "first screen",
+    "started_quiz": false,
+    "finished_quiz": false,
+    "quiz_path": "none",
+    "gave_contact_details": false,
+    "ticked_email_consent": false,
+    "outcome": "left",
+    "seconds_on_page": 15,
+    "first_impression": "Looks classy, but it is about realtors and showings.",
+    "main_reason": "The first screen says real estate agents, mortgage brokers and contractors, with no salon and no price I could see.",
+    "element_that_helped_most": "",
+    "element_that_hurt_most": "Hero label: 'For real estate agents'",
+    "confusion": [],
+    "missing": [
+      "The word salon",
+      "A price on the first screen",
+      "Whether it works with my booking app"
+    ],
+    "booking_fallback_reaction": "did not reach it",
+    "design_score": 4,
+    "clarity_score": 2
+  },
+  {
+    "id": "P099",
+    "device": "desktop",
+    "furthest_point": "method",
+    "started_quiz": false,
+    "finished_quiz": false,
+    "quiz_path": "none",
+    "gave_contact_details": false,
+    "ticked_email_consent": false,
+    "outcome": "left",
+    "seconds_on_page": 120,
+    "first_impression": "Big fancy lettering about a showing, so it is for realtors like the one who told me about it.",
+    "main_reason": "It told me straight that any other business can join a waitlist and no date is promised, so it is not for a garage right now and I skipped the quiz.",
+    "element_that_helped_most": "Method: 'Any other business can join the waitlist too, and no date is promised.'",
+    "element_that_hurt_most": "Intake first screen: eight choices and none is a shop like mine",
+    "confusion": [
+      "The quiz comes before the part that says who it is for",
+      "Words like 'intake' and 'brief' did not tell me what I would get"
+    ],
+    "missing": [
+      "A plain line near the top saying which businesses it is for and which it is not"
+    ],
+    "booking_fallback_reaction": "did not reach it",
+    "design_score": 3,
+    "clarity_score": 3
+  },
+  {
+    "id": "P100",
+    "device": "desktop",
+    "furthest_point": "result",
+    "started_quiz": true,
+    "finished_quiz": true,
+    "quiz_path": "waitlist",
+    "gave_contact_details": false,
+    "ticked_email_consent": false,
+    "outcome": "quiz only",
+    "seconds_on_page": 520,
+    "first_impression": "Confident, well built page, written for agents with other industries added on.",
+    "main_reason": "The result said honestly that no date is promised for a business like mine and nothing covers health information, so I did not message Ray and will look at a clinic-specific vendor.",
+    "element_that_helped_most": "Waitlist result: 'For any other business no date is promised, and there is nothing to buy today.'",
+    "element_that_hurt_most": "Quiz question 'What kind of business do you run?': only Real estate lawyer, Accountant, Insurance or 'Something else'",
+    "confusion": [
+      "'Something else' did not let me say I run a clinic, so Ray would not know what I am",
+      "Joining the list is an Instagram message rather than the form I had just filled in"
+    ],
+    "missing": [
+      "Whether clinics are on the roadmap at all",
+      "How health information in call transcripts is handled",
+      "Whether it connects to clinic booking software"
+    ],
+    "booking_fallback_reaction": "gave up",
+    "design_score": 5,
+    "clarity_score": 4
+  }
+]
