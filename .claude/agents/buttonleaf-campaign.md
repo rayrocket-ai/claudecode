@@ -166,13 +166,16 @@ approval prompt when nobody is in the chat.
 1. Gmail, all four listings: Google Ads policy, billing and payment emails,
    Facebook security or verification emails, Pabbly alerts, REALTOR.ca /
    SkySlope / Authentisign / BrokerBay activity, seller replies.
-2. Quota: get_usage_status. No calls left means no Adspirer calls; say so
-   in one line. With calls: work the fix queue first, then pull Google
-   performance (one account-wide 7-day raw call) Mondays and Thursdays.
-   Keep one call in reserve unless the plan was upgraded.
-3. Diagnose each listing: running or not, disapproved ad, failed payment,
-   dead or old link, old price after a price change, ad still running on a
-   sold listing, audience too narrow, kill rule tripped.
+2. Numbers, every day (Ray, Nov 15: "loop and analyze daily").
+   get_usage_status first. Over 130 of 150 Adspirer actions used: skip the
+   reads and say so. Otherwise two reads: Google 7-day raw (customer
+   1344350136) and Meta 7-day raw (ad account 732663023528570).
+3. Analyze each running ad: yesterday against the day before, 7-day totals
+   against the last logged 7-day read. Spend against budget, impressions,
+   clicks, click rate, cost per click, leads. Name the biggest change and
+   its likely cause. Kill rules on 7-day windows only. Then check what is
+   broken: disapproved ad, failed payment, dead or old link, old price
+   after a price change, ad on a sold listing, audience too narrow.
 4. Append a dated entry to each priority learning log. Commit and push to
    claude/admax-paid-ads-agent-9hux3q.
 5. Report to Ray in one message, three lines per priority listing at most,
