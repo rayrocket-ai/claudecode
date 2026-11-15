@@ -7,7 +7,7 @@ Views and followers are signals. Calls booked and signed clients are the score. 
 Views, reach, likes, comments, shares, saves. Stored on the post's row in Airtable "MOS Posts".
 
 ## Per day (leads and bookings)
-New leads, hot leads and calls booked, by source and segment, in Airtable "MOS Leads". Counts only, no contact details. Sources: Viktor's daily HighLevel line in #agent-marketing, Ad Advisor for Meta lead ads, and Ray or Diana for referrals.
+New leads, hot leads and calls booked, by source and segment, in Airtable "MOS Leads". Counts only, no contact details. Sources: Viktor's daily HighLevel line in #agent-marketing, lead notification emails in Ray's Gmail as the fallback (counted, never copied), Ad Advisor for Meta lead ads, and Ray or Diana for referrals.
 
 ## Deals
 Signed clients and closings in Airtable "MOS Deals" with the source and the post or ad credited. Entered by Ray or Diana.

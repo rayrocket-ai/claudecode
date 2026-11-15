@@ -6,7 +6,8 @@
 - Metricool brand id (blogId) 7745027: Instagram @rayahmadi, Facebook, TikTok @rayahmadii, YouTube, LinkedIn. Always pass timezone America/Toronto.
 - Meta ad account for Ad Advisor: 732663023528570.
 - Rulebook: marketing/knowledge in this repo (mirrored in MOS Knowledge). Read voice/, content/, channels/, compliance/ and rules/ before writing anything.
-- Load connector tools with ToolSearch (airtable, slack, metricool, google drive, canva, ad advisor).
+- Gmail: read for lead notifications and create drafts only. Never send, reply, forward, label, archive or delete.
+- Load connector tools with ToolSearch (airtable, slack, metricool, google drive, gmail, canva, ad advisor).
 
 ## Hard rules
 - Unattended run: do not ask questions. If a tool fails twice or needs a sign-in, note it in one line and move on.
