@@ -13,6 +13,16 @@ Draft for Ray to approve. Four sequences, three emails each. Each email is under
 - Every line that says Ray runs something on his own business must be true on the day it sends. [Ray to confirm: which of the four systems are live on Ray Homes today]
 - Ray approves each email before its workflow is switched on.
 
+## Terms used in these emails
+
+Set 2026-11-15 after the persona test; Ray to confirm. The round 2 offer (`../testing/offer-pitch-v2.md`) is the working offer. The assistant set these terms after the persona test, under Ray's instruction to fix the offer. Ray has not approved them yet. Only the emails that already touched one of these topics were changed, and each is still under 120 words. Full list: `../offer.md` section 6.
+
+- Usage: phone, text and AI minutes are billed at cost with no markup for founding clients, up to a monthly cap the client sets.
+- The demo: the agent dials the live system themselves on the call.
+- The summary of each call arrives by text and by email.
+
+The other round 2 terms (languages, callers and data, CRM, brokerage, urgent calls, forwarding, teams, other businesses, Canada and the US) are not in these emails. They are answered on the sales page and on the call.
+
 ## Timing
 
 PROPOSED, Ray to approve: email 1 at once after the quiz, email 2 two days later, email 3 five days after the quiz.
@@ -49,7 +59,7 @@ You said calls go to voicemail when you are with a client. That is normal for a 
 
 The fix is simple to describe. Something answers every call, asks your questions and books the appointment while you keep working.
 
-I run that on my own line at Ray Homes. I will call it live for you so you can hear it.
+I run that on my own line at Ray Homes. On our call you dial it yourself and hear it answer.
 
 Book your 15-minute call here: {{custom_values.nl_booking_link}}
 
@@ -87,15 +97,13 @@ Unsubscribe: {{unsubscribe_link}}
 
 Hi {{contact.first_name}},
 
-On my own line, an AI receptionist answers the calls I cannot take. It tells the caller it is an AI assistant, asks what they need, and books them on my calendar. I get a summary by text.
+On my own line, an AI receptionist answers the calls I cannot take. It tells the caller it is an AI assistant, asks what they need, and books them on my calendar. I get a summary by text and email.
 
-I have worked in GTA real estate for 12+ years and I run this on my own business. I will show you my own numbers live on the call. [Ray to add: real number from Ray Homes]
+I have worked in GTA real estate for 12+ years. I will show you my own numbers on the call. [Ray to add: real number from Ray Homes]
 
-I am setting it up for 10 agents first, at $300 a month. It is live in 7 days.
+I am setting it up for 10 agents first, at $300 a month. Usage is at cost with no markup, up to a cap you set. It is live in 7 days.
 
-In 15 minutes I will call it while you listen and tell you if it fits.
-
-Book your call here: {{custom_values.nl_booking_link}}
+Book 15 minutes, dial it yourself, and I will tell you plainly if it fits: {{custom_values.nl_booking_link}}
 
 Ray
 
@@ -159,15 +167,15 @@ Unsubscribe: {{unsubscribe_link}}
 
 Hi {{contact.first_name}},
 
-One thing agents miss about reviews. When they work, your phone rings more. Then the question becomes who answers it.
+One thing agents miss about reviews. When they work, your phone rings more. Then who answers it?
 
 That part is ready today. An AI receptionist answers every call you cannot take, qualifies the caller and books the appointment. I run it at Ray Homes.
 
-I have worked in GTA real estate for 12+ years and I run this on my own business. I will show you my own numbers live on the call. [Ray to add: real number from Ray Homes]
+I have worked in GTA real estate for 12+ years. I will show you my own numbers on the call. [Ray to add: real number from Ray Homes]
 
-I am setting it up for 10 agents first, at $300 a month, live in 7 days. Founders are first in line when the review system opens.
+I am setting it up for 10 agents first, at $300 a month, live in 7 days. Usage is at cost with no markup, up to a cap you set. Founders are first in line for the review system.
 
-Book your 15-minute call here: {{custom_values.nl_booking_link}}
+Book your call here: {{custom_values.nl_booking_link}}
 
 Ray
 
@@ -235,11 +243,11 @@ Here is what happens when a reactivation message works. People call. Often at ni
 
 So I start with the phone. An AI receptionist answers every call I cannot take, qualifies the caller and books the appointment.
 
-I have worked in GTA real estate for 12+ years and I run this on my own business. I will show you my own numbers live on the call. [Ray to add: real number from Ray Homes]
+I have worked in GTA real estate for 12+ years. I will show you my own numbers on the call. [Ray to add: real number from Ray Homes]
 
-I am setting it up for 10 agents first, at $300 a month, live in 7 days. Founders are first in line when the reactivation campaign opens.
+I am setting it up for 10 agents first, at $300 a month, live in 7 days. Usage is at cost with no markup, up to a cap you set. Founders are first in line when the reactivation campaign opens.
 
-Book your 15-minute call here: {{custom_values.nl_booking_link}}
+Book your call here: {{custom_values.nl_booking_link}}
 
 Ray
 
@@ -307,11 +315,11 @@ My advice to any agent running ads: fix the phone first.
 
 If an ad works and nobody answers, you paid for a lead who can call someone else. An AI receptionist answers every call you cannot take, qualifies the caller and books the appointment.
 
-I have worked in GTA real estate for 12+ years and I run this on my own business. I will show you my own numbers live on the call. [Ray to add: real number from Ray Homes]
+I have worked in GTA real estate for 12+ years. I will show you my own numbers on the call. [Ray to add: real number from Ray Homes]
 
-I am setting it up for 10 agents first, at $300 a month, live in 7 days. Founders are first in line when ad management opens.
+I am setting it up for 10 agents first, at $300 a month, live in 7 days. Usage is at cost with no markup, up to a cap you set. Founders are first in line when ad management opens.
 
-Book your 15-minute call here: {{custom_values.nl_booking_link}}
+Book your call here: {{custom_values.nl_booking_link}}
 
 Ray
 
@@ -337,11 +345,11 @@ Here is the summary you asked for.
 
 What you told me: {{their words from question 1}}. What you want: {{their words from question 5}}.
 
-What Next Level Answer does: it answers the calls you cannot take, asks your questions, books the appointment and sends you a summary. We set it up for you. It is live in 7 days from the day we have your details.
+What Next Level Answer does: it answers the calls you cannot take, asks your questions, books the appointment and sends you a summary by text and email. We set it up, live in 7 days from the day we have your details.
 
-The founding price is $300 a month, with no setup fee, month to month. Usage is quoted on the call. [Ray to set: usage included or rebilled for the Founding 10]
+The founding price is $300 a month, no setup fee, month to month. Usage is at cost with no markup, up to a monthly cap you set.
 
-Our next step is booked for {{next step date and time}}. Until then, call the demo line and test it: [Ray to add: demo line number]
+Our next step is booked for {{next step date and time}}. Test the demo line: [Ray to add: demo line number]
 
 Ray
 
@@ -399,4 +407,4 @@ No text follow-up is written here. Texts need their own consent (the second chec
 
 ## Next step
 
-Ray reads all 12, fills or removes each proof bracket, and marks each email approve or change. The three one-off emails added on 2026-11-15 need the same review.
+Ray reads all 12, fills or removes each proof bracket, and marks each email approve or change. Ray also confirms or changes the terms under "Terms used in these emails". The three one-off emails added on 2026-11-15 need the same review.
