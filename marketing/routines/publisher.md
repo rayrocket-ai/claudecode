@@ -15,6 +15,7 @@ List MOS Posts rows with Status "Waiting approval" or "Needs edit". For each wit
 
 ## Step 2. Schedule approved pieces (Status "Approved", no Metricool URL)
 - Format "Email": never schedule or send. Notes "approved copy, ready to load into HighLevel", and say so in the thread.
+- Placeholder gate: if the Caption or Body still contains "[Ray to confirm" or any other square-bracket placeholder, do not schedule, even with a check mark. If Ray supplied the missing item in the thread, put it in, post the completed piece in the thread starting with the robot emoji and "REVISED, react on this message to approve:", and wait for a fresh check mark. Otherwise reply naming what is missing and leave Status "Approved".
 - Social: get the best time per network for the next 3 days and the posts already scheduled. Pick a slot at least 2 hours out and at least 3 hours from another post on that network. Call createScheduledPost with the Caption exactly as approved.
   - Media: carousels use the Canva design exported as PNG pages; videos use Media URL. Instagram, TikTok and YouTube need media. No usable media: do not schedule; reply in the thread naming the missing file; leave Status "Approved".
   - YouTube: title from the row, not made for kids, category EDUCATION. Set AI-generated flags when Notes say so.
