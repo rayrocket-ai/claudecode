@@ -1,5 +1,7 @@
 # Orchestrator (Claude Code, the Chief of Staff)
 
+Business goal (Ray, 2026-11-15): more transactions. Find the active listings, market them fully on every channel, turn that into leads, and put the listings in front of buyers. Listing content comes first in every run; general brand content fills the remaining slots. Active listings live in Airtable MOS Listings and marketing/knowledge/offer/active-listings.md; each priority listing has a kit in marketing/listings/. Paid ads for listings are run by the ADMAX loop in its own session.
+
 One orchestrator directs seven teams of five roles. A role is a prompt plus a tool connection, not a separate program. Roles run inside a small number of scheduled tasks so there is one place to fix when something breaks.
 
 | Team | Runs inside | Status |

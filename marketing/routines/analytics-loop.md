@@ -20,9 +20,13 @@ At most ONE read call: campaign performance for account 732663023528570, last 7 
 ## Step 4. Revenue Tracker
 From MOS Deals: signed clients and closings in the last 30 days by Source and by "Post or ad credited". Where a lead or deal credits a post, add to that post's "Leads attributed" and "Calls attributed". Follow the crediting order in reporting/metrics-and-attribution. Never guess a source.
 
+## Step 4b. Listings scoreboard
+The business goal is more transactions on Ray's active listings. For each MOS Listings row (table tbloRzlbuiL9QuLWg) with Status Priority or Active: count the pieces published this week (MOS Posts rows whose Title names the listing slug) and their total views; count showing requests and lead emails that name the listing in Ray's Gmail for the last 7 days (BrokerBay showing requests and confirmations, lead form notices), counts only; and copy the latest paid-ads line for it if Ad Advisor returned live data. Update the row's "Pieces published", "Leads" and "Showings". A listing with no showings for 7 days is named first in the loop feed with one proposed change of angle. Paid ads belong to the ADMAX loop: report, never change them.
+
 ## Step 5. Loop Feeder
 Rewrite the Content of the MOS Knowledge row "reporting/loop-feed" (keep the title and the Format section; replace Status and body), set Updated to today, and mirror the same text into marketing/knowledge/reporting/loop-feed.md, commit and push to the session branch:
 - Week covered.
+- Listings: one line per active listing: pieces published, views, leads, showings, and the next angle to try.
 - Make more of: up to 3 topics, formats or hooks, with the numbers that earned it.
 - Make less of: up to 3, with the numbers.
 - What brought calls and clients: by source and by post or ad, or "not tracked yet" with the reason.
