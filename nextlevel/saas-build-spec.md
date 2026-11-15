@@ -46,7 +46,7 @@ It holds:
 
 | Stage | Enters when | Leaves when |
 |---|---|---|
-| Lead | Quiz submitted, or audit call logged | Audit email sent, or call booked |
+| Lead | Quiz submitted (inbound content is the primary source), or audit call logged (optional tactic) | Audit email sent, or call booked |
 | Audit sent | Missed-call audit email sent | Call booked |
 | Call booked | 15-minute call on the calendar | Call held |
 | Won | Payment received | Intake form sent |
@@ -55,7 +55,7 @@ It holds:
 | At risk | Any churn signal in section 11 | Back to Live, or cancelled |
 
 **Calendars**
-- "Next Level 15-minute call". Ray first. Nadiya added later. Round robin when both are on. [verify in HighLevel]
+- "Next Level 15-minute call". Ray takes every call for now. Nadiya added later. Round robin when both are on. [verify in HighLevel]
 - "Onboarding call". Diana or Ray.
 - "Day 3 check" and "Day 14 check". Short calls or a logged message.
 
@@ -64,7 +64,7 @@ It holds:
 - Each stops the moment a call is booked.
 - Each sends only to contacts who ticked the consent box.
 - Booked-call reminder workflow.
-- No-show workflow: one message, then a task for the closer.
+- No-show workflow: one message, then a task for the closer (Ray, for now).
 - Won workflow: sends the intake form, creates the onboarding tasks, moves the stage.
 
 **The community**
@@ -244,11 +244,13 @@ Create these in the SaaS configurator. How many plans the configurator allows: [
 | SaaS plan in HighLevel | Product | Price | Status |
 |---|---|---|---|
 | NL Answer Founding | Next Level Answer, Founding 10 | $300 a month | Ready to create once Stripe is verified. Cap at 10 sales. |
-| NL Answer | Next Level Answer | [Ray to set after 60 days of proof] | Proposal in `offer.md` |
-| NL Reviews | Next Level Reviews | [Ray to set after 60 days of proof] | Proposal in `offer.md` |
-| NL Nurture | Next Level Nurture | [Ray to set after 60 days of proof] | Proposal in `offer.md` |
-| NL Ads | Next Level Ads | [Ray to set after 60 days of proof] | Proposal in `offer.md` |
-| NL Complete | Next Level Complete | [Ray to set after 60 days of proof] | Proposal in `offer.md` |
+| NL Answer | Next Level Answer | $500 setup + $400 a month | Approved by Ray, 2026-11-15 |
+| NL Reviews | Next Level Reviews | $250 setup + $150 a month | Approved by Ray, 2026-11-15 |
+| NL Nurture | Next Level Nurture | $500 setup + $250 a month | Approved by Ray, 2026-11-15 |
+| NL Ads | Next Level Ads | $500 setup + $750 a month, with ad spend on the client's own card | Approved by Ray, 2026-11-15 |
+| NL Complete | Next Level Complete | $1,500 setup + $1,500 a month | Approved by Ray, 2026-11-15 |
+
+All prices in Canadian dollars. Product names and prices: Approved by Ray, 2026-11-15. Rungs 2 to 5 are created now and released one at a time (see `offer.md` section 8).
 
 - Each plan switches on only the features that rung needs, so a Reviews client does not see the voice agent. [verify in HighLevel]
 - Setup fees: whether the configurator can charge a one-time fee with a plan, or needs a separate Stripe product: [verify in HighLevel]
@@ -338,7 +340,7 @@ One short table, same day each week.
 | Calls answered | Calls answered by the AI across all client accounts, and as a share of calls received. |
 | Appointments booked by AI | Bookings made by the voice agent across all client accounts. |
 
-Also watch, from the sales side: quiz completions, audits sent, calls booked, calls held, Won.
+Also watch, from the sales side: inbound inquiries by platform, quiz completions, calls booked, calls held, Won. Audits sent, if the optional audit is run.
 
 No targets are set here beyond the ones in the Blueprint: 10 paying agents by end of January, $3,000 monthly recurring revenue from the Founding 10, churn under 5%.
 

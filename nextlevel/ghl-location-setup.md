@@ -1,5 +1,7 @@
 # Create the "Next Level" sub-account in HighLevel
 
+**Status, 2026-11-15:** Ray reports step 1 on the done checklist (create the sub-account) is done, and the sub-account is called "next level". It is not yet verified from here. The remaining steps still apply. If the sub-account exists, skip Part A steps 3 to 9, open it, and check its details in Part B.
+
 For Ray or Diana. Work top to bottom. Allow about one sitting, plus waiting time for domain and registration approvals.
 
 HighLevel changes its menu names often. Where a name may differ on your screen it is marked `[verify menu name]`. The step still applies. Look for the closest match.
@@ -127,7 +129,7 @@ Do this only when the Next Level sales snapshot exists. If it does not exist yet
 
 ## Done checklist
 
-- [ ] 1. Next Level sub-account exists and opens.
+- [ ] 1. Next Level sub-account exists and opens. (Reported done by Ray, 2026-11-15. Tick once seen on screen.)
 - [ ] 2. Business profile complete: name, address, logo, time zone.
 - [ ] 3. Phone number bought, named and ringing through.
 - [ ] 4. Messaging registration filed (status: filed or approved).

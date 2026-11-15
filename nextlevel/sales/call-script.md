@@ -1,13 +1,14 @@
 # The 15-minute call
 
-Draft for Ray to approve. Ray runs it first, then Nadiya. This is the one human step in the sales machine. Everything before and after it runs on its own.
+Draft for Ray to approve. Ray is the seller and the closer on every call for now. Nadiya later. This is the one human step in the sales machine. Everything before and after it runs on its own.
 
 Builds on Ray's 5-step pitch script. Steps here: open, discover, demo, offer, close.
 
 ## Before the call (2 minutes)
 
 - Open the contact. Read the quiz result: missed calls, reviews, dead database or ads.
-- Read the audit log line if an audit was done.
+- Note where they came from: which platform and which piece of content. Most calls are inbound.
+- Read the audit log line if an audit was done (optional tactic).
 - Have the demo line ready to dial on speaker. [Ray to add: demo line number]
 - Have the checkout link ready. Blocked until Stripe verification. Until then: take the yes, book the onboarding call, send the link when it is live.
 - Know how many founding places are left. Say the true number.
@@ -26,6 +27,8 @@ Builds on Ray's 5-step pitch script. Steps here: open, discover, demo, offer, cl
 ## 1. Opening
 
 "Hi {{first name}}, Ray here. Thank you for booking.
+
+A quick word on who I am. I am a real estate broker in the GTA, Ray Homes Real Estate under eXp Realty. 12+ years, about 50 deals a year. Everything I show you today runs on my own business.
 
 We have 15 minutes. I will ask you a few questions about how calls and leads work in your business today. Then I will call my AI receptionist live so you can hear it. Then I will tell you plainly if it fits you. If it does, we will get you started today. Sound good?"
 
@@ -81,7 +84,10 @@ Let them talk. Then:
 
 Optional, if they are keen: "Want to call it yourself? Here is the number."
 
-Proof line, only with a real number: "On my own line at Ray Homes, [Ray to add: real number from Ray Homes]."
+Proof, in this order:
+1. The track record from the opening. The only facts to state: GTA real estate broker, Ray Homes Real Estate under eXp Realty, 12+ years, about 50 deals a year, multi-year eXp Icon agent, bilingual in English and Dari.
+2. The live demo they heard a moment ago.
+3. Ray's own system numbers, shown live: "Here is my own account at Ray Homes. These are my calls and my bookings." Share the screen or read from the dashboard. If a figure is said aloud, it is real and current: [Ray to add: real number from Ray Homes].
 
 If the demo fails on the call: say so plainly. "That is not how it should go. I will find out why and send you a recording of a clean call today." Do not sell past a bad demo.
 
@@ -102,7 +108,7 @@ Stop. Let them answer.
 Then, only what Ray has approved:
 - [Ray to set: usage included or rebilled for the Founding 10]
 - [Ray to set: contract terms for the Founding 10]
-- "Agents who come after the first 10 will pay a setup fee plus a monthly fee."
+- "Agents who come after the first 10 will pay $500 for setup plus $400 a month." (Approved by Ray, 2026-11-15.)
 
 Never say: what they will earn, how many deals it will bring, or any figure that is not Ray's own and real.
 

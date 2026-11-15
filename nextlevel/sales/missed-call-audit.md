@@ -1,5 +1,7 @@
 # The free missed-call audit
 
+**Note, 2026-11-15:** the audit is now a secondary, optional tactic. It is kept as drafted, and its legal flags are unchanged. The primary lead source is inbound content (see `nextlevel/content/`).
+
 Draft for Ray to approve. Builds on Ray's existing audit plan: call 20 GTA agents on weekdays between 7 and 9 PM, log each call, send the audit email within 24 hours.
 
 The audit is the proof step in the sales machine. It shows an agent what happened on their own line. It does not need a claim from us.

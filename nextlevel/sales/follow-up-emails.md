@@ -8,7 +8,8 @@ Draft for Ray to approve. Four sequences, three emails each. Each email is under
 - The sequence stops the moment the contact books a call, replies, or unsubscribes.
 - An unsubscribe is permanent until the person opts in again.
 - Subject lines must be true.
-- Any line with `[Ray to add: real number from Ray Homes]` is filled with a real number or cut before sending.
+- Any `[Ray to add: real number from Ray Homes]` bracket is filled with a real number or removed before sending. The sentence around it stands without it: the emails lead with Ray's track record and the live demo, and the numbers are shown live on the call.
+- The only track-record facts to state: GTA real estate broker, Ray Homes Real Estate under eXp Realty, 12+ years, about 50 deals a year, multi-year eXp Icon agent, bilingual in English and Dari.
 - Every line that says Ray runs something on his own business must be true on the day it sends. [Ray to confirm: which of the four systems are live on Ray Homes today]
 - Ray approves each email before its workflow is switched on.
 
@@ -88,7 +89,7 @@ Hi {{contact.first_name}},
 
 On my own line, an AI receptionist answers the calls I cannot take. It tells the caller it is an AI assistant, asks what they need, and books them on my calendar. I get a summary by text.
 
-[Ray to add: real number from Ray Homes]
+I have worked in GTA real estate for 12+ years and I run this on my own business. I will show you my own numbers live on the call. [Ray to add: real number from Ray Homes]
 
 I am setting it up for 10 agents first, at $300 a month. It is live in 7 days.
 
@@ -162,7 +163,7 @@ One thing agents miss about reviews. When they work, your phone rings more. Then
 
 That part is ready today. An AI receptionist answers every call you cannot take, qualifies the caller and books the appointment. I run it at Ray Homes.
 
-[Ray to add: real number from Ray Homes]
+I have worked in GTA real estate for 12+ years and I run this on my own business. I will show you my own numbers live on the call. [Ray to add: real number from Ray Homes]
 
 I am setting it up for 10 agents first, at $300 a month, live in 7 days. Founders are first in line when the review system opens.
 
@@ -234,7 +235,7 @@ Here is what happens when a reactivation message works. People call. Often at ni
 
 So I start with the phone. An AI receptionist answers every call I cannot take, qualifies the caller and books the appointment.
 
-[Ray to add: real number from Ray Homes]
+I have worked in GTA real estate for 12+ years and I run this on my own business. I will show you my own numbers live on the call. [Ray to add: real number from Ray Homes]
 
 I am setting it up for 10 agents first, at $300 a month, live in 7 days. Founders are first in line when the reactivation campaign opens.
 
@@ -306,7 +307,7 @@ My advice to any agent running ads: fix the phone first.
 
 If an ad works and nobody answers, you paid for a lead who can call someone else. An AI receptionist answers every call you cannot take, qualifies the caller and books the appointment.
 
-[Ray to add: real number from Ray Homes]
+I have worked in GTA real estate for 12+ years and I run this on my own business. I will show you my own numbers live on the call. [Ray to add: real number from Ray Homes]
 
 I am setting it up for 10 agents first, at $300 a month, live in 7 days. Founders are first in line when ad management opens.
 
@@ -326,4 +327,4 @@ No text follow-up is written here. Texts need their own consent (the second chec
 
 ## Next step
 
-Ray reads all 12, fills or cuts each proof line, and marks each email approve or change.
+Ray reads all 12, fills or removes each proof bracket, and marks each email approve or change.

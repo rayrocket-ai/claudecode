@@ -19,7 +19,7 @@ Answer 6 questions. See where your business leaks first and what fixes it.
 
 Button: **Start the quiz**
 
-Under the button: Built and used by Ray Ahmadi, broker, Ray Homes Real Estate, eXp Realty. [Ray to confirm: what can be said about eXp on a Next Level page]
+Under the button: Built and used by Ray Ahmadi. GTA real estate broker, Ray Homes Real Estate under eXp Realty. 12+ years. About 50 deals a year. Multi-year eXp Icon agent. English and Dari. [Ray to confirm: what can be said about eXp on a Next Level page]
 
 ## 2. The quiz
 
@@ -63,7 +63,7 @@ Each answer that points to a problem is marked with its route.
 - C. Team leader.
 - D. Broker or brokerage owner.
 
-Q6 does not route. It tells the closer who is on the call. Team leaders and brokers are tagged for the later team offers.
+Q6 does not route. It tells Ray, who takes every call for now, who is on the call. Team leaders and brokers are tagged for the later team offers.
 
 ### Routing rule
 
@@ -109,9 +109,9 @@ You cannot be in a showing and on the phone. Something else has to pick up.
 
 **What fixes it:** Next Level Answer. An AI receptionist answers every call, asks the questions you would ask, and books the appointment on your calendar. You get a summary of each call. It is live in 7 days.
 
-Ray runs it on his own line at Ray Homes. [Ray to add: real number from Ray Homes]
+Ray is a GTA real estate broker with 12+ years in the business and about 50 deals a year. He runs this on his own line at Ray Homes.
 
-**Your next step:** book a 15-minute call. Ray will call the receptionist live so you hear it for yourself.
+**Your next step:** book a 15-minute call. Ray will call the receptionist live so you hear it for yourself, and show you his own numbers on the call. [Ray to add: real number from Ray Homes]
 
 Button: **Book my 15-minute call**
 
@@ -127,9 +127,7 @@ Second option: **Send me a free missed-call audit.** We call your business line 
 
 **What is ready today:** Next Level Answer, the AI receptionist. More reviews bring more calls. Those calls need answering.
 
-Ray's own review numbers: [Ray to add: real number from Ray Homes]
-
-**Your next step:** book a 15-minute call. Ray will show you his own review system and put you first in line for Reviews.
+**Your next step:** book a 15-minute call. Ray will show you his own review system and his own review numbers live, and put you first in line for Reviews. [Ray to add: real number from Ray Homes]
 
 Button: **Book my 15-minute call**
 
@@ -143,9 +141,7 @@ Button: **Book my 15-minute call**
 
 **What is ready today:** Next Level Answer, the AI receptionist. When your database starts calling back, every call is answered and booked.
 
-Ray's own reactivation numbers: [Ray to add: real number from Ray Homes]
-
-**Your next step:** book a 15-minute call. Ray will walk you through what he is running on his own list.
+**Your next step:** book a 15-minute call. Ray will walk you through what he is running on his own list and show you his own numbers live. [Ray to add: real number from Ray Homes]
 
 Button: **Book my 15-minute call**
 
@@ -159,9 +155,7 @@ Button: **Book my 15-minute call**
 
 **What is ready today:** the second half of the fix. Next Level Answer picks up every call your ads create and books it.
 
-Ray's own ad numbers: [Ray to add: real number from Ray Homes]
-
-**Your next step:** book a 15-minute call. Bring your last ad report. Ray will go through it with you.
+**Your next step:** book a 15-minute call. Bring your last ad report. Ray will go through it with you and show you his own ad numbers live. [Ray to add: real number from Ray Homes]
 
 Button: **Book my 15-minute call**
 
@@ -169,7 +163,7 @@ Button: **Book my 15-minute call**
 
 **The Founding 10**
 
-We are opening Next Level to 10 agents first.
+We are opening Next Level to 10 agents first. It is open now.
 
 **What you get: Next Level Answer**
 - Every call answered by an AI receptionist set up for your business.
@@ -189,7 +183,7 @@ We are opening Next Level to 10 agents first.
 
 **Why 10:** [Ray to confirm: the real reason for the cap of 10. PROPOSED wording, Ray to approve: "Ray is involved in every founding setup and reviews the early calls himself. That only works with a small group."]
 
-**Why trust it:** Ray is a working broker. He built this for his own business first. [Ray to add: real number from Ray Homes]
+**Why trust it:** Ray is a working GTA real estate broker. Ray Homes Real Estate under eXp Realty. 12+ years. About 50 deals a year. Multi-year eXp Icon agent. He built this for his own business first and runs it there today. On the call he dials it live and shows you his own numbers. [Ray to add: real number from Ray Homes]
 
 **What it is not:** it is not a promise of leads or deals. It makes sure the calls you already get are answered and booked.
 
@@ -216,7 +210,7 @@ No. Your number forwards to the receptionist when you do not pick up.
 [Ray to set: contract terms for the Founding 10]
 
 **What does it cost after the Founding 10?**
-Founders pay $300 a month. Later clients will pay a setup fee plus a monthly fee. Those prices are not set yet.
+Founders pay $300 a month. After the Founding 10, Next Level Answer is $500 for setup plus $400 a month, in Canadian dollars. (Approved by Ray, 2026-11-15.)
 
 **Is it allowed where I work?**
 Rules on call recording and on telling callers they are speaking with an AI differ by province and state. We confirm them for your location before you go live. Check with your brokerage as well.
@@ -231,7 +225,7 @@ Rules on call recording and on telling callers they are speaking with an AI diff
 [Ray to confirm: which CRMs, if any, are supported at launch]
 
 **Who is behind this?**
-Ray Ahmadi, broker, Ray Homes Real Estate, eXp Realty. He works with clients in the GTA in English and Dari.
+Ray Ahmadi, a GTA real estate broker with Ray Homes Real Estate under eXp Realty. 12+ years in the business, about 50 deals a year, and a multi-year eXp Icon agent. He works with clients in English and Dari.
 
 **Do I have to join Ray's team?**
 No. Next Level is open to agents at any brokerage.
@@ -258,5 +252,7 @@ Privacy policy | Terms [Ray to confirm with counsel]
 
 - No countdown timers. No "only 2 spots left" unless it is true on that day and Ray updates it by hand.
 - No testimonials until there are real ones with written permission.
-- Every `[Ray to add: real number from Ray Homes]` must be a real number or the line is removed.
+- Every `[Ray to add: real number from Ray Homes]` is replaced with a real number or the bracket is removed. The sentence around it is written to stand without it: the page leads with Ray's track record and the live demo, and the system numbers are shown live on the call.
+- The only track-record facts on the page: GTA real estate broker, Ray Homes Real Estate under eXp Realty, 12+ years, about 50 deals a year, multi-year eXp Icon agent, English and Dari. No other number.
+- Traffic is inbound, from content on every platform. The free missed-call audit is an optional second step, not the main path.
 - The page must read well on a phone first.

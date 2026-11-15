@@ -13,7 +13,13 @@ Working real estate agents and small teams in Canada and the US who:
 - ask for reviews when they remember,
 - run ads, or want to, and do not watch them daily.
 
-Sold by a working GTA broker who runs the same systems on his own business.
+Sold by a working GTA broker who runs the same systems on his own business. Ray is the seller and the closer on every call for now. Nadiya later.
+
+### How they find us
+
+The main goal for marketing is inbound. Businesses and agents reach out to Next Level because of content on every platform (see `content/`). Content leads to the sales page and quiz, then to the 15-minute call with Ray.
+
+The missed-call audit is a secondary, optional tactic (see `sales/missed-call-audit.md`). Business owners outside real estate who reach out join the waitlist below until their industry opens.
 
 ### Business edition (after the gate)
 
@@ -69,13 +75,17 @@ Use their words on the page and on the call. These come from the four problems i
 
 For the brand as a whole: systems a working broker runs on his own business, set up for yours. You pay for the result being run for you, not for a login.
 
-Proof line for every page and call: [Ray to add: real number from Ray Homes].
+Proof for every page and call. Ray Homes is the proof for now, in this order:
+
+1. Ray's track record: GTA real estate broker, Ray Homes Real Estate under eXp Realty, 12+ years, about 50 deals a year, multi-year eXp Icon agent, bilingual in English and Dari. These are the only track-record facts to state.
+2. A live demo of the system running on Ray Homes.
+3. The system's own numbers: we will show you ours live on the call. Where a written figure is wanted: [Ray to add: real number from Ray Homes]. The copy stands without it.
 
 ## 4. What they get: the product ladder
 
-All names below are PROPOSED, Ray to approve. They replace "ARIA". Each is plain on purpose: brand, then what it does.
+All names below are **Approved by Ray, 2026-11-15**. They replace "ARIA". Each is plain on purpose: brand, then what it does.
 
-| Rung | Blueprint offer | Proposed name | What it does |
+| Rung | Blueprint offer | Name (approved) | What it does |
 |---|---|---|---|
 | 1 | AI receptionist | **Next Level Answer** | Every call answered, qualified and booked. Missed-call text-back. Live in 7 days. |
 | 2 | Reputation and Google reviews | **Next Level Reviews** | Review requests at closing and at day 30. Replies drafted for the agent to approve. |
@@ -83,11 +93,11 @@ All names below are PROPOSED, Ray to approve. They replace "ARIA". Each is plain
 | 4 | Ads management | **Next Level Ads** | Listing and buyer ads run and watched daily. |
 | 5 | "Production doubler" | **Next Level Complete** | All four as one snapshot, plus coaching from Ray's playbook. |
 
-**Note on rung 5.** "Production doubler" reads as a promise that production will double. That is an earnings claim. Proposed: keep "doubler" as an internal working name only and sell it as Next Level Complete. PROPOSED, Ray to approve.
+**Note on rung 5.** "Production doubler" reads as a promise that production will double. That is an earnings claim. "Doubler" stays an internal working name only. The rung is sold as Next Level Complete. Approved by Ray, 2026-11-15.
 
 **Where Next Level is different from a generic reseller**
 
-- One niche first. Built for agents, sold by a broker with his own numbers.
+- One niche first. Built for agents, sold by a working broker who runs it on his own business and shows it live.
 - Listing data through Repliers, so the AI can answer "is this home still available?" [Ray to confirm: is the listing lookup live for the Founding 10, and does the Repliers licence cover client accounts outside Ray's board]
 - Dari and the newcomer market. [Ray to confirm: which languages the voice agent handles today]
 - A path to Ray's team at eXp for agents who want it. This is a separate conversation, never a condition of the software. [Ray to confirm: what can be said about eXp on a Next Level page]
@@ -96,7 +106,7 @@ The low-price reseller market is crowded. Next Level sells results, not a cheap 
 
 ## 5. What is included in setup
 
-For Next Level Answer (the only rung on sale):
+For Next Level Answer (the rung on sale to the Founding 10 now):
 
 1. A HighLevel sub-account cloned from the Next Level snapshot.
 2. A phone number or call forwarding from the agent's current number.
@@ -113,9 +123,14 @@ For Next Level Answer (the only rung on sale):
 **Set in the Blueprint**
 
 - Offer: the AI receptionist (Next Level Answer).
-- Price: $300 a month.
+- Price: $300 a month. Confirmed by Ray, 2026-11-15.
 - Places: 10.
 - Live in 7 days.
+
+**Decided by Ray, 2026-11-15**
+
+- The Founding 10 opens now, on Ray's own track record and a live demo of the system running on Ray Homes.
+- Ray is the seller and the closer on every call for now.
 
 **PROPOSED, Ray to approve**
 
@@ -131,29 +146,29 @@ For Next Level Answer (the only rung on sale):
 - Usage (phone minutes, texts, AI minutes): included in the $300 or rebilled on top? [Ray to set: usage included or rebilled for the Founding 10]
 - Taxes on the $300 (HST for Ontario clients and others): [Ray to confirm with his accountant]
 
-## 7. Proposed price ladder after the Founding 10
+## 7. Price ladder after the Founding 10
 
-Everything in this table is **PROPOSED, Ray to approve**. None of it is market-tested. The Blueprint says to set the other prices after 60 days of results on Ray's own business, so each row can also stay at [Ray to set after 60 days of proof].
+Everything in this table is **Approved by Ray, 2026-11-15**. The Founding 10 price stays $300 a month for Answer.
 
-All prices in Canadian dollars unless Ray decides otherwise. [Ray to set: currency for US clients]
+All prices in Canadian dollars. [Ray to set: currency for US clients]
 
-| Rung | Setup fee (PROPOSED) | Monthly (PROPOSED) | Reasoning |
+| Rung | Setup fee | Monthly | Reasoning |
 |---|---|---|---|
 | Next Level Answer | $500 | $400 | Above the founding $300 so founders keep a real advantage. Setup fee covers the onboarding hours. |
 | Next Level Reviews | $250 | $150 | Lowest price on the ladder. Simple to deliver and an easy first yes for an agent not ready for the receptionist. |
 | Next Level Nurture | $500 | $250 | More setup work: the list must be cleaned and consent checked before anything sends. |
-| Next Level Ads | $500 | $750, ad spend paid by the client to the ad platform | Daily watching is real labour. Ad spend stays on the client's own card so there is no confusion about whose money it is. |
+| Next Level Ads | $500 | $750, with ad spend on the client's own card | Daily watching is real labour. Ad spend stays on the client's own card so there is no confusion about whose money it is. |
 | Next Level Complete | $1,500 | $1,500 | Slightly under the four rungs added together ($1,550), with coaching on top. A bundle should cost less than its parts. |
 
 Usage on every rung: rebilled at cost plus markup. Markup: [Ray to set].
 
-## 8. What Ray needs to prove first, rung by rung
+## 8. What Ray Homes proves, rung by rung
 
-The gate: Ray's own numbers prove each offer before an agent pays.
+Ray Homes is the proof for now. Decided by Ray, 2026-11-15: the Founding 10 opens now, on Ray's own track record and a live demo of the system running on Ray Homes. No waiting period for Answer. The system numbers below are shown live on the call and filled in here as Ray supplies them.
 
-| Rung | Proof needed from Ray Homes | Minimum period |
+| Rung | What Ray Homes shows | Minimum period |
 |---|---|---|
-| Answer | Calls received, calls answered by the AI, appointments booked by the AI, calls that used to go to voicemail. [Ray to add: real number from Ray Homes] | [Ray to set: proof period for the receptionist before the first founder pays] |
+| Answer | Ray's track record and the live demo. System numbers shown live on the call: calls received, calls answered by the AI, appointments booked by the AI, calls that used to go to voicemail. [Ray to add: real number from Ray Homes] | None. Opens now. |
 | Reviews | Requests sent at closing and day 30, reviews received, Google review count before and after. [Ray to add: real number from Ray Homes] | 60 days |
 | Nurture | Contacts messaged with valid consent, replies, hand-raisers, appointments. [Ray to add: real number from Ray Homes] | 60 days |
 | Ads | Spend, leads, speed to first contact, appointments. [Ray to add: real number from Ray Homes] | 60 days |
@@ -180,20 +195,20 @@ The gate: Ray's own numbers prove each offer before an agent pays.
 - Buying, renting or scraping contact lists. Never.
 - Importing a client's contacts without a consent basis for each one.
 - Custom builds outside the snapshot.
-- Rungs 2 to 5 until each is proven and priced.
+- Rungs 2 to 5 until each is released. Their prices are approved (section 7).
 - Any business edition until the gate is met.
 - A seat on Ray's team. That is a separate conversation.
 
 ## 11. Objections, with honest answers
 
 **"My callers will hate talking to an AI."**
-Some will. The agent says at the start that it is an AI assistant, and any caller can ask for a person. The comparison is not AI against you. It is AI against voicemail. Call the demo line and judge it yourself. [Ray to add: real number from Ray Homes]
+Some will. The agent says at the start that it is an AI assistant, and any caller can ask for a person. The comparison is not AI against you. It is AI against voicemail. Call the demo line and judge it yourself. On the call we will show you our own numbers from Ray Homes live. [Ray to add: real number from Ray Homes]
 
 **"I already have voicemail, or an assistant."**
 Voicemail does not qualify or book. An assistant does, during the hours they work. This covers the rest: showings, evenings, weekends.
 
 **"$300 a month is a lot."**
-It is. The honest test is your own missed calls. The free audit shows what happened when we called your line. If you rarely miss a call, you do not need this, and we will say so.
+It is. The honest test is your own missed calls. Call your own line tonight from another phone and see what a new caller gets. We can also run a free missed-call audit for you. If you rarely miss a call, you do not need this, and we will say so.
 
 **"Is this legal? Recording calls, AI on the phone?"**
 The rules on recording and on telling callers they are speaking with an AI differ by province and state. We confirm them for your location before you go live. [Ray to confirm with counsel]
@@ -208,11 +223,11 @@ PROPOSED, Ray to approve: month to month, cancel before the next billing date. Y
 No. Your sub-account is yours. Ray's team does not work your contacts. [Ray to confirm: put this in the client agreement]
 
 **"Do you have results from other agents?"**
-Not yet. The Founding 10 are the first. What we have is Ray's own business: [Ray to add: real number from Ray Homes]. That is why the founding price is what it is.
+Not yet. The Founding 10 are the first. What we have is Ray's own business. Ray is a GTA real estate broker, Ray Homes Real Estate under eXp Realty, 12+ years, about 50 deals a year, multi-year eXp Icon agent, bilingual in English and Dari. He runs this system on Ray Homes, and we will show you ours live on the call. [Ray to add: real number from Ray Homes] That is why the founding price is what it is.
 
 **"I am not an agent. Can I buy it?"**
 Not yet. The business edition opens one industry at a time, mortgage brokers first. Join the waitlist and we will contact you when your industry opens.
 
 ## Next step
 
-Ray reviews sections 4, 6 and 7 and marks each PROPOSED line approve, change or cut.
+Sections 4 and 7 are approved by Ray, 2026-11-15. Ray reviews section 6 and marks each remaining PROPOSED line approve, change or cut, and answers the two open founding questions: usage included or billed on top, and the live-in-7-days commitment.
