@@ -30,7 +30,7 @@
   color-scheme:dark}
 
 *,*::before,*::after{box-sizing:border-box}
-body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;font-variation-settings:"opsz" 28}
 main{overflow-x:clip}
 h1,h2,h3,h4,p,ul,ol,dl,dd,figure{margin:0}
 ul,ol{padding:0;list-style:none}
@@ -103,7 +103,7 @@ h3{font-size:clamp(1.5rem,2.6vw,2rem);line-height:1.08;letter-spacing:-.02em}
 /* hero */
 .hero{padding-block:clamp(28px,5vw,64px) clamp(56px,8vw,112px)}
 .hero h1{font-size:clamp(2.9rem,10.6vw,8.6rem);line-height:.92;letter-spacing:-.045em;margin-top:clamp(18px,2.4vw,30px)}
-.h-line{display:block;overflow:hidden;padding:.04em .08em .14em 0;margin-bottom:-.14em}
+.h-line{display:block;overflow:hidden;padding:.04em .08em .14em .12em;margin:0 0 -.14em -.12em}
 .h-line>span{display:block}
 .hero-grid{display:grid;gap:44px;margin-top:clamp(36px,5vw,64px);padding-top:clamp(28px,3.4vw,44px);border-top:1px solid var(--ink)}
 .hero-copy{display:grid;gap:26px;align-content:start;justify-items:start;min-width:0}
@@ -206,7 +206,9 @@ h3{font-size:clamp(1.5rem,2.6vw,2rem);line-height:1.08;letter-spacing:-.02em}
 .res-block h4{font-family:var(--mono);font-weight:400;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--sheet-muted)}
 .price{display:grid;gap:8px;padding:16px 0;border-bottom:1px solid var(--sheet-rule)}
 .price .res-kicker{color:var(--sheet-accent)}
-.price-line{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px}
+.price-line{display:grid;gap:4px}
+.price-line .leader{display:none}
+.price .amt{color:var(--sheet-accent)}
 .price .name{font-family:var(--display);font-size:clamp(1.4rem,2.6vw,1.9rem);letter-spacing:-.02em;line-height:1.1}
 .leader{flex:1;min-width:24px;border-bottom:1px dotted currentColor;opacity:.5;transform:translateY(-.3em)}
 .price .amt{font-family:var(--display);font-size:clamp(1.4rem,2.6vw,1.9rem);letter-spacing:-.02em;line-height:1.1;font-variant-numeric:lining-nums}
@@ -274,7 +276,7 @@ table.menu{border-collapse:collapse;width:100%}
 .menu tbody th,.menu td{padding:clamp(20px,2.4vw,30px) 0;border-bottom:1px solid var(--rule);vertical-align:top;text-align:left;font-weight:400}
 .dish{display:flex;align-items:baseline;gap:14px}
 .dish .nm{font-family:var(--display);font-size:clamp(1.55rem,2.8vw,2.3rem);letter-spacing:-.025em;line-height:1.05}
-.dish-note{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;margin-top:10px;color:var(--muted);font-size:15.5px;max-width:52ch}
+.dish-note{display:grid;gap:10px;justify-items:start;margin-top:10px;color:var(--muted);font-size:15.5px;max-width:52ch}
 .menu td.m{font-family:var(--display);font-size:clamp(1.55rem,2.8vw,2.3rem);letter-spacing:-.025em;line-height:1.05;font-variant-numeric:tabular-nums lining-nums;text-align:right;white-space:nowrap;padding-left:24px;width:1%}
 .menu tr.feat td.m:last-child{color:var(--accent)}
 .menu td.m.none{font-style:italic;color:var(--muted)}
@@ -493,7 +495,7 @@ footer .wm{color:var(--ink);margin-bottom:10px}
   <section class="band" id="how" aria-labelledby="h-how" style="padding-top:0">
     <div class="wrap">
       <div class="sec-top"><span class="no">03</span><span class="label">The method</span><i class="hr" data-r="draw"></i></div>
-      <h2 id="h-how" data-r>Three steps. <em>We do the set-up.</em></h2>
+      <h2 id="h-how" data-r>Three steps.<br><em>We set it up.</em></h2>
       <ol class="sec-body steps" data-r="stagger">
         <li><span class="label">Step one</span><h3>Take the intake</h3><p>Six questions. You see your biggest leak and what fixes it, with the price.</p></li>
         <li><span class="label">Step two</span><h3>Book 15 minutes with Ray</h3><p>Ray asks about your business and shows you the system live, running on his own.</p></li>
@@ -522,6 +524,10 @@ footer .wm{color:var(--ink);margin-bottom:10px}
           <h2 id="h-found" class="label" style="font-family:var(--mono);font-size:11.5px;letter-spacing:.16em;line-height:1.4">Next Level Answer, for the first 10 clients</h2>
           <p class="amt" aria-label="300 dollars a month"><sup>$</sup><span id="amt300">300</span></p>
           <p class="per">a month. No setup fee.</p>
+          <div class="found-cta">
+            <a class="btn" href="#book">Book 15 minutes with Ray <span class="arr" aria-hidden="true">&rarr;</span></a>
+            <button type="button" class="textbtn" data-go="quiz" style="color:var(--band-muted)">Or start with the intake</button>
+          </div>
         </div>
         <div>
           <ul class="terms" data-r="stagger">
@@ -531,10 +537,6 @@ footer .wm{color:var(--ink);margin-bottom:10px}
             <li><h3>Live within 7 days</h3><p>Live within 7 days of you supplying everything needed, or the first month is not charged. Once per client, first month only, and not for carrier or registration delays.</p></li>
             <li><h3>Usage</h3><p>Phone, text and AI minutes: usage is quoted on the call.</p></li>
           </ul>
-          <div class="found-cta" data-r>
-            <a class="btn" href="#book">Book 15 minutes with Ray <span class="arr" aria-hidden="true">&rarr;</span></a>
-            <button type="button" class="textbtn" data-go="quiz" style="color:var(--band-muted)">Or start with the intake</button>
-          </div>
         </div>
       </div>
     </div>
