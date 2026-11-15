@@ -29,7 +29,7 @@ docker compose run --rm -p 8765:8765 bot python -m integrations.google_ads_cli a
 ```
 
 It prints a Google URL. Open it in a browser signed in to
-**r4166252070@gmail.com** (the account that owns the Ads account), approve,
+**the Google account that owns the Ads account**, approve,
 and the command prints `GOOGLE_ADS_REFRESH_TOKEN=...`. Paste that into
 `.env`. (If the browser cannot reach localhost on the server, run the same
 command on a laptop with Python: `pip install httpx pydantic-settings`,

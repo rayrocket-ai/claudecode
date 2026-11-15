@@ -43,12 +43,9 @@ justification.
   Veedu Realty). Sellers declined it. Ray's Oct 22 note to agents said the
   price would be adjusted. After that: 2 showings in the two weeks before the
   relist (Nov 1, Nov 7).
-- Agents who showed it since Oct 9: Phoebe Li (RE/MAX Excel), Christine Ann
-  Breen (RE/MAX Hallmark, twice), Kenny Liu (Avision), Ivan Wu (First Class),
-  Mani Reddy (Metapro), Tam Sivathasan (Veedu, wrote the offer), Alkarim
-  Shivji (Sotheby's), Valerie Hazell (RE/MAX All-Stars), Andrew Chin
-  (HomeLife Broadway), Jessica Kee (Right At Home), Bruce Lin (KW Referred
-  Urban). One direct non-agent buyer inquiry Oct 26, showing booked by Nadiya.
+- Eleven agents showed it between Oct 9 and Nov 7, one of whom wrote the
+  Oct 21 offer. Names and dates are in the BrokerBay emails. One direct
+  non-agent buyer inquiry Oct 26, showing booked by the team.
 - Read: demand showed up near $1M. The gap is price, not exposure. Ads can
   widen the top of the funnel, but the fastest path is the buyers who were
   already inside, plus the 27 form leads.
