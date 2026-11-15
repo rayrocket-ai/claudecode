@@ -4,6 +4,29 @@ Every test gets: hypothesis, variants, spend, result, decision, lesson.
 Newest entries at the top.
 
 ---
+## 2026-11-15 — Live-ad audit: the Facebook ad still says $1,999,990
+
+- Ray asked what is running. Live reads through Adspirer (12 or 13 of 15
+  calls used after this).
+- Meta account 732663023528570, last 7 days (Nov 7 to 14): exactly one ad
+  delivered. "Alpha A | 15s Property Tour | $1,999,990 | Message", campaign
+  52516371756316, ad set 52516371756716, ad 52516371756516, video
+  1569899458483680. Spend $35.47, 19,703 impressions, reach 16,220, 12
+  clicks. Video: 1,690 watched 25%, 216 watched to the end.
+- Its text: "Explore 53 Alpha Court in Islington Woods, Vaughan — offered at
+  $1,999,990 ... message Ray Ahmadi". The home relisted Nov 12 at
+  $1,899,000. The ad is advertising a price $100,990 too high, and it shows
+  price and address (it predates the no-price rule; it is a message ad, not
+  a lead form).
+- YouTube 24273515703: enabled, $149.29 and 25 clicks in 30 days. Its link
+  carries utm_content=price_15s, so the video itself may show the old price.
+  Cannot view video from here. Ray or Floricel must check.
+- Fix needed today: change the price in the Facebook ad text (and the video
+  if the price is burned in), or pause it. Not done by me: Ray decides.
+- Lesson: on any price change or relist, audit every live ad for the old
+  price the same day.
+
+---
 ## 2026-11-14 — Day 2 of the relist. No showings booked yet
 
 - No BrokerBay showing request or confirmation for 53 Alpha in the inbox

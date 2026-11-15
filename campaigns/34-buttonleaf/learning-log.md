@@ -5,6 +5,19 @@ Newest entries at the top. Never re-test a settled question without new
 justification.
 
 ---
+## 2026-11-15 — Live-ad audit
+
+- Google: "Video ad - 34 Buttonleaf Cres" (24114799139) enabled. Since the
+  Nov 10 restart: $20.72 spent, 51 clicks, about $0.41 a click, 0 tracked
+  conversions. Still linked to the old listing page.
+- Meta: nothing delivering for Buttonleaf in the last 7 days. A campaign
+  named "34 Buttonleaf | Stouffville Buyer Leads | Meta | 7D" (6999756017312,
+  leads, $10/day, created Jul 20) shows ACTIVE at campaign level but spent
+  nothing, so its ad set has ended or is off. "34 buttomleaf - Lead Gen"
+  (52506208679516) is paused.
+- Two old boosted Instagram posts show active with ad errors and no spend.
+
+---
 ## 2026-11-14 — Day 3 of the relist. No showings booked yet
 
 - No BrokerBay showing request, offer or lead email for 34 Buttonleaf since
