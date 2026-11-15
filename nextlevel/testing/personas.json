@@ -1,0 +1,3388 @@
+[
+  {
+    "id": "P001",
+    "name": "Farid Noorzai",
+    "segment": "real_estate_agent",
+    "role": "Solo agent, eXp Realty",
+    "market": "Scarborough and Ajax, GTA east",
+    "years": 6,
+    "deals_per_year": 14,
+    "team": "solo",
+    "tech_comfort": 3,
+    "current_tools": "Free brokerage CRM he barely opens; personal cell and WhatsApp",
+    "device": "phone",
+    "attention": "reads half",
+    "arrived_from": "Instagram reel (Dari-language clip shared in a family group)",
+    "languages": [
+      "English",
+      "Dari",
+      "Farsi"
+    ],
+    "primary_pain": "Misses calls during Friday prayers and evening showings; newcomer callers rarely leave voicemail.",
+    "budget_sensitivity": 4,
+    "scepticism": 4,
+    "must_see_to_continue": "A plain statement of which languages the AI speaks today, with Dari named or honestly ruled out.",
+    "deal_breakers": [
+      "AI answers Dari callers in English only",
+      "Ray or his team can see or contact his callers",
+      "Any hint that he has to join Ray's team"
+    ],
+    "reason_to_say_yes": "Half his callers are Afghan newcomers who hang up on voicemail; a Dari-capable line would be worth real money.",
+    "reason_to_say_no": "He works the same community as Ray and does not want a direct competitor's system sitting on his phone line.",
+    "the_question_they_want_answered": "You sell to the same Afghan families I do. What stops you from seeing who calls me?",
+    "likely_outcome_prior": "quiz only (possible); books call (unlikely)",
+    "tags": [
+      "trust_objection"
+    ]
+  },
+  {
+    "id": "P002",
+    "name": "Harpreet Gill",
+    "segment": "real_estate_agent",
+    "role": "Team leader, RE/MAX franchise",
+    "market": "Brampton, GTA west",
+    "years": 11,
+    "deals_per_year": 45,
+    "team": "team leader, 4 agents plus a part-time ISA (his cousin)",
+    "tech_comfort": 3,
+    "current_tools": "Follow Up Boss; cousin answers overflow calls evenings",
+    "device": "desktop",
+    "attention": "reads half",
+    "arrived_from": "Referral from a colleague at a Peel board event",
+    "languages": [
+      "English",
+      "Punjabi",
+      "Hindi"
+    ],
+    "primary_pain": "Cousin misses calls after 9 pm and on weekends; sign calls go to whichever agent picks up and are not logged.",
+    "budget_sensitivity": 2,
+    "scepticism": 4,
+    "must_see_to_continue": "Proof it handles callers who switch between Punjabi and English mid-sentence.",
+    "deal_breakers": [
+      "English-only voice",
+      "No way to route calls to different agents on the team",
+      "Per-agent pricing that multiplies the bill by five"
+    ],
+    "reason_to_say_yes": "A logged, routed after-hours line would stop his agents fighting over sign calls.",
+    "reason_to_say_no": "His callers expect a Punjabi-speaking human and he already pays family to do it.",
+    "the_question_they_want_answered": "Is the price per team or per agent, and can it send the call to whoever is on duty?",
+    "likely_outcome_prior": "quiz only (likely); books call (possible)",
+    "tags": []
+  },
+  {
+    "id": "P003",
+    "name": "Mei-Ling Zhao",
+    "segment": "real_estate_agent",
+    "role": "Solo agent, HomeLife franchise",
+    "market": "Markham, GTA north",
+    "years": 9,
+    "deals_per_year": 22,
+    "team": "solo with a part-time admin",
+    "tech_comfort": 3,
+    "current_tools": "WeChat for nearly everything; spreadsheet of clients",
+    "device": "phone",
+    "attention": "reads half",
+    "arrived_from": "Cold (link posted in a Markham agents WeChat group)",
+    "languages": [
+      "Mandarin",
+      "Cantonese",
+      "English"
+    ],
+    "primary_pain": "Follow-up with past clients is sporadic; she is not actually losing phone calls because few clients phone.",
+    "budget_sensitivity": 3,
+    "scepticism": 4,
+    "must_see_to_continue": "Anything showing it works on WeChat or text, not only voice calls.",
+    "deal_breakers": [
+      "Voice-only product",
+      "No Mandarin",
+      "Client data stored outside her control"
+    ],
+    "reason_to_say_yes": "If a later product nurtured her database in Chinese she would look again.",
+    "reason_to_say_no": "Her business does not run on inbound phone calls, so a receptionist solves a problem she does not have.",
+    "the_question_they_want_answered": "My clients message me on WeChat. What does a phone receptionist do for me?",
+    "likely_outcome_prior": "bounce (likely)",
+    "tags": [
+      "unfixable_no"
+    ]
+  },
+  {
+    "id": "P004",
+    "name": "Tony Ferrante",
+    "segment": "real_estate_agent",
+    "role": "Sales representative, RE/MAX",
+    "market": "Woodbridge, Vaughan",
+    "years": 24,
+    "deals_per_year": 18,
+    "team": "solo, wife does the paperwork",
+    "tech_comfort": 1,
+    "current_tools": "Paper day planner, flip-style habits on a smartphone, no CRM",
+    "device": "desktop",
+    "attention": "reads half",
+    "arrived_from": "Referral (his nephew emailed him the link)",
+    "languages": [
+      "English",
+      "Italian"
+    ],
+    "primary_pain": "He does miss calls at open houses but thinks calling back within the hour is good enough.",
+    "budget_sensitivity": 3,
+    "scepticism": 5,
+    "must_see_to_continue": "A phone number he can dial to hear it, without filling anything in.",
+    "deal_breakers": [
+      "A robot talking to people who have known him for 20 years",
+      "Having to learn any software",
+      "A quiz before he can see a price"
+    ],
+    "reason_to_say_yes": "Hearing it on a live call and finding it polite and short might soften him.",
+    "reason_to_say_no": "His clients call Tony to get Tony; he believes an AI voice would embarrass him in his own parish.",
+    "the_question_they_want_answered": "Will my clients know they are talking to a machine?",
+    "likely_outcome_prior": "bounce (very likely)",
+    "tags": [
+      "unfixable_no"
+    ]
+  },
+  {
+    "id": "P005",
+    "name": "Carla Medeiros",
+    "segment": "real_estate_agent",
+    "role": "Solo agent, Royal LePage",
+    "market": "Mississauga (Cooksville and Streetsville)",
+    "years": 8,
+    "deals_per_year": 12,
+    "team": "solo",
+    "tech_comfort": 3,
+    "current_tools": "Brokerage-provided CRM she finds clumsy; Google Calendar",
+    "device": "phone",
+    "attention": "reads everything",
+    "arrived_from": "Instagram reel",
+    "languages": [
+      "English",
+      "Portuguese"
+    ],
+    "primary_pain": "Single parent; calls between 5 and 8 pm go unanswered and she can name two buyers she lost that way.",
+    "budget_sensitivity": 5,
+    "scepticism": 3,
+    "must_see_to_continue": "The full monthly cost in one number, including minutes and texts.",
+    "deal_breakers": [
+      "Usage billed on top with no cap",
+      "A contract longer than month to month",
+      "Setup fee"
+    ],
+    "reason_to_say_yes": "At a flat $300 with no surprises she can justify it against one saved deal a year.",
+    "reason_to_say_no": "If usage is extra and unstated she will assume the real bill is $450 and walk.",
+    "the_question_they_want_answered": "Is $300 the whole bill, or do I pay for minutes and texts on top?",
+    "likely_outcome_prior": "books call (possible, if the cost question is answered); otherwise quiz only",
+    "tags": [
+      "ready_if_one_question_answered"
+    ]
+  },
+  {
+    "id": "P006",
+    "name": "Jason Whitcombe",
+    "segment": "real_estate_agent",
+    "role": "Broker, Sotheby's-affiliated luxury office",
+    "market": "Oakville and Burlington lakeshore",
+    "years": 15,
+    "deals_per_year": 30,
+    "team": "small team: one buyer agent, one full-time assistant",
+    "tech_comfort": 3,
+    "current_tools": "Salesforce-based brokerage CRM; assistant answers weekdays 9 to 5",
+    "device": "desktop",
+    "attention": "reads half",
+    "arrived_from": "Cold (LinkedIn post)",
+    "languages": [
+      "English"
+    ],
+    "primary_pain": "Weekend and evening calls on $3M listings hit voicemail; assistant is off.",
+    "budget_sensitivity": 1,
+    "scepticism": 4,
+    "must_see_to_continue": "A recording of an actual call that sounds like a luxury concierge and not a call centre.",
+    "deal_breakers": [
+      "Generic or salesy AI voice",
+      "Any association of his brand with another broker's brand",
+      "Caller data visible to an eXp broker"
+    ],
+    "reason_to_say_yes": "Evening coverage that sounds as good as his assistant would be an easy expense.",
+    "reason_to_say_no": "He will not put another brokerage's operator between him and a seven-figure client.",
+    "the_question_they_want_answered": "Why would I let a competing broker's company answer my phone?",
+    "likely_outcome_prior": "bounce (likely); quiz only (possible)",
+    "tags": [
+      "trust_objection"
+    ]
+  },
+  {
+    "id": "P007",
+    "name": "Priya Raman",
+    "segment": "real_estate_agent",
+    "role": "New sales representative, Right at Home Realty",
+    "market": "Milton, GTA west",
+    "years": 1,
+    "deals_per_year": 1,
+    "team": "solo",
+    "tech_comfort": 4,
+    "current_tools": "None; a free trial of a CRM that expired",
+    "device": "phone",
+    "attention": "skims 20 seconds",
+    "arrived_from": "Instagram reel",
+    "languages": [
+      "English",
+      "Tamil",
+      "Hindi"
+    ],
+    "primary_pain": "She has no calls to miss; her real problem is that the phone does not ring.",
+    "budget_sensitivity": 5,
+    "scepticism": 3,
+    "must_see_to_continue": "Any sign this gets her leads, which it does not claim to.",
+    "deal_breakers": [
+      "Any monthly fee above $50",
+      "Needing existing call volume to be useful"
+    ],
+    "reason_to_say_yes": "None right now; in a year with a pipeline she might.",
+    "reason_to_say_no": "Board dues and desk fees already exceed her income; $300 a month is not available.",
+    "the_question_they_want_answered": "Will this get me clients?",
+    "likely_outcome_prior": "bounce (very likely)",
+    "tags": [
+      "unfixable_no",
+      "phone_under_30_seconds"
+    ]
+  },
+  {
+    "id": "P008",
+    "name": "Dwayne Campbell",
+    "segment": "real_estate_agent",
+    "role": "Part-time sales representative, Century 21",
+    "market": "Pickering and Oshawa, Durham Region",
+    "years": 4,
+    "deals_per_year": 9,
+    "team": "solo",
+    "tech_comfort": 3,
+    "current_tools": "Google Calendar and his iPhone; no CRM",
+    "device": "phone",
+    "attention": "reads half",
+    "arrived_from": "YouTube (short on missed calls)",
+    "languages": [
+      "English"
+    ],
+    "primary_pain": "Works days at a utility and cannot answer 9 to 5; returns calls at lunch and loses the impatient ones.",
+    "budget_sensitivity": 4,
+    "scepticism": 3,
+    "must_see_to_continue": "Confirmation it books straight into his Google Calendar and that he can cancel any month.",
+    "deal_breakers": [
+      "Annual contract",
+      "Having to change his phone number",
+      "Setup that needs daytime calls with him"
+    ],
+    "reason_to_say_yes": "He is the exact person who cannot pick up, and he knows it.",
+    "reason_to_say_no": "If cancelling is unclear he will not risk a recurring charge on a part-time income.",
+    "the_question_they_want_answered": "Can I cancel after one month if it does not book anything?",
+    "likely_outcome_prior": "books call (likely, if cancellation and calendar are stated); otherwise quiz only",
+    "tags": [
+      "ready_if_one_question_answered"
+    ]
+  },
+  {
+    "id": "P009",
+    "name": "Shabnam Rahimi",
+    "segment": "real_estate_agent",
+    "role": "Broker, independent boutique brokerage",
+    "market": "Richmond Hill and North York",
+    "years": 13,
+    "deals_per_year": 26,
+    "team": "small team: herself, one junior agent, one assistant",
+    "tech_comfort": 3,
+    "current_tools": "A CRM she pays for and dislikes; assistant handles calls weekdays",
+    "device": "desktop",
+    "attention": "reads everything",
+    "arrived_from": "Referral from a colleague (who also warned her who is behind it)",
+    "languages": [
+      "English",
+      "Farsi"
+    ],
+    "primary_pain": "Calls from Farsi-language ads come in late evening Tehran-diaspora hours when the assistant is gone.",
+    "budget_sensitivity": 2,
+    "scepticism": 5,
+    "must_see_to_continue": "A written line that the seller and his team never access, contact or market to her callers.",
+    "deal_breakers": [
+      "No written data-ownership clause",
+      "Recruiting pitch for eXp",
+      "Her contacts sitting in an account another broker controls"
+    ],
+    "reason_to_say_yes": "She has the volume and the budget; evening coverage in Farsi would pay for itself.",
+    "reason_to_say_no": "Ray markets to the same Persian and Afghan buyers; she assumes any broker with her call log will use it.",
+    "the_question_they_want_answered": "Who can log in to my account, and is that in the contract?",
+    "likely_outcome_prior": "quiz only (possible); books call (unlikely)",
+    "tags": [
+      "trust_objection"
+    ]
+  },
+  {
+    "id": "P010",
+    "name": "Greg Olszewski",
+    "segment": "real_estate_agent",
+    "role": "Broker, Royal LePage",
+    "market": "Burlington",
+    "years": 19,
+    "deals_per_year": 20,
+    "team": "solo with a transaction coordinator",
+    "tech_comfort": 2,
+    "current_tools": "Brokerage CRM; desk phone forwarded to cell",
+    "device": "desktop",
+    "attention": "reads everything",
+    "arrived_from": "Cold (Facebook ad shown to a realtor interest group)",
+    "languages": [
+      "English",
+      "Polish"
+    ],
+    "primary_pain": "Misses calls but is more worried about a complaint than a lost lead.",
+    "budget_sensitivity": 2,
+    "scepticism": 4,
+    "must_see_to_continue": "A clear statement on recording consent, AI disclosure and CASL for Ontario.",
+    "deal_breakers": [
+      "Vague 'we handle compliance' wording",
+      "AI quoting prices or giving advice a registrant must give",
+      "Automatic texts sent without documented consent"
+    ],
+    "reason_to_say_yes": "If the page showed the exact disclosure the caller hears, he would consider a trial.",
+    "reason_to_say_no": "He sat on a discipline panel once and will not be the test case for an AI answering as a registrant.",
+    "the_question_they_want_answered": "Does the AI tell the caller it is an AI and that the call is recorded, and who is liable if it says something wrong?",
+    "likely_outcome_prior": "quiz only (possible); books call (unlikely)",
+    "tags": [
+      "legal_privacy_worry"
+    ]
+  },
+  {
+    "id": "P011",
+    "name": "Anjali Deshmukh",
+    "segment": "real_estate_agent",
+    "role": "Broker of record and owner, independent brokerage",
+    "market": "Mississauga",
+    "years": 16,
+    "deals_per_year": 8,
+    "team": "broker-owner, 12 agents, one front-desk admin",
+    "tech_comfort": 3,
+    "current_tools": "Office phone system with a human receptionist 9 to 5; brokerage back-office software",
+    "device": "desktop",
+    "attention": "reads everything",
+    "arrived_from": "Referral from a colleague (one of her agents asked permission to use it)",
+    "languages": [
+      "English",
+      "Marathi",
+      "Hindi",
+      "Gujarati"
+    ],
+    "primary_pain": "After-hours calls to the main line go to a general voicemail nobody owns.",
+    "budget_sensitivity": 2,
+    "scepticism": 4,
+    "must_see_to_continue": "Who the contracting party is, where data is stored and what the brokerage is liable for.",
+    "deal_breakers": [
+      "No written agreement to review",
+      "Agents signing up individually without brokerage oversight",
+      "Trust-account or deposit questions answered by an AI"
+    ],
+    "reason_to_say_yes": "A single brokerage-level line with routing to 12 agents would fix a real gap.",
+    "reason_to_say_no": "As broker of record she carries the liability for everything said on that line and sees no terms.",
+    "the_question_they_want_answered": "If one of my agents uses this, what am I responsible for as broker of record?",
+    "likely_outcome_prior": "quiz only (likely); books call (possible)",
+    "tags": [
+      "legal_privacy_worry"
+    ]
+  },
+  {
+    "id": "P012",
+    "name": "Kevin Tran",
+    "segment": "real_estate_agent",
+    "role": "Solo agent, eXp Realty",
+    "market": "Newmarket and Aurora",
+    "years": 3,
+    "deals_per_year": 7,
+    "team": "solo",
+    "tech_comfort": 4,
+    "current_tools": "Already pays about US$150 a month for an AI voice assistant bundled with his lead platform",
+    "device": "desktop",
+    "attention": "skims 20 seconds",
+    "arrived_from": "YouTube",
+    "languages": [
+      "English",
+      "Vietnamese"
+    ],
+    "primary_pain": "His current AI books few appointments, but he blames lead quality and not the tool.",
+    "budget_sensitivity": 4,
+    "scepticism": 3,
+    "must_see_to_continue": "A side-by-side reason this is better than what he already pays for.",
+    "deal_breakers": [
+      "Paying twice for the same function",
+      "Losing his existing number routing"
+    ],
+    "reason_to_say_yes": "If his current vendor raised prices he would shop.",
+    "reason_to_say_no": "He already has an AI answering and is locked into an annual plan until next summer.",
+    "the_question_they_want_answered": "What does this do that my current AI assistant does not?",
+    "likely_outcome_prior": "bounce (likely)",
+    "tags": [
+      "unfixable_no"
+    ]
+  },
+  {
+    "id": "P013",
+    "name": "Sukhdeep Brar",
+    "segment": "real_estate_agent",
+    "role": "Sales representative, Save Max-style discount brokerage",
+    "market": "Brampton",
+    "years": 2,
+    "deals_per_year": 5,
+    "team": "solo",
+    "tech_comfort": 3,
+    "current_tools": "WhatsApp and a notebook",
+    "device": "phone",
+    "attention": "skims 20 seconds",
+    "arrived_from": "Instagram reel",
+    "languages": [
+      "English",
+      "Punjabi"
+    ],
+    "primary_pain": "Works a second job driving; misses daytime calls from sign riders.",
+    "budget_sensitivity": 5,
+    "scepticism": 4,
+    "must_see_to_continue": "A real client result, not the seller's own numbers.",
+    "deal_breakers": [
+      "Looks like another agent selling a course",
+      "No reviews from other agents",
+      "Price hidden behind a call"
+    ],
+    "reason_to_say_yes": "Seeing two agents he recognises using it would move him.",
+    "reason_to_say_no": "Every top producer on his feed sells coaching; he assumes this is the same thing with AI in the name.",
+    "the_question_they_want_answered": "Is this a course or an actual thing that answers my phone?",
+    "likely_outcome_prior": "bounce (very likely)",
+    "tags": [
+      "trust_objection",
+      "phone_under_30_seconds"
+    ]
+  },
+  {
+    "id": "P014",
+    "name": "Brenda Kowalchuk",
+    "segment": "real_estate_agent",
+    "role": "Sales representative, Century 21 franchise",
+    "market": "Whitby and Brooklin",
+    "years": 21,
+    "deals_per_year": 16,
+    "team": "solo",
+    "tech_comfort": 2,
+    "current_tools": "Brokerage front desk takes messages; brokerage CRM mandated",
+    "device": "desktop",
+    "attention": "reads half",
+    "arrived_from": "Cold (email forward from a friend)",
+    "languages": [
+      "English",
+      "Ukrainian"
+    ],
+    "primary_pain": "Front desk closes at 5 and messages reach her the next morning.",
+    "budget_sensitivity": 3,
+    "scepticism": 3,
+    "must_see_to_continue": "Nothing on the page can do it; she needs her broker of record's written approval first.",
+    "deal_breakers": [
+      "Any tool not on the brokerage's approved list",
+      "Forwarding the office number"
+    ],
+    "reason_to_say_yes": "If her broker approved it for the whole office she would sign the same day.",
+    "reason_to_say_no": "Her brokerage policy bars outside tools that touch client calls or data without approval, and the owner is slow to approve anything.",
+    "the_question_they_want_answered": "Has any Century 21 broker of record in Ontario approved this?",
+    "likely_outcome_prior": "bounce (likely); quiz only (unlikely)",
+    "tags": [
+      "unfixable_no"
+    ]
+  },
+  {
+    "id": "P015",
+    "name": "Omar Haddad",
+    "segment": "real_estate_agent",
+    "role": "Team leader, Keller Williams",
+    "market": "Mississauga and Oakville",
+    "years": 7,
+    "deals_per_year": 35,
+    "team": "small team, 3 agents",
+    "tech_comfort": 5,
+    "current_tools": "Runs his own HighLevel agency account with a voice agent he configured himself",
+    "device": "desktop",
+    "attention": "reads everything",
+    "arrived_from": "YouTube",
+    "languages": [
+      "English",
+      "Arabic"
+    ],
+    "primary_pain": "None he would pay for; he wants to see how the snapshot and prompt are built.",
+    "budget_sensitivity": 3,
+    "scepticism": 4,
+    "must_see_to_continue": "Technical detail: which platform, which voice model, what the workflow looks like.",
+    "deal_breakers": [
+      "Marketing fluff with no stack details"
+    ],
+    "reason_to_say_yes": "He will not buy; at most he would ask about white-labelling it.",
+    "reason_to_say_no": "He can build this in a weekend and is here to copy the funnel.",
+    "the_question_they_want_answered": "Is this just HighLevel Voice AI with your snapshot on top?",
+    "likely_outcome_prior": "quiz only (likely, to see the funnel); buys (very unlikely)",
+    "tags": [
+      "competitor_or_tyre_kicker"
+    ]
+  },
+  {
+    "id": "P016",
+    "name": "Natasha Petrov",
+    "segment": "real_estate_agent",
+    "role": "Broker, pre-construction specialist at an independent brokerage",
+    "market": "Vaughan and Toronto",
+    "years": 10,
+    "deals_per_year": 24,
+    "team": "solo with a marketing freelancer",
+    "tech_comfort": 4,
+    "current_tools": "HubSpot free tier; Calendly",
+    "device": "desktop",
+    "attention": "reads everything",
+    "arrived_from": "Cold (Google search: AI receptionist for realtors Ontario)",
+    "languages": [
+      "English",
+      "Russian"
+    ],
+    "primary_pain": "Investor callers ask one thing first, whether a unit or listing is still available, and hang up if nobody answers.",
+    "budget_sensitivity": 2,
+    "scepticism": 3,
+    "must_see_to_continue": "A concrete answer on whether the AI can look up live listing status.",
+    "deal_breakers": [
+      "AI inventing availability or prices",
+      "No handoff to her mid-call for hot investors"
+    ],
+    "reason_to_say_yes": "If it answers availability accurately she will sign up for a founding spot.",
+    "reason_to_say_no": "If listing lookup is 'coming soon' it is just a voicemail with manners.",
+    "the_question_they_want_answered": "Can it tell a caller whether a specific listing is still available, today, not on a roadmap?",
+    "likely_outcome_prior": "books call (likely, if listing lookup is confirmed); otherwise quiz only",
+    "tags": [
+      "ready_if_one_question_answered"
+    ]
+  },
+  {
+    "id": "P017",
+    "name": "Abdul Wahid Sultani",
+    "segment": "real_estate_agent",
+    "role": "New sales representative, eXp Realty",
+    "market": "Scarborough",
+    "years": 2,
+    "deals_per_year": 3,
+    "team": "solo",
+    "tech_comfort": 3,
+    "current_tools": "None; Instagram DMs and WhatsApp",
+    "device": "phone",
+    "attention": "reads everything",
+    "arrived_from": "Instagram reel (follows Ray's Dari content)",
+    "languages": [
+      "English",
+      "Dari",
+      "Pashto"
+    ],
+    "primary_pain": "Not missed calls; he wants mentorship and leads from someone established in his community.",
+    "budget_sensitivity": 5,
+    "scepticism": 2,
+    "must_see_to_continue": "A way to work with Ray directly, which is not what the page sells.",
+    "deal_breakers": [
+      "$300 a month with three deals a year",
+      "Being sold software when he wanted a team"
+    ],
+    "reason_to_say_yes": "He trusts Ray and would book a call hoping it turns into joining the team.",
+    "reason_to_say_no": "He cannot afford it and has too few calls for it to matter.",
+    "the_question_they_want_answered": "Can I join your team instead of buying this?",
+    "likely_outcome_prior": "books call (possible, for the wrong reason); buys (very unlikely)",
+    "tags": []
+  },
+  {
+    "id": "P018",
+    "name": "Stephanie Leung",
+    "segment": "real_estate_agent",
+    "role": "Sales representative, Living Realty-style Chinese-market brokerage",
+    "market": "Markham and Unionville",
+    "years": 5,
+    "deals_per_year": 15,
+    "team": "solo",
+    "tech_comfort": 4,
+    "current_tools": "A paid CRM she uses daily; WeChat; Google Workspace",
+    "device": "desktop",
+    "attention": "reads half",
+    "arrived_from": "Instagram reel",
+    "languages": [
+      "English",
+      "Cantonese",
+      "Mandarin"
+    ],
+    "primary_pain": "Misses calls during showings; overseas clients call at odd hours.",
+    "budget_sensitivity": 3,
+    "scepticism": 4,
+    "must_see_to_continue": "Where recordings and transcripts are stored, for how long, and who can hear them.",
+    "deal_breakers": [
+      "Recordings kept indefinitely",
+      "Data stored with no stated location",
+      "No way to switch recording off"
+    ],
+    "reason_to_say_yes": "Odd-hours coverage for overseas buyers is a real gap.",
+    "reason_to_say_no": "Her clients are private about money and immigration status; a recorded AI line could cost her their trust.",
+    "the_question_they_want_answered": "Can I turn call recording off and still use it?",
+    "likely_outcome_prior": "quiz only (likely); books call (possible)",
+    "tags": [
+      "legal_privacy_worry"
+    ]
+  },
+  {
+    "id": "P019",
+    "name": "Luciana Ferraz",
+    "segment": "real_estate_agent",
+    "role": "Sales representative, boutique condo brokerage",
+    "market": "Downtown Toronto and Little Portugal",
+    "years": 6,
+    "deals_per_year": 18,
+    "team": "solo",
+    "tech_comfort": 3,
+    "current_tools": "Brokerage CRM; iPhone",
+    "device": "phone",
+    "attention": "skims 20 seconds",
+    "arrived_from": "Instagram reel",
+    "languages": [
+      "English",
+      "Portuguese"
+    ],
+    "primary_pain": "Misses calls while on the subway and in back-to-back condo showings.",
+    "budget_sensitivity": 3,
+    "scepticism": 3,
+    "must_see_to_continue": "The price and what it does in the first screen, without scrolling.",
+    "deal_breakers": [
+      "Long quiz",
+      "Price only on a call"
+    ],
+    "reason_to_say_yes": "If the first screen said 'answers your calls, $300 a month, cancel anytime' she would tap through.",
+    "reason_to_say_no": "She gives a page one thumb-scroll between showings.",
+    "the_question_they_want_answered": "How much, and how fast can I try it?",
+    "likely_outcome_prior": "bounce (likely); quiz only (possible)",
+    "tags": [
+      "phone_under_30_seconds"
+    ]
+  },
+  {
+    "id": "P020",
+    "name": "Marcus Adeyemi",
+    "segment": "real_estate_agent",
+    "role": "Sales representative, leasing-focused, Royal LePage",
+    "market": "Downtown Toronto condos",
+    "years": 3,
+    "deals_per_year": 46,
+    "team": "solo",
+    "tech_comfort": 4,
+    "current_tools": "Google Sheets, a rental listing syndication tool, Calendly",
+    "device": "phone",
+    "attention": "reads half",
+    "arrived_from": "Cold (Reddit thread in a Toronto real estate sub)",
+    "languages": [
+      "English",
+      "Yoruba"
+    ],
+    "primary_pain": "Forty-plus rental enquiries a week by phone, most unqualified; he answers the same five questions all day.",
+    "budget_sensitivity": 4,
+    "scepticism": 3,
+    "must_see_to_continue": "A statement that it can screen rental callers on income, move-in date and pets.",
+    "deal_breakers": [
+      "Built only for buyers and sellers",
+      "Per-minute charges that explode with rental volume"
+    ],
+    "reason_to_say_yes": "Screening tenants automatically would give him back ten hours a week.",
+    "reason_to_say_no": "Lease commissions are small; if usage is metered his volume could make it a loss.",
+    "the_question_they_want_answered": "Can it screen rental enquiries, and is there a limit on calls or minutes?",
+    "likely_outcome_prior": "books call (likely, if rentals and usage are addressed); otherwise bounce",
+    "tags": [
+      "ready_if_one_question_answered"
+    ]
+  },
+  {
+    "id": "P021",
+    "name": "Elise Tremblay-Wong",
+    "segment": "real_estate_agent",
+    "role": "Broker, independent boutique brokerage",
+    "market": "Leslieville and Riverdale, Toronto",
+    "years": 12,
+    "deals_per_year": 28,
+    "team": "small team: herself, a licensed assistant, a client-care manager",
+    "tech_comfort": 3,
+    "current_tools": "Full-time licensed assistant answers every call; a CRM they like",
+    "device": "desktop",
+    "attention": "reads half",
+    "arrived_from": "Referral from a colleague",
+    "languages": [
+      "English",
+      "French"
+    ],
+    "primary_pain": "Nothing urgent; calls are covered seven days by rotation.",
+    "budget_sensitivity": 2,
+    "scepticism": 3,
+    "must_see_to_continue": "Evidence it beats a trained human who knows her clients by name.",
+    "deal_breakers": [
+      "Replacing her assistant",
+      "Any drop in the personal feel"
+    ],
+    "reason_to_say_yes": "If her assistant left she would revisit it.",
+    "reason_to_say_no": "She already has a human solution that works and her brand is high-touch.",
+    "the_question_they_want_answered": "Why would I need this when a person already answers?",
+    "likely_outcome_prior": "bounce (likely)",
+    "tags": [
+      "unfixable_no"
+    ]
+  },
+  {
+    "id": "P022",
+    "name": "Daniel Rosen",
+    "segment": "real_estate_agent",
+    "role": "Broker, Harvey Kalles-style luxury independent",
+    "market": "Forest Hill and midtown Toronto",
+    "years": 25,
+    "deals_per_year": 14,
+    "team": "solo with a shared office administrator",
+    "tech_comfort": 1,
+    "current_tools": "Office landline, a paper rolodex his admin digitised once",
+    "device": "desktop",
+    "attention": "reads half",
+    "arrived_from": "Referral (his daughter sent the link)",
+    "languages": [
+      "English",
+      "Hebrew"
+    ],
+    "primary_pain": "Does not see one. His clients have his home number.",
+    "budget_sensitivity": 1,
+    "scepticism": 5,
+    "must_see_to_continue": "Nothing; he opened the link out of politeness.",
+    "deal_breakers": [
+      "An AI speaking for him",
+      "Anything recorded"
+    ],
+    "reason_to_say_yes": "None he can think of.",
+    "reason_to_say_no": "He considers an AI on his line a breach of the discretion his clients pay for.",
+    "the_question_they_want_answered": "Who thought my clients want to speak to a computer?",
+    "likely_outcome_prior": "bounce (very likely)",
+    "tags": [
+      "unfixable_no"
+    ]
+  },
+  {
+    "id": "P023",
+    "name": "Aisha Mohamud",
+    "segment": "real_estate_agent",
+    "role": "Sales representative, Real Broker",
+    "market": "Downtown Toronto and Regent Park",
+    "years": 2,
+    "deals_per_year": 6,
+    "team": "solo",
+    "tech_comfort": 4,
+    "current_tools": "A $97 a month HighLevel reseller account she set up from a TikTok tutorial",
+    "device": "phone",
+    "attention": "skims 20 seconds",
+    "arrived_from": "Instagram reel",
+    "languages": [
+      "English",
+      "Somali"
+    ],
+    "primary_pain": "Leads from her own content message her faster than she can answer.",
+    "budget_sensitivity": 5,
+    "scepticism": 4,
+    "must_see_to_continue": "Proof this is more than the HighLevel account she already rents for a third of the price.",
+    "deal_breakers": [
+      "Reselling a tool she already has at a markup",
+      "No named difference from the $97 version"
+    ],
+    "reason_to_say_yes": "Done-for-you setup has some value because hers is half configured.",
+    "reason_to_say_no": "She recognises the platform and thinks a broker is marking up software she can get direct.",
+    "the_question_they_want_answered": "Is this just GoHighLevel? Why $300?",
+    "likely_outcome_prior": "bounce (likely)",
+    "tags": [
+      "trust_objection",
+      "phone_under_30_seconds"
+    ]
+  },
+  {
+    "id": "P024",
+    "name": "Victor Stanescu",
+    "segment": "real_estate_agent",
+    "role": "Commercial broker, national commercial brokerage",
+    "market": "Downtown Toronto office and retail leasing",
+    "years": 17,
+    "deals_per_year": 10,
+    "team": "solo within a 6-person office team",
+    "tech_comfort": 3,
+    "current_tools": "Corporate CRM mandated by head office; shared receptionist",
+    "device": "desktop",
+    "attention": "reads half",
+    "arrived_from": "Cold (LinkedIn)",
+    "languages": [
+      "English",
+      "Romanian"
+    ],
+    "primary_pain": "Tenant-rep enquiries on sign calls come in after the receptionist leaves.",
+    "budget_sensitivity": 2,
+    "scepticism": 3,
+    "must_see_to_continue": "Any mention of commercial real estate at all.",
+    "deal_breakers": [
+      "Residential-only scripts",
+      "Head office IT refusing outside systems"
+    ],
+    "reason_to_say_yes": "Sign-call coverage for retail units would be useful.",
+    "reason_to_say_no": "The page talks about showings and buyers; nothing fits commercial, and corporate IT controls his phone.",
+    "the_question_they_want_answered": "Does this work for commercial leasing calls?",
+    "likely_outcome_prior": "bounce (likely); quiz only (unlikely)",
+    "tags": []
+  },
+  {
+    "id": "P025",
+    "name": "Doug Hartley",
+    "segment": "real_estate_agent",
+    "role": "Broker, Royal LePage",
+    "market": "Owen Sound and Grey-Bruce",
+    "years": 22,
+    "deals_per_year": 25,
+    "team": "solo with a part-time admin",
+    "tech_comfort": 2,
+    "current_tools": "Brokerage CRM he ignores; landline and cell",
+    "device": "desktop",
+    "attention": "reads half",
+    "arrived_from": "Cold (Facebook ad)",
+    "languages": [
+      "English"
+    ],
+    "primary_pain": "Spotty cell coverage on rural showings; he calls back from the truck.",
+    "budget_sensitivity": 3,
+    "scepticism": 5,
+    "must_see_to_continue": "A local agent he knows vouching for it.",
+    "deal_breakers": [
+      "Anything that sounds like a Toronto call centre",
+      "AI mispronouncing local township names"
+    ],
+    "reason_to_say_yes": "If a neighbour agent swore by it he would listen.",
+    "reason_to_say_no": "In a town of 22,000 word travels; he believes one robot-answered call becomes a coffee-shop joke.",
+    "the_question_they_want_answered": "Does it know where Kemble is?",
+    "likely_outcome_prior": "bounce (very likely)",
+    "tags": [
+      "unfixable_no"
+    ]
+  },
+  {
+    "id": "P026",
+    "name": "Shelley McAllister",
+    "segment": "real_estate_agent",
+    "role": "Sales representative, cottage and waterfront specialist, independent brokerage",
+    "market": "Peterborough and the Kawarthas",
+    "years": 14,
+    "deals_per_year": 19,
+    "team": "solo",
+    "tech_comfort": 3,
+    "current_tools": "A CRM she pays for and half uses; cell with poor coverage on the lakes",
+    "device": "desktop",
+    "attention": "reads everything",
+    "arrived_from": "Referral from a colleague",
+    "languages": [
+      "English"
+    ],
+    "primary_pain": "No signal at waterfront showings for hours; Toronto cottage buyers call once and move on.",
+    "budget_sensitivity": 3,
+    "scepticism": 3,
+    "must_see_to_continue": "Confirmation she keeps her own number and that forwarding works when her phone has no signal.",
+    "deal_breakers": [
+      "Having to publish a new number",
+      "Losing the number if she cancels"
+    ],
+    "reason_to_say_yes": "This is her exact problem every summer weekend.",
+    "reason_to_say_no": "Her number has been on signs for 14 years; any risk to it ends the conversation.",
+    "the_question_they_want_answered": "Do I keep my number, and does it answer when my phone is out of range?",
+    "likely_outcome_prior": "books call (likely, if the number question is answered); otherwise quiz only",
+    "tags": [
+      "ready_if_one_question_answered"
+    ]
+  },
+  {
+    "id": "P027",
+    "name": "Tyler Beaudoin",
+    "segment": "real_estate_agent",
+    "role": "Sales representative, Century 21",
+    "market": "Sudbury",
+    "years": 4,
+    "deals_per_year": 11,
+    "team": "solo",
+    "tech_comfort": 3,
+    "current_tools": "Brokerage CRM; Facebook Messenger",
+    "device": "phone",
+    "attention": "reads half",
+    "arrived_from": "Cold (Facebook ad)",
+    "languages": [
+      "English",
+      "French"
+    ],
+    "primary_pain": "Shift workers from the mines call at odd hours; about a third of callers start in French.",
+    "budget_sensitivity": 4,
+    "scepticism": 3,
+    "must_see_to_continue": "Whether it answers in French when the caller speaks French.",
+    "deal_breakers": [
+      "English-only",
+      "Toronto-centric assumptions about price points"
+    ],
+    "reason_to_say_yes": "Odd-hours coverage fits a shift-work town.",
+    "reason_to_say_no": "An English-only line would offend a third of his market.",
+    "the_question_they_want_answered": "Does it speak French?",
+    "likely_outcome_prior": "quiz only (possible); bounce (possible)",
+    "tags": []
+  },
+  {
+    "id": "P028",
+    "name": "Joan Pettigrew",
+    "segment": "real_estate_agent",
+    "role": "Broker, RE/MAX",
+    "market": "Cobourg and Northumberland County",
+    "years": 25,
+    "deals_per_year": 9,
+    "team": "solo",
+    "tech_comfort": 2,
+    "current_tools": "Old contact database on a desktop program; landline",
+    "device": "desktop",
+    "attention": "reads half",
+    "arrived_from": "Cold (email forwarded by her broker's newsletter)",
+    "languages": [
+      "English"
+    ],
+    "primary_pain": "None she wants to solve; she is winding down and referring clients out.",
+    "budget_sensitivity": 3,
+    "scepticism": 4,
+    "must_see_to_continue": "Nothing; she will not start new tools.",
+    "deal_breakers": [
+      "Any new subscription",
+      "Learning curve"
+    ],
+    "reason_to_say_yes": "She might pass the link to the agent taking over her book.",
+    "reason_to_say_no": "She plans to hand in her licence within the year.",
+    "the_question_they_want_answered": "Is this something I should tell the young agents about?",
+    "likely_outcome_prior": "bounce (very likely)",
+    "tags": [
+      "unfixable_no"
+    ]
+  },
+  {
+    "id": "P029",
+    "name": "Raj Malhotra",
+    "segment": "real_estate_agent",
+    "role": "Sales representative, eXp Realty; former software developer",
+    "market": "Kitchener-Waterloo",
+    "years": 6,
+    "deals_per_year": 21,
+    "team": "solo",
+    "tech_comfort": 5,
+    "current_tools": "Self-built stack: Twilio, an open-source CRM, his own LLM call agent in testing",
+    "device": "desktop",
+    "attention": "reads everything",
+    "arrived_from": "YouTube",
+    "languages": [
+      "English",
+      "Hindi",
+      "Punjabi"
+    ],
+    "primary_pain": "His home-built agent mishandles interruptions; he is curious how others solved it.",
+    "budget_sensitivity": 3,
+    "scepticism": 4,
+    "must_see_to_continue": "Latency numbers, the voice vendor and how transfers are handled.",
+    "deal_breakers": [
+      "Black-box answers",
+      "Paying retail for something he can assemble at cost"
+    ],
+    "reason_to_say_yes": "If his own build keeps failing he might pay to stop tinkering, though he doubts it.",
+    "reason_to_say_no": "He already has a solution he built and would rather own it than rent it.",
+    "the_question_they_want_answered": "What is the response latency and which voice model is underneath?",
+    "likely_outcome_prior": "quiz only (likely, out of curiosity); buys (very unlikely)",
+    "tags": [
+      "unfixable_no",
+      "competitor_or_tyre_kicker"
+    ]
+  },
+  {
+    "id": "P030",
+    "name": "Kim Vandersteen",
+    "segment": "real_estate_agent",
+    "role": "Sales representative, farm and rural, Royal LePage",
+    "market": "Stratford and Perth County",
+    "years": 9,
+    "deals_per_year": 13,
+    "team": "solo",
+    "tech_comfort": 2,
+    "current_tools": "Brokerage CRM; paper files for farm clients",
+    "device": "desktop",
+    "attention": "reads half",
+    "arrived_from": "Cold (Facebook ad)",
+    "languages": [
+      "English",
+      "Dutch"
+    ],
+    "primary_pain": "Misses calls while walking fence lines with buyers.",
+    "budget_sensitivity": 3,
+    "scepticism": 4,
+    "must_see_to_continue": "Plain wording on whether calls are recorded and whether elderly callers get a person on request.",
+    "deal_breakers": [
+      "Recording farmers without them understanding",
+      "No quick route to a human"
+    ],
+    "reason_to_say_yes": "Coverage during farm walks is a real need.",
+    "reason_to_say_no": "Her older Mennonite and Dutch farm clients distrust recordings; she worries about consent she cannot explain.",
+    "the_question_they_want_answered": "If a caller does not want to be recorded, what happens?",
+    "likely_outcome_prior": "quiz only (possible); bounce (likely)",
+    "tags": [
+      "legal_privacy_worry"
+    ]
+  },
+  {
+    "id": "P031",
+    "name": "Wei Chen",
+    "segment": "real_estate_agent",
+    "role": "Agent (PREC), Royal Pacific-style brokerage",
+    "market": "Richmond, BC",
+    "years": 12,
+    "deals_per_year": 20,
+    "team": "solo with an unlicensed assistant",
+    "tech_comfort": 3,
+    "current_tools": "WeChat, a Chinese-language CRM",
+    "device": "desktop",
+    "attention": "reads half",
+    "arrived_from": "Cold (shared in an agents WeChat group)",
+    "languages": [
+      "Mandarin",
+      "English"
+    ],
+    "primary_pain": "Assistant is unlicensed and cannot discuss listings; evening calls wait.",
+    "budget_sensitivity": 3,
+    "scepticism": 4,
+    "must_see_to_continue": "Whether BC rules allow an unlicensed AI to discuss listings, and whether it speaks Mandarin.",
+    "deal_breakers": [
+      "No BC-specific compliance answer",
+      "English-only"
+    ],
+    "reason_to_say_yes": "An AI could stay inside the unlicensed-assistant limits more reliably than a person.",
+    "reason_to_say_no": "The page is written from Ontario; he assumes nobody checked BCFSA rules.",
+    "the_question_they_want_answered": "Has anyone confirmed this is allowed under BCFSA rules for unlicensed assistance?",
+    "likely_outcome_prior": "bounce (likely); quiz only (possible)",
+    "tags": [
+      "legal_privacy_worry"
+    ]
+  },
+  {
+    "id": "P032",
+    "name": "Gurpreet Sandhu",
+    "segment": "real_estate_agent",
+    "role": "Team leader, large regional brokerage",
+    "market": "Surrey, BC",
+    "years": 14,
+    "deals_per_year": 70,
+    "team": "team leader, 6 agents, 2 offshore ISAs, 1 ops manager",
+    "tech_comfort": 4,
+    "current_tools": "Follow Up Boss, two full-time offshore ISAs covering 16 hours a day, a dialer",
+    "device": "desktop",
+    "attention": "reads half",
+    "arrived_from": "Referral from a colleague in a mastermind group",
+    "languages": [
+      "English",
+      "Punjabi",
+      "Hindi"
+    ],
+    "primary_pain": "ISA turnover, but coverage itself is solved.",
+    "budget_sensitivity": 1,
+    "scepticism": 4,
+    "must_see_to_continue": "A cost and conversion comparison against human ISAs at his volume.",
+    "deal_breakers": [
+      "Worse conversion than his ISAs",
+      "No Punjabi"
+    ],
+    "reason_to_say_yes": "If it out-booked his ISAs in a test he would replace one seat.",
+    "reason_to_say_no": "He already has 16-hour human coverage in Punjabi and English for less per hour than he expects this to cost at volume.",
+    "the_question_they_want_answered": "At 600 calls a month, what does it cost and what does it book compared with an ISA?",
+    "likely_outcome_prior": "quiz only (possible); bounce (likely)",
+    "tags": [
+      "unfixable_no"
+    ]
+  },
+  {
+    "id": "P033",
+    "name": "Hannah Lindqvist",
+    "segment": "real_estate_agent",
+    "role": "Agent, Oakwyn-style independent brokerage",
+    "market": "East Vancouver",
+    "years": 5,
+    "deals_per_year": 12,
+    "team": "solo",
+    "tech_comfort": 4,
+    "current_tools": "Notion, a lightweight CRM, Calendly",
+    "device": "desktop",
+    "attention": "reads everything",
+    "arrived_from": "Instagram reel",
+    "languages": [
+      "English",
+      "Swedish"
+    ],
+    "primary_pain": "Misses calls on showing days; hates phone tag.",
+    "budget_sensitivity": 3,
+    "scepticism": 4,
+    "must_see_to_continue": "Proof from someone outside the seller's own business, ideally in BC.",
+    "deal_breakers": [
+      "Only self-reported results",
+      "Hype language",
+      "Hard-sell call"
+    ],
+    "reason_to_say_yes": "She likes the idea and the price is within reach.",
+    "reason_to_say_no": "A GTA broker she has never heard of, with no outside clients yet, selling software on the side reads as a hustle.",
+    "the_question_they_want_answered": "Who else is using this besides the person selling it?",
+    "likely_outcome_prior": "quiz only (likely); books call (unlikely)",
+    "tags": [
+      "trust_objection"
+    ]
+  },
+  {
+    "id": "P034",
+    "name": "Kourosh Jafari",
+    "segment": "real_estate_agent",
+    "role": "Agent (PREC), RE/MAX",
+    "market": "North Vancouver and West Vancouver",
+    "years": 15,
+    "deals_per_year": 17,
+    "team": "solo",
+    "tech_comfort": 2,
+    "current_tools": "Brokerage CRM; cell phone",
+    "device": "phone",
+    "attention": "reads half",
+    "arrived_from": "Referral from a colleague (a cousin in Toronto)",
+    "languages": [
+      "English",
+      "Farsi"
+    ],
+    "primary_pain": "Misses calls on the Sea-to-Sky and during prayer and family time; clients complain he is hard to reach.",
+    "budget_sensitivity": 2,
+    "scepticism": 3,
+    "must_see_to_continue": "A demo number on the page he can call right now.",
+    "deal_breakers": [
+      "Having to book a meeting just to hear it",
+      "A voice that struggles with accented English"
+    ],
+    "reason_to_say_yes": "If he calls the demo and it understands his accent, he is in.",
+    "reason_to_say_no": "He will not sit through a sales call to hear a sample.",
+    "the_question_they_want_answered": "Where is the number I can call to hear it?",
+    "likely_outcome_prior": "books call (likely, if a demo line is on the page); otherwise bounce",
+    "tags": [
+      "ready_if_one_question_answered"
+    ]
+  },
+  {
+    "id": "P035",
+    "name": "Brittany Cho",
+    "segment": "real_estate_agent",
+    "role": "New agent, discount-fee brokerage",
+    "market": "Burnaby, BC",
+    "years": 1,
+    "deals_per_year": 2,
+    "team": "solo",
+    "tech_comfort": 4,
+    "current_tools": "None",
+    "device": "phone",
+    "attention": "skims 20 seconds",
+    "arrived_from": "Instagram reel",
+    "languages": [
+      "English",
+      "Korean"
+    ],
+    "primary_pain": "No inbound calls yet; she is door-knocking.",
+    "budget_sensitivity": 5,
+    "scepticism": 3,
+    "must_see_to_continue": "A free tier or trial.",
+    "deal_breakers": [
+      "Any fee before she has income"
+    ],
+    "reason_to_say_yes": "None this year.",
+    "reason_to_say_no": "She has no budget and no call volume.",
+    "the_question_they_want_answered": "Is there a free version?",
+    "likely_outcome_prior": "bounce (very likely)",
+    "tags": [
+      "unfixable_no",
+      "phone_under_30_seconds"
+    ]
+  },
+  {
+    "id": "P036",
+    "name": "Cody Ferguson",
+    "segment": "real_estate_agent",
+    "role": "Agent, CIR Realty",
+    "market": "South Calgary and Okotoks",
+    "years": 8,
+    "deals_per_year": 32,
+    "team": "solo with a virtual assistant",
+    "tech_comfort": 4,
+    "current_tools": "Follow Up Boss with years of automations built around it",
+    "device": "desktop",
+    "attention": "reads everything",
+    "arrived_from": "YouTube",
+    "languages": [
+      "English"
+    ],
+    "primary_pain": "Calls missed at showings never make it into Follow Up Boss, so follow-up plans do not trigger.",
+    "budget_sensitivity": 2,
+    "scepticism": 3,
+    "must_see_to_continue": "A yes or no on whether callers and bookings sync to Follow Up Boss.",
+    "deal_breakers": [
+      "Being forced to run a second CRM",
+      "Manual copy-paste between systems"
+    ],
+    "reason_to_say_yes": "If every call lands in Follow Up Boss as a lead with notes, he buys.",
+    "reason_to_say_no": "A separate HighLevel account he has to check is a non-starter.",
+    "the_question_they_want_answered": "Does it push calls and appointments into Follow Up Boss?",
+    "likely_outcome_prior": "books call (likely, if CRM sync is answered yes); otherwise bounce",
+    "tags": [
+      "ready_if_one_question_answered"
+    ]
+  },
+  {
+    "id": "P037",
+    "name": "Amandeep Dhaliwal",
+    "segment": "real_estate_agent",
+    "role": "Agent, eXp Realty",
+    "market": "Northeast Calgary",
+    "years": 5,
+    "deals_per_year": 16,
+    "team": "solo",
+    "tech_comfort": 3,
+    "current_tools": "eXp-provided CRM, WhatsApp",
+    "device": "phone",
+    "attention": "skims 20 seconds",
+    "arrived_from": "Instagram reel",
+    "languages": [
+      "English",
+      "Punjabi"
+    ],
+    "primary_pain": "Misses calls at his kids' tournaments and during gurdwara on Sundays.",
+    "budget_sensitivity": 4,
+    "scepticism": 3,
+    "must_see_to_continue": "Price on the first screen.",
+    "deal_breakers": [
+      "Hidden price",
+      "Long form on a phone"
+    ],
+    "reason_to_say_yes": "He has heard of Ray inside eXp and the price is tolerable.",
+    "reason_to_say_no": "He will not complete a quiz on his phone in a parking lot.",
+    "the_question_they_want_answered": "How much is it?",
+    "likely_outcome_prior": "bounce (likely); quiz only (possible)",
+    "tags": [
+      "phone_under_30_seconds"
+    ]
+  },
+  {
+    "id": "P038",
+    "name": "Lorraine Schultz",
+    "segment": "real_estate_agent",
+    "role": "Agent, RE/MAX",
+    "market": "Northwest Calgary and Cochrane",
+    "years": 20,
+    "deals_per_year": 22,
+    "team": "solo",
+    "tech_comfort": 2,
+    "current_tools": "A CRM she hates and has paid for since 2019",
+    "device": "desktop",
+    "attention": "reads everything",
+    "arrived_from": "Cold (Facebook ad)",
+    "languages": [
+      "English",
+      "German"
+    ],
+    "primary_pain": "Misses calls, but her bigger wound is $9,000 lost to an online lead vendor that delivered nothing.",
+    "budget_sensitivity": 4,
+    "scepticism": 5,
+    "must_see_to_continue": "A refund or exit term in writing on the page.",
+    "deal_breakers": [
+      "Auto-renewing contracts",
+      "Results claims without proof",
+      "A closer on the call"
+    ],
+    "reason_to_say_yes": "Month to month with a clear exit would get her to at least listen.",
+    "reason_to_say_no": "After the lead vendor, anyone selling tech to agents is guilty until proven otherwise.",
+    "the_question_they_want_answered": "How do I get out, and what do I lose when I do?",
+    "likely_outcome_prior": "quiz only (possible); bounce (likely)",
+    "tags": [
+      "trust_objection"
+    ]
+  },
+  {
+    "id": "P039",
+    "name": "Mitchell Okafor",
+    "segment": "real_estate_agent",
+    "role": "Team leader, eXp Realty",
+    "market": "Calgary and Airdrie",
+    "years": 10,
+    "deals_per_year": 55,
+    "team": "team leader, 4 agents, 1 admin",
+    "tech_comfort": 4,
+    "current_tools": "eXp CRM plus a paid dialer; admin answers business hours",
+    "device": "desktop",
+    "attention": "reads half",
+    "arrived_from": "Referral (eXp internal workplace post)",
+    "languages": [
+      "English",
+      "Igbo"
+    ],
+    "primary_pain": "After-hours calls roll to his cell and he is burning out.",
+    "budget_sensitivity": 2,
+    "scepticism": 4,
+    "must_see_to_continue": "A clear line that this is a vendor relationship and has nothing to do with eXp sponsorship or revenue share.",
+    "deal_breakers": [
+      "Any approach to his agents",
+      "Being counted in someone's downline pitch"
+    ],
+    "reason_to_say_yes": "After-hours relief for the team at a few hundred dollars is cheap.",
+    "reason_to_say_no": "Inside eXp every tool pitch has a recruiting angle; he suspects his agents will get a call next.",
+    "the_question_they_want_answered": "Is this a way into my team for your revenue share?",
+    "likely_outcome_prior": "quiz only (likely); books call (possible)",
+    "tags": [
+      "trust_objection"
+    ]
+  },
+  {
+    "id": "P040",
+    "name": "Geneviève Lavoie-Bouchard",
+    "segment": "real_estate_agent",
+    "role": "Courtière immobilière résidentielle, Royal LePage",
+    "market": "Plateau-Mont-Royal, Montréal",
+    "years": 10,
+    "deals_per_year": 18,
+    "team": "solo",
+    "tech_comfort": 3,
+    "current_tools": "Brokerage CRM in French; Google Agenda",
+    "device": "desktop",
+    "attention": "reads half",
+    "arrived_from": "Cold (Facebook ad, in English)",
+    "languages": [
+      "French",
+      "English"
+    ],
+    "primary_pain": "Misses calls during visits; clients expect service in French first.",
+    "budget_sensitivity": 3,
+    "scepticism": 4,
+    "must_see_to_continue": "The page and the AI in French.",
+    "deal_breakers": [
+      "English-first voice",
+      "English-only page and contract",
+      "No mention of Quebec law"
+    ],
+    "reason_to_say_yes": "A French-first assistant would be useful and rare.",
+    "reason_to_say_no": "Serving her clients through an English-first tool is against both the law as she understands it and her own standards.",
+    "the_question_they_want_answered": "Est-ce que ça répond en français d'abord, et le contrat est-il en français?",
+    "likely_outcome_prior": "bounce (very likely)",
+    "tags": [
+      "unfixable_no",
+      "legal_privacy_worry"
+    ]
+  },
+  {
+    "id": "P041",
+    "name": "Mathieu Desrochers",
+    "segment": "real_estate_agent",
+    "role": "Courtier immobilier, team leader, RE/MAX Québec",
+    "market": "Laval and the North Shore",
+    "years": 13,
+    "deals_per_year": 40,
+    "team": "small team, 3 brokers and an adjointe",
+    "tech_comfort": 4,
+    "current_tools": "A Quebec-built CRM, adjointe answers weekdays",
+    "device": "desktop",
+    "attention": "reads everything",
+    "arrived_from": "YouTube",
+    "languages": [
+      "French",
+      "English"
+    ],
+    "primary_pain": "Evening calls from Centris listings go to voicemail.",
+    "budget_sensitivity": 2,
+    "scepticism": 4,
+    "must_see_to_continue": "A statement on Law 25, where data is hosted and who the privacy officer is.",
+    "deal_breakers": [
+      "Data hosted outside Canada with no disclosure",
+      "No French voice",
+      "No answer on OACIQ rules for automated communication"
+    ],
+    "reason_to_say_yes": "He has the volume and the budget to pay for evening coverage.",
+    "reason_to_say_no": "Law 25 makes him personally accountable for client data and the page reads as if Quebec does not exist.",
+    "the_question_they_want_answered": "Où sont hébergées les données et qui est responsable en cas d'incident?",
+    "likely_outcome_prior": "quiz only (possible); bounce (likely)",
+    "tags": [
+      "legal_privacy_worry"
+    ]
+  },
+  {
+    "id": "P042",
+    "name": "Nadia Benali",
+    "segment": "real_estate_agent",
+    "role": "Courtière immobilière, Sutton Québec",
+    "market": "West Island and Saint-Laurent, Montréal",
+    "years": 4,
+    "deals_per_year": 9,
+    "team": "solo",
+    "tech_comfort": 3,
+    "current_tools": "WhatsApp, brokerage CRM",
+    "device": "phone",
+    "attention": "skims 20 seconds",
+    "arrived_from": "Instagram reel",
+    "languages": [
+      "French",
+      "Arabic",
+      "English"
+    ],
+    "primary_pain": "Misses calls while with her children after 4 pm.",
+    "budget_sensitivity": 4,
+    "scepticism": 3,
+    "must_see_to_continue": "French on the first screen.",
+    "deal_breakers": [
+      "English-only page"
+    ],
+    "reason_to_say_yes": "The problem is real for her.",
+    "reason_to_say_no": "She scrolls, sees English only and a Toronto broker, and assumes it is not for Quebec.",
+    "the_question_they_want_answered": "Est-ce disponible au Québec?",
+    "likely_outcome_prior": "bounce (very likely)",
+    "tags": [
+      "phone_under_30_seconds"
+    ]
+  },
+  {
+    "id": "P043",
+    "name": "Stéphane Gagnon",
+    "segment": "real_estate_agent",
+    "role": "Courtier immobilier, Via Capitale",
+    "market": "Longueuil and the South Shore",
+    "years": 23,
+    "deals_per_year": 15,
+    "team": "solo",
+    "tech_comfort": 2,
+    "current_tools": "Paper agenda, brokerage systems he uses under protest",
+    "device": "desktop",
+    "attention": "reads half",
+    "arrived_from": "Referral from a colleague (younger broker in his office)",
+    "languages": [
+      "French"
+    ],
+    "primary_pain": "He calls everyone back the same evening and considers that the job.",
+    "budget_sensitivity": 3,
+    "scepticism": 5,
+    "must_see_to_continue": "Nothing; he wants a person, in French, with a Quebec accent.",
+    "deal_breakers": [
+      "A machine answering in his name",
+      "A France-French or English-accented voice"
+    ],
+    "reason_to_say_yes": "None foreseeable.",
+    "reason_to_say_no": "He distrusts AI speaking to clients on principle and no page changes that.",
+    "the_question_they_want_answered": "Pourquoi je laisserais un robot parler à mes clients?",
+    "likely_outcome_prior": "bounce (very likely)",
+    "tags": [
+      "unfixable_no"
+    ]
+  },
+  {
+    "id": "P044",
+    "name": "Fiona MacNeil",
+    "segment": "real_estate_agent",
+    "role": "Agent, Keller Williams",
+    "market": "Halifax and Dartmouth",
+    "years": 7,
+    "deals_per_year": 15,
+    "team": "solo",
+    "tech_comfort": 3,
+    "current_tools": "KW Command",
+    "device": "desktop",
+    "attention": "reads half",
+    "arrived_from": "Cold (Google search)",
+    "languages": [
+      "English"
+    ],
+    "primary_pain": "Misses calls from come-from-away buyers in Ontario time zones.",
+    "budget_sensitivity": 3,
+    "scepticism": 4,
+    "must_see_to_continue": "Who is behind it, with a face, a licence number and something she can verify.",
+    "deal_breakers": [
+      "Anonymous company",
+      "No address or registration",
+      "Founder she cannot look up"
+    ],
+    "reason_to_say_yes": "Ontario buyers are her growth market, so the fit is real.",
+    "reason_to_say_no": "She has never heard of Ray and a brand-new brand with no outside clients looks risky to hand her phone line to.",
+    "the_question_they_want_answered": "Who are you, and how long has this company existed?",
+    "likely_outcome_prior": "quiz only (possible); bounce (likely)",
+    "tags": [
+      "trust_objection"
+    ]
+  },
+  {
+    "id": "P045",
+    "name": "Darren Kostyniuk",
+    "segment": "real_estate_agent",
+    "role": "Agent, Royal LePage",
+    "market": "Winnipeg",
+    "years": 13,
+    "deals_per_year": 27,
+    "team": "solo with a part-time assistant",
+    "tech_comfort": 3,
+    "current_tools": "A paid CRM he tolerates; assistant works mornings",
+    "device": "desktop",
+    "attention": "reads everything",
+    "arrived_from": "YouTube",
+    "languages": [
+      "English",
+      "Ukrainian"
+    ],
+    "primary_pain": "Afternoons and evenings are uncovered and he knows the count: about six missed calls a week.",
+    "budget_sensitivity": 2,
+    "scepticism": 3,
+    "must_see_to_continue": "What happens to his number, his contacts and his data if he cancels.",
+    "deal_breakers": [
+      "Contacts held hostage",
+      "Number ported away from him"
+    ],
+    "reason_to_say_yes": "He has done the maths; one extra deal covers three years.",
+    "reason_to_say_no": "If the exit is unclear he assumes lock-in.",
+    "the_question_they_want_answered": "If I cancel in six months, do I keep the contacts and my number?",
+    "likely_outcome_prior": "books call (likely, if the exit is spelled out); otherwise quiz only",
+    "tags": [
+      "ready_if_one_question_answered"
+    ]
+  },
+  {
+    "id": "P046",
+    "name": "Yasmin El-Sayed",
+    "segment": "real_estate_agent",
+    "role": "Broker, Engel and Volkers-style boutique",
+    "market": "Ottawa",
+    "years": 9,
+    "deals_per_year": 20,
+    "team": "solo",
+    "tech_comfort": 4,
+    "current_tools": "A paid CRM; encrypted messaging with some clients",
+    "device": "desktop",
+    "attention": "reads everything",
+    "arrived_from": "Cold (LinkedIn)",
+    "languages": [
+      "English",
+      "French",
+      "Arabic"
+    ],
+    "primary_pain": "Misses calls in back-to-back diplomatic-relocation showings.",
+    "budget_sensitivity": 2,
+    "scepticism": 4,
+    "must_see_to_continue": "Data residency in Canada and a named policy on who can access recordings.",
+    "deal_breakers": [
+      "US-hosted recordings",
+      "No privacy policy link",
+      "Vendor staff able to listen to calls"
+    ],
+    "reason_to_say_yes": "Coverage during showings is worth the price.",
+    "reason_to_say_no": "Her clients include public servants and embassy staff who ask where their data goes.",
+    "the_question_they_want_answered": "Is the call data stored in Canada, and who at your company can listen?",
+    "likely_outcome_prior": "quiz only (likely); books call (possible)",
+    "tags": [
+      "legal_privacy_worry"
+    ]
+  },
+  {
+    "id": "P047",
+    "name": "Brett Lawson",
+    "segment": "real_estate_agent",
+    "role": "Agent, tech-forward national brokerage",
+    "market": "Edmonton and St. Albert",
+    "years": 3,
+    "deals_per_year": 8,
+    "team": "solo",
+    "tech_comfort": 4,
+    "current_tools": "Brokerage-supplied platform that already includes an AI call and text assistant in his fees",
+    "device": "phone",
+    "attention": "reads half",
+    "arrived_from": "Instagram reel",
+    "languages": [
+      "English"
+    ],
+    "primary_pain": "The included assistant is mediocre but free to him.",
+    "budget_sensitivity": 4,
+    "scepticism": 3,
+    "must_see_to_continue": "A reason to pay $300 for something he gets bundled.",
+    "deal_breakers": [
+      "Duplicate cost"
+    ],
+    "reason_to_say_yes": "If he changed brokerages he would need a replacement.",
+    "reason_to_say_no": "He already has a solution included in his brokerage fees.",
+    "the_question_they_want_answered": "Why pay for this when my brokerage gives me one?",
+    "likely_outcome_prior": "bounce (likely)",
+    "tags": [
+      "unfixable_no"
+    ]
+  },
+  {
+    "id": "P048",
+    "name": "Ashley Monroe",
+    "segment": "real_estate_agent",
+    "role": "Realtor, Keller Williams",
+    "market": "Frisco and Plano, Texas",
+    "years": 6,
+    "deals_per_year": 24,
+    "team": "solo with a transaction coordinator",
+    "tech_comfort": 3,
+    "current_tools": "KW Command; a paid lead subscription",
+    "device": "phone",
+    "attention": "reads half",
+    "arrived_from": "Instagram reel",
+    "languages": [
+      "English"
+    ],
+    "primary_pain": "Paid leads call back while she is showing and she loses them to the next agent on the list.",
+    "budget_sensitivity": 3,
+    "scepticism": 4,
+    "must_see_to_continue": "Price in US dollars and proof a Canadian company will support a Texas number in her time zone.",
+    "deal_breakers": [
+      "Prices only in CAD with no explanation",
+      "Support only in Eastern business hours",
+      "A vendor that may not exist next year"
+    ],
+    "reason_to_say_yes": "Speed-to-lead on paid leads is her biggest leak.",
+    "reason_to_say_no": "A side business run by one Canadian broker looks like it could vanish, leaving her phone line pointing nowhere.",
+    "the_question_they_want_answered": "Is that $300 Canadian or US, and who do I call when it breaks?",
+    "likely_outcome_prior": "quiz only (possible); bounce (possible)",
+    "tags": [
+      "trust_objection"
+    ]
+  },
+  {
+    "id": "P049",
+    "name": "Miguel Santana",
+    "segment": "real_estate_agent",
+    "role": "Realtor associate, independent brokerage",
+    "market": "Miami and Hialeah, Florida",
+    "years": 10,
+    "deals_per_year": 30,
+    "team": "small team: himself and his sister",
+    "tech_comfort": 3,
+    "current_tools": "A CRM in English he dislikes; WhatsApp Business",
+    "device": "phone",
+    "attention": "reads half",
+    "arrived_from": "Instagram reel",
+    "languages": [
+      "Spanish",
+      "English"
+    ],
+    "primary_pain": "Most callers open in Spanish; his sister covers when she can.",
+    "budget_sensitivity": 3,
+    "scepticism": 3,
+    "must_see_to_continue": "Spanish named explicitly as a supported language.",
+    "deal_breakers": [
+      "English-only",
+      "No WhatsApp handoff"
+    ],
+    "reason_to_say_yes": "Bilingual after-hours coverage would let his sister sell and stop answering phones.",
+    "reason_to_say_no": "Without Spanish it is useless for 70 percent of his calls.",
+    "the_question_they_want_answered": "Does it answer in Spanish?",
+    "likely_outcome_prior": "quiz only (possible); bounce (possible)",
+    "tags": []
+  },
+  {
+    "id": "P050",
+    "name": "Rachel Goldfarb",
+    "segment": "real_estate_agent",
+    "role": "Associate broker, Coldwell Banker",
+    "market": "Bucks County, Pennsylvania",
+    "years": 18,
+    "deals_per_year": 20,
+    "team": "solo",
+    "tech_comfort": 2,
+    "current_tools": "Brokerage CRM; office voicemail",
+    "device": "desktop",
+    "attention": "reads everything",
+    "arrived_from": "Cold (Facebook ad)",
+    "languages": [
+      "English"
+    ],
+    "primary_pain": "Misses evening calls, but her husband is a lawyer and reads everything she signs.",
+    "budget_sensitivity": 3,
+    "scepticism": 4,
+    "must_see_to_continue": "A specific statement about all-party consent states for call recording.",
+    "deal_breakers": [
+      "No mention of US recording law",
+      "A Canadian contract with Canadian governing law",
+      "Indemnity that puts it all on her"
+    ],
+    "reason_to_say_yes": "If consent handling is spelled out she would try it.",
+    "reason_to_say_no": "Pennsylvania requires every party's consent to record and the page appears written for Ontario.",
+    "the_question_they_want_answered": "Pennsylvania is a two-party consent state. How does this handle that?",
+    "likely_outcome_prior": "quiz only (possible); bounce (likely)",
+    "tags": [
+      "legal_privacy_worry"
+    ]
+  },
+  {
+    "id": "P051",
+    "name": "Derek Washington",
+    "segment": "real_estate_agent",
+    "role": "Team leader and broker associate, large franchise",
+    "market": "Atlanta metro, Georgia",
+    "years": 16,
+    "deals_per_year": 120,
+    "team": "team leader, 8 agents, 3 in-house ISAs, a director of operations",
+    "tech_comfort": 4,
+    "current_tools": "Enterprise lead platform with built-in AI texting and calling, in-house ISA department",
+    "device": "desktop",
+    "attention": "skims 20 seconds",
+    "arrived_from": "Referral from a colleague in a coaching group",
+    "languages": [
+      "English"
+    ],
+    "primary_pain": "None in this category; inside sales is his team's core strength.",
+    "budget_sensitivity": 1,
+    "scepticism": 4,
+    "must_see_to_continue": "Enterprise case studies at 1,000-plus leads a month.",
+    "deal_breakers": [
+      "Founding-stage vendor",
+      "No SLA"
+    ],
+    "reason_to_say_yes": "None at his scale today.",
+    "reason_to_say_no": "He already has ISAs and an AI layer, and will not run core intake through a ten-client startup.",
+    "the_question_they_want_answered": "Who else at my volume runs on this?",
+    "likely_outcome_prior": "bounce (very likely)",
+    "tags": [
+      "unfixable_no"
+    ]
+  },
+  {
+    "id": "P052",
+    "name": "Jenna Kowalski",
+    "segment": "real_estate_agent",
+    "role": "Broker, @properties-style brokerage",
+    "market": "Chicago north side, Illinois",
+    "years": 4,
+    "deals_per_year": 10,
+    "team": "solo",
+    "tech_comfort": 4,
+    "current_tools": "Brokerage app suite",
+    "device": "phone",
+    "attention": "skims 20 seconds",
+    "arrived_from": "Instagram reel",
+    "languages": [
+      "English",
+      "Polish"
+    ],
+    "primary_pain": "Misses calls while bartending two nights a week.",
+    "budget_sensitivity": 4,
+    "scepticism": 3,
+    "must_see_to_continue": "A 10-second audio clip of the AI on the first screen.",
+    "deal_breakers": [
+      "Wall of text",
+      "Quiz with more than five taps"
+    ],
+    "reason_to_say_yes": "The problem matches her second-job schedule.",
+    "reason_to_say_no": "She scrolls between tasks and nothing grabs her in the first screen.",
+    "the_question_they_want_answered": "What does it sound like?",
+    "likely_outcome_prior": "bounce (likely); quiz only (possible)",
+    "tags": [
+      "phone_under_30_seconds"
+    ]
+  },
+  {
+    "id": "P053",
+    "name": "Tom Brannigan",
+    "segment": "real_estate_agent",
+    "role": "Designated broker and owner, independent brokerage; also sells a white-label CRM to his agents",
+    "market": "Phoenix and Scottsdale, Arizona",
+    "years": 25,
+    "deals_per_year": 12,
+    "team": "broker-owner, 20 agents",
+    "tech_comfort": 4,
+    "current_tools": "Resells his own HighLevel snapshot to his agents at $149 a month",
+    "device": "desktop",
+    "attention": "reads everything",
+    "arrived_from": "Cold (saw the ad while researching competitors)",
+    "languages": [
+      "English"
+    ],
+    "primary_pain": "None; he is checking pricing and positioning of a rival offer.",
+    "budget_sensitivity": 2,
+    "scepticism": 5,
+    "must_see_to_continue": "The full price ladder and what is in the snapshot.",
+    "deal_breakers": [
+      "Nothing; he is not a buyer"
+    ],
+    "reason_to_say_yes": "He would only engage to propose a partnership or to copy.",
+    "reason_to_say_no": "He sells a competing product to his own agents.",
+    "the_question_they_want_answered": "What are you charging, and what is in the bundle?",
+    "likely_outcome_prior": "quiz only (likely, with fake answers); buys (very unlikely)",
+    "tags": [
+      "competitor_or_tyre_kicker"
+    ]
+  },
+  {
+    "id": "P054",
+    "name": "Samantha Reyes",
+    "segment": "real_estate_agent",
+    "role": "Agent, Compass",
+    "market": "Los Angeles westside, California",
+    "years": 9,
+    "deals_per_year": 15,
+    "team": "solo",
+    "tech_comfort": 3,
+    "current_tools": "Compass platform and its built-in tools, which the brokerage expects agents to use",
+    "device": "phone",
+    "attention": "reads half",
+    "arrived_from": "Instagram reel",
+    "languages": [
+      "English",
+      "Spanish"
+    ],
+    "primary_pain": "Misses calls on set visits and in canyon dead zones.",
+    "budget_sensitivity": 2,
+    "scepticism": 4,
+    "must_see_to_continue": "Nothing on the page; her managing broker would have to approve it.",
+    "deal_breakers": [
+      "Client data leaving the brokerage platform",
+      "Recording Californians without consent"
+    ],
+    "reason_to_say_yes": "The dead-zone problem is real.",
+    "reason_to_say_no": "Her brokerage restricts outside systems holding client data, and California is an all-party consent state.",
+    "the_question_they_want_answered": "Is this allowed at Compass, and is it legal to record in California?",
+    "likely_outcome_prior": "bounce (likely)",
+    "tags": [
+      "unfixable_no",
+      "legal_privacy_worry"
+    ]
+  },
+  {
+    "id": "P055",
+    "name": "Hassan Karimi",
+    "segment": "real_estate_agent",
+    "role": "Broker associate, independent brokerage",
+    "market": "Irvine and Orange County, California",
+    "years": 14,
+    "deals_per_year": 22,
+    "team": "solo with a part-time assistant",
+    "tech_comfort": 3,
+    "current_tools": "A CRM he pays for; Telegram and WhatsApp with clients",
+    "device": "desktop",
+    "attention": "reads half",
+    "arrived_from": "YouTube (Farsi-language real estate channel mention)",
+    "languages": [
+      "English",
+      "Farsi"
+    ],
+    "primary_pain": "Evening calls from Farsi radio ads are missed.",
+    "budget_sensitivity": 2,
+    "scepticism": 4,
+    "must_see_to_continue": "Why a working broker is selling software and whether real estate or software gets his attention.",
+    "deal_breakers": [
+      "Founder too busy selling homes to support the product",
+      "Support by a chatbot"
+    ],
+    "reason_to_say_yes": "Farsi-capable coverage for radio-ad calls would be valuable.",
+    "reason_to_say_no": "He thinks a broker doing 50 deals a year cannot also run a software company, so support will be an afterthought.",
+    "the_question_they_want_answered": "If you are selling 50 homes a year, who is actually running this?",
+    "likely_outcome_prior": "quiz only (possible); bounce (likely)",
+    "tags": [
+      "trust_objection"
+    ]
+  },
+  {
+    "id": "P056",
+    "name": "Lauren Bixby",
+    "segment": "real_estate_agent",
+    "role": "Realtor, small independent brokerage",
+    "market": "Nashville, Tennessee",
+    "years": 2,
+    "deals_per_year": 7,
+    "team": "solo",
+    "tech_comfort": 4,
+    "current_tools": "Free trials of four different AI tools this year, none kept",
+    "device": "phone",
+    "attention": "reads half",
+    "arrived_from": "Instagram reel",
+    "languages": [
+      "English"
+    ],
+    "primary_pain": "Shiny-object habit; she collects demos and free audits.",
+    "budget_sensitivity": 4,
+    "scepticism": 2,
+    "must_see_to_continue": "A free audit or free trial.",
+    "deal_breakers": [
+      "Paying before trying"
+    ],
+    "reason_to_say_yes": "She likes everything for a week.",
+    "reason_to_say_no": "She signs up for every quiz and free call and never buys; she will no-show or ask for a discount.",
+    "the_question_they_want_answered": "Can I try it free for a month?",
+    "likely_outcome_prior": "books call (likely, then no-show or no purchase); buys (very unlikely)",
+    "tags": [
+      "competitor_or_tyre_kicker"
+    ]
+  },
+  {
+    "id": "P057",
+    "name": "Chris Nakamura",
+    "segment": "real_estate_agent",
+    "role": "Salaried agent, Redfin-style employer brokerage",
+    "market": "Seattle, Washington",
+    "years": 5,
+    "deals_per_year": 34,
+    "team": "employee on a company team",
+    "tech_comfort": 4,
+    "current_tools": "Employer's proprietary systems; company call centre routes all leads",
+    "device": "desktop",
+    "attention": "skims 20 seconds",
+    "arrived_from": "Cold (Reddit)",
+    "languages": [
+      "English",
+      "Japanese"
+    ],
+    "primary_pain": "None he controls; the company owns the phone flow.",
+    "budget_sensitivity": 3,
+    "scepticism": 3,
+    "must_see_to_continue": "Nothing applies to an employee agent.",
+    "deal_breakers": [
+      "Any outside tool; it is a firing matter"
+    ],
+    "reason_to_say_yes": "If he went independent he would remember it.",
+    "reason_to_say_no": "His employer forbids outside tools and owns the leads.",
+    "the_question_they_want_answered": "Is this only for independent agents?",
+    "likely_outcome_prior": "bounce (very likely)",
+    "tags": [
+      "unfixable_no"
+    ]
+  },
+  {
+    "id": "P058",
+    "name": "Patricia Oyelaran",
+    "segment": "real_estate_agent",
+    "role": "Realtor, eXp Realty",
+    "market": "Houston and Katy, Texas",
+    "years": 12,
+    "deals_per_year": 26,
+    "team": "solo with a virtual assistant in Lagos",
+    "tech_comfort": 3,
+    "current_tools": "eXp CRM; VA answers email, not phones",
+    "device": "desktop",
+    "attention": "reads everything",
+    "arrived_from": "Referral (eXp workplace group)",
+    "languages": [
+      "English",
+      "Yoruba"
+    ],
+    "primary_pain": "Missed calls on relocation leads; burned twice by vendors who oversold.",
+    "budget_sensitivity": 3,
+    "scepticism": 5,
+    "must_see_to_continue": "The seller's own call numbers shown before the sales call, not promised for it.",
+    "deal_breakers": [
+      "Numbers withheld until the call",
+      "Testimonials that are really the founder",
+      "Pressure to decide on the call"
+    ],
+    "reason_to_say_yes": "A fellow eXp agent with real production has some credibility with her.",
+    "reason_to_say_no": "No outside clients and results 'shown live on the call' reads to her as bait.",
+    "the_question_they_want_answered": "Why can't I see your numbers on the page?",
+    "likely_outcome_prior": "quiz only (possible); bounce (possible)",
+    "tags": [
+      "trust_objection"
+    ]
+  },
+  {
+    "id": "P059",
+    "name": "Ryan Mercer",
+    "segment": "real_estate_agent",
+    "role": "Realtor, Real Broker",
+    "market": "Denver, Colorado",
+    "years": 7,
+    "deals_per_year": 38,
+    "team": "solo with a showing assistant",
+    "tech_comfort": 5,
+    "current_tools": "A competing AI voice agent at US$297 a month, wired into his CRM with Zapier",
+    "device": "desktop",
+    "attention": "reads everything",
+    "arrived_from": "YouTube",
+    "languages": [
+      "English"
+    ],
+    "primary_pain": "His current AI drops calls during transfers about once a week.",
+    "budget_sensitivity": 2,
+    "scepticism": 3,
+    "must_see_to_continue": "A feature table: transfers, CRM sync, listing lookup, minutes included.",
+    "deal_breakers": [
+      "No technical specifics",
+      "Fewer integrations than he has now"
+    ],
+    "reason_to_say_yes": "Reliable warm transfer and live listing lookup would be reasons to switch.",
+    "reason_to_say_no": "He already pays for a working equivalent and switching costs him a weekend.",
+    "the_question_they_want_answered": "How do you handle warm transfers, and what is the failure rate?",
+    "likely_outcome_prior": "quiz only (likely); books call (unlikely)",
+    "tags": [
+      "unfixable_no"
+    ]
+  },
+  {
+    "id": "P060",
+    "name": "Dana Whitfield",
+    "segment": "real_estate_agent",
+    "role": "Broker, ranch and land specialist, independent",
+    "market": "Bozeman and Gallatin Valley, Montana",
+    "years": 16,
+    "deals_per_year": 12,
+    "team": "solo",
+    "tech_comfort": 2,
+    "current_tools": "Email, a land-listing site inbox, cell with no coverage on most properties",
+    "device": "desktop",
+    "attention": "reads half",
+    "arrived_from": "Cold (Facebook ad)",
+    "languages": [
+      "English"
+    ],
+    "primary_pain": "Out of coverage for whole days on ranch tours; buyers are wealthy and impatient.",
+    "budget_sensitivity": 2,
+    "scepticism": 4,
+    "must_see_to_continue": "Evidence the seller understands anything outside suburban houses.",
+    "deal_breakers": [
+      "City-agent assumptions",
+      "AI unable to discuss acreage, water rights or access without making things up"
+    ],
+    "reason_to_say_yes": "Coverage on tour days would matter on a $4M listing.",
+    "reason_to_say_no": "A Toronto-area broker's script will not survive a caller asking about water rights, and she does not trust it to say 'I do not know'.",
+    "the_question_they_want_answered": "What does it say when it does not know the answer?",
+    "likely_outcome_prior": "quiz only (possible); bounce (likely)",
+    "tags": [
+      "trust_objection"
+    ]
+  },
+  {
+    "id": "P061",
+    "name": "Xin Yi Huang",
+    "segment": "real_estate_agent",
+    "role": "Licensed salesperson, independent Chinese-market brokerage",
+    "market": "Flushing, Queens, New York",
+    "years": 8,
+    "deals_per_year": 16,
+    "team": "solo",
+    "tech_comfort": 3,
+    "current_tools": "WeChat; a shared office receptionist",
+    "device": "phone",
+    "attention": "reads half",
+    "arrived_from": "Cold (WeChat moments share)",
+    "languages": [
+      "Mandarin",
+      "English"
+    ],
+    "primary_pain": "Receptionist takes messages badly; rental and sales callers mix.",
+    "budget_sensitivity": 4,
+    "scepticism": 3,
+    "must_see_to_continue": "Mandarin support and a US price.",
+    "deal_breakers": [
+      "English-only",
+      "CAD-only pricing"
+    ],
+    "reason_to_say_yes": "A Mandarin line that separates renters from buyers would save her hours.",
+    "reason_to_say_no": "The page shows no Mandarin and no US pricing, so she assumes it is a Canada-only product.",
+    "the_question_they_want_answered": "Does it speak Mandarin, and can I buy it in New York?",
+    "likely_outcome_prior": "bounce (likely); quiz only (possible)",
+    "tags": []
+  },
+  {
+    "id": "P062",
+    "name": "Manpreet Kaur Sidhu",
+    "segment": "real_estate_agent",
+    "role": "Realtor, Century 21 franchise",
+    "market": "Fresno and the Central Valley, California",
+    "years": 5,
+    "deals_per_year": 13,
+    "team": "solo",
+    "tech_comfort": 3,
+    "current_tools": "Brokerage CRM; WhatsApp",
+    "device": "phone",
+    "attention": "skims 20 seconds",
+    "arrived_from": "Instagram reel",
+    "languages": [
+      "English",
+      "Punjabi",
+      "Spanish"
+    ],
+    "primary_pain": "Misses calls while at her family's trucking office, her other job.",
+    "budget_sensitivity": 4,
+    "scepticism": 3,
+    "must_see_to_continue": "Punjabi and Spanish mentioned up front.",
+    "deal_breakers": [
+      "English-only",
+      "Canadian-only"
+    ],
+    "reason_to_say_yes": "The need is real across three languages.",
+    "reason_to_say_no": "Twenty seconds on a phone is not enough to learn whether it serves her callers.",
+    "the_question_they_want_answered": "Does it work in the US and in Punjabi?",
+    "likely_outcome_prior": "bounce (likely)",
+    "tags": [
+      "phone_under_30_seconds"
+    ]
+  },
+  {
+    "id": "P063",
+    "name": "Bill Krueger",
+    "segment": "real_estate_agent",
+    "role": "Broker associate, RE/MAX",
+    "market": "Milwaukee suburbs, Wisconsin",
+    "years": 23,
+    "deals_per_year": 18,
+    "team": "solo",
+    "tech_comfort": 2,
+    "current_tools": "Brokerage CRM; an answering service he dropped in 2015",
+    "device": "desktop",
+    "attention": "reads half",
+    "arrived_from": "Cold (Facebook ad)",
+    "languages": [
+      "English"
+    ],
+    "primary_pain": "Misses calls on the golf course and admits it.",
+    "budget_sensitivity": 3,
+    "scepticism": 4,
+    "must_see_to_continue": "A plain comparison with the human answering service he used to pay $120 for.",
+    "deal_breakers": [
+      "Jargon",
+      "Anything described as a 'system' or 'snapshot'"
+    ],
+    "reason_to_say_yes": "If it actually books appointments, which his old service never did, that is new.",
+    "reason_to_say_no": "He tried answering services and callers hated them; he expects the same.",
+    "the_question_they_want_answered": "How is this different from an answering service?",
+    "likely_outcome_prior": "quiz only (possible); bounce (likely)",
+    "tags": []
+  },
+  {
+    "id": "P064",
+    "name": "Olivia Brandt",
+    "segment": "real_estate_agent",
+    "role": "Newly licensed agent, Keller Williams",
+    "market": "Charlotte, North Carolina",
+    "years": 0,
+    "deals_per_year": 0,
+    "team": "solo, on a mentor split",
+    "tech_comfort": 4,
+    "current_tools": "KW Command, barely set up",
+    "device": "phone",
+    "attention": "skims 20 seconds",
+    "arrived_from": "Instagram reel",
+    "languages": [
+      "English"
+    ],
+    "primary_pain": "No clients yet; she is in training.",
+    "budget_sensitivity": 5,
+    "scepticism": 2,
+    "must_see_to_continue": "Leads, which this does not provide.",
+    "deal_breakers": [
+      "Any monthly cost"
+    ],
+    "reason_to_say_yes": "None yet.",
+    "reason_to_say_no": "Zero deals and zero budget; licensed four months.",
+    "the_question_they_want_answered": "Does this bring me buyers?",
+    "likely_outcome_prior": "bounce (very likely)",
+    "tags": [
+      "unfixable_no",
+      "phone_under_30_seconds"
+    ]
+  },
+  {
+    "id": "P065",
+    "name": "Andre Baptiste",
+    "segment": "real_estate_agent",
+    "role": "Realtor, vacation-home and investor specialist, independent",
+    "market": "Orlando and Kissimmee, Florida",
+    "years": 5,
+    "deals_per_year": 19,
+    "team": "solo",
+    "tech_comfort": 4,
+    "current_tools": "A paid CRM; Calendly; WhatsApp for overseas buyers",
+    "device": "desktop",
+    "attention": "reads half",
+    "arrived_from": "YouTube",
+    "languages": [
+      "English",
+      "Haitian Creole",
+      "French"
+    ],
+    "primary_pain": "International investors call at 3 am local time.",
+    "budget_sensitivity": 3,
+    "scepticism": 3,
+    "must_see_to_continue": "How consent to record is obtained from callers in Florida and abroad.",
+    "deal_breakers": [
+      "Recording without an announcement",
+      "No way to disable recording"
+    ],
+    "reason_to_say_yes": "Overnight coverage for overseas callers is the best fit he has seen.",
+    "reason_to_say_no": "Florida is an all-party consent state and he has UK and Brazilian callers; one complaint could cost his licence.",
+    "the_question_they_want_answered": "Does it announce recording at the start of every call?",
+    "likely_outcome_prior": "quiz only (likely); books call (possible)",
+    "tags": [
+      "legal_privacy_worry"
+    ]
+  },
+  {
+    "id": "P066",
+    "name": "Megan O'Rourke",
+    "segment": "real_estate_agent",
+    "role": "Agent, Coldwell Banker",
+    "market": "Boston south shore, Massachusetts",
+    "years": 11,
+    "deals_per_year": 21,
+    "team": "solo",
+    "tech_comfort": 3,
+    "current_tools": "Brokerage CRM she likes well enough",
+    "device": "desktop",
+    "attention": "reads everything",
+    "arrived_from": "Referral from a colleague",
+    "languages": [
+      "English"
+    ],
+    "primary_pain": "Misses calls during inspections; her fear is the AI trapping an upset client in a loop.",
+    "budget_sensitivity": 2,
+    "scepticism": 3,
+    "must_see_to_continue": "A clear description of how a caller reaches her live when they ask for a person.",
+    "deal_breakers": [
+      "No human escape hatch",
+      "AI pretending to be human"
+    ],
+    "reason_to_say_yes": "With a reliable 'press or say anything to reach Megan' path she would start next week.",
+    "reason_to_say_no": "If an existing client mid-deal gets stuck talking to a bot, she loses a referral source.",
+    "the_question_they_want_answered": "What happens when a caller says 'I need to talk to Megan right now'?",
+    "likely_outcome_prior": "books call (likely, if the handoff is explained); otherwise quiz only",
+    "tags": [
+      "ready_if_one_question_answered"
+    ]
+  },
+  {
+    "id": "P067",
+    "name": "Javier Morales",
+    "segment": "real_estate_agent",
+    "role": "Says he is a Realtor; actually runs an AI-receptionist agency for home-service businesses",
+    "market": "San Antonio, Texas",
+    "years": 3,
+    "deals_per_year": 4,
+    "team": "solo agency owner with two contractors",
+    "tech_comfort": 5,
+    "current_tools": "His own HighLevel agency with voice AI he resells",
+    "device": "desktop",
+    "attention": "reads everything",
+    "arrived_from": "Cold (ad library research)",
+    "languages": [
+      "English",
+      "Spanish"
+    ],
+    "primary_pain": "None; he is mapping a competitor's funnel, quiz logic and price.",
+    "budget_sensitivity": 1,
+    "scepticism": 5,
+    "must_see_to_continue": "The quiz questions and the results page.",
+    "deal_breakers": [
+      "Nothing; he is not a buyer"
+    ],
+    "reason_to_say_yes": "None.",
+    "reason_to_say_no": "He is a competitor filling in the quiz with invented answers.",
+    "the_question_they_want_answered": "What does your quiz ask, and what do you show after it?",
+    "likely_outcome_prior": "quiz only (very likely, fake data); books call (unlikely)",
+    "tags": [
+      "competitor_or_tyre_kicker"
+    ]
+  },
+  {
+    "id": "P068",
+    "name": "Heather Stokes",
+    "segment": "real_estate_agent",
+    "role": "Team leader, Howard Hanna-style regional brokerage",
+    "market": "Columbus, Ohio",
+    "years": 12,
+    "deals_per_year": 48,
+    "team": "team leader, 3 agents and an admin",
+    "tech_comfort": 3,
+    "current_tools": "A paid team CRM; admin answers 9 to 4",
+    "device": "desktop",
+    "attention": "reads half",
+    "arrived_from": "Referral from a colleague",
+    "languages": [
+      "English"
+    ],
+    "primary_pain": "After 4 pm calls ring four cell phones in turn and often nobody answers.",
+    "budget_sensitivity": 2,
+    "scepticism": 3,
+    "must_see_to_continue": "Team pricing: one line or four, and whether it routes by agent.",
+    "deal_breakers": [
+      "Per-agent pricing with no team rate",
+      "No round-robin or routing"
+    ],
+    "reason_to_say_yes": "If one subscription covers the team line with routing, she will sign.",
+    "reason_to_say_no": "If each agent needs a separate subscription the maths fails.",
+    "the_question_they_want_answered": "Is it one price for my whole team's line?",
+    "likely_outcome_prior": "books call (likely, if team pricing is on the page); otherwise quiz only",
+    "tags": [
+      "ready_if_one_question_answered"
+    ]
+  },
+  {
+    "id": "P069",
+    "name": "Ali Rezaei",
+    "segment": "real_estate_agent",
+    "role": "Realtor, Samson-style independent brokerage",
+    "market": "Fairfax and Northern Virginia",
+    "years": 9,
+    "deals_per_year": 17,
+    "team": "solo",
+    "tech_comfort": 3,
+    "current_tools": "A paid CRM; WhatsApp and Viber",
+    "device": "phone",
+    "attention": "reads everything",
+    "arrived_from": "YouTube (found Ray's Dari videos)",
+    "languages": [
+      "English",
+      "Dari",
+      "Farsi"
+    ],
+    "primary_pain": "Afghan families who arrived since 2021 call in Dari, often from borrowed phones, and never leave voicemail.",
+    "budget_sensitivity": 3,
+    "scepticism": 3,
+    "must_see_to_continue": "A direct yes or no: does the AI hold a conversation in Dari today.",
+    "deal_breakers": [
+      "'Coming soon' on Dari",
+      "CAD-only price with no US answer"
+    ],
+    "reason_to_say_yes": "If Dari works he will pay the same day; nobody else offers it.",
+    "reason_to_say_no": "If Dari is vague he will assume it is English with a Dari marketing video.",
+    "the_question_they_want_answered": "Does it actually speak Dari on the phone, right now?",
+    "likely_outcome_prior": "books call (likely, if Dari is answered plainly); otherwise bounce",
+    "tags": [
+      "ready_if_one_question_answered"
+    ]
+  },
+  {
+    "id": "P070",
+    "name": "Nicole Fontaine",
+    "segment": "real_estate_agent",
+    "role": "Realtor, Berkshire Hathaway-affiliated brokerage",
+    "market": "Las Vegas and Henderson, Nevada",
+    "years": 6,
+    "deals_per_year": 14,
+    "team": "solo",
+    "tech_comfort": 3,
+    "current_tools": "A CRM she stopped paying for last month",
+    "device": "phone",
+    "attention": "reads half",
+    "arrived_from": "Instagram reel",
+    "languages": [
+      "English"
+    ],
+    "primary_pain": "Exhaustion; she has accepted a salaried job in property management starting in January.",
+    "budget_sensitivity": 4,
+    "scepticism": 3,
+    "must_see_to_continue": "Nothing; she is closing out her pipeline.",
+    "deal_breakers": [
+      "Any new commitment"
+    ],
+    "reason_to_say_yes": "None.",
+    "reason_to_say_no": "She is leaving the business.",
+    "the_question_they_want_answered": "Would this have saved me two years ago?",
+    "likely_outcome_prior": "bounce (very likely)",
+    "tags": [
+      "unfixable_no"
+    ]
+  },
+  {
+    "id": "P071",
+    "name": "Rohit Kapoor",
+    "segment": "local_business_waitlist",
+    "role": "Mortgage agent, level 2, with a national broker network",
+    "market": "Mississauga and Brampton",
+    "years": 7,
+    "business_size": "solo, about 90 funded files a year",
+    "team": "solo with a part-time underwriter",
+    "tech_comfort": 3,
+    "current_tools": "Network-provided CRM; cell phone",
+    "device": "desktop",
+    "attention": "reads everything",
+    "arrived_from": "Referral from a colleague (a realtor client of Ray's system)",
+    "languages": [
+      "English",
+      "Hindi",
+      "Punjabi"
+    ],
+    "primary_pain": "Rate-shoppers call three brokers and go with whoever answers first; he is in appointments half the day.",
+    "budget_sensitivity": 2,
+    "scepticism": 3,
+    "must_see_to_continue": "A date or a clear condition for when mortgage brokers can buy.",
+    "deal_breakers": [
+      "An open-ended waitlist with no timeline",
+      "Being told to wait while competitors sign with someone else"
+    ],
+    "reason_to_say_yes": "He would pay $400 today.",
+    "reason_to_say_no": "The page tells him he cannot buy yet and gives no date, so he will sign with whoever sells now.",
+    "the_question_they_want_answered": "When exactly does this open for mortgage brokers?",
+    "likely_outcome_prior": "quiz only then waitlist (likely, if a timeline is given); otherwise bounce",
+    "tags": [
+      "ready_if_one_question_answered"
+    ]
+  },
+  {
+    "id": "P072",
+    "name": "Laila Popal",
+    "segment": "local_business_waitlist",
+    "role": "Mortgage agent, level 1, independent brokerage",
+    "market": "Scarborough and Markham",
+    "years": 3,
+    "business_size": "solo, about 35 files a year",
+    "team": "solo",
+    "tech_comfort": 3,
+    "current_tools": "WhatsApp, spreadsheet",
+    "device": "phone",
+    "attention": "reads half",
+    "arrived_from": "Instagram reel (Dari-language clip)",
+    "languages": [
+      "English",
+      "Dari",
+      "Pashto"
+    ],
+    "primary_pain": "Newcomer clients call evenings; she misses them while cooking for her family.",
+    "budget_sensitivity": 4,
+    "scepticism": 4,
+    "must_see_to_continue": "Assurance that a realtor's company does not see which of her borrowers are house-hunting.",
+    "deal_breakers": [
+      "Her callers' details visible to a real estate team",
+      "Waitlist that is really a lead list for Ray"
+    ],
+    "reason_to_say_yes": "Dari-language intake for newcomers would set her apart.",
+    "reason_to_say_no": "Her callers are pre-approval buyers, exactly the leads a realtor in her community wants; she fears feeding a competitor's pipeline.",
+    "the_question_they_want_answered": "If I join the waitlist, does a real estate team get my clients' names?",
+    "likely_outcome_prior": "bounce (likely); quiz only (possible)",
+    "tags": [
+      "trust_objection"
+    ]
+  },
+  {
+    "id": "P073",
+    "name": "Steve Makarenko",
+    "segment": "local_business_waitlist",
+    "role": "Principal broker, franchise of a national mortgage network",
+    "market": "Barrie and Simcoe County",
+    "years": 18,
+    "business_size": "5 agents, about 400 files a year",
+    "team": "principal broker, 5 agents, 2 admins",
+    "tech_comfort": 3,
+    "current_tools": "Network call centre and lead-routing included in franchise fees; two admins",
+    "device": "desktop",
+    "attention": "reads half",
+    "arrived_from": "Cold (LinkedIn)",
+    "languages": [
+      "English"
+    ],
+    "primary_pain": "None pressing; overflow goes to the network's call centre.",
+    "budget_sensitivity": 2,
+    "scepticism": 3,
+    "must_see_to_continue": "A reason to add a vendor when the franchise already provides intake.",
+    "deal_breakers": [
+      "Duplicating a franchise service",
+      "Unapproved vendor under his network agreement"
+    ],
+    "reason_to_say_yes": "If the network dropped its call centre he would look.",
+    "reason_to_say_no": "He already has a solution through his network and vendor approval would take months.",
+    "the_question_they_want_answered": "Does this integrate with my network's system?",
+    "likely_outcome_prior": "bounce (likely)",
+    "tags": [
+      "unfixable_no"
+    ]
+  },
+  {
+    "id": "P074",
+    "name": "Christine Yuen",
+    "segment": "local_business_waitlist",
+    "role": "Sub-mortgage broker, independent brokerage",
+    "market": "Vancouver and Burnaby, BC",
+    "years": 11,
+    "business_size": "solo, about 120 files a year",
+    "team": "solo with an assistant",
+    "tech_comfort": 4,
+    "current_tools": "A mortgage-specific CRM; WeChat",
+    "device": "desktop",
+    "attention": "reads everything",
+    "arrived_from": "Cold (Google search)",
+    "languages": [
+      "English",
+      "Cantonese",
+      "Mandarin"
+    ],
+    "primary_pain": "Assistant leaves at 5; self-employed borrowers call at night.",
+    "budget_sensitivity": 2,
+    "scepticism": 4,
+    "must_see_to_continue": "Confirmation the AI will not quote rates or collect income and SIN details by voice.",
+    "deal_breakers": [
+      "AI quoting rates",
+      "Sensitive financial data in call transcripts",
+      "No BC regulatory answer"
+    ],
+    "reason_to_say_yes": "Evening intake limited to name, purpose and a booked slot would be ideal.",
+    "reason_to_say_no": "A regulator audit finding an AI discussing rates would be on her licence.",
+    "the_question_they_want_answered": "Can you guarantee it never quotes a rate or asks for financial details?",
+    "likely_outcome_prior": "quiz only then waitlist (possible)",
+    "tags": [
+      "legal_privacy_worry"
+    ]
+  },
+  {
+    "id": "P075",
+    "name": "Jamal Brathwaite",
+    "segment": "local_business_waitlist",
+    "role": "Mortgage agent, level 1, digital-first brokerage",
+    "market": "Brampton",
+    "years": 2,
+    "business_size": "solo, about 20 files a year",
+    "team": "solo",
+    "tech_comfort": 4,
+    "current_tools": "Brokerage app; Instagram DMs",
+    "device": "phone",
+    "attention": "skims 20 seconds",
+    "arrived_from": "Instagram reel",
+    "languages": [
+      "English"
+    ],
+    "primary_pain": "Leads come by DM, not calls; he is still building volume.",
+    "budget_sensitivity": 5,
+    "scepticism": 3,
+    "must_see_to_continue": "The word mortgage anywhere on the first screen.",
+    "deal_breakers": [
+      "Page that reads as agents-only",
+      "Any fee over $100"
+    ],
+    "reason_to_say_yes": "None at his volume.",
+    "reason_to_say_no": "He sees 'for real estate agents', decides it is not for him and leaves before finding the waitlist.",
+    "the_question_they_want_answered": "Is this for mortgage agents or not?",
+    "likely_outcome_prior": "bounce (very likely)",
+    "tags": [
+      "phone_under_30_seconds"
+    ]
+  },
+  {
+    "id": "P076",
+    "name": "Paolo Ricci",
+    "segment": "local_business_waitlist",
+    "role": "Mortgage broker and owner, independent brokerage",
+    "market": "Woodbridge, Vaughan",
+    "years": 20,
+    "business_size": "3 agents, about 180 files a year",
+    "team": "owner, 3 agents, 1 admin",
+    "tech_comfort": 2,
+    "current_tools": "Admin answers 9 to 5; old CRM",
+    "device": "desktop",
+    "attention": "reads half",
+    "arrived_from": "Referral from a colleague (a realtor he shares clients with)",
+    "languages": [
+      "English",
+      "Italian"
+    ],
+    "primary_pain": "After-hours calls from builders' buyers.",
+    "budget_sensitivity": 2,
+    "scepticism": 5,
+    "must_see_to_continue": "A written statement that the seller's real estate business gets nothing from mortgage clients' calls.",
+    "deal_breakers": [
+      "Any referral arrangement baked in",
+      "A realtor steering his callers to a different lender partner"
+    ],
+    "reason_to_say_yes": "After-hours coverage for builder referrals has clear value.",
+    "reason_to_say_no": "A realtor owning the phone line of a mortgage broker is a conflict of interest in his eyes, and his realtor partners would see it as taking sides.",
+    "the_question_they_want_answered": "What does a real estate broker gain from answering a mortgage broker's phone?",
+    "likely_outcome_prior": "bounce (likely); quiz only (unlikely)",
+    "tags": [
+      "trust_objection"
+    ]
+  },
+  {
+    "id": "P077",
+    "name": "Meera Subramaniam",
+    "segment": "local_business_waitlist",
+    "role": "Real estate lawyer, sole practitioner",
+    "market": "Mississauga",
+    "years": 12,
+    "business_size": "about 600 closings a year",
+    "team": "1 lawyer, 2 law clerks",
+    "tech_comfort": 3,
+    "current_tools": "Conveyancing software; clerks answer phones",
+    "device": "desktop",
+    "attention": "reads everything",
+    "arrived_from": "Referral from a colleague (a realtor who sends her files)",
+    "languages": [
+      "English",
+      "Tamil",
+      "Hindi"
+    ],
+    "primary_pain": "Month-end closing bursts swamp the clerks; callers wait on hold.",
+    "budget_sensitivity": 2,
+    "scepticism": 4,
+    "must_see_to_continue": "How confidentiality and conflicts are handled when an AI takes a client's details.",
+    "deal_breakers": [
+      "Recordings of privileged conversations held by a third party",
+      "AI giving anything resembling legal information",
+      "A vendor owned by a realtor who refers and competes for the same clients"
+    ],
+    "reason_to_say_yes": "Intake-only booking during month-end would relieve her clerks.",
+    "reason_to_say_no": "Her duty of confidentiality sits with her, and a third party holding client call recordings needs due diligence the page does not support.",
+    "the_question_they_want_answered": "Who holds the recordings, and can you sign a confidentiality agreement that satisfies the Law Society?",
+    "likely_outcome_prior": "quiz only then waitlist (possible)",
+    "tags": [
+      "legal_privacy_worry"
+    ]
+  },
+  {
+    "id": "P078",
+    "name": "Jonathan Feldman",
+    "segment": "local_business_waitlist",
+    "role": "Managing partner, small real estate and wills firm",
+    "market": "North Toronto",
+    "years": 22,
+    "business_size": "3 lawyers, about 1,400 closings a year",
+    "team": "3 lawyers, 5 clerks, 1 receptionist",
+    "tech_comfort": 2,
+    "current_tools": "Full-time receptionist; firm phone system",
+    "device": "desktop",
+    "attention": "reads half",
+    "arrived_from": "Cold (email forward from a clerk)",
+    "languages": [
+      "English"
+    ],
+    "primary_pain": "None he would solve with AI.",
+    "budget_sensitivity": 1,
+    "scepticism": 5,
+    "must_see_to_continue": "Nothing; firm policy is no AI in client intake.",
+    "deal_breakers": [
+      "Any AI in the client communication path",
+      "Third-party recording of client calls"
+    ],
+    "reason_to_say_yes": "None under current firm policy.",
+    "reason_to_say_no": "His insurer and his own reading of professional obligations rule it out, whatever the page says.",
+    "the_question_they_want_answered": "Has any law firm's insurer signed off on this?",
+    "likely_outcome_prior": "bounce (very likely)",
+    "tags": [
+      "unfixable_no",
+      "legal_privacy_worry"
+    ]
+  },
+  {
+    "id": "P079",
+    "name": "Zahra Hosseini",
+    "segment": "local_business_waitlist",
+    "role": "Real estate lawyer, sole practitioner",
+    "market": "Richmond Hill",
+    "years": 8,
+    "business_size": "about 350 closings a year",
+    "team": "1 lawyer, 1 clerk",
+    "tech_comfort": 3,
+    "current_tools": "Clerk answers; calls roll to her cell after 5",
+    "device": "desktop",
+    "attention": "reads everything",
+    "arrived_from": "Referral from a colleague",
+    "languages": [
+      "English",
+      "Farsi"
+    ],
+    "primary_pain": "Evening calls from Farsi-speaking purchasers asking where to send documents.",
+    "budget_sensitivity": 3,
+    "scepticism": 3,
+    "must_see_to_continue": "A statement that the legal version is intake-only, with recording off.",
+    "deal_breakers": [
+      "Recording on by default",
+      "AI answering legal questions"
+    ],
+    "reason_to_say_yes": "Intake-only, no recording, Farsi greeting: she would join and pay when it opens.",
+    "reason_to_say_no": "If recording cannot be disabled she is out.",
+    "the_question_they_want_answered": "Can it take a message and book without recording the call?",
+    "likely_outcome_prior": "quiz only then waitlist (likely, if intake-only and no recording are stated)",
+    "tags": [
+      "ready_if_one_question_answered"
+    ]
+  },
+  {
+    "id": "P080",
+    "name": "Patrick O'Donnell",
+    "segment": "local_business_waitlist",
+    "role": "Real estate and small business lawyer",
+    "market": "Barrie",
+    "years": 26,
+    "business_size": "2 lawyers, about 700 closings a year",
+    "team": "2 lawyers, 3 staff including a long-time receptionist",
+    "tech_comfort": 2,
+    "current_tools": "Receptionist of 19 years",
+    "device": "desktop",
+    "attention": "reads half",
+    "arrived_from": "Cold (Facebook ad)",
+    "languages": [
+      "English"
+    ],
+    "primary_pain": "None; the receptionist knows every client.",
+    "budget_sensitivity": 2,
+    "scepticism": 4,
+    "must_see_to_continue": "Nothing.",
+    "deal_breakers": [
+      "Replacing a loyal employee"
+    ],
+    "reason_to_say_yes": "None.",
+    "reason_to_say_no": "He already has a person he trusts and would never replace her.",
+    "the_question_they_want_answered": "Why would I?",
+    "likely_outcome_prior": "bounce (very likely)",
+    "tags": [
+      "unfixable_no"
+    ]
+  },
+  {
+    "id": "P081",
+    "name": "Simran Bhatti",
+    "segment": "local_business_waitlist",
+    "role": "Real estate lawyer, sole practitioner",
+    "market": "Brampton",
+    "years": 5,
+    "business_size": "about 450 closings a year",
+    "team": "1 lawyer, 2 clerks",
+    "tech_comfort": 3,
+    "current_tools": "Conveyancing software; WhatsApp with realtors",
+    "device": "phone",
+    "attention": "skims 20 seconds",
+    "arrived_from": "Instagram reel",
+    "languages": [
+      "English",
+      "Punjabi"
+    ],
+    "primary_pain": "Phones ring non-stop on closing days.",
+    "budget_sensitivity": 3,
+    "scepticism": 3,
+    "must_see_to_continue": "The word lawyers on the first screen.",
+    "deal_breakers": [
+      "Agent-only wording"
+    ],
+    "reason_to_say_yes": "The burst-call problem is exactly hers.",
+    "reason_to_say_no": "On a phone in 20 seconds she sees agent language and never reaches the waitlist path.",
+    "the_question_they_want_answered": "Is this for law offices?",
+    "likely_outcome_prior": "bounce (very likely)",
+    "tags": [
+      "phone_under_30_seconds"
+    ]
+  },
+  {
+    "id": "P082",
+    "name": "Helen Papadakis",
+    "segment": "local_business_waitlist",
+    "role": "CPA, owner of a small practice",
+    "market": "Danforth, Toronto",
+    "years": 19,
+    "business_size": "3 staff, about 500 personal and 80 corporate clients",
+    "team": "owner, 2 accountants, 1 admin",
+    "tech_comfort": 2,
+    "current_tools": "Practice software; admin answers",
+    "device": "desktop",
+    "attention": "reads half",
+    "arrived_from": "Cold (local business Facebook group)",
+    "languages": [
+      "English",
+      "Greek"
+    ],
+    "primary_pain": "Few Google reviews compared with the chain tax shop nearby.",
+    "budget_sensitivity": 3,
+    "scepticism": 3,
+    "must_see_to_continue": "A clear explanation of what an accountant would actually get, since calls are not her problem.",
+    "deal_breakers": [
+      "Being sold a receptionist she does not need",
+      "Confusing product names"
+    ],
+    "reason_to_say_yes": "A simple review-request service at tax time is something she would pay for.",
+    "reason_to_say_no": "The page leads with answering calls; she cannot tell that reviews exist as a product or when it would be available to her.",
+    "the_question_they_want_answered": "I do not need my phone answered. What else do you do?",
+    "likely_outcome_prior": "bounce (likely); waitlist (unlikely)",
+    "tags": []
+  },
+  {
+    "id": "P083",
+    "name": "Naveed Qureshi",
+    "segment": "local_business_waitlist",
+    "role": "Bookkeeper and tax preparer",
+    "market": "Milton",
+    "years": 6,
+    "business_size": "solo, about 300 returns a year",
+    "team": "solo, hires a student in March and April",
+    "tech_comfort": 3,
+    "current_tools": "Spreadsheets, a tax program, Google Voice",
+    "device": "desktop",
+    "attention": "reads half",
+    "arrived_from": "YouTube",
+    "languages": [
+      "English",
+      "Urdu"
+    ],
+    "primary_pain": "Overwhelmed eight weeks a year, idle otherwise.",
+    "budget_sensitivity": 5,
+    "scepticism": 3,
+    "must_see_to_continue": "A seasonal or pause option.",
+    "deal_breakers": [
+      "Paying twelve months for an eight-week problem"
+    ],
+    "reason_to_say_yes": "Tax-season call coverage would help.",
+    "reason_to_say_no": "A monthly subscription all year does not fit a seasonal business.",
+    "the_question_they_want_answered": "Can I pay for March and April only?",
+    "likely_outcome_prior": "bounce (likely)",
+    "tags": []
+  },
+  {
+    "id": "P084",
+    "name": "Margaret Liu",
+    "segment": "local_business_waitlist",
+    "role": "CPA, partner in a small firm",
+    "market": "Markham",
+    "years": 15,
+    "business_size": "8 staff, mostly owner-managed businesses",
+    "team": "2 partners, 6 staff",
+    "tech_comfort": 3,
+    "current_tools": "Practice management suite; receptionist",
+    "device": "desktop",
+    "attention": "reads everything",
+    "arrived_from": "Cold (LinkedIn)",
+    "languages": [
+      "English",
+      "Mandarin"
+    ],
+    "primary_pain": "Mandarin-speaking clients call the partners' cells directly at all hours.",
+    "budget_sensitivity": 2,
+    "scepticism": 4,
+    "must_see_to_continue": "A privacy policy and data-processing terms she can read before giving an email.",
+    "deal_breakers": [
+      "Tax and SIN information in transcripts",
+      "No privacy policy",
+      "Waitlist form that asks for more than an email"
+    ],
+    "reason_to_say_yes": "Mandarin after-hours intake would protect the partners' evenings.",
+    "reason_to_say_no": "CPA confidentiality rules and client tax data make her unwilling to engage a vendor with no published privacy terms.",
+    "the_question_they_want_answered": "Where is your privacy policy?",
+    "likely_outcome_prior": "quiz only (possible); waitlist (unlikely)",
+    "tags": [
+      "legal_privacy_worry"
+    ]
+  },
+  {
+    "id": "P085",
+    "name": "Gary Thibault",
+    "segment": "local_business_waitlist",
+    "role": "CPA, sole practitioner",
+    "market": "Ottawa (Orléans)",
+    "years": 24,
+    "business_size": "solo, about 250 clients",
+    "team": "solo with a part-time admin",
+    "tech_comfort": 2,
+    "current_tools": "Desktop software; voicemail",
+    "device": "desktop",
+    "attention": "reads half",
+    "arrived_from": "Cold (Facebook ad)",
+    "languages": [
+      "English",
+      "French"
+    ],
+    "primary_pain": "Phone tag in April.",
+    "budget_sensitivity": 3,
+    "scepticism": 5,
+    "must_see_to_continue": "Why a real estate broker is qualified to sell anything to accountants.",
+    "deal_breakers": [
+      "Jack-of-all-trades vendor",
+      "No accounting clients to reference"
+    ],
+    "reason_to_say_yes": "None unless a fellow CPA recommended it.",
+    "reason_to_say_no": "He has done the books for failed side businesses; a broker branching into software for every industry is a red flag to him.",
+    "the_question_they_want_answered": "What does a real estate agent know about my practice?",
+    "likely_outcome_prior": "bounce (very likely)",
+    "tags": [
+      "trust_objection"
+    ]
+  },
+  {
+    "id": "P086",
+    "name": "Fatima Noori",
+    "segment": "local_business_waitlist",
+    "role": "Tax preparer, home-based",
+    "market": "Ajax",
+    "years": 2,
+    "business_size": "solo, about 120 returns a year",
+    "team": "solo",
+    "tech_comfort": 3,
+    "current_tools": "WhatsApp, a tax program",
+    "device": "phone",
+    "attention": "skims 20 seconds",
+    "arrived_from": "Instagram reel (Dari-language clip)",
+    "languages": [
+      "English",
+      "Dari"
+    ],
+    "primary_pain": "Newcomer families message her at all hours; she wants to look more established.",
+    "budget_sensitivity": 5,
+    "scepticism": 2,
+    "must_see_to_continue": "Something for very small businesses at a very small price.",
+    "deal_breakers": [
+      "Anything over $50 a month"
+    ],
+    "reason_to_say_yes": "She likes that someone from her community built it.",
+    "reason_to_say_no": "The price is beyond her and she is outside the first industries.",
+    "the_question_they_want_answered": "Is there something small for someone like me?",
+    "likely_outcome_prior": "bounce (likely); waitlist (possible)",
+    "tags": [
+      "phone_under_30_seconds"
+    ]
+  },
+  {
+    "id": "P087",
+    "name": "Mike Dragovic",
+    "segment": "local_business_waitlist",
+    "role": "Owner, renovation company",
+    "market": "Etobicoke",
+    "years": 14,
+    "business_size": "4-person crew, about $1.2M a year",
+    "team": "owner, 4 crew, wife does invoices",
+    "tech_comfort": 2,
+    "current_tools": "Cell phone, voicemail always full",
+    "device": "phone",
+    "attention": "reads half",
+    "arrived_from": "Referral from a colleague (a realtor who sends him pre-sale reno work)",
+    "languages": [
+      "English",
+      "Serbian"
+    ],
+    "primary_pain": "On a ladder all day; by the time he calls back the homeowner has three other quotes.",
+    "budget_sensitivity": 2,
+    "scepticism": 3,
+    "must_see_to_continue": "A way to pay and start now.",
+    "deal_breakers": [
+      "Waitlist with no date",
+      "Paperwork"
+    ],
+    "reason_to_say_yes": "He would hand over a card today.",
+    "reason_to_say_no": "Being told contractors are fourth in line means he calls the next company he sees on Facebook.",
+    "the_question_they_want_answered": "Why can't I just buy it now?",
+    "likely_outcome_prior": "quiz only, then joins the waitlist (possible); bounce (likely) if no timeline is given",
+    "tags": [
+      "ready_if_one_question_answered"
+    ]
+  },
+  {
+    "id": "P088",
+    "name": "Sandeep Grewal",
+    "segment": "local_business_waitlist",
+    "role": "Owner, basement finishing and legal second suites",
+    "market": "Brampton",
+    "years": 9,
+    "business_size": "6 crew, 2 subcontractor teams",
+    "team": "owner, 6 crew",
+    "tech_comfort": 3,
+    "current_tools": "WhatsApp groups, Google Business Profile",
+    "device": "phone",
+    "attention": "reads half",
+    "arrived_from": "Instagram reel",
+    "languages": [
+      "English",
+      "Punjabi"
+    ],
+    "primary_pain": "Callers want quotes in Punjabi; he answers while driving between sites.",
+    "budget_sensitivity": 3,
+    "scepticism": 3,
+    "must_see_to_continue": "Punjabi and whether it can collect address and basement size for a quote.",
+    "deal_breakers": [
+      "English-only",
+      "Cannot capture job details"
+    ],
+    "reason_to_say_yes": "Qualifying second-suite enquiries would cut wasted site visits.",
+    "reason_to_say_no": "Not available to contractors yet, and no language detail.",
+    "the_question_they_want_answered": "Can it take the job details so I only visit serious people?",
+    "likely_outcome_prior": "quiz only, then joins the waitlist (possible); bounce (possible)",
+    "tags": []
+  },
+  {
+    "id": "P089",
+    "name": "Luis Carvalho",
+    "segment": "local_business_waitlist",
+    "role": "Owner, roofing company",
+    "market": "Mississauga",
+    "years": 17,
+    "business_size": "8 crew, seasonal",
+    "team": "owner, 8 crew, daughter runs the office part-time",
+    "tech_comfort": 2,
+    "current_tools": "Office line forwarded to his cell; paper estimates",
+    "device": "desktop",
+    "attention": "reads half",
+    "arrived_from": "Referral from a colleague (his daughter found it)",
+    "languages": [
+      "English",
+      "Portuguese"
+    ],
+    "primary_pain": "Storm days bring 60 calls and he answers ten.",
+    "budget_sensitivity": 3,
+    "scepticism": 4,
+    "must_see_to_continue": "Proof it copes with a storm-day surge and angry callers.",
+    "deal_breakers": [
+      "Per-call pricing on surge days",
+      "AI promising arrival times"
+    ],
+    "reason_to_say_yes": "Storm-day triage is worth a lot to a roofer.",
+    "reason_to_say_no": "He doubts an AI built for house-hunters handles a caller with water coming through the ceiling.",
+    "the_question_they_want_answered": "What does it do when 60 people call in one afternoon?",
+    "likely_outcome_prior": "quiz only, then joins the waitlist (possible); bounce (likely)",
+    "tags": []
+  },
+  {
+    "id": "P090",
+    "name": "Brent Hollis",
+    "segment": "local_business_waitlist",
+    "role": "Owner, custom home builder",
+    "market": "Barrie and Oro-Medonte",
+    "years": 21,
+    "business_size": "3 homes a year, 5 staff",
+    "team": "owner, site super, wife runs the office full-time",
+    "tech_comfort": 2,
+    "current_tools": "Wife answers every call",
+    "device": "desktop",
+    "attention": "skims 20 seconds",
+    "arrived_from": "Cold (Facebook ad)",
+    "languages": [
+      "English"
+    ],
+    "primary_pain": "None; three clients a year and each has his cell.",
+    "budget_sensitivity": 2,
+    "scepticism": 4,
+    "must_see_to_continue": "Nothing.",
+    "deal_breakers": [
+      "Not relevant to his volume"
+    ],
+    "reason_to_say_yes": "None.",
+    "reason_to_say_no": "Low call volume and a full-time office manager; he already has the solution.",
+    "the_question_they_want_answered": "Who is this for?",
+    "likely_outcome_prior": "bounce (very likely)",
+    "tags": [
+      "unfixable_no"
+    ]
+  },
+  {
+    "id": "P091",
+    "name": "Tariq Mansoor",
+    "segment": "local_business_waitlist",
+    "role": "Owner, HVAC service company",
+    "market": "Scarborough",
+    "years": 11,
+    "business_size": "5 technicians, 24-hour emergency service",
+    "team": "owner, 5 techs, 1 dispatcher",
+    "tech_comfort": 3,
+    "current_tools": "A human answering service at about $180 a month plus per-call fees; field-service software",
+    "device": "desktop",
+    "attention": "reads half",
+    "arrived_from": "Cold (Google search)",
+    "languages": [
+      "English",
+      "Urdu"
+    ],
+    "primary_pain": "Answering service takes messages but cannot book into his dispatch software.",
+    "budget_sensitivity": 3,
+    "scepticism": 3,
+    "must_see_to_continue": "Integration with his field-service software and 24-hour emergency dispatch.",
+    "deal_breakers": [
+      "No dispatch integration",
+      "Higher price than his current service",
+      "Not open to his trade"
+    ],
+    "reason_to_say_yes": "Direct booking into dispatch would be an upgrade.",
+    "reason_to_say_no": "He already has a cheaper human service that works at 3 am, and HVAC is not even on the list.",
+    "the_question_they_want_answered": "Does it book into my dispatch software?",
+    "likely_outcome_prior": "bounce (likely)",
+    "tags": [
+      "unfixable_no"
+    ]
+  },
+  {
+    "id": "P092",
+    "name": "Angela Russo",
+    "segment": "local_business_waitlist",
+    "role": "Owner, kitchen and bath design-build studio",
+    "market": "Vaughan",
+    "years": 13,
+    "business_size": "showroom, 2 designers, subcontracted trades",
+    "team": "owner, 2 designers, 1 showroom coordinator",
+    "tech_comfort": 3,
+    "current_tools": "Showroom coordinator answers; a design-industry CRM",
+    "device": "desktop",
+    "attention": "reads everything",
+    "arrived_from": "Referral from a colleague (a realtor)",
+    "languages": [
+      "English",
+      "Italian"
+    ],
+    "primary_pain": "Saturday showroom rushes mean calls ring out.",
+    "budget_sensitivity": 2,
+    "scepticism": 4,
+    "must_see_to_continue": "Evidence of anyone outside real estate using it, with a voice that suits a design brand.",
+    "deal_breakers": [
+      "A realtor's side project",
+      "Generic voice",
+      "No non-real-estate examples"
+    ],
+    "reason_to_say_yes": "Saturday coverage has value at her ticket size.",
+    "reason_to_say_no": "She sees a realtor's logo on a tool for her studio and reads it as amateur; her brand cannot look like a side hustle.",
+    "the_question_they_want_answered": "Is this a real company or a realtor's side business?",
+    "likely_outcome_prior": "bounce (likely); waitlist (unlikely)",
+    "tags": [
+      "trust_objection"
+    ]
+  },
+  {
+    "id": "P093",
+    "name": "Deborah Singh",
+    "segment": "local_business_waitlist",
+    "role": "Principal broker, property and casualty brokerage",
+    "market": "Brampton",
+    "years": 16,
+    "business_size": "6 staff, about 3,000 policies",
+    "team": "principal, 4 brokers, 2 CSRs",
+    "tech_comfort": 3,
+    "current_tools": "Broker management system mandated by insurers; CSRs answer",
+    "device": "desktop",
+    "attention": "reads everything",
+    "arrived_from": "Cold (LinkedIn)",
+    "languages": [
+      "English",
+      "Punjabi",
+      "Hindi"
+    ],
+    "primary_pain": "Renewal season call volume; claims calls after hours.",
+    "budget_sensitivity": 2,
+    "scepticism": 4,
+    "must_see_to_continue": "What an unlicensed AI may and may not say about coverage, confirmed for Ontario.",
+    "deal_breakers": [
+      "AI discussing coverage or binding",
+      "Client policy data outside the insurer-approved system",
+      "No regulatory answer"
+    ],
+    "reason_to_say_yes": "After-hours claims-intake triage would be useful.",
+    "reason_to_say_no": "Only licensed people may discuss coverage; an AI slip is an errors-and-omissions claim against her.",
+    "the_question_they_want_answered": "Has this been checked against RIBO rules on unlicensed staff?",
+    "likely_outcome_prior": "quiz only (possible); waitlist (unlikely)",
+    "tags": [
+      "legal_privacy_worry"
+    ]
+  },
+  {
+    "id": "P094",
+    "name": "Kwame Mensah",
+    "segment": "local_business_waitlist",
+    "role": "Life and health insurance advisor, independent through an MGA",
+    "market": "North York, Toronto",
+    "years": 6,
+    "business_size": "solo, about 150 clients",
+    "team": "solo",
+    "tech_comfort": 4,
+    "current_tools": "A financial-advisor CRM; Calendly",
+    "device": "desktop",
+    "attention": "reads half",
+    "arrived_from": "YouTube",
+    "languages": [
+      "English",
+      "Twi"
+    ],
+    "primary_pain": "Past clients never hear from him between policy anniversaries.",
+    "budget_sensitivity": 4,
+    "scepticism": 4,
+    "must_see_to_continue": "A reason to believe the waitlist is not just a mailing list he will be marketed to forever.",
+    "deal_breakers": [
+      "Email harvesting",
+      "No stated date",
+      "Founder with no insurance background"
+    ],
+    "reason_to_say_yes": "Database nurture is the product he actually wants.",
+    "reason_to_say_no": "He has joined waitlists before that turned into weekly sales emails for unrelated things.",
+    "the_question_they_want_answered": "What happens to my email after I join the waitlist?",
+    "likely_outcome_prior": "quiz only (possible); waitlist (unlikely)",
+    "tags": [
+      "trust_objection"
+    ]
+  },
+  {
+    "id": "P095",
+    "name": "Linda Ferreira",
+    "segment": "local_business_waitlist",
+    "role": "Agent-owner, captive agency for a national insurer",
+    "market": "Hamilton",
+    "years": 20,
+    "business_size": "4 staff, single-insurer agency",
+    "team": "owner, 3 licensed staff",
+    "tech_comfort": 2,
+    "current_tools": "Insurer-supplied phone system, CRM and after-hours call centre",
+    "device": "desktop",
+    "attention": "skims 20 seconds",
+    "arrived_from": "Cold (Facebook ad)",
+    "languages": [
+      "English",
+      "Portuguese"
+    ],
+    "primary_pain": "None she is permitted to solve herself.",
+    "budget_sensitivity": 3,
+    "scepticism": 3,
+    "must_see_to_continue": "Nothing; her insurer dictates systems.",
+    "deal_breakers": [
+      "Any outside system; it breaches her agency agreement"
+    ],
+    "reason_to_say_yes": "None.",
+    "reason_to_say_no": "Her insurer forbids outside tools and already provides call handling.",
+    "the_question_they_want_answered": "Would my company even allow this?",
+    "likely_outcome_prior": "bounce (very likely)",
+    "tags": [
+      "unfixable_no"
+    ]
+  },
+  {
+    "id": "P096",
+    "name": "Scott Jamieson",
+    "segment": "local_business_waitlist",
+    "role": "Owner, marketing-automation agency serving insurance brokers",
+    "market": "London, Ontario",
+    "years": 9,
+    "business_size": "agency of 3, about 40 broker clients",
+    "team": "owner, 2 employees",
+    "tech_comfort": 5,
+    "current_tools": "His own HighLevel agency and nurture snapshots",
+    "device": "desktop",
+    "attention": "reads everything",
+    "arrived_from": "Cold (monitoring competitors' ads)",
+    "languages": [
+      "English"
+    ],
+    "primary_pain": "None; he wants to see whether a new entrant is coming for insurance.",
+    "budget_sensitivity": 1,
+    "scepticism": 5,
+    "must_see_to_continue": "The industry roll-out order and prices.",
+    "deal_breakers": [
+      "Nothing; he is not a buyer"
+    ],
+    "reason_to_say_yes": "None; he might propose a referral swap.",
+    "reason_to_say_no": "He is a competitor posing as an insurance broker on the waitlist form.",
+    "the_question_they_want_answered": "When are you entering insurance, and at what price?",
+    "likely_outcome_prior": "quiz only, then joins the waitlist under a false identity (likely); buys (never)",
+    "tags": [
+      "competitor_or_tyre_kicker"
+    ]
+  },
+  {
+    "id": "P097",
+    "name": "Dr. Neha Varma",
+    "segment": "local_business_waitlist",
+    "role": "Dentist and practice owner",
+    "market": "Oakville",
+    "years": 12,
+    "business_size": "2 dentists, 3 hygienists, 4 front-desk and admin",
+    "team": "owner, 9 staff",
+    "tech_comfort": 3,
+    "current_tools": "Dental practice software with online booking; front desk of two",
+    "device": "desktop",
+    "attention": "reads half",
+    "arrived_from": "Cold (Instagram ad that was meant for agents)",
+    "languages": [
+      "English",
+      "Hindi"
+    ],
+    "primary_pain": "Lunch-hour and after-6 calls from new patients go to voicemail.",
+    "budget_sensitivity": 2,
+    "scepticism": 4,
+    "must_see_to_continue": "Any sign dental or health practices are served, and how patient information is protected.",
+    "deal_breakers": [
+      "Health information handled by a non-health vendor",
+      "Not on the industry list"
+    ],
+    "reason_to_say_yes": "New-patient calls are worth a lot and after-hours coverage is a known gap.",
+    "reason_to_say_no": "Dentists are not on the list at all and health privacy rules make a general vendor a hard sell.",
+    "the_question_they_want_answered": "Do you work with dental offices, and is it compliant with health privacy law?",
+    "likely_outcome_prior": "bounce (likely); waitlist (possible, if 'other' is an option)",
+    "tags": [
+      "legal_privacy_worry"
+    ]
+  },
+  {
+    "id": "P098",
+    "name": "Chantelle Okoro",
+    "segment": "local_business_waitlist",
+    "role": "Owner, hair salon",
+    "market": "Pickering",
+    "years": 8,
+    "business_size": "5 chairs, 4 stylists",
+    "team": "owner, 4 stylists who rent chairs",
+    "tech_comfort": 3,
+    "current_tools": "A salon booking app with online booking and reminders",
+    "device": "phone",
+    "attention": "skims 20 seconds",
+    "arrived_from": "Instagram reel",
+    "languages": [
+      "English"
+    ],
+    "primary_pain": "Phone rings while everyone has foils in their hands.",
+    "budget_sensitivity": 4,
+    "scepticism": 3,
+    "must_see_to_continue": "The word salon, or a price under $100.",
+    "deal_breakers": [
+      "Price out of proportion to a $70 haircut",
+      "No link to her booking app"
+    ],
+    "reason_to_say_yes": "The ringing phone is a daily annoyance.",
+    "reason_to_say_no": "Not her industry, three times her software budget, and her booking app already takes most appointments.",
+    "the_question_they_want_answered": "Does it work with my booking app?",
+    "likely_outcome_prior": "bounce (very likely)",
+    "tags": [
+      "phone_under_30_seconds"
+    ]
+  },
+  {
+    "id": "P099",
+    "name": "Vince Morello",
+    "segment": "local_business_waitlist",
+    "role": "Owner, independent auto repair shop",
+    "market": "Woodbridge, Vaughan",
+    "years": 27,
+    "business_size": "4 bays, 3 mechanics",
+    "team": "owner, 3 mechanics, a service advisor",
+    "tech_comfort": 1,
+    "current_tools": "Shop management software the service advisor runs; landline",
+    "device": "desktop",
+    "attention": "reads half",
+    "arrived_from": "Referral (his realtor mentioned it)",
+    "languages": [
+      "English",
+      "Italian"
+    ],
+    "primary_pain": "Service advisor is under a hood half the day and the phone rings out.",
+    "budget_sensitivity": 3,
+    "scepticism": 4,
+    "must_see_to_continue": "Somebody telling him plainly whether it is for shops like his.",
+    "deal_breakers": [
+      "Having to do a quiz to find out it is not for him",
+      "Computer talk"
+    ],
+    "reason_to_say_yes": "He loses brake jobs to missed calls and knows it.",
+    "reason_to_say_no": "He completes the quiz, learns his trade is not on any list, and feels his time was wasted.",
+    "the_question_they_want_answered": "Is this for a garage or not? Just tell me.",
+    "likely_outcome_prior": "quiz only then annoyed bounce (likely); waitlist (unlikely)",
+    "tags": []
+  },
+  {
+    "id": "P100",
+    "name": "Imran Sheikh",
+    "segment": "local_business_waitlist",
+    "role": "Owner, physiotherapy and massage clinic",
+    "market": "Mississauga",
+    "years": 10,
+    "business_size": "3 physiotherapists, 2 RMTs, 2 front desk",
+    "team": "owner, 7 staff",
+    "tech_comfort": 4,
+    "current_tools": "Clinic management software with online booking; front desk until 7 pm",
+    "device": "desktop",
+    "attention": "reads everything",
+    "arrived_from": "YouTube",
+    "languages": [
+      "English",
+      "Urdu"
+    ],
+    "primary_pain": "Insurance-coverage questions tie up the front desk; evening calls are missed.",
+    "budget_sensitivity": 3,
+    "scepticism": 3,
+    "must_see_to_continue": "An 'other industry' option and an honest statement of whether clinics will ever be served.",
+    "deal_breakers": [
+      "Vague 'join the waitlist' with no indication his industry is planned",
+      "Health information handling left unaddressed"
+    ],
+    "reason_to_say_yes": "He is tech-comfortable and would pilot it.",
+    "reason_to_say_no": "With no clinic roadmap he will buy from a clinic-specific vendor instead.",
+    "the_question_they_want_answered": "Is my industry on your roadmap at all, or am I joining a list that goes nowhere?",
+    "likely_outcome_prior": "quiz only, then joins the waitlist (possible); bounce (possible)",
+    "tags": []
+  }
+]
