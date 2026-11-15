@@ -1,0 +1,122 @@
+URL: https://marketplace.gohighlevel.com/docs/ghl/opportunities/create-pipeline | Read: 2026-11-15 | Method: curl | HTTP 200
+Private reference copy for Ray. Text only. Not for republication or reuse; the content belongs to its publisher.
+PipelinesVersion: v3
+Create Pipeline
+POST/opportunities/pipelines
+Try it
+Creates a new pipeline with at least one stage for a given location. Pipeline names must be unique per location (case-insensitive), and stage names must be unique within the pipeline. To enable manual win probability, set useOpportunityProbability to true and provide a stageWinProbability (0–100) on every stage — if any stage is missing a value, the system falls back to auto-computed probabilities based on stage position.
+Authorizations
+Authorizationstringheaderrequired
+Bearer authentication header of the form Bearer <token>, where <token> is your access token.
+Scope:pipelines.create
+Auth methods:OAuthPrivate Integration
+Token type:Sub-Account Token
+Request​
+Headers
+Versionstringrequired
+API Version. Send v3.
+Available optionsv3
+Example:v3
+Body
+application/json
+namestringrequired
+Name of the pipeline
+Example:pipeline
+stagesobject[]required
+List of stages belonging to this pipeline. Each stage needs a name and a unique position.
+Show child attributes
+stages[].namestringrequired
+Name of the stage
+Example:stage
+stages[].positionnumberrequired
+Order of the stage in the pipeline. Required, and must be unique within the pipeline.
+Example:1
+stages[].stageWinProbabilitynumber
+Win probability (0-100) for opportunities in this stage
+Possible values: >= 0 and <= 100
+Example:50
+stages[].showInFunnelboolean
+Whether the stage is shown in the funnel view
+Example:false
+stages[].showInPieChartboolean
+Whether the stage is shown in the pie chart view
+Example:true
+stages[].colorstring
+Stage color as a hex code
+Example:#FF0000
+showInFunnelboolean
+Whether the pipeline is shown in the funnel view
+Example:false
+showInPieChartboolean
+Whether the pipeline is shown in the pie chart view
+Example:true
+useOpportunityProbabilityboolean
+Whether stage-level win probability is enabled for this pipeline
+Example:true
+locationIdstringrequired
+Identifier of the location (sub-account) this pipeline belongs to
+Example:ve9EPM428h8vShlRW1KT
+colorRenderModestring
+How pipeline/stage colors are rendered
+Available optionsdotbg-tintnone
+Example:dot
+Response
+200
+application/json
+Successful response
+idstring
+Unique identifier of the pipeline
+Example:aWdODOBVOlH1RUFKWQke
+namestring
+Name of the pipeline
+Example:new pipeline
+stagesobject[]
+Stages belonging to this pipeline
+Show child attributes
+stages[].idstring
+Unique identifier of the stage
+Example:38704eb0-6b4f-4c3e-8919-4835d51de0c8
+stages[].namestring
+Name of the stage
+Example:test
+stages[].showInFunnelboolean
+Whether the stage is shown in the funnel view
+Example:false
+stages[].showInPieChartboolean
+Whether the stage is shown in the pie chart view
+Example:true
+stages[].positionnumber
+Order of the stage in the pipeline (unique within the pipeline)
+Example:2
+stages[].stageWinProbabilitynumber
+Win probability (0-100) for opportunities in this stage
+Example:50
+stages[].originIdstring
+Identifier of the stage this stage was copied from, if any
+Example:aWdODOBVOlH1RUFKWQke
+stages[].colorstring
+Stage color as a hex code
+Example:#FF0000
+showInFunnelboolean
+Whether the pipeline is shown in the funnel view
+Example:false
+showInPieChartboolean
+Whether the pipeline is shown in the pie chart view
+Example:true
+locationIdstring
+Identifier of the location (sub-account) this pipeline belongs to
+Example:VeMHYX28Satp2p7XVKbb
+useOpportunityProbabilityboolean
+Whether stage-level win probability is enabled for this pipeline
+Example:true
+colorRenderModestring
+How pipeline/stage colors are rendered
+Available optionsdotbg-tintnone
+Example:dot
+positionstring
+Fractional-index key used to sort pipelines. Updated when the user reorders pipelines (via drag-and-drop or the reorder modal).
+Example:a0V
+Previous
+Get Pipelines
+Next
+Get Pipeline

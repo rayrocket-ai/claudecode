@@ -1,0 +1,165 @@
+URL: https://marketplace.gohighlevel.com/docs/ghl/voice-ai/get-call-logs | Read: 2026-11-15 | Method: curl | HTTP 200
+Private reference copy for Ray. Text only. Not for republication or reuse; the content belongs to its publisher.
+DashboardVersion: v3
+List Call Logs
+GET/voice-ai/dashboard/call-logs
+Try it
+Returns call logs for Voice AI agents scoped to a location. Supports filtering by agent, contact, call type, action types, and date range (interpreted in the provided IANA timezone). Also supports sorting and 1-based pagination.
+Authorizations
+Authorizationstringheaderrequired
+Bearer authentication header of the form Bearer <token>, where <token> is your access token.
+Scope:voice-ai-dashboard.readonly
+Auth methods:OAuthPrivate Integration
+Token type:Sub-Account Token
+Request​
+Headers
+Versionstringrequired
+API Version
+Available optionsv3
+Query Parameters
+locationIdstringrequired
+Location identifier. Filters results to this location.
+agentIdstring
+Agent identifier. When provided, returns logs for this agent only.
+Example:507f1f77bcf86cd799439011
+contactIdstring
+Contact IDs (comma-separated) to filter by.
+Example:contact123,contact456
+callTypestring
+Call type filter.
+Available optionsLIVETRIAL
+startDatenumber
+Start date filter (Unix timestamp). Must be less than endDate. Both startDate and endDate must be provided together.
+Example:1679308800000
+endDatenumber
+End date filter (Unix timestamp). Must be greater than startDate. Both startDate and endDate must be provided together.
+Example:1679395199000
+actionTypestring
+Action type filter for call logs (comma-separated ACTION_TYPE values)
+Available optionsCALL_TRANSFERDATA_EXTRACTIONIN_CALL_DATA_EXTRACTIONWORKFLOW_TRIGGERSMSAPPOINTMENT_BOOKINGCUSTOM_ACTIONKNOWLEDGE_BASE
+Example:SMS,CALL_TRANSFER,WORKFLOW_TRIGGER
+sortBystring
+Field to sort by. Defaults to newest if omitted.
+Available optionsdurationcreatedAt
+sortstring
+Sort direction. Applies only when sortBy is provided.
+Available optionsascenddescend
+pagenumber
+Page number (1-based).
+Default:1
+pageSizenumber
+Page size (max 50).
+Default:10
+Response
+200
+application/json
+Successfully retrieved call logs
+totalnumberrequired
+Total number of items
+Example:150
+pagenumberrequired
+Page number starting from 1
+Example:2
+pageSizenumberrequired
+Number of items per page
+Example:10
+callLogsobject[]required
+Array of call logs
+Show child attributes
+callLogs[].idstringrequired
+Unique identifier for the call
+Example:507f1f77bcf86cd799439011
+callLogs[].contactIdstring
+Associated contact ID
+Example:507f1f77bcf86cd799439012
+callLogs[].agentIdstringrequired
+Agent ID associated with the call
+Example:507f1f77bcf86cd799439013
+callLogs[].isAgentDeletedbooleanrequired
+Whether the agent is deleted
+Example:false
+callLogs[].fromNumberstring
+Caller phone number
+Example:+1234567890
+callLogs[].createdAtstring<date-time>required
+Timestamp when the call was created
+Example:2024-01-15T10:30:00.000Z
+callLogs[].durationnumberrequired
+Call duration in seconds
+Example:180
+callLogs[].trialCallbooleanrequired
+Whether this call was a trial call
+Example:false
+callLogs[].executedCallActionsobject[]required
+Actions performed during the call. Note: The APPOINTMENT_BOOKING action will only be visible in executedCallActions from Sep 9th 2025.
+Show child attributes
+callLogs[].executedCallActions[].actionIdstring
+Action ID reference
+Example:507f1f77bcf86cd799439015
+callLogs[].executedCallActions[].actionTypestringrequired
+Action type
+Available optionsCALL_TRANSFERDATA_EXTRACTIONIN_CALL_DATA_EXTRACTIONWORKFLOW_TRIGGERSMSAPPOINTMENT_BOOKINGCUSTOM_ACTIONKNOWLEDGE_BASE
+Example:SMS
+callLogs[].executedCallActions[].actionNamestringrequired
+Action name
+Example:Send SMS Confirmation
+callLogs[].executedCallActions[].actionParametersobject
+Action parameters - structure varies by actionType
+Show child attributes
+oneOf
+CallTransferActionParameters
+DataExtractionActionParameters
+InCallDataExtractionActionParameters
+WorkflowTriggerParameters
+SMSParameters
+AppointmentBookingActionParameters
+CustomActionParameters
+KnowledgeBaseParameters
+callLogs[].executedCallActions[].actionParameters.triggerPromptstringrequired
+When to trigger this action during the call
+Example:When the caller asks to speak to a manager
+callLogs[].executedCallActions[].actionParameters.transferToTypestringrequired
+Type of transfer destination (currently only "number" is supported)
+Available optionsnumber
+Example:number
+callLogs[].executedCallActions[].actionParameters.transferToValuestringrequired
+Phone number to transfer to. Must start with +, include country code, contain only numbers, and be 11-16 characters long (e.g., +12345678901).
+Example:+12345678901
+callLogs[].executedCallActions[].actionParameters.triggerMessagestringrequired
+Message to tell the caller before transferring
+Example:Let me transfer you to a manager right away
+callLogs[].executedCallActions[].actionParameters.hearWhisperMessageboolean
+Whether to play whisper message to the receiving party
+Example:true
+callLogs[].executedCallActions[].executedAtstring<date-time>
+When the action was executed
+Example:2024-01-15T10:32:00.000Z
+callLogs[].executedCallActions[].triggerReceivedAtstring<date-time>
+When the trigger was received
+Example:2024-01-15T10:31:45.000Z
+callLogs[].summarystringrequired
+Call summary
+Example:Customer called to inquire about product pricing and was transferred to sales team.
+callLogs[].transcriptstringrequired
+Call transcript
+Example:bot: Hello, how can I help you today?
+human: I would like to know about your pricing...
+callLogs[].translationobject
+Transcript translation details
+Show child attributes
+callLogs[].translation.enabledboolean
+Whether translation is enabled
+Example:false
+callLogs[].translation.languagestring
+Translation language code
+Example:es
+callLogs[].extractedDataobject
+Dynamic data extracted from the call based on agent configuration
+Show child attributes
+callLogs[].messageIdstring
+Message identifier associated with the call
+Example:507f1f77bcf86cd799439014
+Previous
+Dashboard
+Next
+Get Call Log

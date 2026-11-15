@@ -1,0 +1,48 @@
+URL: https://marketplace.gohighlevel.com/docs/ghl/forms/get-forms | Read: 2026-11-15 | Method: curl | HTTP 200
+Private reference copy for Ray. Text only. Not for republication or reuse; the content belongs to its publisher.
+FormsVersion: v3
+Get Forms
+GET/forms
+Try it
+Get Forms
+Authorizations
+Authorizationstringheaderrequired
+Bearer authentication header of the form Bearer <token>, where <token> is your access token.
+Scope:forms.readonly
+Auth methods:OAuthPrivate Integration
+Token type:Sub-Account Token
+Request​
+Headers
+Versionstringrequired
+API Version
+Available optionsv3
+Query Parameters
+locationIdstringrequired
+Example:ve9EPM428h8vShlRW1KT
+skipnumber
+Example:0
+limitnumber
+Limit Per Page records count. will allow maximum up to 50 and default will be 10
+Default:10
+Example:20
+typestring
+Example:folder
+Response
+200
+application/json
+Successful response
+formsobject[]
+Show child attributes
+forms[].idstring
+Example:YSWdvS4Is98wtIDGnpmI
+forms[].namestring
+Example:Form 1
+forms[].locationIdstring
+Example:ve9EPM428h8vShlRW1KT
+totalnumber
+Total number of forms
+Example:20
+Previous
+Upload files to custom fields
+Next
+Introduction

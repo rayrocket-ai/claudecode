@@ -1,0 +1,199 @@
+URL: https://hamzaautomates.com/gohighlevel/tutorials/build-an-ai-voice-agent | Read: 2026-11-15 | Method: curl | HTTP 200
+Private reference copy for Ray. Text only. Not for republication or reuse; the content belongs to its publisher.
+How to Build an AI Voice Agent in GoHighLevel (2026)
+GoHighLevel with Hamza Automates
+Guides▾
+UpdatesTutorialsStart an AI businessComparisonsPricingAbout Hamza30-day free trialMenu
+GoHighLevel / HighLevel tutorials / Tutorial
+How to build an AI voice agent in GoHighLevel (2026, step by step)
+By Hamza Baig / Published Oct 31, 2026 / Updated Oct 31, 2026
+Heads up: the trial and plan buttons on this page use my affiliate links. If you sign up through one I get a commission. It doesn't cost you more.
+To build an AI voice agent in GoHighLevel, go to AI Agents, then Voice AI, click Create Agent, write the prompt, pick a voice, add the business's knowledge base and a booking action, test it with a web call, then assign a phone number on the Deploy tab. It answers calls 24/7, books appointments into the calendar and updates the contact while it talks.
+Voice agents are half of what I sell, and an AI receptionist is usually the first thing I build for a local business. Below is the full build in the 2026 version of the builder, the settings I change on every agent, and what it actually costs to run, because most guides out there are on the old interface or have the pricing wrong.
+Start your 30-day free trial →
+30 days free instead of HighLevel's usual 14, plus a 1:1 setup call with my team, weekly live calls and my agency resources from day one. See everything you get →
+The video version
+On this page
+01How to build it, step by step
+02The settings I change on every voice agent
+03Which phone number should the agent use?
+04Can it book appointments?
+05Call transfer vs agent transfer
+06How much does a GoHighLevel AI voice agent cost?
+07Can it make outbound calls?
+08How to sell an AI receptionist to a local business
+09Why isn't my voice agent answering calls?
+10FAQ
+Short version
+01Voice AI only works with LC Phone or Twilio numbers, and HighLevel says not to put it on your default account number. I give clients a separate AI line.
+02The prompt is most of the work. Tell it who it is, what it can and can't say, when to book, when to transfer, and not to guess.
+03Test with a web call in the browser, but transfers don't run in web calls, so test those with a real phone call.
+04Cost: pay per minute by default (about 10 to 20 cents a minute on the newer voice models), or $50 a month for 100 minutes, or $97 a month unlimited with fair use. Phone charges are extra.
+How to build it, step by step
+01
+Open the builder
+In the client's sub-account go to AI Agents > Voice AI > Agent List and click + Create Agent. Pick Create Custom Agent for the full builder (or a marketplace template, or the flow-based builder). If you don't see Voice AI, the user needs the "View & Manage Voice AI Agents" permission.
+02
+Name it, pick a voice, model and language
+Set the welcome message and whether the agent or the caller speaks first. Pick the voice you'd actually want answering the phone. I listen to a few and go with one of the highest rated.
+03
+Write the prompt
+Who it is, the business, the tone, what to collect, what it can answer, what it must not say, when to book, when to transfer, how to end the call. Mine start like: "You're the assistant for an established law firm. Sound professional and respectful. Answer questions and book appointments." Then add: if you don't know, don't guess, offer to transfer.
+04
+Add the knowledge base
+Open Knowledge Base and dump everything about the business into it: website, services, prices, hours, locations, policies, FAQs. Then tell the agent when to search it.
+05
+Add actions
+Actions > + New Action. Appointment Booking (connect a HighLevel calendar), Call Transfer to a human number, Send SMS, Update Contact Field, Trigger a Workflow (see GoHighLevel workflows), a custom webhook, or Agent Transfer to another AI agent.
+06
+Tune the advanced settings
+Turn on Show advanced settings. This is the stuff that looks like fluff and is actually the difference between natural and robotic. My settings are below.
+07
+Test it
+Use Web Call in the test panel to call it from your browser. Read the transcript, fix the prompt, call again. Then do a real phone call to test transfers.
+08
+Deploy it
+On the Deploy tab pick the number (or buy one there), choose Answer Calls Directly or Use as Backup, and set working hours: all hours, or only after hours if the business has a front desk during the day.
+The settings I change on every voice agent
+The prompt is on the left. The part most people skip is everything on the right, which looks like fluff but is what stops the awkward pauses.
+Setting
+What I use
+Why
+Response speed
+Fastest (1), dynamic response on
+Long gaps before it answers are the biggest giveaway
+Interruption sensitivity
+0.5
+So an "mhm" or "um" from the caller doesn't make it stop mid-sentence
+Backchanneling
+On, with custom filler words
+Little "yeah" and "right" sounds while the caller talks
+Pronunciation dictionary
+Business name, staff names, city
+So it says the names the way locals do
+Background sound
+Call center
+Dead silence behind a voice sounds off
+Hamza's settings from his Aug 2026 video. Change one at a time and retest, as HighLevel recommends.
+Which phone number should the agent use?
+Voice AI only works on LC Phone or Twilio numbers. HighLevel's own docs say don't assign your default account number to the agent, and don't put call forwarding on the agent's number.
+I prefer giving the business a new number that's just their AI line, and keeping it separate. You can also port their existing number in if they want one number for everything.
+One gotcha: if the number forwards somewhere first and that rings through to voicemail, HighLevel marks the call completed and the agent never answers. Keep the inbound timeout short, 1 to 3 seconds.
+Can it book appointments?
+Yes. Add the Appointment Booking action and connect a HighLevel calendar. It respects the calendar's availability, buffers and minimum notice, and asks for anything it's missing, like an email. You can connect several calendars and let it pick by what the caller wants, for example a consult calendar and a treatment calendar.
+Working hours for the agent and the calendar's availability are separate settings, so check both.
+Call transfer vs agent transfer
+If the agent gets a question it can't answer, transfer it to a human. That's Call Transfer, and it needs a phone number. Agent Transfer hands the caller to another AI agent on the same call, for example a booking agent and a billing agent, up to three destinations.
+How much does a GoHighLevel AI voice agent cost?
+Without an AI plan it's pay per use. The newer speech-to-speech models cost $0.10 to $0.20 a minute all in. The classic setup is $0.045 a minute for the voice engine plus the voice ($0.015 to $0.17 a minute depending on provider) plus the AI model's tokens. HighLevel's own example: 10 minutes with OpenAI's voice comes to $0.60 before tokens and phone charges.
+Or put the sub-account on an AI Employee plan. Growth is $50 a month and includes 100 voice minutes. Unlimited is $97 a month, unlimited with fair use. The $20 Starter AI plan doesn't include Voice AI. Phone charges are separate on every plan.
+Heads up: when an allowance runs out, the agent pauses by default. Turn on Extra Usage in AI Suite if you want it to keep going at pay-per-use rates. Usage rates are in Usage fees.
+Option
+Price
+Voice AI included
+Pay per use
+$0.10 to $0.20/min (speech-to-speech)
+Billed by the minute
+AI Employee Growth
+$50/month per sub-account
+100 minutes a month
+AI Employee Unlimited
+$97/month per sub-account
+Unlimited, fair use
+AI Employee Starter
+$20/month
+Not included
+From HighLevel's AI Products Pricing article and gohighlevel.com/pricing, read Oct 31, 2026.
+Can it make outbound calls?
+Yes, but only from a workflow, with the Voice AI Outbound Call action. You accept HighLevel's outbound terms and verify the business first. Limits as of October 2026: up to 5,000 calls per location per day, each number once a day and 14 times in 14 days, only 8 a.m. to 8 p.m. in the contact's timezone, same country only.
+HighLevel doesn't check if you have consent to call someone. That's on you and the business, so only call people who opted in.
+How to sell an AI receptionist to a local business
+Build it first. Make a demo for the type of business you're going after, then call the business after hours. If nobody picks up, you open with that: their calls are going to voicemail right now, and here's what answering them looks like.
+Offer the after-hours version if they have a front desk, so it only turns on after close. You could build this for a med spa, a plumber or a law firm and charge a setup fee plus a monthly fee you set, and people do. The agent keeps answering every month, which is why it's a monthly service. My full step-by-step for running this as an agency is in Start an AI automation agency.
+Why isn't my voice agent answering calls?
+Check in this order: the number is assigned on the Deploy tab, working hours cover the time you called, the routing mode (Answer Directly vs Use as Backup), call forwarding on the number, and the inbound timeout. If a call reaches voicemail first, HighLevel counts it as done and the agent never picks up.
+Want this set up with you?
+Start HighLevel through my link and my team does a 1:1 setup call with you, with your account set up within 5 days. You also get weekly live calls with me, so you're not figuring it out alone.
+Start your 30-day free trial →
+30 days free instead of HighLevel's usual 14, plus a 1:1 setup call with my team, weekly live calls and my agency resources from day one. See everything you get →
+Start your 30-day free trial →
+30 days free instead of HighLevel's usual 14, plus a 1:1 setup call with my team, weekly live calls and my agency resources from day one. See everything you get →
+Other ways to start
+My bonuses come with every one of these.
+Best if you're new and want live help setting up
+30-day trial + a free live setup bootcamp
+Same 30-day trial, plus a seat in HighLevel's free live bootcamp: a click-by-click Zoom class with a HighLevel coach and small breakout rooms, every weekday at 11am CT, 60 minutes max. You set up your account during the class instead of figuring it out alone. HighLevel says you can launch in 48 minutes.
+Get the trial + bootcamp →Read more
+Best if you're not sure which plan you need
+Compare all 3 plans first
+HighLevel's own pricing page with Starter ($97), Unlimited ($297) and Founder ($497) side by side, monthly and yearly. Every plan there has a 14-day free trial.
+Compare the plans →Read more
+Best if you'll resell HighLevel as your own software
+Go straight to the $497 Founder plan
+HighLevel's top plan (it used to be called Agency Pro), with a 14-day free trial. Everything in Unlimited plus SaaS mode, rebilling with your own markup, Founders Club and HighLevel Partner Network access. For when you're ready to resell the software, not for day one.
+See the Founder plan →Read more
+FAQ
+What is an AI voice agent?+
+Software that talks on the phone. It hears the caller, decides what to say with an AI model and speaks back. In GoHighLevel it can also book appointments, update the contact, send texts and trigger workflows during or after the call.
+Can I test a GoHighLevel voice agent without a phone number?+
+Yes. Use Web Call in the builder's test panel to call it from your browser. It covers the prompt, knowledge base answers and most actions, but not Call Transfer, which needs a real phone call.
+Can I use my existing business phone number?+
+Voice AI works on LC Phone or Twilio numbers, so you'd port the number in or use a new one. HighLevel says not to use your default account number for the agent. I usually give the business a separate AI line.
+Can the AI voice agent transfer calls to a human?+
+Yes. The Call Transfer action sends the caller to a phone number. Agent Transfer can hand off to up to three other AI agents instead.
+Does GoHighLevel Voice AI work after hours only?+
+It can. On the Deploy tab set custom working hours, for example only after the business closes, or set it as a backup that answers when nobody else does.
+How long is the prompt allowed to be?+
+HighLevel caps agent prompts at 15,000 tokens, which is far more than most receptionists need.
+Sources / last checked Oct 31, 2026
+HighLevel help docs. Overview of Voice AI Agents, How to Create Voice AI Agents, Inbound Call Flow, Appointment Booking, Agent Transfer, Voice AI Outbound Calling and AI Products Pricing on help.gohighlevel.com, read Oct 31, 2026.
+HighLevel pricing page and changelog. gohighlevel.com/pricing (AI Employee add-ons) and the Voice AI full-screen builder changelog entry, read Oct 31, 2026.
+My videos. "Make Your Voice AI Sound 100% Human" (Aug 2026) for the settings, my med spa receptionist build (Jun 2026) for the deploy approach, and "The Only Tool I Would Buy In 2026 To Sell AI" (Feb 2026) for the law firm prompt.
+Author
+Hamza Baig / Hamza Automates
+Founder, Hexona Systems
+I run Hexona Systems on GoHighLevel. HighLevel gave it the SaaSpreneur Platinum award in 2024 and Diamond in 2025 and 2026, and I spoke at their LevelUp event in 2026. Hexona powers 1,000+ agencies, we've served 1,500+ businesses, and I've taught 45,000+ students. Everything on this hub is something I use myself or have shown on camera.
+Platinum SaaSpreneur2024
+Diamond SaaSpreneur2025, 2026
+LevelUp speaker2026
+YouTube subscribers, Oct 202634,200
+YouTube ↗
+Skool ↗
+Hexona Systems ↗
+Keep reading
+TutorialBuild an AI appointment setterBuild an AI appointment setter in GoHighLevel that books from SMS, Instagram, Facebook, WhatsApp and web chat: the 2026 setup, prompt, testing and cost.TutorialMissed call text backSet up missed call text back in GoHighLevel: the built-in setting, the workflow version with after-hours texts and AI booking, A2P rules and SMS costs.TutorialUse your own phone numberMake outbound calls in GoHighLevel from a number you already own, no HighLevel or Twilio number needed. Labs toggle, verification and ID check, step by step.
+Start your 30-day free trial →
+30 days free + 1:1 setup call + my bonus / affiliate link
+GoHighLevel with Hamza Automates
+Some links on this site are affiliate links. If you sign up for HighLevel through them I get a commission. It doesn't cost you more.
+Start here
+30-day free trial
+Free live bootcamp
+What you get (my bonus)
+Pricing
+Guides
+Real estate
+Phone system
+Student reviews
+Founder plan ($497)
+Founder vs SaaS Pro
+GoHighLevel AI tools
+Is Hamza Automates legit?
+Usage fees
+GoHighLevel workflows
+White label guide
+GoHighLevel snapshots
+GoHighLevel CRM guide
+GoHighLevel alternatives
+SaaS mode guide
+GoHighLevel review
+Browse
+Updates
+Tutorials
+Start an AI business
+Comparisons
+About Hamza
+RSS feed
+Learn with me
+YouTube ↗
+Free Skool community ↗

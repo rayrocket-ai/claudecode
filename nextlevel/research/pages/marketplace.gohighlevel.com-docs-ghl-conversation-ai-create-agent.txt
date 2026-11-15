@@ -1,0 +1,393 @@
+URL: https://marketplace.gohighlevel.com/docs/ghl/conversation-ai/create-agent | Read: 2026-11-15 | Method: curl | HTTP 200
+Private reference copy for Ray. Text only. Not for republication or reuse; the content belongs to its publisher.
+AgentsVersion: v3
+Create an Agent
+POST/conversation-ai/agents
+Try it
+Creates a new AI agent for the location. The agent will be created with the specified configuration including name, role, actions, and behavior settings.
+Authorizations
+Authorizationstringheaderrequired
+Bearer authentication header of the form Bearer <token>, where <token> is your access token.
+Scope:conversation-ai.write
+Auth methods:OAuthPrivate Integration
+Token type:Sub-Account Token
+Request​
+Headers
+Versionstringrequired
+API Version
+Available optionsv3
+Example:v3
+Body
+application/json
+namestringrequired
+Name of the agent.
+Example:John Doe
+businessNamestring
+Name of the business the agent represents.
+Example:Tech Corp
+modestring
+Mode of operation - OFF, SUGGESTIVE, or AUTO_PILOT
+Available optionsoffsuggestiveauto-pilot
+Example:auto-pilot
+channelsstring[]
+Communication channels the agent can operate on
+Available optionsIGFBSMSWebChatWhatsAppLive_ChatEmail
+Example:["SMS","Live_Chat","WhatsApp"]
+isPrimaryboolean
+Indicates if this agent is a primary agent.
+Default:false
+Example:true
+waitTimenumber
+Wait time before agent responds (max 5 for minutes, 300 for seconds)
+Default:2
+Example:2
+waitTimeUnitstring
+Unit for wait time - SECONDS or MINUTES
+Available optionsminutesseconds
+Example:seconds
+sleepEnabledbooleandeprecated
+Indicates if sleep functionality is enabled.
+Default:false
+Example:false
+sleepOnManualMessageboolean
+Enable sleep when a manual outbound message is sent.
+Example:false
+sleepOnWorkflowMessageboolean
+Enable sleep when a workflow outbound message is sent.
+Example:false
+sleepTimenumber
+Duration of sleep period (required if sleepEnabled is true). Set to null for indefinite sleep. (max 2880 for minutes, 172800 for seconds, 48 for hours)
+Example:2
+sleepTimeUnitstring
+Unit of sleep time - HOURS, MINUTES, or SECONDS (required if sleepEnabled is true). Set to null for indefinite sleep.
+Available optionshoursminutesseconds
+Example:hours
+personalitystringrequired
+Personality traits of the agent.
+Example:Friendly and helpful
+goalstringrequired
+The goal of the agent.
+Example:Assist customers with inquiries.
+instructionsstringrequired
+Instructions for the agent.
+Example:Provide customer service.
+fullPromptstring
+Complete agent prompt. When set and non-empty, used as the source of truth at generation time instead of personality, goal, and instructions.
+autoPilotMaxMessagesnumber
+Maximum number of messages in auto-pilot mode before requiring human intervention. (max: 100, min: 1)
+Default:75
+Example:75
+knowledgeBaseIdsstring[]
+Array of knowledge base IDs associated with this agent.
+Example:["kb_abc123","kb_def456"]
+respondToImagesboolean
+Allow agent to respond to images
+Default:false
+Example:true
+respondToAudioboolean
+Allow agent to respond to audio
+Default:false
+Example:true
+Response
+201
+application/json
+Successful response
+idstringrequired
+Unique identifier for the agent.
+Example:emp_123
+namestringrequired
+Name of the agent.
+Example:John Doe
+businessNamestring
+Name of the business the agent represents.
+Example:Tech Corp
+modestringrequired
+Current operating mode of the agent.
+Available optionsoffsuggestiveauto-pilot
+Example:auto-pilot
+channelsstring[]required
+Communication channels the agent operates on.
+Available optionsIGFBSMSWebChatWhatsAppLive_ChatEmail
+Example:["SMS","Live_Chat"]
+waitTimenumberrequired
+Wait time before agent responds.
+Example:30
+waitTimeUnitstringrequired
+Unit for wait time.
+Available optionsminutesseconds
+Example:seconds
+sleepEnabledbooleanrequireddeprecated
+Indicates if sleep functionality is enabled.
+Example:false
+sleepOnManualMessageboolean
+Whether the bot sleeps on manual outbound messages.
+Example:false
+sleepOnWorkflowMessageboolean
+Whether the bot sleeps on workflow outbound messages.
+Example:false
+sleepTimenumber
+Duration of sleep period.
+Example:2
+sleepTimeUnitstring
+Unit of sleep time.
+Available optionshoursminutesseconds
+Example:hours
+emailWaitTimenumber
+Email-specific wait time (max 12 hours).
+Example:1
+emailWaitTimeUnitstring
+Unit for email wait time.
+Available optionssecondsminuteshours
+Example:hours
+emailSettingsobject
+Email channel formatting settings.
+actionsobject[]required
+List of actions associated with this agent.
+Show child attributes
+actions[].idstringrequired
+Unique identifier for the action.
+Example:actionId123
+actions[].typestringrequired
+type of action.
+Available optionstriggerWorkflowupdateContactFieldappointmentBookingstopBothumanHandOveradvancedFollowuptransferBotcustomApi
+Example:triggerWorkflow
+isPrimarybooleanrequired
+Indicates if this agent is a primary agent.
+Example:false
+autoPilotMaxMessagesnumberrequired
+Maximum number of messages in auto-pilot mode before requiring human intervention.
+Example:25
+goalstring
+The goal of the agent.
+Example:Assist customers with inquiries
+personalitystring
+Personality traits of the agent.
+Example:Friendly and helpful
+instructionsstring
+Instructions for the agent.
+Example:Provide excellent customer service
+fullPromptstring
+Complete agent prompt when stored; when set and non-empty, used as the source of truth at generation time.
+knowledgeBaseIdsstring[]
+Array of knowledge base IDs associated with this agent.
+Example:["kb_123","kb_456"]
+knowledgeBaseTriggersobject[]
+Knowledge base trigger configurations
+Show child attributes
+knowledgeBaseTriggers[].idstringrequired
+Unique trigger ID (UUID v4)
+Example:550e8400-e29b-41d4-a716-446655440000
+knowledgeBaseTriggers[].modestringrequired
+"all" matches every query; "custom" is conditional
+Available optionsallcustom
+knowledgeBaseTriggers[].knowledgeBaseIdsstring[]required
+KB IDs assigned to this trigger (max 7 for "all", max 5 for "custom")
+Example:["kb_001"]
+knowledgeBaseTriggers[].triggerConditionstringrequired
+Free-text condition (empty string for "all" mode, required for "custom")
+Example:When the customer asks about pricing or billing
+knowledgeBaseTriggers[].prioritynumberrequired
+Priority (lower number = higher priority). Custom-mode triggers must use unique values in 1-3; priority 4 is reserved for the all-mode fallback trigger.
+Example:2
+workingHoursobjectnullable
+Working-hours schedule for this agent, or null when not configured. Manage it via the /working-hours routes.
+Show child attributes
+workingHours.enabledbooleanrequired
+Master toggle for working hours.
+Example:false
+workingHours.channelsstring[]required
+Channels the gate applies to. Must be non-empty when enabled.
+Available optionsSMSEmailWhatsAppIGFBWebChatLive_ChatTIKTOK
+Example:["SMS","WhatsApp"]
+workingHours.timezoneModestringrequired
+Available optionscontactbusiness
+workingHours.scheduleobjectrequired
+Show child attributes
+workingHours.schedule.monobjectrequired
+Show child attributes
+workingHours.schedule.mon.enabledbooleanrequired
+Example:true
+workingHours.schedule.mon.slotsobject[]required
+Show child attributes
+workingHours.schedule.mon.slots[].startHournumberrequired
+Possible values: >= 0 and <= 23
+Example:9
+workingHours.schedule.mon.slots[].startMinutenumberrequired
+Possible values: >= 0 and <= 59
+Example:0
+workingHours.schedule.mon.slots[].endHournumberrequired
+Possible values: >= 0 and <= 23
+Example:17
+workingHours.schedule.mon.slots[].endMinutenumberrequired
+Possible values: >= 0 and <= 59
+Example:0
+workingHours.schedule.tueobjectrequired
+Show child attributes
+workingHours.schedule.tue.enabledbooleanrequired
+Example:true
+workingHours.schedule.tue.slotsobject[]required
+Show child attributes
+workingHours.schedule.tue.slots[].startHournumberrequired
+Possible values: >= 0 and <= 23
+Example:9
+workingHours.schedule.tue.slots[].startMinutenumberrequired
+Possible values: >= 0 and <= 59
+Example:0
+workingHours.schedule.tue.slots[].endHournumberrequired
+Possible values: >= 0 and <= 23
+Example:17
+workingHours.schedule.tue.slots[].endMinutenumberrequired
+Possible values: >= 0 and <= 59
+Example:0
+workingHours.schedule.wedobjectrequired
+Show child attributes
+workingHours.schedule.wed.enabledbooleanrequired
+Example:true
+workingHours.schedule.wed.slotsobject[]required
+Show child attributes
+workingHours.schedule.wed.slots[].startHournumberrequired
+Possible values: >= 0 and <= 23
+Example:9
+workingHours.schedule.wed.slots[].startMinutenumberrequired
+Possible values: >= 0 and <= 59
+Example:0
+workingHours.schedule.wed.slots[].endHournumberrequired
+Possible values: >= 0 and <= 23
+Example:17
+workingHours.schedule.wed.slots[].endMinutenumberrequired
+Possible values: >= 0 and <= 59
+Example:0
+workingHours.schedule.thuobjectrequired
+Show child attributes
+workingHours.schedule.thu.enabledbooleanrequired
+Example:true
+workingHours.schedule.thu.slotsobject[]required
+Show child attributes
+workingHours.schedule.thu.slots[].startHournumberrequired
+Possible values: >= 0 and <= 23
+Example:9
+workingHours.schedule.thu.slots[].startMinutenumberrequired
+Possible values: >= 0 and <= 59
+Example:0
+workingHours.schedule.thu.slots[].endHournumberrequired
+Possible values: >= 0 and <= 23
+Example:17
+workingHours.schedule.thu.slots[].endMinutenumberrequired
+Possible values: >= 0 and <= 59
+Example:0
+workingHours.schedule.friobjectrequired
+Show child attributes
+workingHours.schedule.fri.enabledbooleanrequired
+Example:true
+workingHours.schedule.fri.slotsobject[]required
+Show child attributes
+workingHours.schedule.fri.slots[].startHournumberrequired
+Possible values: >= 0 and <= 23
+Example:9
+workingHours.schedule.fri.slots[].startMinutenumberrequired
+Possible values: >= 0 and <= 59
+Example:0
+workingHours.schedule.fri.slots[].endHournumberrequired
+Possible values: >= 0 and <= 23
+Example:17
+workingHours.schedule.fri.slots[].endMinutenumberrequired
+Possible values: >= 0 and <= 59
+Example:0
+workingHours.schedule.satobjectrequired
+Show child attributes
+workingHours.schedule.sat.enabledbooleanrequired
+Example:true
+workingHours.schedule.sat.slotsobject[]required
+Show child attributes
+workingHours.schedule.sat.slots[].startHournumberrequired
+Possible values: >= 0 and <= 23
+Example:9
+workingHours.schedule.sat.slots[].startMinutenumberrequired
+Possible values: >= 0 and <= 59
+Example:0
+workingHours.schedule.sat.slots[].endHournumberrequired
+Possible values: >= 0 and <= 23
+Example:17
+workingHours.schedule.sat.slots[].endMinutenumberrequired
+Possible values: >= 0 and <= 59
+Example:0
+workingHours.schedule.sunobjectrequired
+Show child attributes
+workingHours.schedule.sun.enabledbooleanrequired
+Example:true
+workingHours.schedule.sun.slotsobject[]required
+Show child attributes
+workingHours.schedule.sun.slots[].startHournumberrequired
+Possible values: >= 0 and <= 23
+Example:9
+workingHours.schedule.sun.slots[].startMinutenumberrequired
+Possible values: >= 0 and <= 59
+Example:0
+workingHours.schedule.sun.slots[].endHournumberrequired
+Possible values: >= 0 and <= 23
+Example:17
+workingHours.schedule.sun.slots[].endMinutenumberrequired
+Possible values: >= 0 and <= 59
+Example:0
+workingHours.continueConversationsobjectrequired
+Show child attributes
+workingHours.continueConversations.enabledbooleanrequired
+Example:true
+workingHours.continueConversations.inactivityTimeoutobjectrequired
+Show child attributes
+workingHours.continueConversations.inactivityTimeout.valuenumberrequired
+5–1440 for minutes, 1–24 for hours (5 min – 24 h). Exact bound depends on unit.
+Possible values: >= 1 and <= 1440
+Example:15
+workingHours.continueConversations.inactivityTimeout.unitstringrequired
+Available optionsminuteshours
+workingHours.offHoursAutoReplyobjectrequired
+Show child attributes
+workingHours.offHoursAutoReply.enabledbooleanrequired
+Example:false
+workingHours.offHoursAutoReply.messagestringrequired
+Example:Thanks for reaching out! We're currently outside of business hours.
+workingHours.offHoursAutoReply.sendNotificationboolean
+Example:false
+workingHours.offHoursAutoReply.notificationConfigobjectnullable
+Show child attributes
+workingHours.offHoursAutoReply.notificationConfig.emailNotificationobjectrequired
+Show child attributes
+workingHours.offHoursAutoReply.notificationConfig.emailNotification.enabledboolean
+Example:false
+workingHours.offHoursAutoReply.notificationConfig.emailNotification.notifyAdminsbooleanrequired
+Example:false
+workingHours.offHoursAutoReply.notificationConfig.emailNotification.notifyAllUsersbooleanrequired
+Example:false
+workingHours.offHoursAutoReply.notificationConfig.emailNotification.notifyAssignedUserbooleanrequired
+Example:false
+workingHours.offHoursAutoReply.notificationConfig.emailNotification.notifySpecificUsersbooleanrequired
+Example:false
+workingHours.offHoursAutoReply.notificationConfig.emailNotification.specificUserIdsstring[]required
+Possible values: <= 1000
+Example:[]
+workingHours.offHoursAutoReply.notificationConfig.emailNotification.notifyCustomEmailbooleanrequired
+Example:false
+workingHours.offHoursAutoReply.notificationConfig.emailNotification.customEmailstringrequired
+Comma-separated emails. May be empty; a blank value simply yields no custom recipient.
+Example:
+workingHours.offHoursAutoReply.notificationConfig.contactTagsstring[]required
+Possible values: <= 500
+Example:[]
+workingHours.followUpobjectrequired
+Show child attributes
+workingHours.followUp.enabledbooleanrequired
+Example:false
+workingHours.followUp.messagestringrequired
+Example:Hi {{contact.name}}, we're here now and happy to help.
+workingHours.employeeIdstringrequired
+AI employee id this config belongs to.
+Example:wK36brxPYCOikC85FkbA
+workingHours.createdAtstring<date-time>
+ISO-8601 creation time.
+workingHours.updatedAtstring<date-time>
+ISO-8601 last-update time.
+Previous
+Agents
+Next
+Search Agents

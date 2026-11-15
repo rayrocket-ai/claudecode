@@ -1,0 +1,84 @@
+URL: https://help.gohighlevel.com/support/solutions/articles/48001207115-saas-wallet-credit-management-sub-account-level | Read: 2026-11-15 | Method: curl | HTTP 200
+Private reference copy for Ray. Text only. Not for republication or reuse; the content belongs to its publisher.
+SaaS Wallet Credit Management - Sub Account Level
+Modified on: Thu, 5 Mar, 2026 at 3:49 AM
+Covered in this article:
+What is SaaS Wallet?
+Where can the wallet be accessed from?
+How to view the wallet transaction history?
+How to Recharge Wallet?
+1. Auto Recharge Settings
+2. Charge Client's Card Manually (Add Balance)
+3. Monthly Complimentary Credits
+4. Add Complimentary Credits from Agency View
+How to Remove Credits from the wallet?
+1. Complimentary Credits
+2. Non-Complimentary Credits
+How to Issue Refunds for Non-Complimentary Credits
+Wallet Recharge Retries
+1. SaaS Wallets (for telephone & email rebilling)
+2. Agency Wallets (for ISV)
+What is SaaS Wallet?
+To charge the client for Twilio and Email rebilling, the system uses their wallet. The agency owner/ client recharges their wallet using the client's credit card which adds messaging credits to the location wallet. Each time a message/ email is sent, call is made, or a phone number is purchased, the wallet credits are debited.
+Please Note: 
+Some charges in the wallet may appear after 6 - 24 hours.
+The wallet is recharged when it reaches the minimum balance set in the Company Billing settings. The client's card is attached to the wallet for all charges. The wallet can also be recharged with complimentary (free) monthly/ one-time credits.
+Now, each time a message is sent, Twilio / Mailgun will charge the agency, and the system will charge the client's wallet based on rebilling settings. So for example the client sent 100 messages worth $10 and rebilling was set to 5x, the agency will be charged $10 by Twilio, and the client's wallet will be charged $50.
+Please Note: 
+When the wallet is recharged, the client's card is charged and these charges are sent into the Agency's Stripe account. So the client is paying the agency for these wallet credits.
+Where Can the Wallet Be Accessed From?
+The wallet is found in the Sub Account Settings > Company Billing
+Refunding Wallet Credits
+Wallet credits and Stripe payments are related but not automatically synchronized after credits are spent.
+If a client has:
+Added $100 to their Wallet
+Used $40 in Wallet credits
+Remaining Wallet balance = $60
+You cannot refund $100 in Stripe unless you first adjust the Wallet balance.
+Only refund the amount that matches the remaining wallet balance. If you refund more than the wallet balance, you create a financial mismatch between Stripe and Wallet credits.
+How to View the Wallet Transaction History?
+You can view the wallet transaction history from Settings > Company Billing > Credits > See Details:
+How to Recharge Wallet?
+The wallet can be recharged in several ways.
+1. Auto Recharge Settings
+In the Company Billing > Credits section, you can find the auto recharge settings with 2 options. The amount entered in the 'Auto Recharge with' field will be added to the wallet each time the balance is lower than the amount set in the 'when balance lower than' field.
+2. Charge Client's Card Manually (Add Balance)
+Using the 'Add Balance' button in Company Billing, you can recharge the client's wallet. This method will charge the client's primary card added in the Company Billing settings
+3. Monthly Complimentary Credits
+If the subaccount is on a SaaS Plan, you can set an amount of credits to be granted to the subaccount on monthly basis. These credits will be added to the client's wallet each month. These credits can be modified for each SaaS Plan from the SaaS Configurator.
+Trial behavior (Complimentary Credits)
+If your SaaS plan has a trial, the agency can choose to issue complimentary credits:
+Immediately upon sign-up, or
+Only after the trial ends using the “Add credits after trial period ends” toggle.
+When enabled, no credits are issued until the trial converts. Recurring credits start at trial conversion and follow the billing cycle from that point forward. If rollover is enabled, it applies only after the first credit issuance.
+The amount for these credits can also be changed for each subaccount (which is on a SaaS Plan) individually. The individual settings can be accessed from Agency View > Accounts > View Details:
+4. Add Complimentary Credits from Agency View
+In the Agency View > Accounts > View Details > Manage Credits, you can also add complimentary credits to the client's wallet directly. These credits are not charged to anyone. Once the client uses these credits to send out messages/ calls, then the agency owner is charged for those messages/ calls, but the client is not charged since these credits were given for free.
+If you refund the full original Stripe transaction after part of the wallet credits were already used:
+The wallet usage history remains.
+You may create negative balance or reconciliation issues.
+The platform does not automatically recalculate previously used wallet credits.
+How to Remove Credits from the Wallet?
+1. Complimentary Credits
+These credits can be removed by using the 'Debit' option in the Agency View > Accounts > View Details > Manage Credits. The Debit option only removes the balance from the wallet, it does not refund the amount in Stripe, so if you want to remove original (non-complimentary) credits, you will need to follow an additional step mentioned in the next paragraph.
+2. Non-Complimentary Credits
+To remove these credits: 
+1. Use the same 'Debit' option mentioned above.
+2. You will also need to issue a refund for these credits from your Stripe account by following the steps mentioned below.
+How to Issue Refunds for Non-Complimentary Credits
+1. Go to the Stripe account connected in your Agency Settings > Stripe
+2. Find the client's Stripe customer associated with their subaccount 
+3. In the 'Payments' section for this customer, find the payment for the addition of credits and click the 'Refund payment' button against that payment
+That's it, you're all set! :)
+Wallet Recharge Retries
+1. SaaS Wallets (for telephone & email rebilling)
+We will try to automatically charge the wallet a maximum of 7 times (7 attempts x 1 attempt/day).
+If all 7 attempts fail we will stop automatic retries.
+We will notify the agency admins
+We will notify the location admins
+2. Agency Wallets (for ISV)
+We will try to automatically charge the wallet a maximum of 12 times (3 days x 4 attempts/day).
+If all 12 attempts fail we will stop automatic retries
+We will notify the agency admins
+Please Note: 
+We are making this change because repeated retries were causing the suspension of Stripe accounts. Once we give up manual retries, users will be able to recharge manually and that will reset our counter and automatic retries will start again.

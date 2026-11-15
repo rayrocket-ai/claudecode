@@ -1,0 +1,58 @@
+URL: https://www.hexonasystems.com/privacy | Read: 2026-11-15 | Method: curl | HTTP 200
+Private reference copy for Ray. Text only. Not for republication or reuse; the content belongs to its publisher.
+Privacy Policy · Hexona Systems
+Skip to content
+Hexona SystemsAI EmployeesIndustriesCase StudiesBlogAbout
+Book a free consult
+AI EmployeesIndustriesCase StudiesBlogAboutBook a free consult
+Last updated · November 7, 2026
+Privacy Policy
+This policy explains what personal information Hexona Systems collects through hexonasystems.com, why, and what we do with it. We handle personal information in accordance with Canada's Personal Information Protection and Electronic Documents Act (PIPEDA).
+What we collect
+We only collect personal information when you submit the intake form. That form asks for your name, email address, phone number, company name and website, approximate revenue and headcount, the systems your business runs on, why you are enquiring, and your preferred timing.
+When you submit the form we also record your IP address and the time of submission.
+Simply browsing the site does not require you to give us any personal information.
+Cookies and tracking
+We use Vercel Web Analytics to count visits and see which pages are read and which sites refer visitors to us. It does not use cookies or store IP addresses.
+We also use Google Analytics, loaded through Google Tag Manager, to understand how visitors find and use the site. Google Analytics sets cookies and collects information such as the pages you visit, how long you stay, your approximate location and your device and browser. Google processes this information under its own privacy policy. You can opt out with the Google Analytics opt-out browser add-on (tools.google.com/dlpage/gaoptout) or by blocking cookies in your browser.
+We use Microsoft Clarity to see how visitors use our pages, through heatmaps and recordings of clicks, scrolling and mouse movement. Clarity sets cookies and masks text you type into forms. Microsoft processes this information under its own privacy statement. You can block it by blocking cookies in your browser.
+The site does not use advertising cookies or tracking pixels. Our hosting provider keeps standard server logs, such as IP addresses and requested pages, for security and operational purposes.
+How we use it
+We use the information you submit to assess whether we can help, to respond to your enquiry, to schedule and prepare for a conversation, and to keep a record of our correspondence with you.
+We use your IP address to prevent spam and abuse of the form.
+We do not sell, rent or trade personal information, and we do not use it for purposes unrelated to your enquiry without your consent. We will not add you to a marketing list without your consent, and you can withdraw that consent at any time.
+Who we share it with
+We use a small number of service providers to operate the site and our business: Vercel, which hosts the site; GoHighLevel, the customer relationship management system that receives form submissions; and Upstash, which processes IP addresses for rate limiting. They process information on our behalf and only for these purposes.
+These providers may store and process information outside Canada, including in the United States, where it may be accessible to authorities under local law.
+We may also disclose information where required by law.
+Client engagements
+Information and system access you provide during a paid engagement is governed by the confidentiality and data-handling terms of that engagement agreement, not by this policy.
+How long we keep it
+We keep enquiry information for as long as it is needed to respond to you and maintain a record of our relationship, and then delete or anonymise it. You can ask us to delete it sooner.
+How we protect it
+Information is transmitted over encrypted connections and stored with providers that maintain industry-standard security. Access is limited to the people who need it to respond to you. No method of transmission or storage is completely secure, and we cannot guarantee absolute security.
+Your rights
+You can ask to see the personal information we hold about you, to correct it, or to withdraw your consent and have it deleted. Email hamza@hexonasystems.com and we will respond within 30 days.
+If you are not satisfied with our response, you can contact the Office of the Privacy Commissioner of Canada.
+Changes
+We may update this policy from time to time. The date at the top of this page shows when it last changed.
+Contact
+Questions about this policy or your information can go to our privacy contact, Hamza Baig: Hexona Systems, 18 Harbour Street, Toronto, ON, Canada. hamza@hexonasystems.com.
+Find out what’s holding your value back.
+A free one-hour consult. We’ll look at your numbers and tell you which AI employee would move them first. Straight answers, no sales script.
+Book a free consult →
+Hexona Systems
+AI employees that increase enterprise value.
+18 Harbour Street, Toronto, ONServing the United States and Canadahamza@hexonasystems.com
+Explore
+AI Employees
+Industries
+Case Studies
+Blog
+About
+Company
+Book a free consult
+Privacy
+Terms
+Client login
+© Hexona Systems 2026

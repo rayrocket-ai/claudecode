@@ -1,0 +1,61 @@
+URL: https://marketplace.gohighlevel.com/docs/ghl/workflows/get-workflow-definition | Read: 2026-11-15 | Method: curl | HTTP 200
+Private reference copy for Ray. Text only. Not for republication or reuse; the content belongs to its publisher.
+WorkflowsVersion: v3
+Get Workflow Definition
+GET/workflows/{workflowId}/definition
+Try it
+Limited availability. The workflow API is currently enabled for selected sub-accounts only; any other sub-account receives 403 WORKFLOW_API_NOT_ENABLED_FOR_LOCATION.
+Read a workflow as a complete definition. The definition object is accepted verbatim by Update Workflow Definition, so it round-trips.
+The definition's version is the workflow's own counter. Leave it as it comes back: sending it unchanged on update is what stops a concurrent edit in the builder from being silently overwritten.
+Authorizations
+Authorizationstringheaderrequired
+Bearer authentication header of the form Bearer <token>, where <token> is your access token.
+Scope:workflows.readonly
+Auth methods:OAuthPrivate Integration
+Token type:Sub-Account Token
+Request​
+Headers
+Versionstringrequired
+API Version. Send v3.
+Available optionsv3
+Example:v3
+Path Parameters
+workflowIdstringrequired
+Workflow ID
+Example:b1b0de82-3efb-4d63-83f6-13c50aef208c
+Query Parameters
+locationIdstringrequired
+Sub-account (location) ID the workflow belongs to
+Example:ve9EPM428h8vShlRW1KT
+Response
+200
+application/json
+Successful response
+workflowIdstringrequired
+Workflow ID
+Example:b1b0de82-3efb-4d63-83f6-13c50aef208c
+statusstringrequired
+Whether the workflow is live. Read-only here — change it with Update Workflow Status, which is gated by the workflows.publish scope. It sits outside definition because the definition is sent back verbatim to Update Workflow Definition.
+Available optionsdraftpublished
+Example:draft
+definitionobjectrequired
+The definition, in the same shape Update Workflow Definition accepts.
+Show child attributes
+definition.property name*any
+The definition, in the same shape Update Workflow Definition accepts.
+warningsobject[]required
+Non-blocking findings
+Show child attributes
+warnings[].pathstring
+Path within the definition
+Example:actions[4]
+warnings[].messagestring
+What to be aware of
+Example:Action 'orphan-step' has no incoming edges and may be unreachable.
+warnings[].typestring
+Step type the warning relates to
+Example:sms
+Previous
+Create Workflow
+Next
+Update Workflow Definition

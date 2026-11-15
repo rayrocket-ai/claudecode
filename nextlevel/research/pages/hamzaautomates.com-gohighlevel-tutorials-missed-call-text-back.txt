@@ -1,0 +1,291 @@
+URL: https://hamzaautomates.com/gohighlevel/tutorials/missed-call-text-back | Read: 2026-11-15 | Method: curl | HTTP 200
+Private reference copy for Ray. Text only. Not for republication or reuse; the content belongs to its publisher.
+Missed Call Text Back in GoHighLevel: 10-Minute Setup
+GoHighLevel with Hamza Automates
+Guides▾
+UpdatesTutorialsStart an AI businessComparisonsPricingAbout Hamza30-day free trialMenu
+GoHighLevel / HighLevel tutorials / Tutorial
+Missed call text back in GoHighLevel: set it up in 10 minutes
+By Hamza Baig / Published Oct 31, 2026 / Updated Nov 6, 2026
+Heads up: the trial and plan buttons on this page use my affiliate links. If you sign up through one I get a commission. It doesn't cost you more.
+The quickest way to set up missed call text back in GoHighLevel is the built-in setting: go to Settings > Phone System > Voice > Voicemail & Missed Call Text Back, tick Enable Missed Call Text Back, write your message and save. If you want a different text after hours, the caller added to a pipeline, staff alerted and the conversation handed to AI to book the appointment, build it as a workflow on the Call Details trigger instead, which is what the steps below do.
+Missed calls are the first revenue leak I point out to any local business. Someone calls, nobody picks up, and they call the next business on Google until somebody answers. A text that goes out a minute later keeps that person talking to you, and it's the simplest automation I've ever sold.
+Start the 30-day trial + free live bootcamp →
+30 days free, HighLevel's live setup bootcamp, plus a 1:1 setup call with my team, weekly live calls and my agency resources from day one. See everything you get →
+The video version
+On this page
+01How to build the workflow version, step by step
+02The 2-minute version: the built-in setting
+03Built-in setting vs workflow: which one to use
+04How I set up the logic
+05Missed call text back message templates
+06Hand the conversation to Conversation AI to qualify and book
+07After-hours missed calls: a different text and a morning follow-up
+08Do you need A2P 10DLC registration?
+09What happens if A2P isn't approved yet
+10How much does missed call text back cost to run?
+11How to sell missed call text back to a local business
+12Why isn't my missed call text going out?
+13FAQ
+Short version
+01Built-in version: one checkbox and one message, done in two minutes. It texts every missed call, including the same person calling three times in a row.
+02Workflow version: Call Details trigger on incoming calls that are not answered, busy or go to voicemail, then a short wait, a business hours check, the text, a pipeline card and a staff alert.
+03You need a HighLevel phone number that can send SMS. For texting US numbers from a local number that means A2P 10DLC registration in the Trust Center first, plus the number linked to the approved campaign, or the texts fail with error 30034.
+04Texts cost $0.00747 per segment in the US and Canada plus a carrier fee of up to half a cent, and replies cost the same. A2P registration is $22.50 once plus a monthly campaign fee.
+05The good part: switch Conversation AI on for the caller right after the text so it answers their reply, qualifies them and books them in.
+How to build the workflow version, step by step
+01
+Get a textable number
+The business needs a number in HighLevel's phone system that can send SMS, and calls have to ring through it so HighLevel knows they were missed. For US texting from a local number, register A2P 10DLC first under Settings > Phone System > Trust Center (more on that below, and the full process is in A2P 10DLC registration). Without an SMS-eligible number the text fails and HighLevel logs the failed attempt in the conversation.
+02
+Set the ring timeout
+Go to Settings > Phone System > Voice > Voicemail & Missed Call Text Back. The incoming call timeout slider decides when a call counts as missed. HighLevel recommends 10 to 20 seconds. If you're building the workflow version, leave the Enable Missed Call Text Back box unticked here, or the caller gets two texts.
+03
+Create the workflow and add the trigger
+Automation > Workflows > Create Workflow, start from scratch (or open HighLevel's missed call recipe and edit it). Add New Trigger, pick Call Details (HighLevel's help docs also call it Call Status), name it "Missed call text back", set Call Direction to incoming and the status to not answered, busy and voicemail.
+04
+Add a short wait
+Add a Wait of about a minute. An instant reply reads like a bot. A minute later reads like someone saw the call and grabbed their phone.
+05
+Split business hours from after hours
+Add an If/Else with Date - Time conditions: Current Day of the Week for weekends, and Current Hour or Time of the Day (15 minute steps) for opening hours. One branch gets the "we're with a customer" text, the other gets the "we're closed, we'll text you first thing" text. The after-hours section below covers the morning follow-up.
+06
+Send the SMS
+Add Send SMS on each branch with the templates below. Keep each one under 160 characters with no emojis so it's billed as one segment. Use {{contact.first_name}} only with a fallback, because HighLevel only knows the name if the caller is already a contact.
+07
+Tag it, add it to the pipeline, alert someone
+Add Tag "missed call", then Create Opportunity in the lead pipeline at a "Missed call" stage so it shows up in Opportunities, then Internal Notification to the owner or front desk with the caller's number. HighLevel is phasing out the old combined Create/Update Opportunity action, so use the newer separate one.
+08
+Hand the reply to Conversation AI
+Add Update Conversation AI Bot and Status, pick your SMS booking bot and set it to Active (the bot build is in Build an AI appointment setter). Put it after the Send SMS step, because a workflow message can put the bot to sleep for that contact. Now when the caller texts back, the AI answers.
+09
+Test with a real call, then publish
+Call the number from a phone that isn't on the account and let it ring out. Check the text arrives, the tag and opportunity show up and the alert fires. Then call again after hours (or change the hours to test) and toggle Publish.
+The 2-minute version: the built-in setting
+If the business just needs a text going out today, use the setting. In the sub-account: Settings > Phone System > Voice > Voicemail & Missed Call Text Back > Missed Call Text Back. Tick Enable Missed Call Text Back, click Customize, type the message, send yourself a test from the number you want, and Save.
+A lot of guides still say this lives under Business Profile. It doesn't anymore. It's under Phone System.
+The catch is that it texts every missed call. HighLevel's own docs say the same caller trying three times in a few minutes gets three texts, and they recommend the workflow recipe with a wait or tags (1st call, 2nd call) to stop that. That's why I build the workflow for clients.
+Built-in setting vs workflow: which one to use
+Pick one, not both, or callers get two texts.
+Built-in setting
+Workflow
+Setup time
+About 2 minutes
+About 10 minutes
+Repeat callers
+Texts every missed call
+Wait, tags and conditions to stop repeats
+After-hours message
+One message for all hours
+Separate text by day and time
+Pipeline and staff alert
+No
+Create Opportunity and Internal Notification
+Hand off to AI
+Only if a bot is already primary on SMS
+Turn the bot on for that caller
+From HighLevel's help docs, read Oct 31, 2026.
+How I set up the logic
+My version triggers on any incoming call that's missed, busy or goes to voicemail. It updates the contact's name if we already know who it is, then checks how many times they've called. First call, second call and third call each get a different text. That's super important so it feels like a person and not a spam message.
+Then there's a slight delay before it sends, and the message itself is casual, something like "Hey, sorry, just tied up at the moment. What can I help you with?"
+To count calls, add a tag on the first text ("missed call 1"), then put an If/Else right after the trigger that checks for that tag and sends the second-call text instead. HighLevel also notes the trigger can fire for each status change on the same call, so the tag check stops double texts there too.
+Missed call text back message templates
+Write these for the business and keep them short. All of these fit in one 160 character segment once the business name is filled in, as long as the name is short. No emojis, because one emoji drops the segment to 70 characters.
+During hours: "Hi, it's {{location.name}}. Sorry we missed your call, we're with a customer. What can we help you with? Reply here and we'll get right back to you."
+After hours: "Hi, it's {{location.name}}. We're closed right now but we saw your call. What do you need? Reply here and we'll text you first thing in the morning."
+Second call: "Hey, saw you tried us again. Still tied up for a few minutes. Text me what you need and I'll sort it out."
+Trades on a job site: "Hi from {{location.name}}, sorry we missed you, we're out on a job. Is this for a repair or a quote? Reply here and we'll get you booked."
+Hand the conversation to Conversation AI to qualify and book
+The text gets them to reply. What happens next is where most setups fall apart, because the owner is still on the job and doesn't see the reply for two hours. The money is made in the follow-ups, so let AI take that part.
+Build the bot in AI Agents > Conversation AI. Turn on the SMS channel, set it to Autopilot (Suggestive only drafts replies for a human to send), train it on the business's website and FAQs, and give it an appointment booking goal with the right calendar. Tell it what to ask first: what they need, where they are, how soon.
+Then in the workflow, after the Send SMS step, add Update Conversation AI Bot and Status, pick that bot and set it to Active. HighLevel says a workflow message can put the bot to sleep for that contact, so it has to come after the text. The bot also goes inactive if the caller texts STOP or it hits its message limit.
+If the business wants calls answered live instead of texted back, that's a voice agent, and my full build is in Build an AI voice agent.
+There's also a call-connect version, which is speed to lead more than missed call text back. HighLevel's Call workflow action rings the contact's assigned user (or the Company Phone if nobody's assigned), plays a whisper message, then dials the lead and bridges the two. The whisper is text to speech at $0.00084 per 100 characters.
+Option
+Price
+Conversation AI included
+Pay per use
+Token based, varies by model
+Billed per conversation
+AI Employee Growth
+$50/month per sub-account
+1,000 responses a month
+AI Employee Unlimited
+$97/month per sub-account
+Unlimited, fair use
+AI Employee Starter
+$20/month
+Not included
+Conversation AI pricing from HighLevel's AI Products Pricing article, read Oct 31, 2026. Text charges are separate.
+After-hours missed calls: a different text and a morning follow-up
+After hours is where missed call text back earns its keep, because nobody is going to call that person back until morning. The If/Else in step 5 sends the "we're closed" text. Three more pieces finish the job.
+First, the morning follow-up. On the after-hours branch, after the text, add a Wait and open its Advance Window: Resume on selected days (your open days) and Resume between hours (say 8 to 9 a.m.). Then add an Internal Notification or a task so whoever opens up calls those people first. The contact sits in the Wait overnight and moves on when the window opens.
+Second, decide whether the AI works nights. Conversation AI has a Working Hours setting per agent (Settings > Labs, turn on Working Hours, then AI Agents > Conversation AI > your agent > Deploy > Working Hours). Outside the schedule the agent doesn't reply on the channels you picked. You can set an Off-Hours Auto-Reply (sent once per closed period), team notifications, contact tags and a follow-up when hours resume, and run it on the contact's timezone or the business's. If the whole point is booking the 9 p.m. caller, leave SMS out of that schedule so the bot keeps answering.
+Third, stop the phones ringing at night if the owner wants that. In Settings > My Profile > Inbound call routing, Only ring during working hours skips that user outside the schedule you pick and sends the call to the number's existing backup, voicemail or Voice AI. It's off by default and set per user. Test one after-hours call before you rely on it, and make sure your missed call trigger covers calls that end in voicemail.
+Do you need A2P 10DLC registration?
+Yes, if you're texting US numbers from a regular 10 digit local number, which is what most missed call text back setups do. Carriers want to know who's sending, what they're sending and how people agreed to get it. In HighLevel it's Settings > Phone System > Trust Center.
+You register a Brand (the business, with its legal name and EIN exactly as on file, or Sole Proprietor if there's no tax ID) and a Campaign (the use case, sample messages and how people opt in). Have a live website with a privacy policy ready before you start. Put the missed call text in as a sample message.
+Toll-free numbers skip A2P and go through toll-free verification instead. Canadian numbers bought on or after March 26, 2025 need A2P or Persona verification even for Canada-only texting.
+If none of the business's numbers can text, HighLevel tries another eligible number in the account, and if there isn't one, the failed text shows up in the conversation with the reason.
+Type
+Daily limit
+Monthly campaign fee
+One-time fee
+Sole Proprietor
+3,000 segments
+Up to $2.10
+$22.50
+Low Volume
+6,000 segments
+$1.50 to $10.50
+$22.50
+High Volume
+600,000 segments
+$10.50
+$64.00
+A2P fees from HighLevel's LC Phone Pricing & Billing Guide, read Oct 31, 2026. Fees start on submission, approved or not. Resubmissions are free since Feb 1, 2026.
+What happens if A2P isn't approved yet
+The texts fail and nothing pings you. The workflow still runs, the caller just never gets the message, and you only find out if you open the conversation.
+Here's what you see: in Conversations the text is marked Unsuccessful with a red warning next to it. Hover over it for the error code and a Learn More link. For a local US number the usual one is 30034, which means the number isn't fully registered for A2P. HighLevel doesn't retry a failed text on its own, so fix the cause first.
+The fix for 30034: approval doesn't link your numbers by itself. Go to Settings > Phone System > Phone Numbers, click the three dots next to the number, choose Select A2P campaign to Link and pick the approved campaign. A green A2P Verified label shows up under it. Carriers can take up to 24 hours after approval to switch it on, and a Sole Proprietor registration only covers one local number, so a second local number in that sub-account can still hit 30034.
+If that option isn't there, the Brand or Campaign isn't approved yet. The full registration is in A2P 10DLC registration, and if it came back rejected, the fixes are in A2P rejected? Fixes.
+So it never fails quietly again, build a second workflow on the Messaging Error - SMS trigger, filter Error Code to 30034, 30032 and 30033, and add an Internal Notification to whoever owns the account. Don't make it resend the text automatically. HighLevel warns that repeat sends to unregistered or filtered numbers hurt your messaging health.
+Error
+What it means
+Fix
+30034
+Number not fully registered for A2P
+Link the number to the approved campaign, allow 24 hours
+30032
+Toll-free number not verified
+Finish toll-free verification
+30033
+A2P campaign suspended
+Contact HighLevel support
+21661
+Sending number can't send SMS
+Use or buy an SMS-capable number
+From HighLevel's Understanding Common SMS Delivery Errors and Error 30034 articles, read Nov 6, 2026.
+How much does missed call text back cost to run?
+Pennies. A local number is $1.15 a month. Each text is $0.00747 per segment in the US and Canada, plus the recipient's carrier fee ($0.0035 on AT&T up to $0.0050 on Verizon for outbound). Replies are billed too, at the same SMS rate plus inbound carrier fees.
+So one short text to a Verizon customer is about $0.0125, and 100 missed calls a month is roughly $1.25 for the first texts, before replies and any AI. Calls themselves are billed per minute: $0.01165 a minute inbound to the app, or $0.02 a minute if the number forwards to the owner's cell.
+HighLevel charges every text it tries to deliver, even if it bounces, and adds a 5% markup on carrier and A2P fees at the sub-account when you have rebilling on.
+Item
+Price (US/Canada)
+Local number
+$1.15/month
+SMS out or in
+$0.00747 per segment
+Carrier fee, SMS out
+$0.0035 to $0.0050 per segment
+Inbound call (app, mobile, desk phone)
+$0.01165/minute
+Inbound call forwarded to a US number
+$0.02/minute
+Segment size
+160 characters, or 70 with an emoji
+From HighLevel's LC Phone Pricing & Billing Guide and How to Calculate SMS and MMS Costs, read Oct 31, 2026.
+How to sell missed call text back to a local business
+I tell business owners I find revenue leaks, I plug them, and they pay me monthly to keep them plugged. Missed calls are the first leak I show them.
+Here's the test I use. Find businesses on the first page of Google Maps (they get lots of calls), then call them at 8 or 9 p.m. If nobody picks up and nobody texts or calls back, write it down. Then call during the day and open with it: "Hey, I called you guys after hours. Nobody picked up and nobody got back to me for a day or two." You've shown them the problem before you've pitched anything.
+The best fits are businesses where the owner is the one doing the work: plumbers, electricians, lawn care, tire shops. They're on a job and can't answer. Realtors are good too, they're busy and every missed call is a big deal.
+To show the value, I use a simple calculator with three inputs: their average customer value, missed calls per month and close rate. Ask them for the close rate on the call. After it's live, their Call Report shows the missed first-time callers, so the numbers sell it for you every month.
+You could build this for a local business and charge a setup fee plus a monthly fee you set. Then the AI booking and a voice agent are the natural next things to add. I run my agency on HighLevel, and the full playbook for finding and closing these clients is in Start an AI automation agency.
+Start the 30-day trial on Unlimited →
+Why isn't my missed call text going out?
+Check in this order: A2P or toll-free verification is approved for at least one number, the built-in setting or the workflow is actually on (and published), the call really rang through a HighLevel number, the timeout isn't so long that someone's voicemail picks up first, and the contact isn't on DND. Open the contact's conversation, because a failed text shows there with the reason. Error 30034 means the number isn't linked to an approved A2P campaign yet (see the A2P section above).
+Getting two texts? You've got the built-in setting and a workflow both on. Turn one off.
+Using HighLevel's "use your own phone number" feature? That's outbound calling only, so inbound missed calls still ring on the old phone and HighLevel never sees them.
+Want to set this up live with a coach?
+The bootcamp link gets you a seat in HighLevel's free live setup class, every weekday at 11am CT, plus a 1:1 setup call with my team. It's the start with the most help.
+Start the 30-day trial + free live bootcamp →
+30 days free, HighLevel's live setup bootcamp, plus a 1:1 setup call with my team, weekly live calls and my agency resources from day one. See everything you get →
+From my own account
+The first automation I sold a tire shop client in Toronto was just a very simple missed call text back. The owner works in the shop himself, so in the busy winter tire season there's nobody manning the phones full time. HighLevel's Call Report shows first-time callers whose calls were missed, and that's the number I look at, because repeat callers are often existing customers checking on an order.
+Start the 30-day trial + free live bootcamp →
+30 days free, HighLevel's live setup bootcamp, plus a 1:1 setup call with my team, weekly live calls and my agency resources from day one. See everything you get →
+Other ways to start
+My bonuses come with every one of these.
+Best if you're not sure which plan you need
+Compare all 3 plans first
+HighLevel's own pricing page with Starter ($97), Unlimited ($297) and Founder ($497) side by side, monthly and yearly. Every plan there has a 14-day free trial.
+Compare the plans →Read more
+Best if you'll resell HighLevel as your own software
+Go straight to the $497 Founder plan
+HighLevel's top plan (it used to be called Agency Pro), with a 14-day free trial. Everything in Unlimited plus SaaS mode, rebilling with your own markup, Founders Club and HighLevel Partner Network access. For when you're ready to resell the software, not for day one.
+See the Founder plan →Read more
+FAQ
+What is missed call text back?+
+An automatic text sent to someone whose call you didn't answer, like "Sorry we missed your call, what can we help with?" It keeps the caller talking to you by text so they don't call a competitor.
+Where is missed call text back in GoHighLevel?+
+In the sub-account under Settings > Phone System > Voice > Voicemail & Missed Call Text Back. Older guides say Business Profile, but it moved to Phone System.
+Does missed call text back work after hours?+
+Yes. The built-in setting sends the same text at any hour. A workflow with an If/Else on the day and time lets you send a different after-hours message.
+Can I stop it texting the same person over and over?+
+Not with the built-in setting, which texts every missed call. Build it as a workflow and use a tag or a wait so repeat callers get one text or a different second message, as HighLevel recommends.
+Does missed call text back need A2P registration?+
+Yes for texting US numbers from a local 10 digit number. Register the Brand and Campaign in Settings > Phone System > Trust Center. Toll-free numbers need toll-free verification instead.
+Why does my missed call text fail with error 30034?+
+The sending number isn't fully registered for A2P. Approving the campaign doesn't link your numbers, so go to Settings > Phone System > Phone Numbers, use the three-dot menu to link the number to the approved campaign, and allow up to 24 hours. Sole Proprietor registrations only cover one local number.
+Will Conversation AI answer a caller who texts back after hours?+
+Yes, unless you've turned on Working Hours for that agent and included SMS. Then it stays quiet outside the schedule and can send an Off-Hours Auto-Reply and follow up when hours resume instead.
+Can the missed call text back go out on WhatsApp?+
+Not from the SMS feature. HighLevel has a separate Missed Call WhatsApp Back feature for that.
+Can AI reply to the caller after the text?+
+Yes. Add Update Conversation AI Bot and Status to the workflow after the text and set an SMS bot to Active. With a booking goal it can qualify the caller and book them into the calendar.
+Sources / last checked Nov 6, 2026
+HighLevel help docs: Missed Call Text Back and Call Status trigger. "Where and How to Configure the Missed Call Text Back Feature" (modified Sep 7, 2026) and "Workflow Trigger - Call Status" (modified Jul 24, 2026) on help.gohighlevel.com, read Oct 31, 2026.
+HighLevel help docs: Conversation AI. Conversation AI Bot Explained, Update Conversation AI Bot and Status, Bot Status for Individual Contacts and AI Products Pricing on help.gohighlevel.com, read Oct 31, 2026.
+HighLevel help docs: phone, SMS and A2P. LC Phone Pricing & Billing Guide (modified Oct 12, 2026), How to Calculate SMS and MMS Costs, and A2P 10DLC Registration: Brand and Campaign Registration (modified Sep 4, 2026), read Oct 31, 2026.
+HighLevel help docs: failed texts and A2P linking. "Understanding Common SMS Delivery Errors" (help.gohighlevel.com/support/solutions/articles/48001208912, modified Oct 28, 2026), "Error 30034: Linking a Phone Number to an Approved A2P Campaign" (articles/155000008316, modified Oct 13, 2026) and "Workflow Trigger - Messaging Error - SMS" (articles/155000003201, modified May 27, 2025), read Nov 6, 2026.
+HighLevel help docs: after hours and call connect. "Workflow Action - Wait" (help.gohighlevel.com/support/solutions/articles/155000002470, modified Sep 7, 2026), "Working Hours for Conversation AI" (articles/155000008713, modified Oct 7, 2026), "LC Phone Inbound Call Routing by Working Hours" (articles/155000008268, modified Sep 9, 2026) and "Workflow Action - Call" (articles/155000003274, modified Jul 31, 2026), read Nov 6, 2026.
+HighLevel changelog. "If/Else Action Major Upgrades" (Oct 3, 2024) for the Time of the Day condition, and the opportunity workflow actions entry, read Oct 31, 2026.
+My videos. "Use My ROI Calculator Hack to Close Your First Client (MCTB)" (Mar 2024), "How To ACTUALLY Start An AI Automation Agency (Beginners Guide)" (Jul 2026) for revenue leaks and the after-hours call test, my Day 11 short on the missed call workflow (Sep 2025), and my tire shop walkthrough (Jan 2025).
+Author
+Hamza Baig / Hamza Automates
+Founder, Hexona Systems
+I run Hexona Systems on GoHighLevel. HighLevel gave it the SaaSpreneur Platinum award in 2024 and Diamond in 2025 and 2026, and I spoke at their LevelUp event in 2026. Hexona powers 1,000+ agencies, we've served 1,500+ businesses, and I've taught 45,000+ students. Everything on this hub is something I use myself or have shown on camera.
+Platinum SaaSpreneur2024
+Diamond SaaSpreneur2025, 2026
+LevelUp speaker2026
+YouTube subscribers, Oct 202634,200
+YouTube ↗
+Skool ↗
+Hexona Systems ↗
+Keep reading
+TutorialFacebook lead adsConnect Facebook lead ads to GoHighLevel: page and form, field mapping, the Lead Form Submitted trigger, instant alerts, a 5-minute follow-up and sync fixes.TutorialBuild an AI voice agentBuild an AI voice agent or receptionist in GoHighLevel: the 2026 builder, prompt, knowledge base, booking, deploy, the settings I use, and what it costs.GuideStart an AI automation agencyMy step-by-step for starting an AI automation agency for local businesses: find revenue leaks, sell the fix, run it all on GoHighLevel. No coding needed.
+Start the 30-day trial + free live bootcamp →
+30 days + live bootcamp + 1:1 setup call + my bonus / affiliate link
+GoHighLevel with Hamza Automates
+Some links on this site are affiliate links. If you sign up for HighLevel through them I get a commission. It doesn't cost you more.
+Start here
+30-day free trial
+Free live bootcamp
+What you get (my bonus)
+Pricing
+Guides
+Real estate
+Phone system
+Student reviews
+Founder plan ($497)
+Founder vs SaaS Pro
+GoHighLevel AI tools
+Is Hamza Automates legit?
+Usage fees
+GoHighLevel workflows
+White label guide
+GoHighLevel snapshots
+GoHighLevel CRM guide
+GoHighLevel alternatives
+SaaS mode guide
+GoHighLevel review
+Browse
+Updates
+Tutorials
+Start an AI business
+Comparisons
+About Hamza
+RSS feed
+Learn with me
+YouTube ↗
+Free Skool community ↗

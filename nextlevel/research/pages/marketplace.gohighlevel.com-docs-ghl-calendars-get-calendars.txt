@@ -1,0 +1,393 @@
+URL: https://marketplace.gohighlevel.com/docs/ghl/calendars/get-calendars | Read: 2026-11-15 | Method: curl | HTTP 200
+Private reference copy for Ray. Text only. Not for republication or reuse; the content belongs to its publisher.
+CalendarsVersion: v3
+Get Calendars
+GET/calendars
+Try it
+Get all calendars in a location.
+Authorizations
+Authorizationstringheaderrequired
+Bearer authentication header of the form Bearer <token>, where <token> is your access token.
+Scope:calendars.readonly
+Auth methods:OAuthPrivate Integration
+Token type:Sub-Account Token
+Request​
+Headers
+Versionstringrequired
+API Version
+Available optionsv3
+Example:v3
+Query Parameters
+locationIdstringrequired
+Location Id
+Example:ve9EPM428h8vShlRW1KT
+groupIdstring
+Group Id
+Example:BqTwX8QFwXzpegMve9EQ
+showDraftedboolean
+Show drafted
+Default:true
+Example:false
+Response
+200
+application/json
+Successful response
+calendarsobject[]
+List of calendars
+Show child attributes
+calendars[].isActiveboolean
+Should the created calendar be active or draft
+Default:true
+Example:true
+calendars[].notificationsobject[]deprecated
+🚨 Deprecated! Please use 'Calendar Notifications APIs' instead.
+Show child attributes
+calendars[].notifications[].typestring
+Calendar Notification
+Available optionsemail
+Example:email
+calendars[].notifications[].shouldSendToContactbooleanrequired
+Send notification to contact
+Example:false
+calendars[].notifications[].shouldSendToGuestbooleanrequired
+Send notification to guest
+Example:false
+calendars[].notifications[].shouldSendToUserbooleanrequired
+Send notification to user
+Example:false
+calendars[].notifications[].shouldSendToSelectedUsersbooleanrequired
+Send notification to selected users
+Example:false
+calendars[].notifications[].selectedUsersstringrequired
+Comma separated emails
+Example:[email protected],[email protected]
+calendars[].locationIdstringrequired
+Location ID
+Example:ocQHyuzHvysMo5N5VsXc
+calendars[].groupIdstring
+Group Id
+Example:BqTwX8QFwXzpegMve9EQ
+calendars[].teamMembersobject[]
+Team members are for calendars of type: Round Robin, Collective, Class, Service. Personal calendar must have exactly one team member.
+Show child attributes
+calendars[].teamMembers[].userIdstringrequired
+User ID of the team member
+Example:ocQHyuzHvysMo5N5VsXc
+calendars[].teamMembers[].prioritynumber
+Priority of the team member for round robin
+Available options00.51
+Example:0.5
+calendars[].teamMembers[].meetingLocationTypestringdeprecated
+🚨 Deprecated! Use locationConfigurations.kind instead.
+Available optionscustomzoomgmeetphoneaddressteamsbooker
+Example:custom
+calendars[].teamMembers[].meetingLocationstringdeprecated
+🚨 Deprecated! Use locationConfigurations.location instead.
+calendars[].teamMembers[].isPrimaryboolean
+Marks a user as primary. This property is required in case of collective booking calendars. Only one user can be primary.
+Example:true
+calendars[].teamMembers[].locationConfigurationsobject[]
+Meeting location configurations
+Show child attributes
+calendars[].teamMembers[].locationConfigurations[].kindstringrequired
+Type of meeting location. zoom_conference/google_conference/ms_teams_conference is not supported in event calendar type
+Available optionscustomzoom_conferencegoogle_conferenceinbound_calloutbound_callphysicalbookerms_teams_conference
+Example:custom
+calendars[].teamMembers[].locationConfigurations[].locationstring
+Address for meeting location. Not applicable on "zoom_conference", "google_conference" and "ms_teams_conference" kind
+Example:https://meet.google.com/abc-def
+calendars[].teamMembers[].locationConfigurations[].meetingIdstring
+Unique ID used to select a specific meeting location
+Example:my_conference_id
+calendars[].eventTypestring
+Event type for round robin distribution
+Available optionsRoundRobin_OptimizeForAvailabilityRoundRobin_OptimizeForEqualDistribution
+Example:RoundRobin_OptimizeForAvailability
+calendars[].namestringrequired
+Calendar name
+Example:test calendar
+calendars[].descriptionstring
+Calendar description
+Example:this is used for testing
+calendars[].slugstring
+Legacy calendar slug. The booking page does not read it: set widgetSlug to change the booking link.
+Example:test1
+calendars[].widgetSlugstring
+Booking link slug: the booking page URL ends with /widget/bookings/{widgetSlug}. Must be unique.
+Example:test1
+calendars[].calendarTypestring
+Calendar type
+Available optionsround_robineventclass_bookingcollectiveservice_bookingpersonal
+Example:round_robin
+calendars[].widgetTypestring
+Calendar widget type. Choose "default" for "neo" and "classic" for "classic" layout.
+Available optionsdefaultclassic
+Example:classic
+calendars[].eventTitlestring
+Title for calendar events
+Default:{{contact.name}}
+Example:{{contact.name}}
+calendars[].eventColorstring
+Color for calendar events in hex format
+Default:#039be5
+Example:#039BE5
+calendars[].meetingLocationstringdeprecated
+🚨 Deprecated! Use locationConfigurations.location or teamMembers[].locationConfigurations.location instead.
+calendars[].locationConfigurationsobject[]
+Meeting location configuration for event calendar
+Show child attributes
+calendars[].locationConfigurations[].kindstringrequired
+Type of meeting location. zoom_conference/google_conference/ms_teams_conference is not supported in event calendar type
+Available optionscustomzoom_conferencegoogle_conferenceinbound_calloutbound_callphysicalbookerms_teams_conference
+Example:custom
+calendars[].locationConfigurations[].locationstring
+Address for meeting location. Not applicable on "zoom_conference", "google_conference" and "ms_teams_conference" kind
+Example:https://meet.google.com/abc-def
+calendars[].locationConfigurations[].meetingIdstring
+Unique ID used to select a specific meeting location
+Example:my_conference_id
+calendars[].slotDurationnumber
+This controls the duration of the meeting
+Possible values: >= 1
+Default:30
+Example:30
+calendars[].slotDurationUnitstring
+Unit for slot duration.
+Available optionsminshours
+Example:mins
+calendars[].durationOptionsobject[]
+Multiple duration options for the calendar. Bookers can select their preferred meeting length. Max 3 options. Exactly one must be marked as default.
+Show child attributes
+calendars[].durationOptions[].durationnumberrequired
+Duration value in minutes
+Example:30
+calendars[].durationOptions[].durationUnitstringrequired
+Unit for the duration
+Available optionsminshours
+Example:mins
+calendars[].durationOptions[].isDefaultbooleanrequired
+Whether this is the default (pre-selected) duration
+Example:true
+calendars[].durationOptions[].ordernumberrequired
+Display order of the duration pill (1-based)
+Example:1
+calendars[].slotIntervalnumber
+Slot interval reflects the amount of time the between booking slots that will be shown in the calendar.
+Possible values: >= 1
+Default:30
+Example:30
+calendars[].slotIntervalUnitstring
+Unit for slot interval.
+Available optionsminshours
+Example:mins
+calendars[].slotBuffernumber
+Buffer after each meeting: extra time blocked after an appointment, to wrap up. Unit: slotBufferUnit.
+Example:15
+calendars[].slotBufferUnitstring
+Unit for slot buffer.
+Available optionsminshours
+Example:mins
+calendars[].preBuffernumber
+Buffer before each meeting: extra time blocked before an appointment, to get ready. Unit: preBufferUnit.
+Example:10
+calendars[].preBufferUnitstring
+Unit for pre-buffer.
+Available optionsminshours
+Example:mins
+calendars[].appoinmentPerSlotnumber
+Maximum bookings per slot (per user). Maximum seats per slot in case of Class Booking Calendar.
+Default:1
+Example:1
+calendars[].appoinmentPerDaynumber
+Daily booking limit (unset = no limit).
+Example:8
+calendars[].allowBookingAfternumber
+Minimum scheduling notice before a booking (unit: allowBookingAfterUnit). 0 = no minimum.
+Example:4
+calendars[].allowBookingAfterUnitstring
+Unit for minimum scheduling notice
+Available optionshoursdaysweeksmonthsmins
+Example:days
+calendars[].allowBookingFornumber
+Booking window: how far ahead bookings are allowed (unit: allowBookingForUnit). 0 = no limit.
+Example:30
+calendars[].allowBookingForUnitstring
+Unit for controlling the duration for which booking would be allowed for
+Available optionsdaysweeksmonths
+Example:days
+calendars[].countAvailableDaysOnlyboolean
+When true, only days with configured availability count toward the date range booking window
+Default:false
+Example:false
+calendars[].openHoursobject[]deprecated
+While we will support this property for backward compatibility, it is recommended to use 'Availability' APIs instead.
+Show child attributes
+calendars[].openHours[].daysOfTheWeeknumber[]required
+Days of the week (0=Sun, 6=Sat)
+Possible values: >= 0 and <= 6
+Example:[1,2,3,4,5]
+calendars[].openHours[].hoursobject[]required
+Open hours for the specified days
+Show child attributes
+calendars[].openHours[].hours[].openHournumberrequired
+Opening hour (0-23)
+Possible values: >= 0 and <= 23
+Example:8
+calendars[].openHours[].hours[].openMinutenumberrequired
+Opening minute (0-59)
+Possible values: >= 0 and <= 60
+Example:0
+calendars[].openHours[].hours[].closeHournumberrequired
+Closing hour (0-23)
+Possible values: >= 0 and <= 23
+Example:17
+calendars[].openHours[].hours[].closeMinutenumberrequired
+Closing minute (0-59)
+Possible values: >= 0 and <= 60
+Example:0
+calendars[].enableRecurringboolean
+Enable recurring appointments for the calendars. Please note that only one member should be added in the calendar to enable this
+Default:false
+Example:false
+calendars[].recurringobject
+Recurring appointment configuration
+Show child attributes
+calendars[].recurring.freqstring
+Frequency of recurrence
+Available optionsDAILYWEEKLYMONTHLY
+Example:WEEKLY
+calendars[].recurring.countnumber
+Number of recurrences
+Possible values: <= 24
+Example:4
+calendars[].recurring.bookingOptionstring
+This setting contols what to do incase a recurring slot is unavailable
+Available optionsskipcontinuebook_next
+Example:skip
+calendars[].recurring.bookingOverlapDefaultStatusstring
+This setting contols what to do incase a recurring slot is unavailable
+Available optionsconfirmednew
+Example:confirmed
+calendars[].formIdstring
+Form ID to be used for booking
+Example:YlWd2wuCAZQzh2cH1fVZ
+calendars[].stickyContactboolean
+Enable sticky contact assignment
+Example:true
+calendars[].isLivePaymentModeboolean
+Whether payment mode is live
+Example:false
+calendars[].autoConfirmboolean
+Auto-confirm appointments
+Default:true
+Example:true
+calendars[].shouldSendAlertEmailsToAssignedMemberboolean
+Send alert emails to assigned team member
+Example:false
+calendars[].alertEmailstring
+Alert email address
+Example:[email protected]
+calendars[].googleInvitationEmailsboolean
+Send Google invitation emails
+Default:false
+Example:true
+calendars[].allowRescheduleboolean
+Allow rescheduling of appointments
+Default:true
+Example:true
+calendars[].allowCancellationboolean
+Allow cancellation of appointments
+Default:true
+Example:true
+calendars[].shouldAssignContactToTeamMemberboolean
+Assign contact to team member on booking
+Example:true
+calendars[].shouldSkipAssigningContactForExistingboolean
+Skip assigning contact if contact already exists
+Example:false
+calendars[].notesstring
+Notes for the calendar
+Example:Please arrive 10 minutes early.
+calendars[].pixelIdstring
+Facebook Pixel ID for tracking
+Example:1234567890
+calendars[].formSubmitTypestring
+Action after form submission
+Available optionsRedirectURLThankYouMessage
+Example:ThankYouMessage
+calendars[].formSubmitRedirectURLstring
+Redirect URL after form submission
+Example:https://example.com/thank-you
+calendars[].formSubmitThanksMessagestring
+Thank you message displayed after form submission
+Example:Thank you for booking!
+calendars[].availabilityTypenumberdeprecated
+While we will support this property for backward compatibility, it is not required anymore.
+Available options01
+Example:0
+calendars[].availabilitiesobject[]deprecated
+While we will support this property for backward compatibility, it is recommended to use 'Availability' APIs instead.
+Show child attributes
+calendars[].availabilities[].datestringrequired
+Formulate the date string in the format of <YYYY-MM-DD in local timezone>T00:00:00.000Z.
+Example:2023-09-24T00:00:00.000Z
+calendars[].availabilities[].hoursobject[]required
+Available hours for the date
+Show child attributes
+calendars[].availabilities[].hours[].openHournumberrequired
+Opening hour (0-23)
+Possible values: >= 0 and <= 23
+Example:8
+calendars[].availabilities[].hours[].openMinutenumberrequired
+Opening minute (0-59)
+Possible values: >= 0 and <= 60
+Example:0
+calendars[].availabilities[].hours[].closeHournumberrequired
+Closing hour (0-23)
+Possible values: >= 0 and <= 23
+Example:17
+calendars[].availabilities[].hours[].closeMinutenumberrequired
+Closing minute (0-59)
+Possible values: >= 0 and <= 60
+Example:0
+calendars[].availabilities[].deletedboolean
+Whether this availability is deleted
+Default:false
+Example:false
+calendars[].guestTypestring
+Type of guest allowed
+Available optionscount_onlycollect_detail
+Example:count_only
+calendars[].consentLabelstring
+Consent label text
+Example:I confirm that I want to receive content from this company using any contact information I provide.
+calendars[].calendarCoverImagestring
+Calendar cover image URL
+Example:https://path-to-image.com
+calendars[].lookBusyConfigobject
+Look Busy Configuration
+Show child attributes
+calendars[].lookBusyConfig.enabledbooleanrequired
+Apply Look Busy
+Default:false
+Example:true
+calendars[].lookBusyConfig.lookBusyPercentagenumberrequired
+Percentage of slots that will be hidden
+Example:50
+calendars[].lookBusyConfig.LookBusyPercentagenumberdeprecated
+Percentage of slots that will be hidden (deprecated, use lookBusyPercentage)
+Example:50
+calendars[].idstringrequired
+Calendar ID
+Example:0TkCdp9PfvLeWKYRRvIz
+calendars[].appointmentPerSlotnumber
+Maximum bookings per slot (per user). Maximum seats per slot in case of Class Booking Calendar.
+Default:1
+Example:1
+calendars[].appointmentPerDaynumber
+Daily booking limit: appointments that can be booked per day. Unset = no limit; 0 allows none.
+Example:8
+Previous
+Delete Calendar
+Next
+Create Calendar

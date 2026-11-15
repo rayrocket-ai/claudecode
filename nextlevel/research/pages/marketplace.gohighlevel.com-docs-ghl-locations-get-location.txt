@@ -1,0 +1,130 @@
+URL: https://marketplace.gohighlevel.com/docs/ghl/locations/get-location | Read: 2026-11-15 | Method: curl | HTTP 200
+Private reference copy for Ray. Text only. Not for republication or reuse; the content belongs to its publisher.
+Sub-Account (Formerly Location)Version: v3
+Get Sub-Account (Formerly Location)
+GET/locations/{locationId}
+Try it
+Get details of a Sub-Account (Formerly Location) by passing the sub-account id
+Authorizations
+Authorizationstringheaderrequired
+Bearer authentication header of the form Bearer <token>, where <token> is your access token.
+Scope:locations.readonly
+Auth methods:OAuthPrivate Integration
+Token types:Sub-Account TokenAgency Token
+Request​
+Headers
+Versionstringrequired
+API Version
+Available optionsv3
+Path Parameters
+locationIdstringrequired
+Location Id
+Example:ve9EPM428h8vShlRW1KT
+Response
+200
+application/json
+Successful response
+locationobject
+Show child attributes
+location.idstring
+Example:ve9EPM428h8vShlRW1KT
+location.companyIdstring
+Example:5DP4iH6HLkQsiKESj6rh
+location.namestring
+Example:dentist
+location.domainstring
+Example:test.msgsndr.com
+location.addressstring
+Example:ganthi nagar, gyanbabu chauk motihati
+location.citystring
+Example:motihari
+location.statestring
+Example:Loca
+location.logoUrlstring
+Example:https://dummyimage.com/o/locationPhotos%2Fve9EPM428h8vShlRW1KT.jpeg
+location.countrystring
+Example:IN
+location.postalCodestring
+Example:567654
+location.websitestring
+Example:https://gohighlevel.com/
+location.timezonestring
+Example:America/Chicago
+location.firstNamestring
+Example:Dr. Rane
+location.lastNamestring
+Example:deo
+location.emailstring
+Example:[email protected]
+location.phonestring
+Example:+919039160788
+location.businessobject
+Show child attributes
+location.business.namestring
+Example:dentist
+location.business.addressstring
+Example:MIG 14, Delhi
+location.business.citystring
+Example:delhi
+location.business.statestring
+Example:delhi
+location.business.countrystring
+Example:IN
+location.business.postalCodestring
+Example:567654
+location.business.websitestring
+Example:https://gohighlevel.com/
+location.business.timezonestring
+Example:America/Chicago
+location.business.logoUrlstring
+Example:https://dummyimage.com/o/locationPhotos%2Fve9EPM428h8vShlRW1KT.jpeg
+location.socialobject
+Show child attributes
+location.social.facebookUrlstring
+Facebook URL
+Example:https://www.facebook.com/
+location.social.googlePlusstring
+Googleplus URL
+Example:https://www.googleplus.com/
+location.social.linkedInstring
+LinkedIn URL
+Example:https://www.linkedIn.com/
+location.social.foursquarestring
+Foursquare URL
+Example:https://www.foursquare.com/
+location.social.twitterstring
+Twitter URL
+Example:https://www.foutwitterrsquare.com/
+location.social.yelpstring
+Yelp URL
+Example:https://www.yelp.com/
+location.social.instagramstring
+Instagram URL
+Example:https://www.instagram.com/
+location.social.youtubestring
+Instagram URL
+Example:https://www.youtube.com/
+location.social.pintereststring
+Instagram URL
+Example:https://www.pinterest.com/
+location.social.blogRssstring
+Instagram URL
+Example:https://www.blogRss.com/
+location.social.googlePlacesIdstring
+Google Business Places ID
+Example:ChIJJGPdVbQTrjsRGUkefteUeFk
+location.settingsobject
+Show child attributes
+location.settings.allowDuplicateContactboolean
+Example:false
+location.settings.allowDuplicateOpportunityboolean
+Example:false
+location.settings.allowFacebookNameMergeboolean
+Example:false
+location.settings.disableContactTimezoneboolean
+Example:false
+location.resellerobject
+Previous
+Sub-Account (Formerly Location)
+Next
+Put Sub-Account (Formerly Location)

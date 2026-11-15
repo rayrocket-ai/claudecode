@@ -1,0 +1,241 @@
+URL: https://marketplace.gohighlevel.com/docs/ghl/workflows/create-workflow | Read: 2026-11-15 | Method: curl | HTTP 200
+Private reference copy for Ray. Text only. Not for republication or reuse; the content belongs to its publisher.
+WorkflowsVersion: v3
+Create Workflow
+POST/workflows
+Try it
+Limited availability. The workflow API is currently enabled for selected sub-accounts only; any other sub-account receives 403 WORKFLOW_API_NOT_ENABLED_FOR_LOCATION.
+Create a workflow from a complete definition. The definition is validated in full before anything is persisted, so a rejected request creates nothing. Workflows are always created in draft; use Update Workflow Status to publish.
+Authorizations
+Authorizationstringheaderrequired
+Bearer authentication header of the form Bearer <token>, where <token> is your access token.
+Scope:workflows.write
+Auth methods:OAuthPrivate Integration
+Token type:Sub-Account Token
+Request​
+Headers
+Versionstringrequired
+API Version. Send v3.
+Available optionsv3
+Example:v3
+Query Parameters
+locationIdstringrequired
+Sub-account (location) ID the workflow belongs to
+Example:ve9EPM428h8vShlRW1KT
+Body
+application/json
+namestringrequired
+Workflow name
+Possible values: <= 500 characters
+Example:Welcome series
+sourceobjectrequired
+Where this definition came from
+Show child attributes
+source.systemstringrequired
+Identifier for the system authoring this definition
+Example:my-app
+source.workflowIdstring
+Your own identifier for the workflow, echoed back for correlation
+Example:wf-42
+triggersobject[]required
+Triggers that enrol contacts. May be empty — a workflow with no trigger can still be entered by another workflow or by the API — but the key must be present.
+Show child attributes
+triggers[].typestringrequired
+Trigger type key
+Example:contact_created
+triggers[].namestring
+Display name shown on the canvas
+Example:New contact
+triggers[].conditionsobject[]
+Trigger filters. Shape depends on type; use Validate Workflow Definition to check it.
+Example:[]
+triggers[].scheduleConfigobject
+Schedule for scheduler-type triggers. Absent on every other trigger type. Get Workflow Definition returns it in this shape and Update Workflow Definition accepts it back.
+Show child attributes
+triggers[].scheduleConfig.stopAtnumber
+When the schedule stops firing, as epoch milliseconds (UTC). Omit for no end date.
+Example:1767225600000
+triggers[].scheduleConfig.skipWeekendsboolean
+Skip runs that would fall on a Saturday or Sunday.
+Example:true
+triggers[].idstring
+Trigger ID. Assigned when omitted. Get Workflow Definition returns it; sending it back keeps the trigger stable across updates.
+Possible values: <= 200 characters
+Example:7c1f0d2e-3b4a-4c5d-8e9f-0a1b2c3d4e5f
+triggers[].positionobject
+Canvas position, as the builder stores it. Echoed by Get Workflow Definition; optional on write.
+Show child attributes
+triggers[].position.xnumberrequired
+Horizontal canvas position
+Example:120
+triggers[].position.ynumberrequired
+Vertical canvas position
+Example:240
+triggers[].testResponseobject
+Sample event captured by the builder for testing the trigger. Passed through verbatim.
+Show child attributes
+triggers[].testResponse.property name*any
+Sample event captured by the builder for testing the trigger. Passed through verbatim.
+triggers[].metadataobject
+Importer bookkeeping. Passed through verbatim.
+Show child attributes
+triggers[].metadata.property name*any
+Importer bookkeeping. Passed through verbatim.
+triggers[].workflowsTriggerTypestring
+Marketplace (IATF) triggers only: the trigger class the app registered. Echoed by Get Workflow Definition; send it back unchanged.
+Example:INTERNAL
+triggers[].integrationAccountIdstring
+Marketplace (IATF) triggers only: the connected account the trigger listens on.
+Example:acct_01HZX3K9P2Q
+triggers[].masterTypestring
+Trigger family, as the builder stores it.
+Example:internal
+triggers[].targetActionIdstring
+For triggers bound to one step (a reply trigger, for example), the ID of that step.
+Example:welcome-sms
+triggerRelationstring
+How multiple triggers combine. Echoed by Get Workflow Definition; ignored on write — the system always stores or.
+Available optionsandor
+Example:or
+actionsobject[]required
+Steps. May be an empty array, but the key must be present.
+Show child attributes
+actions[].idstringrequired
+Step ID. Any non-empty string, unique within the definition — a readable id like welcome-sms is fine, and edges reference it by that name. It does not have to be a UUID; ids that are not get converted to one when the workflow is saved, so a definition read back will carry the converted ids rather than the ones sent.
+Reuse ids across updates. A step keeps contacts already mid-workflow on their current step only while it keeps its id. Sending back the ids from Get Workflow Definition is the reliable way to do that — a readable id also converts to the same value every time for a given workflow, so re-sending an authored definition is safe too.
+Possible values: <= 200 characters
+Example:welcome-sms
+actions[].typestringrequired
+Step type key
+Example:add_contact_tag
+actions[].namestring
+Display name shown on the canvas
+Example:Tag as lead
+actions[].attributesobject
+Step configuration. The shape depends on type — fetch it from Get Step Types and check it with Validate Workflow Definition.
+Show child attributes
+actions[].attributes.property name*any
+Step configuration. The shape depends on type — fetch it from Get Step Types and check it with Validate Workflow Definition.
+actions[].positionobject
+Canvas position, as the builder stores it. Echoed by Get Workflow Definition; optional on write.
+Show child attributes
+actions[].position.xnumberrequired
+Horizontal canvas position
+Example:120
+actions[].position.ynumberrequired
+Vertical canvas position
+Example:240
+actions[].metadataobject
+Importer bookkeeping. Passed through verbatim.
+Show child attributes
+actions[].metadata.property name*any
+Importer bookkeeping. Passed through verbatim.
+actions[].workflowsActionTypestring
+Marketplace (IATF) steps only: the action class the app registered. Echoed by Get Workflow Definition; send it back unchanged.
+Example:INTEGRATION
+actions[].isMarketplaceActionboolean
+Marketplace (IATF) steps only: marks the step as a marketplace action.
+Example:true
+actions[].containerstring
+ID of the container step this step is nested in, where the builder uses one.
+Example:loop-1
+edgesobject[]required
+Connections between steps. May be empty, but the key must be present.
+Show child attributes
+edges[].fromstringrequired
+Step ID this edge leaves from
+Example:welcome-sms
+edges[].tostringrequired
+Step ID this edge arrives at
+Example:tag-as-welcomed
+edges[].branchstring
+Branch label, for steps that fan out. On an if/else it is the id of one of the step's declared branches, or no for the else lane.
+Example:no
+edges[].gotoboolean
+Marks this edge as a loop back to an earlier step
+Example:false
+settingsobject
+Workflow-level settings
+Show child attributes
+settings.allowReEntryboolean
+Allow a contact to enter the workflow more than once
+Example:false
+settings.allowMultipleOpportunitiesboolean
+Allow multiple opportunities per contact
+Example:false
+settings.stopOnResponseboolean
+Stop the workflow when the contact replies
+Example:true
+settings.isConversationsMarkAsReadboolean
+Mark conversations as read automatically
+Example:false
+settings.timezonestring
+Whose timezone drives scheduling
+Available optionsaccountcontact
+Example:account
+settings.windowobject
+Sending window
+Show child attributes
+settings.window.conditionstringrequired
+How the window is applied
+Example:wait
+settings.window.startstringrequired
+Window start, 24h HH:mm
+Example:09:00
+settings.window.endstring
+Window end, 24h HH:mm
+Example:17:00
+settings.window.daysstring[]
+Days of week the window applies to, 0 = Sunday
+Example:[1,2,3,4,5]
+settings.senderAddressobject
+Default sender details, passed through verbatim. Recognised keys are from_name, from_email and from_number. Declared as a free-form object rather than a typed schema because those keys are snake_case on the wire — the workflow format uses them verbatim, and a typed schema would fail the public-spec camelCase rule while renaming them would break round-tripping.
+Show child attributes
+settings.senderAddress.property name*any
+Default sender details, passed through verbatim. Recognised keys are from_name, from_email and from_number. Declared as a free-form object rather than a typed schema because those keys are snake_case on the wire — the workflow format uses them verbatim, and a typed schema would fail the public-spec camelCase rule while renaming them would break round-tripping.
+folderNamestring
+Single-segment folder to place the workflow in. Mutually exclusive with folderPath.
+Example:Sales
+folderPathstring[]
+Folder path, outermost first, max 10 levels. Mutually exclusive with folderName.
+Example:["Sales","Q3"]
+createFolderIfMissingboolean
+Create the folder if it does not exist. Requires folderName or folderPath.
+Example:true
+versionnumber
+The workflow's version counter, owned by the system — not a format version. Get Workflow Definition fills it in; leave it untouched and send it back on update, and a concurrent edit in the builder can never be silently overwritten. A stale value is rejected with 422.
+Treat it as opaque: echo it, never compute from it. It does not always advance by one (delete and restore each add 0.1, and a later save rounds up), so it is not always an integer.
+Omit it on create — the system assigns the starting value.
+Example:3
+Response
+201
+application/json
+Workflow created
+workflowIdstringrequired
+ID of the created workflow
+Example:b1b0de82-3efb-4d63-83f6-13c50aef208c
+statusstring
+Status of the new workflow. Always draft — creating something already live is not possible. Absent only in the rare case where the workflow was created but could not be read back.
+Available optionsdraftpublished
+Example:draft
+definitionobject
+The created workflow, in the same shape Get Workflow Definition returns and Update Workflow Definition accepts — so an update needs no separate read. Note version is not 1: the create path saves several times. Absent only if the workflow was created but could not be read back.
+Show child attributes
+definition.property name*any
+The created workflow, in the same shape Get Workflow Definition returns and Update Workflow Definition accepts — so an update needs no separate read. Note version is not 1: the create path saves several times. Absent only if the workflow was created but could not be read back.
+warningsobject[]required
+Non-blocking findings
+Show child attributes
+warnings[].pathstring
+Path within the definition
+Example:actions[4]
+warnings[].messagestring
+What to be aware of
+Example:Action 'orphan-step' has no incoming edges and may be unreachable.
+warnings[].typestring
+Step type the warning relates to
+Example:sms
+Previous
+Validate Workflow Definition
+Next
+Get Workflow Definition

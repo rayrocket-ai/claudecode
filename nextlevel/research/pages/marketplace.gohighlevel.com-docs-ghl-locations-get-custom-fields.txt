@@ -1,0 +1,117 @@
+URL: https://marketplace.gohighlevel.com/docs/ghl/locations/get-custom-fields | Read: 2026-11-15 | Method: curl | HTTP 200
+Private reference copy for Ray. Text only. Not for republication or reuse; the content belongs to its publisher.
+Custom FieldVersion: v3
+Get Custom Fields
+GET/locations/{locationId}/customFields
+Try it
+Get Custom Fields
+Authorizations
+Authorizationstringheaderrequired
+Bearer authentication header of the form Bearer <token>, where <token> is your access token.
+Scope:locations/customFields.readonly
+Auth methods:OAuthPrivate Integration
+Token type:Sub-Account Token
+Request​
+Headers
+Versionstringrequired
+API Version
+Available optionsv3
+Path Parameters
+locationIdstringrequired
+Location Id
+Example:ve9EPM428h8vShlRW1KT
+Query Parameters
+modelstring
+Model of the custom field you want to retrieve
+Available optionscontactopportunityall
+Example:opportunity
+Response
+200
+application/json
+Successful response
+customFieldsobject[]
+Show child attributes
+customFields[].idstring
+Example:3sv6UEo51C9Bmpo1cKTq
+customFields[].namestring
+Example:pincode
+customFields[].fieldKeystring
+Example:contact.pincode
+customFields[].placeholderstring
+Example:Pin code
+customFields[].dataTypestring
+Data type of the custom field.
+URL, USER, TIME, DATE_TIME and RICH_TEXT are Labs-only for now.
+Available optionsTEXTLARGE_TEXTNUMERICALPHONEMONETORYCHECKBOXSINGLE_OPTIONSMULTIPLE_OPTIONSFLOATTIMEDATETEXTBOX_LIST+7 more
+Example:TEXT
+customFields[].positionnumber
+Example:0
+customFields[].picklistOptionsstring[]
+Example:["first option"]
+customFields[].picklistImageOptionsstring[]
+Example:[]
+customFields[].isAllowedCustomOptionboolean
+Example:false
+customFields[].isMultiFileAllowedboolean
+Example:true
+customFields[].maxFileLimitnumber
+Example:4
+customFields[].locationIdstring
+Example:3sv6UEo51C9Bmpo1cKTq
+customFields[].modelstring
+Model of the custom field
+Available optionscontactopportunity
+Example:opportunity
+customFields[].urlValidationobject
+URL validation (URL fields). Labs-only as of now.
+Show child attributes
+customFields[].urlValidation.modestring
+allow_all: any url. allow_only: only allowedDomains. block: anything but blockedDomains.
+Available optionsallow_allallow_onlyblock
+Example:allow_all
+customFields[].urlValidation.allowedDomainsstring[]
+Domains accepted when mode is allow_only
+Example:["example.com"]
+customFields[].urlValidation.blockedDomainsstring[]
+Domains rejected when mode is block
+Example:[]
+customFields[].dateTimeValidationobject
+Date/time validation (DATE, TIME, DATE_TIME). DATE_TIME and TIME are Labs-only as of now.
+Show child attributes
+customFields[].dateTimeValidation.modestring
+any: no restriction. future_only: value must be in future. past_only: value must be in past. range: value within rangeMin-rangeMax.
+Available optionsanyfuture_onlypast_onlyrange
+Example:any
+customFields[].dateTimeValidation.bufferDaysnumber
+For future_only: minimum days from today before a date is selectable
+Example:2
+customFields[].dateTimeValidation.rollingDaysnumber
+For future_only: rolling window in days from today (e.g. 30 = next 30 days). Mutually exclusive with bufferDays.
+Example:30
+customFields[].dateTimeValidation.rangeMinstring
+Required when mode is range. ISO date or datetime string
+Example:2026-01-01
+customFields[].dateTimeValidation.rangeMaxstring
+Required when mode is range. ISO date or datetime string
+Example:2026-12-31
+customFields[].dateTimeValidation.daysAllowednumber[]
+Days of week 0=Sunday..6=Saturday. Works alongside future_only, past_only, or range modes.
+Example:[1,2,3,4,5]
+customFields[].dateTimeValidation.inputTypestring
+For DATE_TIME fields: collect date only, time only, or both (defaults per product if omitted).
+Available optionsdate_onlytime_onlydate_and_time
+Example:date_and_time
+customFields[].userFieldConfigobject
+User field config (USER fields). Labs-only as of now.
+Show child attributes
+customFields[].userFieldConfig.multiSelectboolean
+Single or multi-select; cannot change after create
+Example:false
+customFields[].optionDisplayTypestring
+Option rendering mode for RADIO / CHECKBOX. One of TEXT_ONLY, TEXT_WITH_ICON, TEXT_WITH_IMAGE.
+Available optionsTEXT_ONLYTEXT_WITH_ICONTEXT_WITH_IMAGE
+Example:TEXT_WITH_IMAGE
+Previous
+Custom Field
+Next
+Create Custom Field

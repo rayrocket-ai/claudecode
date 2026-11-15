@@ -1,0 +1,209 @@
+URL: https://hamzaautomates.com/gohighlevel/tutorials/ai-appointment-setter | Read: 2026-11-15 | Method: curl | HTTP 200
+Private reference copy for Ray. Text only. Not for republication or reuse; the content belongs to its publisher.
+How to Build an AI Appointment Setter in GoHighLevel (2026)
+GoHighLevel with Hamza Automates
+Guides▾
+UpdatesTutorialsStart an AI businessComparisonsPricingAbout Hamza30-day free trialMenu
+GoHighLevel / HighLevel tutorials / Tutorial
+How to build an AI appointment setter in GoHighLevel (2026, step by step)
+By Hamza Baig / Published Oct 31, 2026 / Updated Oct 31, 2026
+Heads up: the trial and plan buttons on this page use my affiliate links. If you sign up through one I get a commission. It doesn't cost you more.
+To build an AI appointment setter in GoHighLevel, go to AI Agents > Conversation AI, create a Prompt Based Bot from the Appointment Booking template, train it on the business, connect a calendar under Bot Goals, assign the channels (SMS, web chat, Instagram, Facebook, WhatsApp), test it, then switch it from Suggestive to Auto-Pilot. It replies to every lead in seconds, asks your qualifying questions and books them straight into the calendar.
+I have one of these running in my own Instagram DMs right now, basically selling for me 24/7, and I've built them for clients too, like a daycare that needed its tours booked. This guide is the text side. If you want the AI to answer phone calls, see Build an AI voice agent. Below is the full build in the October 2026 version of HighLevel, including the new outbound triggers and the Claude and Gemini models, plus what it costs to run.
+Start your 30-day free trial →
+30 days free instead of HighLevel's usual 14, plus a 1:1 setup call with my team, weekly live calls and my agency resources from day one. See everything you get →
+On this page
+01How to build it, step by step
+02How I use one in my own Instagram DMs
+03The prompt I'd start with
+04Suggestive vs Auto-Pilot: which mode to use
+05One calendar or several?
+06Handing off to a human
+07New in October 2026: let the AI text new leads first
+08Which AI model should it run on?
+09Test it before a real lead ever sees it
+10How much does a GoHighLevel AI appointment setter cost?
+11How to sell an AI appointment setter to a local business
+12Text or voice: which should you build first?
+13Why isn't my Conversation AI bot replying?
+14FAQ
+Short version
+01It lives under AI Agents > Conversation AI. Use a Prompt Based Bot: it's the only type that can book across several calendars or a services calendar.
+02Run it in Suggestive mode first so a human approves every reply, then switch to Auto-Pilot once you trust it.
+03Since Oct 27, 2026 (in Labs) the agent can text new leads first from a form, lead ad, missed call or tag, and you can run it on Claude or Gemini as well as GPT.
+04Cost: pay per use by tokens (well under a cent per reply on the cheaper models), or $50 a month for 1,000 AI replies, or $97 a month unlimited with fair use. Texts are billed separately.
+How to build it, step by step
+01
+Connect the channels first
+In the client's sub-account, connect everything the bot should answer: an SMS number that's registered for texting (see A2P 10DLC registration), the Facebook page and Instagram account, the chat widget on their site, and WhatsApp if they use it (WhatsApp is a $10 a month add-on per sub-account). The bot can only reply on channels that are connected and assigned to it.
+02
+Create the bot
+Go to AI Agents > Conversation AI > + Create Bot and pick Prompt Based Bot, then Appointment Booking. Guided Form Setup works for a simple bot, but only prompt-based bots can book across multiple calendars or a services calendar, so start there.
+03
+Write the prompt
+Who it is, which business, the tone, what it should qualify for, when to send people to book, what it must never say, and what to do when it doesn't know. Use Additional Instructions for rules like one question at a time and short replies. My starting prompt is below.
+04
+Train it on the business
+Open Bot Training and attach a Knowledge Base (in the newer interface you build it under AI Agents > Knowledge Base). Crawl the website but only tick the pages that answer customer questions, then add FAQs, a table of services and prices, and the policies.
+05
+Set the bot goals and booking
+In Bot Goals, choose the contact details to collect (name, email, phone), enable Appointment Booking and pick the calendar. Then the post-booking options: pause the bot after booking, trigger a workflow, and whether it can cancel and reschedule.
+06
+Add the actions
+Under Set Up Your Actions add Human Handover (for when someone asks for a person or the bot gets stuck) and Auto Follow-up (up to 5 follow-ups when a lead goes quiet, says they're busy, or asks you to check back later).
+07
+Check the bot settings
+Assign the channels, make it the primary bot if it should answer all general inbound messages, add a short response delay so it doesn't reply in half a second, and look at the max messages per conversation (1 to 100, default 100).
+08
+Test it, then go live
+Chat with it in the test panel, then run Prompt Optimizer if you have it in Labs. Put it in Suggestive mode for real leads first, read what it drafts, fix the prompt, and switch to Auto-Pilot when the drafts are ones you'd send yourself.
+How I use one in my own Instagram DMs
+Every message that comes into my business lands in the Conversations tab: SMS, email, Instagram, TikTok, Facebook. A lot of what you'd see in there are Instagram DMs being answered by AI.
+The flow is simple. Somebody comments on one of my videos, a workflow sends them a DM, and the AI agent picks it up from there with a question like: are you looking to start an agency, or are you looking to buy his services? Then it sends them to the right offer depending on the answer. It runs all day and all night, which is the point. The money is made in the follow-ups, and the AI never forgets one.
+For clients it's the same idea pointed at bookings. I built an AI appointment setter for a daycare whose problem was following up with leads, qualifying them and getting tours booked. The bot does the qualifying and books the tour, and a nurture sequence keeps working on the ones who aren't ready yet.
+The prompt I'd start with
+Most of the result comes from the prompt. Keep it plain and specific. Something like this, then swap in the business details:
+"You're the booking assistant for [business], a [type of business] in [city]. Sound friendly and professional. Your job is to answer questions about our services and book a [consultation, tour, free checkup] for people who are a good fit. Ask one question at a time. Before booking, find out [criteria 1], [criteria 2] and [criteria 3]. If they fit, offer to book. If they don't, thank them and let them know the team will follow up. Only answer from the information you've been given. If you don't know, say you'll check with the team and get back to them. Never make up prices, availability or medical, legal or financial advice. Keep replies short, like a text from a real person."
+Two things from my own builds. Give it the context of the first message the lead got, so a reply of "yes" makes sense to it. And tell it what to do when it's stuck, because "I'll check and get back to you" is always better than a confident wrong answer.
+[+]Don't type available times into the prompt. The bot reads real availability from the calendar you connect.
+[+]Customer-facing details about each appointment type go in the prompt or Knowledge Base. Calendar descriptions are only used to pick the right calendar.
+[+]Use Additional Instructions for style rules: no emojis, mirror the customer's language, one question per message.
+Suggestive vs Auto-Pilot: which mode to use
+Every bot has three modes. Off does nothing. Suggestive drafts a reply in the message box and a person on the team reviews it, edits it and hits send. Auto-Pilot replies on its own.
+New bots can start in Off, so check the mode before you wonder why nothing's happening. Run a new client's bot in Suggestive for the first stretch so the owner sees exactly what it would say, then flip it to Auto-Pilot. HighLevel's own docs say to test booking, FAQs and unknown questions before turning on Auto-Pilot. It also makes the owner feel in control, which helps when you're selling it.
+One calendar or several?
+Single calendar is the fastest to launch and fine for a business with one appointment type. If they have a few, like a consult and a treatment, pick Multiple Calendars in the Appointment Booking goal, give each calendar a clear description and keywords, and set a fallback calendar for anything that doesn't match. Multiple calendars and services calendars only work on prompt-based bots.
+A few limits to know: the bot can't take payment during booking, and private services aren't supported. It does handle "tomorrow" properly even if the lead replies the next morning, and it won't book a contact into a time they already have an appointment.
+Handing off to a human
+Turn on Human Handover in Bot Goals (it's a Labs feature, so you may need to enable it first). It has three scenarios: the person asks for a human (add phrases like "can I talk to someone real"), the bot doesn't have the information, or it failed to resolve the issue after two tries.
+When it hands off it can assign the conversation to a team member, send a final message like "Thanks! Someone from the team will get back to you", pause itself for as long as you set, create a task due in 24 hours, and tag the contact. Make sure the staff member has notifications on for assigned conversations under Settings > My Staff, or the handoff goes nowhere.
+New in October 2026: let the AI text new leads first
+Before this you needed a workflow to send the first text and then hand the reply to the bot, which is how I built my dental setter back in January 2025. Since Oct 27, 2026 the agent can start the conversation itself. In the agent go to Deploy > Outbound > Triggers and pick from nine: form submitted, Facebook or Instagram lead form, Google lead form, TikTok lead form, contact created, tag added, appointment booked or confirmed, opportunity created or moved, and missed call.
+Speed to lead is the whole game here. A sales rep takes hours to get back to a Facebook lead, the AI does it in seconds, when the lead is most interested. Missed call text-back is the other easy win for a local business.
+The rules: it's in Labs (Settings > Labs > Conversation AI | Outbound AI Agents), outbound only goes out by SMS, you need a sending number and a compliance confirmation before you can activate it, and it's one trigger of each type per agent. Leads that come in at 2 a.m. get held until working hours start. Do Not Disturb contacts are skipped and the first message carries an AI disclaimer. Only text people who opted in.
+Which AI model should it run on?
+Since Oct 27, 2026 you're not stuck on OpenAI. Turn on Conversations AI | Claude & Gemini Model Support in Settings > Labs and the Model menu lists Claude Opus 5.5, Sonnet 5.5, Haiku 5.5 and Haiku 4.5, and Gemini 3.8 Flash, 3.7 Flash and 3.5 Flash Lite next to the GPT models. Each one shows a relative cost from $ to $$$$.
+For a booking bot on SMS, a fast cheap model is usually plenty. Save the top models for longer sales conversations. You can also set a secondary model from a different provider so the bot keeps working if the main one goes down. Test again after you switch, because each model writes differently. And if any of your bots were on GPT 5 or GPT 5 Mini, move them, those retired on Oct 30.
+Test it before a real lead ever sees it
+Don't just send it three friendly messages and hand it over. On my voice agents I run simulations before anything goes live: generate a bunch of scenarios, including weird ones like someone asking for an appointment yesterday or demanding a human, run them all, read what failed, fix the prompt and run it again until it passes almost everything.
+Conversation AI has the same thing now. Prompt Optimizer (in Labs) builds scenarios from your prompt, knowledge base and booking setup, runs real chats against a copy of your bot, scores each one pass or fail, and suggests an improved prompt with a side by side diff. Your live prompt doesn't change until you click Use Prompt.
+One catch: the actions still run during tests, so point the bot at a test calendar and test workflows first or you'll fill the client's calendar with fake bookings. Then test from your own phone on every channel, ask it something outside its knowledge, and try to cancel and reschedule.
+How much does a GoHighLevel AI appointment setter cost?
+Conversation AI isn't included in the base plans. Without an AI plan it's pay per use, priced on the tokens each reply uses: the prompt, the knowledge base content it pulls, the conversation history and the reply itself. HighLevel's own example is a conversation with 100,000 input tokens and 25,000 output tokens on a $1.25 / $10 per million model costing about 38 cents. A short SMS booking chat on a cheap model like Claude Haiku 5.5 or Gemini 3.5 Flash Lite comes out well under a cent per reply by the same math.
+Or put the sub-account on an AI Employee plan. Growth is $50 a month and includes 1,000 AI replies (plus 100 voice minutes). Unlimited is $97 a month, unlimited with fair use. The $20 Starter plan doesn't include Conversation AI and is only offered to agencies on the $497 plan. Texts and calls are billed separately on every option (rates in Usage fees).
+When an allowance runs out the bot pauses by default. Turn on Extra Usage in AI Suite if you want it to keep going at pay-per-use rates. Also, raising the max messages per conversation means longer chats, which means more usage.
+Option
+Price
+Conversation AI included
+Pay per use
+Token rates by model, e.g. Claude Haiku 5.5 $0.11 in / $0.55 out per 1M
+Billed per token
+AI Employee Growth
+$50/month per sub-account
+1,000 AI replies a month
+AI Employee Unlimited
+$97/month per sub-account
+Unlimited, fair use
+AI Employee Starter
+$20/month ($497 plan agencies only)
+Not included
+WhatsApp add-on
+$10/month per sub-account
+Needed for the WhatsApp channel
+From HighLevel's AI Product Pricing article and gohighlevel.com/pricing, read Oct 31, 2026.
+How to sell an AI appointment setter to a local business
+Don't walk in selling software. Business owners don't care about the CRM or which model it runs on. They want to know one thing: do I have something talking to my leads and booking me appointments? Sell that. With the daycare, I listened to the problems (slow follow-up, no qualifying, tours not getting booked), worked backwards to what to build, and the CRM was a bonus on top.
+Build a demo for the niche first, then test the business yourself. Fill in their contact form or DM their Instagram after hours and see how long it takes them to reply. If nobody gets back to you, that's your opening.
+You could build this for a dentist, a med spa or a home service company and charge a setup fee plus a monthly fee you set, and people do. It keeps replying and booking every month, which is why it works as a monthly service. You can resell the AI Employee plan at your own price or rebill usage from Agency View, and since Oct 30, 2026 Pro agencies can set usage limits per SaaS client in Labs. My full playbook for running this as an agency is in Start an AI automation agency.
+Start the 30-day trial and build your first one →
+Text or voice: which should you build first?
+Text is the easier first build. It covers web forms, lead ads, Instagram and Facebook DMs and missed-call text-backs, and leads can reply when it suits them. Voice is for businesses whose leads mostly call. A business can have both, booking into the same calendar. The voice build, settings and per-minute costs are in my AI voice agent guide.
+Why isn't my Conversation AI bot replying?
+Check in this order: the mode isn't Off, the channel is connected and assigned to the bot, the bot is set as primary (non-primary bots only reply inside workflows), the bot hasn't hit its max messages and gone to sleep, and the sub-account hasn't used up its AI allowance with Extra Usage off. A sleeping bot wakes up when you mark the conversation as Read, or with the Update Conversation AI Bot and Status workflow action.
+Want this set up with you?
+Start HighLevel through my link and my team does a 1:1 setup call with you, with your account set up within 5 days. You also get weekly live calls with me, so you're not figuring it out alone.
+Start your 30-day free trial →
+30 days free instead of HighLevel's usual 14, plus a 1:1 setup call with my team, weekly live calls and my agency resources from day one. See everything you get →
+Start your 30-day free trial →
+30 days free instead of HighLevel's usual 14, plus a 1:1 setup call with my team, weekly live calls and my agency resources from day one. See everything you get →
+Other ways to start
+My bonuses come with every one of these.
+Best if you're new and want live help setting up
+30-day trial + a free live setup bootcamp
+Same 30-day trial, plus a seat in HighLevel's free live bootcamp: a click-by-click Zoom class with a HighLevel coach and small breakout rooms, every weekday at 11am CT, 60 minutes max. You set up your account during the class instead of figuring it out alone. HighLevel says you can launch in 48 minutes.
+Get the trial + bootcamp →Read more
+Best if you're not sure which plan you need
+Compare all 3 plans first
+HighLevel's own pricing page with Starter ($97), Unlimited ($297) and Founder ($497) side by side, monthly and yearly. Every plan there has a 14-day free trial.
+Compare the plans →Read more
+Best if you'll resell HighLevel as your own software
+Go straight to the $497 Founder plan
+HighLevel's top plan (it used to be called Agency Pro), with a 14-day free trial. Everything in Unlimited plus SaaS mode, rebilling with your own markup, Founders Club and HighLevel Partner Network access. For when you're ready to resell the software, not for day one.
+See the Founder plan →Read more
+FAQ
+What is an AI appointment setter?+
+An AI that replies to leads over text, DMs or chat, asks qualifying questions and books them into a calendar without a person doing the back and forth. In GoHighLevel it's built with Conversation AI.
+Where is Conversation AI in GoHighLevel?+
+In the sub-account, under AI Agents > Conversation AI. That's where you create the bot, train it, set its goals and see the dashboard.
+Which channels can the GoHighLevel AI appointment setter answer?+
+SMS, email, Facebook Messenger, Instagram DMs, WhatsApp, the chat widget and live chat. Outbound messages from the new triggers go out by SMS only.
+Can GoHighLevel's AI book appointments?+
+Yes. Enable Appointment Booking in Bot Goals and connect a HighLevel calendar. It offers real available times, books the slot, and can cancel and reschedule if you allow it. It can't collect payment during booking.
+Is Conversation AI free in GoHighLevel?+
+No. It's pay per use by tokens, or included in the AI Employee Growth plan ($50 a month, 1,000 replies) or Unlimited plan ($97 a month, fair use), as of October 2026. Text messages are billed separately.
+Can the AI hand the conversation to a human?+
+Yes, with the Human Handover action. It can trigger when someone asks for a person, when the bot doesn't know the answer, or after two failed attempts, then assign the conversation, create a task and pause the bot.
+Can I use Claude or Gemini instead of ChatGPT?+
+Yes, since Oct 27, 2026. Turn on Claude & Gemini Model Support in Settings > Labs and pick the model in the agent's Model menu. Each agent can run on a different model.
+Sources / last checked Oct 31, 2026
+HighLevel help docs. Conversation AI Bot Explained, How to Set Up a Conversation AI Bot, Appointment Booking in Conversation AI, Multi-Calendar Booking, Advanced Settings, Primary vs Non-Primary Bots, Auto Follow-Up, Human Handover, Bot Training, Prompt Optimizer, Outbound Conversation AI Agents, AI Product Pricing and AI Employee Rebilling on help.gohighlevel.com, read Oct 31, 2026.
+HighLevel pricing page and changelog. gohighlevel.com/pricing (AI Employee and WhatsApp add-ons), plus the changelog entries for Multi-LLM Providers in Conversation AI and Outbound AI Agents with Triggers (both Oct 27, 2026) and SaaS Usage Limits (Oct 30, 2026), read Oct 31, 2026.
+My videos. "The Only Tool I Would Buy In 2026 To Sell AI" (Feb 2026) for my Instagram DM agent, "Why you CAN'T Sell GoHighLevel as a SaaS" (Nov 2024) for the daycare build, the dental AI sales agent build (Jan 2025) and "Build PERFECT AI Agents" (Aug 2026) for testing with simulations.
+Author
+Hamza Baig / Hamza Automates
+Founder, Hexona Systems
+I run Hexona Systems on GoHighLevel. HighLevel gave it the SaaSpreneur Platinum award in 2024 and Diamond in 2025 and 2026, and I spoke at their LevelUp event in 2026. Hexona powers 1,000+ agencies, we've served 1,500+ businesses, and I've taught 45,000+ students. Everything on this hub is something I use myself or have shown on camera.
+Platinum SaaSpreneur2024
+Diamond SaaSpreneur2025, 2026
+LevelUp speaker2026
+YouTube subscribers, Oct 202634,200
+YouTube ↗
+Skool ↗
+Hexona Systems ↗
+Keep reading
+TutorialFacebook lead adsConnect Facebook lead ads to GoHighLevel: page and form, field mapping, the Lead Form Submitted trigger, instant alerts, a 5-minute follow-up and sync fixes.TutorialCalendar setupSet up a GoHighLevel calendar: which type to pick, availability, buffers, Google sync without the client's password, reminders, no-shows and deposits.TutorialTrain Conversation AITrain GoHighLevel Conversation AI to sound human: knowledge base, prompt and personality, chat widget, testing, fixing wrong answers and which model to use.
+Start your 30-day free trial →
+30 days free + 1:1 setup call + my bonus / affiliate link
+GoHighLevel with Hamza Automates
+Some links on this site are affiliate links. If you sign up for HighLevel through them I get a commission. It doesn't cost you more.
+Start here
+30-day free trial
+Free live bootcamp
+What you get (my bonus)
+Pricing
+Guides
+Real estate
+Phone system
+Student reviews
+Founder plan ($497)
+Founder vs SaaS Pro
+GoHighLevel AI tools
+Is Hamza Automates legit?
+Usage fees
+GoHighLevel workflows
+White label guide
+GoHighLevel snapshots
+GoHighLevel CRM guide
+GoHighLevel alternatives
+SaaS mode guide
+GoHighLevel review
+Browse
+Updates
+Tutorials
+Start an AI business
+Comparisons
+About Hamza
+RSS feed
+Learn with me
+YouTube ↗
+Free Skool community ↗

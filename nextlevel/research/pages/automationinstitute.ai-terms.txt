@@ -1,0 +1,40 @@
+URL: https://automationinstitute.ai/terms/ | Read: 2026-11-15 | Method: curl | HTTP 200
+Private reference copy for Ray. Text only. Not for republication or reuse; the content belongs to its publisher.
+Terms of Service | The Automation Institute
+ProgramsAcceleratorReviewsPartners
+Enroll Now
+← Back to Home
+Terms of Service
+Last updated: February 24, 2026
+1. Acceptance of Terms
+By accessing and using The Automation Institute platform and educational programs, you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our services.
+2. Services
+The Automation Institute provides AI and automation education through online programs including The Incubator and The Accelerator. Programs are delivered through the Skool platform and include access to course materials, community forums, and mentorship.
+3. User Accounts
+You are responsible for maintaining the security of your account credentials. You must provide accurate information during registration and keep your account information up to date.
+4. Intellectual Property
+All course content, materials, branding, and resources provided by The Automation Institute are protected by intellectual property laws. You may not redistribute, resell, or reproduce any materials without written permission.
+5. Payment and Refunds
+Program fees are processed through the Skool platform. Refund policies are governed by the specific program terms outlined at the time of enrollment.
+6. Code of Conduct
+Members are expected to engage respectfully within our community. Harassment, spam, or sharing of misleading information may result in account suspension or termination.
+7. Limitation of Liability
+The Automation Institute provides educational content for informational purposes. We do not guarantee specific business outcomes or income results. Individual results depend on effort, skill, and market conditions.
+8. Changes to Terms
+We reserve the right to update these terms at any time. Continued use of our services after changes constitutes acceptance of the updated terms.
+9. Contact
+For questions about these terms, reach out through our community on Skool.
+Automation Institute
+Navigation
+Home
+Programs
+Accelerator
+Partners
+Resources
+Reviews
+FAQ
+Skool
+Legal
+Privacy
+Terms
+© 2026 - The Automation Institute. All rights reserved.

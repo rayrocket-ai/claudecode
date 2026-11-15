@@ -1,0 +1,230 @@
+URL: https://hamzaautomates.com/gohighlevel/tutorials/google-review-automation | Read: 2026-11-15 | Method: curl | HTTP 200
+Private reference copy for Ray. Text only. Not for republication or reuse; the content belongs to its publisher.
+GoHighLevel Reputation Management: Automate Google Reviews
+GoHighLevel with Hamza Automates
+Guides▾
+UpdatesTutorialsStart an AI businessComparisonsPricingAbout Hamza30-day free trialMenu
+GoHighLevel / HighLevel tutorials / Tutorial
+Google review automation in GoHighLevel: the reputation management setup I use (2026)
+By Hamza Baig / Published Oct 31, 2026 / Updated Oct 31, 2026
+Heads up: the trial and plan buttons on this page use my affiliate links. If you sign up through one I get a commission. It doesn't cost you more.
+To automate Google reviews in GoHighLevel, connect the business's Google Business Profile under Settings > Integrations, set the review link and the SMS and email timing under Reputation > Settings, then add a Send Review Request action to a workflow that fires when an appointment is marked Showed or an invoice is paid. Then turn on Reviews AI under Reputation > Settings > Reviews AI and it replies to new Google and Facebook reviews for you, at $0.01 a reply or unlimited on an AI Employee plan.
+This is how I run it for my own agency, Hexona Systems. I send review requests to my customers, I see the reviews come in, and my AI responds to them straight from the Reputation tab. I also followed HighLevel's Google profile checklist until my score went from 8 out of 16 to 14 out of 16. Below is the full setup with menu paths, what changed in Reviews AI in October 2026, what it costs, and the Google and FTC rules you can't break while doing it.
+Start the 30-day trial + free live bootcamp →
+30 days free, HighLevel's live setup bootcamp, plus a 1:1 setup call with my team, weekly live calls and my agency resources from day one. See everything you get →
+The video version
+On this page
+01How to automate Google reviews in GoHighLevel, step by step
+02How I use reputation management for my own agency
+03The review request settings I'd start with
+04Which workflow trigger should send the review request?
+05Reviews AI: auto replies to Google reviews
+06What changed in Reviews AI in October 2026
+07How much does GoHighLevel reputation management cost?
+08Review gating, incentives and the FTC rule: what you can't do
+09How to sell review automation to a local business
+10FAQ
+Short version
+01Reputation management is included on every HighLevel plan ($97, $297 and $497 a month as of October 2026). Texts and emails are billed on usage (see Usage fees).
+02The engine is one workflow: a trigger like Appointment Status is Showed or Invoice is Paid, then a Send Review Request action. Timing, retries and templates live in Reputation > Settings.
+03Reviews AI is $0.01 per AI reply sent on pay per use, or unlimited (fair use) on the $50 Growth or $97 Unlimited AI Employee plan per sub-account.
+04Ask every customer. Google bans selectively asking happy customers and any reward for reviews, and the FTC's 2024 rule bans buying and suppressing reviews.
+How to automate Google reviews in GoHighLevel, step by step
+01
+Connect the Google Business Profile
+In the client's sub-account go to Settings > Integrations > Google Business Profile > Connect. Sign in with a Google account that has Owner or Manager access, tick the right location and click Connect. The profile has to be verified with Google first. Turn on GBP Call Tracking here too if you want Google calls logged. Connect their Facebook page in the same screen if you want Facebook reviews as well.
+02
+Fix the profile with GBP Optimization
+Reputation > GBP Optimization. It gives the profile a score and flags what's missing: description, photos, categories, services, attributes, hours, phone, social links. Click edit, fill it in, and it updates the live Google profile. It's about 10 to 15 minutes of work.
+03
+Set the review link
+Reputation > Settings > Review Link. Under Get Reviews on Google, pick the connected page. Review Balancing splits traffic between Google and Facebook by a ratio you set (50/50 by default). Custom Link sends everyone to one URL you paste.
+04
+Turn on SMS review requests
+Reputation > Settings > SMS Requests. Flip the toggle top right, set When to send SMS after check-in (Immediately works well), Until clicked, repeat this every, and Maximum retries. Pick the default sender number, then Create New for a template and keep the {{reputation.review_link}} token in it. Set which template sends first and which ones are the retries.
+05
+Turn on email review requests
+Reputation > Settings > Email Requests. Same toggle and cadence (HighLevel's example is 1 hour after check-in), a default sender email, then Set Email Templates to choose the Live template and each Retry template. Drag the Review Link element into the email so the button goes to the right place.
+06
+Trigger requests from a workflow
+Automation > Workflows > Create Workflow. Trigger: Appointment Status with the status filter set to Showed, or Invoice with Invoice Status set to Paid. Action: Send Review Request, then pick SMS or Email (add one of each if you want both). Publish it. Each request uses the sender, timing and retries you set in the two steps above. More on building workflows in GoHighLevel workflows.
+07
+Turn on Reviews AI
+Reputation > Settings > Reviews AI. Pick Suggestive (AI drafts, you click send) or Auto Responses. Click Create Agent or Create Starter Agents, set the tone and prompt, and assign agents by sentiment: positive, neutral, negative. Turn on the option to hold sensitive reviews for a human. If there's a pile of old unanswered reviews, create a Drip Mode campaign to work through them a few a day.
+08
+Put the reviews on their website
+Reputation > Widgets > + Create Widget. Pick a layout (list, grid, carousel, slider and more), the sources and the look, then Save. On a HighLevel site drag the Reviews element onto the page, or click the code icon and Copy Code for any other website. New reviews show up on their own.
+How I use reputation management for my own agency
+The Google review system in HighLevel is one of the features I like most. You can track your Google reviews, how many you're getting, and how your ranking is doing. I obviously want to move up the rankings as fast as possible, so I send out review requests to my customers, I see the reviews that come in, and my AI responds to them directly from the system.
+Then I optimized the profile itself. If you search Hexona Systems you'll see the reviews, the photos, the socials connected. That's because I did what HighLevel's GBP Optimization tab told me to do. Before, my score was 8 out of 16. After, it was 14 out of 16. Things like opening hours, holiday hours and connected social profiles send Google signals that you're still in business and you care about the profile.
+Replying to reviews is a big one. It shows people you're active and you care about your customers, and I don't have to do it manually. One thing I don't do myself but would for a client: Google posts. You can schedule them to the Google profile from the Social Planner inside HighLevel.
+The review request settings I'd start with
+Ask while the job is fresh, so send the first one right after the visit. Retries stop on their own the moment the customer clicks the link, so a couple of follow-ups won't spam someone who already left a review.
+Setting
+Where
+Start with
+When to send SMS after check-in
+Reputation > Settings > SMS Requests
+Immediately
+When to send Email after check-in
+Reputation > Settings > Email Requests
+1 hour
+Until clicked, repeat this every
+SMS and Email Requests
+2 to 3 days
+Maximum retries
+SMS and Email Requests
+2 or 3 (HighLevel's own suggestion)
+Default sender
+SMS and Email Requests
+The number or email the customer already knows
+Review link
+Reputation > Settings > Review Link
+The Google page, everyone gets the same link
+Field names from HighLevel's review request help article, read Oct 31, 2026. The values are a starting point, not HighLevel defaults.
+Which workflow trigger should send the review request?
+Use the moment the customer actually got the service. For appointment businesses (med spas, dentists, salons, chiropractors) that's Appointment Status with the filter set to Showed. For trades that invoice after the job (plumbers, roofers, HVAC) it's the Invoice trigger with Invoice Status set to Paid. HighLevel also has a QuickBooks version if the client invoices there.
+Keep the filters about the job, never about how the customer felt. Filtering by a tag like "happy customer" or a survey score is exactly the review gating Google bans. More on that below.
+Two more ways to collect reviews in person: Sites > QR Codes > Create QR Code with the QR type set to Review Link, for the front desk or the back of an invoice. And Reputation > Requests to send one by hand, which is handy for testing.
+Reviews AI: auto replies to Google reviews
+Reviews AI writes and posts replies to Google and Facebook reviews. Suggestive mode drafts a reply when you click AI Reply and you send it yourself. Auto Responses lets your Reviews AI Agents reply on their own, with rules by star rating, a wait time before posting, a footer like the business name, and which pages each agent covers.
+A setup that works for most clients: a warm, short agent for 4 and 5 stars, and an empathetic agent for negative reviews that apologizes, doesn't argue, and asks the person to call or email so it gets sorted out privately. Turn on the sensitive review hold so the angry ones wait for a human.
+If the business has years of unanswered reviews, Drip Mode is the cleanup tool. Reputation > Settings > Reviews AI > Drip Mode > Create a New Campaign, set the date range, replies per day and a time window during business hours, and it works through the backlog without posting 200 replies in one afternoon. Keep it for old reviews and let your normal settings handle new ones.
+What changed in Reviews AI in October 2026
+October was a big month for Reviews AI. The guardrails are the one I'd turn on first, because the biggest risk with AI replies is the AI promising something the owner never would.
+Date
+What changed
+Oct 8
+Brand Voice controls on Reviews AI Agents: "we" or "I", business name, tone, reply length and sign-off
+Oct 8
+Quality Guardrails: stops repeated openings and risky lines like refund promises, promised outcomes, admitting fault, or medical and financial advice
+Oct 8
+Hold sensitive reviews for human review, plus a live preview of positive, neutral and negative replies
+Oct 26
+Agencies can set Reviews AI to Off, Suggestive or Auto for many sub-accounts at once from Agency > AI Suite > AI Setup
+Oct 26
+16 Reputation widgets for sub-account dashboards: requests sent, reviews by rating and source, response stats
+Oct 27
+Help docs updated: up to four AI suggestions per review are free, and you're only charged when an AI reply is actually sent
+From ideas.gohighlevel.com/changelog and help.gohighlevel.com, read Oct 31, 2026.
+How much does GoHighLevel reputation management cost?
+The Reputation tab itself comes with every plan. What you pay for is usage: the texts and emails that carry the requests, and Reviews AI if you use it. Reviews AI dropped from $0.08 to $0.01 per reply back in October 2025. If you heavily rewrite an AI suggestion before sending, HighLevel treats it as a manual reply and doesn't charge.
+If you'd rather not think about it, the AI Employee Growth plan ($50 a month per sub-account) and Unlimited plan ($97) both include Reviews AI unlimited, subject to fair use. Those plans also cover Conversation AI and Voice AI, so they make sense when the client is getting more than review replies. You can rebill Reviews AI usage to a client with your own markup once the sub-account is in SaaS mode.
+Item
+Price
+Notes
+Reputation management
+Included
+On the $97, $297 and $497 plans
+Review request texts and emails
+Usage based
+Adding an image can turn a text into MMS, which costs more
+Reviews AI, pay per use
+$0.01 per AI reply sent
+Generating suggestions is free
+AI Employee Growth / Unlimited
+$50 / $97 a month per sub-account
+Reviews AI unlimited, fair use
+AI Employee Starter
+$20 a month
+Reviews AI not included, billed per use
+Online Listings add-on
+$30 a month per sub-account
+Or $150 per 6 months, or $300 a year. Syncs the business info to 70+ sites
+From HighLevel's AI Product Pricing and Pricing Guide articles and gohighlevel.com/pricing, read Oct 31, 2026.
+Review gating, incentives and the FTC rule: what you can't do
+This is the part most tutorials skip, and it's the part that can get a client's reviews wiped. Google's Maps policy says a business must not "selectively solicit positive reviews from customers" or discourage negative ones. That's review gating: texting "were you happy?" and only sending the Google link to people who say yes, while unhappy people get a private feedback form. Don't build that, even though it's easy to build in a workflow.
+Google also bans incentives of any kind for a review: payment, discounts, free goods or services, or anything in exchange for changing or removing a negative review. So no "10% off if you leave us 5 stars", and no "leave a review to get entered in a draw" either. Owners and staff reviewing their own business is out too.
+In the US the FTC's rule on consumer reviews and testimonials has been in effect since October 21, 2024. It bans fake reviews, buying positive or negative reviews, undisclosed reviews from insiders, company-run review sites posing as independent, and review suppression, which includes intimidating people out of posting bad reviews and presenting only your best reviews as if they were all of them. It carries civil penalties.
+What that means in HighLevel: send the request to every customer who got the service, with the same link, and let them say what they want. Review Balancing is fine because it splits by percentage, not by mood. The widget's Minimum Ratings filter is fine for a testimonials section, but don't label it "all our reviews". And only text customers who agreed to get texts from the business. This is my read of the rules, not legal advice.
+How to sell review automation to a local business
+Stop leading with AI. Lead with the easiest thing you can sell, which is fixing their Google Business Profile. Search their trade in your town, scroll past the top three, and find the business with a 3.8 rating, six reviews and no photos. You can spot who needs it in about 10 seconds.
+I wouldn't even pitch it as a Google profile. I'd say: I want to help you show up when people ask ChatGPT for a roofer near them, and the reason you're not showing up is your Google profile isn't optimized. Then jump on a 15 to 20 minute screen share, connect their profile together, and show them the score before and after.
+From there the review automation is the monthly part. Every finished job gets a request, every review gets a reply, and the widget puts the good ones on their website. You could build this for a local business and charge a monthly fee you set, then add the AI receptionist or missed call text back once they trust you. It's a real business model, and this is how I'd open the door. Both builds are in Build an AI voice agent and Missed call text back.
+Want to set this up live with a coach?
+The bootcamp link gets you a seat in HighLevel's free live setup class, every weekday at 11am CT, plus a 1:1 setup call with my team. It's the start with the most help.
+Start the 30-day trial + free live bootcamp →
+30 days free, HighLevel's live setup bootcamp, plus a 1:1 setup call with my team, weekly live calls and my agency resources from day one. See everything you get →
+Start the 30-day trial + free live bootcamp →
+30 days free, HighLevel's live setup bootcamp, plus a 1:1 setup call with my team, weekly live calls and my agency resources from day one. See everything you get →
+Other ways to start
+My bonuses come with every one of these.
+Best if you're not sure which plan you need
+Compare all 3 plans first
+HighLevel's own pricing page with Starter ($97), Unlimited ($297) and Founder ($497) side by side, monthly and yearly. Every plan there has a 14-day free trial.
+Compare the plans →Read more
+Best if you'll resell HighLevel as your own software
+Go straight to the $497 Founder plan
+HighLevel's top plan (it used to be called Agency Pro), with a 14-day free trial. Everything in Unlimited plus SaaS mode, rebilling with your own markup, Founders Club and HighLevel Partner Network access. For when you're ready to resell the software, not for day one.
+See the Founder plan →Read more
+FAQ
+Can GoHighLevel automate Google review requests?+
+Yes. Set up SMS and email requests under Reputation > Settings, then add the Send Review Request action to a workflow, for example when an appointment is marked Showed or an invoice is paid. It retries on a schedule you set until the customer clicks the link.
+Can GoHighLevel reply to Google reviews automatically?+
+Yes, with Reviews AI set to Auto Responses under Reputation > Settings > Reviews AI. Reviews AI Agents reply to Google and Facebook reviews based on star rating and sentiment, and you can hold sensitive reviews for a human to check first.
+How much does Reviews AI cost?+
+$0.01 per AI reply sent on pay per use, as of October 2026. Generating suggestions is free. It's unlimited, subject to fair use, on the $50 AI Employee Growth or $97 Unlimited plan per sub-account. The $20 Starter plan doesn't include it.
+Is review gating allowed in GoHighLevel?+
+You can technically build it, but Google's policy bans selectively asking happy customers for reviews, and Google can remove reviews from the profile. Send the same review link to every customer.
+Can I offer a discount for a Google review?+
+No. Google bans any incentive for a review, including discounts, free services or payment, even if you don't ask for a positive one. In the US the FTC's 2024 rule also bans buying positive or negative reviews.
+Do I need Google Business Profile connected?+
+To send people to Google and to reply to Google reviews from HighLevel, yes. The profile has to be verified and you need Owner or Manager access. If you only want a custom review page, you can use a Custom Link without connecting it.
+Can Reviews AI reply to old reviews?+
+Yes. Drip Mode under Reputation > Settings > Reviews AI works through older unanswered reviews on a schedule, with a daily limit and a time window, so they don't all post at once.
+How do I show Google reviews on my website?+
+Reputation > Widgets > + Create Widget. Choose the layout and sources, save it, then drag the Reviews element onto a HighLevel site or copy the embed code into any other website. It updates on its own as new reviews come in.
+Sources / last checked Oct 31, 2026
+HighLevel help docs. How to Send Review Requests, Customize Review Request Messages, Workflow Action Review Request, Workflow Trigger Appointment Status, Workflow Trigger Invoice, Integrate Google Business Profile, GBP Optimization, Review Request Balancing, Review QR Codes, Customizing Review Widgets, Reviews AI modes, Getting Started with Reviews AI Agents, Drip Mode, AI Product Pricing and the HighLevel Pricing Guide on help.gohighlevel.com, read Oct 31, 2026.
+HighLevel pricing page and changelog. gohighlevel.com/pricing (plans, AI Employee and Online Listings add-ons) and the Reputation and Reviews AI entries on ideas.gohighlevel.com/changelog from Oct 2025 to Oct 26, 2026, read Oct 31, 2026.
+Google Maps user contributed content policy. Fake engagement section on support.google.com/contributionpolicy, read Oct 31, 2026.
+FTC Trade Regulation Rule on the Use of Consumer Reviews and Testimonials. 16 CFR Part 465, published in the Federal Register Aug 22, 2024, effective Oct 21, 2024, read Oct 31, 2026.
+My videos. "The Only Tool I Would Buy In 2026 To Sell AI" (Feb 2026, from 14:14) for my review requests, AI replies and Google profile, and "THIS Offer Will Get Your First AI Client" (Aug 2026) for GBP Optimization and the pitch.
+Author
+Hamza Baig / Hamza Automates
+Founder, Hexona Systems
+I run Hexona Systems on GoHighLevel. HighLevel gave it the SaaSpreneur Platinum award in 2024 and Diamond in 2025 and 2026, and I spoke at their LevelUp event in 2026. Hexona powers 1,000+ agencies, we've served 1,500+ businesses, and I've taught 45,000+ students. Everything on this hub is something I use myself or have shown on camera.
+Platinum SaaSpreneur2024
+Diamond SaaSpreneur2025, 2026
+LevelUp speaker2026
+YouTube subscribers, Oct 202634,200
+YouTube ↗
+Skool ↗
+Hexona Systems ↗
+Keep reading
+GuideGoHighLevel CRM guideHow the GoHighLevel CRM works in 2026: contacts, pipelines, tasks, Smart Lists, lead scoring and custom objects, with menu paths and how I set mine up.TutorialBuild an AI voice agentBuild an AI voice agent or receptionist in GoHighLevel: the 2026 builder, prompt, knowledge base, booking, deploy, the settings I use, and what it costs.GuideStart an AI automation agencyMy step-by-step for starting an AI automation agency for local businesses: find revenue leaks, sell the fix, run it all on GoHighLevel. No coding needed.
+Start the 30-day trial + free live bootcamp →
+30 days + live bootcamp + 1:1 setup call + my bonus / affiliate link
+GoHighLevel with Hamza Automates
+Some links on this site are affiliate links. If you sign up for HighLevel through them I get a commission. It doesn't cost you more.
+Start here
+30-day free trial
+Free live bootcamp
+What you get (my bonus)
+Pricing
+Guides
+Real estate
+Phone system
+Student reviews
+Founder plan ($497)
+Founder vs SaaS Pro
+GoHighLevel AI tools
+Is Hamza Automates legit?
+Usage fees
+GoHighLevel workflows
+White label guide
+GoHighLevel snapshots
+GoHighLevel CRM guide
+GoHighLevel alternatives
+SaaS mode guide
+GoHighLevel review
+Browse
+Updates
+Tutorials
+Start an AI business
+Comparisons
+About Hamza
+RSS feed
+Learn with me
+YouTube ↗
+Free Skool community ↗

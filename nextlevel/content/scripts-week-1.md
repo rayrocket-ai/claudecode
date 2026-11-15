@@ -309,15 +309,15 @@ I am a real estate broker. The family that calls me about a home is the same fam
 You are in a client meeting or on with a lender. The phone rings. They get a greeting and a beep.
 
 **Beat 3**
-I run an AI receptionist on my own line. It answers, asks the first questions and books the time. Right now I set it up for real estate agents only. Mortgage brokers are the next group I plan to open it to.
+I run an AI receptionist on my own line. It answers, asks the first questions and books the time. I set it up for real estate agents, and three of my first ten spots are open to mortgage brokers and contractors now.
 
 **Call to action**
-If you want to be told when it opens for mortgage brokers, comment WAITLIST.
+If you are a mortgage broker and want one of those spots, comment WAITLIST and I will send you how it works.
 
 **On-screen text**
 1. "Mortgage brokers:"
 2. "Your callers are my callers."
-3. "Agents first. Mortgage brokers next."
+3. "Three founding spots. Open now."
 4. "Comment WAITLIST"
 
 **What to show**
@@ -327,10 +327,10 @@ Ray in his office. No rates, no lender names, no mortgage advice.
 Mortgage brokers, your callers are my callers.
 - The same family calls both of us, often the same evening.
 - A greeting and a beep does not ask them anything.
-- I set this up for agents today. Mortgage brokers are next.
-Comment WAITLIST to be told when it opens.
+- I set this up for agents. Three founding spots are open to mortgage brokers and contractors now.
+Comment WAITLIST and I will send you how it works.
 
-Note for the desk: no price, no offer, no checkout in this piece. Audience: Business lane.
+Note for the desk: no price and no checkout in this piece. The founding spots for mortgage brokers and contractors were approved by Ray on 2026-11-15; the WAITLIST reply in dm-replies.md routes by industry. Audience: Business lane.
 
 ## Day 5
 
@@ -539,15 +539,15 @@ I mean it. Use a different phone. Listen as if you were a new customer who found
 Is the greeting current? Does it say when you will call back? Is the mailbox full? Most owners have not heard their own line in a long time.
 
 **Beat 3**
-I am a real estate broker. I fixed this on my own line with an AI receptionist, and today I set it up for real estate agents. Other local businesses are next, one industry at a time.
+I am a real estate broker. I fixed this on my own line with an AI receptionist, and I set it up for real estate agents. Mortgage brokers and contractors can take a founding spot now. Other industries open on March 1.
 
 **Call to action**
-If you want to know when your industry opens, comment WAITLIST.
+Comment WAITLIST with your industry and I will tell you where you stand.
 
 **On-screen text**
 1. "Call your own number tonight at 8."
 2. "Listen like a new customer."
-3. "Agents first. Other businesses next."
+3. "Some industries open now. The rest March 1."
 4. "Comment WAITLIST"
 
 **What to show**
@@ -557,13 +557,13 @@ Ray on a main street or in a plaza parking lot, shop fronts behind him, no busin
 Call your own business number tonight at 8.
 - Listen like a new customer.
 - Is the greeting current? Is the mailbox full?
-- I set this up for agents today. Other industries open one at a time.
-Comment WAITLIST to be told when yours opens.
+- Mortgage brokers and contractors can take a founding spot now. Other industries open March 1.
+Comment WAITLIST with your industry and I will tell you where you stand.
 
 Dari hook line for a Dari cut (Ray to review Dari):
 «شما یک کار و بار محلی دارید. امشب ساعت هشت به نمبر خودتان زنگ بزنید و ببینید چه می‌شنوید.»
 
-Note for the desk: no price, no offer, no checkout in this piece. Audience: Business lane.
+Note for the desk: no price and no checkout in this piece. The founding spots for mortgage brokers and contractors were approved by Ray on 2026-11-15; the WAITLIST reply in dm-replies.md routes by industry. Audience: Business lane.
 
 ---
 

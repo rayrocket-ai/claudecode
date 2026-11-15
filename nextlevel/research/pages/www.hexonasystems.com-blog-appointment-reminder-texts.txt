@@ -1,0 +1,165 @@
+URL: https://www.hexonasystems.com/blog/appointment-reminder-texts | Read: 2026-11-15 | Method: curl | HTTP 200
+Private reference copy for Ray. Text only. Not for republication or reuse; the content belongs to its publisher.
+Appointment Reminder Texts (Templates) · Hexona Systems
+Skip to content
+Hexona SystemsAI EmployeesIndustriesCase StudiesBlogAbout
+Book a free consult
+AI EmployeesIndustriesCase StudiesBlogAboutBook a free consult
+Home/
+Blog/
+Playbooks
+Playbook · Playbooks
+Appointment reminder texts that cut no-shows (with templates)
+Hamza BaigPublished Nov 6, 20267 min read
+Appointment reminder texts work best as two messages: one a day or two before, and one about two hours before, each with a one-word way to confirm or reschedule. The research on text reminders is consistent: they raise attendance compared with no reminder, and they cost far less than phone calls.
+The bigger win for a service business is the reschedule. A customer who replies R the day before is a slot you can refill; a customer who just doesn’t show is a truck, a tech or a treatment room sitting empty. Below is the timing, templates for different businesses, how to handle replies, and the texting rules to stay inside.
+The short version
+Send two reminders: 24 to 48 hours before, and about 2 hours before (or "on the way" for field service).
+Every reminder needs an easy reply: confirm, reschedule or cancel. Reschedules are slots you can refill.
+In healthcare studies, text reminders raised attendance compared with no reminder and matched phone calls at a lower cost.
+For high-value bookings (med spa treatments, consults), a deposit at booking does more than any reminder.
+Reminders are informational texts, but you still need the customer’s permission to text and must honor STOP.
+On this page
+Do appointment reminder texts actually reduce no-shows?
+When should you send appointment reminders?
+Appointment reminder text templates by industry
+What should happen when a customer replies?
+Should you take deposits to stop no-shows?
+What are the rules for texting appointment reminders?
+How do you automate appointment reminders?
+Where reminders fit in the bigger picture
+Questions people ask
+Do appointment reminder texts actually reduce no-shows?
+Yes, and this is one of the better-studied questions in small-business operations, mostly because hospitals care a lot about missed appointments.
+A Cochrane review of mobile phone reminders (December 2013) found that text reminders increased attendance compared with no reminder, with a risk ratio of 1.14 across seven trials and 5,841 people: attendance was 78.6% with texts against 67.8% with no reminder. Against phone-call reminders, texts performed about the same (risk ratio 0.99), and two studies found the cost per attended appointment 55% and 65% lower with texts. The reviewers rated the evidence low to moderate quality. A 2016 meta-analysis in the Journal of Medical Systems pooled 13 randomized trials and found a pooled odds ratio of 1.62 for attendance with text reminders.
+Two honest caveats. These are healthcare studies, so the exact effect in an HVAC company or an auto shop will differ. And the studies measure attendance, not the rescheduled slots you refill, which is where a lot of the money is for a busy service business.
+1.14
+risk ratio for attendance, text vs no reminder (Cochrane, 7 trials)
+0.99
+risk ratio, text vs phone call reminder: about the same
+55% to 65%
+lower cost per attendance with texts, in two studies
+At a glance: what the research found on text reminders, in healthcare settings
+When should you send appointment reminders?
+The 2016 meta-analysis found no significant difference by when the text was sent (about half the studies sent it within 48 hours of the appointment), so the schedule below is built around what you need operationally: enough notice to refill the slot, and a last nudge close to the time.
+A reminder schedule that works for most service businesses. These are our starting points.
+When
+What it does
+Ask for
+At booking
+Confirms the date, time, address and what to expect
+Nothing, or a deposit link for high-value bookings
+24 to 48 hours before
+Gives time to reschedule and refill the slot
+C to confirm, R to reschedule
+2 hours before
+Catches the people who forgot today
+Reply if anything changed
+"On the way" (field service)
+Makes sure someone is home and the dog is inside
+Nothing needed
+Missed (same day)
+Rebooks the no-show before they go elsewhere
+A link or two times to choose from
+A reminder schedule that works for most service businesses. These are our starting points.
+Appointment reminder text templates by industry
+Keep them under about 160 characters where you can, and type plain straight apostrophes: Twilio notes that one curly quote or other non-standard character switches the whole text to an encoding that fits only 70 characters in a single message, so you pay for more segments. Name the business, give the time window and one clear reply option. These are examples to adapt:
+Example reminder texts. Replace the details with your own and keep your business name in the first few words.
+Industry
+Day before
+Same day
+HVAC, plumbing
+Northside Heating: your furnace tune-up is tomorrow, 9 to 11 AM. Reply C to confirm or R to reschedule.
+Northside Heating: Mike is on his way, about 25 minutes out. Reply if anything changed.
+Med spa
+Glow Med Spa: see you tomorrow at 2:00 PM for your Botox appointment. Reply C to confirm or R to reschedule.
+Glow Med Spa: see you at 2:00 today. Please arrive 10 minutes early and skip makeup on the treatment area.
+Auto shop
+Maple Auto: your oil change and tire rotation is tomorrow at 8:30 AM. Reply C to confirm or R to reschedule.
+Maple Auto: see you at 8:30. Drop-off is at the side door, keys in the box if we're busy.
+Property showing
+Oak Property Group: your viewing at 12 Elm St, Unit 3 is tomorrow at 5:30 PM. Reply C to confirm or R to change the time.
+Oak Property Group: see you at 12 Elm St at 5:30. Park on Elm, buzz 3 at the front door.
+Example reminder texts. Replace the details with your own and keep your business name in the first few words.
+What should happen when a customer replies?
+A reminder that nobody reads the replies to is half a system. Decide in advance what happens to each answer:
+C (confirm): mark the appointment confirmed in your calendar or job software. Nothing else needed.
+R (reschedule): send two or three open times, or a booking link, and release the old slot so it can be refilled.
+Cancel or "can’t make it": ask if they want to rebook, and add them to the waitlist fill for that slot.
+Anything else ("is the tech bringing the part?"): route to a person, fast. This is where an our AI Receptionist page earns its keep, because it can answer the simple ones and hand off the rest.
+STOP: stop all texts to that number immediately.
+The money is in the refill. A slot freed up the day before can go to someone on the waitlist; a no-show at 9 AM is just lost.
+Want this set up for you?
+We build and run AI employees for service businesses. A free one-hour consult tells you which one would pay back first.
+Book a free consult →
+Should you take deposits to stop no-shows?
+For high-value bookings, yes. Reminders reduce forgetting; a deposit changes the decision. Med spas, injectors, consults with a doctor and long treatments are where deposits make sense, collected by a payment link at booking and credited to the treatment.
+Be clear and consistent about the policy (how much, how much notice to reschedule without losing it) and put it in the booking confirmation as well as on the website. For a plumber or an HVAC company a deposit is usually overkill for a service call; the "on the way" text and a quick confirm-or-reschedule do most of the work.
+We built this kind of booking system for a med spa where nearly a quarter of bookings were arriving after hours (the medical spa and aesthetic treatments case study); that system is live and its results are still being measured. More on the setup at AI for med spas and clinics.
+What are the rules for texting appointment reminders?
+Appointment reminders are usually treated as informational messages rather than marketing under the US Telephone Consumer Protection Act (TCPA). That still means the customer has to have given you their number and permission to be texted about their appointment. If you add a promotion ("and 20% off your next visit"), the message can become marketing, which needs stronger consent.
+Make opting out easy and honor it right away. Customers can opt out by any reasonable method, and a reply of STOP, quit, end, revoke, opt out, cancel or unsubscribe always counts. Under a February 2024 FCC order (in effect since April 11, 2025) businesses must honor opt-outs within ten business days at the latest; good texting platforms handle STOP automatically. If you send business texts in the US from a regular 10-digit number, your number also needs to be registered through your texting provider, or carriers may block your messages; A2P 10DLC explained: what business owners need before texting customers covers how.
+This is general information, not legal advice. Healthcare providers have extra rules about what a reminder can say, so keep reminders to the date, time and place, and check with your compliance advisor.
+How do you automate appointment reminders?
+Most booking and field-service tools can send a basic reminder. What they usually don’t do well is read the replies, reschedule people, refill the slot and rebook no-shows. That is the gap we fill.
+1Connect to where appointments liveYour calendar, booking tool or field-service software, so reminders always match the real schedule.
+2Set the scheduleDay-before and same-day reminders, plus "on the way" for field service.
+3Handle replies automaticallyConfirm, offer new times, release the slot, and hand anything unusual to a person.
+4Refill and rebookOffer freed slots to a waitlist, and text no-shows the same day with times to rebook.
+5Report itConfirmations, reschedules, no-shows and refilled slots each month.
+Where reminders fit in the bigger picture
+No-shows are one of the quieter ways a service business loses revenue it already earned: the marketing worked, the customer booked, and the slot still went empty. The same thing happens earlier in the process when calls go unanswered; Missed call text back: how it works and what to send covers that one.
+Our our AI Dispatcher page handles reminders, reschedules and rebooking alongside the schedule itself. If you’d like to see what it would look like for your business, book a free consult.
+Questions people ask
+When should I send an appointment reminder text?
++
+Send one 24 to 48 hours before the appointment, so there is time to reschedule and refill the slot, and a second about 2 hours before. For field service, an "on the way" text replaces the second one.
+Do reminder texts really reduce no-shows?
++
+In healthcare studies, yes. A Cochrane review found text reminders increased attendance compared with no reminder (risk ratio 1.14) and worked about as well as phone calls at a lower cost. Results in other industries will vary.
+What should an appointment reminder text say?
++
+Your business name, the date and time or arrival window, and one clear reply option, such as "Reply C to confirm or R to reschedule". Keep it short and leave out promotions.
+Do I need permission to send appointment reminder texts?
++
+Yes. Reminders are usually treated as informational rather than marketing, but the customer still needs to have given you their number and agreed to texts about their appointment, and you must stop when they reply STOP. This is general information, not legal advice.
+Should a med spa charge a deposit to reduce no-shows?
++
+For treatments and consults, a deposit taken by payment link at booking and credited to the treatment is usually more effective than reminders alone. State the reschedule policy clearly in the booking confirmation.
+What should I do when a customer doesn’t show up?
++
+Text them the same day with two or three times to rebook, or a booking link. The sooner you reach out, the more likely they rebook with you instead of a competitor.
+Sources
+Facts and prices checked on Nov 6, 2026. Prices change, so confirm on the source before you buy.
+Cochrane, Mobile phone text messaging reminders for attendance at healthcare appointments (CD007458). Gurol-Urganci et al., Dec 5, 2013 update: attendance rates, risk ratios, cost results and evidence quality. Read Nov 6, 2026.
+Boksmati et al., The effectiveness of SMS reminders on appointment attendance: a meta-analysis. Journal of Medical Systems, 2016: pooled odds ratio 1.62 (95% CI 1.35 to 1.94) across 13 RCTs, no significant difference by SMS timing. The article page redirected to a login on Nov 6, 2026; figures are from the abstract as shown in search results, not read on the page.
+FCC, Report and Order FCC 24-24 on revoking consent. Adopted Feb 15, released Feb 16, 2024: revoking consent by reasonable means and the ten business day deadline. Read Nov 6, 2026.
+47 CFR 64.1200 (Cornell Legal Information Institute). The opt-out words in (a)(10) and the ten business day limit as codified. Read Nov 6, 2026.
+Twilio Docs, What is UCS-2 character encoding?. Any non GSM-7 character, such as a smart quote, switches a text to UCS-2 with 70 characters per single message. Read Nov 6, 2026.
+Written by
+Hamza Baig
+Founded Hexona Systems in 2022. Hexona has served more than 1,500 businesses, more than 1,000 agencies run on its AI and systems, and Hamza teaches AI automation to a community of more than 45,000 members.
+About HexonaYouTubeLinkedIn
+Keep reading
+All articles →
+Playbook · 8 min readMissed call text back: how it works and what to sendNov 6, 2026
+Guide · 8 min readA2P 10DLC explained: what business owners need before texting customersNov 6, 2026
+Playbook · 9 min readHow to get more Google reviews without begging (or breaking Google’s rules)Nov 6, 2026
+Find out what’s holding your value back.
+A free one-hour consult. We’ll look at your numbers and tell you which AI employee would move them first. Straight answers, no sales script.
+Book a free consult →
+Hexona Systems
+AI employees that increase enterprise value.
+18 Harbour Street, Toronto, ONServing the United States and Canadahamza@hexonasystems.com
+Explore
+AI Employees
+Industries
+Case Studies
+Blog
+About
+Company
+Book a free consult
+Privacy
+Terms
+Client login
+© Hexona Systems 2026

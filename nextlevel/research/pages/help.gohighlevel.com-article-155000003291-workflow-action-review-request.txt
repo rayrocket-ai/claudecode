@@ -1,0 +1,41 @@
+URL: https://help.gohighlevel.com/support/solutions/articles/155000003291-workflow-action-review-request | Read: 2026-11-15 | Method: curl | HTTP 200
+Private reference copy for Ray. Text only. Not for republication or reuse; the content belongs to its publisher.
+Workflow Action - Review Request
+Modified on: Wed, 4 Sep, 2024 at 4:49 AM
+TABLE OF CONTENTS
+Overview
+Action Name
+Action Description
+Action Details
+Example
+Overview
+The Review Request action allows you to send a request to your contacts asking them to provide feedback or reviews. This action can be customized to send requests via different communication channels such as email or SMS.
+Action Name
+Review Request
+Action Description
+This action sends a review request to a contact. You can specify the type of review request (e.g., via email) and configure the content of the message through the Reputation Settings.
+Action Details
+Field
+Description
+Mandatory
+Action Name
+The name of the action. Default is "Send Review Request".
+Yes
+Review Type
+Select the type of review request. Options include "E-mail" and potentially other channels (e.g., SMS).
+Yes
+How to Configure
+Action Name: Set a name for the action. By default, it's "Send Review Request".
+Review Type: Choose the type of review request from the dropdown menu. For example, select "E-mail" to send the review request via email.
+Message Configuration: Configure the actual message content that will be sent out in the review request by clicking on the "Reputation Settings" link. This will allow you to customize the message template, ensuring that the request aligns with your branding and communication style.
+Example
+To set up a review request action effectively, consider the following workflow configuration:
+Trigger: Select a trigger such as "Appointment Completed".
+Action: Configure the action as follows:
+Action Name: "Send Review Request".
+Review Type: "E-mail".
+Configure the message template in the Reputation Settings to include details like:
+A thank you note for the appointment.
+A request for feedback.
+A link to the review platform.
+By configuring the action in this manner, you ensure that contacts receive timely and relevant requests for feedback, helping you to gather valuable customer insights and enhance your business reputation.

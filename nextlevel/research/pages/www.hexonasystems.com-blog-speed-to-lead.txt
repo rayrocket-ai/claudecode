@@ -1,0 +1,132 @@
+URL: https://www.hexonasystems.com/blog/speed-to-lead | Read: 2026-11-15 | Method: curl | HTTP 200
+Private reference copy for Ray. Text only. Not for republication or reuse; the content belongs to its publisher.
+Speed to Lead: How Fast to Answer a Lead · Hexona Systems
+Skip to content
+Hexona SystemsAI EmployeesIndustriesCase StudiesBlogAbout
+Book a free consult
+AI EmployeesIndustriesCase StudiesBlogAboutBook a free consult
+Home/
+Blog/
+Playbooks
+Guide · Playbooks
+Speed to lead: how fast you need to answer a new lead
+Hamza BaigPublished Nov 6, 20267 min read
+Answer a new lead within five minutes if you can, and within the hour at the very latest. The research behind that is old but consistent: in an analysis of 1.25 million leads reported in Harvard Business Review in 2011, firms that contacted a lead within an hour were nearly seven times as likely to qualify it as firms that waited an hour longer.
+Speed to lead just means the time between a customer reaching out (a form, a call, a message) and your first real response. For a service business it often decides who gets the job, because the person asking for a quote may well be calling your competitors at the same time.
+The short version
+Aim for under five minutes for a first response, and never more than an hour.
+When HBR’s researchers sent a test web lead to 2,241 US companies, 23% never responded at all.
+The famous "21 times" figure compares calling at 5 minutes with 30 minutes, not 5 with 10, and it measured qualifying a lead, not closing a sale.
+An instant text plus a call attempt covers most leads. After hours needs automation or an answering service.
+Measure your own response time from your CRM before you buy anything.
+On this page
+What is speed to lead?
+What does the research say about lead response time?
+Which speed to lead statistics are misquoted?
+How fast should a service business respond to a lead?
+How do you respond to every lead in under five minutes?
+What does faster response look like in a real business?
+How do you measure your own speed to lead?
+Questions people ask
+What is speed to lead?
+Speed to lead is how long it takes your business to reply to a new enquiry. The clock starts when the form is submitted, the call is missed or the message lands, and stops at the first human (or useful automated) response. An auto-reply that says "thanks, we’ll be in touch" doesn’t stop the clock, because it doesn’t answer anything.
+For a contractor, a med spa or a property manager, it is the cheapest lead you will ever get: you already paid for it with your ads, your Google profile or your referrals. Losing it to a slow reply is how money quietly goes missing. A call that rings out is the same leak in a different form, which we cover in Missed call text back: how it works and what to send.
+What does the research say about lead response time?
+Two studies get quoted for almost every speed to lead claim. Both trace back to James Oldroyd, who was at MIT and later BYU.
+Harvard Business Review, 2011. Oldroyd, Kristina McElheran and David Elkington did two things. First they sent a test web lead to 2,241 US companies and timed the replies: 37% responded within an hour, 16% within 1 to 24 hours, 24% took longer than a day, and 23% never responded. Among companies that replied within 30 days, the average wait was 42 hours.
+Second, they looked at 1.25 million leads received by 42 US companies (29 selling to consumers, 13 to businesses). Companies that tried to contact a lead within an hour were nearly seven times as likely to qualify it, meaning have a meaningful conversation with a decision maker, as those that waited an hour longer, and more than 60 times as likely as those that waited 24 hours or more. Those two figures come from the 1.25 million leads, not from the 2,241 company test.
+The Lead Response Management study (Oldroyd with InsideSales.com, presented in October 2007) used three years of data from six companies: more than 15,000 web leads and more than 100,000 call attempts. It reports that the odds of reaching a lead fell 100 times between calling at 5 minutes and calling at 30 minutes, and the odds of qualifying it fell 21 times over the same gap. Between 5 and 10 minutes, the drop was 5 times for reaching the lead and 4 times for qualifying it. A qualified lead here means one willing to enter the sales process, such as setting an appointment. The study says plainly that it did not look at close rates.
+Within an hour37%
+Within 1 to 24 hours16%
+More than 24 hours24%
+Never responded23%
+At a glance: how 2,241 US companies responded to a web lead (HBR, 2011)
+Both studies are more than a decade old and looked at web leads and sales calls, not specifically at plumbers or med spas. We use them for the direction (faster wins, by a lot) rather than as a promise of a specific multiple.
+Which speed to lead statistics are misquoted?
+A lot of vendor pages repeat numbers that drifted from the originals. The common ones:
+Popular speed to lead claims next to what the source actually compared.
+What you often read
+What the source compared
+"21x more likely to convert if you call within 5 minutes vs 10"
+The Lead Response Management study compared 5 minutes with 30 minutes, and the 21x was about qualifying the lead, not closing a sale. Between 5 and 10 minutes it found about 4x for qualifying.
+"Harvard found you’re 100x more likely to close"
+The 100x is from the Lead Response Management study, not Harvard. It is about the odds of reaching the lead by phone, comparing 5 and 30 minutes, and the study did not measure closed sales.
+"7x more likely to convert within an hour"
+HBR’s figure was about qualifying the lead (having a meaningful conversation with a decision maker), within an hour versus an hour later, across 1.25 million leads at 42 companies.
+Popular speed to lead claims next to what the source actually compared.
+How fast should a service business respond to a lead?
+Our rule of thumb for the businesses we work with:
+Under 1 minute: an acknowledgement text that asks a real question ("Is this for a repair or a quote?"), so the lead is in a conversation with you.
+Under 5 minutes: a call attempt or a booking offer, during business hours.
+After hours: a reply that either books them or tells them exactly when you will call. A booking beats a promise.
+Old leads that went quiet: a follow-up sequence over days and weeks, which we cover in Database reactivation: how to turn old leads and estimates into booked jobs.
+Want this set up for you?
+We build and run AI employees for service businesses. A free one-hour consult tells you which one would pay back first.
+Book a free consult →
+How do you respond to every lead in under five minutes?
+Nobody answers every lead in five minutes by trying harder. You do it by taking the first response off people. This is the setup we use most:
+1Put every lead source in one placeWeb forms, Google Business Profile messages, Facebook and Instagram, paid ads and phone calls should all land in one CRM, not five inboxes.
+2Send an instant text that asks a questionWithin a minute, from your registered business number. A question gets a reply; a "thanks for reaching out" doesn’t.
+3Route the hot ones to a personHigh-intent leads (emergency, ready to book, big job) ping whoever is on call. Everyone else goes into an automated conversation.
+4Let an AI keep the conversation goingIt answers questions, qualifies the job and books the appointment, then hands off with a summary.
+5Cover nights and weekendsThat is when most leads get lost. Either an AI answers or your after-hours message books them into the next morning.
+6Follow up the ones who go quietDay 1, day 3, day 7. Most closes happen after the first reply, not on it.
+What does faster response look like in a real business?
+A roofing and remodelling company we worked with was taking about three days to get a quote out after a lead came in, with 18 hours a week of the sales team’s time going on admin. After we automated the first reply, scheduling and quoting, lead-to-quote time dropped to under 24 hours, admin dropped to 3.5 hours a week and lead conversion rose 22%. The details are in the roofing, kitchen and bath remodelling, exterior renovation case study.
+The AI employee that does this job is our sales follow-up agent: our AI Sales Follow-Up page. For calls specifically, our AI Receptionist page answers live.
+How do you measure your own speed to lead?
+Pull the last 50 leads from your CRM or inbox and note two times for each: when the lead came in and when someone first replied with something useful. Then check three numbers: the median response time, the share answered within an hour, and the share never answered.
+Or test yourself the way the HBR researchers did: fill in your own website form at 8 p.m. on a Thursday and see when you hear back. If you want a broader look at what a slow response costs your business value, read What is my business worth? How buyers value a service business.
+Questions people ask
+What is a good lead response time?
++
+Under five minutes for the first response, and under an hour at worst. In the Lead Response Management study by James Oldroyd and InsideSales, the odds of reaching a lead by phone fell more than 10 times over the first hour, and the odds of qualifying it more than 6 times.
+Is the 5 minute rule for leads real?
++
+It comes from the Lead Response Management study, which found the odds of contacting a lead fell 100 times between calling at 5 and at 30 minutes, and the odds of qualifying it 21 times. It is often misquoted as 5 versus 10 minutes, where the study found a smaller drop (5 times for contact, 4 times for qualifying). It did not measure closed sales.
+What percentage of companies never respond to leads?
++
+In the 2011 Harvard Business Review study of 2,241 US companies, 23% never responded to a web lead at all, and 24% took longer than 24 hours.
+Does an automatic reply count as responding to a lead?
++
+Only if it moves the conversation forward. A text that asks what the customer needs or offers a booking counts. A generic "thanks, we’ll be in touch" doesn’t, because the lead still has no answer.
+How do I respond to leads fast after hours?
++
+Use an automated text that asks a question and offers to book, or an AI receptionist that answers calls and books appointments overnight, with emergencies passed to whoever is on call.
+Does speed to lead matter for service businesses or just sales teams?
++
+Yes. The studies looked at web leads in sales teams, but the logic is the same for a service business: a customer asking for a repair or a quote can call the next company on the list in seconds, and often books whoever answers first.
+Sources
+Facts and prices checked on Nov 6, 2026. Prices change, so confirm on the source before you buy.
+Harvard Business Review, The Short Life of Online Sales Leads (March 2011). Article page, authors and issue. The full text is behind HBR’s paywall, so the figures are taken from SmartCompany’s report below. Read Nov 6, 2026.
+Oldroyd, McElheran and Elkington, The Short Life of Online Sales Leads (record). Bibliographic record of the Harvard Business Review article, vol. 89, 2011. Read Nov 6, 2026.
+SmartCompany, Are you letting online leads go cold?. Report of the HBR research, Jul 1, 2011: the 2,241 company audit and response-time breakdown, and the separate 1.25 million lead analysis behind the 7x and 60x figures. Read Nov 6, 2026.
+Lead Response Management study summary (Oldroyd, InsideSales). Full summary as presented Oct 16, 2007: six companies, 15,000+ leads, 100,000+ call attempts; the 5 versus 30 and 5 versus 10 minute contact and qualification odds. Read Nov 6, 2026.
+Hexona case study: home improvement sales workflow. Lead-to-quote time, admin hours and conversion, quoted as published. Checked Nov 6, 2026.
+Written by
+Hamza Baig
+Founded Hexona Systems in 2022. Hexona has served more than 1,500 businesses, more than 1,000 agencies run on its AI and systems, and Hamza teaches AI automation to a community of more than 45,000 members.
+About HexonaYouTubeLinkedIn
+Keep reading
+All articles →
+Playbook · 8 min readMissed call text back: how it works and what to sendNov 6, 2026
+Playbook · 7 min readDatabase reactivation: how to turn old leads and estimates into booked jobsNov 6, 2026
+Guide · 7 min readHow much does an AI receptionist cost in 2026?Nov 6, 2026
+Find out what’s holding your value back.
+A free one-hour consult. We’ll look at your numbers and tell you which AI employee would move them first. Straight answers, no sales script.
+Book a free consult →
+Hexona Systems
+AI employees that increase enterprise value.
+18 Harbour Street, Toronto, ONServing the United States and Canadahamza@hexonasystems.com
+Explore
+AI Employees
+Industries
+Case Studies
+Blog
+About
+Company
+Book a free consult
+Privacy
+Terms
+Client login
+© Hexona Systems 2026

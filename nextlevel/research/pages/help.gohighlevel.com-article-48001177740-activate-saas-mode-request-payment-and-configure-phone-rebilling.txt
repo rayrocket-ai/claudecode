@@ -1,0 +1,40 @@
+URL: https://help.gohighlevel.com/support/solutions/articles/48001177740-activate-saas-mode-request-payment-and-configure-phone-rebilling | Read: 2026-11-15 | Method: curl | HTTP 200
+Private reference copy for Ray. Text only. Not for republication or reuse; the content belongs to its publisher.
+Activate SaaS Mode, Request Payment, and Configure Phone Rebilling
+Modified on: Tue, 27 Oct, 2026 at 10:50 AM
+With the SAAS model, Agencies can resell the platform's features and tools to their clients, eliminating the need for local software installation.
+Phone Rebilling is a feature that allows businesses to automate the process of billing their clients for phone usage. The feature integrates with the phone system and bills the clients automatically after applying a multiplier to the charges paid to the Phone System by the agency, saving time, reducing errors, and earning some profit for the Agency.
+SAAS mode Activation (Request Payment>>Phone Rebilling Config)
+Please Note: As of 25th January 2023. Phone Rebilling is also available on the $297/Month and $2970/year plans! But only for sub-accounts that are using LeadConnector Phone, not Twilio.
+This video covers the $497/month process and $4970/Year Founder Plan Clients.
+Before you start with this tutorial, you'll want to connect your Stripe account to your Agency account if you haven't already.
+With Phase 2 of SaaS mode, you can activate SaaS mode for specific sub-accounts, request a credit card from your clients via links or connect an existing client from your Stipe account, and configure Twilio rebilling so your clients pre-pay for their Twilio usage. You generate a profit from their credits.
+Phone Rebilling on Unlimited Plan (297/month & 2970/year)
+From January 25th, 2023, onwards, our agencies on the Unlimited plan, 297/month or 2970/year will be able to rebill phone costs to their clients (sub-accounts).
+This only works if your client is using LC Phone (and NOT Twilio) Click Here to learn how to move an account over to the LeadConnector Phone System.
+Agencies on the Umlimited plan can NOT mark the costs up. Rebilling at markup is only available on the Founder Plan. However, Unlimited plan subaccounts will continue to benefit from a 10% discount because what LC Phone charges is already 10% cheaper than Twilio in most categories like phone numbers, US/Canada SMS and calling, etc.
+The sub-account must contain at least one account admin (not to be confused with agency admin) to add/manage your client's payment method.
+How do I know which sub-accounts can be rebilled for phone usage? 
+Please head over to Agency Level -> Settings -> Phone Integration
+A sub-account can fall into any one of the following conditions
+Phone rebilling enabled - You are rebilling phone related costs to your clients
+Phone rebilling can be enabled - To rebill phone costs to your client, please go to the manage client page and turn on phone rebilling.
+Phone rebilling disabled - Use LeadConnector phone on this sub-account to rebill phone related costs to your clients.
+How do I enable phone rebilling?
+You can navigate to the Manage Client page from here:
+Or from Agency Sidebar> Sub-Accounts>Scroll to the account:
+Scroll down to Phone System Resell Settings and enable this toggle:
+It will then ask for the method by which you want to ask your client to add a Payment Method:
+If the client already exists on your Stripe account, you can choose I already have this customer in Stripe and then search for them using their Name, Email, or Stripe ID which you have them by in Stripe.,
+At this point your client can add their payment method by going to Sub-Account Level -> Settings -> Company Billing page.
+Please Note: Agencies must not add their own card here. It needs to be your client's card.
+Once your client has added their card, you can enable the rebilling option for them in the Manage Client area.
+As mentioned above, these charges can not be marked up on the Unlimited Plan Agencies. To cover your Stripe charges, the default markup is set to 1.05x (meaning a 5% markup) to cover your Stripe charges.
+How does rebilling work?
+You, the Agency, get billed from the CRM for LC usage
+Your client gets billed from your Stripe account for Phone Rebilling
+How can I check my Agency's usage?
+Please head to Agency Level -> Settings -> Billing and click on See Details in the credits section.
+How do I analyze my Agency's Spending on LC Communications?
+How can my client check their usage?
+Please head to Sub-Account Level -> Settings -> Company Billing and click on See Details in the credits section.

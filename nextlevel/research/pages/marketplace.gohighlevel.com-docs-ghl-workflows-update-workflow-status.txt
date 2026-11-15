@@ -1,0 +1,49 @@
+URL: https://marketplace.gohighlevel.com/docs/ghl/workflows/update-workflow-status | Read: 2026-11-15 | Method: curl | HTTP 200
+Private reference copy for Ray. Text only. Not for republication or reuse; the content belongs to its publisher.
+WorkflowsVersion: v3
+Update Workflow Status
+PUT/workflows/{workflowId}/status
+Try it
+Limited availability. The workflow API is currently enabled for selected sub-accounts only; any other sub-account receives 403 WORKFLOW_API_NOT_ENABLED_FOR_LOCATION.
+Publish a workflow or send it back to draft. Publishing validates the definition in full and activates the triggers; a definition that fails validation is rejected with 422 and the workflow stays as it was. Locked and scheduled-paused workflows cannot change status and return 409.
+Authorizations
+Authorizationstringheaderrequired
+Bearer authentication header of the form Bearer <token>, where <token> is your access token.
+Scope:workflows.publish
+Auth methods:OAuthPrivate Integration
+Token type:Sub-Account Token
+Request​
+Headers
+Versionstringrequired
+API Version. Send v3.
+Available optionsv3
+Example:v3
+Path Parameters
+workflowIdstringrequired
+Workflow ID
+Example:b1b0de82-3efb-4d63-83f6-13c50aef208c
+Query Parameters
+locationIdstringrequired
+Sub-account (location) ID the workflow belongs to
+Example:ve9EPM428h8vShlRW1KT
+Body
+application/json
+statusstringrequired
+Target status. Publishing validates the full definition first and activates the triggers; a definition that fails validation is rejected with 422 and the workflow stays in draft.
+Available optionspublisheddraft
+Example:published
+Response
+200
+application/json
+Status changed
+workflowIdstringrequired
+Workflow ID
+Example:b1b0de82-3efb-4d63-83f6-13c50aef208c
+statusstringrequired
+The status the workflow now has
+Available optionspublisheddraft
+Example:published
+Previous
+Update Workflow Definition
+Next
+Search Workflows

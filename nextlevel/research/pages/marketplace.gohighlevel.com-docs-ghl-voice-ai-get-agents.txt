@@ -1,0 +1,199 @@
+URL: https://marketplace.gohighlevel.com/docs/ghl/voice-ai/get-agents | Read: 2026-11-15 | Method: curl | HTTP 200
+Private reference copy for Ray. Text only. Not for republication or reuse; the content belongs to its publisher.
+AgentsVersion: v3
+List Agents
+GET/voice-ai/agents
+Try it
+Retrieve a paginated list of agents for given location.
+Authorizations
+Authorizationstringheaderrequired
+Bearer authentication header of the form Bearer <token>, where <token> is your access token.
+Scope:voice-ai-agents.readonly
+Auth methods:OAuthPrivate Integration
+Token type:Sub-Account Token
+Request​
+Headers
+Versionstringrequired
+API Version
+Available optionsv3
+Query Parameters
+pagenumber
+Page number starting from 1
+Possible values: >= 1 and <= 5000
+Default:1
+Example:1
+pageSizenumber
+Number of items per page
+Possible values: >= 1 and <= 50
+Default:10
+Example:10
+locationIdstringrequired
+Location ID
+querystring
+Query
+Response
+200
+application/json
+Agent list retrieved successfully.
+totalnumberrequired
+Total number of items
+Example:150
+pagenumberrequired
+Page number starting from 1
+Example:2
+pageSizenumberrequired
+Number of items per page
+Example:10
+agentsobject[]required
+Show child attributes
+agents[].idstringrequired
+Unique identifier for the created agent
+Example:507f1f77bcf86cd799439011
+agents[].locationIdstringrequired
+Unique identifier for the location where this agent operates
+Example:LOC123456789ABCDEF
+agents[].agentNamestringrequired
+Display name of the voice AI agent
+Example:Customer Support Agent
+agents[].businessNamestringrequired
+Name of the business this agent represents
+Example:Acme Corporation
+agents[].welcomeMessagestringrequired
+Greeting message spoken when the agent answers calls
+Example:Hello! Thank you for calling. How can I assist you today?
+agents[].agentPromptstringrequired
+Custom instructions defining the agent's behavior
+Example:You are a helpful customer service representative.
+agents[].voiceIdstringrequired
+Identifier for the speech synthesis voice being used
+Example:507f1f77bcf86cd799439011
+agents[].languagestringrequired
+Language code for the agent's speech and understanding
+Example:en-US
+agents[].patienceLevelstringrequired
+Current tolerance level for caller response delays
+Example:medium
+agents[].maxCallDurationnumberrequired
+Maximum call duration in seconds, between 180-900
+Possible values: >= 180 and <= 900
+Example:600
+agents[].sendUserIdleRemindersbooleanrequired
+Indicates whether automatic idle reminders are enabled
+Example:true
+agents[].reminderAfterIdleTimeSecondsnumberrequired
+Seconds to wait before sending idle reminders, between 1-20
+Possible values: >= 1 and <= 20
+Example:5
+agents[].inboundNumberstring
+Phone number for receiving inbound calls
+Example:+1234567890
+agents[].numberPoolIdstring
+Identifier for the number pool managing this agent's phone allocation
+Example:pool_507f1f77bcf86cd799439011
+agents[].callEndWorkflowIdsstring[]
+Array of workflow IDs triggered automatically when calls end
+Example:[]
+agents[].sendPostCallNotificationToobject
+Current post-call notification settings including recipient configuration
+Show child attributes
+agents[].sendPostCallNotificationTo.adminsboolean
+Send notifications to admins
+Example:true
+agents[].sendPostCallNotificationTo.allUsersboolean
+Send notifications to all users
+Example:false
+agents[].sendPostCallNotificationTo.contactAssignedUserboolean
+Send notifications to contact assigned user
+Example:false
+agents[].sendPostCallNotificationTo.specificUsersstring[]
+Specific user IDs to notify
+Example:[]
+agents[].sendPostCallNotificationTo.customEmailsstring[]
+Custom email addresses to notify
+Example:[]
+agents[].agentWorkingHoursobject[]
+Time intervals when the agent accepts calls, organized by day of week
+Show child attributes
+agents[].agentWorkingHours[].dayOfTheWeeknumberrequired
+Day of the week for this working hours configuration (Monday=1 to Sunday=7)
+Available options1234567
+Example:1
+agents[].agentWorkingHours[].intervalsobject[]required
+Array of time intervals when the agent is available on this day
+Show child attributes
+agents[].agentWorkingHours[].intervals[].startHournumberrequired
+Starting hour of the working interval in 24-hour format (0-23)
+Possible values: >= 0 and <= 23
+Example:9
+agents[].agentWorkingHours[].intervals[].endHournumberrequired
+Ending hour of the working interval in 24-hour format (0-23)
+Possible values: >= 0 and <= 23
+Example:17
+agents[].agentWorkingHours[].intervals[].startMinutenumberrequired
+Starting minute of the working interval (0-59)
+Possible values: >= 0 and <= 59
+Example:0
+agents[].agentWorkingHours[].intervals[].endMinutenumberrequired
+Ending minute of the working interval (0-59)
+Possible values: >= 0 and <= 59
+Example:30
+agents[].timezonestringrequired
+IANA timezone identifier for working hours and scheduling
+Example:America/New_York
+agents[].isAgentAsBackupDisabledbooleanrequired
+Indicates whether this agent is excluded from backup scenarios
+Example:false
+agents[].translationobject
+Current language translation settings including enablement status and target language
+Show child attributes
+agents[].translation.enabledboolean
+Whether translation is enabled
+Example:false
+agents[].translation.languagestring
+Translation language code
+Example:es
+agents[].actionsobject[]required
+Raw actions configured for this agent with complete actionParameters structure
+Show child attributes
+agents[].actions[].idstringrequired
+Unique identifier for this action
+Example:507f1f77bcf86cd799439011
+agents[].actions[].actionTypestringrequired
+Type of action
+Available optionsCALL_TRANSFERDATA_EXTRACTIONIN_CALL_DATA_EXTRACTIONWORKFLOW_TRIGGERSMSAPPOINTMENT_BOOKINGCUSTOM_ACTIONKNOWLEDGE_BASE
+Example:CALL_TRANSFER
+agents[].actions[].namestringrequired
+Human-readable name for this action
+Example:Transfer to Manager
+agents[].actions[].actionParametersobjectrequired
+Action parameters - structure varies by actionType
+Show child attributes
+oneOf
+CallTransferActionParameters
+DataExtractionActionParameters
+InCallDataExtractionActionParameters
+WorkflowTriggerParameters
+SMSParameters
+AppointmentBookingActionParameters
+CustomActionParameters
+KnowledgeBaseParameters
+agents[].actions[].actionParameters.triggerPromptstringrequired
+When to trigger this action during the call
+Example:When the caller asks to speak to a manager
+agents[].actions[].actionParameters.transferToTypestringrequired
+Type of transfer destination (currently only "number" is supported)
+Available optionsnumber
+Example:number
+agents[].actions[].actionParameters.transferToValuestringrequired
+Phone number to transfer to. Must start with +, include country code, contain only numbers, and be 11-16 characters long (e.g., +12345678901).
+Example:+12345678901
+agents[].actions[].actionParameters.triggerMessagestringrequired
+Message to tell the caller before transferring
+Example:Let me transfer you to a manager right away
+agents[].actions[].actionParameters.hearWhisperMessageboolean
+Whether to play whisper message to the receiving party
+Example:true
+Previous
+Create Agent
+Next
+Patch Agent

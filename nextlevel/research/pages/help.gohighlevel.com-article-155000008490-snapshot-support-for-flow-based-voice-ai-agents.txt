@@ -1,0 +1,161 @@
+URL: https://help.gohighlevel.com/support/solutions/articles/155000008490-snapshot-support-for-flow-based-voice-ai-agents | Read: 2026-11-15 | Method: curl | HTTP 200
+Private reference copy for Ray. Text only. Not for republication or reuse; the content belongs to its publisher.
+Snapshot Support for Flow-Based Voice AI Agents
+Modified on: Mon, 24 Aug, 2026 at 9:37 AM
+Snapshot Support for Flow-Based Voice AI Agents
+Package, clone, and deploy complex call flows across sub-accounts using Snapshots
+What You'll Learn
+Flow-Based Voice AI agents built with the visual Flow Builder can be included in Snapshots, allowing you to copy entire call flows—complete with nodes, branches, and connected actions—across sub-accounts without rebuilding from scratch.
+This guide explains what Flow-Based Voice AI Snapshot support includes, how to add these agents to your Snapshots, and best practices for deploying production-ready voice experiences at scale.
+Table of Contents
+1
+Key Benefits of Snapshot Support for Flow-Based Voice AI Agents
+2
+Requirements and Limitations for Flow-Based Voice AI Snapshots
+3
+Voice AI Assets in Snapshots
+4
+How Flow-Based Voice AI Builders Transfer Between Accounts
+5
+How to Set Up Snapshot Support for Flow-Based Voice AI Agents
+6
+Best Practices for Using Flow-Based Voice AI with Snapshots
+7
+Related Articles
+8
+Frequently Asked Questions
+1
+Key Benefits of Snapshot Support for Flow-Based Voice AI Agents
+Snapshotting Flow-Based Voice AI agents gives agencies a repeatable, scalable way to deploy proven call flows across many accounts while preserving all the underlying logic. This helps you standardize client onboarding and voice experiences without sacrificing customization where it matters.
+Faster client onboarding — Launch new sub-accounts with a complete, production-ready voice agent in just a few clicks instead of recreating flows from scratch.
+Consistent voice experiences across locations — Reuse the same tested flow design and logic across franchises, branches, or brands so every caller gets a predictable, high-quality experience.
+Scalable Voice AI deployments — Treat Flow-Based Voice AI agents like any other Snapshot asset and roll them out to dozens or hundreds of accounts using your existing Snapshot workflows.
+Preserved logic and actions — Automatically carry over nodes, branches, versions, and connected actions (like workflows or triggers) so the recreated agent behaves the same way in the destination account.
+Simplified management and updates — Use familiar Snapshot tools—sharing, loading, and refreshing—to manage and iterate on Flow-Based Voice AI templates over time.
+2
+Requirements and Limitations for Flow-Based Voice AI Snapshots
+Understanding what is and isn't moved with a Snapshot helps you plan smooth deployments and avoid surprises after import. Snapshots move configuration, not live telephony resources or historical data.
+Requirements
+Requirement 1
+Voice AI access in both accounts
+The source and destination sub-accounts must have Voice AI enabled so that the imported agents can run as expected.
+Requirement 2
+LC Phone or Twilio numbers in the destination
+Voice AI agents require a compatible phone number in the destination account before they can take calls, even though the number itself is not copied by the Snapshot.
+Requirement 3
+Dependent assets available
+Any referenced workflows, triggers, or other connected assets should either be included in the same Snapshot or already exist in the destination account, so the flow can wire up correctly.
+Limitations
+Limitation 1
+Phone numbers are not transferred
+Assigned phone numbers for Voice AI agents are not copied via Snapshots and must be reassigned in the destination account.
+Limitation 2
+Live data is not copied
+Contacts, call history, call transcripts, and other live activity remain in the source account and do not move with the Snapshot.
+Limitation 3
+Post-import tweaks may be required
+You may need to update small details such as local phone numbers, business hours, or location-specific messages after import to fully localize the agent.
+Limitation 4
+Asset protection still applies
+If a Snapshot is protected using Assets Protected Snapshots, recipients can use the imported Flow-Based Voice AI but may be restricted from editing or exporting certain assets, depending on your protection settings.
+3
+Voice AI Assets in Snapshots
+The Voice AI asset category inside Snapshots supports both prompt-based and Flow-Based Builder agents, giving you a single place to manage every voice configuration you want to reuse.
+When you create or load a Snapshot, Flow-Based Voice AI agents appear alongside other Voice AI assets. This lets you choose exactly which agents to move into new or existing sub-accounts, whether they're simple prompt-based agents, complex flow-driven agents, or a mix of both.
+Where Flow-Based Voice AI agents appear
+During Snapshot creation (source account)
+Under the Voice AI asset category, your Flow-Based agents will be listed as selectable assets.
+During Snapshot loading (destination account)
+The same agents appear under Voice AI so you can decide whether to load all or only specific agents into the target account.
+Selecting Flow-Based agents
+You can:
+Select only Flow-Based Voice AI agents.
+Select only prompt-based Voice AI agents.
+Select both Flow-Based and prompt-based Voice AI agents along with other Snapshot assets (workflows, funnels, etc.) for a full, ready-made template.
+4
+How Flow-Based Voice AI Builders Transfer Between Accounts
+Flow-Based Voice AI agents are more than just a single prompt—they're entire call journeys represented as graphs with nodes, branches, and action connections. When included in a Snapshot, that complete structure is recreated in the destination account using the appropriate local asset IDs, so the agent is immediately usable once numbers and final details are configured.
+What is preserved when you Snapshot a Flow-Based Voice AI agent?
+The full flow graph (all nodes and branches)
+Agent configuration (such as name, description, and core settings)
+Connected actions and references to other assets (e.g., workflows, triggers, booking actions) when those assets are also available in the destination account
+Versions of the agent that are part of the current active flow setup
+What is re-mapped in the destination account?
+Internal IDs for referenced assets (workflows, triggers, calendars) are mapped to the destination account's copies where available, ensuring the imported flow uses that account's own resources
+Any flow steps that depend on unavailable assets will need manual adjustment after import (for example, pointing to a different workflow or calendar)
+Quick Recap
+Deploy Complex Voice Flows in Seconds
+Flow-Based Voice AI agents carry their entire call graph, nodes, branches, and connected actions across Snapshots—ready to take calls once you assign a number.
+5
+How to Set Up Snapshot Support for Flow-Based Voice AI Agents
+Including Flow-Based Voice AI agents in Snapshots follows the same familiar Snapshot workflow you use for other assets. The key difference is simply selecting your Flow-Based agents under the Voice AI category when creating and loading Snapshots.
+Step 1
+Prepare your Flow-Based Voice AI agent in the source account
+Open the sub-account where your Flow-Based Voice AI agent currently lives.
+Go to Voice AI and open the Flow-Based Builder for the agent you want to reuse.
+Confirm that:
+The flow is working as expected (test calls complete successfully).
+Any workflows, triggers, calendars, or other connected assets are configured and active.
+Step 2
+Create a Snapshot from the source sub-account
+Switch to Agency View.
+Click Account Snapshots in the left navigation.
+Click + Create New Snapshot (or the equivalent "Create Snapshot" action).
+Choose the source sub-account that contains your Flow-Based Voice AI agent.
+Step 3
+Select Flow-Based Voice AI agents as Snapshot assets
+In the asset selection step, locate the Voice AI category.
+Expand Voice AI to see all available agents:
+Prompt-based agents
+Flow-Based Builder agents
+Check the box next to each Flow-Based agent you want included.
+Optionally, include related assets like workflows, triggers, calendars, funnels, or campaigns that your flow depends on.
+Click Create or Save to finalize the Snapshot. The Snapshot now includes the selected Flow-Based Voice AI agent(s).
+Step 4
+Load the Snapshot into another sub-account
+From Agency View → Account Snapshots, locate the Snapshot you created.
+Click Load (or the equivalent import option).
+Choose the destination sub-account.
+Review the list of assets to be loaded and ensure that Voice AI → [Your Flow-Based Agent] is selected.
+Confirm and start the load. HighLevel recreates the Flow-Based Voice AI agent in the destination account, wiring it to that account's local asset IDs for any included dependencies.
+Step 5
+Finalize the Flow-Based Voice AI agent in the destination account
+Switch to the destination sub-account.
+Open Voice AI and confirm that your Flow-Based agent appears in the list.
+Assign or verify a compatible LC Phone or Twilio number for the agent so it can place and receive calls.
+Update any location-specific details (e.g., hours, addresses, local offers) to reflect the destination account's business.
+Place a few test calls to ensure the agent behaves as expected and that all actions trigger properly.
+Success
+Your Flow-Based Voice AI agent is now live in the destination account with all flow logic, nodes, branches, and connected actions intact—ready to handle calls immediately after phone number assignment.
+6
+Best Practices for Using Flow-Based Voice AI with Snapshots
+Adopting a few best practices will help you maintain clean templates, avoid conflicts, and ensure smooth imports when working with Flow-Based Voice AI agents in Snapshots.
+Use a "template" sub-account for master flows — Maintain your canonical Flow-Based Voice AI designs in a dedicated template account so you always know which version should be Snapshotted and shared.
+Name agents and assets consistently — Use clear, descriptive names for Voice AI agents and their dependent workflows/calendars so it's obvious what each asset does after import.
+Bundle dependencies in the same Snapshot — Include the workflows, triggers, and calendars that your flow uses so the imported agent can function with minimal manual remapping.
+Refresh Snapshots as you update flows — Whenever you significantly modify a Flow-Based Voice AI template, refresh the Snapshot so new imports and pushes contain the latest flow logic.
+Test in a staging sub-account first — Load the Snapshot into a non-production sub-account to validate behavior before rolling out to multiple client accounts.
+Combine with Snapshot sharing and protection — Use Snapshot sharing options and Assets Protected Snapshots to distribute Flow-Based Voice AI templates to partners or customers while still protecting your intellectual property when needed.
+7
+Related Articles
+Snapshots Overview: Copy Account Assets Fast
+Voice AI Configuration Support for Snapshots
+Conversation AI Flow Builder
+8
+Frequently Asked Questions
+Q: What's the difference between prompt-based and Flow-Based Voice AI agents in Snapshots?
+Prompt-based agents rely primarily on a single (or small set of) prompts and general AI behavior, while Flow-Based agents use a visual graph of nodes, branches, and actions to control the conversation path. Both can be selected as Voice AI assets in Snapshots; this feature adds support for copying the full Flow-Based graph and its connected actions.
+Q: Are assigned phone numbers copied with Flow-Based Voice AI agents in a Snapshot?
+No. Assigned phone numbers are not transferred with Voice AI agents. You must assign or configure a local LC Phone or Twilio number in each destination account after loading the Snapshot.
+Q: Do all versions of a Flow-Based agent transfer, or only the active one?
+The Snapshot focuses on the configuration that defines the active behavior of the agent—its current flow graph and connected actions. Older, unused versions may not be preserved in the same way, so it's best to keep a clean, active version in your template account before creating the Snapshot.
+Q: What happens if a referenced workflow or calendar isn't included in the Snapshot?
+The Flow-Based Voice AI agent is still created, but steps that relied on missing assets may need manual reconfiguration in the destination account (for example, selecting a different workflow or calendar). To minimize cleanup, bundle key dependencies in the same Snapshot.
+Q: Can I choose only some Flow-Based Voice AI agents from a Snapshot when loading it?
+Yes. During the Snapshot loading process, you can selectively enable or disable individual Voice AI assets—including specific Flow-Based agents—before importing them into the destination sub-account.
+Q: Will updating my Snapshot also update Flow-Based agents that were already imported?
+If you refresh a Snapshot and then use Push Updates or reload assets, HighLevel compares and applies changes from the Snapshot to compatible assets in the destination accounts. This allows you to propagate improvements to your Flow-Based Voice AI templates over time.
+Q: Does Snapshot support for Flow-Based Voice AI work with multi-language agents?
+Yes. Any language configuration or multilingual setup you've built into your Flow-Based Voice AI agent is part of its configuration and will be carried over, though you may still need to ensure the destination account's phone numbers and regional settings support your target languages.
+Q: Can I protect my Flow-Based Voice AI flows when sharing Snapshots with other agencies?
+Yes. By using Assets Protected Snapshots, you can share a Snapshot that includes Flow-Based Voice AI agents while restricting how recipients can view, edit, or export protected assets, helping safeguard your proprietary flows.

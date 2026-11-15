@@ -1,0 +1,48 @@
+URL: https://marketplace.gohighlevel.com/docs/ghl/locations/create-custom-value | Read: 2026-11-15 | Method: curl | HTTP 200
+Private reference copy for Ray. Text only. Not for republication or reuse; the content belongs to its publisher.
+Custom ValueVersion: v3
+Create Custom Value
+POST/locations/{locationId}/customValues
+Try it
+Create Custom Value
+Authorizations
+Authorizationstringheaderrequired
+Bearer authentication header of the form Bearer <token>, where <token> is your access token.
+Scope:locations/customValues.write
+Auth methods:OAuthPrivate Integration
+Token type:Sub-Account Token
+Request​
+Headers
+Versionstringrequired
+API Version
+Available optionsv3
+Path Parameters
+locationIdstringrequired
+Location Id
+Example:ve9EPM428h8vShlRW1KT
+Body
+application/json
+namestringrequired
+Example:Custom Field Name
+valuestringrequired
+Example:Value
+Response
+201
+application/json
+Successful response
+customValueobject
+Show child attributes
+customValue.idstring
+Example:rWQ709Pb62syqGLceg1x
+customValue.namestring
+Example:Custom Field
+customValue.fieldKeystring
+Example:{{ custom_values.custom_field }}
+customValue.valuestring
+Example:Value
+customValue.locationIdstring
+Example:rWQ709Pb6dasyqGLceg1x
+Previous
+Get Custom Values
+Next
+Get Custom Value

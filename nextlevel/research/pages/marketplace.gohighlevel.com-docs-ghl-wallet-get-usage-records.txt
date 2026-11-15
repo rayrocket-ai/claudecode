@@ -1,0 +1,30 @@
+URL: https://marketplace.gohighlevel.com/docs/ghl/wallet/get-usage-records | Read: 2026-11-15 | Method: curl | HTTP 200
+Private reference copy for Ray. Text only. Not for republication or reuse; the content belongs to its publisher.
+DashboardsVersion: v3
+Get usage records
+GET/wallet/usage-records
+Try it
+Fetch monthly usage totals for the sub-account resolved from the access token, across the reported window.
+Scope follows the access token: an Agency token reads the agency, a Sub-Account token reads its own sub-account. No tenant id appears in the URL.
+Authorizations
+Authorizationstringheaderrequired
+Bearer authentication header of the form Bearer <token>, where <token> is your access token.
+Scope:wallet.readonly
+Auth methods:OAuthPrivate Integration
+Token types:Agency TokenSub-Account Token
+Request​
+Headers
+Versionstringrequired
+API Version
+Available optionsv3
+Example:v3
+Response
+200
+application/json
+Usage records retrieved successfully
+usageRecordsarray[]required
+Monthly usage totals for the tenant, one entry per month in the reported window.
+Previous
+Dashboards
+Next
+Get top usage products

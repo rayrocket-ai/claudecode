@@ -1,0 +1,158 @@
+URL: https://www.hexonasystems.com/blog/ai-receptionist-cost | Read: 2026-11-15 | Method: curl | HTTP 200
+Private reference copy for Ray. Text only. Not for republication or reuse; the content belongs to its publisher.
+AI Receptionist Cost in 2026: Real Prices · Hexona Systems
+Skip to content
+Hexona SystemsAI EmployeesIndustriesCase StudiesBlogAbout
+Book a free consult
+AI EmployeesIndustriesCase StudiesBlogAboutBook a free consult
+Home/
+Blog/
+Costs & comparisons
+Guide · Costs & comparisons
+How much does an AI receptionist cost in 2026?
+Hamza BaigPublished Nov 6, 20267 min read
+Most self-serve AI receptionist plans cost between $29 and $500 a month as of November 2026, and usage-based voice AI runs about $0.10 to $0.20 a minute plus phone charges. A human answering service covering the same calls usually costs several times more: Ruby starts at $250 a month for 50 minutes.
+The sticker price is the smaller part of the bill, though. What decides whether an AI receptionist pays for itself is setup, texting fees, connecting it to your calendar and CRM, and whether anyone actually reads the calls and fixes what it gets wrong.
+Missed calls are the first leak I point out to any local business. Someone calls, nobody picks up, and they call the next business on Google until somebody answers. So the right question is less "what does it cost" and more "what does it cost compared with the calls I am losing now".
+The short version
+Self-serve AI receptionist plans: about $29 to $500 a month as of Nov 2026, priced per minute, per call or per unique caller.
+Usage pricing on platforms like GoHighLevel: $0.10 to $0.20 a minute for voice AI, plus phone minutes and a platform subscription.
+Human answering services cost more: Ruby is $250 a month for 50 minutes and $1,725 for 500 minutes.
+Budget for the hidden parts too: texting registration (A2P), calendar and CRM connections, and someone to review calls.
+Done-for-you costs more upfront than an app, and makes sense when the calls you miss are worth more than the build.
+On this page
+What do AI receptionists cost? Real prices as of November 2026
+What would 150 calls a month cost?
+What costs are not on the pricing page?
+Should you set it up yourself or pay someone to build it?
+Is an AI receptionist worth the money?
+What should you ask before you sign up?
+Questions people ask
+What do AI receptionists cost? Real prices as of November 2026
+These are the published prices on each company’s own pricing page or FAQ, checked on November 6, 2026. They change often, so treat this as a snapshot and check the source before you sign up.
+Published AI receptionist and answering service prices, checked Nov 6, 2026. Ruby is a human service, included for comparison.
+Service
+How it charges
+Published price
+Dialzara
+Minutes per month
+$29 for 60 min, $99 for 220 min, $199 for 500 min, $349 for 1,000 min. Overage $0.35 to $0.48 a minute. No setup fee, 7-day trial.
+Goodcall
+Unique callers per month
+$79 for 100 callers, $129 for 500, $299 for 2,000. Extra callers 15¢ to 79¢ each. No setup fee, month to month.
+Smith.ai AI Receptionist
+Per call
+Free for 25 calls ($3.00 a call after), Pro $150 a month at $2.00 a call, Enterprise $500 a month at $1.67 a call. No fee when the AI escalates to a human; live agent help with scheduling is a per-call add-on.
+GoHighLevel Voice AI
+Per minute, usage
+$0.10 to $0.20 a minute plus phone charges (inbound about $0.012 a minute), on top of a HighLevel subscription.
+Ruby (live humans)
+Receptionist minutes
+$250 for 50 min, $395 for 100, $720 for 200, $1,725 for 500.
+Published AI receptionist and answering service prices, checked Nov 6, 2026. Ruby is a human service, included for comparison.
+Pricing units matter more than the headline number. A per-minute plan punishes long calls, a per-call plan punishes lots of short ones, and a per-caller plan is kind to customers who call back three times about the same job.
+What would 150 calls a month cost?
+Here is one worked example so the units make sense. Say a plumbing company gets 150 calls a month that need answering and they average 3 minutes each, so 450 minutes. Those numbers are an assumption for illustration; check your own phone logs.
+GoHighLevel Voice AI, usage onlyabout $50-$95 + subscription
+Goodcall Growth (up to 500 callers)$129
+Dialzara Business Plus (500 min)$199
+Ruby, 500 live minutes$1,725
+At a glance: monthly cost for 150 calls averaging 3 minutes (450 minutes), on published prices as of Nov 6, 2026
+The usage figure leaves out the HighLevel subscription and the build, and Goodcall assumes most of the 150 calls come from different callers. The gap that does not move is the one between AI and live humans.
+What costs are not on the pricing page?
+This is where most owners get surprised. The monthly plan is the easy part.
+Texting registration. If the receptionist texts customers (confirmations, missed-call text back), US carriers require A2P 10DLC registration. On GoHighLevel that is $22.50 one time for a low-volume brand and $1.50 to $10.00 a month per campaign, per its help docs as of Nov 2026. Other platforms charge similar carrier fees. A2P 10DLC explained: what business owners need before texting customers covers what registration involves.
+Texts themselves. On GoHighLevel a US text segment is $0.00747 plus a carrier fee of a fraction of a cent, so roughly a cent a text, per its phone pricing guide as of Nov 2026. Small, but it adds up with reminders.
+Connecting your calendar and CRM. Some plans include common calendars. Field-service software, practice management systems and custom CRMs often need an integration someone has to build and maintain.
+Call recording and transcripts. Often included on self-serve plans. On usage platforms they are billed per minute, and stored recordings can carry a small monthly fee.
+Your time, or someone’s. Writing the scripts, testing calls, reading transcripts and fixing wrong answers. In the first month this is a few hours a week. Skip it and the receptionist keeps making the same mistake.
+Want this set up for you?
+We build and run AI employees for service businesses. A free one-hour consult tells you which one would pay back first.
+Book a free consult →
+Should you set it up yourself or pay someone to build it?
+If your calls are simple (hours, prices, book a slot) and you are comfortable in software, a self-serve plan is fine. You will spend an afternoon setting it up and a few hours a month tuning it.
+Done-for-you costs more upfront and makes sense when the receptionist has to work inside the rest of your business: book into your field-service software, trigger follow-up when a quote goes out, alert the on-call tech for emergencies, and report jobs booked rather than "conversations". That is what we build at Hexona. Our AI Receptionist is set up around your call types, connected to your tools and run for you, and we give a fixed price after a free consult, because the right scope depends on your systems. Details are on our AI Receptionist page.
+Self-serve app vs done-for-you, in plain terms.
+Self-serve app
+Done-for-you
+Monthly price
+$29 to $500
+Higher, quoted per business
+Who writes the scripts
+You
+The provider, with you
+Calendar and CRM
+Common ones, you connect them
+Built to your systems
+Who reviews calls and fixes mistakes
+You
+The provider
+What it reports
+Calls and minutes
+Jobs booked and revenue recovered
+Self-serve app vs done-for-you, in plain terms.
+Is an AI receptionist worth the money?
+Run your own numbers: missed calls a month, times the share that would have booked, times your average job. If that number is bigger than the monthly cost, it pays.
+One of our clients, a tire shop with no full-time receptionist, had more than 600 calls a month going to voicemail. The shop’s own arithmetic put the leak at $40,000 to $50,000 a month. After a missed-call assistant that texted back within seconds and booked appointments, booked appointments rose 50% and more than $50,000 was recovered. The full write-up, including how it was measured, is in the tire and seasonal automotive service case study.
+It is not worth it if you get a handful of calls a week and someone always answers. Then the money is better spent somewhere else, and a good provider should tell you that. If you are not sure where your leaks are, Which revenue leaks should a service business fix first? walks through how to rank them.
+What should you ask before you sign up?
+1How is a call counted?Per minute, per call or per unique caller, and whether spam and wrong numbers are charged.
+2What happens on overage?Does it keep answering at a higher rate, or stop? A receptionist that stops answering at month end is worse than none.
+3Can it book into my calendar?Name your actual software and ask to see it working.
+4Who handles texting registration?If it sends texts, someone has to register A2P. Ask who does it and what it costs.
+5Can I get a person when I need one?Emergencies and upset customers should reach a human, with a summary of the call.
+Questions people ask
+How much does an AI receptionist cost per month?
++
+Most self-serve AI receptionist plans cost $29 to $500 a month as of November 2026. Dialzara starts at $29 for 60 minutes, Goodcall at $79 for 100 unique callers, and Smith.ai offers a free tier for 25 calls with paid plans from $150 a month.
+Is an AI receptionist cheaper than an answering service?
++
+Usually, yes. A human answering service like Ruby starts at $250 a month for 50 minutes, while AI plans with a few hundred minutes or callers start around $99 to $199 (Dialzara $99 for 220 minutes, Goodcall $129 for 500 callers). Human services are still better for complex or emotional calls, which is why many businesses use both.
+How much does AI voice cost per minute?
++
+On usage-based platforms, voice AI runs about $0.10 to $0.20 a minute as of late 2026, plus phone charges of around a cent a minute. GoHighLevel, for example, lists $0.10 to $0.20 a minute for speech-to-speech voice AI on top of its subscription.
+Are there setup fees for an AI receptionist?
++
+Most self-serve plans have no setup fee, including Dialzara, Goodcall and Smith.ai as of November 2026. Done-for-you providers charge for the build because they write the scripts, connect your systems and test the calls before going live.
+What hidden costs come with an AI receptionist?
++
+The common ones are A2P 10DLC registration if it sends texts, per-text and per-minute phone charges on usage plans, integrations with field-service or practice software, and the time someone spends reviewing calls and fixing wrong answers.
+How do I know if an AI receptionist will pay for itself?
++
+Multiply your missed calls a month by the share that would have booked and by your average job value. If that is more than the monthly cost, it pays. Your phone system or carrier can usually show missed and after-hours calls for the last 90 days.
+Sources
+Facts and prices checked on Nov 6, 2026. Prices change, so confirm on the source before you buy.
+Dialzara pricing. Plan minutes, prices, overage rates, trial and setup fees. Read Nov 6, 2026.
+Goodcall FAQ. Starter, Growth and Scale prices, per-customer billing and overage. Read Nov 6, 2026.
+Smith.ai AI Receptionist. Free, Pro and Enterprise plans, per-call rates, no setup fees, and the escalation fee FAQ. Read Nov 6, 2026.
+Ruby plans and pricing. Receptionist minute plans from $250 a month. Read Nov 6, 2026.
+HighLevel AI Products Pricing. Voice AI per-minute rates and AI Employee plans (page last modified Nov 6, 2026). Read Nov 6, 2026.
+HighLevel Phone System Pricing and Billing Guide. US inbound call rate ($0.01165 a minute), text segment, recording and number fees (page last modified Oct 12, 2026). Read Nov 6, 2026.
+HighLevel A2P 10DLC fees. Brand registration ($22.50 low volume) and monthly campaign fees ($1.50 to $10.00), page last modified Sep 24, 2026. Read Nov 6, 2026.
+Written by
+Hamza Baig
+Founded Hexona Systems in 2022. Hexona has served more than 1,500 businesses, more than 1,000 agencies run on its AI and systems, and Hamza teaches AI automation to a community of more than 45,000 members.
+About HexonaYouTubeLinkedIn
+Keep reading
+All articles →
+Comparison · 9 min readBest AI receptionist for small business in 2026: an honest comparisonNov 6, 2026
+Comparison · 5 min readAI receptionist vs hiring a receptionist: the real cost in 2026Nov 6, 2026
+Comparison · 7 min readAfter-hours answering service: AI or a human call center?Nov 6, 2026
+Find out what’s holding your value back.
+A free one-hour consult. We’ll look at your numbers and tell you which AI employee would move them first. Straight answers, no sales script.
+Book a free consult →
+Hexona Systems
+AI employees that increase enterprise value.
+18 Harbour Street, Toronto, ONServing the United States and Canadahamza@hexonasystems.com
+Explore
+AI Employees
+Industries
+Case Studies
+Blog
+About
+Company
+Book a free consult
+Privacy
+Terms
+Client login
+© Hexona Systems 2026

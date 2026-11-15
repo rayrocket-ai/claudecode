@@ -1,0 +1,69 @@
+URL: https://marketplace.gohighlevel.com/docs/ghl/knowledge-base/create-knowledge-base | Read: 2026-11-15 | Method: curl | HTTP 200
+Private reference copy for Ray. Text only. Not for republication or reuse; the content belongs to its publisher.
+Knowledge BaseVersion: v3
+Create a new knowledge base (max 15 knowledge bases per location)
+POST/knowledge-bases
+Try it
+Creates a new knowledge base for a location (maximum 15 per location).
+WHEN TO USE: use this when you need to add a brand-new knowledge source; use updateKnowledgeBase to rename one; use create (FAQs) or trainDiscoveredUrls to add content.
+RETURNS: success and the created knowledge base, including its server-assigned id.
+Authorizations
+Authorizationstringheaderrequired
+Bearer authentication header of the form Bearer <token>, where <token> is your access token.
+Scope:knowledge-bases.write
+Auth methods:OAuthPrivate Integration
+Token type:Sub-Account Token
+Request​
+Headers
+Versionstringrequired
+API Version
+Available optionsv3
+Example:v3
+Body
+application/json
+namestringrequired
+Name of the knowledge base
+Example:My Knowledge Base
+descriptionstring
+Optional description of the knowledge base
+Example:A knowledge base for customer support FAQs
+locationIdstringrequired
+The location ID this knowledge base belongs to
+Example:qIyivCmsuEOSnyoFYEej
+Response
+201
+application/json
+Knowledge base created successfully
+successbooleanrequired
+Success status of the operation
+Example:true
+dataobjectrequired
+Created knowledge base details
+Show child attributes
+data.idstringrequired
+Knowledge base ID
+Example:ZwTB8S0yo0FIBY6OPZTD
+data.namestringrequired
+Knowledge base name
+Example:KB for Bot Training
+data.nameLowerCasestringrequired
+Knowledge base name in lowercase
+Example:kb for bot training
+data.locationIdstringrequired
+Location ID
+Example:qIyivCmsuEOSnyoFYEej
+data.kbMetadataobjectrequired
+Knowledge base metadata
+data.deletedbooleanrequired
+Whether the knowledge base is deleted
+Example:false
+data.createdAtstringrequired
+Date when knowledge base was created
+Example:2025-08-02T20:26:57.057Z
+data.updatedAtstringrequired
+Date when knowledge base was last updated
+Example:2025-08-02T20:26:57.057Z
+Previous
+Get all knowledge bases for a location by location Id (paginated)
+Next
+Web Crawler

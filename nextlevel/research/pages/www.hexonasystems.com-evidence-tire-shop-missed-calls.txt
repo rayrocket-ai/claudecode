@@ -1,0 +1,70 @@
+URL: https://www.hexonasystems.com/evidence/tire-shop-missed-calls | Read: 2026-11-15 | Method: curl | HTTP 200
+Private reference copy for Ray. Text only. Not for republication or reuse; the content belongs to its publisher.
+Tire shop: $50,000+ of missed calls back · Hexona Systems
+Skip to content
+Hexona SystemsAI EmployeesIndustriesCase StudiesBlogAbout
+Book a free consult
+AI EmployeesIndustriesCase StudiesBlogAboutBook a free consult
+Home/
+Case Studies/
+Tire shop: $50,000+ of missed calls back
+Tire and seasonal automotive service · Toronto
+Six hundred calls a month went to voicemail in a shop where everyone was already busy.
+A high-traffic tire shop specialising in seasonal changes and repairs, at its busiest through the winter tire season. There was no full-time receptionist, the team was small, and the owner was working in the shop rather than sitting by the phone.
+Book a free consult →All case studies
+Found before the build
+$40K–$50K/mo
+$40,000 to $50,000 a month
+Result
+$50,000+
+Revenue recovered
+Window
+Not stated
+The source does not state one. See how this was measured, below.
+The situation
+More than two thousand calls came in every month, and customers reached out on Facebook, Instagram and email as well. With no system behind any of those channels, enquiries either went unanswered or were answered too late to matter.
+What we found
+Missed calls a month, 270 of them first-time callers, at a $500 average customer value and a 30% close rate600+
+Revenue lost to those missed calls$40K–$50K per month
+Social media enquiries going cold while competitors answered first
+Staff time spent calling missed leads back by hand10+ hrs per week
+What we built
+1A missed-call assistant that replied by text within seconds of a dropped call and then held a real conversation, asking what the caller needed and steering toward a booking rather than firing off a generic apology
+2Facebook and Instagram chatbots trained on the questions the shop actually got: pricing, availability, and which services it offered
+3Automatic tagging and assignment of any lead that needed a person, so nothing sat unread in an inbox
+4Drafted email replies within minutes of an enquiry arriving
+5Self-scheduling through a booking link, with automated reminders and confirmations to hold down no-shows
+6One dashboard covering calls, texts, emails and social messages together
+What changed
+40% of missed leads re-engaged
+Booked appointments up 50%
+Over $50,000 in recovered revenue
+Conversion rates twice what they had been, because leads were answered immediately instead of hours or days later
+Ten or more hours a week of manual lead chasing eliminated, and round-the-clock coverage without another hire
+How this was measured
+Bookings and recovered revenue were counted in the shop systems after the assistant went live. The $40,000 to $50,000 monthly leak is the shop’s own arithmetic from its call logs: 270 first-time missed callers a month at a $500 average customer value and a 30% close rate. The source document does not state the window the $50,000 recovery was measured over, so it is published as the client reported it rather than as an annualised figure.
+The client’s name is withheld by agreement. The figures are unaltered.
+The AI employees behind results like this
+Moves Growth
+AI Receptionist
+Answers every call, day or night, and books the job straight into your calendar.
+Meet the AI Receptionist →
+Industries:Property management →Automotive →
+Find out what’s holding your value back.
+A free one-hour consult. We’ll look at your numbers and tell you which AI employee would move them first. Straight answers, no sales script.
+Book a free consult →
+Hexona Systems
+AI employees that increase enterprise value.
+18 Harbour Street, Toronto, ONServing the United States and Canadahamza@hexonasystems.com
+Explore
+AI Employees
+Industries
+Case Studies
+Blog
+About
+Company
+Book a free consult
+Privacy
+Terms
+Client login
+© Hexona Systems 2026

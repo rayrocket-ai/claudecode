@@ -1,0 +1,249 @@
+URL: https://marketplace.gohighlevel.com/docs/ghl/voice-ai/patch-agent | Read: 2026-11-15 | Method: curl | HTTP 200
+Private reference copy for Ray. Text only. Not for republication or reuse; the content belongs to its publisher.
+AgentsVersion: v3
+Patch Agent
+PATCH/voice-ai/agents/{agentId}
+Try it
+Partially update an existing voice AI agent
+Authorizations
+Authorizationstringheaderrequired
+Bearer authentication header of the form Bearer <token>, where <token> is your access token.
+Scope:voice-ai-agents.write
+Auth methods:OAuthPrivate Integration
+Token type:Sub-Account Token
+Request​
+Headers
+Versionstringrequired
+API Version
+Available optionsv3
+Path Parameters
+agentIdstringrequired
+Unique agent identifier
+Example:507f1f77bcf86cd799439011
+Query Parameters
+locationIdstringrequired
+Location ID
+Example:LOC123456789ABCDEF
+Body
+application/json
+agentNamestring
+Display name for the voice AI agent, between 1-40 characters. Default: "My Agent {random 3 digit number}"
+Possible values: non-empty and <= 40 characters
+Example:Customer Support Agent
+businessNamestring
+Name of the business this agent represents. Default: Uses location name
+Possible values: non-empty
+Example:Acme Corporation
+welcomeMessagestring
+Initial greeting spoken when the agent answers calls. Default: Auto generated
+Possible values: non-empty and <= 190 characters
+Example:Hello! Thank you for calling Acme Corporation. How can I assist you today?
+agentPromptstring
+Custom instructions defining the agent's behavior and personality. Default: Basic prompt generated automatically
+Example:You are a helpful customer service representative. Always be polite and professional.
+voiceIdstring
+Identifier for the speech synthesis voice from available voice options. Default: Auto generated
+Example:507f1f77bcf86cd799439011
+languageVoiceAILanguage
+Language code for the agent's speech and understanding. Default: "en-US"
+Available optionsen-USpt-BResfrdeitnl-NLmulti
+Example:en-US
+patienceLevelPatienceLevel
+Tolerance level for caller response delays. Default: "high"
+Available optionslowmediumhigh
+Example:low
+maxCallDurationnumber
+Maximum call duration in seconds, between 180-900 (3-15 minutes). Default: 300 seconds (5 minutes)
+Possible values: >= 180 and <= 900
+Example:600
+sendUserIdleRemindersboolean
+Enables automatic reminders when callers are silent. Default: true
+Example:true
+reminderAfterIdleTimeSecondsnumber
+Seconds to wait before sending idle reminders, between 1-20. Default: 8 seconds
+Possible values: >= 1 and <= 20
+Example:5
+inboundNumberstring
+Phone number for receiving inbound calls to this agent. Default: null
+Example:+1234567890
+numberPoolIdstring
+Identifier for the number pool managing phone number allocation. Default: null
+Example:pool_507f1f77bcf86cd799439011
+callEndWorkflowIdsstring[]
+Array of workflow IDs to trigger automatically when calls end. Default: []
+Possible values: <= 10
+Example:["wf_507f1f77bcf86cd799439011","wf_507f1f77bcf86cd799439012"]
+sendPostCallNotificationToobject
+Configuration for post-call email notifications to various recipients. Default: []
+Show child attributes
+sendPostCallNotificationTo.adminsbooleanrequired
+Enables post-call notifications to all admin users in the location. Default: true
+Example:true
+sendPostCallNotificationTo.allUsersbooleanrequired
+Enables post-call notifications to all users in the location. Default: false
+Example:false
+sendPostCallNotificationTo.contactAssignedUserbooleanrequired
+Enables post-call notifications to the user assigned to the contact. Default: false
+Example:false
+sendPostCallNotificationTo.specificUsersstring[]required
+Array of specific user IDs to receive post-call notifications. Default: []
+Example:["user_507f1f77bcf86cd799439011"]
+sendPostCallNotificationTo.customEmailsstring[]required
+Array of custom email addresses to receive post-call notifications. Default: []
+Example:["[email protected]"]
+agentWorkingHoursobject[]
+Time intervals defining when the agent accepts calls, organized by day of week. Default: [] (available 24/7)
+Show child attributes
+agentWorkingHours[].dayOfTheWeeknumberrequired
+Day of the week for this working hours configuration (Monday=1 to Sunday=7)
+Available options1234567
+Example:1
+agentWorkingHours[].intervalsobject[]required
+Array of time intervals when the agent is available on this day
+Show child attributes
+agentWorkingHours[].intervals[].startHournumberrequired
+Starting hour of the working interval in 24-hour format (0-23)
+Possible values: >= 0 and <= 23
+Example:9
+agentWorkingHours[].intervals[].endHournumberrequired
+Ending hour of the working interval in 24-hour format (0-23)
+Possible values: >= 0 and <= 23
+Example:17
+agentWorkingHours[].intervals[].startMinutenumberrequired
+Starting minute of the working interval (0-59)
+Possible values: >= 0 and <= 59
+Example:0
+agentWorkingHours[].intervals[].endMinutenumberrequired
+Ending minute of the working interval (0-59)
+Possible values: >= 0 and <= 59
+Example:30
+timezonestring
+IANA timezone identifier affecting working hours and scheduling. Default: Location timezone
+Possible values: Value must match regular expression ^[A-Za-z_]+/[A-Za-z_]+$
+Example:America/New_York
+isAgentAsBackupDisabledboolean
+Prevents this agent from being used as a fallback option. Default: false (Available as backup agent)
+Example:false
+translationobject
+Language translation settings including enablement flag and target language code. Rules: (1) translation.enabled can only be true if the agent's language is not en-US; (2) when enabled, translation.language must be either the agent's language or en-US; (3) when enabled, translation.language is required.
+Show child attributes
+translation.enabledbooleanrequired
+Enables language translation for agent conversations. Default: false
+Example:false
+translation.languagestring
+Target language code for translation (e.g., "es" for Spanish, "fr" for French).
+Example:es
+Response
+200
+application/json
+Agent updated successfully
+idstringrequired
+Unique identifier for the created agent
+Example:507f1f77bcf86cd799439011
+locationIdstringrequired
+Unique identifier for the location where this agent operates
+Example:LOC123456789ABCDEF
+agentNamestringrequired
+Display name of the voice AI agent
+Example:Customer Support Agent
+businessNamestringrequired
+Name of the business this agent represents
+Example:Acme Corporation
+welcomeMessagestringrequired
+Greeting message spoken when the agent answers calls
+Example:Hello! Thank you for calling. How can I assist you today?
+agentPromptstringrequired
+Custom instructions defining the agent's behavior
+Example:You are a helpful customer service representative.
+voiceIdstringrequired
+Identifier for the speech synthesis voice being used
+Example:507f1f77bcf86cd799439011
+languagestringrequired
+Language code for the agent's speech and understanding
+Example:en-US
+patienceLevelstringrequired
+Current tolerance level for caller response delays
+Example:medium
+maxCallDurationnumberrequired
+Maximum call duration in seconds, between 180-900
+Possible values: >= 180 and <= 900
+Example:600
+sendUserIdleRemindersbooleanrequired
+Indicates whether automatic idle reminders are enabled
+Example:true
+reminderAfterIdleTimeSecondsnumberrequired
+Seconds to wait before sending idle reminders, between 1-20
+Possible values: >= 1 and <= 20
+Example:5
+inboundNumberstring
+Phone number for receiving inbound calls
+Example:+1234567890
+numberPoolIdstring
+Identifier for the number pool managing this agent's phone allocation
+Example:pool_507f1f77bcf86cd799439011
+callEndWorkflowIdsstring[]
+Array of workflow IDs triggered automatically when calls end
+Example:[]
+sendPostCallNotificationToobject
+Current post-call notification settings including recipient configuration
+Show child attributes
+sendPostCallNotificationTo.adminsboolean
+Send notifications to admins
+Example:true
+sendPostCallNotificationTo.allUsersboolean
+Send notifications to all users
+Example:false
+sendPostCallNotificationTo.contactAssignedUserboolean
+Send notifications to contact assigned user
+Example:false
+sendPostCallNotificationTo.specificUsersstring[]
+Specific user IDs to notify
+Example:[]
+sendPostCallNotificationTo.customEmailsstring[]
+Custom email addresses to notify
+Example:[]
+agentWorkingHoursobject[]
+Time intervals when the agent accepts calls, organized by day of week
+Show child attributes
+agentWorkingHours[].dayOfTheWeeknumberrequired
+Day of the week for this working hours configuration (Monday=1 to Sunday=7)
+Available options1234567
+Example:1
+agentWorkingHours[].intervalsobject[]required
+Array of time intervals when the agent is available on this day
+Show child attributes
+agentWorkingHours[].intervals[].startHournumberrequired
+Starting hour of the working interval in 24-hour format (0-23)
+Possible values: >= 0 and <= 23
+Example:9
+agentWorkingHours[].intervals[].endHournumberrequired
+Ending hour of the working interval in 24-hour format (0-23)
+Possible values: >= 0 and <= 23
+Example:17
+agentWorkingHours[].intervals[].startMinutenumberrequired
+Starting minute of the working interval (0-59)
+Possible values: >= 0 and <= 59
+Example:0
+agentWorkingHours[].intervals[].endMinutenumberrequired
+Ending minute of the working interval (0-59)
+Possible values: >= 0 and <= 59
+Example:30
+timezonestringrequired
+IANA timezone identifier for working hours and scheduling
+Example:America/New_York
+isAgentAsBackupDisabledbooleanrequired
+Indicates whether this agent is excluded from backup scenarios
+Example:false
+translationobject
+Current language translation settings including enablement status and target language
+Show child attributes
+translation.enabledboolean
+Whether translation is enabled
+Example:false
+translation.languagestring
+Translation language code
+Example:es
+Previous
+List Agents
+Next
+Get Agent

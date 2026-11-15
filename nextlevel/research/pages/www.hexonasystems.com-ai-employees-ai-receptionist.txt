@@ -1,0 +1,152 @@
+URL: https://www.hexonasystems.com/ai-employees/ai-receptionist | Read: 2026-11-15 | Method: curl | HTTP 200
+Private reference copy for Ray. Text only. Not for republication or reuse; the content belongs to its publisher.
+AI Receptionist for Service Businesses · Hexona Systems
+Skip to content
+Hexona SystemsAI EmployeesIndustriesCase StudiesBlogAbout
+Book a free consult
+AI EmployeesIndustriesCase StudiesBlogAboutBook a free consult
+Home/
+AI Employees/
+AI Receptionist
+AI Employee · Moves Growth
+An AI receptionist that never lets a call go to voicemail.
+An AI receptionist answers every call and message 24/7, texts back anyone who hangs up, books the job into your calendar and passes urgent calls to a person. Hexona builds it into your phone line and CRM, then runs and tunes it for you.
+Book a free consult →How it works
+Incoming call · 9:42 PM Live
+Caller: Hi, our furnace just stopped working and it’s freezing in here.
+AI: Sorry to hear that. I can get a technician to you. Is anyone in the home elderly or unwell?
+Caller: No, just us. Can someone come tomorrow morning?
+AI: I have 8:00 AM open. What’s the address? I’ll text you a confirmation.
+Booked: Tue 8:00 AM · Logged in CRM
+Example conversation
+Sound familiar?
+Most service businesses do not have a lead problem. They have an answering problem. The phone rings while everyone is on a job, the caller hangs up, and they ring the next company on the list. Every one of those calls was paid for by your marketing.
+✕Calls go to voicemail while the team is on a job
+✕After-hours enquiries wait until morning, and most never call back
+✕Somebody spends hours a week calling missed leads back by hand
+✕Website chat, Facebook and Instagram messages sit unread
+What it does
+What the AI Receptionist handles, around the clock.
+1
+Answers every call, 24/7
+Nights, weekends and the lunch rush. Callers get a natural conversation, not a phone tree.
+2
+Texts back missed callers in seconds
+If a call drops, a text goes out straight away and carries on the conversation until the job is booked.
+3
+Books jobs into your calendar
+It checks real availability and books the appointment, then sends the confirmation and the reminders.
+4
+Qualifies before it books
+It asks your questions first: service, location, urgency, budget. Your team only spends time on real work.
+5
+Hands urgent calls to a person
+Emergencies and high-value jobs are transferred to whoever is on call, with a summary of what the caller said.
+6
+Logs everything in your CRM
+Every call, text and booking is recorded against the customer, so nothing lives in somebody’s head.
+Proof
+What it changed for clients.
+Tire and auto service$50,000+recovered from calls that used to go to voicemail, with booked appointments up 50%.Read the case →
+Med spa23%of bookings were arriving after hours, and two thirds of those callers never rang back. That is the leak this system was built to close.Read the case →
+How we set it up
+Built for you. Run by us.
+You don't learn any software. We build it around how your business already works, then keep improving it.
+1
+Map your calls
+We listen to how calls come in today, what callers ask, and what counts as a good booking for you.
+2
+Build and connect
+We write the scripts, connect your phone line, calendar and CRM, and set the rules for when a person takes over.
+3
+Test, then go live
+We run test calls until it handles your real questions properly, then switch it on.
+4
+Run and report
+We review conversations, keep improving it, and send you the numbers: calls answered, jobs booked, revenue recovered.
+Compare
+AI receptionist compared with the alternatives.
+AI receptionist compared with the alternatives
+Feature
+Hexona AI Receptionist
+Human answering service
+Self-serve AI receptionist app
+Answers 24/7
+Yes
+Usually, at extra cost
+Yes
+Books into your calendar
+Yes, with your rules
+Often takes a message
+Sometimes, if you set it up
+Connected to your CRM and follow-up
+Built in
+Rarely
+You connect it yourself
+Who sets it up and tunes it
+We do
+They script it
+You do
+Reports the revenue it recovered
+Every month
+Call counts only
+Call counts only
+Questions
+AI Receptionist FAQ
+Something else? Ask us on a free consult.
+Book a free consult →
+Will callers know they are talking to an AI?
++
+It sounds natural, but we recommend it says it is an AI assistant at the start of the call. Callers care far more about getting an answer and a booking than about who gives it, and being upfront avoids any awkwardness.
+What happens with an emergency or a difficult call?
++
+You decide the rules. Emergencies, angry customers and high-value jobs can be transferred to a person straight away, with a short summary of the call sent to their phone so they do not have to ask the caller to repeat themselves.
+Can it book into the calendar and CRM we already use?
++
+In most cases, yes. We connect it to the calendar, CRM or field-service software you already run, so bookings land where your team already looks. If a system has no way to connect, we tell you before we start.
+Do I have to change my phone number?
++
+No. Calls are forwarded from your existing number, either all the time or only when nobody picks up, so customers keep calling the number they already know.
+How is this different from a $49 a month AI receptionist app?
++
+An app gives you the tool and leaves the setup, scripts, integrations and tuning to you. We build it into your business, connect it to your follow-up and CRM, run it, and report what it recovered. You are buying the result, not a login.
+Is it legal to record and transcribe calls?
++
+Yes, with the right notice. Some US states, including California, Florida, Pennsylvania and Washington, require everyone on a call to consent to recording, so the assistant announces it at the start of the call. We set that up for the states you operate in.
+AI Receptionist for your industry
+Construction and contractors →
+Plumbing, HVAC and home services →
+Med spas and clinics →
+Property management →
+The rest of the team
+Moves Growth
+AI Sales Follow-Up
+Replies to new leads in under a minute and brings old estimates back to life.
+Meet the AI Sales Follow-Up →
+Moves Margin
+AI Dispatcher
+Builds the schedule, routes the crews and handles the reschedules.
+Meet the AI Dispatcher →
+Moves Output per employee
+AI Office Admin
+Quotes, paperwork and approvals, done without anyone chasing them.
+Meet the AI Office Admin →
+ See every AI employee
+Find out what’s holding your value back.
+A free one-hour consult. We’ll look at your numbers and tell you which AI employee would move them first. Straight answers, no sales script.
+Book a free consult →
+Hexona Systems
+AI employees that increase enterprise value.
+18 Harbour Street, Toronto, ONServing the United States and Canadahamza@hexonasystems.com
+Explore
+AI Employees
+Industries
+Case Studies
+Blog
+About
+Company
+Book a free consult
+Privacy
+Terms
+Client login
+© Hexona Systems 2026

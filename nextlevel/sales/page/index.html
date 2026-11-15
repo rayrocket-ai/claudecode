@@ -92,11 +92,16 @@ h3{font-size:clamp(1.5rem,2.6vw,2rem);line-height:1.08;letter-spacing:-.02em}
 .dark .btn{background:var(--band-btn);color:var(--band-btn-ink);box-shadow:none}
 .dark .btn::before{background:var(--band-btn-hover)}
 .u,.textbtn{background:none;border:0;padding:0 0 3px;cursor:pointer;text-decoration:none;color:inherit;background-image:linear-gradient(currentColor,currentColor),linear-gradient(var(--rule),var(--rule));background-repeat:no-repeat;background-position:0 100%,0 100%;background-size:0% 1px,100% 1px;transition:background-size .5s var(--ease)}
-.u:hover,.textbtn:hover,.u:focus-visible,.textbtn:focus-visible{background-size:100% 1px,100% 1px}
-.dark .u,.dark .textbtn{background-image:linear-gradient(currentColor,currentColor),linear-gradient(var(--band-line),var(--band-line))}
+.u:hover,.u:focus-visible{background-size:100% 1px,100% 1px}
+.dark .u{background-image:linear-gradient(currentColor,currentColor),linear-gradient(var(--band-line),var(--band-line))}
 .textbtn{font-size:15px;color:var(--muted);text-align:left}
 /* standalone text controls get a 44px tap target; the underline stays close to the words */
-.u.label,.textbtn{display:inline-flex;align-items:center;min-height:44px;padding:0;background-position:0 calc(100% - 9px),0 calc(100% - 9px)}
+.u.label{display:inline-flex;align-items:center;min-height:44px;padding:0;background-position:0 calc(100% - 9px),0 calc(100% - 9px)}
+.textbtn{display:inline-flex;align-items:center;min-height:44px;padding:0;background-image:none;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:6px;text-decoration-color:currentColor;transition:color .3s}
+.dark .textbtn{color:var(--band-muted)}
+.textbtn:hover,.textbtn:focus-visible{color:var(--ink)}
+.dark .textbtn:hover,.dark .textbtn:focus-visible{color:var(--band-ink)}
+@media (max-width:480px){.btn{padding:16px 20px;letter-spacing:.12em;gap:10px}}
 .u.label{color:var(--accent)}
 
 /* top bar and wordmark */
@@ -127,11 +132,11 @@ h3{font-size:clamp(1.5rem,2.6vw,2rem);line-height:1.08;letter-spacing:-.02em}
 }
 
 /* hero */
-.hero{padding-block:clamp(28px,5vw,64px) clamp(56px,8vw,112px)}
-.hero h1{font-size:clamp(2.6rem,13.4vw,8.6rem);line-height:.92;letter-spacing:-.045em;margin-top:clamp(18px,2.4vw,30px)}
+.hero{padding-block:clamp(24px,3vw,40px) clamp(56px,8vw,112px)}
+.hero h1{font-size:clamp(2.6rem,13.4vw,7.2rem);line-height:.92;letter-spacing:-.045em;margin-top:clamp(18px,2.4vw,30px)}
 .h-line{display:block;overflow:hidden;padding:.04em .08em .14em .12em;margin:0 0 -.14em -.12em}
 .h-line>span{display:block}
-.hero-grid{display:grid;gap:44px;margin-top:clamp(36px,5vw,64px);padding-top:clamp(28px,3.4vw,44px);border-top:1px solid var(--rule-strong)}
+.hero-grid{display:grid;gap:44px;margin-top:clamp(32px,3.4vw,44px);padding-top:clamp(26px,2.6vw,36px);border-top:1px solid var(--rule-strong)}
 .hero-copy{display:grid;gap:26px;align-content:start;justify-items:start;min-width:0}
 .hero-copy .sub{font-size:clamp(1.2rem,2vw,1.5rem);line-height:1.38;max-width:26ch;font-family:var(--display);letter-spacing:-.01em}
 .hero-copy .by{font-size:14.5px;line-height:1.55;color:var(--muted);max-width:40ch}
@@ -299,8 +304,8 @@ h3{font-size:clamp(1.5rem,2.6vw,2rem);line-height:1.08;letter-spacing:-.02em}
 
 /* founding (dark band) */
 .found-grid{display:grid;gap:48px}
-.figure-price{display:grid;gap:10px;align-content:start;min-width:0}
-.figure-price .amt{font-family:var(--display);font-size:clamp(6.5rem,25vw,17rem);line-height:.78;letter-spacing:-.06em;font-variant-numeric:tabular-nums lining-nums;color:var(--band-ink);white-space:nowrap}
+.figure-price{display:grid;gap:10px;align-content:start;min-width:0;container-type:inline-size}
+.figure-price .amt{margin-top:clamp(10px,1.6vw,26px);font-family:var(--display);font-size:clamp(6.5rem,25vw,17rem);font-size:min(17rem,50cqw);line-height:.78;letter-spacing:-.06em;font-variant-numeric:tabular-nums lining-nums;color:var(--band-ink);white-space:nowrap}
 .figure-price .amt sup{font-size:.34em;vertical-align:top;position:relative;top:.16em;letter-spacing:0;margin-right:.04em;color:var(--band-accent)}
 .figure-price .per{font-family:var(--display);font-style:italic;font-size:clamp(1.5rem,3vw,2.4rem);letter-spacing:-.02em;margin-top:14px}
 .terms{border-top:1px solid var(--band-line)}
@@ -360,7 +365,7 @@ table.menu{border-collapse:collapse;width:100%}
 
 /* faq */
 .faq-grid{display:grid;gap:36px}
-@media (min-width:1000px){.faq-grid{grid-template-columns:4fr 8fr;gap:72px}.faq-grid h2{position:sticky;top:calc(env(safe-area-inset-top,0px) + 40px);font-size:clamp(2.4rem,4.4vw,4rem)}}
+@media (min-width:1000px){.faq-grid{grid-template-columns:4fr 8fr;gap:72px}.faq-grid h2{align-self:start;position:sticky;top:calc(env(safe-area-inset-top,0px) + 40px);font-size:clamp(2.4rem,4.4vw,4rem)}}
 .faq{border-top:1px solid var(--rule-strong);min-width:0}
 details{border-bottom:1px solid var(--rule)}
 summary:hover{color:var(--accent)}
@@ -573,7 +578,7 @@ footer .wm{color:var(--ink);margin-bottom:10px}
           <p class="per">a month. No setup fee.</p>
           <div class="found-cta">
             <a class="btn" href="#book">Book 15 minutes with Ray <span class="arr" aria-hidden="true">&rarr;</span></a>
-            <button type="button" class="textbtn" data-go="quiz" style="color:var(--band-muted)">Or start with the intake</button>
+            <button type="button" class="textbtn" data-go="quiz">Or start with the intake</button>
           </div>
         </div>
         <div>
@@ -1072,7 +1077,7 @@ function renderResult(focus) {
             + foundingHTML(callsFlagged
               ? "You also said calls get missed. An AI receptionist answers every call, qualifies the caller and books the appointment."
               : "Ready today. An AI receptionist answers every call, qualifies the caller and books the appointment.")}
-        ${flags.length >= 2 ? `<p class="hint">Your answers point to ${flags.length + 1} of the four problems. Next Level Complete runs all four as one system, when all four are open: $1,500 setup + $1,500 a month.</p>` : ""}
+        ${flags.length >= 2 ? `<p class="hint">Your answers point to ${flags.length + 1 >= 4 ? "all four problems" : (flags.length + 1) + " of the four problems"}. Next Level Complete runs all four as one system, when all four are open: $1,500 setup + $1,500 a month.</p>` : ""}
         <p class="fine">Prices in Canadian dollars.</p>
       </div>
       <div class="res-block"><h4>Before you pay</h4>

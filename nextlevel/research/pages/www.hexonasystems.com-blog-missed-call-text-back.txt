@@ -1,0 +1,160 @@
+URL: https://www.hexonasystems.com/blog/missed-call-text-back | Read: 2026-11-15 | Method: curl | HTTP 200
+Private reference copy for Ray. Text only. Not for republication or reuse; the content belongs to its publisher.
+Missed Call Text Back: How It Works · Hexona Systems
+Skip to content
+Hexona SystemsAI EmployeesIndustriesCase StudiesBlogAbout
+Book a free consult
+AI EmployeesIndustriesCase StudiesBlogAboutBook a free consult
+Home/
+Blog/
+Playbooks
+Playbook · Playbooks
+Missed call text back: how it works and what to send
+Hamza BaigPublished Nov 6, 20268 min read
+Missed call text back is an automatic text that goes to anyone whose call you didn’t answer, usually within a minute, asking what they need. It keeps the caller talking to you instead of dialing the next business on Google, and for most service businesses it is the cheapest fix there is for lost calls.
+It is the first leak I point out to any local business. The owner is on a roof, under a sink or with a client, the phone rings out, and the caller has already moved on by the time anyone checks voicemail. Below is how it works, what you need to switch it on legally, the texts we actually send, and when it is time to move up to an AI that answers the call itself.
+The short version
+When a call isn’t answered, busy or goes to voicemail, a text goes out about a minute later asking what the caller needs.
+In the US you need your texting number registered for A2P 10DLC before you send business texts from a local number.
+Short, plain texts work best: who you are, sorry we missed you, what do you need. One message, no links, no emojis.
+The text gets the reply. Someone (or an AI) has to answer that reply fast, or you lose them anyway.
+If you miss more than a handful of calls a day, an AI that answers the call live is usually the better fix.
+On this page
+How does missed call text back work?
+How much do missed calls actually cost a small business?
+Do you need A2P 10DLC registration to text back missed calls?
+What should a missed call text say? Templates to copy
+How do you set up missed call text back?
+How much does it cost to run?
+When should you switch to an AI that answers the call?
+Questions people ask
+How does missed call text back work?
+Your calls ring through a phone system that knows when a call wasn’t picked up. When it sees a missed call (no answer, busy, or sent to voicemail), it waits a short moment and sends a text from your business number to the caller.
+The good versions do a little more: a different message after hours, a tag on the contact so you can see it in your CRM, an alert to the owner or front desk, and a note so the same person doesn’t get three texts for three calls in a row.
+Call rings out→
+System logs it as missed→
+Waits about a minute→
+Sends the text→
+Alerts your team→
+Reply gets answered
+At a glance: what happens in the first two minutes after a missed call
+How much do missed calls actually cost a small business?
+You can work it out from your own call log in ten minutes. Count the missed calls from numbers that aren’t already customers, multiply by how often a new caller turns into a job, then by what a job is worth.
+That is exactly the math one of our clients, a busy tire shop in Toronto, did on its own logs: 270 first-time missed callers a month, a $500 average customer value and a 30% close rate, which came to $40,000 to $50,000 a month walking out the door. There was no full-time receptionist and the owner was working in the shop, so in winter tire season, the busiest time of year, nobody was sitting by the phone.
+The core of what we built was a missed call text back that replied within seconds and kept the conversation going toward a booking, alongside Facebook and Instagram chat, tagging of leads that needed a person, and a booking link with reminders. Once it went live, 40% of missed leads re-engaged, booked appointments went up 50% and over $50,000 in revenue was recovered. Those results are for the whole build, not the text alone. The full write-up, including how it was measured, is in the tire and seasonal automotive service case study.
+600+
+missed calls a month before the build
+$50,000+
+revenue recovered
+50%
+more booked appointments
+At a glance: the tire shop’s own numbers, before and after
+Do you need A2P 10DLC registration to text back missed calls?
+Yes, if you text US customers from a normal 10 digit local number, which is what nearly every missed call setup does. US carriers require business texting on local numbers to be registered through The Campaign Registry, which verifies brands and campaigns before they are allowed to send. You don’t register with it directly; your phone provider submits it for you. Unregistered business texts get filtered or blocked.
+Registration has two parts. The brand is your business, with its legal name and tax ID exactly as on file. The campaign is what you send and how people agree to get it, with sample messages. Put your missed call text in as a sample. Have a live website with a privacy policy before you start, because reviewers check it.
+Toll-free numbers go through a separate toll-free verification instead. Either way, plan for a few days to a couple of weeks before texts flow reliably, and don’t switch the automation on until registration is approved. The full process is in A2P 10DLC explained: what business owners need before texting customers.
+This is general information, not legal advice. Texting rules change, so check your phone provider’s current requirements before you go live.
+What should a missed call text say? Templates to copy
+These are examples. Change the wording to sound like your business, keep each one under 160 characters so it sends as a single text, and skip emojis (one emoji cuts the limit to 70 characters).
+Example missed call text back messages by situation. Swap in your business name.
+Situation
+Example text
+During business hours
+Hi, it's [Business]. Sorry we missed your call, we're with a customer. What can we help with? Reply here and we'll get right back to you.
+After hours
+Hi, it's [Business]. We're closed but we saw your call. What do you need? Reply here and we'll text you first thing in the morning.
+Trades, on a job site
+Hi from [Business], sorry we missed you, we're out on a job. Is this for a repair or a quote? Reply here and we'll get you booked.
+Med spa or clinic
+Hi, it's [Business]. Sorry we couldn't pick up, we're with a client. Are you looking to book, or do you have a question? Just reply here.
+Property management
+Hi, this is [Company]. We missed your call. Is this about a current unit or a vacancy? If it's an emergency like a leak, reply EMERGENCY.
+Second call in a few minutes
+Saw you tried us again. Still tied up for a few minutes. Text what you need and we'll sort it out.
+Example missed call text back messages by situation. Swap in your business name.
+Wait about a minute before the text goes out. An instant reply reads like a robot; a minute later reads like someone saw the call and grabbed their phone.
+Want this set up for you?
+We build and run AI employees for service businesses. A free one-hour consult tells you which one would pay back first.
+Book a free consult →
+How do you set up missed call text back?
+If you use GoHighLevel, Hamza’s step-by-step build with the exact menu paths and current per-text rates is at hamzaautomates.com/gohighlevel/tutorials/missed-call-text-back.
+1Get a number that can textYour calls need to ring through a phone system that can also send texts, so it can see when a call is missed. You can usually keep your existing number by forwarding it.
+2Register for A2P 10DLCBrand plus campaign, with the missed call message as a sample. Wait for approval before sending.
+3Set when a call counts as missedHighLevel recommends a ring time of 10 to 20 seconds. Too short and your staff never get a chance to pick up.
+4Write two messagesOne for business hours, one for after hours. Use the templates above as a start.
+5Stop repeat textsAdd a rule so the same caller doesn’t get a new text every time they redial within a few minutes.
+6Decide who answers the replyAlert the owner or front desk, or hand the conversation to an AI that can answer questions and book. This is the step most setups skip.
+7Test itCall from a phone that isn’t on the account, let it ring out, and check the text arrives and the alert fires. Then test after hours.
+How much does it cost to run?
+The texts themselves cost pennies. On HighLevel’s phone system, as of Oct 31, 2026, a US or Canadian text was $0.00747 per segment plus a carrier fee of $0.0035 to $0.005, so 100 missed call texts a month comes to roughly $1.10 to $1.25 before replies. A2P registration adds a one-time fee ($22.50 for HighLevel’s low volume and sole proprietor options) and a monthly campaign fee.
+The real cost is the time it takes someone to answer the replies. That is what decides whether you should text back at all or have the call answered.
+When should you switch to an AI that answers the call?
+A text back is a patch. It works when you miss a few calls a day and someone can reply within minutes. It stops working when the volume grows, when callers have emergencies, or when the replies sit unread until the evening.
+At that point, have the call answered live. An AI receptionist picks up, asks what the caller needs, books the job into your calendar and hands real emergencies to a person. We build and run those, and you can see what ours does at our AI Receptionist page. If you are in the trades, AI for plumbing, hvac and home services covers the setup for plumbing and HVAC.
+Text back vs an AI that answers the call, for a service business.
+Missed call text back
+AI that answers the call
+Best for
+A few missed calls a day
+Busy lines, after hours, emergencies
+Caller experience
+Gets a text, has to reply
+Talks to someone right away
+Books the job
+Only if someone answers the reply
+Yes, during the call
+Running cost
+Pennies per text
+Per minute of talk time, plus setup
+Text back vs an AI that answers the call, for a service business.
+Questions people ask
+What is missed call text back?
++
+Missed call text back is an automation that sends a text to anyone whose call you didn’t answer, usually within a minute. It asks what they need so the conversation continues by text instead of the caller trying another business.
+Is missed call text back legal?
++
+Generally yes, because you are replying to someone who just called you. In the US the number sending the text must be registered for A2P 10DLC, and you must honor anyone who replies STOP. This is general information, not legal advice.
+Does missed call text back work after hours?
++
+Yes, and that is where it earns its keep. Set a separate after-hours message that says you are closed and when you will reply, or hand the reply to an AI that can book the appointment at night.
+Can I keep my business phone number?
++
+Usually yes. Most setups forward your existing number to a phone system that can detect missed calls and send texts, so customers keep calling the number they already know.
+How fast should the text go out?
++
+About a minute after the missed call. Instant replies read as automated, and waiting longer than a few minutes gives the caller time to call a competitor.
+Is a missed call text better than voicemail?
++
+For most callers, yes. Many people hang up instead of leaving a voicemail, and a text gives them an easy way to tell you what they need without calling again.
+Sources
+Facts and prices checked on Nov 6, 2026. Prices change, so confirm on the source before you buy.
+Hexona case study: tire shop missed calls. Missed call volume, the shop’s own leak calculation and recovered revenue, quoted as published. Checked Nov 6, 2026.
+Hamza Baig, Missed call text back in GoHighLevel. Setup steps, ring timeout, message templates, HighLevel per-text rates and A2P fees as checked Oct 31, 2026. Read Nov 6, 2026.
+The Campaign Registry. The registry that verifies A2P 10DLC brands and campaigns; brands register through their messaging provider, not directly. Read Nov 6, 2026.
+Written by
+Hamza Baig
+Founded Hexona Systems in 2022. Hexona has served more than 1,500 businesses, more than 1,000 agencies run on its AI and systems, and Hamza teaches AI automation to a community of more than 45,000 members.
+About HexonaYouTubeLinkedIn
+Keep reading
+All articles →
+Guide · 7 min readSpeed to lead: how fast you need to answer a new leadNov 6, 2026
+Comparison · 7 min readAfter-hours answering service: AI or a human call center?Nov 6, 2026
+Guide · 8 min readA2P 10DLC explained: what business owners need before texting customersNov 6, 2026
+Find out what’s holding your value back.
+A free one-hour consult. We’ll look at your numbers and tell you which AI employee would move them first. Straight answers, no sales script.
+Book a free consult →
+Hexona Systems
+AI employees that increase enterprise value.
+18 Harbour Street, Toronto, ONServing the United States and Canadahamza@hexonasystems.com
+Explore
+AI Employees
+Industries
+Case Studies
+Blog
+About
+Company
+Book a free consult
+Privacy
+Terms
+Client login
+© Hexona Systems 2026

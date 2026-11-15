@@ -1,0 +1,107 @@
+URL: https://help.gohighlevel.com/support/solutions/articles/155000008422-fixed-rate-rebilling-for-ai-products | Read: 2026-11-15 | Method: curl | HTTP 200
+Private reference copy for Ray. Text only. Not for republication or reuse; the content belongs to its publisher.
+Fixed-Rate Rebilling for AI Products
+Modified on: Tue, 11 Aug, 2026 at 7:15 AM
+AI Products Re billing
+Fixed-Rate Re Billing for AI Products
+Configure predictable, flat-rate pricing for Conversation and Voice AI products to simplify billing and accelerate AI product adoption.
+What You'll Learn
+This article explains how to use fixed-rate re billing for AI products, allowing you to charge sub-accounts a predictable flat rate per unit of AI usage (such as $0.50 per message) instead of a variable markup on token-based costs.
+You'll discover how to configure pricing models per product, understand the mechanics of charge-time enforcement, and learn best practices for managing AI product re billing across your agency.
+Table of Contents
+1
+What is Fixed-Rate Re Billing?
+2
+Key Benefits
+3
+Understanding Pricing Models
+4
+How to Configure Fixed-Rate Re billing
+5
+How Charge-Time Enforcement Works
+6
+Frequently Asked Questions
+1
+What is Fixed-Rate Re Billing?
+Fixed-rate re billing allows you to charge sub-accounts a predictable flat rate for each unit of AI usage — such as $0.50 per Conversation AI message or $0.10 per Voice AI minute — instead of applying a percentage-based markup on top of the underlying token costs that HighLevel charges your agency.
+This pricing model applies to Conversation AI and Voice AI products. You continue to pay HighLevel based on actual token consumption, but your sub-accounts see a simple, consistent line item on their invoices regardless of how token usage varies behind the scenes.
+The economics of the spread between your actual cost and the fixed rate you charge are entirely yours to manage, giving you control over margin and pricing strategy while simplifying the customer experience.
+2
+Key Benefits
+Fixed-rate re billing transforms how you sell and manage AI products by removing billing complexity and variability for your sub-accounts.
+Easier Sales Process — Quote a simple, fixed price per message or call to small-business customers who don't understand or care about token economics.
+Billing Predictability — Sub-accounts receive consistent charges for AI usage every billing cycle, eliminating confusion and billing disputes caused by usage volatility.
+Increased Product Adoption — Lower the barrier to attaching AI products to more sub-accounts by removing billing unpredictability as a friction point.
+Flexible Pricing Strategy — Maintain full control over margin by setting your fixed rate at whatever level supports your business model, independent of token cost fluctuations.
+Reduced Support Burden — Eliminate billing-related support tickets and customer questions about why their AI costs changed month-to-month.
+3
+Understanding Pricing Models
+HighLevel supports two distinct re billing models for AI products. You choose the model independently for each product (Conversation AI and Voice AI) and for each sub-account.
+Model 1
+Markup-Based Pricing
+The sub-account is charged a percentage markup (e.g., 1.5x or 2x) on top of the actual token cost HighLevel charges your agency. This model ties the sub-account's bill directly to usage variability. It remains fully supported and is ideal for agencies with sophisticated customers who understand usage-based pricing.
+Model 2
+Fixed-Rate Pricing
+The sub-account is charged a flat rate per unit of AI usage (e.g., $0.50 per Conversation AI message), regardless of the token cost incurred. The billing engine applies the fixed rate at charge time, bypassing the markup calculation entirely. This model provides billing predictability and is ideal for price-sensitive small-business customers.
+Per-Product Independence
+You can configure Conversation AI with a fixed rate and Voice AI with a markup for the same sub-account. Each product's pricing model is independent.
+4
+How to Configure Fixed-Rate Re Billing
+You can configure fixed-rate re billing in three locations within HighLevel. All three interfaces allow you to select the pricing model and enter the flat rate per product.
+Step 1
+Navigate to the Configuration Interface
+Go to one of the following locations in your HighLevel account:
+Manage Client → Re billing Settings for a specific location
+SaaS Plan Create/Update → Re billing Flow when building subscription plans
+AI Usage Dashboard for quick access to AI product pricing configuration
+Step 2
+Select the AI Product
+Locate the AI product you want to configure (Conversation AI or Voice AI). Each product's pricing model is configured independently.
+Step 3
+Choose the Pricing Model
+Select either "Markup" or "Fixed Rate" from the pricing model dropdown for the product. The interface will display different fields depending on your selection.
+Step 4
+Enter the Fixed Rate
+If you selected "Fixed Rate", enter the flat rate you want to charge per unit of usage (e.g., $0.50 per message for Conversation AI). If you selected "Markup", enter the multiplier (e.g., 1.5x or 2x).
+Step 5
+Save the Configuration
+Click "Save Markups" to apply the pricing model. The configuration takes effect immediately for all future AI usage charges for the sub-account. Switching between markup and fixed rate is supported — the interface will restore the original state correctly if you toggle back before saving.
+Note
+The pricing model and rate you configure apply only to the specific sub-account or subscription plan you're editing. Changes do not retroactively affect past charges.
+5
+How Charge-Time Enforcement Works
+HighLevel's billing engine applies the configured pricing model at the moment a chargeable AI event occurs, ensuring that the correct rate is charged without delay or post-processing.
+Here's how the system determines what to charge:
+Event Trigger
+AI Usage Event Occurs
+When a Conversation AI message is sent or a Voice AI call is completed, the billing engine receives a usage event with token consumption data from HighLevel's AI infrastructure.
+Config Lookup
+Retrieve Pricing Model
+The billing engine checks the rebilling configuration for the sub-account and product to determine whether the pricing model is set to "Markup" or "Fixed Rate".
+Pricing Logic
+Apply the Correct Rate
+If the pricing model is "Fixed Rate", the billing engine applies the configured flat rate (e.g., $0.50) directly, bypassing the markup calculation entirely. The actual token cost is ignored for the sub-account charge.
+If the pricing model is "Markup", the billing engine calculates the sub-account charge as: (token cost × markup multiplier).
+Charge Applied
+Record the Charge
+The calculated charge is recorded against the sub-account's billing cycle and appears on their next invoice as a line item for the AI product.
+Agency Cost Unaffected
+Your agency continues to be charged by HighLevel based on actual token usage, regardless of the pricing model configured for the sub-account. The fixed-rate model transfers pricing risk and margin management to your agency.
+6
+Frequently Asked Questions
+Q: Can I switch between markup and fixed-rate pricing for the same product?
+Yes. You can switch a product's pricing model from markup to fixed rate (or vice versa) at any time through the Manage Client rebilling settings, SaaS plan configuration, or AI Usage dashboard. The change takes effect immediately for all future charges. Past charges are not affected.
+Q: Does fixed-rate re billing change how HighLevel charges my agency?
+No. Your agency is always charged by HighLevel based on actual token consumption for AI products, regardless of the pricing model you configure for sub-accounts. Fixed-rate re billing only changes what the sub-account sees on their invoice.
+Q: What happens if I set the fixed rate too low and my token costs exceed it?
+You absorb the difference. If the fixed rate you charge the sub-account is lower than the token cost HighLevel charges your agency, you will incur a negative margin on that transaction. It is your responsibility to set a fixed rate that supports your business model.
+Q: Can I use different pricing models for Conversation AI and Voice AI on the same sub-account?
+Yes. Each AI product's pricing model is configured independently. You can charge a fixed rate for Conversation AI and a markup for Voice AI (or any other combination) for the same sub-account.
+Q: Does the fixed-rate configuration apply across all my sub-accounts?
+No. Fixed-rate pricing is configured per sub-account or per SaaS subscription plan. Each sub-account can have a different pricing model and rate. If you want to apply the same fixed rate to multiple sub-accounts, you can configure it at the SaaS plan level or use grouped/bulk re billing configuration APIs.
+Q: What validations are in place to prevent configuration errors?
+The billing engine includes validators to catch mismatches, such as a product marked as "Markup" that still carries a stale fixed price value, or a product marked as "Fixed Rate" without a flat rate entered. These validators run when you save the rebilling configuration and will prevent invalid configurations from being applied.
+Q: Will fixed-rate re billing appear on the sub-account's invoice differently than markup-based charges?
+The invoice line item will show the AI product name and the total charge for the billing cycle. The pricing model is not explicitly labeled on the invoice — the sub-account simply sees the amount they owe. However, the charge will be consistent from cycle to cycle when fixed-rate pricing is used, unlike the variable charges they would see with markup-based pricing.
+Q: Can I configure fixed-rate re billing using the HighLevel API?
+Yes. The pricing model (markup vs. fixed rate) and fixed rate values are included in the rebilling configuration payload for subscription plan creation/update APIs and grouped/bulk rebilling configuration APIs. Refer to the API documentation for details on the required payload structure.

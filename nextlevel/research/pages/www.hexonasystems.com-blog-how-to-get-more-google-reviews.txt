@@ -1,0 +1,183 @@
+URL: https://www.hexonasystems.com/blog/how-to-get-more-google-reviews | Read: 2026-11-15 | Method: curl | HTTP 200
+Private reference copy for Ray. Text only. Not for republication or reuse; the content belongs to its publisher.
+How to Get More Google Reviews (2026) · Hexona Systems
+Skip to content
+Hexona SystemsAI EmployeesIndustriesCase StudiesBlogAbout
+Book a free consult
+AI EmployeesIndustriesCase StudiesBlogAboutBook a free consult
+Home/
+Blog/
+Playbooks
+Playbook · Playbooks
+How to get more Google reviews without begging (or breaking Google’s rules)
+Hamza BaigPublished Nov 6, 20269 min read
+To get more Google reviews, ask every customer, within a few hours of the job, with a direct link to your review form, and send one or two reminders until they click. Most businesses with few reviews aren’t doing anything wrong in the work; they just never ask consistently.
+The catch is that the obvious shortcuts are banned. Google removes reviews that came from selective asking or rewards, and in the US the FTC can fine businesses for buying or suppressing reviews. Below is the system that works inside the rules: when to ask, what to send, how to automate it, how to reply, and what to measure.
+The short version
+Ask every customer the same way, right after the job or visit. Selective asking ("only send the link to happy people") breaks Google’s policy.
+Use Google’s own review link or QR code from your Business Profile. One tap to the form beats "search for us on Google".
+Send the first text within a few hours, then one or two reminders that stop as soon as they click.
+No discounts, draws or freebies for reviews, and no hiding the bad ones. Both are banned by Google, and buying or suppressing reviews is banned by the FTC.
+Reply to every review, good and bad. It shows the next customer you are paying attention.
+On this page
+Why do some businesses get far more Google reviews than others?
+When is the best time to ask for a Google review?
+How do I get my Google review link and QR code?
+What should a review request text say?
+How do you automate Google review requests?
+How should you reply to Google reviews, especially bad ones?
+What are the rules for asking for Google reviews?
+What does the FTC fake reviews rule mean for a small business?
+What should you measure?
+Should you set this up yourself or have it built?
+Questions people ask
+Why do some businesses get far more Google reviews than others?
+It is rarely the quality of the work. The plumber with 600 reviews and the plumber with 12 often do the same job. The difference is that one of them asks every customer, every time, and makes it a one-tap job.
+Asking by hand doesn’t survive a busy week. The tech forgets, the front desk forgets, the owner means to send a batch on Friday and doesn’t. That is why review requests are one of the first things we automate for a client: the request goes out because the job was marked done, not because somebody remembered.
+Hamza runs the same system for Hexona. As of November 2026 our own Google profile sits at 74 reviews and a 4.8 rating, and AI drafts the replies to new reviews as they come in.
+When is the best time to ask for a Google review?
+Ask while the customer still remembers your name. For most service businesses that means the same day, triggered by the thing that proves the job is done.
+When to send the first review request, by type of business. These are our starting points, not rules from Google.
+Business
+Send it when
+First request
+Plumbing, HVAC, electrical
+The job is marked complete or the invoice is paid
+1 to 3 hours after
+Med spa, clinic
+The appointment is marked showed
+Same evening (results may need a day)
+Auto shop
+The car is picked up
+1 to 2 hours after
+Restaurant, café
+A loyalty visit or online order is completed
+Within the hour
+Property management
+A maintenance ticket is closed or a lease is signed
+Same day
+Contractor, remodeler
+Final walkthrough or final payment
+Same day, then again at 30 days
+When to send the first review request, by type of business. These are our starting points, not rules from Google.
+Use the job, not the mood, as the trigger. Filtering who gets the link by a satisfaction score or a "happy customer" tag is exactly the selective asking Google bans.
+How do I get my Google review link and QR code?
+Google gives every business on Business Profile a direct link and a QR code to its review form. According to Google’s help page (read Nov 6, 2026), you open your Business Profile, select Read Reviews, then choose "Get more reviews". Copy the link rather than typing it, and right-click the QR code to save the image. Google says review QR codes can only be generated in a computer browser, not on a phone.
+Then put it everywhere a happy customer already is:
+In the review request text and email (the main one).
+On the invoice, receipt and job completion email.
+On a card the tech leaves on the counter, or a sign at the front desk or service counter.
+At the end of a chat or text conversation that solved a problem.
+What should a review request text say?
+Short, personal, one link. Use the customer’s name and the service they had. Don’t ask for "5 stars" and don’t tell them what to write. Type plain straight apostrophes in your texts: Twilio notes a single curly quote switches a text to an encoding with only 70 characters per message, so it can cost you extra segments. These are examples to adapt, not scripts to copy word for word:
+Example review request texts by industry. Replace [link] with your Google review link.
+Industry
+First request
+Reminder (2 to 3 days later, only if not clicked)
+HVAC, plumbing
+Hi Dana, thanks for having us out today to fix the water heater. If you have a minute, a quick Google review helps other homeowners find us: [link]
+Hi Dana, just a gentle nudge on that review if you get a second: [link]. Thanks again for choosing us.
+Med spa
+Hi Priya, it was lovely seeing you today. If you have a moment, we'd really appreciate a Google review: [link]
+Hi Priya, hope you're happy with your results. Here's the review link again if you get a chance: [link]
+Auto shop
+Hi Marcus, your Civic is all set. Thanks for trusting us with it. Would you leave us a quick Google review? [link]
+Hi Marcus, here's that review link if you have a minute: [link]. Drive safe.
+Property management
+Hi Jordan, the maintenance request at Unit 4B is closed. If the team took good care of you, a Google review helps us a lot: [link]
+Hi Jordan, here's the review link again if you get a chance: [link]
+Example review request texts by industry. Replace [link] with your Google review link.
+Google’s policy now also bans asking staff to collect a set number of reviews, or reviews with specific content such as a staff member’s name. PPC Land reported the change on April 17, 2026, and it is on Google’s policy page as of Nov 6, 2026. Ask for an honest review, not a mention.
+How do you automate Google review requests?
+You need three things connected: the system that knows a job is done (your CRM, field-service software or booking tool), a texting and email sender, and your review link. When the job is marked complete, the request goes out; when the customer clicks, the reminders stop.
+1Pick the triggerJob complete, invoice paid, appointment showed, or car picked up. Whatever proves the service happened.
+2Send the first requestText first, because it gets read. Add an email an hour later for customers who prefer it.
+3Follow up once or twiceTwo to three days apart, and only to people who haven’t clicked. Stop at two reminders.
+4Make sure you have permission to textOnly text customers who gave you their number for updates about their service, and honor STOP replies immediately.
+5Reply to what comes inEvery review, within a day or two. AI can draft replies, but a person should approve anything about a complaint.
+Want this set up for you?
+We build and run AI employees for service businesses. A free one-hour consult tells you which one would pay back first.
+Book a free consult →
+How should you reply to Google reviews, especially bad ones?
+Reply to all of them. A short thank-you to a 5-star review takes ten seconds and shows the next person reading that someone is home.
+For a bad review, don’t argue in public and don’t promise anything you haven’t checked. Apologize for the experience, say you want to fix it, and give a direct way to reach a manager. Then actually call them. A complaint handled well often reads better than a wall of perfect scores.
+Hamza uses AI to reply to Hexona’s reviews, with one rule we set for every client too: anything negative waits for a human. AI is good at warm thank-yous and bad at deciding whether to offer a refund.
+What are the rules for asking for Google reviews?
+This is the part that gets reviews wiped, so it is worth being precise. Google’s Maps content policy treats these as fake engagement, and it removes the reviews and can restrict the profile:
+Selective asking (review gating). Merchants must not selectively ask for positive reviews or discourage negative ones. A "were you happy?" step that sends only the happy people to Google breaks this.
+Incentives. No discounts, free services, gift cards or prize draws in exchange for a review, and nothing in exchange for changing or removing a negative one.
+Reviews from inside the business. Google bans content based on a conflict of interest, including current or former employment, so owners and staff reviewing their own business are out.
+Staff quotas and scripted content. Asking staff to collect a certain number of reviews, or reviews that say something specific, is listed as rating manipulation.
+What does the FTC fake reviews rule mean for a small business?
+In the US, the FTC’s Trade Regulation Rule on the Use of Consumer Reviews and Testimonials (16 CFR Part 465) has been in effect since October 21, 2024. It bans fake reviews, paying or rewarding people for reviews that say something positive (or negative), undisclosed reviews from insiders, company-controlled "review" sites posing as independent, and review suppression. Suppression includes groundless legal threats, physical threats or intimidation to stop a negative review, and implying your review section shows all or most reviews when negative ones were suppressed. The FTC can seek civil penalties from businesses that knowingly break it.
+For a service business the practical version is simple: ask everyone, reward nobody, hide nothing, and never threaten a customer over a review. This is general information, not legal advice; if you are unsure about a specific practice, ask a lawyer.
+What should you measure?
+Four numbers tell you whether the system is working:
+Requests sent vs jobs completed. Should be close to 100%. If it isn’t, the trigger is broken or someone is skipping it.
+Click rate on the link. If it is low, the message is too long or arrives too late.
+New reviews per month. Google says more reviews and positive ratings can help local ranking, and AI assistants quote them too (How to get your business recommended by ChatGPT and Google’s AI answers).
+Reply rate. Every review answered, within a couple of days.
+Requests sent→
+Links clicked→
+Reviews left→
+Replies posted
+At a glance: the review funnel to track each month
+Should you set this up yourself or have it built?
+If you run one location and already have software that sends texts when a job closes, you can set this up in an afternoon. Where it gets harder is connecting the job system to the texting, handling reminders and opt-outs properly, and replying to every review without it eating your evenings.
+That is the job of an our AI Retention page: review requests, replies, win-backs and repeat business, run for you. It is usually part of a bigger setup for a home services company (AI for plumbing, hvac and home services) or a med spa (AI for med spas and clinics). If you want to see whether it would pay back for you, book a free consult.
+Questions people ask
+How do I get more Google reviews fast?
++
+Ask every customer the same day the job is done, with a direct link to your Google review form, and send one or two reminders to anyone who hasn’t clicked. Automating the request off a job-complete or invoice-paid trigger is what makes it consistent.
+Can I offer a discount for a Google review?
++
+No. Google’s policy bans incentives such as payment, discounts and free goods or services in exchange for any review, and in the US the FTC’s 2024 rule bans rewarding reviews that express a particular sentiment. Reviews obtained that way can be removed.
+Is it allowed to only ask happy customers for reviews?
++
+No. Google prohibits selectively soliciting positive reviews or discouraging negative ones. Send the same request with the same link to every customer who received the service.
+Where do I find my Google review link?
++
+On a computer, open your Business Profile, select Read Reviews and choose "Get more reviews". Copy the link and save the QR code from there; Google says the QR code can only be generated in a computer browser.
+Should I reply to every Google review?
++
+Yes. A short thank-you for good reviews and a calm, specific reply to bad ones shows future customers you are paying attention. Take complaints offline with a direct contact and follow up.
+How many reminders should I send for a review request?
++
+One or two, two to three days apart, and only to people who haven’t clicked the link yet. More than that starts to feel like nagging and can cause opt-outs.
+Sources
+Facts and prices checked on Nov 6, 2026. Prices change, so confirm on the source before you buy.
+Google Maps, Prohibited & restricted content (fake engagement). Rules on selective solicitation, incentives, conflicts of interest, and staff review quotas and specific content. Read Nov 6, 2026.
+Google Business Profile Help, Create a Google link or QR code to request reviews. Where to find the review link and QR code, desktop only. Read Nov 6, 2026.
+Google Business Profile Help, Tips to get more Google reviews. Asking customers through a Google link or QR code, and replying to reviews. Read Nov 6, 2026.
+Google Business Profile Help, Tips to improve your local ranking on Google. More reviews and positive ratings can help local ranking. Read Nov 6, 2026.
+FTC, Federal Trade Commission announces final rule banning fake reviews and testimonials. Aug 14, 2024 release listing the banned practices; effective 60 days after Federal Register publication (Aug 22, 2024), which is Oct 21, 2024. Read Nov 6, 2026.
+16 CFR Part 465 (Cornell Legal Information Institute). Section list of the rule (89 FR 68077, Aug 22, 2024). Read Nov 6, 2026. The Federal Register page redirected to a bot check and was not read.
+PPC Land, Google tightens Maps review policy: staff names and quotas now banned. Report on the April 2026 policy update, published Apr 17, 2026. Read Nov 6, 2026.
+Twilio Docs, What is UCS-2 character encoding?. Any non GSM-7 character, such as a smart quote, switches a text to UCS-2. Read Nov 6, 2026.
+Written by
+Hamza Baig
+Founded Hexona Systems in 2022. Hexona has served more than 1,500 businesses, more than 1,000 agencies run on its AI and systems, and Hamza teaches AI automation to a community of more than 45,000 members.
+About HexonaYouTubeLinkedIn
+Keep reading
+All articles →
+Guide · 7 min readHow to get your business recommended by ChatGPT and Google’s AI answersNov 6, 2026
+Playbook · 7 min readAppointment reminder texts that cut no-shows (with templates)Nov 6, 2026
+Playbook · 8 min readMissed call text back: how it works and what to sendNov 6, 2026
+Find out what’s holding your value back.
+A free one-hour consult. We’ll look at your numbers and tell you which AI employee would move them first. Straight answers, no sales script.
+Book a free consult →
+Hexona Systems
+AI employees that increase enterprise value.
+18 Harbour Street, Toronto, ONServing the United States and Canadahamza@hexonasystems.com
+Explore
+AI Employees
+Industries
+Case Studies
+Blog
+About
+Company
+Book a free consult
+Privacy
+Terms
+Client login
+© Hexona Systems 2026
