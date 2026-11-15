@@ -1,0 +1,493 @@
+[
+  {
+    "id": "P051",
+    "segment": "real_estate_agent",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "I run three ISAs and an enterprise AI layer, and a service that says it is new with no case studies and is taking its first 10 clients is not touching my intake.",
+    "what_almost_changed_their_mind": "Nothing came close; a colleague's referral got him to look, but 'there are no client testimonials or case studies yet' ended it.",
+    "missing_info": [
+      "Who else at 1,000-plus leads a month runs on this?",
+      "Is there an SLA or uptime commitment?"
+    ],
+    "price_reaction": "cheap",
+    "max_monthly_they_would_pay_cad": 0,
+    "trust_in_ray": 2,
+    "best_product_for_them": "none",
+    "moved_from_prior": false,
+    "moved_why": ""
+  },
+  {
+    "id": "P052",
+    "segment": "real_estate_agent",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "I had twenty seconds on my phone and there was nothing to listen to, just text and then a quiz and a call.",
+    "what_almost_changed_their_mind": "'Answers every call you miss' fits her two bartending nights exactly, and a 10-second audio clip would have got her to tap.",
+    "missing_info": [
+      "What does the AI sound like (audio sample)?",
+      "How many taps is the quiz?",
+      "What are the phone, text and AI usage costs?"
+    ],
+    "price_reaction": "expensive",
+    "max_monthly_they_would_pay_cad": 150,
+    "trust_in_ray": 3,
+    "best_product_for_them": "Answer",
+    "moved_from_prior": false,
+    "moved_why": ""
+  },
+  {
+    "id": "P053",
+    "segment": "real_estate_agent",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "I got what I came for, the whole price ladder is right there, and I sell my own agents a competing product at $149.",
+    "what_almost_changed_their_mind": "Nothing; the only engagement he would consider is a partnership pitch, which the offer does not invite.",
+    "missing_info": [
+      "What is actually built behind the Reviews, Nurture and Ads tiers?",
+      "What usage costs sit on top of the $300?"
+    ],
+    "price_reaction": "fair",
+    "max_monthly_they_would_pay_cad": 0,
+    "trust_in_ray": 2,
+    "best_product_for_them": "none",
+    "moved_from_prior": false,
+    "moved_why": ""
+  },
+  {
+    "id": "P054",
+    "segment": "real_estate_agent",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "Nothing says whether Compass allows it or what happens to call recordings, and in California I cannot guess on either.",
+    "what_almost_changed_their_mind": "'Answers every call you miss' solves her canyon dead zones, and 'says it is an AI' is a start on disclosure, but not on recording consent.",
+    "missing_info": [
+      "Does my brokerage allow it?",
+      "What happens to call recordings, and is recording announced or can it be switched off?",
+      "Where is caller data stored, and does it leave my brokerage platform?"
+    ],
+    "price_reaction": "fair",
+    "max_monthly_they_would_pay_cad": 0,
+    "trust_in_ray": 3,
+    "best_product_for_them": "Answer",
+    "moved_from_prior": false,
+    "moved_why": ""
+  },
+  {
+    "id": "P055",
+    "segment": "real_estate_agent",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "A broker closing 50 deals a year says 'Ray's team sets it up' but never says who that team is or who picks up when it breaks, and it never says the AI speaks Farsi.",
+    "what_almost_changed_their_mind": "The feedback calls at day 14 and day 30 and 'Ray's team' suggested real support, but with no names, no support channel and no Farsi it stayed a suggestion.",
+    "missing_info": [
+      "Who runs and supports this day to day if Ray is selling 50 homes a year?",
+      "Is support a person or a chatbot?",
+      "Which languages does the AI speak on the phone today?",
+      "What happens to call recordings, and is recording announced or can it be switched off?"
+    ],
+    "price_reaction": "fair",
+    "max_monthly_they_would_pay_cad": 400,
+    "trust_in_ray": 3,
+    "best_product_for_them": "Answer",
+    "moved_from_prior": false,
+    "moved_why": ""
+  },
+  {
+    "id": "P056",
+    "segment": "real_estate_agent",
+    "decision_founding": "books call only",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "I will take the 15-minute call to see it live, but I am not putting a card down for $300 without trying it first.",
+    "what_almost_changed_their_mind": "'Live within 7 days or the first month is not charged' sounded close to a trial, but it is a delivery guarantee, not a free month.",
+    "missing_info": [
+      "Can I try it free for a month?",
+      "What are the phone, text and AI usage costs?"
+    ],
+    "price_reaction": "expensive",
+    "max_monthly_they_would_pay_cad": 100,
+    "trust_in_ray": 3,
+    "best_product_for_them": "Answer",
+    "moved_from_prior": false,
+    "moved_why": ""
+  },
+  {
+    "id": "P057",
+    "segment": "real_estate_agent",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "My employer owns the phone flow and the leads, and using an outside tool would get me fired.",
+    "what_almost_changed_their_mind": "Nothing; he would only remember it if he went independent.",
+    "missing_info": [
+      "Is this only for independent agents?"
+    ],
+    "price_reaction": "cannot judge",
+    "max_monthly_they_would_pay_cad": 0,
+    "trust_in_ray": 3,
+    "best_product_for_them": "none",
+    "moved_from_prior": false,
+    "moved_why": ""
+  },
+  {
+    "id": "P058",
+    "segment": "real_estate_agent",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "You run it on your own business and will only show it 'live on a call', so your numbers are held back until the sales call, which is exactly how I got burned twice.",
+    "what_almost_changed_their_mind": "Admitting 'there are no client testimonials or case studies yet' and being a fellow eXp agent with 50 deals a year earned some credit, and Ray's own missed-call and booking numbers in writing would have got her to the quiz.",
+    "missing_info": [
+      "What are Ray's own call numbers: calls answered, appointments booked, over what period?",
+      "Will I be asked to decide on the 15-minute call?",
+      "What are the phone, text and AI usage costs?"
+    ],
+    "price_reaction": "fair",
+    "max_monthly_they_would_pay_cad": 300,
+    "trust_in_ray": 3,
+    "best_product_for_them": "Answer",
+    "moved_from_prior": false,
+    "moved_why": ""
+  },
+  {
+    "id": "P059",
+    "segment": "real_estate_agent",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "I already pay US$297 for one that works most of the time, and you give me no feature list, no transfer handling, and you do not even say which CRMs it connects to.",
+    "what_almost_changed_their_mind": "Month to month with no setup fee makes a side-by-side test cheap, but without warm-transfer and integration specifics it is not worth a weekend of rewiring.",
+    "missing_info": [
+      "How are warm transfers handled and what is the failure rate?",
+      "Which CRMs does it connect to?",
+      "Does it do live listing lookup?",
+      "How many minutes are included and what are the usage costs?"
+    ],
+    "price_reaction": "fair",
+    "max_monthly_they_would_pay_cad": 350,
+    "trust_in_ray": 3,
+    "best_product_for_them": "Answer",
+    "moved_from_prior": false,
+    "moved_why": ""
+  },
+  {
+    "id": "P060",
+    "segment": "real_estate_agent",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "It 'asks the qualifying questions', but nothing says what it does when a buyer asks about water rights and it does not know, and it was built for a Toronto-area house business.",
+    "what_almost_changed_their_mind": "'Says it is an AI' and 'texts you a summary' would cover her ranch-tour days if it were stated that it takes a message rather than guessing.",
+    "missing_info": [
+      "What does the AI say when it does not know the answer?",
+      "Can the script be written for ranch and land (acreage, water rights, access)?",
+      "What are the phone, text and AI usage costs?"
+    ],
+    "price_reaction": "fair",
+    "max_monthly_they_would_pay_cad": 300,
+    "trust_in_ray": 2,
+    "best_product_for_them": "Answer",
+    "moved_from_prior": false,
+    "moved_why": ""
+  },
+  {
+    "id": "P061",
+    "segment": "real_estate_agent",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "The price is only in Canadian dollars and it never says the AI speaks Mandarin, so I assume it is not for me in New York.",
+    "what_almost_changed_their_mind": "'Asks the qualifying questions' could separate renters from buyers, which is her real problem, if Mandarin were confirmed.",
+    "missing_info": [
+      "Which languages does the AI speak on the phone today?",
+      "Is it sold outside Canada, and what is the price in US dollars?",
+      "What are the phone, text and AI usage costs?"
+    ],
+    "price_reaction": "expensive",
+    "max_monthly_they_would_pay_cad": 200,
+    "trust_in_ray": 3,
+    "best_product_for_them": "Answer",
+    "moved_from_prior": false,
+    "moved_why": ""
+  },
+  {
+    "id": "P062",
+    "segment": "real_estate_agent",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "In twenty seconds I saw Canadian dollars and a GTA broker and nothing about Punjabi or Spanish, so I kept scrolling.",
+    "what_almost_changed_their_mind": "'Answers every call you miss or cannot take' matches her days at the trucking office, and one line naming Punjabi and the US would have held her.",
+    "missing_info": [
+      "Which languages does the AI speak on the phone today?",
+      "Is it sold outside Canada, and what is the price in US dollars?"
+    ],
+    "price_reaction": "expensive",
+    "max_monthly_they_would_pay_cad": 150,
+    "trust_in_ray": 3,
+    "best_product_for_them": "Answer",
+    "moved_from_prior": false,
+    "moved_why": ""
+  },
+  {
+    "id": "P063",
+    "segment": "real_estate_agent",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "It books the appointment, which my old service never did, but it is $300 against the $120 I used to pay and nothing tells me callers will not hate talking to it.",
+    "what_almost_changed_their_mind": "'Books the appointment into your calendar, and texts you a summary' is the first real difference from an answering service he has seen, and a plain side-by-side with a human service would have got him to the quiz.",
+    "missing_info": [
+      "How is this different from a human answering service, side by side, including cost?",
+      "How do callers react to it?",
+      "What are the phone, text and AI usage costs?"
+    ],
+    "price_reaction": "expensive",
+    "max_monthly_they_would_pay_cad": 150,
+    "trust_in_ray": 3,
+    "best_product_for_them": "Answer",
+    "moved_from_prior": false,
+    "moved_why": ""
+  },
+  {
+    "id": "P064",
+    "segment": "real_estate_agent",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "I have no clients and no calls to miss yet, and this answers the phone, it does not bring me buyers.",
+    "what_almost_changed_their_mind": "Nothing; any monthly cost is out while she has zero deals.",
+    "missing_info": [
+      "Does this bring me buyers?"
+    ],
+    "price_reaction": "expensive",
+    "max_monthly_they_would_pay_cad": 0,
+    "trust_in_ray": 3,
+    "best_product_for_them": "none",
+    "moved_from_prior": false,
+    "moved_why": ""
+  },
+  {
+    "id": "P065",
+    "segment": "real_estate_agent",
+    "decision_founding": "books call only",
+    "decision_standard": "passes",
+    "would_refer": true,
+    "main_reason": "Overnight cover for my overseas investors is the best fit I have seen, so I will spend 15 minutes asking about recording, but I will not pay until I know every call is announced.",
+    "what_almost_changed_their_mind": "A written line that recording is announced on every call and can be turned off would have made him a founding buyer; 'what happens to call recordings' is simply not stated.",
+    "missing_info": [
+      "Does it announce recording at the start of every call?",
+      "Can recording be disabled?",
+      "What happens to call recordings, and is recording announced or can it be switched off?",
+      "Which languages does the AI speak on the phone today?",
+      "What are the phone, text and AI usage costs?"
+    ],
+    "price_reaction": "fair",
+    "max_monthly_they_would_pay_cad": 400,
+    "trust_in_ray": 3,
+    "best_product_for_them": "Answer",
+    "moved_from_prior": true,
+    "moved_why": "Moved from quiz-only to a call because the pitch says the AI 'says it is an AI', the founding offer is month to month with no setup fee, and only 10 places exist, so a 15-minute call is a cheap way to ask the one recording question."
+  },
+  {
+    "id": "P066",
+    "segment": "real_estate_agent",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": true,
+    "main_reason": "It says it is an AI, which I like, but nothing tells me what happens when a client mid-deal says they need me right now.",
+    "what_almost_changed_their_mind": "'Says it is an AI' cleared one of her two deal breakers, and a single sentence describing a live transfer or urgent-alert path would have had her booking the call.",
+    "missing_info": [
+      "How does a caller reach the agent live when they ask for a person?",
+      "Does it only take calls I miss, or can known clients ring straight through?",
+      "What are the phone, text and AI usage costs?"
+    ],
+    "price_reaction": "fair",
+    "max_monthly_they_would_pay_cad": 400,
+    "trust_in_ray": 4,
+    "best_product_for_them": "Answer",
+    "moved_from_prior": false,
+    "moved_why": ""
+  },
+  {
+    "id": "P067",
+    "segment": "real_estate_agent",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "I am here to see your quiz and results page, and I resell my own voice AI, so there is nothing to buy.",
+    "what_almost_changed_their_mind": "Nothing; he is mapping the funnel, and the pitch already gave him the price ladder.",
+    "missing_info": [
+      "What does the quiz ask and what is shown after it?"
+    ],
+    "price_reaction": "fair",
+    "max_monthly_they_would_pay_cad": 0,
+    "trust_in_ray": 2,
+    "best_product_for_them": "none",
+    "moved_from_prior": false,
+    "moved_why": ""
+  },
+  {
+    "id": "P068",
+    "segment": "real_estate_agent",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "It says 'your business line' and one price, but not whether that covers my whole team's line or how calls get routed to four agents.",
+    "what_almost_changed_their_mind": "$300 with no setup fee for a line that goes unanswered after 4 pm is an easy yes if one subscription covers the team with routing.",
+    "missing_info": [
+      "Is it one price for the whole team's line, or per agent?",
+      "Does it route or round-robin by agent?",
+      "Which CRMs does it connect to?",
+      "What are the phone, text and AI usage costs?"
+    ],
+    "price_reaction": "cheap",
+    "max_monthly_they_would_pay_cad": 600,
+    "trust_in_ray": 4,
+    "best_product_for_them": "Answer",
+    "moved_from_prior": false,
+    "moved_why": ""
+  },
+  {
+    "id": "P069",
+    "segment": "real_estate_agent",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "It says Ray works in Dari, but it does not say the AI speaks Dari on the phone, and the price is Canadian only.",
+    "what_almost_changed_their_mind": "'Works in English and Dari' made him think this was the one, and a plain 'yes, the AI converses in Dari today' would have had him paying the same day.",
+    "missing_info": [
+      "Does the AI hold a phone conversation in Dari today?",
+      "Is it sold outside Canada, and what is the price in US dollars?",
+      "What are the phone, text and AI usage costs?"
+    ],
+    "price_reaction": "fair",
+    "max_monthly_they_would_pay_cad": 400,
+    "trust_in_ray": 4,
+    "best_product_for_them": "Answer",
+    "moved_from_prior": false,
+    "moved_why": ""
+  },
+  {
+    "id": "P070",
+    "segment": "real_estate_agent",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "I start a salaried property management job in January and I am not taking on anything new.",
+    "what_almost_changed_their_mind": "Nothing; she only wonders whether it would have helped two years ago.",
+    "missing_info": [],
+    "price_reaction": "cannot judge",
+    "max_monthly_they_would_pay_cad": 0,
+    "trust_in_ray": 3,
+    "best_product_for_them": "none",
+    "moved_from_prior": false,
+    "moved_why": ""
+  },
+  {
+    "id": "P071",
+    "segment": "local_business_waitlist",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": true,
+    "main_reason": "I would pay today, but you tell me it is not on sale for me and promise no date and no price, so I will sign with whoever sells now.",
+    "what_almost_changed_their_mind": "A date or even a condition such as 'after the first 10 agent clients' would have put him on the waitlist; 'no date and no price are promised' did the opposite.",
+    "missing_info": [
+      "When does it open for non-real-estate businesses, and at what price?",
+      "Will mortgage brokers get the same founding terms?"
+    ],
+    "price_reaction": "cannot judge",
+    "max_monthly_they_would_pay_cad": 400,
+    "trust_in_ray": 4,
+    "best_product_for_them": "Answer",
+    "moved_from_prior": false,
+    "moved_why": ""
+  },
+  {
+    "id": "P072",
+    "segment": "local_business_waitlist",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "The waitlist is run by a realtor's company and nothing says who sees my callers' names, and those are exactly the buyers a realtor wants.",
+    "what_almost_changed_their_mind": "Ray working in Dari is the draw for her newcomer clients, and a written promise that her callers' data never reaches the real estate side would have got her to the quiz.",
+    "missing_info": [
+      "Does Ray's real estate team see my callers' or clients' details?",
+      "What is the legal business name behind Next Level?",
+      "What happens to call recordings, and is recording announced or can it be switched off?",
+      "Which languages does the AI speak on the phone today?",
+      "When does it open for non-real-estate businesses, and at what price?"
+    ],
+    "price_reaction": "cannot judge",
+    "max_monthly_they_would_pay_cad": 150,
+    "trust_in_ray": 2,
+    "best_product_for_them": "Answer",
+    "moved_from_prior": false,
+    "moved_why": ""
+  },
+  {
+    "id": "P073",
+    "segment": "local_business_waitlist",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "My franchise fees already include a call centre and lead routing, and you cannot even sell to me yet.",
+    "what_almost_changed_their_mind": "Nothing; he would look only if his network dropped its call centre.",
+    "missing_info": [
+      "Does it integrate with my network's system?",
+      "Is it an approved vendor under my network agreement?"
+    ],
+    "price_reaction": "cannot judge",
+    "max_monthly_they_would_pay_cad": 0,
+    "trust_in_ray": 3,
+    "best_product_for_them": "none",
+    "moved_from_prior": false,
+    "moved_why": ""
+  },
+  {
+    "id": "P074",
+    "segment": "local_business_waitlist",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "It 'asks the qualifying questions', but nothing guarantees it never quotes a rate or collects income details, and you do not say what happens to the recordings.",
+    "what_almost_changed_their_mind": "'Books the appointment into your calendar, and texts you a summary' is the narrow evening intake she wants, and a written limit on what it may ask would have put her on the waitlist.",
+    "missing_info": [
+      "Can you guarantee it never quotes a rate or asks for income or SIN details?",
+      "What happens to call recordings, and is recording announced or can it be switched off?",
+      "Is there an answer on BC mortgage regulatory compliance?",
+      "Which languages does the AI speak on the phone today?",
+      "When does it open for non-real-estate businesses, and at what price?"
+    ],
+    "price_reaction": "cannot judge",
+    "max_monthly_they_would_pay_cad": 400,
+    "trust_in_ray": 3,
+    "best_product_for_them": "Answer",
+    "moved_from_prior": false,
+    "moved_why": ""
+  },
+  {
+    "id": "P075",
+    "segment": "local_business_waitlist",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "It is for real estate agents, my leads come by Instagram DM and not by phone, and I cannot pay anything over $100.",
+    "what_almost_changed_their_mind": "Nothing; he left before reaching the waitlist line, and a call receptionist does not fit DM leads anyway.",
+    "missing_info": [
+      "Is this for mortgage agents or not?"
+    ],
+    "price_reaction": "expensive",
+    "max_monthly_they_would_pay_cad": 0,
+    "trust_in_ray": 3,
+    "best_product_for_them": "none",
+    "moved_from_prior": false,
+    "moved_why": ""
+  }
+]
