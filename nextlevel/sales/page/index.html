@@ -1,0 +1,624 @@
+<title>Next Level for Agents</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,500..900&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: one column of sections on a quiet ground; the call log in the hero and the dark quiz card carry the weight. Missed is red, answered is green. */
+:root{
+  --bg:#f4f6f3; --surface:#ffffff; --ink:#11211c; --muted:#55645e; --line:#d5dcd7; --soft:#e4efe9;
+  --accent:#0b7a53; --accent-ink:#ffffff; --miss:#b93a2a;
+  --deep:#11261f; --deep-ink:#eef4f0; --deep-muted:#a9bab2; --deep-line:#2f483d; --deep-field:#1b352b;
+  --pop:#7fe0b4; --pop-ink:#06241a; --warn:#ffb4a6;
+  --display:"Archivo","Arial Narrow",ui-sans-serif,system-ui,sans-serif;
+  --body:"IBM Plex Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0b1310; --surface:#131e19; --ink:#e7eeea; --muted:#9aaaa2; --line:#27362f; --soft:#1a2a23;
+  --accent:#46d39a; --accent-ink:#06241a; --miss:#ff8773;
+  --deep:#182b23; --deep-ink:#eef4f0; --deep-muted:#a9bab2; --deep-line:#35503f; --deep-field:#213a2f;
+  --pop:#7fe0b4; --pop-ink:#06241a; --warn:#ffb4a6; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0b1310; --surface:#131e19; --ink:#e7eeea; --muted:#9aaaa2; --line:#27362f; --soft:#1a2a23;
+  --accent:#46d39a; --accent-ink:#06241a; --miss:#ff8773;
+  --deep:#182b23; --deep-ink:#eef4f0; --deep-muted:#a9bab2; --deep-line:#35503f; --deep-field:#213a2f;
+  --pop:#7fe0b4; --pop-ink:#06241a; --warn:#ffb4a6; color-scheme:dark}
+
+*,*::before,*::after{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 40px}
+.page{max-width:1040px;margin:0 auto;display:grid;gap:72px}
+h1,h2,h3{font-family:var(--display);font-stretch:112%;margin:0;line-height:1.08;text-wrap:balance;letter-spacing:-.01em}
+h2{font-size:clamp(26px,5vw,36px);font-weight:800}
+h3{font-size:20px;font-weight:700;line-height:1.2}
+p{margin:0}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:4px}
+.label{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.lede{color:var(--muted);max-width:62ch}
+.sec{display:grid;gap:24px}
+.sec-head{display:grid;gap:10px}
+
+/* header */
+.top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.wordmark{font-family:var(--display);font-stretch:125%;font-weight:900;font-size:20px;letter-spacing:.02em;text-transform:uppercase}
+.wordmark i{font-style:normal;color:var(--accent)}
+
+/* hero */
+.hero{display:grid;gap:32px;align-items:center}
+.hero-copy{display:grid;gap:20px;min-width:0;justify-items:start}
+.hero h1{font-size:clamp(38px,8.6vw,68px);font-weight:900;line-height:1}
+.hero .sub{font-size:clamp(18px,2.4vw,21px);max-width:44ch}
+.hero .by{font-size:14px;color:var(--muted);max-width:52ch}
+@media (min-width:860px){.hero{grid-template-columns:1.15fr .85fr;gap:48px}}
+
+.btn{font-family:var(--body);font-weight:600;font-size:17px;line-height:1.2;border:0;border-radius:8px;padding:15px 24px;background:var(--accent);color:var(--accent-ink);cursor:pointer;text-decoration:none;display:inline-block;text-align:center}
+.btn:hover{filter:brightness(1.08)}
+.textbtn{background:none;border:0;padding:6px 0;font:inherit;font-size:15px;color:var(--muted);cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+
+/* call log (illustration) */
+.log{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;display:grid;gap:0;min-width:0;font-family:var(--mono);font-size:14px}
+.log-title{display:flex;justify-content:space-between;gap:8px;padding-bottom:12px;color:var(--muted);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.log-row{display:grid;grid-template-columns:12px 68px 1fr;gap:10px;align-items:baseline;padding:11px 0;border-top:1px solid var(--line)}
+.log-row .t{color:var(--muted);font-variant-numeric:tabular-nums}
+.log-row .w{min-width:0}
+.log-row b{font-weight:500;display:block}
+.log-row small{font-size:13px;color:var(--muted);font-family:var(--body)}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--miss);align-self:center}
+.log-row.miss b{color:var(--miss)}
+.log-row.ok{background:var(--soft);margin:8px -18px -18px;padding:16px 18px;border-top:0;border-radius:0 0 13px 13px}
+.log-row.ok .dot{background:var(--accent)}
+.log-row.ok b{color:var(--accent)}
+
+/* quiz card */
+.quiz{background:var(--deep);color:var(--deep-ink);border-radius:18px;padding:28px 20px;display:grid;gap:20px;scroll-margin-top:16px}
+@media (min-width:700px){.quiz{padding:44px 48px}}
+.quiz :focus-visible{outline-color:var(--pop)}
+.quiz-inner{max-width:680px;margin:0 auto;width:100%;display:grid;gap:20px;min-width:0}
+.prog{display:grid;gap:8px}
+.prog-text{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--pop)}
+.bar{height:4px;background:var(--deep-line);border-radius:4px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--pop);transition:width .25s ease}
+.q{font-size:clamp(23px,4.6vw,31px);font-weight:800;outline:none}
+.opts{display:grid;gap:10px}
+.opt{font:inherit;font-size:16px;text-align:left;padding:15px 16px;border-radius:10px;border:1px solid var(--deep-line);background:var(--deep-field);color:var(--deep-ink);cursor:pointer;display:grid;grid-template-columns:22px 1fr;gap:10px;align-items:baseline}
+.opt span:first-child{font-family:var(--mono);font-size:13px;color:var(--deep-muted)}
+.opt:hover{border-color:var(--pop)}
+.opt[aria-pressed="true"]{border-color:var(--pop);box-shadow:inset 0 0 0 1px var(--pop)}
+.opt[aria-pressed="true"] span:first-child{color:var(--pop)}
+.back{justify-self:start;background:none;border:0;padding:6px 0;font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--deep-muted);cursor:pointer}
+.back:hover{color:var(--deep-ink)}
+.quiz .btn{background:var(--pop);color:var(--pop-ink)}
+.quiz .btn[disabled]{opacity:.6;cursor:default}
+.quiz .hint{color:var(--deep-muted);font-size:15px}
+.field{display:grid;gap:6px}
+.field label{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--deep-muted)}
+.field input{font:inherit;font-size:16px;width:100%;padding:13px 14px;border-radius:10px;border:1px solid var(--deep-line);background:var(--deep-field);color:var(--deep-ink)}
+.check{display:grid;grid-template-columns:24px 1fr;gap:10px;align-items:start;font-size:15px;cursor:pointer}
+.check input{width:20px;height:20px;margin:3px 0 0;accent-color:var(--pop)}
+.err{color:var(--warn);font-size:15px;min-height:1.4em}
+.fine{font-size:13px;color:var(--deep-muted)}
+
+/* result */
+.res-kicker{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--pop)}
+.res h2{font-size:clamp(26px,5.4vw,38px);outline:none}
+.res-block{display:grid;gap:8px}
+.res-block h3{font-size:15px;font-family:var(--mono);font-stretch:100%;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--deep-muted)}
+.echo{border-left:3px solid var(--deep-line);padding-left:14px;color:var(--deep-muted);font-size:15px;display:grid;gap:4px}
+.price{border:1px solid var(--deep-line);border-radius:12px;padding:18px;display:grid;gap:6px;background:var(--deep-field)}
+.price .name{font-family:var(--display);font-stretch:112%;font-weight:800;font-size:21px}
+.price .amt{font-family:var(--display);font-stretch:112%;font-weight:800;font-size:clamp(22px,5vw,28px);color:var(--pop);font-variant-numeric:tabular-nums}
+.price .note{font-size:14px;color:var(--deep-muted)}
+.price.founding{border-color:var(--pop)}
+.book{display:grid;gap:10px;justify-items:start}
+.fallback{border:1px dashed var(--line);border-radius:12px;padding:16px 18px;font-size:16px;max-width:60ch}
+.quiz .fallback{border-color:var(--pop)}
+.fallback b{font-family:var(--mono);font-weight:500}
+
+/* content sections */
+.grid2{display:grid;gap:16px}
+@media (min-width:700px){.grid2{grid-template-columns:1fr 1fr}}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px 20px;display:grid;gap:10px;align-content:start;min-width:0}
+.panel ul{margin:0;padding-left:20px;display:grid;gap:4px}
+.panel.quiet{background:transparent}
+.probs{display:grid;gap:0;border-top:1px solid var(--line)}
+.prob{display:grid;gap:6px 24px;padding:20px 0;border-bottom:1px solid var(--line)}
+.prob .fix{color:var(--muted)}
+.prob .fix b{color:var(--accent);font-weight:600}
+@media (min-width:760px){.prob{grid-template-columns:220px 1fr 1fr;align-items:start}}
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:16px;counter-reset:s}
+@media (min-width:760px){.steps{grid-template-columns:repeat(3,1fr)}}
+.steps li{counter-increment:s;display:grid;gap:8px;align-content:start;border-top:3px solid var(--ink);padding-top:14px}
+.steps li::before{content:"Step " counter(s);font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.steps p{color:var(--muted)}
+
+/* price table */
+.founding-strip{background:var(--soft);border-radius:14px;padding:20px;display:grid;gap:6px}
+.founding-strip .amt{font-family:var(--display);font-stretch:112%;font-weight:900;font-size:clamp(28px,6vw,40px);color:var(--accent);line-height:1.05;font-variant-numeric:tabular-nums}
+.tablewrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:16px}
+th{font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px 10px 0;border-bottom:1px solid var(--ink)}
+td{padding:16px 12px 16px 0;border-bottom:1px solid var(--line);vertical-align:top}
+td.n{font-family:var(--display);font-stretch:112%;font-weight:700;white-space:nowrap}
+td.m{font-variant-numeric:tabular-nums;white-space:nowrap;font-weight:600}
+td small{display:block;color:var(--muted);font-size:14px;font-weight:400;white-space:normal}
+@media (max-width:699px){
+  table,tbody,tr,td{display:block}
+  thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  tr{padding:16px 0;border-bottom:1px solid var(--line)}
+  td{padding:2px 0;border:0}
+  td.n{font-size:19px;white-space:normal}
+  td.m{white-space:normal}
+  td[data-l]::before{content:attr(data-l) ": ";font-family:var(--mono);font-size:12px;font-weight:400;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+}
+.tnote{font-size:15px;color:var(--muted);max-width:70ch}
+
+/* about, faq, cta, footer */
+.facts{list-style:none;margin:0;padding:0;display:grid;gap:0;border-top:1px solid var(--line)}
+.facts li{display:grid;grid-template-columns:minmax(110px,180px) 1fr;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+.facts span{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding-top:4px}
+.faq{border-top:1px solid var(--line);max-width:760px}
+details{border-bottom:1px solid var(--line);padding:16px 0}
+summary{cursor:pointer;font-weight:600;font-size:18px}
+details p{margin-top:8px;color:var(--muted);max-width:65ch}
+.cta{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:32px 20px;display:grid;gap:16px;justify-items:start}
+@media (min-width:700px){.cta{padding:48px}}
+.cta h2{font-size:clamp(30px,6vw,46px);font-weight:900}
+footer{border-top:1px solid var(--line);padding-top:24px;display:grid;gap:6px;font-size:14px;color:var(--muted)}
+footer b{color:var(--ink)}
+@media (prefers-reduced-motion:reduce){.bar i{transition:none}html{scroll-behavior:auto}}
+</style>
+
+<div class="page">
+
+  <header class="top">
+    <span class="wordmark">Next <i>Level</i></span>
+    <span class="label">By Ray Ahmadi, GTA real estate broker</span>
+  </header>
+
+  <section class="hero" aria-labelledby="h-hero">
+    <div class="hero-copy">
+      <span class="label">For real estate agents</span>
+      <h1 id="h-hero">You were in a showing. Who answered your phone?</h1>
+      <p class="sub">Answer 6 questions. See where your business leaks first and what fixes it.</p>
+      <button type="button" class="btn" data-go="quiz">Start the quiz</button>
+      <p class="by">Built and run by Ray Ahmadi on his own real estate business. He shows it to you live on a 15-minute call.</p>
+    </div>
+    <div class="log" role="img" aria-label="Illustration of a call log. Three calls missed during a workday. With Next Level Answer, the same call is answered, qualified and booked.">
+      <div class="log-title"><span>Tuesday, your phone</span><span>Illustration</span></div>
+      <div class="log-row miss"><span class="dot"></span><span class="t">2:14 pm</span><span class="w"><b>Missed call</b><small>You were in a showing</small></span></div>
+      <div class="log-row miss"><span class="dot"></span><span class="t">6:40 pm</span><span class="w"><b>Missed call</b><small>Listing appointment</small></span></div>
+      <div class="log-row miss"><span class="dot"></span><span class="t">9:05 pm</span><span class="w"><b>Voicemail, no message</b><small>They called the next agent</small></span></div>
+      <div class="log-row ok"><span class="dot"></span><span class="t">2:14 pm</span><span class="w"><b>Answered. Qualified. Booked.</b><small>The same call with Next Level Answer</small></span></div>
+    </div>
+  </section>
+
+  <section class="quiz" id="quiz" aria-label="Quiz">
+    <div class="quiz-inner" id="app">
+      <noscript><p>The quiz needs JavaScript. Message NEXT to @rayahmadi on Instagram and Ray will send you a time for a call.</p></noscript>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="h-who">
+    <div class="sec-head"><span class="label">Who it is for</span><h2 id="h-who">Agents who take their own calls.</h2></div>
+    <div class="grid2">
+      <div class="panel">
+        <h3>Open now: real estate agents</h3>
+        <ul>
+          <li>Solo agents</li>
+          <li>Agents with an assistant</li>
+          <li>Team leaders</li>
+          <li>Brokers and brokerage owners</li>
+        </ul>
+        <p>Any brokerage. You do not have to join Ray's team.</p>
+      </div>
+      <div class="panel quiet">
+        <h3>Waitlist: other businesses</h3>
+        <ul>
+          <li>Mortgage brokers</li>
+          <li>Real estate lawyers</li>
+          <li>Accountants</li>
+          <li>Contractors and renovation</li>
+          <li>Insurance</li>
+        </ul>
+        <p>Take the same quiz and pick "I run a different kind of business". You join the waitlist. No price is set for these yet.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="h-prob">
+    <div class="sec-head"><span class="label">The four problems</span><h2 id="h-prob">Four places an agent's business leaks.</h2></div>
+    <div class="probs">
+      <div class="prob"><h3>Missed calls</h3><p>You were in a showing. By the time you called back, they had booked with someone else.</p><p class="fix"><b>Next Level Answer.</b> An AI receptionist answers every call, qualifies the caller and books the appointment.</p></div>
+      <div class="prob"><h3>Reviews</h3><p>Your clients are happy. Nobody asked them for a Google review.</p><p class="fix"><b>Next Level Reviews.</b> A review request goes out at closing and again at day 30, every time.</p></div>
+      <div class="prob"><h3>Dead database</h3><p>Years of contacts are sitting there. Most have not heard from you in months.</p><p class="fix"><b>Next Level Nurture.</b> Reactivation, follow-up with everyone who raises a hand, and regular past-client touches.</p></div>
+      <div class="prob"><h3>Ads</h3><p>You boosted a listing and have no idea what it did.</p><p class="fix"><b>Next Level Ads.</b> Listing and buyer ads run and watched daily.</p></div>
+    </div>
+    <div><button type="button" class="btn" data-go="quiz">Find my biggest leak</button></div>
+  </section>
+
+  <section class="sec" aria-labelledby="h-how">
+    <div class="sec-head"><span class="label">How it works</span><h2 id="h-how">Three steps.</h2></div>
+    <ol class="steps">
+      <li><h3>Take the quiz</h3><p>6 questions. You see your biggest leak and the product that fixes it, with the price.</p></li>
+      <li><h3>Book 15 minutes with Ray</h3><p>Ray asks about your business and shows you the system live, running on his own business.</p></li>
+      <li><h3>We set it up for you</h3><p>You send your details. We build it and test it with you before it goes live.</p></li>
+    </ol>
+  </section>
+
+  <section class="sec" aria-labelledby="h-price">
+    <div class="sec-head"><span class="label">Products and prices</span><h2 id="h-price">What it costs.</h2></div>
+    <div class="founding-strip">
+      <span class="label">The Founding 10</span>
+      <span class="amt">$300 a month</span>
+      <p>Next Level Answer for the first 10 clients.</p>
+    </div>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th scope="col">Product</th><th scope="col">What it does</th><th scope="col">Setup</th><th scope="col">Monthly</th></tr></thead>
+        <tbody>
+          <tr><td class="n">Next Level Answer</td><td>AI receptionist. Every call answered, qualified and booked.</td><td class="m" data-l="Setup">$500<small>after the Founding 10</small></td><td class="m" data-l="Monthly">$400<small>after the Founding 10</small></td></tr>
+          <tr><td class="n">Next Level Reviews</td><td>Review requests at closing and at day 30.</td><td class="m" data-l="Setup">$250</td><td class="m" data-l="Monthly">$150</td></tr>
+          <tr><td class="n">Next Level Nurture</td><td>Database reactivation, follow-up and past-client touches.</td><td class="m" data-l="Setup">$500</td><td class="m" data-l="Monthly">$250</td></tr>
+          <tr><td class="n">Next Level Ads</td><td>Listing and buyer ads run and watched daily.</td><td class="m" data-l="Setup">$500</td><td class="m" data-l="Monthly">$750<small>Ad spend goes on your own card.</small></td></tr>
+          <tr><td class="n">Next Level Complete</td><td>All four as one system.</td><td class="m" data-l="Setup">$1,500</td><td class="m" data-l="Monthly">$1,500</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="tnote">All prices in Canadian dollars. Phone and AI usage is quoted on the call. Next Level does not promise leads, deals or income. It makes sure the business you already have is answered and followed up.</p>
+  </section>
+
+  <section class="sec" aria-labelledby="h-ray">
+    <div class="sec-head"><span class="label">About Ray</span><h2 id="h-ray">Built by a working broker.</h2>
+      <p class="lede">Ray Ahmadi runs this system on his own business. On the call he shows it to you live.</p></div>
+    <ul class="facts">
+      <li><span>Role</span><div>Real estate broker in the GTA</div></li>
+      <li><span>Brokerage</span><div>Ray Homes Real Estate, under eXp Realty</div></li>
+      <li><span>Experience</span><div>12+ years, about 50 deals a year</div></li>
+      <li><span>Recognition</span><div>Multi-year eXp Icon agent</div></li>
+      <li><span>Languages</span><div>English and Dari</div></li>
+      <li><span>On your call</span><div>Ray himself, every time</div></li>
+    </ul>
+  </section>
+
+  <section class="sec" aria-labelledby="h-faq">
+    <div class="sec-head"><span class="label">Questions</span><h2 id="h-faq">Before you book.</h2></div>
+    <div class="faq">
+      <details><summary>Will callers know it is an AI?</summary><p>Yes. It says so at the start of the call. A caller can ask for a person at any time and the call is passed to you.</p></details>
+      <details><summary>What does it sound like?</summary><p>Book the call. Ray will show it to you live so you hear it for yourself.</p></details>
+      <details><summary>Do I have to change my phone number?</summary><p>No. Your number forwards to the receptionist when you do not pick up.</p></details>
+      <details><summary>What do you need from me?</summary><p>Your business details, your hours and areas, the questions you want asked, calendar access, and the number to forward.</p></details>
+      <details><summary>How long does setup take?</summary><p>We set it up for you. Ray gives you the timeline for your business on the call.</p></details>
+      <details><summary>Is phone and AI usage included in the price?</summary><p>Usage is quoted on the call.</p></details>
+      <details><summary>Is there a contract?</summary><p>Ray walks you through the terms on the call, before you decide anything.</p></details>
+      <details><summary>What does Answer cost after the Founding 10?</summary><p>$500 setup and $400 a month, in Canadian dollars. The first 10 clients pay $300 a month.</p></details>
+      <details><summary>Who pays for the ads?</summary><p>You do, on your own card, straight to the ad platform. The Next Level Ads fee covers running and watching them.</p></details>
+      <details><summary>Does this promise me more leads or deals?</summary><p>No. It makes sure the calls, clients and contacts you already have are answered and followed up.</p></details>
+      <details><summary>Is it allowed where I work?</summary><p>Rules on call recording and on telling callers they are speaking with an AI differ by province and state. We confirm them for your location before you go live. Check with your brokerage as well.</p></details>
+      <details><summary>Do I have to join Ray's team?</summary><p>No. Next Level is open to agents at any brokerage.</p></details>
+      <details><summary>I run a business that is not real estate. Can I use it?</summary><p>Not yet. Take the quiz, pick "I run a different kind of business" and join the waitlist. Ray will contact you when your industry opens.</p></details>
+    </div>
+  </section>
+
+  <section class="cta" aria-labelledby="h-cta">
+    <span class="label">Your next step</span>
+    <h2 id="h-cta">Hear it answer a call.</h2>
+    <p class="lede">Book 15 minutes with Ray. He asks about your business, shows you the system live, and tells you plainly if it fits.</p>
+    <div class="book" id="cta-book">
+      <p class="fallback">Booking opens shortly. Message <b>NEXT</b> to @rayahmadi on Instagram and Ray will send you a time.</p>
+    </div>
+    <button type="button" class="textbtn" data-go="quiz">Not sure which problem is yours? Take the quiz first.</button>
+  </section>
+
+  <footer>
+    <p><b>Next Level</b> · Ray Ahmadi</p>
+    <p>Software and set-up service. Not real estate brokerage services.</p>
+    <p>[Business name and mailing address to be added]</p>
+    <!-- BEFORE LAUNCH: add Privacy Policy and Terms links here (to be confirmed with counsel). Replace the business name and mailing address placeholder above. -->
+  </footer>
+</div>
+
+<script>
+/* ===== SETTINGS =====
+   BOOKING_URL: Ray's 15-minute calendar link. Empty = the Instagram fallback is shown instead of a button.
+   WEBHOOK_URL: HighLevel Inbound Webhook URL. Empty = no network request is ever made. */
+const CONFIG = {
+  BOOKING_URL: "",
+  WEBHOOK_URL: "",
+  INSTAGRAM_HANDLE: "rayahmadi",
+  LOCATION_ID: "n0qwGpNQ3CShe8AIhyI0"
+};
+/* ==================== */
+
+const SOURCE = "nextlevel-sales-page";
+const STORE_KEY = "nlQuizV1";
+
+const WHO = [
+  ["solo", "Solo agent"],
+  ["assistant", "Agent with an assistant"],
+  ["team", "Team leader"],
+  ["broker", "Broker or brokerage owner"],
+  ["business", "I run a different kind of business"]
+];
+const INDUSTRY = [
+  ["mortgage", "Mortgage broker"],
+  ["lawyer", "Real estate lawyer"],
+  ["accountant", "Accountant"],
+  ["contractor", "Contractor or renovation"],
+  ["insurance", "Insurance"],
+  ["other", "Something else"]
+];
+/* [id, label, problem flag or ""] */
+const QUESTIONS = {
+  who: { title: "Which best describes you?", opts: WHO.map(o => [o[0], o[1], ""]) },
+  industry: { title: "What kind of business do you run?", opts: INDUSTRY.map(o => [o[0], o[1], ""]) },
+  q1: { title: "A new buyer calls while you are in a showing. What happens?", opts: [
+    ["a", "It goes to voicemail and I call back when I can.", "calls"],
+    ["b", "Someone on my team picks up.", ""],
+    ["c", "I step out and take it.", ""],
+    ["d", "I am not sure how many I miss.", "calls"]] },
+  q2: { title: "When did you last ask a client for a Google review?", opts: [
+    ["a", "At my last closing. I ask every time.", ""],
+    ["b", "A few months ago.", "reviews"],
+    ["c", "I cannot remember.", "reviews"],
+    ["d", "I do not have a Google Business Profile set up.", "reviews"]] },
+  q3: { title: "Think about every contact in your database. How many heard from you in the last 90 days?", opts: [
+    ["a", "Most of them.", ""],
+    ["b", "Some of them.", "database"],
+    ["c", "Very few.", "database"],
+    ["d", "I do not have them in one place.", "database"]] },
+  q4: { title: "Are you running paid ads right now?", opts: [
+    ["a", "Yes, and I know what each lead costs me.", ""],
+    ["b", "Yes, and I do not know if they work.", "ads"],
+    ["c", "I tried and stopped.", "ads"],
+    ["d", "No, and I do not plan to.", ""]] },
+  problem: { title: "Which one of these costs you the most right now?", opts: [
+    ["calls", "Calls I do not get to.", "calls"],
+    ["reviews", "Not enough reviews.", "reviews"],
+    ["database", "A database I never contact.", "database"],
+    ["ads", "Ads that do not pay.", "ads"]] }
+};
+const PROBLEMS = {
+  calls: { tag: "nl-problem-missed-calls", short: "missed calls", label: "Calls I do not get to",
+    head: "Your biggest leak: calls you do not get to.",
+    body: "You cannot be in a showing and on the phone. A caller who reaches voicemail can hang up and call the next agent. Something else has to pick up.",
+    product: "Next Level Answer",
+    fix: "An AI receptionist answers every call, asks the questions you would ask, and books the appointment on your calendar.",
+    price: "$500 setup + $400 a month", priceNote: "The price after the Founding 10.",
+    next: "Book a 15-minute call. Ray will show you the receptionist live, running on his own business." },
+  reviews: { tag: "nl-problem-reviews", short: "reviews", label: "Not enough reviews",
+    head: "Your biggest leak: happy clients who were never asked.",
+    body: "Buyers and sellers can compare agents on Google before they call anyone. When the request only goes out if you remember, most clients are never asked.",
+    product: "Next Level Reviews",
+    fix: "A review request goes out at closing and again at day 30, every time, with replies drafted for you to approve.",
+    price: "$250 setup + $150 a month", priceNote: "",
+    next: "Book a 15-minute call. Ray will show you the review system he runs on his own business." },
+  database: { tag: "nl-problem-dead-database", short: "a quiet database", label: "A database I never contact",
+    head: "Your biggest leak: a database nobody is talking to.",
+    body: "Some of your contacts will move. The agent who stayed in touch is the one they think of.",
+    product: "Next Level Nurture",
+    fix: "A reactivation campaign to the people you have permission to contact, follow-up with everyone who raises a hand, and regular past-client touches.",
+    price: "$500 setup + $250 a month", priceNote: "",
+    next: "Book a 15-minute call. Ray will walk you through what he runs on his own list." },
+  ads: { tag: "nl-problem-ads", short: "ads", label: "Ads that do not pay",
+    head: "Your biggest leak: ad money with nobody watching it.",
+    body: "Ads fail in two places. Nobody watches them daily, and nobody calls the lead fast.",
+    product: "Next Level Ads",
+    fix: "Listing and buyer ads, run and watched daily.",
+    price: "$500 setup + $750 a month", priceNote: "Ad spend goes on your own card.",
+    next: "Book a 15-minute call. Bring your last ad report. Ray will go through it with you." }
+};
+
+const blank = () => ({ i: 0, who: "", industry: "", q1: "", q2: "", q3: "", q4: "", problem: "", name: "", done: false, sent: "" });
+let st = blank();
+try {
+  const s = JSON.parse(localStorage.getItem(STORE_KEY) || "null");
+  if (s && typeof s === "object" && typeof s.i === "number") st = Object.assign(blank(), s);
+} catch (e) {}
+const save = () => { try { localStorage.setItem(STORE_KEY, JSON.stringify(st)); } catch (e) {} };
+
+const app = document.getElementById("app");
+const quizEl = document.getElementById("quiz");
+const esc = t => String(t).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const isBiz = () => st.who === "business";
+const flow = () => isBiz() ? ["who", "industry", "problem", "contact"] : ["who", "q1", "q2", "q3", "q4", "problem", "contact"];
+const labelOf = (key, id) => { const o = QUESTIONS[key].opts.find(x => x[0] === id); return o ? o[1] : ""; };
+const igUrl = () => "https://www.instagram.com/" + encodeURIComponent(CONFIG.INSTAGRAM_HANDLE) + "/";
+const igLink = () => `<a href="${igUrl()}" target="_blank" rel="noopener">@${esc(CONFIG.INSTAGRAM_HANDLE)}</a>`;
+
+function fallbackHTML(word, tail) {
+  return `<p class="fallback">${word === "NEXT" ? "Booking opens shortly. " : ""}Message <b>${word}</b> to ${igLink()} on Instagram and Ray will ${tail}.</p>`;
+}
+function bookingHTML() {
+  if (CONFIG.BOOKING_URL) {
+    return `<a class="btn" href="${esc(CONFIG.BOOKING_URL)}" target="_blank" rel="noopener">Book my 15-minute call</a><p class="fine">15 minutes. With Ray.</p>`;
+  }
+  return fallbackHTML("NEXT", "send you a time");
+}
+
+/* ---------- quiz screens ---------- */
+function progressHTML(i, steps) {
+  const total = steps.length - 1;
+  const isContact = steps[i] === "contact";
+  const text = isContact ? "Last step" : `Question ${i + 1} of ${total}`;
+  const pct = Math.round((isContact ? 1 : i / total) * 100);
+  return `<div class="prog"><span class="prog-text" aria-live="polite">${text}</span>
+    <div class="bar" role="progressbar" aria-label="Quiz progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${pct}"><i style="width:${pct}%"></i></div></div>`;
+}
+
+function renderQuestion(focus) {
+  const steps = flow();
+  const key = steps[st.i];
+  if (key === "contact") return renderContact(focus);
+  const q = QUESTIONS[key];
+  const letters = "ABCDEF";
+  app.innerHTML = `${progressHTML(st.i, steps)}
+    <h2 class="q" id="qt" tabindex="-1">${esc(q.title)}</h2>
+    <div class="opts" role="group" aria-labelledby="qt">${q.opts.map((o, n) =>
+      `<button type="button" class="opt" data-v="${esc(o[0])}" aria-pressed="${st[key] === o[0]}"><span aria-hidden="true">${letters[n]}</span><span>${esc(o[1])}</span></button>`).join("")}</div>
+    ${st.i > 0 ? `<button type="button" class="back" id="bk">Back</button>` : `<p class="hint">One tap per answer. Your name and email are only asked at the end.</p>`}`;
+  app.querySelectorAll(".opt").forEach(b => b.addEventListener("click", () => {
+    st[key] = b.dataset.v;
+    st.i += 1; save(); renderQuestion(true);
+  }));
+  const bk = document.getElementById("bk");
+  if (bk) bk.addEventListener("click", () => { st.i -= 1; save(); renderQuestion(true); });
+  if (focus) focusTop("qt");
+}
+
+function renderContact(focus) {
+  const steps = flow();
+  const biz = isBiz();
+  app.innerHTML = `${progressHTML(st.i, steps)}
+    <h2 class="q" id="qt" tabindex="-1">${biz ? "Where should Ray reach you when your industry opens?" : "Where should we send your result?"}</h2>
+    <form id="cf" novalidate style="display:grid;gap:16px">
+      <div class="field"><label for="nl-name">First name</label><input id="nl-name" name="name" autocomplete="given-name" value="${esc(st.name)}"></div>
+      <div class="field"><label for="nl-email">Email</label><input id="nl-email" name="email" type="email" autocomplete="email" inputmode="email"></div>
+      <div class="field"><label for="nl-phone">Mobile (optional)</label><input id="nl-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel"></div>
+      <label class="check" for="nl-consent"><input type="checkbox" id="nl-consent" name="consent"><span>Yes, email me my result and follow-up from Next Level. I can unsubscribe at any time.</span></label>
+      <label class="check" for="nl-sms" id="sms-row" hidden><input type="checkbox" id="nl-sms" name="sms"><span>Yes, you may text me at this number about my result. Reply STOP to end.</span></label>
+      <p class="err" id="er" role="alert"></p>
+      <div><button class="btn" type="submit" id="sub">Show my result</button></div>
+      <p class="fine">Without the tick you still see your result here, and nothing is sent. We do not sell or share your details.</p>
+    </form>
+    <button type="button" class="back" id="bk">Back</button>`;
+  const f = document.getElementById("cf"), er = document.getElementById("er");
+  const ph = document.getElementById("nl-phone"), smsRow = document.getElementById("sms-row");
+  ph.addEventListener("input", () => { smsRow.hidden = !ph.value.trim(); if (smsRow.hidden) document.getElementById("nl-sms").checked = false; });
+  document.getElementById("bk").addEventListener("click", () => { st.i -= 1; save(); renderQuestion(true); });
+  f.addEventListener("submit", async e => {
+    e.preventDefault();
+    const name = document.getElementById("nl-name").value.trim();
+    const email = document.getElementById("nl-email").value.trim();
+    const phone = ph.value.trim();
+    const consent = document.getElementById("nl-consent").checked;
+    const sms = !smsRow.hidden && document.getElementById("nl-sms").checked;
+    if (!name) { er.textContent = "Add your first name so the result is written to you."; document.getElementById("nl-name").focus(); return; }
+    if (consent && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { er.textContent = "Enter a valid email, like name@example.com, or untick the box to see your result here only."; document.getElementById("nl-email").focus(); return; }
+    er.textContent = "";
+    st.name = name;
+    const btn = document.getElementById("sub");
+    btn.disabled = true; btn.textContent = "Building your result";
+    st.sent = consent ? await send({ name, email, phone, sms }) : "not-sent";
+    st.done = true; save(); renderResult(true);
+  });
+  if (focus) focusTop("qt");
+}
+
+/* ---------- webhook ---------- */
+function buildPayload(c) {
+  const biz = isBiz();
+  const answers = {};
+  flow().filter(k => k !== "contact").forEach(k => { answers[k] = { question: QUESTIONS[k].title, answer: labelOf(k, st[k]) }; });
+  const flags = biz ? [] : secondaryFlags();
+  const tags = biz
+    ? ["nl-waitlist", "nl-waitlist-" + st.industry]
+    : [PROBLEMS[st.problem].tag, "nl-seg-" + st.who].concat(flags.map(f => "nl-flag-" + f));
+  return {
+    name: c.name, email: c.email, phone: c.phone || "",
+    business_type: biz ? labelOf("industry", st.industry) : labelOf("who", st.who),
+    biggest_problem: PROBLEMS[st.problem].label,
+    answers: answers, secondary_flags: flags, tags: tags,
+    path: biz ? "waitlist" : "agent",
+    consent_email: true, consent_sms: !!c.sms,
+    source: SOURCE, location_id: CONFIG.LOCATION_ID,
+    page: location.href, submitted_at: new Date().toISOString()
+  };
+}
+async function send(c) {
+  if (!CONFIG.WEBHOOK_URL) return "skipped"; /* no network request at all */
+  const body = JSON.stringify(buildPayload(c));
+  const withTimeout = opts => {
+    const ctl = new AbortController(); const t = setTimeout(() => ctl.abort(), 7000);
+    return fetch(CONFIG.WEBHOOK_URL, Object.assign({ method: "POST", body: body, signal: ctl.signal }, opts)).finally(() => clearTimeout(t));
+  };
+  try {
+    const r = await withTimeout({ headers: { "Content-Type": "application/json" } });
+    if (!r.ok) throw new Error("bad status");
+    return "ok";
+  } catch (e) {
+    try { await withTimeout({ mode: "no-cors", headers: { "Content-Type": "text/plain" } }); return "ok"; }
+    catch (e2) { return "failed"; }
+  }
+}
+
+/* ---------- result ---------- */
+function secondaryFlags() {
+  const out = [];
+  ["q1", "q2", "q3", "q4"].forEach(k => {
+    const o = QUESTIONS[k].opts.find(x => x[0] === st[k]);
+    if (o && o[2] && o[2] !== st.problem && out.indexOf(o[2]) < 0) out.push(o[2]);
+  });
+  return out;
+}
+function echoes() {
+  return ["q1", "q2", "q3", "q4"].map(k => {
+    const o = QUESTIONS[k].opts.find(x => x[0] === st[k]);
+    return o && o[2] ? o[1] : "";
+  }).filter(Boolean);
+}
+function foundingHTML(lead) {
+  return `<div class="price founding"><span class="res-kicker">The Founding 10</span>
+    <span class="name">Next Level Answer</span><span class="amt">$300 a month</span>
+    <span class="note">${lead} For the first 10 clients. After that, $500 setup + $400 a month.</span></div>`;
+}
+function renderResult(focus) {
+  if (!st.problem || !PROBLEMS[st.problem] || !st.who) { st = blank(); save(); return renderQuestion(focus); }
+  const p = PROBLEMS[st.problem];
+  const name = esc(st.name || "");
+  let html;
+  if (isBiz()) {
+    const ind = st.industry === "other" ? "your industry" : labelOf("industry", st.industry).toLowerCase() + "s";
+    const joined = st.sent === "ok";
+    html = `<span class="res-kicker">Your result${name ? ", " + name : ""}</span>
+      <h2 id="rt" tabindex="-1">Real estate agents go first. ${st.industry === "other" ? "Your industry can join the waitlist." : "Your industry is on the list."}</h2>
+      <p>You told us the thing costing you most is ${esc(p.short)}. The same systems Ray runs on his own business are being set up for ${esc(ind)} next. There is no price for your industry yet, and nothing to buy today.</p>
+      <div class="res-block"><h3>Your next step</h3>
+      ${joined
+        ? `<p>You are on the waitlist. Ray will contact you when your industry opens.</p>`
+        : `<p>Join the waitlist with one message.</p>${fallbackHTML("WAITLIST", "add you to the list")}`}</div>`;
+  } else {
+    const flags = secondaryFlags();
+    const ech = echoes();
+    const answerIsMain = st.problem === "calls";
+    const showFounding = answerIsMain || flags.indexOf("calls") >= 0;
+    html = `<span class="res-kicker">Your result${name ? ", " + name : ""}</span>
+      <h2 id="rt" tabindex="-1">${esc(p.head)}</h2>
+      <p>${name ? name + ", you" : "You"} told us the thing costing you most is ${esc(p.short)}. ${esc(p.body)}</p>
+      ${ech.length ? `<div class="echo"><span>Your own answers:</span>${ech.map(x => `<span>"${esc(x)}"</span>`).join("")}</div>` : ""}
+      <div class="res-block"><h3>What fixes it</h3>
+        ${answerIsMain
+          ? foundingHTML(esc(p.fix))
+          : `<div class="price"><span class="name">${esc(p.product)}</span><span class="amt">${esc(p.price)}</span><span class="note">${esc(p.fix)}${p.priceNote ? " " + esc(p.priceNote) : ""}</span></div>`}
+        ${!answerIsMain && showFounding ? foundingHTML("You also said calls get missed. An AI receptionist answers every call, qualifies the caller and books the appointment.") : ""}
+        ${flags.length >= 2 ? `<p class="hint">Your answers point to ${flags.length + 1} of the four problems. Next Level Complete runs all four as one system: $1,500 setup + $1,500 a month.</p>` : ""}
+        <p class="fine">Prices in Canadian dollars. Usage is quoted on the call.</p>
+      </div>
+      <div class="res-block"><h3>Your next step</h3><p>${esc(p.next)}</p>
+        <div class="book">${bookingHTML()}</div>
+        ${st.sent === "failed" && CONFIG.BOOKING_URL ? fallbackHTML("NEXT", "send you a time") : ""}
+      </div>`;
+  }
+  app.innerHTML = `<div class="res" style="display:grid;gap:20px">${html}
+    <button type="button" class="back" id="re">Change my answers</button></div>`;
+  document.getElementById("re").addEventListener("click", () => { const n = st.name; st = blank(); st.name = n; save(); renderQuestion(true); });
+  if (focus) focusTop("rt");
+}
+
+function focusTop(id) {
+  const el = document.getElementById(id);
+  const r = quizEl.getBoundingClientRect();
+  if (r.top < 0 || r.top > window.innerHeight * 0.6) {
+    const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    quizEl.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+  }
+  if (el) el.focus({ preventScroll: true });
+}
+
+/* ---------- boot ---------- */
+document.querySelectorAll("[data-go='quiz']").forEach(b => b.addEventListener("click", () => {
+  focusTop(st.done ? "rt" : "qt");
+}));
+document.getElementById("cta-book").innerHTML = bookingHTML();
+if (st.i >= flow().length) st.i = flow().length - 1;
+if (st.done) renderResult(false); else renderQuestion(false);
+</script>
