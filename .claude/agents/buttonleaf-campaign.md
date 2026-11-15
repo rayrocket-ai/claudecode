@@ -111,7 +111,8 @@ to in-market home buyers, and monitored daily. Budget stays $5/day per
 listing (his Nov 3 figure) until he names another. So a campaign built from
 this queue for one of these four listings may be switched on once its video
 and link are checked. Any other listing, or any other budget, still needs
-his word.
+his word. Ray confirmed the same day ("go") that the daily run builds
+and switches these on without asking him again.
 
 
 Approved by Ray's "make these better" (2026-11-15). Work in order the next
