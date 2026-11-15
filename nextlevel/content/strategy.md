@@ -18,7 +18,7 @@ What content never does: promise leads, deals, commission or income. It shows th
 
 ### Lane 1: agents (now)
 
-Working real estate agents and small teams in Canada and the US who take their own calls and miss some during showings, listing appointments and evenings.
+Working real estate agents and small teams who take their own calls and miss some during showings, listing appointments and evenings. Canada first. US agents can join the Founding 10 only where setup is confirmed for their state on the call. (Set 2026-11-15 after the persona test; Ray to confirm.)
 
 What they should think after a video: "That is my phone. He is one of us. I can hear it for myself."
 
@@ -28,7 +28,7 @@ Where it leads: the quiz, then a 15-minute call, then one of the Founding 10 pla
 
 Mortgage brokers, real estate lawyers, accountants, contractors and insurance brokers. Same missed-call problem, different day.
 
-The gate in `offer.md` still holds. For this lane, content may show the problem and the system, and invite the owner to join the waitlist by their own choice. Content may not state a price for a non-agent business, offer a sale, or link to a checkout. Industries open one at a time, mortgage brokers first.
+The gate in `offer.md` still holds. For this lane, content may show the problem and the system, and invite the owner to join the waitlist by their own choice. Content may not offer a sale to a non-agent business or link to a checkout. The one price it may state for this lane is the starting price, $500 setup plus $400 a month, with the line that Answer opens to other businesses once the first 10 agents are live. (Set 2026-11-15 after the persona test; Ray to confirm.) Industries open one at a time, mortgage brokers first.
 
 Share of the calendar: about 1 piece in 5. Enough to build the waitlist without blurring who the offer is for today.
 
@@ -74,7 +74,7 @@ One call to action per piece. The ladder is the same every time.
 1. **Comment the keyword.** The video names one word. The viewer comments it.
 2. **DM with the resource.** A person sends the resource by direct message. Replies are drafted by an AI and sent by Ray or Diana. Scripts are in `dm-replies.md`.
 3. **Quiz page.** Six questions that find the viewer's biggest leak. Copy is in `sales/funnel-copy.md`. Link: [Ray to confirm: quiz page link]
-4. **15-minute call.** Ray dials the receptionist live. Link: [Ray to confirm: 15-minute call booking link]
+4. **15-minute call.** The viewer dials the live system themselves. Link: [Ray to confirm: 15-minute call booking link]
 
 Rules:
 
@@ -180,4 +180,39 @@ What is not a goal: views and followers. They are watched, not chased. A video w
 
 ## Prices in content (updated 2026-11-15)
 
-Ray approved the full price ladder on 2026-11-15. Content may state the Founding 10 price ($300 a month for Next Level Answer) and, where a piece needs it, the standard prices exactly as written in `nextlevel/offer.md`. The founding terms approved by Ray on 2026-11-15 (no setup fee, price locked while the subscription is active, month to month, the live-in-7-days commitment) may be stated, only in the exact words of `offer.md` section 6. No other price, discount or term appears in any piece. Usage costs are "quoted on the call" until Ray decides whether usage is included.
+Ray approved the full price ladder on 2026-11-15. Content may state the Founding 10 price ($300 a month for Next Level Answer) and, where a piece needs it, the standard prices exactly as written in `nextlevel/offer.md`. The founding terms approved by Ray on 2026-11-15 (no setup fee, price locked while the subscription is active, month to month, the live-in-7-days commitment) may be stated, only in the exact words of `offer.md` section 6. No other price, discount or term appears in any piece. Usage is no longer "quoted on the call". See the rules below.
+
+## Price and claims rules after the persona test
+
+Set 2026-11-15 after the persona test; Ray to confirm. The round 2 offer (`../testing/offer-pitch-v2.md`) is the working offer. The assistant set these terms after the persona test, under Ray's instruction to fix the offer. Ray has not approved them yet, so every piece that states one is listed under "NEEDS RAY'S OK ON FIGURES" in the approval message. Full wording: `../offer.md` section 6. A piece states a term in those words or not at all.
+
+**Price rules**
+
+- Usage: "billed at cost with no markup for founding clients, up to a monthly cap you set." No rate per minute appears in content until Ray supplies it. [Ray to add: usage rate per minute]
+- Other businesses: "from $500 setup plus $400 a month, once the first 10 agents are live." No date.
+- Teams: "quoted on the call." No team price appears in content. [Ray to set: team pricing]
+- US viewers: prices are in Canadian dollars. Say so when a piece speaks to US agents.
+- No smaller plan is mentioned. [Ray to decide: a smaller plan for very small practices]
+
+**Claims a piece may make, in these words**
+
+- You dial the live system yourself on the call. Ray shows the real usage bill for his own line before you pay.
+- English at launch. Any other language is tested on your own line, and there is no charge if it is not good enough for you. A piece in Dari, or about Dari-speaking callers, carries this line and does not say the AI speaks Dari. [Ray to confirm: which languages the voice agent handles today]
+- Your callers stay yours. No one at Next Level or Ray Homes contacts your callers or uses your contacts.
+- The transcript stays in your own account. The people who can read it are you, and the set-up team only while they are setting up or fixing your account.
+- Audio recording is off unless you turn it on. When it is on, the AI says so at the start of the call.
+- Your contacts and transcripts are exported to you and deleted when you leave.
+- Every call arrives as a text and an email summary. A direct push into your CRM is confirmed on the call before you pay. No CRM is named in content. [Ray to confirm: which CRMs get a direct push]
+- A one-page summary for your broker of record. First month back if your brokerage says no within 14 days.
+- If a caller asks for a person, or it is urgent, the AI offers a callback and alerts you by text.
+- You keep your number. Calls forward only when you do not answer, and forwarding is switched off the day you cancel.
+- One subscription covers one business line.
+- Canada first. US agents where setup is confirmed for their state on the call.
+
+**Claims a piece may not make**
+
+- That the AI passes a caller to a person in the middle of a call. The term is a callback and a text alert.
+- That any named language other than English works today.
+- That any named CRM is connected.
+- That a US state is open, or that an industry opens on a date.
+- Any result, client count or testimonial. There are none yet. When a piece mentions that, it says so as the reason the founding price and the founding terms exist.
