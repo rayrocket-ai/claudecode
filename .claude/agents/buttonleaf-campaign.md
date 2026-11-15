@@ -61,9 +61,10 @@ exposure. State that day:
 # Access
 
 - Adspirer connector: Google Ads 1344350136 and Meta ad account
-  732663023528570. Free plan, 15 counted calls a month, resets Dec 10.
-  All 15 were used by Nov 15. Nothing can be read or changed in Google Ads
-  through Adspirer until Dec 10 unless Ray upgrades the plan.
+  732663023528570.
+  Ray upgraded to Plus on Nov 15: 150 actions a month, resets Dec 15,
+  overage $0.50 an action up to $50 (he can switch that off). About 13
+  used on Nov 15.
   search_tools, get_tool_schema, get_usage_status and refused calls are free.
 - Ad Advisor connector: Meta ad account 1788128334781323. 20 calls a month.
   Its token has been invalid since Nov 9. Ray must reconnect it, or add this
@@ -82,8 +83,13 @@ exposure. State that day:
 - Google: 53 Alpha YouTube 24273515703 (VIDEO, $5/day, links to
   rayahmadi.com/contact). 34 Buttonleaf Demand Gen 24114799139 ($5/day,
   ad group 198558882666, ad 820207161773. Link fixed Nov 15: now
-  rayahmadi.com/contact with UTM tags. Audience is still the database list
-  only; see the fix queue).
+  rayahmadi.com/contact with UTM tags. Audience widened Nov 15: in-market
+  80157 plus database list plus video viewers).
+- Google: 85 Sidney Demand Gen 24461687730, built Nov 15, PAUSED, $10/day
+  (Google refused $5). Live ad group 202330243619 (Clarington, Oshawa,
+  Whitby; YouTube only; in-market 80157; presence only). Ad group
+  202233108156 (Bowmanville only) is paused to avoid overlap. Video
+  hSIkkg-5ANc.
 - Meta 732663023528570: 53 Alpha awareness campaign 52516371756316, ad set
   52516371756716, ad 52516371756516. Its text still says $1,999,990.
   Buttonleaf lead-gen 52506208679516 is paused (website conversion, not a
@@ -118,20 +124,14 @@ and switches these on without asking him again.
 Approved by Ray's "make these better" (2026-11-15). Work in order the next
 time a tool has room, then delete the line.
 
-1. 34 Buttonleaf audience. replace_demandgen_audiences on ad group
-   198558882666: in-market 80157 (Residential Properties, For Sale) plus
-   user lists customers/1344350136/userLists/8481608755 (database) and
-   customers/1344350136/userLists/8481870530 (video viewers, 180 days).
-   Tried Nov 15, refused: Adspirer quota was spent.
 2. 53 Alpha YouTube. The live ad uses the "price" cut made before the
    relist, so it most likely shows $1,999,990. Needs the no-price tour cut
    on YouTube (Ray uploads 53-alpha-A-tour-15s from Drive), then build a
    YouTube campaign with it PAUSED and ask Ray to switch over.
 
-3. 85 Sidney YouTube campaign. Video hSIkkg-5ANc is on Ray's channel
-   (unlisted). Build with create_youtube_campaign, PAUSED: $5/day unless
-   Ray names another figure, Bowmanville 25 km, in-market 80157, link
-   rayahmadi.com/contact, no price, no address. Ray says go before it runs.
+3. 85 Sidney launch. Campaign 24461687730 is built and paused at $10/day.
+   Ray approved $5/day; Google's minimum for this campaign type is higher.
+   Switch on (resume_campaign) only after Ray approves $10/day in chat.
 4. 53 Alpha tour cut to YouTube. The file 53-alpha-A-tour-15s-9x16.mp4 is
    private in Ray's Drive, so Metricool cannot fetch it. Once Ray sets it to
    "Anyone with the link", upload it unlisted through Metricool (brand
@@ -198,6 +198,23 @@ live ad on a listing that is still for sale.
   history is in the BrokerBay emails.
 - One Facebook security reset breaks ads access and the lead pipeline
   together. Check both first.
+
+# Building YouTube campaigns through Adspirer (learned Nov 15)
+
+- create_youtube_campaign makes a Demand Gen campaign. Google refuses $5 a
+  day for a new one; $10 was accepted. The existing $5 campaigns predate
+  this or are a different type.
+- Locations live on the ad group, not the campaign. Campaign-level radius
+  and city adds are refused. Use add_demandgen_ad_group with
+  target_locations (city names), then update_demandgen_channel_controls to
+  switch off Discover, Gmail and Display, and set PRESENCE with
+  update_location_targeting.
+- The account had no logo asset. Brand cards are in campaigns/assets/brand
+  (public raw GitHub URLs work for logo_images and
+  validate_and_prepare_assets).
+- get_ad_creative fails on Demand Gen video ads (Adspirer bug). Videos
+  already in the account: 53 Alpha full video No5y2mid2OE, Buttonleaf
+  sVpajNRcXic.
 
 # Dashboard
 

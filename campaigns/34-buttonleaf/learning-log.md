@@ -5,6 +5,17 @@ Newest entries at the top. Never re-test a settled question without new
 justification.
 
 ---
+## 2026-11-15 (later) — Audience widened. 7-day read
+
+- Ray upgraded Adspirer. Audience on ad group 198558882666 replaced: people
+  in market for a home for sale (80157) plus the database list plus
+  180-day video viewers.
+- Nov 7 to 14 (ran from Nov 10): $25.90, CTR 1.55%, about 60 clicks at
+  roughly $0.42 each. That was the database-only audience. Expect a lower
+  click rate and higher cost per click now that it reaches new people;
+  judge again after 7 days.
+
+---
 ## 2026-11-15 — YouTube link fixed. Audience fix queued
 
 - Ray: "make these better and daily heal and fix".

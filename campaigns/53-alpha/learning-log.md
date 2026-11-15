@@ -4,6 +4,16 @@ Every test gets: hypothesis, variants, spend, result, decision, lesson.
 Newest entries at the top.
 
 ---
+## 2026-11-15 (later) — YouTube 7-day read: creative should be replaced
+
+- Nov 7 to 14: $41.73, CTR 0.10%, about 6 clicks. That is under the 0.8%
+  replace line after far more than 2,000 impressions, and the cut in use is
+  the pre-relist "price" cut.
+- Replacement needs a no-price video on YouTube. Two routes: the tour cut
+  in Ray's Drive (private, he must share it), or the full listing video
+  already on his channel (No5y2mid2OE) if it shows no price.
+
+---
 ## 2026-11-15 — Live-ad audit: the Facebook ad still says $1,999,990
 
 - Ray asked what is running. Live reads through Adspirer (12 or 13 of 15

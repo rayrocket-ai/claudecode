@@ -4,6 +4,19 @@ Every test gets: hypothesis, variants, spend, result, decision, lesson.
 Newest entries at the top.
 
 ---
+## 2026-11-15 — YouTube campaign built, paused
+
+- Campaign 24461687730, Demand Gen, YouTube only (in-stream, in-feed,
+  Shorts), people in market for a home for sale, presence only.
+- Area: Clarington, Oshawa and Whitby (ad group 202330243619). Google
+  would not take a 25 km radius on this campaign type, so the towns inside
+  that radius are named instead.
+- Copy carries no price and no address. Link: rayahmadi.com/contact with
+  UTM tags.
+- Budget: Google refused $5/day; built at $10/day. Not switched on. Needs
+  Ray's OK on $10/day.
+
+---
 ## 2026-11-14 — Tour video is on YouTube
 
 - Ray: use the videos from Sid Media in Drive.
