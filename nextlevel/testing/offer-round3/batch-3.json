@@ -1,0 +1,458 @@
+[
+  {
+    "id": "P051",
+    "segment": "real_estate_agent",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "I run 8 agents and 3 ISAs with an AI layer already, and a ten-client startup with no testimonials that does not sell in the US is not something I put core intake through.",
+    "what_almost_changed_their_mind": "Nothing; an enterprise case study at 1,000-plus leads a month would have been the only thing, and the pitch says there are no clients yet.",
+    "missing_info": [
+      "Who else at my volume runs on this?",
+      "Is there an SLA?"
+    ],
+    "price_reaction": "cannot judge",
+    "max_monthly_they_would_pay_cad": 0,
+    "trust_in_ray": 3,
+    "best_product_for_them": "none",
+    "line_that_helped_most": "He runs this system on his own business and shows it live on a call.",
+    "line_that_hurt_most": "there are no client testimonials yet"
+  },
+  {
+    "id": "P052",
+    "segment": "real_estate_agent",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "I gave it twenty seconds on my phone, it was a wall of text with no audio clip, and then it turns out it is Canada only anyway.",
+    "what_almost_changed_their_mind": "The demo number I can dial was close to what I wanted, but I wanted a ten-second clip on the first screen, not a phone call.",
+    "missing_info": [
+      "What does it sound like, as a clip I can tap?",
+      "How many taps is the quiz?"
+    ],
+    "price_reaction": "expensive",
+    "max_monthly_they_would_pay_cad": 100,
+    "trust_in_ray": 3,
+    "best_product_for_them": "Answer",
+    "line_that_helped_most": "a demo number is on the page",
+    "line_that_hurt_most": "founding clients are in Canada only"
+  },
+  {
+    "id": "P053",
+    "segment": "real_estate_agent",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "I sell my own HighLevel snapshot to my agents for $149, so I read this for the price ladder and the bundle, and I got both without buying anything.",
+    "what_almost_changed_their_mind": "Nothing; I was never a buyer, though the 250-minute bundle and the $0.30 overage are useful to know.",
+    "missing_info": [],
+    "price_reaction": "expensive",
+    "max_monthly_they_would_pay_cad": 0,
+    "trust_in_ray": 2,
+    "best_product_for_them": "none",
+    "line_that_helped_most": "the $300 includes 250 AI call minutes a month",
+    "line_that_hurt_most": "Next Level is a customer of HighLevel, not a partner or affiliate of it."
+  },
+  {
+    "id": "P054",
+    "segment": "real_estate_agent",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "My brokerage does not let client data sit on an outside platform, and this is held on HighLevel and is not sold in the US in any case.",
+    "what_almost_changed_their_mind": "Recording being off by default and announced when on answered my California worry, but it does not get past my managing broker.",
+    "missing_info": [
+      "Is this allowed at Compass?",
+      "Does a transcript without audio still need all-party consent in California?"
+    ],
+    "price_reaction": "fair",
+    "max_monthly_they_would_pay_cad": 0,
+    "trust_in_ray": 3,
+    "best_product_for_them": "none",
+    "line_that_helped_most": "Audio recording is off unless you turn it on, and when it is on the AI says so at the start of the call.",
+    "line_that_hurt_most": "your account runs on HighLevel, a US software company"
+  },
+  {
+    "id": "P055",
+    "segment": "real_estate_agent",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "Farsi is not promised, it is not sold in California, and nobody has told me who actually runs this while Ray sells 50 homes a year.",
+    "what_almost_changed_their_mind": "If Farsi had been a stated yes and the set-up team had been named, I would have joined the US list.",
+    "missing_info": [
+      "Who runs support day to day, and is it a person?",
+      "Will Farsi pass the test?",
+      "When does it open in the US and at what price?"
+    ],
+    "price_reaction": "fair",
+    "max_monthly_they_would_pay_cad": 0,
+    "trust_in_ray": 2,
+    "best_product_for_them": "Answer",
+    "line_that_helped_most": "The rule for every language is the same: it is tested on your own line with you",
+    "line_that_hurt_most": "Dari, Farsi, Punjabi, Mandarin, Cantonese, Urdu and Arabic are not promised"
+  },
+  {
+    "id": "P056",
+    "segment": "real_estate_agent",
+    "decision_founding": "joins waitlist",
+    "decision_standard": "joins waitlist",
+    "would_refer": false,
+    "main_reason": "There is no free month and it is not even sold in the US yet, so I will put my email on the US list and call the demo number for fun.",
+    "what_almost_changed_their_mind": "A free trial month would have had me booking the call, though I probably would not have paid after it.",
+    "missing_info": [
+      "Can I try it free for a month?"
+    ],
+    "price_reaction": "expensive",
+    "max_monthly_they_would_pay_cad": 0,
+    "trust_in_ray": 3,
+    "best_product_for_them": "none",
+    "line_that_helped_most": "If you are in the United States, you can join the US list.",
+    "line_that_hurt_most": "there is no cheaper plan today"
+  },
+  {
+    "id": "P057",
+    "segment": "real_estate_agent",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "My employer owns the phone flow and the leads, and using an outside tool would get me fired, so this is not for an employee agent like me.",
+    "what_almost_changed_their_mind": "Nothing now; if I ever went independent I would remember that I keep my own number.",
+    "missing_info": [],
+    "price_reaction": "cannot judge",
+    "max_monthly_they_would_pay_cad": 0,
+    "trust_in_ray": 3,
+    "best_product_for_them": "none",
+    "line_that_helped_most": "You keep your number",
+    "line_that_hurt_most": "Nothing is sold to US clients before then."
+  },
+  {
+    "id": "P058",
+    "segment": "real_estate_agent",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "I asked to see your numbers on the page and the pitch still saves them for the call, there are no outside clients, and it is not sold in Texas.",
+    "what_almost_changed_their_mind": "Admitting there are no testimonials and promising never to recruit me was more honest than the last two vendors, but the usage numbers are still held for the call.",
+    "missing_info": [
+      "Why are Ray's own call numbers not on the page?",
+      "When does it open in the US and at what price?"
+    ],
+    "price_reaction": "cannot judge",
+    "max_monthly_they_would_pay_cad": 0,
+    "trust_in_ray": 2,
+    "best_product_for_them": "Answer",
+    "line_that_helped_most": "Next Level never recruits a client to Ray's brokerage or team.",
+    "line_that_hurt_most": "you see Ray's own line's real usage on the call before you pay"
+  },
+  {
+    "id": "P059",
+    "segment": "real_estate_agent",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "I already pay US$297 for a voice agent wired into my CRM, and this one only offers a callback, has no warm transfer or listing lookup, and is not sold in the US.",
+    "what_almost_changed_their_mind": "A stated warm transfer with a failure rate would have earned a call; a callback is a step down from what I have.",
+    "missing_info": [
+      "How are warm transfers handled and what is the failure rate?",
+      "Is there live listing lookup?"
+    ],
+    "price_reaction": "fair",
+    "max_monthly_they_would_pay_cad": 0,
+    "trust_in_ray": 3,
+    "best_product_for_them": "none",
+    "line_that_helped_most": "the $300 includes 250 AI call minutes a month",
+    "line_that_hurt_most": "it offers a callback and alerts you by text straight away"
+  },
+  {
+    "id": "P060",
+    "segment": "real_estate_agent",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "Nothing here tells me what it says to a ranch buyer asking about water rights when it does not know, and it is not sold in Montana anyway.",
+    "what_almost_changed_their_mind": "Choosing my own qualifying questions is sensible, but I needed to read that it says it does not know rather than making something up.",
+    "missing_info": [
+      "What does it say when it does not know the answer?",
+      "Does anyone there understand land and ranch calls?"
+    ],
+    "price_reaction": "fair",
+    "max_monthly_they_would_pay_cad": 0,
+    "trust_in_ray": 2,
+    "best_product_for_them": "Answer",
+    "line_that_helped_most": "If a caller asks for a person or it is urgent, it offers a callback and alerts you by text straight away.",
+    "line_that_hurt_most": "GTA real estate broker"
+  },
+  {
+    "id": "P061",
+    "segment": "real_estate_agent",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "Mandarin is not promised and nothing is sold in New York, so both of my questions got a plain no.",
+    "what_almost_changed_their_mind": "If Mandarin had been on the list of ten I would have joined the US list to wait for a US price.",
+    "missing_info": [
+      "Will Mandarin pass the test?",
+      "What is the US dollar price?"
+    ],
+    "price_reaction": "expensive",
+    "max_monthly_they_would_pay_cad": 0,
+    "trust_in_ray": 3,
+    "best_product_for_them": "Answer",
+    "line_that_helped_most": "If you are in the United States, you can join the US list.",
+    "line_that_hurt_most": "Dari, Farsi, Punjabi, Mandarin, Cantonese, Urdu and Arabic are not promised"
+  },
+  {
+    "id": "P062",
+    "segment": "real_estate_agent",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "In twenty seconds I learned it is Canada only and Punjabi is not promised, so it does not serve my callers.",
+    "what_almost_changed_their_mind": "Spanish is on the list, which is half of what I need, but Punjabi and the US are both a no.",
+    "missing_info": [
+      "Will Punjabi pass the test?",
+      "When does it open in the US?"
+    ],
+    "price_reaction": "expensive",
+    "max_monthly_they_would_pay_cad": 0,
+    "trust_in_ray": 3,
+    "best_product_for_them": "Answer",
+    "line_that_helped_most": "The platform also lists French, Spanish",
+    "line_that_hurt_most": "founding clients are in Canada only"
+  },
+  {
+    "id": "P063",
+    "segment": "real_estate_agent",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "It books appointments, which my old answering service never did, but it costs more than double what I paid, it is full of talk about platforms and systems, and it is not sold in Wisconsin.",
+    "what_almost_changed_their_mind": "A plain side-by-side with a $120 answering service and a US price would have got me to dial the demo number.",
+    "missing_info": [
+      "How is this different from a human answering service, in plain words?",
+      "Do callers hang up on it?"
+    ],
+    "price_reaction": "expensive",
+    "max_monthly_they_would_pay_cad": 150,
+    "trust_in_ray": 3,
+    "best_product_for_them": "Answer",
+    "line_that_helped_most": "books the appointment into your calendar",
+    "line_that_hurt_most": "your account runs on HighLevel, a US software company"
+  },
+  {
+    "id": "P064",
+    "segment": "real_estate_agent",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "I have no clients and no budget, and this answers calls rather than bringing me buyers.",
+    "what_almost_changed_their_mind": "Nothing; I need leads first.",
+    "missing_info": [],
+    "price_reaction": "expensive",
+    "max_monthly_they_would_pay_cad": 0,
+    "trust_in_ray": 3,
+    "best_product_for_them": "none",
+    "line_that_helped_most": "",
+    "line_that_hurt_most": "It only answers calls that come in."
+  },
+  {
+    "id": "P065",
+    "segment": "real_estate_agent",
+    "decision_founding": "joins waitlist",
+    "decision_standard": "joins waitlist",
+    "would_refer": true,
+    "main_reason": "Recording is off unless I turn it on and it is announced when on, which is exactly what I needed, but nothing is sold in Florida yet so I am on the US list.",
+    "what_almost_changed_their_mind": "If it were sold in the US today I would have booked the call to hear the demo and check French for my overseas buyers.",
+    "missing_info": [
+      "When does it open in the US and at what US dollar price?",
+      "Does a transcript with audio off count as recording for callers abroad?"
+    ],
+    "price_reaction": "fair",
+    "max_monthly_they_would_pay_cad": 400,
+    "trust_in_ray": 4,
+    "best_product_for_them": "Answer",
+    "line_that_helped_most": "Audio recording is off unless you turn it on, and when it is on the AI says so at the start of the call.",
+    "line_that_hurt_most": "Nothing is sold to US clients before then."
+  },
+  {
+    "id": "P066",
+    "segment": "real_estate_agent",
+    "decision_founding": "joins waitlist",
+    "decision_standard": "joins waitlist",
+    "would_refer": true,
+    "main_reason": "It says it is an AI and it alerts me by text when someone asks for a person, which is close to what I wanted, but it is a callback rather than putting them through and it is not sold in Massachusetts yet.",
+    "what_almost_changed_their_mind": "A live transfer to my cell when a client says they need me right now would have made me try to buy this week.",
+    "missing_info": [
+      "Can a caller be put straight through to me instead of offered a callback?",
+      "When does it open in the US?"
+    ],
+    "price_reaction": "fair",
+    "max_monthly_they_would_pay_cad": 400,
+    "trust_in_ray": 4,
+    "best_product_for_them": "Answer",
+    "line_that_helped_most": "If a caller asks for a person or it is urgent, it offers a callback and alerts you by text straight away.",
+    "line_that_hurt_most": "Nothing is sold to US clients before then."
+  },
+  {
+    "id": "P067",
+    "segment": "real_estate_agent",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "I resell my own HighLevel voice AI, so I was only here to read the price, the bundle and the funnel.",
+    "what_almost_changed_their_mind": "Nothing; I am not a buyer.",
+    "missing_info": [],
+    "price_reaction": "fair",
+    "max_monthly_they_would_pay_cad": 0,
+    "trust_in_ray": 2,
+    "best_product_for_them": "none",
+    "line_that_helped_most": "",
+    "line_that_hurt_most": "Next Level is a customer of HighLevel, not a partner or affiliate of it."
+  },
+  {
+    "id": "P068",
+    "segment": "real_estate_agent",
+    "decision_founding": "joins waitlist",
+    "decision_standard": "joins waitlist",
+    "would_refer": true,
+    "main_reason": "One subscription covers our team line and extra lines are half price, so the maths works, but it does not say how calls are routed to my three agents and it is not sold in Ohio yet.",
+    "what_almost_changed_their_mind": "A sentence saying the booked appointment or alert goes to the right agent in turn, plus a US date, would have had me booking the call.",
+    "missing_info": [
+      "Does it route or round-robin booked callers across agents?",
+      "When does it open in the US and at what price?"
+    ],
+    "price_reaction": "fair",
+    "max_monthly_they_would_pay_cad": 600,
+    "trust_in_ray": 4,
+    "best_product_for_them": "Answer",
+    "line_that_helped_most": "Each extra agent line on the same account is half the monthly price",
+    "line_that_hurt_most": "Nothing is sold to US clients before then."
+  },
+  {
+    "id": "P069",
+    "segment": "real_estate_agent",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": true,
+    "main_reason": "You told me plainly the AI is not promised in Dari and it is not sold in Virginia, so it is a no for my callers, and I respect the straight answer.",
+    "what_almost_changed_their_mind": "A stated yes on Dari would have had me paying the same day I was allowed to.",
+    "missing_info": [
+      "Is Dari on the platform's current list at all?"
+    ],
+    "price_reaction": "fair",
+    "max_monthly_they_would_pay_cad": 0,
+    "trust_in_ray": 4,
+    "best_product_for_them": "none",
+    "line_that_helped_most": "the AI is not promised in Dari",
+    "line_that_hurt_most": "the AI is not promised in Dari"
+  },
+  {
+    "id": "P070",
+    "segment": "real_estate_agent",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "I am leaving real estate for a salaried job in January and I am not taking on anything new.",
+    "what_almost_changed_their_mind": "Nothing; two years ago the missed-call cover might have helped.",
+    "missing_info": [],
+    "price_reaction": "cannot judge",
+    "max_monthly_they_would_pay_cad": 0,
+    "trust_in_ray": 3,
+    "best_product_for_them": "none",
+    "line_that_helped_most": "Month to month, cancel before the next billing date.",
+    "line_that_hurt_most": ""
+  },
+  {
+    "id": "P071",
+    "segment": "local_business_waitlist",
+    "decision_founding": "buys",
+    "decision_standard": "books call only",
+    "would_refer": true,
+    "main_reason": "It says mortgage brokers can take 3 of the 10 founding spots now at $300 with no setup fee, which is less than the $400 I was ready to pay, and whoever answers first wins my rate-shoppers.",
+    "what_almost_changed_their_mind": "Only 3 spots for mortgage and contractors together made me want to move before a competitor does; at the standard price the extra $500 setup with no client results yet would make me want the call first.",
+    "missing_info": [
+      "Is HST added to the $300?"
+    ],
+    "price_reaction": "cheap",
+    "max_monthly_they_would_pay_cad": 400,
+    "trust_in_ray": 4,
+    "best_product_for_them": "Answer",
+    "line_that_helped_most": "3 of the 10 founding spots are open to you now",
+    "line_that_hurt_most": "Results from any client, because there are none yet."
+  },
+  {
+    "id": "P072",
+    "segment": "local_business_waitlist",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "The set-up team that can read my transcripts works for a realtor, my callers are pre-approval buyers, Dari is not promised, and $300 is a lot for 35 files a year.",
+    "what_almost_changed_their_mind": "The line that no one at Ray Homes contacts my callers is the right promise, but it is only a written promise from the people I am worried about.",
+    "missing_info": [
+      "Who exactly is on the set-up team, and do they work at Ray Homes?",
+      "How would I ever know if a transcript was read?",
+      "Will Dari pass the test?"
+    ],
+    "price_reaction": "expensive",
+    "max_monthly_they_would_pay_cad": 100,
+    "trust_in_ray": 2,
+    "best_product_for_them": "none",
+    "line_that_helped_most": "No one at Next Level or Ray Homes contacts your callers or uses your contacts, and that is written in the agreement.",
+    "line_that_hurt_most": "The names of the set-up team."
+  },
+  {
+    "id": "P073",
+    "segment": "local_business_waitlist",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "My network's call centre already takes our overflow inside the franchise fees, and an outside vendor would need months of approval.",
+    "what_almost_changed_their_mind": "Nothing; if the network dropped its call centre I would look again.",
+    "missing_info": [
+      "Does this connect to my network's system?"
+    ],
+    "price_reaction": "fair",
+    "max_monthly_they_would_pay_cad": 0,
+    "trust_in_ray": 3,
+    "best_product_for_them": "none",
+    "line_that_helped_most": "every call reaches you as a text and an email summary",
+    "line_that_hurt_most": "Any other CRM: the text and email summary."
+  },
+  {
+    "id": "P074",
+    "segment": "local_business_waitlist",
+    "decision_founding": "books call only",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "Evening intake is what I need and mortgage brokers can buy now, but nothing guarantees it never quotes a rate or takes income details, the transcripts sit in the US, and there is no BC regulatory answer.",
+    "what_almost_changed_their_mind": "A written statement that it refuses rate and financial questions and only takes name, purpose and a booking would have made me buy.",
+    "missing_info": [
+      "Can it be guaranteed never to quote a rate or ask for income or SIN details?",
+      "How long does the platform keep a transcript?",
+      "Has this been checked against BC mortgage broker rules?"
+    ],
+    "price_reaction": "fair",
+    "max_monthly_they_would_pay_cad": 400,
+    "trust_in_ray": 3,
+    "best_product_for_them": "Answer",
+    "line_that_helped_most": "asks your qualifying questions (you choose them",
+    "line_that_hurt_most": "Your data is not stored in Canada."
+  },
+  {
+    "id": "P075",
+    "segment": "local_business_waitlist",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "My leads come by Instagram DM, not calls, and $300 a month is three times the most I would spend on anything.",
+    "what_almost_changed_their_mind": "Nothing at my volume; it does say mortgage brokers can join, but only if I had scrolled that far.",
+    "missing_info": [],
+    "price_reaction": "expensive",
+    "max_monthly_they_would_pay_cad": 50,
+    "trust_in_ray": 3,
+    "best_product_for_them": "none",
+    "line_that_helped_most": "",
+    "line_that_hurt_most": "there is no cheaper plan today"
+  }
+]
