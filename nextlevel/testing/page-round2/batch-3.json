@@ -1,0 +1,647 @@
+[
+ {
+  "id": "P051",
+  "device": "desktop",
+  "furthest_point": "first screen",
+  "started_quiz": false,
+  "finished_quiz": false,
+  "quiz_path": "none",
+  "gave_contact_details": false,
+  "ticked_email_consent": false,
+  "outcome": "left",
+  "seconds_on_page": 14,
+  "first_impression": "Clean, expensive-looking page, but the headline is talking to a solo agent who misses calls, which is not me.",
+  "main_reason": "'$300 a month for the first 10 clients' tells me this is a ten-client startup, and 'Canada only for now' ends it for a Georgia team with three ISAs.",
+  "element_that_helped_most": "",
+  "element_that_hurt_most": "$300 a month for the first 10 clients. No setup fee. Month to month.",
+  "confusion": [],
+  "missing": [
+   "Enterprise case studies at 1,000-plus leads a month",
+   "An SLA",
+   "Any named client at team scale"
+  ],
+  "booking_fallback_reaction": "did not reach it",
+  "design_score": 4,
+  "clarity_score": 5
+ },
+ {
+  "id": "P052",
+  "device": "phone",
+  "furthest_point": "first screen",
+  "started_quiz": false,
+  "finished_quiz": false,
+  "quiz_path": "none",
+  "gave_contact_details": false,
+  "ticked_email_consent": false,
+  "outcome": "left",
+  "seconds_on_page": 17,
+  "first_impression": "Nice big headline and it is literally my bartending nights, but it is all words.",
+  "main_reason": "I wanted to hear it in ten seconds and there is nothing to play, and then I saw 'Canada only for now', so there was no reason to tap a quiz.",
+  "element_that_helped_most": "You were in a showing. Who answered your phone?",
+  "element_that_hurt_most": "Canada only for now. In the United States? Join the US list",
+  "confusion": [
+   "The main button promises '60 seconds' when I wanted a 10-second listen"
+  ],
+  "missing": [
+   "An audio clip of the AI on the first screen"
+  ],
+  "booking_fallback_reaction": "did not reach it",
+  "design_score": 4,
+  "clarity_score": 4
+ },
+ {
+  "id": "P053",
+  "device": "desktop",
+  "furthest_point": "result",
+  "started_quiz": true,
+  "finished_quiz": true,
+  "quiz_path": "agent",
+  "gave_contact_details": false,
+  "ticked_email_consent": false,
+  "outcome": "quiz only",
+  "seconds_on_page": 540,
+  "first_impression": "Polished editorial design, far better than the usual HighLevel funnel, and the price is on the first screen.",
+  "main_reason": "I got the whole price ladder from 'The menu' and the 21 terms, ran the quiz with invented answers to see the brief, and I am not a buyer.",
+  "element_that_helped_most": "The menu. (Product / Setup / A month table)",
+  "element_that_hurt_most": "Your account runs on HighLevel, a US software company.",
+  "confusion": [
+   "The page never says what is actually built inside the HighLevel account beyond the voice agent"
+  ],
+  "missing": [
+   "What is in the snapshot: workflows, pipelines, templates",
+   "A reseller or partner option"
+  ],
+  "booking_fallback_reaction": "fine",
+  "design_score": 4,
+  "clarity_score": 5
+ },
+ {
+  "id": "P054",
+  "device": "phone",
+  "furthest_point": "ray",
+  "started_quiz": false,
+  "finished_quiz": false,
+  "quiz_path": "none",
+  "gave_contact_details": false,
+  "ticked_email_consent": false,
+  "outcome": "left",
+  "seconds_on_page": 48,
+  "first_impression": "Looks elegant and the showing headline is my dead-zone problem exactly.",
+  "main_reason": "'Canada only for now' is on the first screen, and nothing by the About Ray strip tells me Compass would allow client data in an outside system, so it is a no for a California agent.",
+  "element_that_helped_most": "Audio recording is off unless you turn it on.",
+  "element_that_hurt_most": "Canada only for now. In the United States? Join the US list",
+  "confusion": [
+   "'You get a one-page summary to show your broker of record' sounds Canadian and does not answer whether my managing broker may approve it"
+  ],
+  "missing": [
+   "Anything about California all-party consent near the top",
+   "A statement on brokerage platform restrictions"
+  ],
+  "booking_fallback_reaction": "did not reach it",
+  "design_score": 4,
+  "clarity_score": 4
+ },
+ {
+  "id": "P055",
+  "device": "desktop",
+  "furthest_point": "method",
+  "started_quiz": false,
+  "finished_quiz": false,
+  "quiz_path": "none",
+  "gave_contact_details": false,
+  "ticked_email_consent": false,
+  "outcome": "left",
+  "seconds_on_page": 95,
+  "first_impression": "Serious, restrained design; the headline is clear and the price is right there.",
+  "main_reason": "'12+ years, about 50 deals a year' beside 'On your call: Ray himself, every time' confirms my worry that one busy broker is the whole company, and it is Canada only with no Farsi mentioned where I read.",
+  "element_that_helped_most": "I run this system on my own business. On your call, you dial it yourself.",
+  "element_that_hurt_most": "Experience: 12+ years, about 50 deals a year",
+  "confusion": [
+   "'We set it up for you' never says who 'we' is",
+   "'Portrait to come' on the person I am supposed to trust"
+  ],
+  "missing": [
+   "Who runs support day to day",
+   "Farsi stated yes or no in the upper half of the page",
+   "A US price"
+  ],
+  "booking_fallback_reaction": "did not reach it",
+  "design_score": 4,
+  "clarity_score": 4
+ },
+ {
+  "id": "P056",
+  "device": "phone",
+  "furthest_point": "result",
+  "started_quiz": true,
+  "finished_quiz": true,
+  "quiz_path": "us-list",
+  "gave_contact_details": false,
+  "ticked_email_consent": false,
+  "outcome": "joined a list",
+  "seconds_on_page": 110,
+  "first_impression": "Ooh, pretty, very clean, and the headline is so me.",
+  "main_reason": "There is no free trial and it is 'Canada only for now', but 'Join the US list' was two taps and one Instagram message, so I sent USLIST and moved on.",
+  "element_that_helped_most": "Join the US list",
+  "element_that_hurt_most": "There is no free trial or free audit anywhere I looked",
+  "confusion": [
+   "The brief says 'Nothing was sent or stored' and then asks me to message on Instagram to actually be on the list"
+  ],
+  "missing": [
+   "A free trial or free month",
+   "A free audit"
+  ],
+  "booking_fallback_reaction": "fine",
+  "design_score": 5,
+  "clarity_score": 4
+ },
+ {
+  "id": "P057",
+  "device": "desktop",
+  "furthest_point": "first screen",
+  "started_quiz": false,
+  "finished_quiz": false,
+  "quiz_path": "none",
+  "gave_contact_details": false,
+  "ticked_email_consent": false,
+  "outcome": "left",
+  "seconds_on_page": 12,
+  "first_impression": "Sharp page, and I understood the offer in one glance.",
+  "main_reason": "It is an outside phone tool for agents who own their own line, my employer's call centre owns mine, and it says 'Canada only for now' anyway.",
+  "element_that_helped_most": "",
+  "element_that_hurt_most": "An AI receptionist answers every call you miss, qualifies the caller and books the appointment.",
+  "confusion": [],
+  "missing": [
+   "A line saying whether it is for independent agents only"
+  ],
+  "booking_fallback_reaction": "did not reach it",
+  "design_score": 4,
+  "clarity_score": 5
+ },
+ {
+  "id": "P058",
+  "device": "desktop",
+  "furthest_point": "final cta",
+  "started_quiz": false,
+  "finished_quiz": false,
+  "quiz_path": "none",
+  "gave_contact_details": false,
+  "ticked_email_consent": false,
+  "outcome": "left",
+  "seconds_on_page": 420,
+  "first_impression": "Restrained and honest-looking, which I did not expect from a fellow eXp agent selling software.",
+  "main_reason": "'On the call Ray shows you the real usage on his own line before you pay' is exactly the numbers-withheld-until-the-call pattern that burned me twice, and it is Canada only.",
+  "element_that_helped_most": "Not yet. Next Level is new and the first 10 clients are its founding clients.",
+  "element_that_hurt_most": "Minutes used are shown on every invoice, and Ray shows you his own line's real usage on the call.",
+  "confusion": [
+   "Why his own call numbers cannot be printed on the page if he runs it on his own business",
+   "Booking is 'Message NEXT on Instagram' while 'The online calendar opens shortly'"
+  ],
+  "missing": [
+   "Ray's own call numbers on the page: calls answered, appointments booked, minutes used",
+   "A US price or date"
+  ],
+  "booking_fallback_reaction": "annoyed",
+  "design_score": 4,
+  "clarity_score": 5
+ },
+ {
+  "id": "P059",
+  "device": "desktop",
+  "furthest_point": "final cta",
+  "started_quiz": false,
+  "finished_quiz": false,
+  "quiz_path": "none",
+  "gave_contact_details": false,
+  "ticked_email_consent": false,
+  "outcome": "left",
+  "seconds_on_page": 380,
+  "first_impression": "Well designed and the price is up front, which I appreciate.",
+  "main_reason": "'The AI offers a callback and you get a text alert' means no warm transfer at all, the CRM push is 'one way' through Zapier, and it is Canada only, so it is less than what I already pay US$297 for.",
+  "element_that_helped_most": "250 AI call minutes a month, your phone number, and the summary and alert texts, up to 500 text segments a month.",
+  "element_that_hurt_most": "If a caller asks for a person, or the call is urgent, the AI offers a callback and you get a text alert straight away.",
+  "confusion": [
+   "No feature table; specifics are scattered across 21 folded terms and 22 questions"
+  ],
+  "missing": [
+   "Warm transfer",
+   "Listing lookup",
+   "Failure or uptime figures",
+   "A feature comparison table"
+  ],
+  "booking_fallback_reaction": "fine",
+  "design_score": 4,
+  "clarity_score": 4
+ },
+ {
+  "id": "P060",
+  "device": "desktop",
+  "furthest_point": "method",
+  "started_quiz": false,
+  "finished_quiz": false,
+  "quiz_path": "none",
+  "gave_contact_details": false,
+  "ticked_email_consent": false,
+  "outcome": "left",
+  "seconds_on_page": 100,
+  "first_impression": "Handsome page, but 'You were in a showing' is a city agent's day, not a ranch tour.",
+  "main_reason": "The sample call is a buyer asking to see a listing on Thursday at 4, nothing says what it does when someone asks about water rights, and it is 'Canada only for now'.",
+  "element_that_helped_most": "See a sample call",
+  "element_that_hurt_most": "A sample call. (Daniel wants to see one of Maya's listings)",
+  "confusion": [
+   "'Solo agents, agents with an assistant, team leaders, brokers' lists every kind of suburban agent and no land or rural work"
+  ],
+  "missing": [
+   "What the AI says when it does not know the answer",
+   "Any sign of land, acreage or rural experience"
+  ],
+  "booking_fallback_reaction": "did not reach it",
+  "design_score": 4,
+  "clarity_score": 4
+ },
+ {
+  "id": "P061",
+  "device": "phone",
+  "furthest_point": "result",
+  "started_quiz": true,
+  "finished_quiz": true,
+  "quiz_path": "us-list",
+  "gave_contact_details": false,
+  "ticked_email_consent": false,
+  "outcome": "quiz only",
+  "seconds_on_page": 130,
+  "first_impression": "Looks premium and I understood it fast, even in English.",
+  "main_reason": "The first screen says 'Canada only for now', the US brief gives no US price until 1 March 2027 and says nothing about Mandarin, and I do not use Instagram for work, so I stopped there.",
+  "element_that_helped_most": "Join the US list",
+  "element_that_hurt_most": "Message USLIST on Instagram",
+  "confusion": [
+   "The US list is joined only by an Instagram message, with no email or WeChat option",
+   "The brief says 'Nothing was sent or stored', so I am not actually on any list"
+  ],
+  "missing": [
+   "Mandarin support, yes or no, where I was reading",
+   "A US dollar price"
+  ],
+  "booking_fallback_reaction": "gave up",
+  "design_score": 4,
+  "clarity_score": 4
+ },
+ {
+  "id": "P062",
+  "device": "phone",
+  "furthest_point": "first screen",
+  "started_quiz": false,
+  "finished_quiz": false,
+  "quiz_path": "none",
+  "gave_contact_details": false,
+  "ticked_email_consent": false,
+  "outcome": "left",
+  "seconds_on_page": 13,
+  "first_impression": "Pretty page, big headline, I get it: it answers the calls I miss.",
+  "main_reason": "'Canada only for now' is right under the button and nothing on the first screen mentions Punjabi or Spanish.",
+  "element_that_helped_most": "",
+  "element_that_hurt_most": "Canada only for now. In the United States? Join the US list",
+  "confusion": [],
+  "missing": [
+   "Punjabi and Spanish named on the first screen"
+  ],
+  "booking_fallback_reaction": "did not reach it",
+  "design_score": 4,
+  "clarity_score": 5
+ },
+ {
+  "id": "P063",
+  "device": "desktop",
+  "furthest_point": "method",
+  "started_quiz": false,
+  "finished_quiz": false,
+  "quiz_path": "none",
+  "gave_contact_details": false,
+  "ticked_email_consent": false,
+  "outcome": "left",
+  "seconds_on_page": 90,
+  "first_impression": "Plain and readable, no hype, and I knew what it was straight away.",
+  "main_reason": "It reads like the answering service I dropped in 2015 with a robot on the line, the only new part is 'books the appointment', and then it says 'Canada only for now', so there is nothing for a Wisconsin agent to do.",
+  "element_that_helped_most": "Appointment booked. Thursday, 4 pm, on your calendar",
+  "element_that_hurt_most": "Next Level Answer. An AI receptionist answers every call you miss, qualifies the caller and books the appointment.",
+  "confusion": [
+   "'The intake', 'The four leaks' and 'Next Level Answer' are names I had to decode",
+   "'We set it up for you' and 'the live system' are vague"
+  ],
+  "missing": [
+   "A plain comparison with a human answering service",
+   "Whether callers hang up on the AI"
+  ],
+  "booking_fallback_reaction": "did not reach it",
+  "design_score": 3,
+  "clarity_score": 4
+ },
+ {
+  "id": "P064",
+  "device": "phone",
+  "furthest_point": "first screen",
+  "started_quiz": false,
+  "finished_quiz": false,
+  "quiz_path": "none",
+  "gave_contact_details": false,
+  "ticked_email_consent": false,
+  "outcome": "left",
+  "seconds_on_page": 8,
+  "first_impression": "Fancy looking, but it is about answering calls and I do not have any calls yet.",
+  "main_reason": "'$300 a month' with zero deals is impossible, and it answers callers rather than bringing me buyers.",
+  "element_that_helped_most": "",
+  "element_that_hurt_most": "$300 a month for the first 10 clients. No setup fee. Month to month.",
+  "confusion": [],
+  "missing": [
+   "Anything about getting leads"
+  ],
+  "booking_fallback_reaction": "did not reach it",
+  "design_score": 4,
+  "clarity_score": 5
+ },
+ {
+  "id": "P065",
+  "device": "desktop",
+  "furthest_point": "result",
+  "started_quiz": true,
+  "finished_quiz": true,
+  "quiz_path": "us-list",
+  "gave_contact_details": false,
+  "ticked_email_consent": false,
+  "outcome": "joined a list",
+  "seconds_on_page": 170,
+  "first_impression": "Clean and credible, and overnight missed calls are exactly my problem with overseas investors.",
+  "main_reason": "'Audio recording is off unless you turn it on' answered my consent worry in the About Ray strip, and since it is Canada only I joined the US list to hear the US date by 1 March 2027.",
+  "element_that_helped_most": "Audio recording is off unless you turn it on.",
+  "element_that_hurt_most": "Message USLIST on Instagram",
+  "confusion": [
+   "Having to paste a word into an Instagram message from a desktop to join a list",
+   "The brief says nothing was stored, so the list exists only if my message arrives"
+  ],
+  "missing": [
+   "Whether the AI announces recording at the start when recording is on, stated near the top",
+   "How callers outside the US and Canada are handled",
+   "A US price"
+  ],
+  "booking_fallback_reaction": "annoyed",
+  "design_score": 4,
+  "clarity_score": 5
+ },
+ {
+  "id": "P066",
+  "device": "desktop",
+  "furthest_point": "result",
+  "started_quiz": true,
+  "finished_quiz": true,
+  "quiz_path": "us-list",
+  "gave_contact_details": false,
+  "ticked_email_consent": false,
+  "outcome": "quiz only",
+  "seconds_on_page": 460,
+  "first_impression": "Calm, grown-up design; the headline is my inspection days.",
+  "main_reason": "My question got half an answer, 'the AI offers a callback and you get a text alert straight away', which is not reaching me live, and with Canada only the US list wanted an Instagram message I did not bother to send.",
+  "element_that_helped_most": "Yes. It says so at the start of the call.",
+  "element_that_hurt_most": "If a caller asks for a person, or it is urgent, it offers a callback and alerts you by text straight away.",
+  "confusion": [
+   "The handoff answer is inside the folded 'All 22 questions' and 'All 21 terms' rather than in the open rows",
+   "Joining the US list by Instagram message from a desktop"
+  ],
+  "missing": [
+   "A way for a caller to be put through to me live",
+   "How existing clients mid-deal are treated differently from new callers"
+  ],
+  "booking_fallback_reaction": "gave up",
+  "design_score": 4,
+  "clarity_score": 5
+ },
+ {
+  "id": "P067",
+  "device": "desktop",
+  "furthest_point": "result",
+  "started_quiz": true,
+  "finished_quiz": true,
+  "quiz_path": "agent",
+  "gave_contact_details": false,
+  "ticked_email_consent": false,
+  "outcome": "quiz only",
+  "seconds_on_page": 600,
+  "first_impression": "Better looking than most funnels in this niche, with pricing on the first screen, which is unusual.",
+  "main_reason": "I mapped the eight-answer first question, the four routes and the brief layouts with made-up answers, and I resell the same thing, so I am not booking.",
+  "element_that_helped_most": "The intake brief (Prepared for / Profile / Costing you most / What fixes it)",
+  "element_that_hurt_most": "The online calendar opens shortly.",
+  "confusion": [
+   "No lead capture at all: 'No email is asked for, and nothing is sent anywhere'",
+   "Booking is a copied word and an Instagram profile"
+  ],
+  "missing": [],
+  "booking_fallback_reaction": "fine",
+  "design_score": 4,
+  "clarity_score": 5
+ },
+ {
+  "id": "P068",
+  "device": "desktop",
+  "furthest_point": "founding",
+  "started_quiz": false,
+  "finished_quiz": false,
+  "quiz_path": "none",
+  "gave_contact_details": false,
+  "ticked_email_consent": false,
+  "outcome": "left",
+  "seconds_on_page": 105,
+  "first_impression": "Polished and clear; I knew what it was and what it cost in seconds.",
+  "main_reason": "The six founding terms I could see never say whether $300 covers my whole team's line or how calls route to four agents, and 'Canada only' is repeated beside the price.",
+  "element_that_helped_most": "$300 a month, no setup fee",
+  "element_that_hurt_most": "10 founding spots. 7 for real estate agents. 3 open now to mortgage brokers and to contractors and renovators. Canada only.",
+  "confusion": [
+   "Team pricing is hidden behind 'All 21 terms / 15 more'",
+   "'Team leaders' are named as a fit in the method section with no team price next to it"
+  ],
+  "missing": [
+   "Team pricing where the price is shown",
+   "Routing or round-robin between agents"
+  ],
+  "booking_fallback_reaction": "did not reach it",
+  "design_score": 4,
+  "clarity_score": 4
+ },
+ {
+  "id": "P069",
+  "device": "phone",
+  "furthest_point": "final cta",
+  "started_quiz": false,
+  "finished_quiz": false,
+  "quiz_path": "none",
+  "gave_contact_details": false,
+  "ticked_email_consent": false,
+  "outcome": "left",
+  "seconds_on_page": 330,
+  "first_impression": "Beautiful page, and Ray speaks Dari, so I came in hopeful.",
+  "main_reason": "The languages answer says 'Not promised today: Dari, Farsi', which is a plain no for today, and the price is Canadian with Canada only, so both of my conditions failed.",
+  "element_that_helped_most": "English is live today. Other languages are tested on your own line before you go live, and if one does not meet your standard you are not charged.",
+  "element_that_hurt_most": "Not promised today: Dari, Farsi, Punjabi, Mandarin, Cantonese, Urdu and Arabic.",
+  "confusion": [
+   "'Languages: English and Dari' in the About Ray strip is about Ray, not the AI, and I first read it as the product",
+   "'Ask Ray on the call which languages are available' when I cannot book a call from the US"
+  ],
+  "missing": [
+   "A yes or no on Dari today, near the top",
+   "A US price or date"
+  ],
+  "booking_fallback_reaction": "fine",
+  "design_score": 4,
+  "clarity_score": 4
+ },
+ {
+  "id": "P070",
+  "device": "phone",
+  "furthest_point": "ray",
+  "started_quiz": false,
+  "finished_quiz": false,
+  "quiz_path": "none",
+  "gave_contact_details": false,
+  "ticked_email_consent": false,
+  "outcome": "left",
+  "seconds_on_page": 40,
+  "first_impression": "Lovely page, and that headline was my whole last two years.",
+  "main_reason": "I start a salaried job in January, so '$300 a month' is a commitment I will not take on, and it is Canada only besides.",
+  "element_that_helped_most": "You were in a showing. Who answered your phone?",
+  "element_that_hurt_most": "$300 a month for the first 10 clients. No setup fee. Month to month.",
+  "confusion": [],
+  "missing": [],
+  "booking_fallback_reaction": "did not reach it",
+  "design_score": 4,
+  "clarity_score": 5
+ },
+ {
+  "id": "P071",
+  "device": "desktop",
+  "furthest_point": "result",
+  "started_quiz": true,
+  "finished_quiz": true,
+  "quiz_path": "founding-business",
+  "gave_contact_details": false,
+  "ticked_email_consent": false,
+  "outcome": "would buy after call",
+  "seconds_on_page": 520,
+  "first_impression": "Looks premium, and the first line under the button says mortgage brokers are open now.",
+  "main_reason": "'Also open now to mortgage brokers and to contractors and renovators: 3 founding spots, on the same terms' answered my only question, so I took the three-question intake and messaged NEXT to get the call where I dial it myself.",
+  "element_that_helped_most": "Also open now to mortgage brokers and to contractors and renovators: 3 founding spots, on the same terms.",
+  "element_that_hurt_most": "The online calendar opens shortly.",
+  "confusion": [
+   "No calendar: I had to switch to Instagram and paste a word to ask for a time, with no promised reply time",
+   "Only 3 spots are shared between mortgage brokers and contractors, with no count of how many are left",
+   "Punjabi and Hindi callers: Punjabi is 'not promised today'"
+  ],
+  "missing": [
+   "A calendar or a phone number to book",
+   "How many of the 3 spots remain",
+   "Whether prices include HST"
+  ],
+  "booking_fallback_reaction": "annoyed",
+  "design_score": 4,
+  "clarity_score": 5
+ },
+ {
+  "id": "P072",
+  "device": "phone",
+  "furthest_point": "result",
+  "started_quiz": true,
+  "finished_quiz": true,
+  "quiz_path": "founding-business",
+  "gave_contact_details": false,
+  "ticked_email_consent": false,
+  "outcome": "quiz only",
+  "seconds_on_page": 190,
+  "first_impression": "Elegant and calm, and I was glad to see mortgage brokers named at the top.",
+  "main_reason": "'No one at Next Level or Ray Homes contacts your callers or uses your contacts, and that is written in the agreement' eased my main fear, but $300 a month is heavy on 35 files and the brief only says other languages are 'tested on your own line first', so I am not messaging yet.",
+  "element_that_helped_most": "Your callers stay yours",
+  "element_that_hurt_most": "English is live today. Any other language is tested on your own line first.",
+  "confusion": [
+   "The reel was in Dari but the brief gives no yes or no on Dari",
+   "'Your data is stored in the United States, not in Canada' for newcomer clients"
+  ],
+  "missing": [
+   "A plain statement that Dari works on the phone",
+   "A cheaper plan for a small book"
+  ],
+  "booking_fallback_reaction": "fine",
+  "design_score": 4,
+  "clarity_score": 4
+ },
+ {
+  "id": "P073",
+  "device": "desktop",
+  "furthest_point": "method",
+  "started_quiz": false,
+  "finished_quiz": false,
+  "quiz_path": "none",
+  "gave_contact_details": false,
+  "ticked_email_consent": false,
+  "outcome": "left",
+  "seconds_on_page": 85,
+  "first_impression": "Professional and clear; I understood the offer at once.",
+  "main_reason": "My network's call centre already takes overflow under my franchise fees, and nothing down to 'Three steps. We set it up.' gives a reason to add an unapproved vendor.",
+  "element_that_helped_most": "",
+  "element_that_hurt_most": "The same founding terms as agents: $300 a month, no setup fee, price locked, 250 minutes included.",
+  "confusion": [],
+  "missing": [
+   "Anything on integrating with a mortgage network's systems",
+   "A reason to switch from an included franchise service"
+  ],
+  "booking_fallback_reaction": "did not reach it",
+  "design_score": 4,
+  "clarity_score": 5
+ },
+ {
+  "id": "P074",
+  "device": "desktop",
+  "furthest_point": "result",
+  "started_quiz": true,
+  "finished_quiz": true,
+  "quiz_path": "founding-business",
+  "gave_contact_details": false,
+  "ticked_email_consent": false,
+  "outcome": "quiz only",
+  "seconds_on_page": 560,
+  "first_impression": "Careful, well-made page, and the fine print is unusually candid.",
+  "main_reason": "Nothing says the AI will never quote a rate or take income details, 'Each call is transcribed' with data 'stored in the United States, not in Canada', and the only regulatory line is 'We confirm them for your location before you go live', so I read my brief and stopped.",
+  "element_that_helped_most": "asks the questions you choose",
+  "element_that_hurt_most": "Your data is stored in the United States, not in Canada.",
+  "confusion": [
+   "The sample call and every example are real estate; nothing shows a mortgage call",
+   "'Rules ... differ by province and state. We confirm them for your location' gives no BC answer"
+  ],
+  "missing": [
+   "A guarantee the AI never quotes rates or collects financial details",
+   "A BC regulatory statement for mortgage brokers",
+   "A privacy policy link"
+  ],
+  "booking_fallback_reaction": "fine",
+  "design_score": 4,
+  "clarity_score": 5
+ },
+ {
+  "id": "P075",
+  "device": "phone",
+  "furthest_point": "first screen",
+  "started_quiz": false,
+  "finished_quiz": false,
+  "quiz_path": "none",
+  "gave_contact_details": false,
+  "ticked_email_consent": false,
+  "outcome": "left",
+  "seconds_on_page": 15,
+  "first_impression": "Slick page, and it does say mortgage brokers at the top, so it is for me.",
+  "main_reason": "'$300 a month' is three times what I could spend, and my leads come by DM, not by phone.",
+  "element_that_helped_most": "FOR REAL ESTATE AGENTS, MORTGAGE BROKERS AND CONTRACTORS",
+  "element_that_hurt_most": "$300 a month for the first 10 clients. No setup fee. Month to month.",
+  "confusion": [
+   "The headline says 'You were in a showing', which is an agent's day, under a label that includes mortgage brokers"
+  ],
+  "missing": [],
+  "booking_fallback_reaction": "did not reach it",
+  "design_score": 4,
+  "clarity_score": 5
+ }
+]
