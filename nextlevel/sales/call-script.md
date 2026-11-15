@@ -124,8 +124,10 @@ One-line version, if they ask what it is in a sentence. PROPOSED, Ray to approve
 Stop. Let them answer.
 
 Then, only what Ray has approved:
-- [Ray to set: usage included or rebilled for the Founding 10]
-- [Ray to set: contract terms for the Founding 10]
+- "Usage is quoted on the call." Not decided yet whether it is included or billed on top. [Ray to set: usage included or rebilled for the Founding 10]
+- Founding terms (Approved by Ray, 2026-11-15): "There is no setup fee for the Founding 10. Your $300 a month stays locked for as long as your subscription is active. It is month to month. You can cancel before your next billing date, and we export your contacts for you."
+- Live in 7 days (Approved by Ray, 2026-11-15): "If you are not live within 7 days of sending us everything we need, your first month is not charged. That applies once, to the first month, and not when the delay is a carrier or registration approval outside our control."
+- What founders give back (Approved by Ray, 2026-11-15): "In return I ask for a short feedback call at day 14 and at day 30. I share your numbers only with your written permission."
 - "Agents who come after the first 10 will pay $500 for setup plus $400 a month." (Approved by Ray, 2026-11-15.)
 
 Never say: what they will earn, how many deals it will bring, or any figure that is not Ray's own and real.
@@ -147,7 +149,7 @@ If they are still unsure: "Call the demo line yourself tonight. Try to trip it u
 Listen. It is usually one of three:
 
 - **Is it worth it?** "You told me you get about {{their number}} new calls a week and you miss some. I cannot promise you what those calls are worth. You know your business. What is one answered call worth to you?" Let them do the math. Do not do it for them.
-- **Will it work for me?** "That is what the first 14 days are for. We listen to your real calls with you on day 3 and day 14 and fix what is off." If Ray approves the live-in-7-days commitment in `offer.md`, state its exact terms here.
+- **Will it work for me?** "That is what the first 14 days are for. We listen to your real calls with you on day 3 and day 14 and fix what is off." Then state the live-in-7-days commitment in its exact terms (Approved by Ray, 2026-11-15): "If you are not live within 7 days of sending us everything we need, your first month is not charged. That applies once, to the first month, and not when the delay is a carrier or registration approval outside our control."
 - **I need to ask my broker or partner.** "Good idea. Shall we book a short call with them on the line?" Book it before hanging up.
 
 Do not push. Do not invent a deadline. If the founding places are nearly gone, say the true number.
@@ -193,6 +195,7 @@ Say this at the end of every yes.
 - **By day 7:** you are live. Calls you do not pick up are answered and booked.
 - **Day 3 after go-live:** we listen to your first real calls and tune it.
 - **Day 14:** we review your numbers together.
+- **Day 30:** a short feedback call.
 
 Before you go live we confirm the call recording and AI disclosure rules for your province or state. [Ray to confirm with counsel]
 

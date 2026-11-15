@@ -177,9 +177,14 @@ We are opening Next Level to 10 agents first. It is open now.
 
 **The founding price: $300 a month.**
 
-[Ray to set: usage included or rebilled for the Founding 10]
+Usage is quoted on the call. [Ray to set: usage included or rebilled for the Founding 10]
 
-[If Ray approves the founding terms in `offer.md`, add here: no setup fee, price locked while you stay, month to month.]
+**Founding terms** (Approved by Ray, 2026-11-15)
+- No setup fee for the Founding 10.
+- Your $300 a month stays locked while your subscription is active.
+- Month to month. Cancel before your next billing date. Your contacts are exported for you when you leave.
+- Live within 7 days of the day we have everything we need from you, or your first month is not charged. This applies once per client, to the first month only, and not when the delay is a carrier or registration approval outside our control.
+- In return: a short feedback call at day 14 and at day 30. Your numbers are shared only with your written permission.
 
 **Why 10:** [Ray to confirm: the real reason for the cap of 10. PROPOSED wording, Ray to approve: "Ray is involved in every founding setup and reviews the early calls himself. That only works with a small group."]
 
@@ -207,7 +212,7 @@ Your business details, your hours and areas, the questions you want asked, calen
 No. Your number forwards to the receptionist when you do not pick up.
 
 **Is there a contract?**
-[Ray to set: contract terms for the Founding 10]
+It is month to month. You can cancel before your next billing date, and we export your contacts for you. (Approved by Ray, 2026-11-15.)
 
 **What does it cost after the Founding 10?**
 Founders pay $300 a month. After the Founding 10, Next Level Answer is $500 for setup plus $400 a month, in Canadian dollars. (Approved by Ray, 2026-11-15.)

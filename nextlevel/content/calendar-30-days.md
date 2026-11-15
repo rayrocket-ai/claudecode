@@ -118,7 +118,7 @@ Start date: [Ray to set: the Monday the calendar starts]. Day 1 is a Monday.
 | 27a | H36 | [Ray to confirm: which languages the voice agent handles today] |
 | 27b | H47 | [Ray to confirm: which CRMs, if any, are supported at launch] |
 | 28a | H37 | [Ray to add: real number from Ray Homes] |
-| 29b | H48 | Ray's approval of the PROPOSED Founding 10 terms in `offer.md` section 6 |
+| 29b | H48 | Nothing more on terms: the Founding 10 terms in `offer.md` section 6 are approved by Ray, 2026-11-15 |
 | 6b | H29 | Ray's own call log with names hidden, or film it as a live demonstration |
 | Every DEMO row | | [Ray to add: demo line number, if Ray wants it public] |
 | Every Business row | | [Ray to confirm: waitlist opt-in form link] |

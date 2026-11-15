@@ -104,7 +104,7 @@ Notes for the desk:
 - H41 is perspective only. The piece says the rules differ by province and state and that Ray confirms them for each client's location. It gives no legal advice. [Ray to confirm with counsel]
 - H42 states a price. $300 a month is the Founding 10 price in `offer.md`. The approval message must list it under "NEEDS RAY'S OK ON FIGURES".
 - H47 cannot be filmed until Ray answers: [Ray to confirm: which CRMs, if any, are supported at launch]
-- H48 depends on the PROPOSED month-to-month terms in `offer.md` section 6. Not publishable until Ray approves them.
+- H48 depends on the month-to-month terms in `offer.md` section 6. Those terms are approved by Ray, 2026-11-15. The piece states them only in the words of that section.
 
 ## Pillar 5: Beyond Real Estate
 

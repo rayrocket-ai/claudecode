@@ -8,12 +8,13 @@ Nothing in this folder is live. Every page, email, text and script here is a dra
 
 Questions for Ray. Each one stays a placeholder in the files until he answers.
 
-1. Founding 10 usage: is phone, SMS and AI usage included in the $300 a month, or billed on top?
-2. Does Ray approve the live-in-7-days commitment as written in `offer.md` section 6?
-3. Legal business name and mailing address for Next Level (needed in every footer and email under CASL).
-4. Trademark check on "Next Level", Canada and US.
-5. Stripe verification.
-6. Legal and licence checks already flagged:
+1. Founding 10 usage: is phone, SMS and AI usage included in the $300 a month, or billed on top? Until Ray decides, copy says usage is quoted on the call.
+2. Legal business name and mailing address for Next Level (needed in every footer and email under CASL).
+3. Calendar booking link for the 15-minute call.
+4. HighLevel webhook address for the sales page quiz.
+5. Trademark check on "Next Level", Canada and US.
+6. Stripe verification.
+7. Legal and licence checks already flagged:
    - CASL basis for the missed-call audit email.
    - Separate entity for Next Level, and eXp sign-off.
    - Repliers licence for client accounts.
@@ -27,7 +28,23 @@ Questions for Ray. Each one stays a placeholder in the files until he answers.
 - **Who sells.** Ray is the seller and the closer on every call for now. Nadiya later.
 - **Proof.** Ray Homes is the proof for now. The Founding 10 opens now, on Ray's own track record and a live demo of the system running on Ray Homes.
 - **Main marketing goal.** Inbound. Businesses and agents reach out to Next Level because of content on every platform. See `content/`.
-- **HighLevel sub-account.** Ray reports it is created and is called "next level".
+- **HighLevel sub-account.** Verified: name "Next Level", location ID n0qwGpNQ3CShe8AIhyI0 (seen in HighLevel's notices to Ray's inbox on 2026-11-15).
+- **Founding 10 terms.** Approved by Ray, 2026-11-15, as proposed. No setup fee for founders. The $300 a month price stays locked while the subscription is active. Month to month, cancel before the next billing date, contacts exported on exit. Live within 7 days of the client supplying everything needed, or the first month is not charged (once per client, first month only, not for carrier or registration delays). Feedback calls at day 14 and day 30. A client's numbers are shared only with written permission. See `offer.md` section 6.
+- **NL Demo sub-account.** Approved by Ray, 2026-11-15. A demo sub-account named "NL Demo" with made-up contacts only. See `saas-build-spec.md` section 2a. Creating it is a step in `ghl-location-setup.md`.
+- **Secondary channels.** Approved by Ray, 2026-11-15, managed in Slack. Agents Ray knows, rooms where agents gather, and partners are kept. They are run through Slack, with Viktor (the Slack assistant that holds the HighLevel connection) managing the HighLevel side under its propose-only rule. See `offer.md` section 1.
+- **Welcome video.** Ray chose an AI-made video for new clients. The script is a draft for his approval: `onboarding/welcome-video-script.md`.
+
+## Check
+
+- A contact import ran into the "Next Level" sub-account on 2026-11-15. HighLevel reported 88% deliverable and 10% high risk.
+- Ray Homes consumer contacts must not be emailed about Next Level.
+- Ray to say which list it was. Until he does, no email or text goes to those contacts from this sub-account.
+
+## Slack
+
+- Next Level approvals are posted in #nextlevel-approvals (private channel, id C0CHSJFA146). Ray Homes content stays in #agent-marketing. A piece goes to exactly one of them.
+- Next Level stays in the same Slack workspace as Ray Homes for now, because the connections and Viktor live there.
+- Revisit a separate workspace when Next Level has its own staff.
 
 ## What Next Level is
 
@@ -90,6 +107,7 @@ This rule decides the build order below. It also decides what the "for businesse
 | `offer.md` | The offer: who, problem, promise, product ladder, founding terms, approved prices, objections. | Ray, Nadiya later |
 | `saas-build-spec.md` | How it is built in HighLevel: SaaS mode, the sales sub-account, the master snapshot, onboarding, retention, weekly numbers. | Ray, Diana, builder |
 | `ghl-location-setup.md` | Numbered steps to create the "Next Level" sub-account and connect it. | Ray or Diana |
+| `onboarding/welcome-video-script.md` | Script, on-screen text, shot list and production notes for the AI-made welcome video. DRAFT for Ray's approval. | Ray, Diana |
 | `content/` | Inbound content for every platform. The primary lead source. | Ray, Diana |
 | `sales/funnel-copy.md` | The smart sales page: headlines, quiz, result blocks, offer, FAQ, call to action. | Ray, builder |
 | `sales/page/` | The built sales page. | Ray, builder |
@@ -118,15 +136,15 @@ What changed in these files (each change is marked "Added from the course notes,
 | `sales/call-script.md` | First-contact rule, pre-call brief, what to listen for, the after-hours question, the one-line version, three short objection answers, the after-call summary step, the script review. |
 | `sales/follow-up-emails.md` | Three one-off emails: after-call summary, lead magnet delivery, the day after meeting in person. |
 
-Nothing approved was changed: brand, platform, product names, prices, who sells, the proof and the inbound-first plan all stand. Every addition that is a suggestion is marked `PROPOSED, Ray to approve`.
+Nothing approved was changed: brand, platform, product names, prices, who sells, the proof and the inbound-first plan all stand. Every addition that is a suggestion is marked `PROPOSED, Ray to approve`. Since then Ray has approved the secondary channels and the NL Demo sub-account (see "Decided by Ray, 2026-11-15").
 
-New questions for Ray from this work are in `learning/open-questions.md`. The main ones: approve or cut the secondary channels, approve the NL Demo sub-account, set the script review numbers, and confirm with counsel the consent basis for any message to a person who has not asked.
+New questions for Ray from this work are in `learning/open-questions.md`. The main ones still open: set the script review numbers, and confirm with counsel the consent basis for any message to a person who has not asked.
 
 ## Build order
 
 1. **Unblock.** Stripe verification. Legal name and mailing address for Next Level. Trademark check on the name in Canada and the US.
 2. **Show the proof.** Keep the AI receptionist running on Ray Homes and keep the demo line ready for every call. The Founding 10 opens now. Collect the real system numbers as they come in.
-3. **Finish the sales sub-account.** Ray reports step 1 (create it) is done. The remaining steps in `ghl-location-setup.md` still apply.
+3. **Finish the sales sub-account.** Step 1 (create it) is verified: "Next Level", location ID n0qwGpNQ3CShe8AIhyI0. The remaining steps in `ghl-location-setup.md` still apply, including creating the NL Demo sub-account.
 4. **Build the master snapshot.** Follow `saas-build-spec.md`. Build it on Ray Homes first, then save it as the snapshot.
 5. **Build the sales machine.** Sales page and quiz, follow-up workflows, booking calendar, checkout.
 6. **Publish inbound content.** Content on every platform, so businesses and agents reach out. See `content/`. This is the primary lead source.
@@ -153,11 +171,17 @@ Optional, any time after step 5: the missed-call audit. 20 GTA agents, weekdays 
 | Who sells | Decided by Ray, 2026-11-15 | Ray | Ray is the seller and the closer on every call for now. Nadiya later. |
 | Proof that opens the Founding 10 | Decided by Ray, 2026-11-15 | Ray | Opens now, on Ray's track record and a live demo on Ray Homes. |
 | Main marketing goal | Decided by Ray, 2026-11-15 | Ray | Inbound content on every platform. See `content/`. |
-| "Next Level" sub-account in HighLevel | Created by Ray on 2026-11-15, not yet verified from here; send the location ID, funnel link and calendar link | Ray or Diana | Ray calls it "next level". Remaining steps are in `ghl-location-setup.md`. |
+| "Next Level" sub-account in HighLevel | **Verified, 2026-11-15** | Ray or Diana | Name "Next Level", location ID n0qwGpNQ3CShe8AIhyI0, seen in HighLevel's notices to Ray's inbox on 2026-11-15. Funnel link and calendar link still to send. Remaining steps are in `ghl-location-setup.md`. |
+| Contact import into the "Next Level" sub-account | **Check** | Ray | Ran on 2026-11-15. HighLevel reported 88% deliverable, 10% high risk. Ray to say which list it was. Ray Homes consumer contacts must not be emailed about Next Level. |
+| NL Demo sub-account | **Approved by Ray, 2026-11-15**, not created yet | Ray or Diana | Made-up contacts only. Step in `ghl-location-setup.md`. |
+| Secondary channels | **Approved by Ray, 2026-11-15, managed in Slack** | Ray, with Viktor | Viktor manages the HighLevel side under its propose-only rule. See `offer.md` section 1. |
+| Welcome video for new clients | Draft script, waiting on Ray | Ray | AI-made video. Script in `onboarding/welcome-video-script.md`. Made only after Ray approves the script in Slack with the clapper reaction. |
+| Next Level approvals in Slack | Done | Ray | #nextlevel-approvals, id C0CHSJFA146. Same workspace as Ray Homes for now. |
+| Calendar booking link and HighLevel webhook address | Waiting on Ray | Ray or Diana | See "Still open" |
 | Stripe verification | **Blocked** | Ray | Blocks every SaaS sale and the checkout link |
 | System metrics from Ray Homes | Waiting on Ray | Ray | Every "[Ray to add: real number from Ray Homes]" in these files. Does not block the Founding 10: the copy leads with the track record and the live demo. |
-| Founding 10 usage: included or billed on top | Waiting on Ray | Ray | See "Still open" |
-| Live-in-7-days commitment | Waiting on Ray | Ray | Terms drafted in `offer.md` section 6. Not to be published until approved. |
+| Founding 10 usage: included or billed on top | Waiting on Ray | Ray | See "Still open". Copy says usage is quoted on the call. |
+| Founding 10 terms, including the live-in-7-days commitment | **Approved by Ray, 2026-11-15** | Ray | Exact terms in `offer.md` section 6. Copy states them only as written there. |
 | Trademark check on "Next Level", Canada and US | **Blocked** (not checked) | Ray, with counsel | Do this before paid ads, a domain or printed material |
 | Business name and mailing address for Next Level | Waiting on Ray | Ray | Needed in every email under CASL |
 | Call recording and AI disclosure rules per province or state | Waiting on Ray | Ray, with counsel | Needed before any client goes live |
@@ -167,7 +191,7 @@ Optional, any time after step 5: the missed-call audit. 20 GTA agents, weekdays 
 
 - No invented results, testimonials, client counts, rates or prices. The only set prices are $300 a month for the Founding 10 AI receptionist and the approved ladder in `offer.md` section 7.
 - The only track-record facts to state are the six listed under "The proof we lead with".
-- No income or earnings claims. No guarantees unless Ray approves the exact terms.
+- No income or earnings claims. No guarantees unless Ray approves the exact terms. The one approved commitment is live in 7 days or the first month is not charged, stated only with its exact terms from `offer.md` section 6.
 - CASL applies to every email and text.
 - Nothing is sent, published or changed in HighLevel without Ray's approval.
 - Markers used in these files:

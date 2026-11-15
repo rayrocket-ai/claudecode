@@ -1,6 +1,8 @@
 # Create the "Next Level" sub-account in HighLevel
 
-**Status, 2026-11-15:** Ray reports step 1 on the done checklist (create the sub-account) is done, and the sub-account is called "next level". It is not yet verified from here. The remaining steps still apply. If the sub-account exists, skip Part A steps 3 to 9, open it, and check its details in Part B.
+**Status, 2026-11-15:** Step 1 on the done checklist (create the sub-account) is verified. The sub-account is named "Next Level", location ID n0qwGpNQ3CShe8AIhyI0, seen in HighLevel's notices to Ray's inbox on 2026-11-15. Skip Part A steps 3 to 9, open it, and check its details in Part B. The remaining steps still apply.
+
+**Check before any send:** a contact import ran into this sub-account on 2026-11-15 (HighLevel reported 88% deliverable, 10% high risk). Ray to say which list it was. Ray Homes consumer contacts must not be emailed about Next Level.
 
 For Ray or Diana. Work top to bottom. Allow about one sitting, plus waiting time for domain and registration approvals.
 
@@ -45,7 +47,7 @@ Have these ready:
 12. Click "Business Profile". [verify menu name]
 13. Upload the Next Level logo.
 14. Check the name, address, phone, email and time zone. Fix anything wrong.
-15. Find the Location ID on this page and copy it. You will send it back at the end. [verify menu name]
+15. Find the Location ID on this page and check it reads n0qwGpNQ3CShe8AIhyI0. If it differs, tell Ray. [verify menu name]
 16. Click "Update" or "Save" in each section you changed. [verify menu name]
 
 ## Part C. Phone number
@@ -127,9 +129,21 @@ Do this only when the Next Level sales snapshot exists. If it does not exist yet
 69. Book a test slot on the 15-minute calendar. Check it lands on Ray's calendar. Cancel it.
 70. Find the funnel in "Sites" > "Funnels" and copy its link, if the snapshot has been loaded. [verify menu name]
 
+## Part J. The NL Demo sub-account
+
+Approved by Ray, 2026-11-15. For Ray or Diana. What it is for is in `saas-build-spec.md` section 2a.
+
+71. Switch to the agency view. Click "Sub-Accounts", then "Create Sub-Account". [verify menu name]
+72. If the Next Level master snapshot exists, choose it. If it does not exist yet, choose the blank option and load the snapshot later, as in Part G. [verify menu name]
+73. Name it "NL Demo". Time zone: Eastern (Toronto). Country: Canada. Leave any SaaS plan field empty.
+74. Add made-up contacts only. No real person's name, number, email or call goes into this sub-account. Do not import any list into it.
+75. Label every made-up record "sample".
+76. Do not buy a phone number or connect a sending domain for it unless Ray asks. Nothing is sent from NL Demo to a real person.
+77. Add Ray and Diana as Admin users.
+
 ## Done checklist
 
-- [ ] 1. Next Level sub-account exists and opens. (Reported done by Ray, 2026-11-15. Tick once seen on screen.)
+- [x] 1. Next Level sub-account exists. (Verified 2026-11-15: name "Next Level", location ID n0qwGpNQ3CShe8AIhyI0.)
 - [ ] 2. Business profile complete: name, address, logo, time zone.
 - [ ] 3. Phone number bought, named and ringing through.
 - [ ] 4. Messaging registration filed (status: filed or approved).
@@ -139,6 +153,8 @@ Do this only when the Next Level sales snapshot exists. If it does not exist yet
 - [ ] 8. "Next Level 15-minute call" calendar live and tied to Ray's calendar.
 - [ ] 9. Snapshot loaded, pipeline stages correct, all workflows still off (or marked "snapshot not built yet").
 - [ ] 10. Ray, Diana and Nadiya can each log in.
+- [ ] 11. NL Demo sub-account created by Ray or Diana: named "NL Demo", made-up contacts only, every record labelled "sample". (Approved by Ray, 2026-11-15.)
+- [ ] 12. Ray has said which list was imported into this sub-account on 2026-11-15, and no Ray Homes consumer contact is set to receive Next Level email.
 
 ## Send these back to Ray
 
@@ -146,11 +162,13 @@ Paste into one message. No client names, phone numbers or emails.
 
 | Item | Value |
 |---|---|
-| Location ID | |
+| Location ID | n0qwGpNQ3CShe8AIhyI0 (verified 2026-11-15) |
 | Funnel URL (sales page) | |
 | Calendar link (15-minute call) | |
 | Checkout link (Founding 10) | Blocked until Stripe verification |
 | Next Level phone number | |
 | Sending domain and from address | |
 | Messaging registration status | |
+| NL Demo sub-account created (yes or no) | |
+| Which list was imported on 2026-11-15 | |
 | Anything that did not match these steps | |

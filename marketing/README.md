@@ -26,6 +26,7 @@ Weekdays 7:52  Morning brief                one page: what worked, what's booked
 | Email sequences, win-back, lead magnets (drafts) | `marketing/email/` |
 | Posts, leads, deals | Airtable base "Real Estate Marketing Platform": MOS Posts, MOS Leads, MOS Deals |
 | Approvals and interrupts | Slack #agent-marketing |
+| Next Level approvals | Slack #nextlevel-approvals (private, id C0CHSJFA146). A piece goes to one channel only. |
 | Scheduling and post analytics | Metricool brand "rayahmadi" |
 | Leads, email sending, consent | HighLevel, through Viktor |
 | Meta lead ads | Ad Advisor, read only |

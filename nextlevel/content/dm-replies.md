@@ -175,7 +175,7 @@ That helps. The fastest way to see if this fits is 15 minutes with me. I will ca
 
 If they ask the price:
 The first 10 agents pay $300 a month. I will go through what that includes on the call: [Ray to confirm: 15-minute call booking link]
-(Only this price may be stated. Anything about setup fees, usage, contract length or the price after the first 10 is answered on the call, by Ray, once he has approved those terms in `offer.md`.)
+(Only this price may be stated in a first reply. If they ask about terms: the founding terms in `offer.md` section 6 are approved by Ray, 2026-11-15, and may be given in those exact words: no setup fee for founders, month to month, cancel before the next billing date. Usage is quoted on the call. The price after the first 10 is answered on the call, by Ray.)
 
 **5. If they say no**
 Understood. Keep the plan. If the timing changes, send me a message and we will pick it up from there.

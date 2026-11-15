@@ -21,7 +21,7 @@ The main goal for marketing is inbound. Businesses and agents reach out to Next 
 
 The missed-call audit is a secondary, optional tactic (see `sales/missed-call-audit.md`). Business owners outside real estate who reach out join the waitlist below until their industry opens.
 
-**Secondary channels, from the course notes. PROPOSED, Ray to approve.** Inbound stays the main source. These sit beside it. Drafts are in `learning/content-additions.md`.
+**Secondary channels, from the course notes. Approved by Ray, 2026-11-15, managed in Slack.** Inbound stays the main source. These sit beside it. Drafts are in `learning/content-additions.md`. They are run through Slack: Viktor, the Slack assistant that holds the HighLevel connection, manages the HighLevel side under its propose-only rule, so nothing changes in HighLevel until Ray approves it. The conditions in the table still apply.
 
 | Channel | How Next Level uses it | Condition |
 |---|---|---|
@@ -154,19 +154,23 @@ For Next Level Answer (the rung on sale to the Founding 10 now):
 - The Founding 10 opens now, on Ray's own track record and a live demo of the system running on Ray Homes.
 - Ray is the seller and the closer on every call for now.
 
-**PROPOSED, Ray to approve**
+**Founding terms. Approved by Ray, 2026-11-15**
 
 - No setup fee for the Founding 10. Reasoning: the Blueprint says setup fee plus monthly applies after the founding 10.
 - The $300 price stays locked for as long as the subscription stays active. Reasoning: it gives founders a reason to stay and supports the churn goal.
-- Month to month. Cancel any time before the next billing date.
+- Month to month. Cancel any time before the next billing date. On exit, the client's contacts are exported for them.
 - The 7 days start when the agent has supplied everything in section 9, not at payment. Reasoning: the clock should not run on the client's delay.
-- In return, founders agree to a short feedback call at day 14 and at day 30, and may be asked for written permission to share their numbers. Sharing is their choice.
+- Live-in-7-days commitment: if the receptionist is not live 7 days after the agent supplied everything in section 9, the first month is not charged. Exact terms: applies once per client, applies only to the first month, does not apply when the delay is a carrier or registration approval outside Next Level's control.
+- In return, founders agree to a short feedback call at day 14 and at day 30.
+- A founder's numbers are shared only with their written permission. Sharing is their choice.
+
+**PROPOSED, Ray to approve**
+
 - At day 30, founders may also be asked for a short review in their own words, or to take part in a written case study. It is their choice and never a condition of the founding price. Nothing is published without their written permission. (Added from the course notes, 2026-11-15.)
-- Live-in-7-days commitment: if the receptionist is not live 7 days after the agent supplied everything in section 9, the first month is not charged. Exact terms: applies once per client, applies only to the first month, does not apply when the delay is a carrier or registration approval outside Next Level's control. PROPOSED, Ray to approve. Not to be published until approved.
 
 **Open**
 
-- Usage (phone minutes, texts, AI minutes): included in the $300 or rebilled on top? [Ray to set: usage included or rebilled for the Founding 10]
+- Usage (phone minutes, texts, AI minutes): included in the $300 or rebilled on top? Not decided. Until it is, copy says usage is quoted on the call. [Ray to set: usage included or rebilled for the Founding 10]
 - Taxes on the $300 (HST for Ontario clients and others): [Ray to confirm with his accountant]
 
 ## 7. Price ladder after the Founding 10
@@ -240,7 +244,7 @@ The rules on recording and on telling callers they are speaking with an AI diffe
 It runs in its own HighLevel account that we set up for you. What connects to your current CRM: [Ray to confirm: which CRMs, if any, are supported at launch].
 
 **"What if I want out?"**
-PROPOSED, Ray to approve: month to month, cancel before the next billing date. Your contacts are yours and we export them for you.
+Month to month, cancel before the next billing date. Your contacts are yours and we export them for you. (Approved by Ray, 2026-11-15.)
 
 **"You are a broker. Are you going to take my leads?"**
 No. Your sub-account is yours. Ray's team does not work your contacts. [Ray to confirm: put this in the client agreement]
@@ -281,4 +285,4 @@ What this confirms:
 
 ## Next step
 
-Sections 4 and 7 are approved by Ray, 2026-11-15. Ray reviews section 6 and marks each remaining PROPOSED line approve, change or cut, and answers the two open founding questions: usage included or billed on top, and the live-in-7-days commitment.
+Sections 4 and 7 are approved by Ray, 2026-11-15. The founding terms in section 6, including the live-in-7-days commitment, are approved by Ray, 2026-11-15. Ray marks each remaining PROPOSED line approve, change or cut, and answers the open founding question: usage included or billed on top.

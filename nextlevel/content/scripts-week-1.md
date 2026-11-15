@@ -523,7 +523,7 @@ I did not want software. I wanted my calls answered.
 - Live 7 days after you have supplied everything.
 Comment PLAN for the day-by-day.
 
-Note for the desk: "live in 7 days" is the promise in `offer.md`. The first-month commitment in section 6 is PROPOSED and must not be mentioned until Ray approves it.
+Note for the desk: "live in 7 days" is the promise in `offer.md`. The first-month commitment in section 6 is approved by Ray, 2026-11-15. This script does not state it. If a later piece does, it uses the exact terms of that section.
 
 ### S14. Call your own number tonight
 

@@ -91,7 +91,7 @@ Four, each with one keyword. Names are PROPOSED, Ray to approve.
 | 1 | **The Evening Line Test** | AUDIT | The free missed-call audit. We call the agent's business line once on a weekday evening and send back exactly what happened: rings, voicemail, callback time. Method is in `sales/missed-call-audit.md`. | Agents | Approval of the audit checks in that file. [Ray to confirm with counsel: the calling and consent checks in missed-call-audit.md] |
 | 2 | **The Front Desk Script** | SCRIPT | A one-page PDF: the questions Ray's receptionist asks every caller, in order, and why each one is there. Usable by a human assistant too. | Agents and business owners | The final question list from Ray's live agent. [Ray to add: the current receptionist question list] |
 | 3 | **The Live Line** | DEMO | The demo phone number, plus a short card: five things to try on the call to test it properly. | Agents and business owners | [Ray to add: demo line number, if Ray wants it public] |
-| 4 | **The 7-Day Go-Live Plan** | PLAN | A one-page checklist: what an agent supplies, what happens each day, and what is tested before the line goes live. Built from sections 5 and 9 of `offer.md`. | Agents close to deciding | Approval of the PROPOSED terms in `offer.md` section 6. |
+| 4 | **The 7-Day Go-Live Plan** | PLAN | A one-page checklist: what an agent supplies, what happens each day, and what is tested before the line goes live. Built from sections 5 and 9 of `offer.md`. | Agents close to deciding | Nothing more on terms: the founding terms in `offer.md` section 6 are approved by Ray, 2026-11-15. |
 
 One more keyword that is not a lead magnet:
 
@@ -180,4 +180,4 @@ What is not a goal: views and followers. They are watched, not chased. A video w
 
 ## Prices in content (updated 2026-11-15)
 
-Ray approved the full price ladder on 2026-11-15. Content may state the Founding 10 price ($300 a month for Next Level Answer) and, where a piece needs it, the standard prices exactly as written in `nextlevel/offer.md`. No other price, discount or term appears in any piece. Usage costs are "quoted on the call" until Ray decides whether usage is included.
+Ray approved the full price ladder on 2026-11-15. Content may state the Founding 10 price ($300 a month for Next Level Answer) and, where a piece needs it, the standard prices exactly as written in `nextlevel/offer.md`. The founding terms approved by Ray on 2026-11-15 (no setup fee, price locked while the subscription is active, month to month, the live-in-7-days commitment) may be stated, only in the exact words of `offer.md` section 6. No other price, discount or term appears in any piece. Usage costs are "quoted on the call" until Ray decides whether usage is included.

@@ -9,7 +9,7 @@ a. Google Drive: the newest Google Doc titled "rayrocket content pack <date>" fr
 b. Google Drive: video files whose title starts with "POST " modified in the last 3 days. Write each caption in the caption format, using the matching script from the newest "Video coach <date>" doc when the topic matches.
 c. Wednesdays only: write the weekly market email (under 200 words, one topic, one sourced number, one next step) from the newest "rayrocket content brief" doc, following channels/linkedin-email and compliance/casl-email. Also save it as a Gmail DRAFT with no recipients (subject line as written, body as written) so the approved copy is ready to paste into HighLevel, and put "Gmail draft saved" in the row's Notes. Create the draft only. Never send it.
 d. Listings: on every run, read the MOS Listings rows (table tbloRzlbuiL9QuLWg) with Status Priority or Active. For each one, draft at most ONE new listing piece per run: the next unposted line of that listing's 14-day plan in marketing/listings/<slug>.md. Skip any angle that already has a MOS Posts row for that slug. Title format: "<run date> <Format>: <slug> <angle>". Use only the facts in the listing's row and in knowledge/offer/active-listings; a missing fact is [Ray to confirm: ...]. Buyer-facing pieces carry no price and no address, and the one call to action is the listing keyword; only agent-to-agent pieces may name the address, MLS number, price and bonus, and a bonus line is dropped after its deadline. Never draft for a listing whose Status is Sold, Conditional or Off market. A listing with no kit file gets no piece; say so in the final message. Paid ads belong to ADMAX: never touch an ad platform.
-e. Next Level: on every run, draft at most ONE Next Level piece from nextlevel/content/calendar-30-days.md (the next unused day), using the matching script in nextlevel/content/scripts-week-1.md or the matching hook in nextlevel/content/hooks.md. Audience "Agent", or the business lane where the calendar says so. Title format: "<date> <Format>: nextlevel <topic>". Send it for approval like any other piece. Never promise results, and never state a price other than those in nextlevel/offer.md. Ray's own listing content still comes first when the per-run cap is reached.
+e. Next Level: on every run, draft at most ONE Next Level piece from nextlevel/content/calendar-30-days.md (the next unused day), using the matching script in nextlevel/content/scripts-week-1.md or the matching hook in nextlevel/content/hooks.md. Audience "Agent", or the business lane where the calendar says so. Title format: "<date> <Format>: nextlevel <topic>". Send it for approval like any other piece, but post it in #nextlevel-approvals (C0CHSJFA146), not in #agent-marketing; everything else goes in #agent-marketing. The row's Notes field records which channel: "channel: C0CHSJFA146" for a Next Level piece, "channel: C0CHP38H7NZ" for every other piece. Never promise results, and never state a price other than those in nextlevel/offer.md. Ray's own listing content still comes first when the per-run cap is reached.
 
 Skip any piece that already has a MOS Posts row with the same Title. Title format: "<YYYY-MM-DD> <Format>: <topic>", where the date is the source doc's date (the content pack date, or the video file's date).
 Drive search matches loosely: keep only real video files whose title begins with "POST " in capitals.
@@ -29,10 +29,10 @@ Decisions that came up on the first run:
 For a carousel that passed, create a Canva design from the slide text using Ray's brand kit if one exists (list brand kits first). Put the link on the row. Design creation is a job: start it, wait about 20 seconds, then check it up to three times. If there is no brand kit, use a plain layout and say so. An Instagram caption post needs one image: make a single-slide Canva design from its hook line the same way. If Canva fails, continue with text only and say so in the Slack message.
 
 ## Step 4. Save
-One MOS Posts row per piece: Title, Status "Draft", Format, Channels, Audience, Language, Topic, Hook, Caption, Body, CTA, Media URL (Drive link for videos), Canva design, Source doc, Compliance check.
+One MOS Posts row per piece: Title, Status "Draft", Format, Channels, Audience, Language, Topic, Hook, Caption, Body, CTA, Media URL (Drive link for videos), Canva design, Source doc, Compliance check, and in Notes the channel line from Step 5.
 
 ## Step 5. Ask for approval
-For each PASS piece post ONE message in #agent-marketing, save its timestamp in "Slack ts", set Status "Waiting approval":
+For each PASS piece post ONE message, save its timestamp in "Slack ts", set Status "Waiting approval". Next Level pieces are posted in #nextlevel-approvals (C0CHSJFA146), everything else in #agent-marketing (C0CHP38H7NZ). A piece goes to exactly one channel. Record which one in the row's Notes field as a line "channel: C0CHSJFA146" or "channel: C0CHP38H7NZ". The message:
 
     (robot emoji) APPROVAL NEEDED: <Title>
     Channels: <channels> | Audience: <segment> | Language: <language>
@@ -44,7 +44,7 @@ For each PASS piece post ONE message in #agent-marketing, save its timestamp in 
     ---
     React with a check mark to approve, an x to reject, or reply in this thread with changes.
 
-FAIL piece: Status "Blocked compliance", and one message starting with the robot emoji and "INTERRUPT: blocked draft" naming the piece, the rule and what Ray must supply.
+FAIL piece: Status "Blocked compliance", and one message in that piece's channel starting with the robot emoji and "INTERRUPT: blocked draft" naming the piece, the rule and what Ray must supply.
 Dari longer than two sentences: add the line "Ray to review Dari".
 
 ## Final message

@@ -76,9 +76,9 @@ It holds:
 
 ## 2a. The NL Demo sub-account
 
-PROPOSED, Ray to approve. Added from the course notes, 2026-11-15.
+Approved by Ray, 2026-11-15. Added from the course notes, 2026-11-15. Ray or Diana creates it: see Part J and the done checklist in `ghl-location-setup.md`.
 
-- A third sub-account, cloned from the master snapshot, holding made-up contacts only. No real person's name, number or call is in it.
+- A third sub-account, named "NL Demo", cloned from the master snapshot, holding made-up contacts only. No real person's name, number or call is in it.
 - Use: Ray shares this screen on the 15-minute call to show the pipeline, a call summary and the monthly report. The live call to the receptionist still goes to the real line.
 - Why: showing the Ray Homes account on a shared screen puts real callers' names and numbers in front of a stranger. Ray Homes numbers can still be read out or shown as totals with contact details off screen.
 - Label every made-up record "sample" so nobody mistakes it for a result.
@@ -312,14 +312,14 @@ All prices in Canadian dollars. Product names and prices: Approved by Ray, 2026-
 
 - Rebilling needs Stripe connected and a card on file in each sub-account. Blocked until Stripe verification.
 - Each sub-account has a prepaid balance that refills. Set the starting amount and refill amount. [Ray to set: starting balance and refill amount] [verify in HighLevel]
-- For the Founding 10: decide whether usage is included or rebilled. [Ray to set: usage included or rebilled for the Founding 10]
+- For the Founding 10: decide whether usage is included or rebilled. Not decided. Until it is, copy says usage is quoted on the call. [Ray to set: usage included or rebilled for the Founding 10]
 - Tell every client in writing, before they pay, what is rebilled and how.
 
 ## 8. The 9-step onboarding checklist
 
-PROPOSED, Ray to approve. Goal: live in 7 days.
+PROPOSED, Ray to approve. Goal: live in 7 days. The live-in-7-days commitment itself is approved by Ray, 2026-11-15: live within 7 days of the client supplying everything needed, or the first month is not charged (once per client, first month only, not for carrier or registration delays). Feedback calls at day 14 and day 30 are also approved for founders.
 
-1. **Payment and welcome.** Payment received. Welcome email sent with the intake form and the onboarding call link. Stage moves to Won, then Onboarding. Added from the course notes, 2026-11-15, PROPOSED: the welcome email also carries one short welcome video from Ray (what happens in the 7 days, what the form asks, how to reach us) [Ray to record], and the client agreement is accepted before work starts [Ray to confirm with counsel: the client agreement].
+1. **Payment and welcome.** Payment received. Welcome email sent with the intake form and the onboarding call link. Stage moves to Won, then Onboarding. Added from the course notes, 2026-11-15: the welcome email also carries one short welcome video (what happens in the 7 days, what the form asks, how to reach us). Ray chose an AI-made video, 2026-11-15. The script is in `onboarding/welcome-video-script.md`, DRAFT for Ray's approval. PROPOSED, Ray to approve: the client agreement is accepted before work starts [Ray to confirm with counsel: the client agreement].
 2. **Intake form back.** Business details, hours, areas, top questions, who gets hand-offs, calendar, number to forward. The 7 days start here.
 3. **Sub-account cloned.** New sub-account created from the Next Level snapshot. Client user added. The client user sees the features of the rung they bought and nothing half-built. They are told in writing what else exists and when it opens. The client connects their own Google, Facebook and Instagram accounts while logged in as themselves. Next Level never asks for or stores a client's passwords. (Added from the course notes, 2026-11-15.)
 4. **Custom values filled.** Every `nl_` value entered and read back.

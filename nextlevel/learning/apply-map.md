@@ -118,7 +118,7 @@ Ray's decisions of 2026-11-15 stand in every case. Each item gives the differenc
 
 **2.5 Proof.** The notes suggest a beginner answer the "you are new" objection by pointing to an established expert behind them. Ray decided the proof is his own business, shown live. Recommendation: keep Ray's proof. Borrowing someone else's standing would be untrue for Next Level and would imply a tie to a third party.
 
-**2.6 Guarantees.** The notes contain no guarantee. Next Level has one proposed commitment (live in 7 days or the first month is not charged) in `offer.md` section 6, still waiting on Ray. Recommendation: no change. Nothing in the notes argues for or against it.
+**2.6 Guarantees.** The notes contain no guarantee. Next Level has one commitment (live in 7 days or the first month is not charged) in `offer.md` section 6, approved by Ray, 2026-11-15. Recommendation: no change. Nothing in the notes argues for or against it.
 
 **2.7 Income and results claims.** The notes cite income figures from the author and students. Next Level's rules forbid income claims and invented results. Recommendation: none of it is used. The digest records only that the figures exist.
 

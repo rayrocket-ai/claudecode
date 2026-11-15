@@ -339,7 +339,7 @@ What you told me: {{their words from question 1}}. What you want: {{their words 
 
 What Next Level Answer does: it answers the calls you cannot take, asks your questions, books the appointment and sends you a summary. We set it up for you. It is live in 7 days from the day we have your details.
 
-The founding price is $300 a month. [Ray to set: usage included or rebilled for the Founding 10]
+The founding price is $300 a month, with no setup fee, month to month. Usage is quoted on the call. [Ray to set: usage included or rebilled for the Founding 10]
 
 Our next step is booked for {{next step date and time}}. Until then, call the demo line and test it: [Ray to add: demo line number]
 

@@ -36,14 +36,14 @@ Written 2026-11-15. Two parts: what the notes leave unanswered that Next Level n
 
 ### Decisions now waiting on Ray
 
-19. Approve or cut the three secondary channels in `offer.md` section 1.
-20. Approve the NL Demo sub-account (`saas-build-spec.md` section 2a).
+19. Approve or cut the three secondary channels in `offer.md` section 1. Answered: approved by Ray, 2026-11-15, managed in Slack.
+20. Approve the NL Demo sub-account (`saas-build-spec.md` section 2a). Answered: approved by Ray, 2026-11-15.
 21. Set the script review numbers (`sales/call-script.md`, "Reviewing this script").
 22. Decide the parked ideas: website chat, social message auto-replies, invoicing, the same-details check.
 23. Decide whether the planned community waits until the Founding 10 are live.
 24. Approve the one plain line per rung in `offer.md` section 3.
-25. Decide whether Next Level runs through the same Slack approval channel as Ray Homes or a separate one.
-26. Record the short welcome video for onboarding.
+25. Decide whether Next Level runs through the same Slack approval channel as Ray Homes or a separate one. Answered, 2026-11-15: same workspace, separate channel, #nextlevel-approvals.
+26. Record the short welcome video for onboarding. Answered, 2026-11-15: Ray chose an AI-made video. Script draft in `onboarding/welcome-video-script.md`, waiting on his approval.
 
 These sit beside the questions already listed under "Still open" in `README.md`. None of those are answered by the notes.
 
