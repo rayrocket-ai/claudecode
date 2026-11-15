@@ -1,0 +1,644 @@
+{
+  "_about": "Declarative definition of what the Founding 10 snapshot needs for Next Level Answer (agent edition). Read by hl_build.py. Source: snapshot-build/automation-blueprints.md and saas-build-spec.md section 3 and 13. Keys that start with an underscore are notes and are never sent to the API. No client data and no phone numbers belong in this file.",
+  "product": "Next Level Answer",
+  "edition": "agent",
+  "api": {
+    "base_url_note": "Fixed in the tool: https://services.leadconnectorhq.com",
+    "version_header": "v3",
+    "_verify": "Every endpoint page read on 2026-11-15 lists the Version header option as v3. The Private Integrations page shows an example with Version 2021-07-28. If v3 is refused, run with --api-version 2021-07-28.",
+    "custom_field_options_request_field": "options"
+  },
+  "custom_values": [
+    {
+      "name": "nl_edition",
+      "value": "agent",
+      "holds": "agent or biz"
+    },
+    {
+      "name": "nl_industry",
+      "value": "real estate",
+      "holds": "real estate, mortgage, law, accounting, contracting, insurance"
+    },
+    {
+      "name": "nl_biz_name",
+      "value": "[business or team name]",
+      "holds": "Business or team name"
+    },
+    {
+      "name": "nl_owner_name",
+      "value": "[owner name]",
+      "holds": "The person callers ask for"
+    },
+    {
+      "name": "nl_brokerage_name",
+      "value": "[brokerage name]",
+      "holds": "Brokerage, firm or parent company as it must appear"
+    },
+    {
+      "name": "nl_service_area",
+      "value": "[cities or areas served]",
+      "holds": "Cities or areas served"
+    },
+    {
+      "name": "nl_hours",
+      "value": "[office hours]",
+      "holds": "Office hours"
+    },
+    {
+      "name": "nl_phone_main",
+      "value": "[main number]",
+      "holds": "Main number. Filled at onboarding, never by this tool"
+    },
+    {
+      "name": "nl_transfer_number",
+      "value": "",
+      "holds": "Where a live transfer goes. Empty until a transfer has been tested on a real call",
+      "_verify": "Meant to be empty. The reference page marks value as required and does not say whether an empty string is accepted. If the API refuses it, create this one by hand and run again."
+    },
+    {
+      "name": "nl_booking_link",
+      "value": "[booking link]",
+      "holds": "Client's calendar link"
+    },
+    {
+      "name": "nl_review_link",
+      "value": "[Google review link]",
+      "holds": "Google review link"
+    },
+    {
+      "name": "nl_mailing_address",
+      "value": "[mailing address]",
+      "holds": "For the footer of every email"
+    },
+    {
+      "name": "nl_ai_name",
+      "value": "[AI assistant name]",
+      "holds": "Name the voice agent uses"
+    },
+    {
+      "name": "nl_ai_disclosure_line",
+      "value": "Thanks for calling {{custom_values.nl_biz_name}}. I am {{custom_values.nl_ai_name}}, an AI assistant for {{custom_values.nl_owner_name}}.",
+      "holds": "The exact words the agent uses to say it is an AI",
+      "_verify": "PROPOSED default from blueprint 1. Ray to confirm with counsel. Whether a custom value may hold other custom values and still render is not confirmed."
+    },
+    {
+      "name": "nl_recording_line",
+      "value": "",
+      "holds": "The exact words about call recording. Empty while recording is off",
+      "_verify": "Meant to be empty. The reference page marks value as required and does not say whether an empty string is accepted. If the API refuses it, create this one by hand and run again."
+    },
+    {
+      "name": "nl_languages",
+      "value": "English",
+      "holds": "Languages the agent handles. Only languages that passed a test call"
+    },
+    {
+      "name": "nl_faq_1",
+      "value": "[approved question and answer 1]",
+      "holds": "Approved question and answer 1"
+    },
+    {
+      "name": "nl_faq_2",
+      "value": "[approved question and answer 2]",
+      "holds": "Approved question and answer 2"
+    },
+    {
+      "name": "nl_faq_3",
+      "value": "[approved question and answer 3]",
+      "holds": "Approved question and answer 3"
+    },
+    {
+      "name": "nl_faq_4",
+      "value": "[approved question and answer 4]",
+      "holds": "Approved question and answer 4"
+    },
+    {
+      "name": "nl_faq_5",
+      "value": "[approved question and answer 5]",
+      "holds": "Approved question and answer 5"
+    },
+    {
+      "name": "nl_not_allowed",
+      "value": "[anything else the agent must never answer]",
+      "holds": "Adds to the fixed never list. Cannot shorten it"
+    },
+    {
+      "name": "nl_appointment_name",
+      "value": "[what a booking is called]",
+      "holds": "showing, consultation, estimate"
+    },
+    {
+      "name": "nl_q1",
+      "value": "Are you looking to buy, sell or rent?",
+      "holds": "Question 1. Writes NL | Caller reason"
+    },
+    {
+      "name": "nl_q2",
+      "value": "Which area or address is this about?",
+      "holds": "Question 2. Writes NL | Area of interest"
+    },
+    {
+      "name": "nl_q3",
+      "value": "When are you hoping to move?",
+      "holds": "Question 3. Writes NL | Timeline"
+    },
+    {
+      "name": "nl_q4",
+      "value": "Are you already working with a real estate agent?",
+      "holds": "Question 4. If yes, message only, no booking",
+      "_verify": "Ray to confirm the wording Ontario rules require here."
+    },
+    {
+      "name": "nl_q5",
+      "value": "Is there anything {{custom_values.nl_owner_name}} should know before calling you?",
+      "holds": "Question 5"
+    },
+    {
+      "name": "nl_urgent_definition",
+      "value": "[what counts as urgent, in one sentence]",
+      "holds": "What counts as urgent for this client"
+    },
+    {
+      "name": "nl_callback_promise",
+      "value": "as soon as they are free",
+      "holds": "The words the AI may use about a callback"
+    },
+    {
+      "name": "nl_send_window",
+      "value": "9:00 a.m. to 8:00 p.m., Monday to Saturday",
+      "holds": "The sending window, as text",
+      "_verify": "PROPOSED default. Ray to set."
+    },
+    {
+      "name": "nl_forward_off_code",
+      "value": "[carrier code to switch forwarding off]",
+      "holds": "The code the client dials to switch forwarding off"
+    },
+    {
+      "name": "nl_usage_cap",
+      "value": "0",
+      "holds": "Monthly cap on extra minutes the client chose. Zero allowed"
+    },
+    {
+      "name": "nl_minutes_included",
+      "value": "250",
+      "holds": "250, plus 125 for each extra agent line (spec section 13)",
+      "_verify": "The spec names nl_minutes_included and the blueprints name nl_usage_included for the same figure. Both are created. Ray to pick one."
+    },
+    {
+      "name": "nl_usage_included",
+      "value": "250",
+      "holds": "Minutes included, as used in the usage messages (blueprint 8)",
+      "_verify": "See nl_minutes_included."
+    },
+    {
+      "name": "nl_usage_extra_rate",
+      "value": "$0.30 CAD",
+      "holds": "Price of an extra minute, as agreed with the client"
+    },
+    {
+      "name": "nl_lines",
+      "value": "1",
+      "holds": "Number of agent lines on the account"
+    },
+    {
+      "name": "nl_recording_on",
+      "value": "no",
+      "holds": "yes or no. Default no"
+    },
+    {
+      "name": "nl_summary_email",
+      "value": "[email for summaries and alerts]",
+      "holds": "Where summaries and alerts go by email"
+    },
+    {
+      "name": "nl_summary_mobile",
+      "value": "[mobile for summaries and alerts]",
+      "holds": "Where summaries and alerts go by text"
+    },
+    {
+      "name": "nl_crm_name",
+      "value": "[client CRM, and whether a push was tested]",
+      "holds": "The client's CRM"
+    },
+    {
+      "name": "nl_report_month",
+      "value": "[set each month]",
+      "holds": "Report month"
+    },
+    {
+      "name": "nl_report_calls",
+      "value": "[set each month]",
+      "holds": "Calls that reached the AI"
+    },
+    {
+      "name": "nl_report_answered",
+      "value": "[set each month]",
+      "holds": "Calls the AI answered"
+    },
+    {
+      "name": "nl_report_booked",
+      "value": "[set each month]",
+      "holds": "Appointments the AI booked"
+    },
+    {
+      "name": "nl_report_textbacks",
+      "value": "[set each month]",
+      "holds": "Missed calls that got a text back"
+    },
+    {
+      "name": "nl_report_reviews_asked",
+      "value": "[set each month]",
+      "holds": "Reviews requested"
+    },
+    {
+      "name": "nl_report_reviews_in",
+      "value": "[set each month]",
+      "holds": "Reviews received"
+    },
+    {
+      "name": "nl_report_changed",
+      "value": "[set each month]",
+      "holds": "One thing we changed this month"
+    },
+    {
+      "name": "nl_report_next",
+      "value": "[set each month]",
+      "holds": "One thing we suggest next"
+    }
+  ],
+  "custom_fields": [
+    {
+      "name": "NL | Caller reason",
+      "dataType": "SINGLE_OPTIONS",
+      "model": "contact",
+      "options": [
+        "buy",
+        "sell",
+        "rent",
+        "listing question",
+        "other"
+      ],
+      "_verify": "The create page does not show the request field that carries the choices for SINGLE_OPTIONS (the response shows picklistOptions). The tool sends them under the name in api.custom_field_options_request_field. Check the first created field in the account."
+    },
+    {
+      "name": "NL | Timeline",
+      "dataType": "TEXT",
+      "model": "contact"
+    },
+    {
+      "name": "NL | Area of interest",
+      "dataType": "TEXT",
+      "model": "contact"
+    },
+    {
+      "name": "NL | Preferred language",
+      "dataType": "TEXT",
+      "model": "contact"
+    },
+    {
+      "name": "NL | Qualified",
+      "dataType": "SINGLE_OPTIONS",
+      "model": "contact",
+      "options": [
+        "yes",
+        "no",
+        "unknown"
+      ],
+      "_verify": "The create page does not show the request field that carries the choices for SINGLE_OPTIONS (the response shows picklistOptions). The tool sends them under the name in api.custom_field_options_request_field. Check the first created field in the account."
+    },
+    {
+      "name": "NL | Call summary",
+      "dataType": "LARGE_TEXT",
+      "model": "contact",
+      "holds": "Two sentences, written by the agent"
+    },
+    {
+      "name": "NL | Consent basis",
+      "dataType": "SINGLE_OPTIONS",
+      "model": "contact",
+      "options": [
+        "express",
+        "implied",
+        "inquiry",
+        "none"
+      ],
+      "_verify": "The create page does not show the request field that carries the choices for SINGLE_OPTIONS (the response shows picklistOptions). The tool sends them under the name in api.custom_field_options_request_field. Check the first created field in the account. The spec lists express, implied, none. Blueprint 3 also stores inquiry. Ray to approve the fourth choice."
+    },
+    {
+      "name": "NL | Consent date",
+      "dataType": "DATE",
+      "model": "contact"
+    },
+    {
+      "name": "NL | Review requested date",
+      "dataType": "DATE",
+      "model": "contact"
+    },
+    {
+      "name": "NL | Review received",
+      "dataType": "SINGLE_OPTIONS",
+      "model": "contact",
+      "options": [
+        "yes",
+        "no"
+      ],
+      "_verify": "The create page does not show the request field that carries the choices for SINGLE_OPTIONS (the response shows picklistOptions). The tool sends them under the name in api.custom_field_options_request_field. Check the first created field in the account."
+    },
+    {
+      "name": "NL | Last AI call date",
+      "dataType": "DATE",
+      "model": "contact"
+    },
+    {
+      "name": "NL | Urgent",
+      "dataType": "SINGLE_OPTIONS",
+      "model": "contact",
+      "options": [
+        "yes",
+        "no"
+      ],
+      "_verify": "The create page does not show the request field that carries the choices for SINGLE_OPTIONS (the response shows picklistOptions). The tool sends them under the name in api.custom_field_options_request_field. Check the first created field in the account."
+    },
+    {
+      "name": "NL | Callback number",
+      "dataType": "PHONE",
+      "model": "contact",
+      "holds": "The number the caller wants to be reached on"
+    },
+    {
+      "name": "NL | Appointment confirmed",
+      "dataType": "SINGLE_OPTIONS",
+      "model": "contact",
+      "options": [
+        "yes",
+        "no",
+        "asked"
+      ],
+      "_verify": "The create page does not show the request field that carries the choices for SINGLE_OPTIONS (the response shows picklistOptions). The tool sends them under the name in api.custom_field_options_request_field. Check the first created field in the account."
+    },
+    {
+      "name": "NL | Closed date",
+      "dataType": "DATE",
+      "model": "contact"
+    },
+    {
+      "name": "NL | Last reactivation date",
+      "dataType": "DATE",
+      "model": "contact"
+    }
+  ],
+  "tags": [
+    {
+      "name": "nl-source-ai-call"
+    },
+    {
+      "name": "nl-source-missed-call"
+    },
+    {
+      "name": "nl-source-form"
+    },
+    {
+      "name": "nl-source-ad"
+    },
+    {
+      "name": "nl-status-qualified"
+    },
+    {
+      "name": "nl-status-booked"
+    },
+    {
+      "name": "nl-status-needs-human"
+    },
+    {
+      "name": "nl-consent-express"
+    },
+    {
+      "name": "nl-consent-implied"
+    },
+    {
+      "name": "nl-do-not-contact"
+    },
+    {
+      "name": "nl-review-requested"
+    },
+    {
+      "name": "nl-review-received"
+    },
+    {
+      "name": "nl-reactivation-sent"
+    },
+    {
+      "name": "nl-hand-raiser"
+    },
+    {
+      "name": "nl-urgent"
+    },
+    {
+      "name": "nl-textback-sent"
+    },
+    {
+      "name": "nl-appt-confirmed"
+    },
+    {
+      "name": "nl-appt-unconfirmed"
+    },
+    {
+      "name": "nl-reactivation-queue"
+    },
+    {
+      "name": "nl-report-ready"
+    },
+    {
+      "name": "nl-usage-80"
+    },
+    {
+      "name": "nl-usage-cap-reached"
+    },
+    {
+      "name": "nl-cancel-requested"
+    },
+    {
+      "name": "nl-export-sent"
+    },
+    {
+      "name": "nl-export-confirmed"
+    }
+  ],
+  "pipelines": [
+    {
+      "name": "NL | Client pipeline (agent edition)",
+      "stages": [
+        "New caller",
+        "Qualified",
+        "Appointment booked",
+        "Appointment held",
+        "Client",
+        "Closed",
+        "Not a fit"
+      ],
+      "_note": "Stage positions are sent as 1 to 7 in this order."
+    }
+  ],
+  "calendars": [
+    {
+      "name": "Call with {{custom_values.nl_owner_name}}",
+      "_verify": "Name taken from the spec. Whether a calendar name renders a custom value is not confirmed. If it shows the braces, rename it by hand. calendarType event is used because the page says a personal calendar needs exactly one team member and no user ID is known to this tool; the right type and the team member are set by hand. openHours is marked deprecated on the page but still supported. The calendar is created as a draft (isActive false).",
+      "api_fields": {
+        "calendarType": "event",
+        "isActive": false,
+        "description": "Next Level Answer. Bookings made by the AI receptionist and the booking link.",
+        "slotDuration": 30,
+        "slotDurationUnit": "mins",
+        "slotInterval": 30,
+        "slotIntervalUnit": "mins",
+        "autoConfirm": true,
+        "allowReschedule": true,
+        "allowCancellation": true,
+        "openHours": [
+          {
+            "daysOfTheWeek": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "hours": [
+              {
+                "openHour": 9,
+                "openMinute": 0,
+                "closeHour": 17,
+                "closeMinute": 0
+              }
+            ]
+          }
+        ]
+      },
+      "_placeholders": "Slot length, buffer, notice and hours are placeholders. The real ones come from the client's intake form. Connecting Google or Outlook is done by the client."
+    }
+  ],
+  "voice_agents": [
+    {
+      "name": "NL Receptionist (agent edition)",
+      "welcome_message": "Thanks for calling {{custom_values.nl_biz_name}}. I am {{custom_values.nl_ai_name}}, an AI assistant for {{custom_values.nl_owner_name}}. How can I help you today?",
+      "ai_disclosure_must_contain": "an AI assistant",
+      "_verify": "Whether the welcome message and the prompt render our own nl_ custom values is not confirmed (backlog item 7). If they do not, fill both per client by paste. The disclosure line needs counsel's approval. The agent is created with no phone number and no voice chosen; voice, advanced settings, the number and the Deploy tab are done by hand.",
+      "api_fields": {
+        "language": "en-US",
+        "maxCallDuration": 600,
+        "patienceLevel": "high",
+        "sendUserIdleReminders": true,
+        "sendPostCallNotificationTo": {
+          "admins": false,
+          "allUsers": false,
+          "contactAssignedUser": false,
+          "specificUsers": [],
+          "customEmails": []
+        }
+      },
+      "_api_fields_note": "maxCallDuration 600 is PROPOSED, Ray to set (allowed 180 to 900). The built-in post-call email is switched off because the summary is sent by NL 01 | AI call finished to nl_summary_email and nl_summary_mobile, and the built-in one would go to every admin user. Ray to confirm. businessName is left out so it defaults to the location name. callEndWorkflowIds is a confirmed field but needs the ID of a workflow that does not exist yet; set it by hand once NL 01 | AI call finished is built.",
+      "recording": {
+        "setting": "off",
+        "set_by_api": false,
+        "_verify": "Not a field on the agent in the API reference. Set by hand on the phone number (Call Recording: disable). That a transcript and summary are still produced with recording off is blocking test 2 in TESTS-BEFORE-FIRST-CLIENT.md."
+      },
+      "prompt_slots": [
+        {
+          "slot": "Role",
+          "text": "You answer the phone for {{custom_values.nl_biz_name}}, a {{custom_values.nl_industry}} business serving {{custom_values.nl_service_area}}, with {{custom_values.nl_brokerage_name}}. You are an AI assistant named {{custom_values.nl_ai_name}}. You are not a licensed professional."
+        },
+        {
+          "slot": "Job",
+          "text": "Find out who is calling and why, book a {{custom_values.nl_appointment_name}} or take a message, and end the call politely. Keep every reply to one or two sentences. Ask one question at a time. Ask the caller's name. Read back the number they are calling from and ask if it is the best one to reach them on."
+        },
+        {
+          "slot": "Honesty",
+          "text": "You have already said you are an AI. Say so again whenever asked. Never claim to be a person."
+        },
+        {
+          "slot": "Recording",
+          "text": "If this line is not empty, say it right after the greeting: {{custom_values.nl_recording_line}}"
+        },
+        {
+          "slot": "Questions",
+          "text": "Ask these in order. Skip any the caller has already answered. 1. {{custom_values.nl_q1}} 2. {{custom_values.nl_q2}} 3. {{custom_values.nl_q3}} 4. {{custom_values.nl_q4}} 5. {{custom_values.nl_q5}} If the caller says they already work with another agent, take a message only and do not offer a booking."
+        },
+        {
+          "slot": "Approved answers",
+          "text": "Answer questions only from this list. Hours: {{custom_values.nl_hours}}. Area served: {{custom_values.nl_service_area}}. {{custom_values.nl_faq_1}} {{custom_values.nl_faq_2}} {{custom_values.nl_faq_3}} {{custom_values.nl_faq_4}} {{custom_values.nl_faq_5}} If the answer is not here, say: I do not have that information. I will pass your question to {{custom_values.nl_owner_name}}. Never guess."
+        },
+        {
+          "slot": "Never",
+          "text": "Never give: 1. An opinion on what a property is worth, what to offer, or whether a price is fair. 2. Legal, mortgage, tax, insurance or investment advice. 3. Whether a listing is still available, its price or its details. Take a message. 4. Anything about another client, another caller or another deal. 5. A claim that you are a person, or that a person is listening when none is. 6. A promise of a callback time, a result, a commission rate or a fee. 7. A comment on a neighbourhood's people, safety or schools. 8. Anything to a caller who says they are represented by another agent, beyond taking a message. 9. The owner's personal mobile number, home address or schedule. 10. Anything you are not sure of. Also never: {{custom_values.nl_not_allowed}}"
+        },
+        {
+          "slot": "Urgent",
+          "text": "Urgent means: {{custom_values.nl_urgent_definition}} Any request to speak to a person is also urgent. On an urgent call: confirm the name and the callback number, ask for the reason in one sentence, then say: I am sending this to {{custom_values.nl_owner_name}} right now and asking them to call you back {{custom_values.nl_callback_promise}}. Do not promise a time. Do not transfer the call. Then end the call."
+        },
+        {
+          "slot": "Booking",
+          "text": "Ask: Would you like to book a {{custom_values.nl_appointment_name}} with {{custom_values.nl_owner_name}}? Use the calendar action. Offer two times. Say the chosen day and time back. Say a confirmation text will follow. If nothing fits or the caller declines, take a message."
+        },
+        {
+          "slot": "Language",
+          "text": "Speak {{custom_values.nl_languages}} only. If the caller speaks another language, say in English that a person will call back, take the number, and end the call."
+        },
+        {
+          "slot": "Close",
+          "text": "Recap in one sentence. Say: {{custom_values.nl_owner_name}} will have this in a moment. Thanks for calling. End the call. Then write a call summary of two sentences at most."
+        }
+      ],
+      "actions": [
+        {
+          "name": "NL | Book a call",
+          "actionType": "APPOINTMENT_BOOKING",
+          "create_via_api": false,
+          "intent": "Book on the calendar above. Offer two times. Repeat the day and time.",
+          "actionParameters": null,
+          "_verify": "The create-action page lists this actionType but shows the actionParameters fields for CALL_TRANSFER only. The fields for this type are not confirmed, so the tool does not create it. Build it by hand in the agent, or add actionParameters here and set create_via_api to true after reading the live page. Treat the first one as a test on a real call."
+        },
+        {
+          "name": "NL | Save caller details",
+          "actionType": "DATA_EXTRACTION",
+          "create_via_api": false,
+          "intent": "After the call, write NL | Caller reason, NL | Area of interest, NL | Timeline, NL | Callback number, NL | Urgent and NL | Call summary (two sentences).",
+          "actionParameters": null,
+          "_verify": "The create-action page lists this actionType but shows the actionParameters fields for CALL_TRANSFER only. The fields for this type are not confirmed, so the tool does not create it. Build it by hand in the agent, or add actionParameters here and set create_via_api to true after reading the live page. Treat the first one as a test on a real call."
+        },
+        {
+          "name": "NL | AI call finished",
+          "actionType": "WORKFLOW_TRIGGER",
+          "create_via_api": false,
+          "intent": "At the end of a call that is not urgent, start the workflow NL 01 | AI call finished, which sends the summary by text and email.",
+          "actionParameters": null,
+          "_verify": "The create-action page lists this actionType but shows the actionParameters fields for CALL_TRANSFER only. The fields for this type are not confirmed, so the tool does not create it. Build it by hand in the agent, or add actionParameters here and set create_via_api to true after reading the live page. Treat the first one as a test on a real call. The workflow must exist first and is built by hand."
+        },
+        {
+          "name": "NL | Needs a human",
+          "actionType": "WORKFLOW_TRIGGER",
+          "create_via_api": false,
+          "intent": "On the urgent path, start the workflow NL 01 | Needs a human.",
+          "actionParameters": null,
+          "_verify": "The create-action page lists this actionType but shows the actionParameters fields for CALL_TRANSFER only. The fields for this type are not confirmed, so the tool does not create it. Build it by hand in the agent, or add actionParameters here and set create_via_api to true after reading the live page. Treat the first one as a test on a real call. The workflow must exist first and is built by hand."
+        },
+        {
+          "name": "NL | Transfer to owner",
+          "actionType": "CALL_TRANSFER",
+          "create_via_api": false,
+          "intent": "Off in version 1. A live transfer is used only where nl_transfer_number is filled and a transfer was tested on a real call for that client.",
+          "actionParameters": null,
+          "_note": "The parameter fields for CALL_TRANSFER are confirmed on the page (triggerPrompt, transferToType, transferToValue, triggerMessage, hearWhisperMessage) but transferToValue is a phone number, and no phone number belongs in this file."
+        }
+      ]
+    }
+  ],
+  "built_by_hand": [
+    "Workflows NL 00 and NL 01 (a person publishes each one)",
+    "Phone number, timeout, recording off, Deploy tab",
+    "Voice choice and advanced agent settings",
+    "Forms, templates, dashboard",
+    "SaaS plan, usage limits, rebilling",
+    "Snapshot creation"
+  ]
+}
