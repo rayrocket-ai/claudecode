@@ -1,0 +1,491 @@
+[
+  {
+    "id": "P076",
+    "segment": "local_business_waitlist",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "A realtor running my phone line is a conflict my realtor partners would notice, and a line in an agreement I have not seen does not change who owns the system.",
+    "what_almost_changed_their_mind": "The written promise that no one at Ray Homes contacts his callers or uses his contacts is exactly the statement he asked for, and mortgage brokers being first in line was noted.",
+    "missing_info": [
+      "What does a real estate broker gain from answering a mortgage broker's phone beyond the fee?",
+      "Is there any referral or lender-partner arrangement, stated as a flat no?",
+      "Can I read the agreement wording before giving any details?",
+      "What is the registered business behind Next Level?"
+    ],
+    "price_reaction": "fair",
+    "max_monthly_they_would_pay_cad": 400,
+    "trust_in_ray": 2,
+    "best_product_for_them": "Answer",
+    "line_that_helped_most": "No one at Next Level or Ray Homes contacts your callers or uses your contacts, and that is written in the agreement.",
+    "line_that_hurt_most": "GTA real estate broker, Ray Homes Real Estate under eXp Realty"
+  },
+  {
+    "id": "P077",
+    "segment": "local_business_waitlist",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "My duty of confidentiality cannot sit with a vendor owned by a realtor who refers into my market, when the transcripts are held by them and nothing says they will sign terms the Law Society would accept.",
+    "what_almost_changed_their_mind": "Recording being off by default and transcripts deleted on leaving came close, because intake-only booking at month-end is what her clerks need.",
+    "missing_info": [
+      "Who holds the transcripts, where are they stored, and for how long?",
+      "Will you sign a confidentiality agreement that satisfies Law Society of Ontario requirements?",
+      "How is the AI prevented from giving anything resembling legal information?",
+      "How are conflicts handled when a caller is on the other side of a file?",
+      "Can transcription be turned off as well as recording?"
+    ],
+    "price_reaction": "fair",
+    "max_monthly_they_would_pay_cad": 400,
+    "trust_in_ray": 2,
+    "best_product_for_them": "Answer",
+    "line_that_helped_most": "Audio recording is off unless you turn it on",
+    "line_that_hurt_most": "Calls are transcribed so you get the summary."
+  },
+  {
+    "id": "P078",
+    "segment": "local_business_waitlist",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "Firm policy and our insurer rule out any AI in client intake, and nothing here says a single law firm's insurer has signed off.",
+    "what_almost_changed_their_mind": "Nothing; recording off by default was noticed but transcription by a third party is still an AI in the client communication path.",
+    "missing_info": [
+      "Has any law firm's professional liability insurer signed off on this?"
+    ],
+    "price_reaction": "cannot judge",
+    "max_monthly_they_would_pay_cad": 0,
+    "trust_in_ray": 1,
+    "best_product_for_them": "none",
+    "line_that_helped_most": "",
+    "line_that_hurt_most": "Calls are transcribed so you get the summary."
+  },
+  {
+    "id": "P079",
+    "segment": "local_business_waitlist",
+    "decision_founding": "joins waitlist",
+    "decision_standard": "joins waitlist",
+    "would_refer": true,
+    "main_reason": "Recording is off unless I turn it on and I choose the questions it asks, so I will put my name down for when lawyers open and decide on Farsi and price then.",
+    "what_almost_changed_their_mind": "She nearly held back because the pitch never says in so many words that the legal version is intake-only and will not answer legal questions.",
+    "missing_info": [
+      "Is the legal version intake-only, with the AI refusing legal questions?",
+      "Does Farsi work well enough for purchasers asking where to send documents?",
+      "When do real estate lawyers actually open?",
+      "What is the usage cost per minute?"
+    ],
+    "price_reaction": "expensive",
+    "max_monthly_they_would_pay_cad": 300,
+    "trust_in_ray": 3,
+    "best_product_for_them": "Answer",
+    "line_that_helped_most": "Audio recording is off unless you turn it on",
+    "line_that_hurt_most": "Starting price: $500 setup plus $400 a month."
+  },
+  {
+    "id": "P080",
+    "segment": "local_business_waitlist",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "My receptionist of 19 years knows every client by voice and I would never put a machine in her place.",
+    "what_almost_changed_their_mind": "Nothing; the calls-forward-only-when-you-do-not-answer detail does not matter because his phone is always answered.",
+    "missing_info": [],
+    "price_reaction": "cannot judge",
+    "max_monthly_they_would_pay_cad": 0,
+    "trust_in_ray": 2,
+    "best_product_for_them": "none",
+    "line_that_helped_most": "",
+    "line_that_hurt_most": "says it is an AI"
+  },
+  {
+    "id": "P081",
+    "segment": "local_business_waitlist",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "It opened with a real estate broker and agents, so I scrolled on before I ever saw the word lawyers.",
+    "what_almost_changed_their_mind": "If the line naming real estate lawyers second in the roll-out had been on the first screen, the closing-day phone problem would have held her.",
+    "missing_info": [
+      "Is this for law offices?",
+      "When does it open for lawyers?"
+    ],
+    "price_reaction": "cannot judge",
+    "max_monthly_they_would_pay_cad": 250,
+    "trust_in_ray": 2,
+    "best_product_for_them": "Answer",
+    "line_that_helped_most": "",
+    "line_that_hurt_most": "GTA real estate broker, Ray Homes Real Estate under eXp Realty"
+  },
+  {
+    "id": "P082",
+    "segment": "local_business_waitlist",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "I do not need my phone answered, and the only thing I would pay for, reviews, is listed as not available yet with nothing saying accountants will ever get it.",
+    "what_almost_changed_their_mind": "Seeing Reviews named with a price of $150 a month was the first thing that matched her actual problem.",
+    "missing_info": [
+      "Will Reviews be offered to accountants, and when?",
+      "Can I join a waitlist for Reviews rather than Answer?",
+      "How does the review-request service work at tax time?"
+    ],
+    "price_reaction": "fair",
+    "max_monthly_they_would_pay_cad": 150,
+    "trust_in_ray": 3,
+    "best_product_for_them": "Reviews",
+    "line_that_helped_most": "Reviews ($250 setup, $150 a month).",
+    "line_that_hurt_most": "Opening next, in this order (not available yet)"
+  },
+  {
+    "id": "P083",
+    "segment": "local_business_waitlist",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "A $500 setup and $400 a month for a problem I have eight weeks a year does not work, and nothing mentions a pause or seasonal plan.",
+    "what_almost_changed_their_mind": "Month to month with cancellation before the next billing date made a two-month use possible, until the setup fee and the absence of a pause option priced it out.",
+    "missing_info": [
+      "Can I pay for March and April only?",
+      "Is there a pause option that keeps my setup?",
+      "Would I pay the $500 setup again each season?"
+    ],
+    "price_reaction": "expensive",
+    "max_monthly_they_would_pay_cad": 100,
+    "trust_in_ray": 3,
+    "best_product_for_them": "Answer",
+    "line_that_helped_most": "Month to month, cancel before the next billing date.",
+    "line_that_hurt_most": "Starting price: $500 setup plus $400 a month."
+  },
+  {
+    "id": "P084",
+    "segment": "local_business_waitlist",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "There is no privacy policy or data-processing terms I can read, calls are transcribed, and even the waitlist asks for more than my email.",
+    "what_almost_changed_their_mind": "Mandarin being tested on her own line with no charge if it fails, and export and deletion on leaving, were the right instincts but are not published terms.",
+    "missing_info": [
+      "Where is your privacy policy?",
+      "What are the data-processing terms, storage location and subprocessors?",
+      "How are SINs and tax details kept out of transcripts?",
+      "What is the registered business name?",
+      "Does Mandarin actually work?"
+    ],
+    "price_reaction": "fair",
+    "max_monthly_they_would_pay_cad": 400,
+    "trust_in_ray": 2,
+    "best_product_for_them": "Answer",
+    "line_that_helped_most": "Your contacts and transcripts are exported to you and deleted from the account when you leave.",
+    "line_that_hurt_most": "Join the waitlist and you get first notice and one question now: your industry and your biggest phone problem."
+  },
+  {
+    "id": "P085",
+    "segment": "local_business_waitlist",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "A real estate broker selling phone software to five different industries with no clients at all is the kind of side business I have seen fail on paper many times.",
+    "what_almost_changed_their_mind": "The candour that it is new with no testimonials was respected, but it confirmed there is no fellow CPA to ask.",
+    "missing_info": [
+      "What does a real estate broker know about an accounting practice?",
+      "Which accounting firms use it?"
+    ],
+    "price_reaction": "expensive",
+    "max_monthly_they_would_pay_cad": 0,
+    "trust_in_ray": 1,
+    "best_product_for_them": "none",
+    "line_that_helped_most": "",
+    "line_that_hurt_most": "It is new: the first 10 clients are its founding clients, and there are no client testimonials yet."
+  },
+  {
+    "id": "P086",
+    "segment": "local_business_waitlist",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "I liked that he speaks Dari, but $500 to start and $400 a month is many times what my little business can pay.",
+    "what_almost_changed_their_mind": "Ray working in English and Dari made her want to stay, and a small plan under $50 would have had her on the list.",
+    "missing_info": [
+      "Is there something small for a one-person home business?",
+      "Is a tax preparer counted as an accountant on the list?"
+    ],
+    "price_reaction": "expensive",
+    "max_monthly_they_would_pay_cad": 50,
+    "trust_in_ray": 4,
+    "best_product_for_them": "Answer",
+    "line_that_helped_most": "Works in English and Dari.",
+    "line_that_hurt_most": "Starting price: $500 setup plus $400 a month."
+  },
+  {
+    "id": "P087",
+    "segment": "local_business_waitlist",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "I would hand over a card today, but contractors are fourth in line with no date, so I will call whoever can start me this week.",
+    "what_almost_changed_their_mind": "The missed-call answer and text summary is exactly his ladder problem; a date or a pay-now option would have closed it.",
+    "missing_info": [
+      "Why can I not buy it now?",
+      "What date do contractors open?",
+      "How much paperwork is the agreement?"
+    ],
+    "price_reaction": "fair",
+    "max_monthly_they_would_pay_cad": 500,
+    "trust_in_ray": 3,
+    "best_product_for_them": "Answer",
+    "line_that_helped_most": "It answers every call you miss or cannot take",
+    "line_that_hurt_most": "mortgage brokers, real estate lawyers, accountants, contractors and renovators, insurance"
+  },
+  {
+    "id": "P088",
+    "segment": "local_business_waitlist",
+    "decision_founding": "joins waitlist",
+    "decision_standard": "joins waitlist",
+    "would_refer": true,
+    "main_reason": "It lets me pick the questions, so address and basement size can be asked, and Punjabi gets tested on my own line before I am charged, so I will join the list and see.",
+    "what_almost_changed_their_mind": "He nearly left because contractors are fourth with no date and Punjabi is a test rather than a stated capability.",
+    "missing_info": [
+      "Does Punjabi actually work on quote calls?",
+      "When do contractors open?",
+      "What is the per-minute usage cost?"
+    ],
+    "price_reaction": "expensive",
+    "max_monthly_they_would_pay_cad": 300,
+    "trust_in_ray": 3,
+    "best_product_for_them": "Answer",
+    "line_that_helped_most": "If it does not handle your callers' language to your standard, you do not go live and you are not charged.",
+    "line_that_hurt_most": "mortgage brokers, real estate lawyers, accountants, contractors and renovators, insurance"
+  },
+  {
+    "id": "P089",
+    "segment": "local_business_waitlist",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "Nothing says what happens when 60 people call in one afternoon, and a spending cap that stops the system is the last thing I want on a storm day.",
+    "what_almost_changed_their_mind": "The urgent-caller callback and instant text alert sounded like triage, but there is no word on simultaneous calls or what the AI may promise.",
+    "missing_info": [
+      "How many calls can it take at once?",
+      "What does a storm-day afternoon of 60 calls cost at the usage rate?",
+      "Will it avoid promising arrival times?",
+      "Has it handled an upset caller with an active leak?"
+    ],
+    "price_reaction": "cannot judge",
+    "max_monthly_they_would_pay_cad": 350,
+    "trust_in_ray": 2,
+    "best_product_for_them": "Answer",
+    "line_that_helped_most": "If a caller asks for a person or it is urgent, it offers a callback and alerts you by text straight away.",
+    "line_that_hurt_most": "You set a monthly spending cap before go-live and the system stops and alerts you if it is reached."
+  },
+  {
+    "id": "P090",
+    "segment": "local_business_waitlist",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "I build three homes a year and my wife answers every call, so this is for someone else.",
+    "what_almost_changed_their_mind": "Nothing; there is no volume problem to solve.",
+    "missing_info": [],
+    "price_reaction": "cannot judge",
+    "max_monthly_they_would_pay_cad": 0,
+    "trust_in_ray": 2,
+    "best_product_for_them": "none",
+    "line_that_helped_most": "",
+    "line_that_hurt_most": ""
+  },
+  {
+    "id": "P091",
+    "segment": "local_business_waitlist",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "HVAC is not on the list, it costs more than double my answering service, and it only promises to check a CRM push on a call, not booking into my dispatch software.",
+    "what_almost_changed_their_mind": "Booking straight into a calendar was the upgrade he wanted, if it had named field-service software and 24-hour dispatch.",
+    "missing_info": [
+      "Does it book into my field-service dispatch software?",
+      "Does it dispatch a technician at 3 am?",
+      "When, if ever, does HVAC open?"
+    ],
+    "price_reaction": "expensive",
+    "max_monthly_they_would_pay_cad": 180,
+    "trust_in_ray": 2,
+    "best_product_for_them": "Answer",
+    "line_that_helped_most": "books the appointment into your calendar",
+    "line_that_hurt_most": "Outside those five industries you can still join; no date is promised."
+  },
+  {
+    "id": "P092",
+    "segment": "local_business_waitlist",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "It says outright that it is new, has no clients, and is run by a realtor, and my studio cannot be the test case for a side business.",
+    "what_almost_changed_their_mind": "Dialling the live system to hear the voice herself would have answered the generic-voice worry, but that is only offered on the agent call.",
+    "missing_info": [
+      "Is this a registered company or a realtor's side business?",
+      "Who outside real estate uses it?",
+      "Can the voice be matched to a design brand?"
+    ],
+    "price_reaction": "fair",
+    "max_monthly_they_would_pay_cad": 400,
+    "trust_in_ray": 2,
+    "best_product_for_them": "Answer",
+    "line_that_helped_most": "on the call you dial the live system yourself and hear it answer as your business would",
+    "line_that_hurt_most": "It is new: the first 10 clients are its founding clients, and there are no client testimonials yet."
+  },
+  {
+    "id": "P093",
+    "segment": "local_business_waitlist",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "There is not a word about what an unlicensed AI may say about coverage under RIBO rules, and one slip is an errors-and-omissions claim against me.",
+    "what_almost_changed_their_mind": "The urgent-call callback and alert fit after-hours claims triage, and choosing the questions suggested it could be kept to intake only.",
+    "missing_info": [
+      "Has this been checked against RIBO rules on unlicensed staff?",
+      "How is the AI stopped from discussing coverage or binding?",
+      "Where is client data stored relative to my insurer-approved system?"
+    ],
+    "price_reaction": "fair",
+    "max_monthly_they_would_pay_cad": 400,
+    "trust_in_ray": 2,
+    "best_product_for_them": "Answer",
+    "line_that_helped_most": "If a caller asks for a person or it is urgent, it offers a callback and alerts you by text straight away.",
+    "line_that_hurt_most": "Calls are transcribed so you get the summary."
+  },
+  {
+    "id": "P094",
+    "segment": "local_business_waitlist",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "The waitlist is for the receptionist, not the nurture product I want, and nothing says what happens to my email after I join.",
+    "what_almost_changed_their_mind": "The promise that client contacts are never used was the right tone, but it covers paying clients' callers, not a waitlister's email.",
+    "missing_info": [
+      "What happens to my email after I join the waitlist?",
+      "When does Nurture open, and to insurance advisors?",
+      "What date does insurance open?"
+    ],
+    "price_reaction": "expensive",
+    "max_monthly_they_would_pay_cad": 150,
+    "trust_in_ray": 2,
+    "best_product_for_them": "Nurture",
+    "line_that_helped_most": "Nurture ($500, $250 a month).",
+    "line_that_hurt_most": "Join the waitlist and you get first notice and one question now: your industry and your biggest phone problem."
+  },
+  {
+    "id": "P095",
+    "segment": "local_business_waitlist",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "My insurer supplies and dictates my phone system and call centre, and an outside tool would breach my agency agreement.",
+    "what_almost_changed_their_mind": "Nothing; the brokerage one-page summary is for real estate brokers, not a captive insurance agency.",
+    "missing_info": [
+      "Would my insurer even allow this?"
+    ],
+    "price_reaction": "cannot judge",
+    "max_monthly_they_would_pay_cad": 0,
+    "trust_in_ray": 2,
+    "best_product_for_them": "none",
+    "line_that_helped_most": "",
+    "line_that_hurt_most": ""
+  },
+  {
+    "id": "P096",
+    "segment": "local_business_waitlist",
+    "decision_founding": "joins waitlist",
+    "decision_standard": "joins waitlist",
+    "would_refer": false,
+    "main_reason": "I will join the list as an insurance broker to watch when they reach my market; I have the roll-out order and prices already and I am not a customer.",
+    "what_almost_changed_their_mind": "Nothing could make him buy; he might propose a referral swap later.",
+    "missing_info": [
+      "When exactly does insurance open?",
+      "What platform is it built on?"
+    ],
+    "price_reaction": "fair",
+    "max_monthly_they_would_pay_cad": 0,
+    "trust_in_ray": 2,
+    "best_product_for_them": "none",
+    "line_that_helped_most": "mortgage brokers, real estate lawyers, accountants, contractors and renovators, insurance",
+    "line_that_hurt_most": "phone, text and AI minutes are billed at cost with no markup for founding clients"
+  },
+  {
+    "id": "P097",
+    "segment": "local_business_waitlist",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "Dental is not on the list, no date is promised, and nothing addresses patient health information being transcribed by a general vendor.",
+    "what_almost_changed_their_mind": "Being told plainly that industries outside the five can still join kept her reading, and after-hours new-patient calls are a real gap.",
+    "missing_info": [
+      "Do you work with dental offices?",
+      "Is it compliant with Ontario health privacy law?",
+      "Does it book into dental practice software?"
+    ],
+    "price_reaction": "fair",
+    "max_monthly_they_would_pay_cad": 400,
+    "trust_in_ray": 2,
+    "best_product_for_them": "Answer",
+    "line_that_helped_most": "Outside those five industries you can still join; no date is promised.",
+    "line_that_hurt_most": "Calls are transcribed so you get the summary."
+  },
+  {
+    "id": "P098",
+    "segment": "local_business_waitlist",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "It is for real estate agents and costs $400 a month, which is out of all proportion to a $70 haircut.",
+    "what_almost_changed_their_mind": "The idea of something answering the phone while hands are full was the hook, if a salon price under $100 had appeared.",
+    "missing_info": [
+      "Does it work with my salon booking app?",
+      "Is there a small-business price?"
+    ],
+    "price_reaction": "expensive",
+    "max_monthly_they_would_pay_cad": 80,
+    "trust_in_ray": 3,
+    "best_product_for_them": "Answer",
+    "line_that_helped_most": "It answers every call you miss or cannot take",
+    "line_that_hurt_most": "Starting price: $500 setup plus $400 a month."
+  },
+  {
+    "id": "P099",
+    "segment": "local_business_waitlist",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "It tells me a garage is not on the list and there is no date, so that is a no for now.",
+    "what_almost_changed_their_mind": "He appreciated getting a straight answer in writing, and would have joined if auto repair were named with a date.",
+    "missing_info": [
+      "Is this for a garage or not?",
+      "When would a shop like mine be able to start?"
+    ],
+    "price_reaction": "expensive",
+    "max_monthly_they_would_pay_cad": 250,
+    "trust_in_ray": 3,
+    "best_product_for_them": "Answer",
+    "line_that_helped_most": "Outside those five industries you can still join; no date is promised.",
+    "line_that_hurt_most": "Outside those five industries you can still join; no date is promised."
+  },
+  {
+    "id": "P100",
+    "segment": "local_business_waitlist",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "It is honest that clinics are not among the five and no date is promised, which tells me I would be joining a list that goes nowhere, with health information not addressed.",
+    "what_almost_changed_their_mind": "The explicit other-industry option and the plain no-date statement were what he asked for; any sign clinics are planned would have had him join and offer to pilot.",
+    "missing_info": [
+      "Are clinics on the roadmap at all?",
+      "How is patient health information in transcripts handled?",
+      "Does it connect to clinic management software?"
+    ],
+    "price_reaction": "fair",
+    "max_monthly_they_would_pay_cad": 400,
+    "trust_in_ray": 3,
+    "best_product_for_them": "Answer",
+    "line_that_helped_most": "Outside those five industries you can still join; no date is promised.",
+    "line_that_hurt_most": "Outside those five industries you can still join; no date is promised."
+  }
+]
