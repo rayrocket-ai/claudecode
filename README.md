@@ -118,3 +118,44 @@ pytest tests/
   access restricted.
 - The bot prepares documents under a licensed broker's supervision; it is not
   a substitute for legal review.
+
+## Campaign dashboard
+
+A self-hosted, multi-campaign ads dashboard (`dashboard/`) runs as its own
+docker-compose service next to the bot. The ADMAX daily loop pushes each
+day's results (spend, leads, CPL, CTR) through a keyed API; campaigns,
+kill rules, and the learning log render at `/` and `/c/<slug>`.
+
+Deploy on the server:
+
+```bash
+cd /opt/realtor-bot
+git pull
+# set DASHBOARD_KEY (and optionally DASHBOARD_PORT) in .env
+docker compose up -d --build dashboard
+```
+
+API (all writes need the `X-Dashboard-Key` header):
+
+| Endpoint | Purpose |
+|---|---|
+| `PUT /api/campaigns/<slug>` | Register or update a campaign |
+| `POST /api/campaigns/<slug>/daily` | Report a day's results (same date = correction) |
+| `POST /api/campaigns/<slug>/log` | Append a learning-log entry |
+| `GET /api/campaigns` | Headline KPIs for every campaign |
+
+### Dashboard data: git-file path (no inbound network needed)
+
+The daily loop writes `campaigns/<slug>/results.json` and commits it. The
+server surfaces new results by pulling the repo — no POST into the box, so
+it works even when the loop's environment cannot reach the server.
+
+Enable the 15-minute auto-pull on the server once:
+
+```bash
+( crontab -l 2>/dev/null; \
+  echo "*/15 * * * * cd /opt/realtor-bot && git pull --ff-only origin claude/admax-paid-ads-agent-9hux3q >/dev/null 2>&1" ) | crontab -
+```
+
+The dashboard container live-mounts `./campaigns`, so a pull is picked up
+immediately with no rebuild.

@@ -1,0 +1,100 @@
+{
+  "name": "53 Alpha Court \u2014 Woodbridge",
+  "subtitle": "$10/day \u00b7 Meta $5 Leads + YouTube $5 via Google Ads \u00b7 no price, no address",
+  "status": "built-paused",
+  "playbook": "Listing Exposure \u00b7 Playbook A",
+  "targets": {
+    "budget_note": "of $70/wk plan",
+    "leads_note": "target 1\u20133 / wk",
+    "cpl_note": "target $15 \u00b7 ceiling $30",
+    "ctr_note": "floor 0.8%"
+  },
+  "config": [
+    [
+      "Meta (FB + IG)",
+      "$5/day \u00b7 Leads \u00b7 instant form"
+    ],
+    [
+      "YouTube (Google Ads)",
+      "$5/day \u00b7 views \u00b7 Presence-only geo \u00b7 retargeting pool"
+    ],
+    [
+      "Geo",
+      "Islington Woods + 25 km ring"
+    ],
+    [
+      "Category",
+      "Housing (Special Ad Category)"
+    ],
+    [
+      "Hook offer",
+      "Get the price + address + full tour"
+    ],
+    [
+      "Hook angles",
+      "golf-course lot \u00b7 basement apartment \u00b7 pool + solarium \u00b7 size"
+    ],
+    [
+      "Qualifiers",
+      "timeline \u00b7 pre-approval \u00b7 home to sell"
+    ],
+    [
+      "Creative",
+      "6\u201310 ads in one ad set from day one"
+    ],
+    [
+      "Lead routing",
+      "GoHighLevel + ARIA Voice callback"
+    ]
+  ],
+  "rules": [
+    {
+      "chip": "pause",
+      "text": "Variant CPL over $30 after $70+ spent on it"
+    },
+    {
+      "chip": "replace",
+      "text": "CTR under 0.8% after 2,000 impressions"
+    },
+    {
+      "chip": "hold",
+      "text": "Judge on 7-day windows. Daily counts are noise at $10/day"
+    },
+    {
+      "chip": "review",
+      "text": "After 2 full weeks: shift budget toward whichever listing wins on CPL (Ray approves)"
+    }
+  ],
+  "daily": [
+    {
+      "date": "2026-11-03",
+      "spend": 0.0,
+      "leads": 0,
+      "ctr_pct": null,
+      "impressions": null,
+      "views": null,
+      "notes": "Campaign + lead form built PAUSED in Meta; ad set and ads pending"
+    },
+    {
+      "date": "2026-11-07",
+      "spend": 0.0,
+      "leads": 0,
+      "ctr_pct": null,
+      "impressions": null,
+      "views": null,
+      "notes": "Ad set + 1 video ad built; waiting on Ray's preview"
+    }
+  ],
+  "log": [
+    {
+      "date": "2026-11-03",
+      "title": "Campaign drafted",
+      "entry": "Ray asked for 53 Alpha Court on Nov 3. Plan, hooks and copy drafted from the listing material in Drive. Waiting on: Ray's budget approval ($60/day for four listings) and Meta access (Ad Advisor or system-user token)."
+    },
+    {
+      "date": "2026-11-03",
+      "title": "Budget set by Ray: $10/day",
+      "entry": "Ray set $10/day per listing on Nov 3: $5 Meta (FB + IG Leads), $5 YouTube through Google Ads. Four listings, $40/day total."
+    }
+  ]
+}

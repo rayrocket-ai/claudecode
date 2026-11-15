@@ -1,0 +1,186 @@
+{
+  "name": "16 Curry Cres \u2014 Georgetown",
+  "subtitle": "$15/day lean flight \u00b7 Meta Leads + YouTube Shorts \u00b7 no price, no address",
+  "status": "sold",
+  "playbook": "Listing Exposure \u00b7 Playbook A",
+  "targets": {
+    "budget_note": "of $105/wk plan",
+    "leads_note": "target 2\u20135 / wk",
+    "cpl_note": "target $15 \u00b7 ceiling $30",
+    "ctr_note": "floor 0.8%"
+  },
+  "config": [
+    [
+      "Meta (FB + IG)",
+      "$10/day \u00b7 Leads \u00b7 instant form"
+    ],
+    [
+      "YouTube Shorts",
+      "$5/day \u00b7 views \u00b7 retargeting pool"
+    ],
+    [
+      "Geo",
+      "Georgetown + 25 km feeder ring"
+    ],
+    [
+      "Category",
+      "Housing (Special Ad Category)"
+    ],
+    [
+      "Hook offer",
+      "Get the price + address + full tour"
+    ],
+    [
+      "Hook angles",
+      "4-car garage \u00b7 in-law suite \u00b7 work already done"
+    ],
+    [
+      "Qualifiers",
+      "timeline \u00b7 pre-approval \u00b7 home to sell"
+    ],
+    [
+      "Creative",
+      "3 vertical cuts, GEORGETOWN RAY.mp4"
+    ],
+    [
+      "Lead routing",
+      "GoHighLevel + ARIA Voice callback"
+    ]
+  ],
+  "rules": [
+    {
+      "chip": "pause",
+      "text": "Variant CPL over $30 after $70+ spent on it"
+    },
+    {
+      "chip": "replace",
+      "text": "CTR under 0.8% after 2,000 impressions"
+    },
+    {
+      "chip": "hold",
+      "text": "Judge on 7-day windows \u2014 daily counts are noise at $10/day"
+    },
+    {
+      "chip": "review",
+      "text": "After 2 full weeks: shift budget toward whichever property wins on CPL (Ray approves)"
+    }
+  ],
+  "daily": [
+    {
+      "date": "2026-08-11",
+      "spend": 8.45,
+      "leads": 0,
+      "ctr_pct": 8.68,
+      "impressions": 484,
+      "views": null,
+      "notes": ""
+    },
+    {
+      "date": "2026-08-12",
+      "spend": 8.49,
+      "leads": 1,
+      "ctr_pct": 5.88,
+      "impressions": 493,
+      "views": null,
+      "notes": ""
+    },
+    {
+      "date": "2026-08-13",
+      "spend": 10.59,
+      "leads": 1,
+      "ctr_pct": 7.78,
+      "impressions": 553,
+      "views": null,
+      "notes": ""
+    },
+    {
+      "date": "2026-08-14",
+      "spend": 9.97,
+      "leads": 2,
+      "ctr_pct": 6.0,
+      "impressions": 567,
+      "views": null,
+      "notes": ""
+    },
+    {
+      "date": "2026-08-15",
+      "spend": 7.35,
+      "leads": 0,
+      "ctr_pct": 7.2,
+      "impressions": 472,
+      "views": null,
+      "notes": ""
+    },
+    {
+      "date": "2026-08-16",
+      "spend": 8.86,
+      "leads": 0,
+      "ctr_pct": 6.1,
+      "impressions": 525,
+      "views": null,
+      "notes": ""
+    },
+    {
+      "date": "2026-08-17",
+      "spend": 13.13,
+      "leads": 2,
+      "ctr_pct": 4.25,
+      "impressions": 706,
+      "views": null,
+      "notes": ""
+    },
+    {
+      "date": "2026-08-18",
+      "spend": 10.15,
+      "leads": 0,
+      "ctr_pct": 3.58,
+      "impressions": 447,
+      "views": null,
+      "notes": ""
+    },
+    {
+      "date": "2026-08-19",
+      "spend": 10.22,
+      "leads": 2,
+      "ctr_pct": 4.24,
+      "impressions": 519,
+      "views": null,
+      "notes": ""
+    },
+    {
+      "date": "2026-08-20",
+      "spend": 3.06,
+      "leads": 0,
+      "ctr_pct": 5.34,
+      "impressions": 131,
+      "views": null,
+      "notes": "partial day; snapshot froze here"
+    },
+    {
+      "date": "2026-11-03",
+      "spend": 0.0,
+      "leads": 0,
+      "ctr_pct": null,
+      "impressions": null,
+      "views": null,
+      "notes": "Ray confirmed sold Nov 3. Zero-spend marker row; Meta campaign 52506205424516 must be PAUSED in Ads Manager (no API access from this session)."
+    }
+  ],
+  "log": [
+    {
+      "date": "2026-07-22",
+      "title": "Campaign created, mirroring Buttonleaf",
+      "entry": "Same $15/day structure and curiosity strategy. Property-specific hooks: 4-car garage, walk-up basement in-law suite potential, $60K waterproofing and new mechanicals already done. Discovery framing only \u2014 23 days on market."
+    },
+    {
+      "date": "2026-08-11",
+      "title": "Live since Aug 11",
+      "entry": "Discovered via Ad Advisor on Sep 17: campaign 52506205424516, single ad, pixel LEAD optimization, Halton Hills 15mi radius, Advantage+ audience. Through Aug 20: $90.27 spend, 8 leads, CPL $11.28, CTR 5.9%."
+    },
+    {
+      "date": "2026-11-03",
+      "title": "SOLD \u2014 campaign retired",
+      "entry": "Ray confirmed 16 Curry sold on Nov 3. Meta campaign 52506205424516 and ad set 52506205424716 must be paused immediately; no Ad Advisor or Meta API access in this session, so Ray pauses in Ads Manager. Final known numbers through Aug 20: $90.27 spend, 8 leads, CPL $11.28, CTR 5.9%. Spend Aug 21 to Nov 3 unknown until Meta is reconnected."
+    }
+  ]
+}
