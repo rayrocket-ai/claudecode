@@ -4,6 +4,17 @@ Every test gets: hypothesis, variants, spend, result, decision, lesson.
 Newest entries at the top.
 
 ---
+## 2026-11-14 — Tour video is on YouTube
+
+- Ray: use the videos from Sid Media in Drive.
+- Uploaded "sydney rundle.mp4" (39 s, vertical) to Ray's YouTube channel as
+  unlisted through Metricool. Video ID hSIkkg-5ANc. Title has no address
+  and no price.
+- Listing still active: showing and feedback on Nov 1.
+- Next: build the YouTube campaign PAUSED. Blocked until Adspirer has
+  actions again (all 15 used, resets Dec 10 or on upgrade).
+
+---
 ## 2026-11-03 — Built in Meta (partial, paused)
 
 - Ad account 1788128334781323 (the second "Ray Ahmadi" account; the only one with a

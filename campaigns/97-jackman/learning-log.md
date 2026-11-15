@@ -4,6 +4,18 @@ Every test gets: hypothesis, variants, spend, result, decision, lesson.
 Newest entries at the top.
 
 ---
+## 2026-11-14 — No finished video, raw footage found
+
+- Sid Media delivered finished edits for Sidney and Brocklesby, but for
+  Jackman only raw clips from the Sep 24 shoot (C9572 to C9609 in the
+  shared RAW VID folder). Confirmed by frames: brick front with two-car
+  garage, both kitchens, rec room, backyard and deck.
+- Started a draft cut. Google Drive's download quota for those files ran
+  out before the clips came down. Retry after it resets. Shot list is in
+  the agent file fix queue.
+- Listing still active: showing confirmed for Nov 14.
+
+---
 ## 2026-11-03 — Built in Meta (partial, paused)
 
 - Ad account 1788128334781323 (the second "Ray Ahmadi" account; the only one with a

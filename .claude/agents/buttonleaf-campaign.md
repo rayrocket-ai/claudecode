@@ -20,8 +20,8 @@ campaigns/<slug>/learning-log.md, newest entry first. Read it before acting.
 |---|---|---|
 | 34-buttonleaf | 34 Buttonleaf Cres, Stouffville. Relisted Nov 11 at $1,299,000, MLS N14172060 | PRIORITY. YouTube live. No Meta ad running. |
 | 53-alpha | 53 Alpha Court, Woodbridge. Relisted Nov 12 at $1,899,000. $10,000 agent bonus to Nov 24 | PRIORITY. YouTube live. Meta awareness video live. Lead-form ad paused. |
-| 85-sidney | 85 Sidney Rundle Ave, Bowmanville. Relisted Oct 15 at $499,000 | Pre-launch. Meta campaign shell and form only. Tour video in Drive ("sydney rundle.mp4"), not on YouTube. |
-| 97-jackman | 97 Jackman Cres, West Woodbridge | Pre-launch. No video and no photos in Drive, only a script and caption (Oct 7). |
+| 85-sidney | 85 Sidney Rundle Ave, Bowmanville. Relisted Oct 15 at $499,000 | Pre-launch. Meta campaign shell and form only. Tour video on YouTube, unlisted: hSIkkg-5ANc (39 s, vertical, uploaded Nov 14). |
+| 97-jackman | 97 Jackman Cres, West Woodbridge | Pre-launch. No finished video. Raw footage exists (Sid Media, Sep 24 shoot), see the fix queue. |
 | (no folder yet) | 3 Brocklesby Cres, Ajax. Listed Nov 10 at $799,900 | No ads. Tour video in Drive ("3 Brocklesby.mp4", Nov 13), not on YouTube. |
 | (no folder yet) | 104 Dixon Rd, Toronto. Listed Nov 5 at $1,399,000 | No ads. No video found. |
 | _sold/16-curry | 16 Curry Cres, Georgetown | SOLD. Never report. Meta campaign paused Nov 10. |
@@ -117,6 +117,28 @@ time a tool has room, then delete the line.
    relist, so it most likely shows $1,999,990. Needs the no-price tour cut
    on YouTube (Ray uploads 53-alpha-A-tour-15s from Drive), then build a
    YouTube campaign with it PAUSED and ask Ray to switch over.
+
+3. 85 Sidney YouTube campaign. Video hSIkkg-5ANc is on Ray's channel
+   (unlisted). Build with create_youtube_campaign, PAUSED: $5/day unless
+   Ray names another figure, Bowmanville 25 km, in-market 80157, link
+   rayahmadi.com/contact, no price, no address. Ray says go before it runs.
+4. 53 Alpha tour cut to YouTube. The file 53-alpha-A-tour-15s-9x16.mp4 is
+   private in Ray's Drive, so Metricool cannot fetch it. Once Ray sets it to
+   "Anyone with the link", upload it unlisted through Metricool (brand
+   7745027, YouTube connected), then do item 2.
+5. 97 Jackman draft video. Raw clips are in Sid Media's shared Drive folder
+   "BROL AND OTHER AGENT VIDEOS" > RAW VID, clips C9572 to C9609 (S-Log,
+   vertical, needs a colour grade). Shot list: C9603 front, C9572 living,
+   C9573 and C9575 kitchen, C9577 stairs, C9587 bedroom, C9583 bath,
+   C9594 rec room, C9600 second kitchen, C9607 backyard and deck. Google
+   Drive's download quota for these files ran out on Nov 14; it resets
+   within about a day. Download one file at a time, cut a 20 to 25 second
+   draft with the hooks in campaigns/97-jackman/edit-brief.md, and send it
+   to Ray. Do not publish it until he approves.
+
+How to put a video on YouTube without Ray: Metricool createScheduledPost,
+provider youtube, privacy unlisted, notifySubscribers false, media = a
+public file URL. Read the video ID back with getScheduledPosts.
 
 # Daily loop: check, heal, fix
 
