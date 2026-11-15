@@ -161,3 +161,52 @@ or his team. About 15 minutes.
 Also: reconnect the Pabbly Facebook-leads workflow, or replace it with
 GoHighLevel's own Facebook Lead Form trigger so form leads enter the same
 workflow.
+
+## Paste-ready prompt for GoHighLevel's AI workflow builder
+
+Ray asked on 2026-11-15 for this to be built by logging in. This session
+runs in the cloud with no browser signed in to GoHighLevel, and passwords
+are never taken in chat, so the build happens on Ray's side: Automation >
+Workflows > Create Workflow > build with AI, paste the text below, review,
+publish. A Claude session on Ray's own computer (desktop app or the Chrome
+extension), where he is already signed in, can also click it through from
+this same text.
+
+    Create a workflow named "Website lead: instant reply and follow-up".
+
+    Trigger: Form Submitted, form = the website Contact Us form.
+
+    Step 1. Send SMS to the contact:
+    "Hi {{contact.first_name}}, Ray Ahmadi here from Ray Homes Real Estate.
+    Got your message. Which home were you asking about? I can send the
+    price and address right now. Reply STOP to opt out."
+
+    Step 2. Send email to the contact. Subject: "Your home inquiry". Body:
+    "Hi {{contact.first_name}}, thanks for reaching out. Which home caught
+    your eye? Tell me which one and I will send the price, the address and
+    a time to see it. Or call or text me and we can sort it out in two
+    minutes. Ray Ahmadi, Ray Homes Real Estate, eXp Realty, Brokerage."
+
+    Step 3. Send an internal notification email to Ray with the contact's
+    name, phone, email, message, UTM campaign
+    ({{contact.attributionSource.utmCampaign}}) and UTM content
+    ({{contact.attributionSource.utmContent}}).
+
+    Step 4. Add the tag "website-lead".
+
+    Step 5. Create a task assigned to Ray Ahmadi titled "Call new website
+    lead", due in 15 minutes.
+
+    Step 6. Create an opportunity in the buyer pipeline, first stage,
+    status open, named with the contact's full name.
+
+    Step 7. Wait 1 day. If the contact has not replied, send SMS:
+    "Hi {{contact.first_name}}, Ray here. Still happy to send the price and
+    address. Which home was it?"
+
+    Step 8. Wait 3 days. If the contact has not replied, send email:
+    "Hi {{contact.first_name}}, last note from me. If the timing is not
+    right, tell me what you are looking for and I will watch the market
+    for you. Ray"
+
+    Stop the workflow for a contact as soon as they reply by SMS or email.
