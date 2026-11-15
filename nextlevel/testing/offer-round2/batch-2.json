@@ -1,0 +1,495 @@
+[
+  {
+    "id": "P026",
+    "segment": "real_estate_agent",
+    "decision_founding": "buys",
+    "decision_standard": "books call only",
+    "would_refer": true,
+    "main_reason": "It says I keep my number, it answers when my phone is off, and forwarding is switched off the day I cancel, which is the only thing I needed to know before trying it on the lakes.",
+    "what_almost_changed_their_mind": "The pitch says 'when your phone is off' but never says 'out of range' in so many words, and I nearly held back until someone confirmed no-signal counts.",
+    "missing_info": [
+      "Does forwarding trigger when the phone is on but has no signal, not just when it is off?",
+      "What is the usage rate per minute?"
+    ],
+    "price_reaction": "fair",
+    "max_monthly_they_would_pay_cad": 350,
+    "trust_in_ray": 4,
+    "best_product_for_them": "Answer",
+    "line_that_helped_most": "You keep your number; calls forward only when you do not answer, including when your phone is off, and forwarding is switched off the day you cancel.",
+    "line_that_hurt_most": "phone, text and AI minutes are billed at cost with no markup for founding clients, on top of the $300."
+  },
+  {
+    "id": "P027",
+    "segment": "real_estate_agent",
+    "decision_founding": "books call only",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "It does not say it speaks French, only that another language gets tested on my line and I am not charged if it fails, so I will take the call but I am not paying until I hear it answer a French caller.",
+    "what_almost_changed_their_mind": "If the pitch had named French as working today I would have been close to buying at $300, since odd-hours coverage fits my shift-work callers.",
+    "missing_info": [
+      "Does it answer in French when the caller starts in French, and switch mid-call?",
+      "What is the usage rate per minute on top of the $300?"
+    ],
+    "price_reaction": "expensive",
+    "max_monthly_they_would_pay_cad": 250,
+    "trust_in_ray": 3,
+    "best_product_for_them": "Answer",
+    "line_that_helped_most": "If it does not handle your callers' language to your standard, you do not go live and you are not charged.",
+    "line_that_hurt_most": "English at launch."
+  },
+  {
+    "id": "P028",
+    "segment": "real_estate_agent",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": true,
+    "main_reason": "I am handing in my licence within the year and I am not starting any new subscription, however sensible it sounds.",
+    "what_almost_changed_their_mind": "The plain admission that it is new with no testimonials made me think it is honest enough to forward to the agent taking over my book.",
+    "missing_info": [],
+    "price_reaction": "cannot judge",
+    "max_monthly_they_would_pay_cad": 0,
+    "trust_in_ray": 3,
+    "best_product_for_them": "none",
+    "line_that_helped_most": "Month to month, cancel before the next billing date.",
+    "line_that_hurt_most": "It is new: the first 10 clients are its founding clients, and there are no client testimonials yet."
+  },
+  {
+    "id": "P029",
+    "segment": "real_estate_agent",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "There is no latency figure, no voice vendor and no real transfer, just a callback offer, and I can run my own stack at cost without renting someone else's black box.",
+    "what_almost_changed_their_mind": "Usage billed at cost with no markup is the one thing that is not retail pricing, and seeing his real usage bill would be interesting, but only as research.",
+    "missing_info": [
+      "What is the response latency?",
+      "Which voice model and telephony vendor are underneath?",
+      "Is there a live transfer or only a callback offer?",
+      "How are interruptions handled?"
+    ],
+    "price_reaction": "expensive",
+    "max_monthly_they_would_pay_cad": 0,
+    "trust_in_ray": 2,
+    "best_product_for_them": "none",
+    "line_that_helped_most": "phone, text and AI minutes are billed at cost with no markup for founding clients, on top of the $300.",
+    "line_that_hurt_most": "it offers a callback and alerts you by text straight away."
+  },
+  {
+    "id": "P030",
+    "segment": "real_estate_agent",
+    "decision_founding": "books call only",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "Recording being off unless I turn it on is the plain wording I wanted, but calls are still transcribed and nothing says what happens when a farmer does not want that, so I would ask on a call before paying anything.",
+    "what_almost_changed_their_mind": "A sentence saying a caller can decline the transcript and still reach me, or get me live rather than a callback, would have settled it.",
+    "missing_info": [
+      "If a caller objects to being transcribed, what happens to the call and the transcript?",
+      "Is the callback the only route to a person, and how fast is it?",
+      "Where are transcripts kept and for how long?"
+    ],
+    "price_reaction": "fair",
+    "max_monthly_they_would_pay_cad": 300,
+    "trust_in_ray": 3,
+    "best_product_for_them": "Answer",
+    "line_that_helped_most": "Audio recording is off unless you turn it on, and when it is on the AI says so at the start of the call.",
+    "line_that_hurt_most": "Calls are transcribed so you get the summary."
+  },
+  {
+    "id": "P031",
+    "segment": "real_estate_agent",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "Nothing mentions BCFSA or what an unlicensed AI may say about a listing, and Mandarin is only something they will test, so this was plainly written from Ontario.",
+    "what_almost_changed_their_mind": "The one-page brokerage summary and the first month back if my brokerage says no showed some compliance thinking, but it is my managing broker doing the checking, not them.",
+    "missing_info": [
+      "Has anyone confirmed this is allowed under BCFSA rules for unlicensed assistance?",
+      "What will the AI say and refuse to say about a listing?",
+      "Does it handle Mandarin callers today?",
+      "Is setup available in BC now?"
+    ],
+    "price_reaction": "fair",
+    "max_monthly_they_would_pay_cad": 300,
+    "trust_in_ray": 2,
+    "best_product_for_them": "Answer",
+    "line_that_helped_most": "If your brokerage says no within 14 days, you get your first month back.",
+    "line_that_hurt_most": "English at launch."
+  },
+  {
+    "id": "P032",
+    "segment": "real_estate_agent",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "I already have two ISAs covering 16 hours a day in Punjabi and English, and this gives me no conversion numbers, no Punjabi and no price for a team at 600 calls a month.",
+    "what_almost_changed_their_mind": "If it had shown bookings per hundred calls against a human ISA I would have run a test on one seat.",
+    "missing_info": [
+      "At 600 calls a month, what does usage cost in total?",
+      "What is the booking rate compared with a human ISA?",
+      "Does it handle Punjabi?",
+      "What is the team price for routing to six agents?"
+    ],
+    "price_reaction": "cannot judge",
+    "max_monthly_they_would_pay_cad": 0,
+    "trust_in_ray": 2,
+    "best_product_for_them": "none",
+    "line_that_helped_most": "You see Ray's own line's real usage bill on the call before you pay.",
+    "line_that_hurt_most": "A team routing calls to several agents is quoted on the call."
+  },
+  {
+    "id": "P033",
+    "segment": "real_estate_agent",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "It says outright that nobody outside his own business is using it yet, and that is exactly the proof I need before I point my phone line at a broker I have never heard of.",
+    "what_almost_changed_their_mind": "The honesty about having no testimonials and being able to dial the live system myself nearly got me onto a call.",
+    "missing_info": [
+      "Who else is using this besides the person selling it?",
+      "Is setup confirmed for a BC number?",
+      "What is the usage rate per minute?"
+    ],
+    "price_reaction": "fair",
+    "max_monthly_they_would_pay_cad": 300,
+    "trust_in_ray": 2,
+    "best_product_for_them": "Answer",
+    "line_that_helped_most": "on the call you dial the live system yourself and hear it answer as your business would.",
+    "line_that_hurt_most": "there are no client testimonials yet."
+  },
+  {
+    "id": "P034",
+    "segment": "real_estate_agent",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "I asked for a number I can call right now and instead I am told I can only hear it once I am on a call with him, and I will not book a meeting to hear a sample.",
+    "what_almost_changed_their_mind": "If the demo number were printed in the pitch I would have dialled it on the spot, and if it understood my accent I would be in.",
+    "missing_info": [
+      "Where is the number I can call right now to hear it?",
+      "Does it understand accented English?"
+    ],
+    "price_reaction": "cheap",
+    "max_monthly_they_would_pay_cad": 500,
+    "trust_in_ray": 3,
+    "best_product_for_them": "Answer",
+    "line_that_helped_most": "you dial the live system yourself and hear it answer as your business would.",
+    "line_that_hurt_most": "a short quiz, then a 15-minute call with Ray (evening and weekend times available), then payment by card."
+  },
+  {
+    "id": "P035",
+    "segment": "real_estate_agent",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "There is no free version and I have no calls coming in and no income yet, so three hundred dollars a month is not happening.",
+    "what_almost_changed_their_mind": "No setup fee and not being charged if it is not live in seven days sounded low risk, but it is still a monthly fee.",
+    "missing_info": [
+      "Is there a free tier or trial?"
+    ],
+    "price_reaction": "expensive",
+    "max_monthly_they_would_pay_cad": 0,
+    "trust_in_ray": 3,
+    "best_product_for_them": "none",
+    "line_that_helped_most": "No setup fee.",
+    "line_that_hurt_most": "$300 CAD a month."
+  },
+  {
+    "id": "P036",
+    "segment": "real_estate_agent",
+    "decision_founding": "books call only",
+    "decision_standard": "books call only",
+    "would_refer": false,
+    "main_reason": "I need a yes or no on Follow Up Boss and the pitch says it will be confirmed on the call and admits the list of CRMs is not stated, so I will take the call but a text and an email summary is copy-paste, which I will not pay for.",
+    "what_almost_changed_their_mind": "One line naming Follow Up Boss as a direct push would have made me a buyer at either price.",
+    "missing_info": [
+      "Does it push callers and booked appointments into Follow Up Boss as leads with notes?",
+      "Will it trigger my existing Follow Up Boss action plans?",
+      "Is there a separate account I have to log into?"
+    ],
+    "price_reaction": "cheap",
+    "max_monthly_they_would_pay_cad": 500,
+    "trust_in_ray": 3,
+    "best_product_for_them": "Answer",
+    "line_that_helped_most": "A direct push into your CRM is confirmed for your specific CRM on the call before you pay; if it cannot be done, you are told then.",
+    "line_that_hurt_most": "which specific CRMs have a direct push"
+  },
+  {
+    "id": "P037",
+    "segment": "real_estate_agent",
+    "decision_founding": "books call only",
+    "decision_standard": "passes",
+    "would_refer": true,
+    "main_reason": "The price is right there at three hundred, I know Ray's name from eXp, and it is a short quiz and fifteen minutes on a weekend, so I would book it, but I am not paying until I know what the usage adds.",
+    "what_almost_changed_their_mind": "If the quiz turns out longer than a few taps on my phone I would have closed it and forgotten about it.",
+    "missing_info": [
+      "What does usage typically add to the $300 in a month?",
+      "How long is the quiz?",
+      "Does it handle Punjabi callers?"
+    ],
+    "price_reaction": "fair",
+    "max_monthly_they_would_pay_cad": 300,
+    "trust_in_ray": 4,
+    "best_product_for_them": "Answer",
+    "line_that_helped_most": "$300 CAD a month. No setup fee.",
+    "line_that_hurt_most": "on top of the $300."
+  },
+  {
+    "id": "P038",
+    "segment": "real_estate_agent",
+    "decision_founding": "books call only",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "It is month to month, my number stays mine and my contacts are exported when I leave, which is more exit detail than the lead vendor ever gave me, so I will listen, but 'billed at cost' with no number is exactly how I lost nine thousand dollars.",
+    "what_almost_changed_their_mind": "A stated usage rate and one outside client I could phone would have moved me from listening to trying a month.",
+    "missing_info": [
+      "What is the usage rate per minute as a number?",
+      "Is the month refunded if I cancel partway through?",
+      "Is the standard setup fee refundable?",
+      "Will the call be a hard sell?"
+    ],
+    "price_reaction": "fair",
+    "max_monthly_they_would_pay_cad": 300,
+    "trust_in_ray": 2,
+    "best_product_for_them": "Answer",
+    "line_that_helped_most": "Month to month, cancel before the next billing date.",
+    "line_that_hurt_most": "the usage rate per minute as a number"
+  },
+  {
+    "id": "P039",
+    "segment": "real_estate_agent",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "It leads with him being an eXp Icon agent and promises not to contact my callers, but says nothing about my agents or revenue share, and that is the only thing I asked.",
+    "what_almost_changed_their_mind": "After-hours relief for a few hundred dollars is cheap, and one sentence saying this is a vendor deal with no sponsorship or recruiting would have got me on a call.",
+    "missing_info": [
+      "Is this purely a vendor relationship with no eXp sponsorship or revenue share angle?",
+      "Will anyone approach my agents?",
+      "What is the price for a team of four agents?"
+    ],
+    "price_reaction": "cheap",
+    "max_monthly_they_would_pay_cad": 600,
+    "trust_in_ray": 2,
+    "best_product_for_them": "Answer",
+    "line_that_helped_most": "No one at Next Level or Ray Homes contacts your callers or uses your contacts, and that is written in the agreement.",
+    "line_that_hurt_most": "multi-year eXp Icon agent"
+  },
+  {
+    "id": "P040",
+    "segment": "real_estate_agent",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "It is English at launch, with nothing about a French contract or Quebec law, and I will not serve my clients through an English-first tool.",
+    "what_almost_changed_their_mind": "Testing French on my own line without being charged is fair, but it is a test, not a French-first product.",
+    "missing_info": [
+      "Does it answer in French first?",
+      "Is the agreement available in French?",
+      "Does it comply with Quebec language and privacy law?"
+    ],
+    "price_reaction": "cannot judge",
+    "max_monthly_they_would_pay_cad": 0,
+    "trust_in_ray": 2,
+    "best_product_for_them": "none",
+    "line_that_helped_most": "If it does not handle your callers' language to your standard, you do not go live and you are not charged.",
+    "line_that_hurt_most": "English at launch."
+  },
+  {
+    "id": "P041",
+    "segment": "real_estate_agent",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "There is not a word on Law 25, where the data is hosted, who the privacy officer is or OACIQ rules, and I am personally accountable for my clients' data.",
+    "what_almost_changed_their_mind": "Export and deletion when I leave and recording off by default are the right instincts, but they are not a hosting answer.",
+    "missing_info": [
+      "Where is the data hosted?",
+      "Who is the privacy officer and who is responsible in an incident?",
+      "Is there a Law 25 statement?",
+      "Is there a Quebec French voice?",
+      "What do OACIQ rules say about automated answering?",
+      "What is the team price?"
+    ],
+    "price_reaction": "cheap",
+    "max_monthly_they_would_pay_cad": 600,
+    "trust_in_ray": 2,
+    "best_product_for_them": "Answer",
+    "line_that_helped_most": "Your contacts and transcripts are exported to you and deleted from the account when you leave.",
+    "line_that_hurt_most": "English at launch."
+  },
+  {
+    "id": "P042",
+    "segment": "real_estate_agent",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "It is all in English from a Toronto broker and it says English at launch, so I assume it is not meant for Quebec.",
+    "what_almost_changed_their_mind": "If the first line had been in French and said it works in Quebec I would have kept reading, because the after-4 pm problem is real for me.",
+    "missing_info": [
+      "Is it available in Quebec?",
+      "Does it answer in French?"
+    ],
+    "price_reaction": "cannot judge",
+    "max_monthly_they_would_pay_cad": 0,
+    "trust_in_ray": 2,
+    "best_product_for_them": "none",
+    "line_that_helped_most": "",
+    "line_that_hurt_most": "English at launch."
+  },
+  {
+    "id": "P043",
+    "segment": "real_estate_agent",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "I call everyone back the same evening myself, and no page will convince me to let a machine speak to my clients in my name.",
+    "what_almost_changed_their_mind": "Nothing came close, though I noted it at least admits to callers that it is an AI.",
+    "missing_info": [],
+    "price_reaction": "cannot judge",
+    "max_monthly_they_would_pay_cad": 0,
+    "trust_in_ray": 1,
+    "best_product_for_them": "none",
+    "line_that_helped_most": "",
+    "line_that_hurt_most": "An AI receptionist on your business line."
+  },
+  {
+    "id": "P044",
+    "segment": "real_estate_agent",
+    "decision_founding": "books call only",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "He is a named broker with a brokerage I can look up, which is enough to take a call, but the business name and address are only on the agreement and the company is brand new with no outside clients, so I would not pay yet.",
+    "what_almost_changed_their_mind": "If the registered business name and address were stated up front so I could check them before the call, I would have considered a month at $300.",
+    "missing_info": [
+      "What is the registered business name and address?",
+      "How long has this company existed?",
+      "Is there one outside client I can speak to?"
+    ],
+    "price_reaction": "fair",
+    "max_monthly_they_would_pay_cad": 300,
+    "trust_in_ray": 3,
+    "best_product_for_them": "Answer",
+    "line_that_helped_most": "GTA real estate broker, Ray Homes Real Estate under eXp Realty, 12+ years, about 50 deals a year",
+    "line_that_hurt_most": "the registered business name itself"
+  },
+  {
+    "id": "P045",
+    "segment": "real_estate_agent",
+    "decision_founding": "buys",
+    "decision_standard": "buys",
+    "would_refer": true,
+    "main_reason": "It spells out the exit: my number stays mine, forwarding is switched off the day I cancel and my contacts and transcripts are exported to me, so six missed calls a week makes this an easy yes.",
+    "what_almost_changed_their_mind": "The usage rate not being a number gave me pause, but the spending cap I set myself and seeing his real bill before paying cover it.",
+    "missing_info": [
+      "What is the usage rate per minute?"
+    ],
+    "price_reaction": "cheap",
+    "max_monthly_they_would_pay_cad": 600,
+    "trust_in_ray": 4,
+    "best_product_for_them": "Answer",
+    "line_that_helped_most": "Your contacts and transcripts are exported to you and deleted from the account when you leave.",
+    "line_that_hurt_most": "the usage rate per minute as a number"
+  },
+  {
+    "id": "P046",
+    "segment": "real_estate_agent",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "My clients ask where their data goes, and this never says which country the transcripts are stored in or who at the company can read them, and there is no privacy policy to check.",
+    "what_almost_changed_their_mind": "Recording being off unless I turn it on nearly got me to a call, because it removes the worst of the listening risk.",
+    "missing_info": [
+      "Is call data and transcript storage in Canada?",
+      "Who at the company can access transcripts or recordings?",
+      "Where is the privacy policy?",
+      "Which underlying vendors process the calls?"
+    ],
+    "price_reaction": "cheap",
+    "max_monthly_they_would_pay_cad": 500,
+    "trust_in_ray": 3,
+    "best_product_for_them": "Answer",
+    "line_that_helped_most": "Audio recording is off unless you turn it on, and when it is on the AI says so at the start of the call.",
+    "line_that_hurt_most": "Calls are transcribed so you get the summary."
+  },
+  {
+    "id": "P047",
+    "segment": "real_estate_agent",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "My brokerage already gives me an AI call and text assistant in my fees, and nothing here says why this one is worth three hundred dollars more.",
+    "what_almost_changed_their_mind": "If I ever changed brokerages, the month-to-month terms and no setup fee would make this the first thing I tried.",
+    "missing_info": [
+      "What does this do better than the assistant bundled with my brokerage platform?"
+    ],
+    "price_reaction": "expensive",
+    "max_monthly_they_would_pay_cad": 0,
+    "trust_in_ray": 3,
+    "best_product_for_them": "none",
+    "line_that_helped_most": "No setup fee.",
+    "line_that_hurt_most": "$300 CAD a month."
+  },
+  {
+    "id": "P048",
+    "segment": "real_estate_agent",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "It is priced in Canadian dollars, Texas is only a maybe to be confirmed on a call, and it never says who I call when it breaks or in what hours.",
+    "what_almost_changed_their_mind": "Forwarding only when I do not answer and being switched off when I cancel eased my fear of the line pointing nowhere, but not the fear of the vendor vanishing.",
+    "missing_info": [
+      "Is setup confirmed for Texas numbers?",
+      "What is the price in US dollars?",
+      "Who supports it and in what hours and time zone?",
+      "What happens to my forwarding if the business shuts down?"
+    ],
+    "price_reaction": "cannot judge",
+    "max_monthly_they_would_pay_cad": 0,
+    "trust_in_ray": 2,
+    "best_product_for_them": "Answer",
+    "line_that_helped_most": "calls forward only when you do not answer",
+    "line_that_hurt_most": "US clients can join the founding 10 only where setup is confirmed for their state on the call; price is in Canadian dollars."
+  },
+  {
+    "id": "P049",
+    "segment": "real_estate_agent",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "Seventy percent of my callers open in Spanish and this says English at launch, with Spanish only something they would test, and there is no WhatsApp handoff at all.",
+    "what_almost_changed_their_mind": "Not being charged if the language test fails is fair, and if Spanish had been named as working I would have booked the call.",
+    "missing_info": [
+      "Does it answer in Spanish today?",
+      "Can it hand a caller off to WhatsApp?",
+      "Is setup confirmed for Florida?",
+      "What is the price for two people on one line?"
+    ],
+    "price_reaction": "fair",
+    "max_monthly_they_would_pay_cad": 300,
+    "trust_in_ray": 3,
+    "best_product_for_them": "Answer",
+    "line_that_helped_most": "If it does not handle your callers' language to your standard, you do not go live and you are not charged.",
+    "line_that_hurt_most": "English at launch."
+  },
+  {
+    "id": "P050",
+    "segment": "real_estate_agent",
+    "decision_founding": "passes",
+    "decision_standard": "passes",
+    "would_refer": false,
+    "main_reason": "Pennsylvania needs every party's consent and this says nothing about US recording law, whose law governs the agreement or who carries the liability, so my husband would not let me sign it.",
+    "what_almost_changed_their_mind": "Recording being off by default with the AI announcing it when on is close to what I needed, but transcription is still on and nobody says how that sits with Pennsylvania law.",
+    "missing_info": [
+      "How is all-party consent handled in Pennsylvania, including for transcription?",
+      "Which governing law applies to the agreement?",
+      "What are the indemnity terms?",
+      "Is setup confirmed for Pennsylvania?"
+    ],
+    "price_reaction": "fair",
+    "max_monthly_they_would_pay_cad": 300,
+    "trust_in_ray": 3,
+    "best_product_for_them": "Answer",
+    "line_that_helped_most": "Audio recording is off unless you turn it on, and when it is on the AI says so at the start of the call.",
+    "line_that_hurt_most": "Canada first."
+  }
+]
