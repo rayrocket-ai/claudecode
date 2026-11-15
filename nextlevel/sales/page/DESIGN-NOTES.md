@@ -38,9 +38,21 @@ Restyled 2026-11-15 after Ray asked for "nicer white colours, bright colours". S
 - Quiz: a Next control on any question that already has an answer; "Change my answers" keeps the answers; the typed first name survives Back.
 - All standalone text controls are at least 44px tall.
 
+## Offer update, 2026-11-15 (round 3 offer)
+Design, motion, the booking fallback and the consent logic are unchanged. What was added:
+- **Four quiz paths**, chosen by the first answer. Agents: six questions (unchanged). Mortgage brokers and contractors: three questions and a result that offers Answer on the founding terms, worded for the trade. "I run a different kind of business": industry, one phone question, then a waitlist result (1 March 2027 and the starting price for real estate lawyers, accountants and insurance; no date for anything else). "I am in the United States": one question, then a US list result with no price and no booking.
+- **Webhook payload**: same fields plus `industry`; `path` is `agent`, `founding-business`, `waitlist` or `us-list`. New tags follow the old style: `nl-founding-business`, `nl-founding-business-<trade>`, `nl-phone-<problem>`, `nl-us-list`, `nl-us-list-<business>`.
+- **`CONFIG.DEMO_PHONE`** (empty). When set, script adds a "Call the demo line" block with a `tel:` link under the hero buttons and in every result that offers Answer. When empty nothing about a demo number is on the page.
+- **Hero**: one line under the buttons, with a blue rule on its left, welcomes mortgage brokers and contractors. The headline and the label are as they were.
+- **Who it is for**: three columns (agents, 7 spots; mortgage brokers and contractors, 3 spots; opening 1 March 2027).
+- **Founding terms**: 21 rows. One row holds a text button, "I am in the United States", that opens the US list question in the intake.
+- The saved-answers key is now `nlQuizV2`, so answers saved by the earlier version are not read into the new paths.
+- A `[hidden]{display:none!important}` rule was added so the text-consent row stays hidden wherever the page is hosted.
+
 ## To replace before launch
 - Portrait slot: the `<figure class="portrait">` in section 06 (HTML comment marks it).
 - Signature: typeset in a script face. Swap for Ray's real signature image.
-- `CONFIG.BOOKING_URL` and `CONFIG.WEBHOOK_URL` are empty.
+- `CONFIG.BOOKING_URL`, `CONFIG.WEBHOOK_URL` and `CONFIG.DEMO_PHONE` are empty.
 - Footer: business name and mailing address; privacy and terms links (HTML comment only).
 - Terms marked "Ray to confirm" in `offer.md` section 6 are on the page as working terms.
+- Lines that rest on facts marked `[not verified]` in `offer.md` (the minute bundle, data held in the United States, the Zapier push) are on the page as approved wording. Check them as listed in `../../README.md`, "Verify before publishing", before the page is made public.

@@ -48,6 +48,7 @@ h1,h2,h3,h4,p,ul,ol,dl,dd,figure{margin:0}
 ul,ol{padding:0;list-style:none}
 a{color:inherit}
 ::selection{background:var(--accent);color:var(--on-accent)}
+[hidden]{display:none!important}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 button{font:inherit;color:inherit}
 :focus-visible{outline:2px solid var(--accent);outline-offset:4px}
@@ -141,6 +142,14 @@ h3{font-size:clamp(1.5rem,2.6vw,2rem);line-height:1.08;letter-spacing:-.02em}
 .hero-copy .sub{font-size:clamp(1.2rem,2vw,1.5rem);line-height:1.38;max-width:26ch;font-family:var(--display);letter-spacing:-.01em}
 .hero-copy .by{font-size:14.5px;line-height:1.55;color:var(--muted);max-width:40ch}
 .hero-cta{display:flex;flex-wrap:wrap;align-items:center;gap:18px 28px}
+.hero-copy .also{font-size:15.5px;line-height:1.5;max-width:40ch;padding-left:14px;border-left:2px solid var(--accent)}
+/* demo line: rendered by script only when CONFIG.DEMO_PHONE is set */
+.demo{display:grid;gap:4px;justify-items:start}
+.demo a{display:inline-flex;align-items:center;min-height:44px;font-family:var(--display);font-size:clamp(1.7rem,3vw,2.3rem);letter-spacing:-.02em;line-height:1.1;color:var(--accent);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:6px;font-variant-numeric:lining-nums}
+.demo p{font-size:14.5px;color:var(--muted);max-width:40ch}
+.brief .demo{padding-bottom:6px}
+.brief .demo a{color:var(--sheet-accent)}
+.brief .demo p{color:var(--sheet-muted)}
 @media (min-width:900px){.hero-grid{grid-template-columns:5fr 7fr;gap:64px}}
 
 /* phone line (illustration) */
@@ -301,7 +310,8 @@ h3{font-size:clamp(1.5rem,2.6vw,2rem);line-height:1.08;letter-spacing:-.02em}
 .who-col li{padding:11px 0;border-bottom:1px solid var(--rule);font-family:var(--display);font-size:clamp(1.3rem,2vw,1.6rem);letter-spacing:-.02em;line-height:1.15}
 .who-col.quiet li{color:var(--muted)}
 .who-col p{color:var(--muted);font-size:15.5px;max-width:44ch}
-@media (min-width:860px){.who{grid-template-columns:1fr 1fr;gap:64px}}
+@media (min-width:860px){.who{grid-template-columns:1fr 1fr 1fr;gap:40px}}
+@media (min-width:1280px){.who{gap:56px}}
 
 /* founding (dark band) */
 .found-grid{display:grid;gap:48px}
@@ -309,11 +319,13 @@ h3{font-size:clamp(1.5rem,2.6vw,2rem);line-height:1.08;letter-spacing:-.02em}
 .figure-price h2{position:relative;z-index:1}
 .figure-price .amt{margin-top:clamp(10px,1.6vw,26px);font-family:var(--display);font-size:clamp(6.5rem,25vw,17rem);font-size:min(17rem,50cqw);line-height:.78;letter-spacing:-.06em;font-variant-numeric:tabular-nums lining-nums;color:var(--band-ink);white-space:nowrap}
 .figure-price .amt sup{font-size:.34em;vertical-align:top;position:relative;top:.16em;letter-spacing:0;margin-right:.04em;color:var(--band-accent)}
+.figure-price .spots{color:var(--band-muted);font-size:15.5px;line-height:1.5;max-width:34ch;margin-top:12px}
 .figure-price .per{font-family:var(--display);font-style:italic;font-size:clamp(1.5rem,3vw,2.4rem);letter-spacing:-.02em;margin-top:14px}
 .terms{border-top:1px solid var(--band-line)}
 .terms li{display:grid;gap:4px 24px;padding:18px 0;border-bottom:1px solid var(--band-rule)}
 .terms h3{font-size:clamp(1.3rem,2vw,1.6rem)}
 .terms p{color:var(--band-muted);font-size:15.5px;max-width:48ch}
+.terms li>div{display:grid;gap:4px;justify-items:start;min-width:0}
 @media (min-width:640px){.terms li{grid-template-columns:minmax(150px,5fr) 7fr;align-items:baseline}}
 @media (min-width:1000px){.found-grid{grid-template-columns:5fr 7fr;gap:72px;align-items:start}.figure-price{position:sticky;top:calc(env(safe-area-inset-top,0px) + 48px)}}
 .found-cta{display:flex;flex-wrap:wrap;gap:18px 28px;align-items:center;margin-top:clamp(36px,4vw,56px)}
@@ -456,7 +468,8 @@ footer .wm{color:var(--ink);margin-bottom:10px}
             <button type="button" class="btn" data-go="quiz">Start the intake <span class="arr" aria-hidden="true">&rarr;</span></button>
             <a class="u label" href="#menu">See the prices</a>
           </div>
-          <p class="by h-fade" style="--i:3">Built and run by Ray Ahmadi on his own real estate business. On a 15-minute call you dial the live system yourself.</p>
+          <p class="also h-fade" style="--i:3">Also open now to mortgage brokers and to contractors and renovators: 3 founding spots, on the same terms.</p>
+          <p class="by h-fade" style="--i:4">Built and run by Ray Ahmadi on his own real estate business. On a 15-minute call you dial the live system yourself.</p>
         </div>
         <figure class="line" id="line" role="img" aria-label="Illustration of one day on an agent's phone line. Three calls are missed: 2:14 pm during a showing, 6:40 pm during a listing appointment, and 9:05 pm, a voicemail with no message. With Next Level Answer, the 2:14 pm call is answered, qualified and booked.">
           <div class="line-head label"><span>Tuesday, your line</span><span>Illustration</span></div>
@@ -500,7 +513,7 @@ footer .wm{color:var(--ink);margin-bottom:10px}
       <div class="intake-grid">
         <div class="intake-side" data-r>
           <h2 id="h-quiz">Six questions. <em>One brief.</em></h2>
-          <p class="lede">Tell us how your business runs today. You leave with a one-page brief, written to you.</p>
+          <p class="lede">Tell us how your business runs today. You leave with a one-page brief, written to you. Mortgage brokers and contractors answer three questions.</p>
           <ol>
             <li>One tap per answer</li>
             <li>Your biggest leak, named</li>
@@ -551,20 +564,25 @@ footer .wm{color:var(--ink);margin-bottom:10px}
       <div class="sec-top"><span class="no">03</span><span class="label">The method</span><i class="hr" data-r="draw"></i></div>
       <h2 id="h-how" data-r>Three steps.<br><em>We set it up.</em></h2>
       <ol class="sec-body steps" data-r="stagger">
-        <li><span class="label">Step one</span><h3>Take the intake</h3><p>Six questions. You see your biggest leak and what fixes it, with the price.</p></li>
+        <li><span class="label">Step one</span><h3>Take the intake</h3><p>Six questions for agents, three for mortgage brokers and contractors. You see your biggest leak and what fixes it, with the price.</p></li>
         <li><span class="label">Step two</span><h3>Book 15 minutes with Ray</h3><p>Ray asks about your business. You dial the live system yourself and hear it answer, before you pay.</p></li>
         <li><span class="label">Step three</span><h3>We set it up for you</h3><p>You send your details. We build it and test it with you before it goes live.</p></li>
       </ol>
       <div class="who">
         <div class="who-col" data-r>
-          <span class="label">Open now: real estate agents</span>
+          <span class="label">Open now: real estate agents, 7 founding spots</span>
           <ul><li>Solo agents</li><li>Agents with an assistant</li><li>Team leaders</li><li>Brokers and brokerage owners</li></ul>
-          <p>Any brokerage. You do not have to join Ray's team.</p>
+          <p>Any brokerage. Next Level never recruits a client to Ray's brokerage or team, and joining anything of Ray's is not a condition of the price, the service or the support.</p>
+        </div>
+        <div class="who-col" data-r>
+          <span class="label">Also open now: 3 founding spots</span>
+          <ul><li>Mortgage brokers</li><li>Contractors and renovators</li></ul>
+          <p>The same founding terms as agents: $300 a month, no setup fee, price locked, 250 minutes included. Same intake, same 15-minute call.</p>
         </div>
         <div class="who-col quiet" data-r>
-          <span class="label">Next: other businesses, in this order</span>
-          <ol><li>Mortgage brokers</li><li>Real estate lawyers</li><li>Accountants</li><li>Contractors and renovators</li><li>Insurance</li></ol>
-          <p>Next Level Answer opens to other businesses once the first 10 agents are live, from $500 setup plus $400 a month. Take the same intake, pick "I run a different kind of business" and join the waitlist for first notice.</p>
+          <span class="label">Opening 1 March 2027</span>
+          <ul><li>Real estate lawyers</li><li>Accountants</li><li>Insurance</li></ul>
+          <p>From $500 setup plus $400 a month. Join the waitlist through the intake and you get first notice before that date. Any other business can join the waitlist too, and no date is promised.</p>
         </div>
       </div>
     </div>
@@ -578,6 +596,7 @@ footer .wm{color:var(--ink);margin-bottom:10px}
           <h2 id="h-found" class="label" style="font-family:var(--mono);font-size:11.5px;letter-spacing:.16em;line-height:1.4">Next Level Answer, for the first 10 clients</h2>
           <p class="amt" aria-label="300 dollars a month"><sup>$</sup><span id="amt300">300</span></p>
           <p class="per">a month. No setup fee.</p>
+          <p class="spots">10 founding spots. 7 for real estate agents. 3 open now to mortgage brokers and to contractors and renovators. Canada only.</p>
           <div class="found-cta">
             <a class="btn" href="#book">Book 15 minutes with Ray <span class="arr" aria-hidden="true">&rarr;</span></a>
             <button type="button" class="textbtn" data-go="quiz">Or start with the intake</button>
@@ -585,19 +604,27 @@ footer .wm{color:var(--ink);margin-bottom:10px}
         </div>
         <div>
           <ul class="terms" data-r="stagger">
-            <li><h3>No setup fee</h3><p>For the Founding 10. After the first 10 clients, Answer is $500 setup + $400 a month.</p></li>
+            <li><h3>No setup fee</h3><p>For the Founding 10. After the first 10 clients, Answer is $500 setup + $400 a month, with the same 250 minutes and the same $0.30 for extra minutes.</p></li>
             <li><h3>Price locked</h3><p>The $300 price stays locked while your subscription is active.</p></li>
-            <li><h3>Month to month</h3><p>Cancel before the next billing date. When you leave, your contacts and transcripts are exported to you and deleted from the account.</p></li>
+            <li><h3>Month to month</h3><p>Cancel before the next billing date. When you leave, your contacts and transcripts are exported to you and deleted from the account within 30 days.</p></li>
             <li><h3>Live within 7 days</h3><p>Live within 7 days of you supplying everything needed, or the first month is not charged. Once per client, first month only, and not for carrier or registration delays.</p></li>
-            <li><h3>Usage at cost</h3><p>Phone, text and AI minutes are billed at cost with no markup for founding clients, on top of the $300. You set a monthly cap before go-live, and the system stops and alerts you if it is reached. Ray shows you his own line's bill on the call.</p></li>
+            <li><h3>250 minutes included</h3><p>The $300 includes 250 AI call minutes a month, your phone number, and the summary and alert texts, up to 500 text segments a month. Extra minutes are $0.30 each. A part minute counts as a minute, and unused minutes do not carry over. Minutes used are shown on every invoice, and Ray shows you his own line's real usage on the call.</p></li>
+            <li><h3>A cap you set</h3><p>Before go-live you set a monthly cap on extra minutes, and it can be zero. With the cap at zero, the most you can be billed is $300. With a cap of 100 extra minutes, the most is $330. The system stops and alerts you if the cap is reached.</p></li>
+            <li><h3>10 founding spots</h3><p>7 are for real estate agents. 3 are open now to mortgage brokers and to contractors and renovators, on the same founding terms.</p></li>
+            <li><h3>Teams</h3><p>One subscription covers one business line. Each additional agent line on the same account is half the monthly price: $150 a month at the founding price, $200 at the standard price. Each one adds 125 minutes, and all lines on the account share one pool of minutes.</p></li>
+            <li><h3>Canada only</h3><div><p>Founding clients are in Canada only, and the price is in Canadian dollars. US agents can join the US list, and are told the US opening date and the US dollar price by 1 March 2027. Nothing is sold to US clients before then.</p><button type="button" class="textbtn" data-us>I am in the United States</button></div></li>
             <li><h3>Try it first</h3><p>On the call you dial the live system yourself and hear it answer, before you pay.</p></li>
-            <li><h3>Languages</h3><p>English at launch. Any other language is tested on your own line with you during setup. If it is not good enough for your callers, you do not go live and you are not charged.</p></li>
+            <li><h3>Languages</h3><p>English is live today. Other languages that HighLevel lists can be switched on, and each one is tested on your own line with you during set-up. If it does not handle your callers to your standard, you do not go live and you are not charged. Dari, Farsi, Punjabi, Mandarin, Cantonese, Urdu and Arabic are not promised today. Ask Ray on the call which languages are available for your line.</p></li>
             <li><h3>Your callers stay yours</h3><p>No one at Next Level or Ray Homes contacts your callers or uses your contacts, and that is written in the agreement.</p></li>
-            <li><h3>Recording off</h3><p>Audio recording is off unless you turn it on. When it is on, the AI says so at the start of the call.</p></li>
-            <li><h3>Call summaries</h3><p>Every call arrives as a text and an email summary, so it works beside any CRM. A direct push into your CRM is confirmed for your specific CRM on the call, before you pay.</p></li>
+            <li><h3>Where your data is</h3><p>Your account runs on HighLevel, a US software company. Your data is stored in the United States, not in Canada.</p></li>
+            <li><h3>Transcripts and recording</h3><p>Each call is transcribed so you get the summary. The people who can read a transcript are you, and the set-up team only while they are setting up your account or fixing something you asked them to fix. Audio recording is off unless you turn it on. When it is on, the AI says so at the start of the call.</p></li>
+            <li><h3>Summaries and your CRM</h3><p>Every call arrives as a text and an email summary, so it works beside any CRM. For Follow Up Boss and BoldTrail there is also a one-way push into your CRM through Zapier. Lofty and Sierra Interactive are tested in your account during set-up.</p></li>
             <li><h3>Urgent callers</h3><p>If a caller asks for a person, or the call is urgent, the AI offers a callback and you get a text alert straight away.</p></li>
             <li><h3>Your brokerage</h3><p>You get a one-page summary to show your broker of record before you sign.</p></li>
-            <li><h3>Why a founding price</h3><p>Next Level is new and there are no client testimonials yet. That is the reason the founding price and the founding terms exist.</p></li>
+            <li><h3>Written agreement</h3><p>You get a written agreement before any payment. It names the registered business and its address.</p></li>
+            <li><h3>No recruiting</h3><p>Next Level never recruits a client to Ray's brokerage or team. Joining anything of Ray's is not a condition of the price, the service or the support.</p></li>
+            <li><h3>No cheaper plan</h3><p>There is no cheaper plan today. If $300 a month is more than your phone problem is worth, this is not the right service for you yet.</p></li>
+            <li><h3>Why a founding price</h3><p>Next Level is new and there are no client testimonials yet. That is the reason for the founding terms: a lower price, no setup fee and a locked price, in return for being first.</p></li>
           </ul>
         </div>
       </div>
@@ -613,8 +640,8 @@ footer .wm{color:var(--ink);margin-bottom:10px}
         <table class="menu">
           <thead><tr><th scope="col">Product</th><th scope="col">Setup</th><th scope="col">A month</th></tr></thead>
           <tbody>
-            <tr class="feat"><th scope="row"><div class="dish"><span class="nm">Answer, Founding 10</span><i class="leader" aria-hidden="true"></i></div><div class="dish-note"><span class="tag now">Available now</span><span>AI receptionist. Every call answered, qualified and booked. First 10 clients.</span></div></th><td class="m none" data-l="Setup">None</td><td class="m" data-l="A month">$300</td></tr>
-            <tr><th scope="row"><div class="dish"><span class="nm">Answer</span><i class="leader" aria-hidden="true"></i></div><div class="dish-note"><span class="tag now">Available now</span><span>The standard price, after the Founding 10.</span></div></th><td class="m" data-l="Setup">$500</td><td class="m" data-l="A month">$400</td></tr>
+            <tr class="feat"><th scope="row"><div class="dish"><span class="nm">Answer, Founding 10</span><i class="leader" aria-hidden="true"></i></div><div class="dish-note"><span class="tag now">Available now</span><span>AI receptionist. Every call answered, qualified and booked. First 10 clients: 7 real estate agents, and 3 mortgage brokers or contractors. 250 minutes a month included.</span></div></th><td class="m none" data-l="Setup">None</td><td class="m" data-l="A month">$300</td></tr>
+            <tr><th scope="row"><div class="dish"><span class="nm">Answer</span><i class="leader" aria-hidden="true"></i></div><div class="dish-note"><span class="tag now">Available now</span><span>The standard price, after the Founding 10. The same 250 minutes a month included.</span></div></th><td class="m" data-l="Setup">$500</td><td class="m" data-l="A month">$400</td></tr>
             <tr><th scope="row"><div class="dish"><span class="nm">Reviews</span><i class="leader" aria-hidden="true"></i></div><div class="dish-note"><span class="tag">Opening next</span><span>Review requests at closing and at day 30.</span></div></th><td class="m" data-l="Setup">$250</td><td class="m" data-l="A month">$150</td></tr>
             <tr><th scope="row"><div class="dish"><span class="nm">Nurture</span><i class="leader" aria-hidden="true"></i></div><div class="dish-note"><span class="tag">Opening next</span><span>Database reactivation, follow-up and past-client touches.</span></div></th><td class="m" data-l="Setup">$500</td><td class="m" data-l="A month">$250</td></tr>
             <tr><th scope="row"><div class="dish"><span class="nm">Ads</span><i class="leader" aria-hidden="true"></i></div><div class="dish-note"><span class="tag">Opening next</span><span>Listing and buyer ads, run and watched daily. Ad spend goes on your own card.</span></div></th><td class="m" data-l="Setup">$500</td><td class="m" data-l="A month">$750</td></tr>
@@ -622,7 +649,7 @@ footer .wm{color:var(--ink);margin-bottom:10px}
           </tbody>
         </table>
       </div>
-      <p class="tnote" data-r>All prices in Canadian dollars. For founding clients, phone, text and AI minutes are billed at cost with no markup, up to a monthly cap you set. Ray shows you his own line's bill on the call. Next Level does not promise leads, deals or income. It makes sure the business you already have is answered and followed up.</p>
+      <p class="tnote" data-r>All prices in Canadian dollars. Answer includes 250 AI call minutes a month, your phone number and up to 500 text segments a month, at the founding price and at the standard price. Extra minutes are $0.30 each, up to a monthly cap you set, and the cap can be zero. A part minute counts as a minute, and unused minutes do not carry over. Each additional agent line on the same account is half the monthly price, $150 founding or $200 standard, and adds 125 minutes to a shared pool. There is no cheaper plan today. Next Level does not promise leads, deals or income. It makes sure the business you already have is answered and followed up.</p>
     </div>
   </section>
 
@@ -666,25 +693,27 @@ footer .wm{color:var(--ink);margin-bottom:10px}
           <details><summary>Will callers know it is an AI?<i class="pm" aria-hidden="true"></i></summary><p>Yes. It says so at the start of the call. If a caller asks for a person, or it is urgent, it offers a callback and alerts you by text straight away.</p></details>
           <details><summary>What does it sound like?<i class="pm" aria-hidden="true"></i></summary><p>Book the call and dial the live system yourself. You hear it answer before you pay anything.</p></details>
           <details><summary>What is available today?<i class="pm" aria-hidden="true"></i></summary><p>Next Level Answer is available now. Reviews, Nurture and Ads are opening next, in that order. Complete follows when all four are open.</p></details>
-          <details><summary>What do the Founding 10 pay?<i class="pm" aria-hidden="true"></i></summary><p>$300 a month for Next Level Answer, with no setup fee. The $300 price stays locked while your subscription is active.</p></details>
-          <details><summary>What does Answer cost after the Founding 10?<i class="pm" aria-hidden="true"></i></summary><p>$500 setup and $400 a month, in Canadian dollars.</p></details>
-          <details><summary>What does usage cost?<i class="pm" aria-hidden="true"></i></summary><p>Phone, text and AI minutes are billed at cost with no markup for founding clients, on top of the $300. You set a monthly spending cap before go-live. If it is reached, the system stops and alerts you. On the call Ray shows you the real usage bill for his own line before you pay.</p></details>
-          <details><summary>Is there a contract?<i class="pm" aria-hidden="true"></i></summary><p>No long contract. It is month to month. Cancel before the next billing date. When you leave, your contacts and transcripts are exported to you and deleted from the account.</p></details>
+          <details><summary>What do the Founding 10 pay?<i class="pm" aria-hidden="true"></i></summary><p>$300 a month for Next Level Answer, with no setup fee. That includes 250 AI call minutes a month, your phone number and up to 500 text segments a month. The $300 price stays locked while your subscription is active.</p></details>
+          <details><summary>What does Answer cost after the Founding 10?<i class="pm" aria-hidden="true"></i></summary><p>$500 setup and $400 a month, in Canadian dollars, with the same 250 minutes and the same $0.30 for extra minutes.</p></details>
+          <details><summary>What does usage cost?<i class="pm" aria-hidden="true"></i></summary><p>Nothing extra, up to 250 AI call minutes a month. The $300 includes those minutes, your phone number, and the summary and alert texts, up to 500 text segments a month. Extra minutes are $0.30 each. A part minute counts as a minute, and unused minutes do not carry over. You set a monthly cap on extra minutes before go-live, and it can be zero. With the cap at zero, the most you can be billed is $300. Minutes used are shown on every invoice, and on the call Ray shows you the real usage on his own line before you pay.</p></details>
+          <details><summary>Is there a cheaper plan?<i class="pm" aria-hidden="true"></i></summary><p>There is no cheaper plan today. If $300 a month is more than your phone problem is worth, this is not the right service for you yet.</p></details>
+          <details><summary>Is there a contract?<i class="pm" aria-hidden="true"></i></summary><p>You get a written agreement before any payment. It names the registered business and its address. It is month to month. Cancel before the next billing date. When you leave, your contacts and transcripts are exported to you and deleted from the account within 30 days.</p></details>
           <details><summary>How long does setup take?<i class="pm" aria-hidden="true"></i></summary><p>For the Founding 10: live within 7 days of you supplying everything needed, or the first month is not charged. This applies once per client, to the first month only, and not to carrier or registration delays.</p></details>
           <details><summary>Do I have to change my phone number?<i class="pm" aria-hidden="true"></i></summary><p>No. You keep your number. Calls forward only when you do not answer, including when your phone is off. Forwarding is switched off the day you cancel.</p></details>
-          <details><summary>What do you need from me?<i class="pm" aria-hidden="true"></i></summary><p>Your business details, your hours and areas, the questions you want asked, calendar access, the number to forward, and the monthly spending cap you choose.</p></details>
-          <details><summary>Does it speak other languages?<i class="pm" aria-hidden="true"></i></summary><p>English at launch. Any other language is tested on your own line with you during setup. If it does not handle your callers' language to your standard, you do not go live and you are not charged.</p></details>
-          <details><summary>I am on another CRM. Does this replace it?<i class="pm" aria-hidden="true"></i></summary><p>No. It works beside it. You get every call as a text and an email summary from day one. A direct push into your CRM is confirmed for your specific CRM on the call, before you pay. If it cannot be done, you are told then.</p></details>
-          <details><summary>Who can see my callers and my call transcripts?<i class="pm" aria-hidden="true"></i></summary><p>Your callers stay yours. No one at Next Level or Ray Homes contacts your callers or uses your contacts, and that is written in the agreement. Each call is transcribed so you get the summary. The transcript stays in your own account. The people who can read it are you, and the set-up team only while they are setting up or fixing your account. Audio recording is off unless you turn it on.</p></details>
+          <details><summary>What do you need from me?<i class="pm" aria-hidden="true"></i></summary><p>Your business details, your hours and areas, the questions you want asked, calendar access, the number to forward, the name of your CRM, the languages your callers use, and the monthly cap on extra minutes you choose.</p></details>
+          <details><summary>Does it speak other languages?<i class="pm" aria-hidden="true"></i></summary><p>English is live today. Other languages that HighLevel lists can be switched on, and each one is tested on your own line with you during set-up. If it does not handle your callers to your standard, you do not go live and you are not charged. Dari, Farsi, Punjabi, Mandarin, Cantonese, Urdu and Arabic are not promised today. Ask Ray on the call which languages are available for your line.</p></details>
+          <details><summary>I am on another CRM. Does this replace it?<i class="pm" aria-hidden="true"></i></summary><p>No. It works beside it. Every call reaches you as a text and an email summary from day one. For Follow Up Boss and BoldTrail there is also a push into your CRM through Zapier. It is one way, from Next Level Answer into your CRM. Lofty and Sierra Interactive are tested in your account during set-up. If the push for one of those four does not work in your account during set-up, you can cancel and you are not charged. Any other CRM gets the text and email summary.</p></details>
+          <details><summary>Who can see my callers and my call transcripts?<i class="pm" aria-hidden="true"></i></summary><p>Your callers stay yours. No one at Next Level or Ray Homes contacts your callers or uses your contacts, and that is written in the agreement. Each call is transcribed so you get the summary. The people who can read a transcript are you, and the set-up team only while they are setting up your account or fixing something you asked them to fix. Audio recording is off unless you turn it on.</p></details>
+          <details><summary>Where is my data held?<i class="pm" aria-hidden="true"></i></summary><p>Your account runs on HighLevel, a US software company. Your data is stored in the United States, not in Canada. When you leave, your contacts and transcripts are exported to you and deleted from the account within 30 days.</p></details>
           <details><summary>Will my brokerage allow it?<i class="pm" aria-hidden="true"></i></summary><p>You get a one-page summary to show your broker of record before you sign. If your brokerage says no within 14 days, you get your first month back.</p></details>
           <details><summary>Is it allowed where I work?<i class="pm" aria-hidden="true"></i></summary><p>Rules on call recording and on telling callers they are speaking with an AI differ by province and state. We confirm them for your location before you go live. Audio recording is off unless you turn it on, and when it is on the AI says so at the start of the call. Check with your brokerage as well.</p></details>
-          <details><summary>Do you have client testimonials?<i class="pm" aria-hidden="true"></i></summary><p>Not yet. Next Level is new and the first 10 agents are its founding clients. That is the reason the founding price and the founding terms exist. What you can check today is Ray's own track record and the live system, which you dial yourself on the call.</p></details>
-          <details><summary>I run a team. How does that work?<i class="pm" aria-hidden="true"></i></summary><p>One subscription covers one business line. A team routing calls to several agents is quoted on the call.</p></details>
-          <details><summary>I am in the US. Can I join?<i class="pm" aria-hidden="true"></i></summary><p>Canada first. US agents can join the Founding 10 only where setup is confirmed for their state on the call. The price is in Canadian dollars.</p></details>
+          <details><summary>Do you have client testimonials?<i class="pm" aria-hidden="true"></i></summary><p>Not yet. Next Level is new and the first 10 clients are its founding clients. That is the reason for the founding terms: a lower price, no setup fee and a locked price, in return for being first. What you can check today is Ray's own track record and the live system, which you dial yourself on the call.</p></details>
+          <details><summary>I run a team. How does that work?<i class="pm" aria-hidden="true"></i></summary><p>One subscription covers one business line. Each additional agent line on the same account is half the monthly price: $150 a month at the founding price, $200 at the standard price. Each one adds 125 minutes, and all lines on the account share one pool of minutes.</p></details>
+          <details><summary>I am in the US. Can I join?<i class="pm" aria-hidden="true"></i></summary><p>Not yet. Founding clients are in Canada only. You can join the US list: in the intake, pick "I am in the United States". By 1 March 2027 everyone on the US list is told the US opening date and the price in US dollars. Nothing is sold to US clients before then.</p></details>
           <details><summary>Who pays for the ads?<i class="pm" aria-hidden="true"></i></summary><p>You do, on your own card, straight to the ad platform. The Next Level Ads fee covers running and watching them.</p></details>
           <details><summary>Does this promise me more leads or deals?<i class="pm" aria-hidden="true"></i></summary><p>No. It makes sure the calls, clients and contacts you already have are answered and followed up.</p></details>
-          <details><summary>Do I have to join Ray's team?<i class="pm" aria-hidden="true"></i></summary><p>No. Next Level is open to agents at any brokerage.</p></details>
-          <details><summary>I run a business that is not real estate. Can I use it?<i class="pm" aria-hidden="true"></i></summary><p>Not yet. Answer opens to other businesses once the first 10 agents are live, in this order: mortgage brokers, real estate lawyers, accountants, contractors and renovators, insurance. The starting price is $500 setup plus $400 a month. Take the intake, pick "I run a different kind of business" and join the waitlist for first notice. Outside those five industries you can still join, and no date is promised.</p></details>
+          <details><summary>Do I have to join Ray's team?<i class="pm" aria-hidden="true"></i></summary><p>No. Next Level never recruits a client to Ray's brokerage or team. Joining anything of Ray's is not a condition of the price, the service or the support. Next Level is open to agents at any brokerage.</p></details>
+          <details><summary>I run a business that is not real estate. Can I use it?<i class="pm" aria-hidden="true"></i></summary><p>It depends on your business. Mortgage brokers, and contractors and renovators: 3 of the 10 founding spots are open to you now, on the same founding terms as agents. That is $300 a month, no setup fee, price locked and 250 minutes included, with the same intake and the same 15-minute call. Real estate lawyers, accountants and insurance: Answer opens to you on 1 March 2027, from $500 setup plus $400 a month. Join the waitlist through the intake and you get first notice before that date. Any other business can join the waitlist, and no date is promised.</p></details>
         </div>
       </div>
     </div>
@@ -719,17 +748,19 @@ footer .wm{color:var(--ink);margin-bottom:10px}
 <script>
 /* ===== SETTINGS =====
    BOOKING_URL: Ray's 15-minute calendar link. Empty = the Instagram fallback is shown: a button that copies NEXT and opens Ray's profile, plus the plain instruction.
-   WEBHOOK_URL: HighLevel Inbound Webhook URL. Empty = no network request is ever made. */
+   WEBHOOK_URL: HighLevel Inbound Webhook URL. Empty = no network request is ever made.
+   DEMO_PHONE: the demo line, as it should be read, for example "+1 416 555 0100". Empty = nothing about a demo number appears anywhere. */
 const CONFIG = {
   BOOKING_URL: "",
   WEBHOOK_URL: "",
+  DEMO_PHONE: "",
   INSTAGRAM_HANDLE: "rayahmadi",
   LOCATION_ID: "n0qwGpNQ3CShe8AIhyI0"
 };
 /* ==================== */
 
 const SOURCE = "nextlevel-sales-page";
-const STORE_KEY = "nlQuizV1";
+const STORE_KEY = "nlQuizV2";
 
 /* Motion is an enhancement. MOTION is false with reduced motion or without the APIs, and then nothing moves. */
 const REDUCE = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
@@ -740,21 +771,46 @@ const WHO = [
   ["solo", "Solo agent"],
   ["assistant", "Agent with an assistant"],
   ["team", "Team leader"],
-  ["broker", "Broker or brokerage owner"],
-  ["business", "I run a different kind of business"]
+  ["broker", "Real estate broker or brokerage owner"],
+  ["mortgage", "Mortgage broker"],
+  ["contractor", "Contractor or renovator"],
+  ["business", "I run a different kind of business"],
+  ["us", "I am in the United States"]
 ];
 const INDUSTRY = [
-  ["mortgage", "Mortgage broker"],
   ["lawyer", "Real estate lawyer"],
   ["accountant", "Accountant"],
-  ["contractor", "Contractor or renovation"],
   ["insurance", "Insurance"],
   ["other", "Something else"]
 ];
+const USBIZ = [
+  ["real-estate", "Real estate agent or team"],
+  ["mortgage", "Mortgage broker"],
+  ["contractor", "Contractor or renovator"],
+  ["other", "Another kind of business"]
+];
+/* Wording for the two trades that can buy today. Nothing here mentions showings, listings, buyers or sellers. */
+const TRADES = {
+  mortgage: { busy: "with a client", caller: "client", next: "the next broker", line: "A new client calls while you are with someone else. What happens?" },
+  contractor: { busy: "on a job site", caller: "customer", next: "the next contractor", line: "A new customer calls while you are on a job site. What happens?" }
+};
+const PHONE = {
+  voicemail: { label: "Calls go to voicemail while I am working", head: "Your biggest phone problem: calls that reach voicemail." },
+  afterhours: { label: "Calls in the evening and on weekends go unanswered", head: "Your biggest phone problem: calls after hours." },
+  callback: { label: "I call back too late and they have moved on", head: "Your biggest phone problem: call-backs that come too late." },
+  interrupt: { label: "I answer everything myself and it pulls me off my work", head: "Your biggest phone problem: the phone pulls you off your work." }
+};
 /* [id, label, problem flag or ""] */
 const QUESTIONS = {
   who: { title: "Which best describes you?", opts: WHO.map(o => [o[0], o[1], ""]) },
   industry: { title: "What kind of business do you run?", opts: INDUSTRY.map(o => [o[0], o[1], ""]) },
+  usbiz: { title: "What kind of business do you run in the United States?", opts: USBIZ.map(o => [o[0], o[1], ""]) },
+  phone: { title: "What is your biggest phone problem right now?", opts: Object.keys(PHONE).map(k => [k, PHONE[k].label + ".", ""]) },
+  line: { title: "A new caller rings while you are busy. What happens?", opts: [
+    ["voicemail", "It goes to voicemail and I call back when I can.", ""],
+    ["staff", "Someone in the office picks up during the day.", ""],
+    ["service", "An answering service takes a message.", ""],
+    ["unsure", "I am not sure how many calls I miss.", ""]] },
   q1: { title: "A new buyer calls while you are in a showing. What happens?", opts: [
     ["a", "It goes to voicemail and I call back when I can.", "calls"],
     ["b", "Someone on my team picks up.", ""],
@@ -788,7 +844,7 @@ const PROBLEMS = {
     product: "Next Level Answer",
     fix: "An AI receptionist answers every call you miss, says it is an AI, asks the questions you choose, and books the appointment on your calendar. You get a summary of each call by text and by email.",
     price: "$500 setup + $400 a month", priceNote: "The price after the Founding 10.",
-    next: "Book a 15-minute call. You dial the live system yourself and hear it answer. Ray shows you the real usage bill for his own line before you pay." },
+    next: "Book a 15-minute call. You dial the live system yourself and hear it answer. Ray shows you the real usage on his own line before you pay." },
   reviews: { tag: "nl-problem-reviews", short: "reviews", label: "Not enough reviews",
     head: "Your biggest leak: happy clients who were never asked.",
     body: "Buyers and sellers can compare agents on Google before they call anyone. When the request only goes out if you remember, most clients are never asked.",
@@ -812,7 +868,7 @@ const PROBLEMS = {
     next: "Book a 15-minute call. Bring your last ad report. Ray will go through it with you. You can also dial the live receptionist yourself on the call." }
 };
 
-const blank = () => ({ i: 0, who: "", industry: "", q1: "", q2: "", q3: "", q4: "", problem: "", name: "", done: false, sent: "" });
+const blank = () => ({ i: 0, who: "", industry: "", usbiz: "", phone: "", line: "", q1: "", q2: "", q3: "", q4: "", problem: "", name: "", done: false, sent: "" });
 let st = blank();
 try {
   const s = JSON.parse(localStorage.getItem(STORE_KEY) || "null");
@@ -824,9 +880,19 @@ const app = document.getElementById("app");
 const stageEl = document.getElementById("stage");
 const quizEl = document.getElementById("quiz");
 const esc = t => String(t).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
-const isBiz = () => st.who === "business";
-const flow = () => isBiz() ? ["who", "industry", "problem", "contact"] : ["who", "q1", "q2", "q3", "q4", "problem", "contact"];
+/* Four paths. The first answer picks the path; "I run a different kind of business" then asks the industry. */
+const FLOWS = {
+  "agent": ["who", "q1", "q2", "q3", "q4", "problem", "contact"],
+  "founding-business": ["who", "phone", "line", "contact"],
+  "waitlist": ["who", "industry", "phone", "contact"],
+  "us-list": ["who", "usbiz", "contact"]
+};
+const pathOf = () => st.who === "us" ? "us-list" : st.who === "business" ? "waitlist" : TRADES[st.who] ? "founding-business" : "agent";
+const flow = () => FLOWS[pathOf()];
+const industryOf = () => { const p = pathOf(); return p === "agent" ? "real-estate" : p === "founding-business" ? st.who : p === "waitlist" ? st.industry : st.usbiz; };
+const titleOf = key => key === "line" && TRADES[st.who] ? TRADES[st.who].line : QUESTIONS[key].title;
 const labelOf = (key, id) => { const o = QUESTIONS[key].opts.find(x => x[0] === id); return o ? o[1] : ""; };
+const answered = () => flow().every(k => k === "contact" || labelOf(k, st[k]));
 const igUrl = () => "https://www.instagram.com/" + encodeURIComponent(CONFIG.INSTAGRAM_HANDLE) + "/";
 const ARR = ` <span class="arr" aria-hidden="true">&rarr;</span>`;
 
@@ -852,6 +918,15 @@ function bookingHTML() {
     return `<a class="btn" href="${esc(CONFIG.BOOKING_URL)}" target="_blank" rel="noopener">Book my 15-minute call${ARR}${NEWTAB}</a><p class="fine">15 minutes. With Ray.</p>`;
   }
   return fallbackHTML("NEXT", "send you a time");
+}
+
+/* Demo line. With CONFIG.DEMO_PHONE empty this returns nothing, and the page says nothing about a demo number. */
+function demoHTML(cls) {
+  const n = String(CONFIG.DEMO_PHONE || "").trim();
+  if (!n) return "";
+  return `<div class="demo${cls ? " " + cls : ""}" data-demo><span class="res-kicker label">Call the demo line</span>
+    <a href="tel:${esc(n.replace(/[^\d+]/g, ""))}">${esc(n)}</a>
+    <p>Dial it before you book anything and hear the AI answer.</p></div>`;
 }
 
 /* ---------- screen transitions (visual only) ---------- */
@@ -898,9 +973,11 @@ function progressOf(i, steps) {
 }
 function progressHTML(i, steps) {
   const p = progressOf(i, steps);
-  const text = p.isContact ? "Last step" : `Question ${i + 1} of ${p.total}`;
   const pad = n => String(n).padStart(2, "0");
-  return `<div class="prog"><div class="prog-row"><span class="prog-text" aria-live="polite">${text}</span><span class="prog-n" aria-hidden="true">${p.isContact ? "Your details" : pad(i + 1) + " / " + pad(p.total)}</span></div>
+  /* until the first answer is in, the path and its length are not known */
+  const open = !st.who;
+  const text = p.isContact ? "Last step" : open ? "Question 1" : `Question ${i + 1} of ${p.total}`;
+  return `<div class="prog"><div class="prog-row"><span class="prog-text" aria-live="polite">${text}</span><span class="prog-n" aria-hidden="true">${p.isContact ? "Your details" : open ? "01" : pad(i + 1) + " / " + pad(p.total)}</span></div>
     <div class="bar" role="progressbar" aria-label="Quiz progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${p.pct}"><i></i></div></div>`;
 }
 
@@ -909,13 +986,13 @@ function renderQuestion(focus) {
   const key = steps[st.i];
   if (key === "contact") return renderContact(focus);
   const q = QUESTIONS[key];
-  const letters = "ABCDEF";
+  const letters = "ABCDEFGH";
   swap(`${progressHTML(st.i, steps)}
-    <h3 class="q" id="qt" tabindex="-1">${esc(q.title)}</h3>
+    <h3 class="q" id="qt" tabindex="-1">${esc(titleOf(key))}</h3>
     <div class="opts" role="group" aria-labelledby="qt">${q.opts.map((o, n) =>
       `<button type="button" class="opt" data-v="${esc(o[0])}" aria-pressed="${st[key] === o[0]}"><span aria-hidden="true">${letters[n]}</span><span>${esc(o[1])}</span><span class="go" aria-hidden="true">&rarr;</span></button>`).join("")}</div>
     ${st.i > 0 || st[key] ? `<div class="navrow">${st.i > 0 ? `<button type="button" class="back" id="bk">Back</button>` : `<span></span>`}${st[key] ? `<button type="button" class="back fwd" id="nx">Next${ARR}</button>` : ""}</div>` : ""}
-    ${st.i === 0 ? `<p class="hint">One tap per answer. Your name and email are only asked at the end.</p>` : ""}`, progressOf(st.i, steps).pct);
+    ${st.i === 0 ? `<p class="hint">One tap per answer. Six questions for real estate agents, three for mortgage brokers and contractors. Your name and email are only asked at the end.</p>` : ""}`, progressOf(st.i, steps).pct);
   app.querySelectorAll(".opt").forEach(b => b.addEventListener("click", () => {
     st[key] = b.dataset.v;
     st.i += 1; save(); renderQuestion(true);
@@ -930,9 +1007,11 @@ function renderQuestion(focus) {
 
 function renderContact(focus) {
   const steps = flow();
-  const biz = isBiz();
+  const path = pathOf();
+  const ask = path === "waitlist" ? "Where should Ray reach you when your industry opens?"
+    : path === "us-list" ? "Where should Ray send the US opening date?" : "Where should we send your result?";
   swap(`${progressHTML(st.i, steps)}
-    <h3 class="q" id="qt" tabindex="-1">${biz ? "Where should Ray reach you when your industry opens?" : "Where should we send your result?"}</h3>
+    <h3 class="q" id="qt" tabindex="-1">${ask}</h3>
     <form id="cf" class="cform" novalidate>
       <div class="field"><label for="nl-name">First name</label><input id="nl-name" name="name" autocomplete="given-name" aria-describedby="er" value="${esc(st.name)}"></div>
       <div class="field"><label for="nl-email">Email</label><input id="nl-email" name="email" type="email" autocomplete="email" inputmode="email" aria-describedby="er"></div>
@@ -973,19 +1052,21 @@ function renderContact(focus) {
 
 /* ---------- webhook ---------- */
 function buildPayload(c) {
-  const biz = isBiz();
+  const path = pathOf();
   const answers = {};
-  flow().filter(k => k !== "contact").forEach(k => { answers[k] = { question: QUESTIONS[k].title, answer: labelOf(k, st[k]) }; });
-  const flags = biz ? [] : secondaryFlags();
-  const tags = biz
-    ? ["nl-waitlist", "nl-waitlist-" + st.industry]
-    : [PROBLEMS[st.problem].tag, "nl-seg-" + st.who].concat(flags.map(f => "nl-flag-" + f));
+  flow().filter(k => k !== "contact").forEach(k => { answers[k] = { question: titleOf(k), answer: labelOf(k, st[k]) }; });
+  const flags = path === "agent" ? secondaryFlags() : [];
+  const ind = industryOf();
+  const tags = path === "agent" ? [PROBLEMS[st.problem].tag, "nl-seg-" + st.who].concat(flags.map(f => "nl-flag-" + f))
+    : path === "founding-business" ? ["nl-founding-business", "nl-founding-business-" + ind, "nl-phone-" + st.phone]
+    : path === "waitlist" ? ["nl-waitlist", "nl-waitlist-" + ind]
+    : ["nl-us-list", "nl-us-list-" + ind];
   return {
     name: c.name, email: c.email, phone: c.phone || "",
-    business_type: biz ? labelOf("industry", st.industry) : labelOf("who", st.who),
-    biggest_problem: PROBLEMS[st.problem].label,
+    business_type: path === "waitlist" ? labelOf("industry", st.industry) : path === "us-list" ? labelOf("usbiz", st.usbiz) : labelOf("who", st.who),
+    biggest_problem: path === "agent" ? PROBLEMS[st.problem].label : path === "us-list" ? "" : PHONE[st.phone].label,
     answers: answers, secondary_flags: flags, tags: tags,
-    path: biz ? "waitlist" : "agent",
+    path: path, industry: ind,
     consent_email: true, consent_sms: !!c.sms,
     source: SOURCE, location_id: CONFIG.LOCATION_ID,
     page: location.href, submitted_at: new Date().toISOString()
@@ -1030,7 +1111,7 @@ function priceHTML(kicker, name, amt, note, cls) {
 }
 function foundingHTML(lead) {
   return priceHTML("Available now: the Founding 10", "Next Level Answer", "$300 a month",
-    `${lead} No setup fee for the first 10 clients. The $300 price stays locked while your subscription is active. After the Founding 10: $500 setup + $400 a month.`, "founding");
+    `${lead} No setup fee for the first 10 clients. 250 AI call minutes a month are included. The $300 price stays locked while your subscription is active. After the Founding 10: $500 setup + $400 a month.`, "founding");
 }
 function briefTop(kind) {
   return `<div class="brief-top"><span class="wm"><span class="wm-mark" aria-hidden="true"></span><span>Next <i>Level</i></span></span><span class="label">${kind}</span></div>`;
@@ -1038,37 +1119,93 @@ function briefTop(kind) {
 function briefMeta(rows) {
   return `<dl class="brief-meta">${rows.map(r => `<div><dt class="label">${r[0]}</dt><dd>${r[1]}</dd></div>`).join("")}</dl>`;
 }
-function briefSign() {
-  return `<div class="brief-sign"><span class="label">On your call: Ray, every time</span><span class="sig" aria-hidden="true">Ray Ahmadi</span></div>`;
+function briefSign(label) {
+  return `<div class="brief-sign"><span class="label">${label || "On your call: Ray, every time"}</span><span class="sig" aria-hidden="true">Ray Ahmadi</span></div>`;
+}
+/* The lines shown above the booking step on every result that offers Answer. */
+function beforeYouPay(extra) {
+  const lines = [
+    "$300 a month for the first 10 clients. That includes 250 AI call minutes a month, your phone number and up to 500 text segments. Extra minutes are $0.30 each, up to a cap you set. The cap can be zero.",
+    "A part minute counts as a minute, and unused minutes do not carry over."
+  ].concat(extra || [], [
+    "You get a written agreement before any payment. It names the registered business.",
+    "You dial the live system yourself on the call, before you pay.",
+    "English is live today. Any other language is tested on your own line first. No charge if it does not handle your callers to your standard.",
+    "Your callers stay yours. Audio recording is off unless you turn it on. Your data is stored in the United States, not in Canada.",
+    "Founding clients are in Canada only. In the United States? Change your first answer to join the US list."
+  ]);
+  return `<div class="res-block"><h4>Before you pay</h4><ul class="terms-mini">${lines.map(l => `<li>${l}</li>`).join("")}</ul></div>`;
+}
+function nextStepHTML(text) {
+  return `<div class="res-block"><h4>Your next step</h4><p>${esc(text)}</p>
+        ${demoHTML()}
+        <div class="book">${bookingHTML()}</div>
+        ${st.sent === "failed" && CONFIG.BOOKING_URL ? fallbackHTML("NEXT", "send you a time") : ""}
+      </div>`;
 }
 function renderResult(focus) {
-  if (!st.problem || !PROBLEMS[st.problem] || !st.who) { st = blank(); save(); return renderQuestion(focus); }
-  const p = PROBLEMS[st.problem];
+  if (!st.who || !answered()) { st = blank(); save(); return renderQuestion(focus); }
+  const path = pathOf();
   const name = esc(st.name || "");
+  const kicker = `<span class="res-kicker">Your result${name ? ", " + name : ""}</span>`;
+  const joined = st.sent === "ok";
   let today = "";
   try { today = new Date().toLocaleDateString("en-CA", { year: "numeric", month: "long", day: "numeric" }); } catch (e) {}
   let html;
-  if (isBiz()) {
-    const other = st.industry === "other";
-    const joined = st.sent === "ok";
-    html = `${briefTop("Waitlist brief")}
-      ${briefMeta([["Prepared for", name || "You"], ["Date", esc(today)], ["Business", esc(labelOf("industry", st.industry))], ["Costing you most", esc(p.label)]])}
-      <div class="brief-find"><span class="res-kicker">Your result${name ? ", " + name : ""}</span>
-      <h3 id="rt" tabindex="-1">Real estate agents go first. ${other ? "You can still join the waitlist." : "Your industry is on the list."}</h3>
-      <p>You told us the thing costing you most is ${esc(p.short)}. Next Level Answer opens to other businesses once the first 10 agents are live, in this order: mortgage brokers, real estate lawyers, accountants, contractors and renovators, insurance. The starting price is $500 setup plus $400 a month. ${other ? "Outside those five industries you can still join, and no date is promised." : "There is nothing to buy today."}</p></div>
+  if (path === "us-list") {
+    html = `${briefTop("US list brief")}
+      ${briefMeta([["Prepared for", name || "You"], ["Date", esc(today)], ["Business", esc(labelOf("usbiz", st.usbiz))], ["Country", "United States"]])}
+      <div class="brief-find">${kicker}
+      <h3 id="rt" tabindex="-1">Founding clients are in Canada only. You can join the US list.</h3>
+      <p>Next Level Answer is not sold to US clients yet. By 1 March 2027 everyone on the US list is told the US opening date and the price in US dollars. Nothing is sold to US clients before then, so there is nothing to buy or book today.</p></div>
       <div class="res-block"><h4>Your next step</h4>
       ${joined
-        ? `<p>You are on the waitlist. You get first notice when your industry opens.</p>`
+        ? `<p>You are on the US list. Ray tells you the US opening date and the US dollar price by 1 March 2027.</p>`
+        : `<p>Join the US list with one message.</p>${fallbackHTML("USLIST", "add you to the US list")}`}</div>
+      ${briefSign("Operated by Ray Ahmadi")}`;
+  } else if (path === "waitlist") {
+    const other = st.industry === "other";
+    html = `${briefTop("Waitlist brief")}
+      ${briefMeta([["Prepared for", name || "You"], ["Date", esc(today)], ["Business", esc(labelOf("industry", st.industry))], ["Biggest phone problem", esc(PHONE[st.phone].label)]])}
+      <div class="brief-find">${kicker}
+      <h3 id="rt" tabindex="-1">${other ? "You can join the waitlist. No date is promised." : "Next Level Answer opens to your industry on 1 March 2027."}</h3>
+      <p>${other
+        ? "Today Next Level Answer is open to real estate agents, mortgage brokers, and contractors and renovators. Real estate lawyers, accountants and insurance open on 1 March 2027. For any other business no date is promised, and there is nothing to buy today."
+        : "Next Level Answer opens to real estate lawyers, accountants and insurance on 1 March 2027, from $500 setup plus $400 a month, in Canadian dollars. People on the waitlist get first notice before that date. There is nothing to buy today."}</p>
+      <div class="echo"><span class="res-kicker">In your words</span><q>${esc(PHONE[st.phone].label)}.</q></div></div>
+      <div class="res-block"><h4>Your next step</h4>
+      ${joined
+        ? `<p>You are on the waitlist. ${other ? "No date is promised. If your kind of business opens, you get first notice." : "You get first notice before 1 March 2027."}</p>`
         : `<p>Join the waitlist with one message.</p>${fallbackHTML("WAITLIST", "add you to the list")}`}</div>
+      ${briefSign("Operated by Ray Ahmadi")}`;
+  } else if (path === "founding-business") {
+    const t = TRADES[st.who], ph = PHONE[st.phone];
+    const trade = st.who === "mortgage" ? "mortgage brokers" : "contractors and renovators";
+    html = `${briefTop("Intake brief")}
+      ${briefMeta([["Prepared for", name || "You"], ["Date", esc(today)], ["Business", esc(labelOf("who", st.who))], ["Biggest phone problem", esc(ph.label)]])}
+      <div class="brief-find">${kicker}
+      <h3 id="rt" tabindex="-1">${esc(ph.head)}</h3>
+      <p>${name ? name + ", you" : "You"} cannot be ${t.busy} and on the phone. A ${t.caller} who reaches voicemail can hang up and call ${t.next}. Something else has to pick up.</p>
+      <div class="echo"><span class="res-kicker">In your words</span><q>${esc(ph.label)}.</q><q>${esc(labelOf("line", st.line))}</q></div></div>
+      <div class="res-block"><h4>What fixes it</h4>
+        ${priceHTML("Open now to " + trade + ": 3 founding spots", "Next Level Answer", "$300 a month",
+          `An AI receptionist answers every call you miss, says it is an AI, asks the questions you choose, and books the appointment on your calendar. You get a summary of each call by text and by email. You keep your number, and calls forward only when you do not answer. The same founding terms as real estate agents: no setup fee, 250 AI call minutes a month included, and the $300 price stays locked while your subscription is active. After the Founding 10: $500 setup + $400 a month.`, "founding")}
+        <p class="fine">Prices in Canadian dollars.</p>
+      </div>
+      ${beforeYouPay(["3 of the 10 founding spots are open to mortgage brokers and to contractors and renovators. The other 7 are for real estate agents."])}
+      ${nextStepHTML("Book a 15-minute call. Ray asks about your business. You dial the live system yourself and hear it answer, and Ray shows you the real usage on his own line before you pay.")}
       ${briefSign()}`;
   } else {
+    const p = PROBLEMS[st.problem];
     const flags = secondaryFlags();
     const ech = echoes();
     const answerIsMain = st.problem === "calls";
     const callsFlagged = flags.indexOf("calls") >= 0;
+    const teamLine = st.who === "team" || st.who === "broker"
+      ? ["Running a team: each additional agent line on the same account is $150 a month at the founding price, and adds 125 minutes to a shared pool."] : [];
     html = `${briefTop("Intake brief")}
       ${briefMeta([["Prepared for", name || "You"], ["Date", esc(today)], ["Profile", esc(labelOf("who", st.who))], ["Costing you most", esc(p.label)]])}
-      <div class="brief-find"><span class="res-kicker">Your result${name ? ", " + name : ""}</span>
+      <div class="brief-find">${kicker}
       <h3 id="rt" tabindex="-1">${esc(p.head)}</h3>
       <p>${name ? name + ", you" : "You"} told us the thing costing you most is ${esc(p.short)}. ${esc(p.body)}</p>
       ${ech.length ? `<div class="echo"><span class="res-kicker">In your words</span>${ech.map(x => `<q>${esc(x)}</q>`).join("")}</div>` : ""}</div>
@@ -1082,22 +1219,11 @@ function renderResult(focus) {
         ${flags.length >= 2 ? `<p class="hint">Your answers point to ${flags.length + 1 >= 4 ? "all four problems" : (flags.length + 1) + " of the four problems"}. Next Level Complete runs all four as one system, when all four are open: $1,500 setup + $1,500 a month.</p>` : ""}
         <p class="fine">Prices in Canadian dollars.</p>
       </div>
-      <div class="res-block"><h4>Before you pay</h4>
-        <ul class="terms-mini">
-          <li>$300 a month for the first 10 agents. Phone, text and AI minutes are billed at cost with no markup, up to a monthly cap you set.</li>
-          <li>You dial the live system yourself on the call, before you pay.</li>
-          <li>English at launch. Any other language is tested on your own line. No charge if it is not good enough for you.</li>
-          <li>Your callers stay yours. Audio recording is off unless you turn it on.</li>
-          <li>Canada first. US agents where setup is confirmed for their state on the call.</li>
-        </ul>
-      </div>
-      <div class="res-block"><h4>Your next step</h4><p>${esc(p.next)}</p>
-        <div class="book">${bookingHTML()}</div>
-        ${st.sent === "failed" && CONFIG.BOOKING_URL ? fallbackHTML("NEXT", "send you a time") : ""}
-      </div>
+      ${beforeYouPay(teamLine)}
+      ${nextStepHTML(p.next)}
       ${briefSign()}`;
   }
-  swap(`<div class="res"><article class="brief" aria-label="Your intake brief">${html}</article>
+  swap(`<div class="res"><article class="brief" aria-label="Your ${path === "waitlist" ? "waitlist" : path === "us-list" ? "US list" : "intake"} brief">${html}</article>
     <button type="button" class="back" id="re">Change my answers</button></div>`);
   lastPct = 0;
   /* answers are kept, so the reader changes only what they want and steps forward with Next */
@@ -1120,7 +1246,12 @@ function focusTop(id) {
 document.querySelectorAll("[data-go='quiz']").forEach(b => b.addEventListener("click", () => {
   focusTop(st.done ? "rt" : "qt");
 }));
+/* the US list: one tap opens its question in the intake */
+document.querySelectorAll("[data-us]").forEach(b => b.addEventListener("click", () => {
+  st = Object.assign(blank(), { name: st.name, who: "us", i: 1 }); save(); renderQuestion(true);
+}));
 document.getElementById("cta-book").innerHTML = bookingHTML();
+(function () { const cta = document.querySelector(".hero-cta"), d = demoHTML("h-fade"); if (cta && d) cta.insertAdjacentHTML("afterend", d); })();
 if (st.i >= flow().length) st.i = flow().length - 1;
 if (st.done) renderResult(false); else renderQuestion(false);
 booted = true;
