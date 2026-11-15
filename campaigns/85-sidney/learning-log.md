@@ -4,6 +4,12 @@ Every test gets: hypothesis, variants, spend, result, decision, lesson.
 Newest entries at the top.
 
 ---
+## 2026-11-15 (daily run)
+
+- Campaign 24461687730 still paused at $7/day, waiting for Ray's OK. No
+  inbox activity on the listing in the last 2 days.
+
+---
 ## 2026-11-15 — YouTube campaign built, paused
 
 - Campaign 24461687730, Demand Gen, YouTube only (in-stream, in-feed,

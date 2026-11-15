@@ -5,6 +5,18 @@ Newest entries at the top. Never re-test a settled question without new
 justification.
 
 ---
+## 2026-11-15 (daily run) — First daily read
+
+- YouTube 24114799139, 7 days to Nov 14 (live since Nov 10): $26.02, about
+  61 clicks, click rate 1.55%, about $0.43 a click. No leads.
+- Account-wide clicks fell from 20 on Nov 13 to 10 on Nov 14 at the same
+  spend. That was still the database-only audience, which is small and
+  wears out quickly. The wider audience went in after midnight, so Nov 15
+  is the first day it shows.
+- Facebook: lead-form campaign 52528831097516 is built and paused, waiting
+  for Ray's go. No showing activity in the inbox in the last 2 days.
+
+---
 ## 2026-11-15 (heal) — Facebook lead-form campaign built, paused
 
 - Meta's hold lifted, so the build that was refused Nov 10 to 12 went

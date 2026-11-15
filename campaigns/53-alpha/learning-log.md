@@ -4,6 +4,18 @@ Every test gets: hypothesis, variants, spend, result, decision, lesson.
 Newest entries at the top.
 
 ---
+## 2026-11-15 (daily run) — First daily read
+
+- YouTube 24273515703, 7 days to Nov 14: $41.76, about 6 clicks, click
+  rate 0.10%, about $7 a click. Under the 0.8% replace line. Still the
+  pre-relist "price" cut. Needs a no-price video from Ray.
+- Facebook awareness 52516371756316, 7 days: $40.15, 22,122 impressions,
+  13 clicks, click rate 0.06%. These numbers are the old-price ad.
+- New no-price Facebook ad 52528830920716 shows ACTIVE this morning; old
+  ad paused. First delivery numbers come tomorrow.
+- No showing activity in the inbox in the last 2 days. No ad leads.
+
+---
 ## 2026-11-15 (heal) — Facebook ad with the old price replaced
 
 - Ray: "fix and heal mode on loop". The live Facebook ad's text still said

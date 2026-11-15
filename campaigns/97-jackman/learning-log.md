@@ -4,6 +4,12 @@ Every test gets: hypothesis, variants, spend, result, decision, lesson.
 Newest entries at the top.
 
 ---
+## 2026-11-15 (daily run)
+
+- No ad. Still no finished video. One showing confirmed for Nov 14 and a
+  signing completed Nov 13 (document not read).
+
+---
 ## 2026-11-14 — No finished video, raw footage found
 
 - Sid Media delivered finished edits for Sidney and Brocklesby, but for

@@ -164,9 +164,10 @@ time a tool has room, then delete the line.
 7. 34 Buttonleaf Facebook launch. Campaign 52528831097516 is built and
    paused at $5/day (Ray's Nov 3 Meta figure). Switch on the campaign, ad
    set and ad only after Ray says go for it in chat.
-8. 53 Alpha Facebook check. Confirm the new ad 52528830920716 passed
-   Meta's review and is delivering. If Meta rejected it, tell Ray; do not
-   switch the old-price ad back on.
+8. 53 Alpha Facebook check. New ad 52528830920716 showed ACTIVE on the
+   Nov 15 run. On the next run confirm it has impressions. If Meta
+   rejected it or it is not delivering, tell Ray; do not switch the
+   old-price ad back on.
 
 How to put a video on YouTube without Ray: Metricool createScheduledPost,
 provider youtube, privacy unlisted, notifySubscribers false, media = a
