@@ -5,6 +5,21 @@ Newest entries at the top. Never re-test a settled question without new
 justification.
 
 ---
+## 2026-11-15 — YouTube link fixed. Audience fix queued
+
+- Ray: "make these better and daily heal and fix".
+- Fixed: the YouTube ad (820207161773) linked to the pre-relist listing
+  page, which carries the old listing. It now goes to
+  rayahmadi.com/contact with UTM tags (campaign 34_buttonleaf). Google put
+  the ad back under review, which is normal after an edit.
+- Not done: widening the audience from the database list to people in
+  market for a home (in-market 80157) plus database plus video viewers.
+  Adspirer refused the call, quota spent. It is first in the fix queue in
+  the agent file. No performance read is possible until Dec 10 or an
+  upgrade.
+- The daily loop now heals as well as checks: see the agent file.
+
+---
 ## 2026-11-15 — Live-ad audit
 
 - Google: "Video ad - 34 Buttonleaf Cres" (24114799139) enabled. Since the

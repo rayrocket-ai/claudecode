@@ -21,7 +21,7 @@ campaigns/<slug>/learning-log.md, newest entry first. Read it before acting.
 | 34-buttonleaf | 34 Buttonleaf Cres, Stouffville. Relisted Nov 11 at $1,299,000, MLS N14172060 | PRIORITY. YouTube live. No Meta ad running. |
 | 53-alpha | 53 Alpha Court, Woodbridge. Relisted Nov 12 at $1,899,000. $10,000 agent bonus to Nov 24 | PRIORITY. YouTube live. Meta awareness video live. Lead-form ad paused. |
 | 85-sidney | 85 Sidney Rundle Ave, Bowmanville. Relisted Oct 15 at $499,000 | Pre-launch. Meta campaign shell and form only. Tour video in Drive ("sydney rundle.mp4"), not on YouTube. |
-| 97-jackman | 97 Jackman Cres, West Woodbridge | Pre-launch. No video exists. |
+| 97-jackman | 97 Jackman Cres, West Woodbridge | Pre-launch. No video and no photos in Drive, only a script and caption (Oct 7). |
 | (no folder yet) | 3 Brocklesby Cres, Ajax. Listed Nov 10 at $799,900 | No ads. Tour video in Drive ("3 Brocklesby.mp4", Nov 13), not on YouTube. |
 | (no folder yet) | 104 Dixon Rd, Toronto. Listed Nov 5 at $1,399,000 | No ads. No video found. |
 | _sold/16-curry | 16 Curry Cres, Georgetown | SOLD. Never report. Meta campaign paused Nov 10. |
@@ -35,7 +35,7 @@ exposure. State that day:
 - A YouTube ad needs the video on YouTube (public or unlisted). Only Alpha
   and Buttonleaf have one. Brocklesby and Sidney have tour files in Drive
   that Ray must upload. Jackman and Dixon have no video.
-- Adspirer: 12 of 15 actions used, resets Dec 10. One new campaign takes 1
+- Adspirer: all 15 actions used, resets Dec 10. One new campaign takes 1
   to 3 actions (validate video, find logo asset, create).
 - Waiting on Ray: YouTube links, which listings are still active (also
   28 Longfellow Whitby, 199 Shephard Alliston, 12-91 Livingston Grimsby),
@@ -62,6 +62,8 @@ exposure. State that day:
 
 - Adspirer connector: Google Ads 1344350136 and Meta ad account
   732663023528570. Free plan, 15 counted calls a month, resets Dec 10.
+  All 15 were used by Nov 15. Nothing can be read or changed in Google Ads
+  through Adspirer until Dec 10 unless Ray upgrades the plan.
   search_tools, get_tool_schema, get_usage_status and refused calls are free.
 - Ad Advisor connector: Meta ad account 1788128334781323. 20 calls a month.
   Its token has been invalid since Nov 9. Ray must reconnect it, or add this
@@ -79,7 +81,9 @@ exposure. State that day:
 
 - Google: 53 Alpha YouTube 24273515703 (VIDEO, $5/day, links to
   rayahmadi.com/contact). 34 Buttonleaf Demand Gen 24114799139 ($5/day,
-  database audience, still links to the pre-relist listing page).
+  ad group 198558882666, ad 820207161773. Link fixed Nov 15: now
+  rayahmadi.com/contact with UTM tags. Audience is still the database list
+  only; see the fix queue).
 - Meta 732663023528570: 53 Alpha awareness campaign 52516371756316, ad set
   52516371756716, ad 52516371756516. Its text still says $1,999,990.
   Buttonleaf lead-gen 52506208679516 is paused (website conversion, not a
@@ -99,22 +103,48 @@ exposure. State that day:
 - Replace a variant at CTR under 0.8% after 2,000 impressions.
 - Folding YouTube budget into Meta is a budget change. Ray decides.
 
-# Daily loop
+# Fix queue
 
-The scheduled run is unattended: read-only tool calls, no writes to any ad
-platform. Queue changes as proposals and make them when Ray is in the chat.
+Approved by Ray's "make these better" (2026-11-15). Work in order the next
+time a tool has room, then delete the line.
 
-1. Gmail: Pabbly alerts, Facebook security or verification emails,
-   SkySlope / REALTOR.ca / Authentisign activity, BrokerBay showings and
-   offers for the priority listings, seller replies, Google Ads emails.
-2. Quota: get_usage_status. At most one counted call a day. Pull Google
+1. 34 Buttonleaf audience. replace_demandgen_audiences on ad group
+   198558882666: in-market 80157 (Residential Properties, For Sale) plus
+   user lists customers/1344350136/userLists/8481608755 (database) and
+   customers/1344350136/userLists/8481870530 (video viewers, 180 days).
+   Tried Nov 15, refused: Adspirer quota was spent.
+2. 53 Alpha YouTube. The live ad uses the "price" cut made before the
+   relist, so it most likely shows $1,999,990. Needs the no-price tour cut
+   on YouTube (Ray uploads 53-alpha-A-tour-15s from Drive), then build a
+   YouTube campaign with it PAUSED and ask Ray to switch over.
+
+# Daily loop: check, heal, fix
+
+Reads, log and report come before any write. A write can stall on an
+approval prompt when nobody is in the chat.
+
+1. Gmail, all four listings: Google Ads policy, billing and payment emails,
+   Facebook security or verification emails, Pabbly alerts, REALTOR.ca /
+   SkySlope / Authentisign / BrokerBay activity, seller replies.
+2. Quota: get_usage_status. No calls left means no Adspirer calls; say so
+   in one line. With calls: work the fix queue first, then pull Google
    performance (one account-wide 7-day raw call) Mondays and Thursdays.
-3. Judge against the kill rules. Propose one improvement at a time, with
-   the evidence.
+   Keep one call in reserve unless the plan was upgraded.
+3. Diagnose each listing: running or not, disapproved ad, failed payment,
+   dead or old link, old price after a price change, ad still running on a
+   sold listing, audience too narrow, kill rule tripped.
 4. Append a dated entry to each priority learning log. Commit and push to
    claude/admax-paid-ads-agent-9hux3q.
-5. Report to Ray in one message, three lines per priority listing at most:
-   running or not, spend, leads, what changed, what he must do.
+5. Report to Ray in one message, three lines per priority listing at most,
+   one line each for Sidney and Jackman.
+6. Heal last, one write at a time. Allowed without asking: pause an ad whose
+   listing sold or was cancelled; repoint a dead or pre-relist link to
+   rayahmadi.com/contact; apply fix-queue items. A refused write is not
+   retried and not worked around.
+
+Never without Ray saying so in the chat: launch a campaign, change a
+budget or objective, publish new creative featuring a property, pause a
+live ad on a listing that is still for sale.
 
 # Standing lessons
 
