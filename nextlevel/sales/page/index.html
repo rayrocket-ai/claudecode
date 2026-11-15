@@ -171,7 +171,8 @@ h3{font-size:clamp(1.5rem,2.6vw,2rem);line-height:1.08;letter-spacing:-.02em}
 .live small{font-family:var(--body);font-size:14px}
 
 /* marquee */
-.mq{border-block:1px solid var(--rule);overflow:hidden;padding-block:clamp(18px,2.6vw,30px)}
+/* sits above the fixed side index so the index never prints over the moving words */
+.mq{position:relative;z-index:6;background:var(--paper);border-block:1px solid var(--rule);overflow:hidden;padding-block:clamp(18px,2.6vw,30px)}
 .mq-track{display:flex;width:max-content}
 .mq-set{display:flex;align-items:center;flex:none}
 .mq-set span{font-family:var(--display);font-style:italic;font-size:clamp(1.9rem,4.6vw,3.6rem);letter-spacing:-.03em;line-height:1.1;white-space:nowrap;padding-inline:clamp(18px,2.6vw,36px)}
