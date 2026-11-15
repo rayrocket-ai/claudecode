@@ -4,17 +4,52 @@ Draft build files. Version 1, written 2026-11-15 from Ray's Blueprint and Roadma
 
 Nothing in this folder is live. Every page, email, text and script here is a draft for Ray to review and approve before it is sent, published or loaded into HighLevel. The product names and the price ladder are approved (see "Decided by Ray, 2026-11-15" below).
 
+## Tested offer
+
+The offer was read to a fixed panel of 100 model-written personas in two rounds on 2026-11-15. The panel finds weak points. It is not market research and not a forecast: see `testing/README.md`. The round 2 pitch, `testing/offer-pitch-v2.md`, is now the working offer.
+
+| Group | Measure | Round 1 | Round 2 |
+|---|---|---|---|
+| 70 agents, founding price | Buys | 0 | 3 |
+| | Books a call | 7 | 19 |
+| | Passes | 63 | 48 |
+| 70 agents, standard price | Buys | 0 | 1 |
+| | Books a call | 2 | 9 |
+| 30 business owners | Joins waitlist | 1 | 5 (one is a competitor) |
+| All 100 | Would refer someone | 4 | 11 |
+| Agents | Trust in Ray, out of 5 | 2.8 | 2.7 |
+
+- Round 1: [testing/offer-round1/RESULTS.md](testing/offer-round1/RESULTS.md)
+- Round 2: [testing/offer-round2/RESULTS.md](testing/offer-round2/RESULTS.md)
+- How to run the next round: [testing/LOOP.md](testing/LOOP.md)
+
+These are simulated people. The real test is the first 10 sales calls, recorded in the scoreboard in `testing/LOOP.md`.
+
+**Terms set after the test.** Set 2026-11-15 after the persona test; Ray to confirm. Ray said "fix and heal and make it better", so the assistant set the round 2 terms and carried them into `offer.md`, the sales files, the content rules and the build spec. They are not approved by Ray. In each file they carry that marker where they first appear. In short: usage at cost with no markup for founders, with a monthly cap the client sets and Ray's own bill shown on the call; the agent dials the live system on the call; English at launch, other languages tested on the client's line with no charge if not good enough; no contact with a client's callers, the transcript stays in the client's account, recording off by default and announced when on, export and deletion on leaving; a text and email summary for every call, with a direct CRM push confirmed before payment; a one-page brokerage summary and the first month back if the brokerage says no within 14 days; a callback and a text alert on urgent calls; forwarding only when unanswered and switched off on cancel; one subscription per business line, teams quoted; other businesses open after the first 10 agents are live, in the stated order, from $500 setup plus $400 a month; Canada first, US confirmed per state. Full wording: `offer.md` section 6.
+
 ## Still open
 
-Questions for Ray. Each one stays a placeholder in the files until he answers.
+Facts only Ray can supply. The round 2 test showed these are what still stops a buyer. Each one stays a placeholder in the files until he answers. They are listed in the order to answer them.
 
-1. Founding 10 usage: is phone, SMS and AI usage included in the $300 a month, or billed on top? Until Ray decides, copy says usage is quoted on the call.
-2. Legal business name and mailing address for Next Level (needed in every footer and email under CASL).
-3. Calendar booking link for the 15-minute call.
-4. HighLevel webhook address for the sales page quiz.
-5. Trademark check on "Next Level", Canada and US.
-6. Stripe verification.
-7. Legal and licence checks already flagged:
+1. The usage rate per minute, as a number. And whether "at cost, no markup" leaves an acceptable margin at $300.
+2. The languages the AI handles today.
+3. Which CRMs get a direct push.
+4. The registered business name and address (also needed in every footer and email under CASL).
+5. Where data is hosted.
+6. Team pricing.
+7. Which US states.
+8. A waitlist date.
+9. Whether to offer a smaller plan for very small practices.
+
+Ray also confirms or changes each term marked "Set 2026-11-15 after the persona test; Ray to confirm".
+
+Open from before the test:
+
+10. Calendar booking link for the 15-minute call.
+11. HighLevel webhook address for the sales page quiz.
+12. Trademark check on "Next Level", Canada and US.
+13. Stripe verification.
+14. Legal and licence checks already flagged:
    - CASL basis for the missed-call audit email.
    - Separate entity for Next Level, and eXp sign-off.
    - Repliers licence for client accounts.
@@ -97,6 +132,8 @@ Nothing moves to the next phase until its gate is met.
 1. Ray's own business proves each offer before an agent pays for it. For the first offer this gate is resolved by Ray on 2026-11-15: the Founding 10 opens now, on Ray's own track record and a live demo of the system running on Ray Homes. Rungs 2 to 5 are released one at a time, each after it runs on Ray Homes.
 2. Each new industry starts only when real estate has paying clients and a repeatable onboarding.
 
+For other businesses, the round 2 offer states the gate in a buyer's words: Answer opens once the first 10 agents are live. (Set 2026-11-15 after the persona test; Ray to confirm.)
+
 This rule decides the build order below. It also decides what the "for businesses" edition can and cannot do today. See `offer.md`.
 
 ## How the folder is organized
@@ -110,10 +147,12 @@ This rule decides the build order below. It also decides what the "for businesse
 | `onboarding/welcome-video-script.md` | Script, on-screen text, shot list and production notes for the AI-made welcome video. DRAFT for Ray's approval. | Ray, Diana |
 | `content/` | Inbound content for every platform. The primary lead source. | Ray, Diana |
 | `sales/funnel-copy.md` | The smart sales page: headlines, quiz, result blocks, offer, FAQ, call to action. | Ray, builder |
-| `sales/page/` | The built sales page. | Ray, builder |
+| `sales/page/` | The built sales page. Not yet updated to the round 2 terms. | Ray, builder |
 | `sales/missed-call-audit.md` | The free missed-call audit: method, log, email, voice note. Secondary, optional tactic. | Ray, Diana |
 | `sales/call-script.md` | The 15-minute call. | Ray. Nadiya later. |
 | `sales/follow-up-emails.md` | Four follow-up sequences by problem, with the CASL sender block. | Ray, Diana |
+| `product-roadmap.md` | One-page roadmap in four phases, from the Founding 10 to a licence for others. | Ray |
+| `testing/` | The 100-persona panel, the two pitch files, the results of both rounds and `LOOP.md`, the steps to rerun the test. | Ray, Diana |
 | `learning/course-notes-template.md` | Empty note-taking template for any training the team owns. | Ray's team |
 | `learning/course-notes-digest.md` | Digest of Ray's course notes, in our own words, section by section. | Ray, Diana |
 | `learning/apply-map.md` | Each lesson mapped to where it lands in Next Level, with status. Where the notes and Ray's decisions differ. How the one-person company system runs it. | Ray |
@@ -180,7 +219,9 @@ Optional, any time after step 5: the missed-call audit. 20 GTA agents, weekdays 
 | Calendar booking link and HighLevel webhook address | Waiting on Ray | Ray or Diana | See "Still open" |
 | Stripe verification | **Blocked** | Ray | Blocks every SaaS sale and the checkout link |
 | System metrics from Ray Homes | Waiting on Ray | Ray | Every "[Ray to add: real number from Ray Homes]" in these files. Does not block the Founding 10: the copy leads with the track record and the live demo. |
-| Founding 10 usage: included or billed on top | Waiting on Ray | Ray | See "Still open". Copy says usage is quoted on the call. |
+| Founding 10 usage | Set 2026-11-15 after the persona test; Ray to confirm | Ray | Billed at cost with no markup, up to a cap the client sets. The rate per minute and the margin at $300 are still open. See "Still open". |
+| Round 2 terms in the offer, sales, content and build files | Set 2026-11-15 after the persona test; Ray to confirm | Ray | See "Tested offer". Not approved by Ray. The built page in `sales/page/` does not carry them yet. |
+| Offer test, rounds 1 and 2 | Done | Claude | 100 personas. Results in `testing/`. |
 | Founding 10 terms, including the live-in-7-days commitment | **Approved by Ray, 2026-11-15** | Ray | Exact terms in `offer.md` section 6. Copy states them only as written there. |
 | Trademark check on "Next Level", Canada and US | **Blocked** (not checked) | Ray, with counsel | Do this before paid ads, a domain or printed material |
 | Business name and mailing address for Next Level | Waiting on Ray | Ray | Needed in every email under CASL |
@@ -197,5 +238,6 @@ Optional, any time after step 5: the missed-call audit. 20 GTA agents, weekdays 
 - Markers used in these files:
   - `Approved by Ray, 2026-11-15`: a decision. Do not change it without Ray.
   - `PROPOSED, Ray to approve`: a suggestion, not a decision.
+  - `Set 2026-11-15 after the persona test; Ray to confirm`: a term the assistant set after the offer test, under Ray's instruction to fix the offer. Used in copy as the working offer. Not approved by Ray.
   - `[Ray to ...]`: Ray must supply or confirm this.
   - `[verify in HighLevel]` and `[verify menu name]`: check in the live account before relying on it.

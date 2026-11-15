@@ -215,6 +215,7 @@ Added from the course notes, 2026-11-15. Check each line before a workflow goes 
 4. Test the after-hours case: a form filled at 10 PM on a Friday. What does the lead receive, and when?
 5. Open the enrollment history and the execution log. Confirm the contact reached the last step and did not stall at a wait or a branch.
 6. Reply STOP as the sample contact. Confirm every workflow ends.
+7. Run the promise tests in section 13 before any client account goes live, and again after every snapshot change. (Set 2026-11-15 after the persona test; Ray to confirm.)
 
 ### Review requests: one rule
 
@@ -312,7 +313,7 @@ All prices in Canadian dollars. Product names and prices: Approved by Ray, 2026-
 
 - Rebilling needs Stripe connected and a card on file in each sub-account. Blocked until Stripe verification.
 - Each sub-account has a prepaid balance that refills. Set the starting amount and refill amount. [Ray to set: starting balance and refill amount] [verify in HighLevel]
-- For the Founding 10: decide whether usage is included or rebilled. Not decided. Until it is, copy says usage is quoted on the call. [Ray to set: usage included or rebilled for the Founding 10]
+- For the Founding 10: usage is rebilled at cost with no markup, up to a monthly cap the client sets. (Set 2026-11-15 after the persona test; Ray to confirm.) The markup in the table above applies after the Founding 10. Build requirements are in section 13. The rate per minute as a number, and whether the margin at $300 is acceptable: [Ray to add: usage rate per minute] [Ray to confirm: margin at $300 with usage at cost]
 - Tell every client in writing, before they pay, what is rebilled and how.
 
 ## 8. The 9-step onboarding checklist
@@ -391,6 +392,61 @@ Script review, added from the course notes, 2026-11-15, PROPOSED: after every [R
 
 No targets are set here beyond the ones in the Blueprint: 10 paying agents by end of January, $3,000 monthly recurring revenue from the Founding 10, churn under 5%.
 
+## 13. Promises the build must keep
+
+Set 2026-11-15 after the persona test; Ray to confirm. The round 2 offer (`testing/offer-pitch-v2.md`) is the working offer. The assistant set these terms after the persona test, under Ray's instruction to fix the offer. Ray has not approved them yet. Each term is a promise made to a buyer, so each one is a build requirement here. Full wording: `offer.md` section 6.
+
+A promise marked `[verify in HighLevel]` depends on the platform. If the check comes back "no", the promise is kept by hand with a written procedure, or the wording in `offer.md` changes before anyone is sold on it. No client goes live on a promise that has not been checked.
+
+| # | Promise | What the build must do | Check |
+|---|---|---|---|
+| 1 | Usage at cost, no markup, for founders | Rebilling for the NL Answer Founding plan is set to pass usage through with no markup on phone, text and AI minutes. The client can see their usage in their own account. | [verify in HighLevel: rebilling with no markup on one plan while other plans carry a markup] |
+| 2 | Client-set monthly cap, with a stop and an alert | A per-account spending cap, entered at intake and stored as `nl_usage_cap`. When usage reaches the cap, the AI stops taking calls, the client is alerted by text and email, and calls ring through to the client's own phone or voicemail as they did before. | [verify in HighLevel: per-account spending cap and stop] |
+| 3 | Ray's own bill shown on the call | The usage and billing view for the Ray Homes account can be shown on a shared screen with no caller details in view. | [verify in HighLevel] |
+| 4 | Dial the live system on the call | A demo line that is always on, answers as an AI, and holds no real contacts. It is tested before every sales call. | [Ray to add: demo line number] |
+| 5 | English at launch, other languages tested on the client's line | Onboarding step 7 gains a language test: the client calls their own line in each language their callers use and signs off, or the account does not go live and no charge is made. `nl_languages` lists only languages that passed. | [verify in HighLevel: languages the voice agent supports] |
+| 6 | No contact with a client's callers | No agency-level workflow, campaign or list reads a client sub-account's contacts. Nothing is copied from a client account into the Next Level or Ray Homes accounts. The clause is in the client agreement. | [Ray to confirm with counsel: the client agreement] |
+| 7 | The transcript stays in the client's account. Staff read it only during setup or a fix | Staff reach a client account through a named user with the lowest role that does the job. Access is opened for setup or for a fix the client asked for, then removed. Every access is logged with the date and the reason. | [verify in HighLevel: access control for staff, per sub-account, with a log] |
+| 8 | Transcripts kept only while the client stays | A stated retention rule for transcripts and call summaries in each account, and a way to delete them. | [verify in HighLevel: transcript retention] [Ray to add: where client data is hosted] |
+| 9 | Audio recording off by default | Call recording is off in the snapshot and in every new account. Turning it on is the client's choice, made in writing. | [verify in HighLevel: recording off by default] |
+| 10 | Recording announced when on | When recording is on, `nl_recording_line` is filled and the AI says it at the start of every call. When recording is off, the line is empty and nothing is recorded. | [Ray to confirm with counsel] |
+| 11 | Export and deletion on leaving | An offboarding procedure: export contacts and transcripts to the client, confirm they received the file, delete both from the account, then close the account. | [verify in HighLevel: export and deletion] |
+| 12 | Summary by text and by email | The "AI call finished" workflow sends the summary to the client by text and by email after every call. | Test call |
+| 13 | Direct CRM push confirmed before payment | A written list of the CRMs with a tested push, kept current. A CRM is on the list only after a test record arrived in it. Anything else gets the text and email summary. | [verify in HighLevel: outbound webhooks or integrations] [Ray to confirm: which CRMs get a direct push] |
+| 14 | One-page brokerage summary, first month back if the brokerage says no within 14 days | The one-page summary exists as a file. A refund procedure exists for the first month and is logged on the contact. | [Ray to confirm: the day the 14 days are counted from] |
+| 15 | Urgent-call callback and text alert | When a caller asks for a person or the call is urgent, the AI offers a callback, the "Needs a human" workflow texts the client at once, and a task is created. The copy promises a callback and an alert. It does not promise a live transfer, so `nl_transfer_number` is used only where a transfer has been tested. | Test call |
+| 16 | Forwarding only when unanswered, including when the phone is off | Forwarding is set as conditional: no answer, busy and unreachable. It is never set to forward every call. | [verify in HighLevel: call forwarding conditions] [verify with the client's carrier] |
+| 17 | Forwarding off on the day of cancelling | The offboarding procedure removes forwarding on the cancel date and a test call confirms the client's phone rings as before. | Test call |
+| 18 | One subscription, one business line | One sub-account and one number per subscription. Routing to several agents is built only after a team quote is accepted. | [verify in HighLevel: routing one line to several users] [Ray to set: team pricing] |
+| 19 | Other businesses after the first 10 agents are live | The waitlist form has a consent box that is not pre-ticked and one question: industry and biggest phone problem. No checkout exists for a non-agent plan until the industry opens. | Form test |
+| 20 | Canada first, US confirmed per state | Before a US client is accepted: a number can be bought for their state, text registration can be filed, and the recording and AI disclosure rules are confirmed for that state. | [verify in HighLevel] [Ray to confirm with counsel] [Ray to confirm: which US states] |
+| 21 | Registered name and address on the agreement | The agreement and every footer carry the registered business name and address. | [Ray to confirm: business name and mailing address for Next Level] |
+
+New custom values for the snapshot: `nl_usage_cap` (the monthly cap the client chose), `nl_recording_on` (yes or no, default no), `nl_summary_email` and `nl_summary_mobile` (where summaries and alerts go), `nl_crm_name` (the client's CRM, and whether a push was confirmed).
+
+### Promise tests
+
+Run in NL Demo first, then in each client account before go-live. Tick a line only when seen on screen or heard on a call.
+
+- [ ] Usage: the founding plan shows usage at cost with no markup on a test invoice.
+- [ ] Cap: set a low cap in NL Demo, use it up, and confirm the AI stops, the alert arrives by text and email, and the phone rings through as before.
+- [ ] Demo line: dial it from an outside phone. It answers, says it is an AI, and books a sample appointment.
+- [ ] Language: for each language in `nl_languages`, the client made a test call on their own line and signed off.
+- [ ] No contact: search the agency account and the Ray Homes account for a sample contact that exists only in the test client account. It is not there.
+- [ ] Staff access: a staff user with no open setup or fix cannot open the test client account. The access log shows who opened it, when and why.
+- [ ] Transcript retention: the retention setting is as written, and a deleted transcript cannot be opened afterwards.
+- [ ] Recording off: make a test call in a new account. No audio file exists afterwards.
+- [ ] Recording on: switch it on in NL Demo. The AI says the recording line at the start of the call.
+- [ ] Summary: after a test call, the summary arrives by text and by email.
+- [ ] CRM push: for each CRM on the list, a test record arrives in that CRM.
+- [ ] Urgent call: ask for a person on a test call. The AI offers a callback and the text alert arrives at once.
+- [ ] Forwarding when unanswered: let the client's phone ring out. The AI answers. Answer the phone on the next call. The AI does not.
+- [ ] Forwarding when the phone is off: switch the phone off and call. The AI answers.
+- [ ] Cancel: run the offboarding procedure on a test account. The export arrives, the contacts and transcripts are gone from the account, and forwarding is off.
+- [ ] One line: the test account holds one number.
+- [ ] Waitlist form: submit it with the box unticked. No message is sent.
+- [ ] US state: for a US test, the number, the text registration and the rules check are all recorded before go-live.
+
 ## Next step
 
-Diana works through section 1 in the live account and replaces each `[verify in HighLevel]` with yes, no, or how.
+Diana works through section 1 in the live account and replaces each `[verify in HighLevel]` with yes, no, or how. Section 13 comes next: every promise there is checked before the first founding client is sold on it.
