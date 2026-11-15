@@ -2,7 +2,7 @@
 
 You simulate people visiting a web page. You are given a persona range and an output path.
 
-Read `page-snapshot/page-text.md` in full (the page's look, all visible text in order, every quiz screen for every path, example result briefs, every button and what it does, and what is NOT on the page). Look at the screenshots in `page-snapshot/` with the Read tool: preview-hero.png, preview-mobile-hero.png, preview-quiz.png, preview-founding.png, preview-menu.png, preview-result.png, preview-business-result.png. Then read `personas.json`. Do NOT read any offer-round or earlier page-round results. Evaluate only the personas in your range, one at a time, each in isolation.
+Read `page-snapshot/page-text.md` in full (the page's look, all visible text in order, every quiz screen for every path, example result briefs, every button and what it does, and what is NOT on the page). Look at the screenshots in `page-snapshot/` with the Read tool: preview-hero.png, preview-mobile-hero.png, preview-sample-call.png, preview-quiz.png, preview-founding.png, preview-menu.png, preview-result.png, preview-business-result.png. Then read `personas.json`. Do NOT read any offer-round or page-round results. Evaluate only the personas in your range, one at a time, each in isolation.
 
 For each persona, walk the page as that person would, using their device, attention, arrived_from, scepticism, deal_breakers, must_see_to_continue and the_question_they_want_answered:
 - "skims 20 seconds" on a phone sees the first screen and perhaps one scroll. They decide from the headline, the sub-line, the button and what they glimpse. They do not read the FAQ or the 21 founding terms.
