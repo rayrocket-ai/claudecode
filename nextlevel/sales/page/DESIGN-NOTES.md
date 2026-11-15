@@ -11,6 +11,8 @@ Restyled 2026-11-15 after Ray asked for "nicer white colours, bright colours". S
 - **Wordmark**: "Next *Level*" with a two-bar step mark; the upper bar is blue.
 - **Grid**: full-bleed bands, one content column, hairline rules, numbered sections 01 to 08, small uppercase mono labels.
 
+The sections describing motifs, motion and the round 3 offer update below are kept as history. Where they differ from "Visitor test round 1 changes" at the end of this file, that last section is the current state.
+
 ## Where colour is used
 - Blue: the italic headline phrase, buttons, section numbers, quiz progress line, active side-index item, founding price in the menu, FAQ plus signs, step rules, signature, "Available now" tags (with a slow pulse on the dot).
 - Coral: the three missed-call dots and the missed-call count, marquee diamonds, "Opening next" tags. Nowhere else.
@@ -50,9 +52,24 @@ Design, motion, the booking fallback and the consent logic are unchanged. What w
 - A `[hidden]{display:none!important}` rule was added so the text-consent row stays hidden wherever the page is hosted.
 
 ## To replace before launch
-- Portrait slot: the `<figure class="portrait">` in section 06 (HTML comment marks it).
+- Portrait slot: the `<figure class="portrait">` in the About Ray strip, section 01 (HTML comment marks it).
 - Signature: typeset in a script face. Swap for Ray's real signature image.
 - `CONFIG.BOOKING_URL`, `CONFIG.WEBHOOK_URL` and `CONFIG.DEMO_PHONE` are empty.
-- Footer: business name and mailing address; privacy and terms links (HTML comment only).
+- Footer: business name and mailing address (the placeholder is now an HTML comment only; the visible line says they are on the agreement); privacy and terms links (HTML comment only).
 - Terms marked "Ray to confirm" in `offer.md` section 6 are on the page as working terms.
 - Lines that rest on facts marked `[not verified]` in `offer.md` (the minute bundle, data held in the United States, the Zapier push) are on the page as approved wording. Check them as listed in `../../README.md`, "Verify before publishing", before the page is made public.
+
+## Visitor test round 1 changes, 2026-11-15
+Palette, type faces, tokens, CONFIG, payload fields, the four quiz paths and the consent rules are unchanged. What changed, against `../../testing/page-round1/RESULTS.md`:
+
+- **Hero**: two columns on desktop (copy left, illustration right), one column on a phone. Order: label "For real estate agents, mortgage brokers and contractors", the same four-line headline at a smaller size, the what-it-is line, the price line, the main button "See what it would do for you (60 seconds)", "See the prices", the "3 founding spots" line, then "Canada only for now. In the United States? Join the US list" (a text button that opens the US path). All of the first five fit a 360 x 740 phone screen without scrolling.
+- **Illustration**: one call from start to finish (missed call, the same call answered by the AI, appointment booked, the text summary). The day line and the count of three missed calls are gone. Still `role="img"` with a written description and the visible label "Illustration". The looped "Answered. Qualified. Booked." panel is unchanged.
+- **Sample call**: an outlined button under the illustration opens a native `<dialog>` (modal, Esc, backdrop click, Close; focus returns to the button). It holds a nine-line written exchange and the text the agent receives, labelled "Sample script for illustration, not a recording". Invented first names, no numbers, no addresses. It uses the light sheet tokens in both themes, like the result brief.
+- **About Ray**: now a compact strip directly under the hero (section 01) with a small portrait slot, the six approved facts, the quote and signature, and three short assurances. The old section 06 is removed. Side index order: Ray, Intake, Leaks, Method, Founding 10, Menu, Questions, Book.
+- **Founding terms**: six rows first, then an "All 21 terms" expander for the other 15. FAQ: six questions first, then "All 22 questions" for the other 16 (two pairs of overlapping questions were merged, so 22 where there were 23). The expander is a `<button>` with `aria-expanded` and `aria-controls`. The folded block carries `hidden="until-found"` and is laid out with `content-visibility: hidden`, so it stays in the DOM, find-in-page opens it (`beforematch`), and a print rule shows it.
+- **Languages and data rows** lead with what is offered; the not-promised list follows in smaller text. The data row leads with who can read a transcript and recording off, then says plainly that data is stored in the United States.
+- **Booking fallback** (`BOOKING_URL` empty): "Ask Ray for a time", one button "Message NEXT on Instagram", and "The online calendar opens shortly." When the webhook is set and consent was ticked, "Ray will contact you at the details you gave." sits beside the button. The founding section button reads "Ask Ray for a time" in this mode. With `BOOKING_URL` set everything is as before.
+- **Last quiz step** (`WEBHOOK_URL` empty): only "First name (optional)" and "Show my brief"; the result says "This brief is shown here only. Nothing was sent or stored. Your answers stay in this browser." With `WEBHOOK_URL` set the earlier form and consent logic are untouched.
+- **Trade wording**: "who it is for" is three compact columns, each group with a one-line missed-call example in its own trade. The leaks heading and the missed-call quote no longer assume an agent.
+- **Length**: band padding and the section headline scale were reduced, the footer placeholder was replaced, and the About Ray section was merged into the strip. Heights are in `../../testing/page-snapshot/page-text.md`.
+- **Footer**: "Operated by Ray Ahmadi. The registered business name and address are on the agreement you sign before any payment."
