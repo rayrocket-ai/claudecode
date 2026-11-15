@@ -603,7 +603,7 @@
     "id": "P024",
     "device": "desktop",
     "furthest_point": "who it is for",
-    "started_quiz": "",
+    "started_quiz": false,
     "finished_quiz": false,
     "quiz_path": "none",
     "gave_contact_details": false,
