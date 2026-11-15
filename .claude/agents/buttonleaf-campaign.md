@@ -69,9 +69,10 @@ exposure. State that day:
 - Ad Advisor connector: Meta ad account 1788128334781323. 20 calls a month.
   Its token has been invalid since Nov 9. Ray must reconnect it, or add this
   account in Adspirer.
-- Meta holds a security check on Ray's Facebook login (code 31/3858385).
-  Until Ray completes Start verification in Ads Manager, the API refuses
-  ad creation and edits. Pausing still works.
+- Meta's security hold on Ray's Facebook login (code 31/3858385) lifted by
+  Nov 15: ad creation through Adspirer works again on account
+  732663023528570. If creation is refused with that code again, Ray must
+  redo Start verification in Ads Manager.
 - Gmail is free to read and is the first source every day.
 - Direct API paths exist in integrations/ (meta_ads_cli, google_ads_cli) but
   need credentials on the server. See META_ADS_SETUP.md, GOOGLE_ADS_SETUP.md.
@@ -91,9 +92,15 @@ exposure. State that day:
   202233108156 (Bowmanville only) is paused to avoid overlap. Video
   hSIkkg-5ANc.
 - Meta 732663023528570: 53 Alpha awareness campaign 52516371756316, ad set
-  52516371756716, ad 52516371756516. Its text still says $1,999,990.
-  Buttonleaf lead-gen 52506208679516 is paused (website conversion, not a
-  form). Buttonleaf form 985332827899566, video 1553311682394230.
+  52516371756716. New ad 52528830920716 (same 15 s tour video
+  1569899458483680, no price, no address, Contact button to
+  rayahmadi.com/contact) switched on Nov 15. Old ad 52516371756516, whose
+  text said $1,999,990, is paused. Keep it paused.
+- Meta 732663023528570: 34 Buttonleaf lead-form campaign 52528831097516, ad
+  set 52528831098116, ad 52528831113716, built Nov 15, PAUSED, $5/day,
+  Stouffville 25 km, Housing category, form 985332827899566, video
+  1553311682394230. The older Buttonleaf campaign 52506208679516 stays
+  paused.
 - Meta 1788128334781323: 53 Alpha lead campaign 120250450871140620, ad set
   120250513336680620, ad 120250513340880620 (paused; copy wrongly claims a
   pool and an apartment, rebuild from plan.md before any launch), form
@@ -154,6 +161,13 @@ time a tool has room, then delete the line.
    link to the one file, which Metricool can take as is. The Drive folder he
    sent the same day ("RAW BUTTON LEAF") is Buttonleaf, not Jackman.
 
+7. 34 Buttonleaf Facebook launch. Campaign 52528831097516 is built and
+   paused at $5/day (Ray's Nov 3 Meta figure). Switch on the campaign, ad
+   set and ad only after Ray says go for it in chat.
+8. 53 Alpha Facebook check. Confirm the new ad 52528830920716 passed
+   Meta's review and is delivering. If Meta rejected it, tell Ray; do not
+   switch the old-price ad back on.
+
 How to put a video on YouTube without Ray: Metricool createScheduledPost,
 provider youtube, privacy unlisted, notifySubscribers false, media = a
 public file URL. Read the video ID back with getScheduledPosts.
@@ -170,6 +184,10 @@ approval prompt when nobody is in the chat.
    get_usage_status first. Over 130 of 150 Adspirer actions used: skip the
    reads and say so. Otherwise two reads: Google 7-day raw (customer
    1344350136) and Meta 7-day raw (ad account 732663023528570).
+   When a Meta lead-form campaign is running, add one more read:
+   get_meta_lead_form_submissions for form 985332827899566, because
+   Facebook form leads do not reach Gmail while Pabbly is broken. Give Ray
+   the new ones in chat, never in the repo.
 3. Analyze each running ad: yesterday against the day before, 7-day totals
    against the last logged 7-day read. Spend against budget, impressions,
    clicks, click rate, cost per click, leads. Name the biggest change and

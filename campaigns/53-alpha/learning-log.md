@@ -4,6 +4,21 @@ Every test gets: hypothesis, variants, spend, result, decision, lesson.
 Newest entries at the top.
 
 ---
+## 2026-11-15 (heal) — Facebook ad with the old price replaced
+
+- Ray: "fix and heal mode on loop". The live Facebook ad's text still said
+  $1,999,990; the home relisted Nov 12 at $1,899,000.
+- Meta does not allow editing ad text in place. Created a new ad in the
+  same ad set with the same 15 s tour video and corrected copy (no price,
+  no address), switched it on, paused the old one. New ad 52528830920716.
+- Change to note: the old ad's button opened Messenger. Adspirer cannot
+  create a Messenger button, so the new ad uses a Contact button to
+  rayahmadi.com/contact with UTM tags (53_alpha_awareness).
+- Last 30 days on the old ad: $153.51, 79,205 impressions, reach 65,948,
+  44 clicks, 815 full plays, one Messenger conversation.
+- Creation worked, so Meta's security hold has lifted.
+
+---
 ## 2026-11-15 (later) — YouTube 7-day read: creative should be replaced
 
 - Nov 7 to 14: $41.73, CTR 0.10%, about 6 clicks. That is under the 0.8%

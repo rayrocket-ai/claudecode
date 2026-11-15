@@ -5,6 +5,16 @@ Newest entries at the top. Never re-test a settled question without new
 justification.
 
 ---
+## 2026-11-15 (heal) — Facebook lead-form campaign built, paused
+
+- Meta's hold lifted, so the build that was refused Nov 10 to 12 went
+  through: campaign 52528831097516, $5/day, Stouffville 25 km, Housing
+  category, lead form 985332827899566, no-address copy, tour video.
+- Paused at every level. Not launched: waiting for Ray's go.
+- Facebook form leads will not reach Gmail while Pabbly is broken. The
+  daily run reads the form directly once this is live.
+
+---
 ## 2026-11-15 (later) — Audience widened. 7-day read
 
 - Ray upgraded Adspirer. Audience on ad group 198558882666 replaced: people
