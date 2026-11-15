@@ -148,8 +148,10 @@ time a tool has room, then delete the line.
    vertical, needs a colour grade). Shot list: C9603 front, C9572 living,
    C9573 and C9575 kitchen, C9577 stairs, C9587 bedroom, C9583 bath,
    C9594 rec room, C9600 second kitchen, C9607 backyard and deck. Google
-   Drive's download quota for these files ran out on Nov 14; it resets
-   within about a day. Download one file at a time, cut a 20 to 25 second
+   Drive's download quota for these files ran out on Nov 14. On the
+   Nov 15 morning run full downloads were still refused (small range
+   requests pass, which is misleading). Try one full file once per day;
+   stop at the first refusal. Download one file at a time, cut a 20 to 25 second
    draft with the hooks in campaigns/97-jackman/edit-brief.md, and send it
    to Ray. Do not publish it until he approves.
 
