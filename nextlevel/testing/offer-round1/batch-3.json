@@ -278,7 +278,7 @@
     "segment": "real_estate_agent",
     "decision_founding": "books call only",
     "decision_standard": "passes",
-    "would_refer": true,
+    "would_refer": false,
     "main_reason": "Overnight cover for my overseas investors is the best fit I have seen, so I will spend 15 minutes asking about recording, but I will not pay until I know every call is announced.",
     "what_almost_changed_their_mind": "A written line that recording is announced on every call and can be turned off would have made him a founding buyer; 'what happens to call recordings' is simply not stated.",
     "missing_info": [
@@ -300,7 +300,7 @@
     "segment": "real_estate_agent",
     "decision_founding": "passes",
     "decision_standard": "passes",
-    "would_refer": true,
+    "would_refer": false,
     "main_reason": "It says it is an AI, which I like, but nothing tells me what happens when a client mid-deal says they need me right now.",
     "what_almost_changed_their_mind": "'Says it is an AI' cleared one of her two deal breakers, and a single sentence describing a live transfer or urgent-alert path would have had her booking the call.",
     "missing_info": [
@@ -395,7 +395,7 @@
     "segment": "local_business_waitlist",
     "decision_founding": "passes",
     "decision_standard": "passes",
-    "would_refer": true,
+    "would_refer": false,
     "main_reason": "I would pay today, but you tell me it is not on sale for me and promise no date and no price, so I will sign with whoever sells now.",
     "what_almost_changed_their_mind": "A date or even a condition such as 'after the first 10 agent clients' would have put him on the waitlist; 'no date and no price are promised' did the opposite.",
     "missing_info": [
