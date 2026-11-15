@@ -333,7 +333,7 @@ When: the same day as a 15-minute call that did not end in a yes. Only when the 
 
 Hi {{contact.first_name}},
 
-Thank you for the call today. Here is the summary you asked for.
+Here is the summary you asked for.
 
 What you told me: {{their words from question 1}}. What you want: {{their words from question 5}}.
 

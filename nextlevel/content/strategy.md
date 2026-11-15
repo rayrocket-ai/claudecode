@@ -177,3 +177,7 @@ What is not a goal: views and followers. They are watched, not chased. A video w
 - [Ray to confirm: which languages the voice agent handles today]
 - [Ray to confirm: what can be said about eXp on a Next Level piece]
 - [Ray to confirm with counsel: recording a call with the AI receptionist for content, and showing it publicly]
+
+## Prices in content (updated 2026-11-15)
+
+Ray approved the full price ladder on 2026-11-15. Content may state the Founding 10 price ($300 a month for Next Level Answer) and, where a piece needs it, the standard prices exactly as written in `nextlevel/offer.md`. No other price, discount or term appears in any piece. Usage costs are "quoted on the call" until Ray decides whether usage is included.
