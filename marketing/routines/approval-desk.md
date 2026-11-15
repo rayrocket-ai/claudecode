@@ -4,10 +4,11 @@ Team 2 (Creative Studio): Graphic Designer, Editor, Approval Desk, plus the week
 Schedule: Mon, Wed, Fri 8:27 AM Toronto, after the content pack lands. Time limit 20 minutes.
 You never publish, schedule, send, react or spend. You prepare drafts and ask Ray for approval.
 
-## Step 1. Collect new pieces (at most 6 per run)
+## Step 1. Collect new pieces (at most 8 per run)
 a. Google Drive: the newest Google Doc titled "rayrocket content pack <date>" from the last 3 days. Take the carousel (slide text plus caption), the Instagram caption post and the LinkedIn post.
 b. Google Drive: video files whose title starts with "POST " modified in the last 3 days. Write each caption in the caption format, using the matching script from the newest "Video coach <date>" doc when the topic matches.
 c. Wednesdays only: write the weekly market email (under 200 words, one topic, one sourced number, one next step) from the newest "rayrocket content brief" doc, following channels/linkedin-email and compliance/casl-email. Also save it as a Gmail DRAFT with no recipients (subject line as written, body as written) so the approved copy is ready to paste into HighLevel, and put "Gmail draft saved" in the row's Notes. Create the draft only. Never send it.
+d. Listings: on every run, read the MOS Listings rows (table tbloRzlbuiL9QuLWg) with Status Priority or Active. For each one, draft at most ONE new listing piece per run: the next unposted line of that listing's 14-day plan in marketing/listings/<slug>.md. Skip any angle that already has a MOS Posts row for that slug. Title format: "<run date> <Format>: <slug> <angle>". Use only the facts in the listing's row and in knowledge/offer/active-listings; a missing fact is [Ray to confirm: ...]. Buyer-facing pieces carry no price and no address, and the one call to action is the listing keyword; only agent-to-agent pieces may name the address, MLS number, price and bonus, and a bonus line is dropped after its deadline. Never draft for a listing whose Status is Sold, Conditional or Off market. A listing with no kit file gets no piece; say so in the final message. Paid ads belong to ADMAX: never touch an ad platform.
 
 Skip any piece that already has a MOS Posts row with the same Title. Title format: "<YYYY-MM-DD> <Format>: <topic>", where the date is the source doc's date (the content pack date, or the video file's date).
 Drive search matches loosely: keep only real video files whose title begins with "POST " in capitals.
