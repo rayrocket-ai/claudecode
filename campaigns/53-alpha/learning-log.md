@@ -57,9 +57,9 @@ Newest entries at the top.
 ## 2026-11-12 (afternoon) — Sell-now review from Ray's inbox
 
 - Listed Sep 14 at $1,999,990 (REALTOR.ca). About 12 showings Sep 29 to
-  Nov 10. Max Kamali (RE/MAX West) showed it twice, Oct 13 and Oct 16.
-  Most recent: Massimo Breda (Ren/Tex) Nov 4, Anthony Arci (RE/MAX Hallmark)
-  Nov 10. One direct buyer inquiry through the office Oct 19.
+  Nov 10. One agent showed it twice (Oct 13 and Oct 16). Most recent
+  showings: Nov 4 and Nov 10. One direct buyer inquiry through the office
+  Oct 19. Names are in the BrokerBay emails.
 - Two buyers on record at different prices and closing dates. Figures are
   in Ray's Nov 7 email to the seller, not kept in this public repo.
 - One showing agent's feedback (Oct 18) raised a condition concern about the
