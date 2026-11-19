@@ -5,6 +5,23 @@ Newest entries at the top. Never re-test a settled question without new
 justification.
 
 ---
+## 2026-11-19 (later) — $15/day, Advantage+ audience, 4 creatives live
+
+- Ray: "yes $15, best targeting, best media pieces, monitor daily".
+- Ad set 52528831098116: budget $5 to $15/day. Advantage+ audience ON
+  (Housing rules still apply: Stouffville 25 km, no age, gender or
+  interest narrowing).
+- Added three ads beside the original, each a distinct hook on a different
+  no-price cut, all to lead form 985332827899566:
+  Hook A size 52530186768516 (video 2107347619854878, the Jul sprint cut
+  that ran $12.88 CPL), Hook B move-up 52530190512116 (kinetic v3, licensed
+  music), Hook C sell-first 52530190641916 (kinetic v2).
+- Hypothesis: the move-up and sell-first hooks pull more qualified leads
+  (home to sell = yes) than the size hook. Judge after 7 days per ad.
+- Daily monitoring: the existing "ADMAX daily loop" scheduled task
+  (7 AM Toronto) now reads per-ad numbers per the agent file.
+
+---
 ## 2026-11-19 — Facebook lead-form campaign LIVE on Ray's go. Google running
 
 - Ray: "must fix and run 34 buttonleaf on google and facebook". That is

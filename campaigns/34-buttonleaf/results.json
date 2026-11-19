@@ -150,7 +150,7 @@
       "ctr_pct": null,
       "impressions": null,
       "views": null,
-      "notes": "Meta lead-form campaign 52528831097516 switched on Nov 19; Google Demand Gen live since Nov 10"
+      "notes": "Meta $15/day from Nov 19, 4 ads; Google Demand Gen live since Nov 10"
     }
   ],
   "log": [
@@ -173,6 +173,11 @@
       "date": "2026-11-19",
       "title": "Facebook live, Google running",
       "entry": "Ray gave the go. Meta lead-form campaign 52528831097516 on at $5/day, no-address copy. Google video: $49.08, 103 clicks, CTR 1.47% since Nov 10."
+    },
+    {
+      "date": "2026-11-19",
+      "title": "$15/day and 4 creatives",
+      "entry": "Ray approved $15/day on Meta. Advantage+ audience on. Three new hook ads added beside the original. Daily loop reads per-ad numbers."
     }
   ]
 }
