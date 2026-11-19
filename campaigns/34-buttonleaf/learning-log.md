@@ -5,6 +5,24 @@ Newest entries at the top. Never re-test a settled question without new
 justification.
 
 ---
+## 2026-11-19 — Facebook lead-form campaign LIVE on Ray's go. Google running
+
+- Ray: "must fix and run 34 buttonleaf on google and facebook". That is
+  the go for the Nov 15 build.
+- Switched ON: Meta campaign 52528831097516, ad set 52528831098116
+  ($5/day, Stouffville 25 km, Housing, lead form 985332827899566), ad
+  52528831113716 (no-address copy, tour video).
+- Old Meta campaign 52506208679516 was briefly resumed this session, then
+  paused again within minutes (copy carries the address, built for the
+  pre-relist listing). It stays paused.
+- Google Demand Gen 24114799139 enabled and delivering: Nov 10 to 18,
+  $49.08, 7,030 impressions, 103 clicks, CTR 1.47%, CPC $0.48, 0 tracked
+  conversions.
+- Adspirer has live access to both platforms. The Ad Advisor connector
+  still reports reconnect_required.
+- Next run: confirm the Meta ad passed review and has impressions.
+
+---
 ## 2026-11-15 (daily run) — First daily read
 
 - YouTube 24114799139, 7 days to Nov 14 (live since Nov 10): $26.02, about
