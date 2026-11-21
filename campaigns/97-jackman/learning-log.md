@@ -4,6 +4,16 @@ Every test gets: hypothesis, variants, spend, result, decision, lesson.
 Newest entries at the top.
 
 ---
+## 2026-11-21 (daily run) — Relisted, no ads yet
+
+- Listing cancelled and relisted Nov 16 (MLS N14185836). Offer activity
+  Nov 16 to 18 and showings continue, per the inbox.
+- No ad running. No finished video: Sid Media's Dropbox cut is still out
+  of reach from this session, and the raw clips need a grade and cut.
+- Next: Ray sends a direct link to the finished file, or the Drive raw
+  clips download, then a draft cut goes to Ray for approval.
+
+---
 ## 2026-11-15 (daily run)
 
 - No ad. Still no finished video. One showing confirmed for Nov 14 and a

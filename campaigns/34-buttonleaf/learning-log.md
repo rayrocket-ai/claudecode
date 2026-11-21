@@ -5,6 +5,23 @@ Newest entries at the top. Never re-test a settled question without new
 justification.
 
 ---
+## 2026-11-21 (daily run) — Facebook lead campaign live and producing
+
+- Facebook lead campaign 52528831097516 found ACTIVE on this read. 7 days:
+  $22.62, click rate 5.43%, 6 results (3 form leads Nov 20 to 21 plus
+  messaging conversations). Cost per form lead about $7.50, well under
+  the $15 target.
+- Form leads do not reach Gmail: Pabbly is still broken. Read straight
+  from the form. Lead details went to Ray in chat only. First-reply
+  drafts are in Gmail Drafts with no price; Ray sends the price sheet.
+- YouTube 24114799139: $9.83 yesterday, about $43.13 over 7 days, click
+  rate 1.31% (down from 1.55% on Nov 15 as the wider audience settles).
+  No contact-form leads traced to it.
+- Lesson so far: the instant form converts far better than the YouTube
+  click-to-site path for this listing. Keep both; judge YouTube on a
+  full 14 days.
+
+---
 ## 2026-11-15 (daily run) — First daily read
 
 - YouTube 24114799139, 7 days to Nov 14 (live since Nov 10): $26.02, about

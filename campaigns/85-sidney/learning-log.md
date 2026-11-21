@@ -4,6 +4,13 @@ Every test gets: hypothesis, variants, spend, result, decision, lesson.
 Newest entries at the top.
 
 ---
+## 2026-11-21 (daily run) — Still paused
+
+- Google campaign 24461687730 stays paused at $7/day, the lowest Google
+  takes for a new Demand Gen campaign. Waiting on Ray to approve $7.
+- No spend, no leads. Nothing to analyze.
+
+---
 ## 2026-11-15 (daily run)
 
 - Campaign 24461687730 still paused at $7/day, waiting for Ray's OK. No
