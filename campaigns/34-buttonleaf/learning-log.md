@@ -7,10 +7,11 @@ justification.
 ---
 ## 2026-11-21 (daily run) — Facebook lead campaign live and producing
 
-- Facebook lead campaign 52528831097516 found ACTIVE on this read. 7 days:
-  $22.62, click rate 5.43%, 6 results (3 form leads Nov 20 to 21 plus
-  messaging conversations). Cost per form lead about $7.50, well under
-  the $15 target.
+- Facebook lead campaign 52528831097516 (live since Nov 19 on Ray's go,
+  $15/day and 4 hook ads since Nov 19 evening). 7 days: $22.62, click
+  rate 5.43%, 6 results (3 form leads Nov 20 to 21 plus messaging
+  conversations). Cost per form lead about $7.50, well under the $15
+  target. Spend is under the $15/day budget: still in learning.
 - Form leads do not reach Gmail: Pabbly is still broken. Read straight
   from the form. Lead details went to Ray in chat only. First-reply
   drafts are in Gmail Drafts with no price; Ray sends the price sheet.
@@ -20,6 +21,41 @@ justification.
 - Lesson so far: the instant form converts far better than the YouTube
   click-to-site path for this listing. Keep both; judge YouTube on a
   full 14 days.
+
+---
+## 2026-11-19 (later) — $15/day, Advantage+ audience, 4 creatives live
+
+- Ray: "yes $15, best targeting, best media pieces, monitor daily".
+- Ad set 52528831098116: budget $5 to $15/day. Advantage+ audience ON
+  (Housing rules still apply: Stouffville 25 km, no age, gender or
+  interest narrowing).
+- Added three ads beside the original, each a distinct hook on a different
+  no-price cut, all to lead form 985332827899566:
+  Hook A size 52530186768516 (video 2107347619854878, the Jul sprint cut
+  that ran $12.88 CPL), Hook B move-up 52530190512116 (kinetic v3, licensed
+  music), Hook C sell-first 52530190641916 (kinetic v2).
+- Hypothesis: the move-up and sell-first hooks pull more qualified leads
+  (home to sell = yes) than the size hook. Judge after 7 days per ad.
+- Daily monitoring: the existing "ADMAX daily loop" scheduled task
+  (7 AM Toronto) now reads per-ad numbers per the agent file.
+
+---
+## 2026-11-19 — Facebook lead-form campaign LIVE on Ray's go. Google running
+
+- Ray: "must fix and run 34 buttonleaf on google and facebook". That is
+  the go for the Nov 15 build.
+- Switched ON: Meta campaign 52528831097516, ad set 52528831098116
+  ($5/day, Stouffville 25 km, Housing, lead form 985332827899566), ad
+  52528831113716 (no-address copy, tour video).
+- Old Meta campaign 52506208679516 was briefly resumed this session, then
+  paused again within minutes (copy carries the address, built for the
+  pre-relist listing). It stays paused.
+- Google Demand Gen 24114799139 enabled and delivering: Nov 10 to 18,
+  $49.08, 7,030 impressions, 103 clicks, CTR 1.47%, CPC $0.48, 0 tracked
+  conversions.
+- Adspirer has live access to both platforms. The Ad Advisor connector
+  still reports reconnect_required.
+- Next run: confirm the Meta ad passed review and has impressions.
 
 ---
 ## 2026-11-15 (daily run) — First daily read

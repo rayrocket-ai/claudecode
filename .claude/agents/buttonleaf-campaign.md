@@ -18,7 +18,7 @@ campaigns/<slug>/learning-log.md, newest entry first. Read it before acting.
 
 | Slug | Listing | Status |
 |---|---|---|
-| 34-buttonleaf | 34 Buttonleaf Cres, Stouffville. Relisted Nov 11 at $1,299,000, MLS N14172060 | PRIORITY. YouTube live. Facebook lead-form campaign live (found ACTIVE Nov 21). |
+| 34-buttonleaf | 34 Buttonleaf Cres, Stouffville. Relisted Nov 11 at $1,299,000, MLS N14172060 | PRIORITY. YouTube live. Meta lead-form ad live since Nov 19. |
 | 53-alpha | 53 Alpha Court, Woodbridge. Relisted Nov 12 at $1,899,000. $10,000 agent bonus to Nov 24 | PRIORITY. YouTube live. Meta awareness video live. Lead-form ad paused. |
 | 85-sidney | 85 Sidney Rundle Ave, Bowmanville. Relisted Oct 15 at $499,000 | Pre-launch. Meta campaign shell and form only. Tour video on YouTube, unlisted: hSIkkg-5ANc (39 s, vertical, uploaded Nov 14). |
 | 97-jackman | 97 Jackman Cres, West Woodbridge. Relisted Nov 16 at $1,099,000, MLS N14185836 | Pre-launch. No finished video. Raw footage exists (Sid Media, Sep 24 shoot), see the fix queue. |
@@ -96,8 +96,20 @@ exposure. State that day:
   1569899458483680, no price, no address, Contact button to
   rayahmadi.com/contact) switched on Nov 15. Old ad 52516371756516, whose
   text said $1,999,990, is paused. Keep it paused.
-- Meta 732663023528570: 34 Buttonleaf lead-form campaign 52528831097516, ad
-  set 52528831098116, ad 52528831113716, built Nov 15, ACTIVE (found live Nov 21), $5/day,
+- 34 BUTTONLEAF META, RAY-APPROVED NOV 19: budget $15/day on ad set
+  52528831098116 (Ray: "yes $15"), Advantage+ audience ON within Housing
+  rules. Four ads live, all on the same lead form, no price, no address:
+  52528831113716 (original, BUTTON LEAF.mp4 74s), 52530186768516 Hook A
+  size (15s no-price cut), 52530190512116 Hook B move-up (kinetic v3),
+  52530190641916 Hook C sell-first (kinetic v2). UTM utm_content per hook.
+  Daily loop: pull per-ad numbers for this ad set (analyze_meta_ad_performance
+  or get_meta_ad_creatives, 7 days) and report spend, impressions, CTR,
+  leads and cost per lead PER AD, plus showings and offers from Gmail.
+  Kill rules per ad on 7-day windows: pause at CPL over $30 after $70 spent;
+  replace at CTR under 0.8% after 2,000 impressions. Never pause the last
+  live ad. Pausing a failing variant is allowed without asking.
+- Meta 732663023528570: 34 Buttonleaf lead-form campaign 52528831097516 (LIVE since Nov 19 on Ray's go), ad
+  set 52528831098116, ad 52528831113716, built Nov 15, switched ON Nov 19, $5/day,
   Stouffville 25 km, Housing category, form 985332827899566, video
   1553311682394230. The older Buttonleaf campaign 52506208679516 stays
   paused.
