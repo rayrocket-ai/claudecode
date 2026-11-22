@@ -4,6 +4,15 @@ Every test gets: hypothesis, variants, spend, result, decision, lesson.
 Newest entries at the top.
 
 ---
+## 2026-11-22 (daily run) — Still low click rates
+
+- YouTube 24273515703: 7 days $41.03, click rate 0.15% (was 0.18%). Still
+  the pre-relist cut. The no-price cut waits on Ray sharing the Drive file.
+- Facebook awareness 52516371756316: 7 days $39.53, click rate 0.07%. Reach
+  campaign, not a click campaign.
+- $10k agent bonus ends Nov 24.
+
+---
 ## 2026-11-21 (daily run) — Low click rates on both platforms
 
 - YouTube: about $41.17 over 7 days, click rate 0.18%. Very low. The

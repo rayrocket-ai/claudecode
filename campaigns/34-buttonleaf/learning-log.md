@@ -5,6 +5,21 @@ Newest entries at the top. Never re-test a settled question without new
 justification.
 
 ---
+## 2026-11-22 (daily run) — Facebook leads picking up speed
+
+- Facebook lead campaign 52528831097516: 7 days $34.62, click rate 6.38%,
+  14 results (4 form leads, 4 Messenger chats started, 2 replied, plus
+  grouped form events). Yesterday (Nov 21) $17.02, 38 clicks, 8 results,
+  against Nov 20 $19.49, 25 clicks, 3 results. Cost per form lead about
+  $8.66, cost per result about $2.47. Still well under the $15 target.
+- Read: the four hook ads are now spending the full $15/day and the
+  results rate is climbing as learning settles. No ad is near a kill rule.
+- Form lead count went from 3 to 4: one new form lead sits in the Page's
+  Leads Center. Pabbly is still broken, so it is not in Gmail.
+- YouTube 24114799139: 7 days $42.60, click rate 1.19% (was 1.31%). Steady,
+  no leads traced to it.
+
+---
 ## 2026-11-21 (daily run) — Facebook lead campaign live and producing
 
 - Facebook lead campaign 52528831097516 (live since Nov 19 on Ray's go,

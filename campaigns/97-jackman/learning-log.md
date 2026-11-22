@@ -4,6 +4,12 @@ Every test gets: hypothesis, variants, spend, result, decision, lesson.
 Newest entries at the top.
 
 ---
+## 2026-11-22 (daily run) — No ad yet
+
+- Relisted Nov 16. No ad and no finished video. Waiting on a direct link
+  to the finished file.
+
+---
 ## 2026-11-21 (daily run) — Relisted, no ads yet
 
 - Listing cancelled and relisted Nov 16 (MLS N14185836). Offer activity
