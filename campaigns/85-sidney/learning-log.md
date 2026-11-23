@@ -4,6 +4,11 @@ Every test gets: hypothesis, variants, spend, result, decision, lesson.
 Newest entries at the top.
 
 ---
+## 2026-11-23 (daily run)
+
+- Campaign 24461687730 still paused at $7/day. Waiting on Ray to approve $7.
+
+---
 ## 2026-11-22 (daily run) — Still paused
 
 - Google campaign 24461687730 paused at $7/day, waiting on Ray's approval.
