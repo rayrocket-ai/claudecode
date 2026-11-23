@@ -148,9 +148,10 @@ time a tool has room, then delete the line.
    on YouTube (Ray uploads 53-alpha-A-tour-15s from Drive), then build a
    YouTube campaign with it PAUSED and ask Ray to switch over.
 
-3. 85 Sidney launch. Campaign 24461687730 is built and paused at $7/day,
-   the lowest Google accepts. Ray said "5 on all" on Nov 15, so do not
-   switch it on until he approves $7/day in chat.
+3. 85 Sidney launch. RAY APPROVED $7/day IN CHAT ON 2026-11-23
+   ("approved sidney"). Campaign 24461687730 is built and paused at $7/day.
+   Check its video (hSIkkg-5ANc) and link, then resume it
+   (google_ads resume_campaign). Then delete this item.
 4. 53 Alpha tour cut to YouTube. The file 53-alpha-A-tour-15s-9x16.mp4 is
    private in Ray's Drive, so Metricool cannot fetch it. Once Ray sets it to
    "Anyone with the link", upload it unlisted through Metricool (brand
