@@ -4,6 +4,12 @@ Every test gets: hypothesis, variants, spend, result, decision, lesson.
 Newest entries at the top.
 
 ---
+## 2026-11-24 (daily run)
+
+- Ray approved $7/day on Nov 23. Switch-on attempts stalled on the
+  approval prompt; this run tries again.
+
+---
 ## 2026-11-23 (daily run)
 
 - Campaign 24461687730 still paused at $7/day. Waiting on Ray to approve $7.

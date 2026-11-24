@@ -5,6 +5,18 @@ Newest entries at the top. Never re-test a settled question without new
 justification.
 
 ---
+## 2026-11-24 (daily run) — Volume steady, cost per lead edging up
+
+- Facebook lead campaign 52528831097516: 7 days $73.38, click rate 6.15%,
+  24 results (7 form leads, 7 Messenger chats, 3 replied). The day
+  before: $55.66, 21 results, 6 form leads. Nov 23 about $17.70, about 37
+  clicks, 3 results, against Nov 22 about $21, about 46 clicks, 7 results.
+  Cost per form lead about $10.48 (was $9.28). Under the $15 target.
+- Read: Nov 23 was a softer day. Pabbly still broken. A budget raise to
+  $25 waits on Ray's word.
+- YouTube 24114799139: 7 days $40.77, click rate 1.02% (was 1.20%).
+
+---
 ## 2026-11-23 (daily run) — Best day yet on Facebook
 
 - Facebook lead campaign 52528831097516: 7 days $55.66, click rate 6.27%,
