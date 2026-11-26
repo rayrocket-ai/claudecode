@@ -4,6 +4,12 @@ Every test gets: hypothesis, variants, spend, result, decision, lesson.
 Newest entries at the top.
 
 ---
+## 2026-11-26 (daily run)
+
+- Campaign 24461687730 still paused at $7/day (Ray approved). The
+  switch-on is retried as the last write of this run.
+
+---
 ## 2026-11-25 (daily run)
 
 - Campaign 24461687730 still paused at $7/day. Ray approved Nov 23. This
