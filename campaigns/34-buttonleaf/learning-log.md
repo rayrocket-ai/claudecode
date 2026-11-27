@@ -5,6 +5,19 @@ Newest entries at the top. Never re-test a settled question without new
 justification.
 
 ---
+## 2026-11-27 (daily run) — Facebook flat, YouTube clicks at zero
+
+- Facebook lead campaign 52528831097516: 7 days $116.75, click rate 5.54%,
+  37 results (11 form leads, 10 chats, 5 replied), same results as the
+  day before on more spend. Cost per form lead about $10.61 (was $9.46).
+  Nov 26 shows no results yet, but Meta marks that day partial.
+- YouTube 24114799139: 7 days $37.64, click rate 0.58% (was 0.72%).
+  Google shows 0 clicks for the whole account on Nov 25 and Nov 26, on
+  about 3,000 impressions. Two days in a row is not a lag. Check the ads
+  and the landing link in Google Ads.
+- Pabbly sent another failure notice.
+
+---
 ## 2026-11-26 (daily run) — More leads, cost per lead lower again
 
 - Facebook lead campaign 52528831097516: 7 days $104.04, click rate 5.73%,

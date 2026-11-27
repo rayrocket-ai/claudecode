@@ -4,6 +4,13 @@ Every test gets: hypothesis, variants, spend, result, decision, lesson.
 Newest entries at the top.
 
 ---
+## 2026-11-27 (daily run)
+
+- YouTube 24273515703: 7 days $39.98, click rate 0.04% (was 0.06%).
+- Facebook awareness 52516371756316: 7 days $39.27, click rate 0.04%.
+- Showing activity in the inbox on Nov 26; ads stay on.
+
+---
 ## 2026-11-26 (daily run)
 
 - YouTube 24273515703: 7 days $39.90, click rate 0.06% (was 0.08%).

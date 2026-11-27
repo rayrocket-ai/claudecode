@@ -4,6 +4,11 @@ Every test gets: hypothesis, variants, spend, result, decision, lesson.
 Newest entries at the top.
 
 ---
+## 2026-11-27 (daily run)
+
+- Still no ad and no finished video.
+
+---
 ## 2026-11-26 (daily run)
 
 - Still no ad and no finished video. Waiting on the Dropbox file or a
