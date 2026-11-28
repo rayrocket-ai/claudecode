@@ -4,6 +4,13 @@ Every test gets: hypothesis, variants, spend, result, decision, lesson.
 Newest entries at the top.
 
 ---
+## 2026-11-28 (daily run)
+
+- Still paused at $7/day. Not retried today: the switch-on stalled six
+  times in a row with nobody in the chat. Needs Ray to say "switch on
+  Sidney" while he is in the chat.
+
+---
 ## 2026-11-27 (daily run)
 
 - Campaign 24461687730 still paused at $7/day. The Nov 26 switch-on

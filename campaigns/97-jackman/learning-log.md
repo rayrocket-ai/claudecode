@@ -4,6 +4,12 @@ Every test gets: hypothesis, variants, spend, result, decision, lesson.
 Newest entries at the top.
 
 ---
+## 2026-11-28 (daily run)
+
+- No ad and no video yet. Showing requests and confirmations came in
+  Nov 27 and Nov 28, so buyers are looking without ads.
+
+---
 ## 2026-11-27 (daily run)
 
 - Still no ad and no finished video.
